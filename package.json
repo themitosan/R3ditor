@@ -1,0 +1,24 @@
+{
+  "main": "App/index.htm",
+  "name": "R3ditor",
+  "description": "Um programa que serve para editar algumns tipos de arquivos do game resident evil 3 pc",
+  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",
+  "version": "1.0.0",
+  "keywords": [ "R3ditor", "node-webkit" ],
+  "window": {
+    "title": "R3ditor - Aguarde...",
+    "toolbar": false,
+    "fullscreen": false,
+    "frame": true,
+    "width": 1341,
+    "height": 707,
+    "icon" : "App/img/logo.png",
+    "min_width": 1340,
+    "min_height": 706,
+    "max_width": 1340,
+    "max_height": 706
+  },
+  "webkit": {
+    "plugin": true
+  }
+}
