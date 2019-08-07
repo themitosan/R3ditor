@@ -31,6 +31,11 @@ Em Breve:
 - Mapas Obtidos
 - Files Obtidos
 
+#### Importante
+Todas as mudanças que você fizer serão automáticamente aplicadas ao seu save.<br>
+Caso você queira recuperar seu save, abra a pasta "backup" e selecione um arquivo de backup.<br>
+Ao selecionar, cole o mesmo na pasta aonde está o executável do game e renomeie o arquivo de backup para "Bu00.sav"
+
 ### Arquivos de mensagem (.msg) [wip]
 Você pode visualizar / editar as mensagens internas do game carregando arquivos .msg ou usando o campo "Hex Input".
 
