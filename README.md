@@ -1,5 +1,5 @@
 # R3ditor
-Um editor de arquivos para realizar estudos de engenharia reversa no game Resident Evil 3.
+Um editor de arquivos escrito em js para realizar estudos de engenharia reversa no game Resident Evil 3.
 
 ## Como instalar
 - Faça o download da versão mais recente do Node-Webkit e extraia o pacote em uma pasta de sua preferência<br>(Clique <a href="http://nwjs.io" target="_blank">aqui</a> para ir até a pagina)
