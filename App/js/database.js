@@ -243,7 +243,7 @@ var POISON = {
 }
 
 var LOCAIS = {
-	"00": ["Armazén"],
+	"00": ["Armazém"],
 	"01": ["Beco"],
 	"02": ["Hall da RPD"],
 	"03": ["Sala Escura"],
