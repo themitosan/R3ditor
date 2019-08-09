@@ -114,7 +114,6 @@ function RDT_decompileItens(id, edit){
 function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp){
 	var tipo = undefined;
 	var cssFix = undefined;
-	console.log(id);
 	if (parseInt(id, 16) > 133){
 		cssFix = "RDT-file-bg";
 		tipo = "File";
