@@ -454,98 +454,103 @@ function save_renderBox(s_slot){
 }
 
 function save_renderInfos(s_slot){
-	log_separador();
-	// Render Time
-	IGTExtract = localStorage.getItem("Save_" + s_slot).slice(RANGES["IGT"][0], RANGES["IGT"][1]);
+	try{
+		log_separador();
+		// Render Time
+		IGTExtract = localStorage.getItem("Save_" + s_slot).slice(RANGES["IGT"][0], RANGES["IGT"][1]);
+		
+		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
 	
-	decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
-
-	addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
-	addLog("log", "IGT Completa (Formato: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
-	log_separador();
-
-	// Dificuldade
-	dificuldade = localStorage.getItem("Save_" + s_slot).slice(RANGES["leveldificuldade"][0], RANGES["leveldificuldade"][1]);
-	var diffi = DIFICULDADE[dificuldade][0];
-	$("#lbl-dificuldade").html(diffi);
-
-	// Saves
-	totalVezesSaves = localStorage.getItem("Save_" + s_slot).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
-	var tvs = parseInt("0x" + totalVezesSaves);
-	$("#lbl-saves").html(tvs);
-
-	// Sala de Save
-	localSave = localStorage.getItem("Save_" + s_slot).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
-	var nomeLocSave = LOCAIS[localSave][0];
-	$("#lbl-saveplace").html(nomeLocSave);
-
-	// Local da cidade
-	lCidade = localStorage.getItem("Save_" + s_slot).slice(RANGES["localCidade"][0], RANGES["localCidade"][1]);
-	var lCity = CIDADE[lCidade][0];
-	$("#lbl-city").html(lCity);
-
-	// Roupa
-	outf = localStorage.getItem("Save_" + s_slot).slice(RANGES["roupaAtual"][0], RANGES["roupaAtual"][1]);
-	var costumeJill = ROUPA[outf][0];
-	$("#lbl-outfit").html(costumeJill);
+		addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
+		addLog("log", "IGT Completa (Formato: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
+		log_separador();
 	
-	// Player Atual
-	cPlayer = localStorage.getItem("Save_" + s_slot).slice(RANGES["characterAtual"][0], RANGES["characterAtual"][1]);
-	var plr = PLAYERS[cPlayer][0];
-	$("#lbl-currentPlayer").html(plr);
-
-	// Jill - Arma equipada
-	jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
-	var jcw = ITEM[jArmaEquip][0];
-	if (jcw == "Slot Vazio"){
-		jcw = "Nenhuma arma equipada";
+		// Dificuldade
+		dificuldade = localStorage.getItem("Save_" + s_slot).slice(RANGES["leveldificuldade"][0], RANGES["leveldificuldade"][1]);
+		var diffi = DIFICULDADE[dificuldade][0];
+		$("#lbl-dificuldade").html(diffi);
+	
+		// Saves
+		totalVezesSaves = localStorage.getItem("Save_" + s_slot).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
+		var tvs = parseInt("0x" + totalVezesSaves);
+		$("#lbl-saves").html(tvs);
+	
+		// Sala de Save
+		localSave = localStorage.getItem("Save_" + s_slot).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
+		var nomeLocSave = LOCAIS[localSave][0];
+		$("#lbl-saveplace").html(nomeLocSave);
+	
+		// Local da cidade
+		lCidade = localStorage.getItem("Save_" + s_slot).slice(RANGES["localCidade"][0], RANGES["localCidade"][1]);
+		var lCity = CIDADE[lCidade][0];
+		$("#lbl-city").html(lCity);
+	
+		// Roupa
+		outf = localStorage.getItem("Save_" + s_slot).slice(RANGES["roupaAtual"][0], RANGES["roupaAtual"][1]);
+		var costumeJill = ROUPA[outf][0];
+		$("#lbl-outfit").html(costumeJill);
+		
+		// Player Atual
+		cPlayer = localStorage.getItem("Save_" + s_slot).slice(RANGES["characterAtual"][0], RANGES["characterAtual"][1]);
+		var plr = PLAYERS[cPlayer][0];
+		$("#lbl-currentPlayer").html(plr);
+	
+		// Jill - Arma equipada
+		jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
+		var jcw = ITEM[jArmaEquip][0];
+		if (jcw == "Slot Vazio"){
+			jcw = "Nenhuma arma equipada";
+		}
+		$("#lbl-jArma").html(jcw);
+	
+		// Carlos - Arma equipada
+		cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
+		var ccw = ITEM[cArmaEquip][0];
+		if (ccw == "Slot Vazio"){
+			ccw = "Nenhuma arma equipada";
+		}
+		$("#lbl-cArma").html(ccw);
+	
+		// Jill e Carlos - Sidepack
+		jSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill-side"][0], RANGES["jill-side"][1])
+		cSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlos-side"][0], RANGES["carlos-side"][1]);
+		var jSpack = SIDEPACK[jSide][0];
+		var cSpack = SIDEPACK[cSide][0];
+		$("#j-sidePack").html(jSpack);
+		$("#c-sidePack").html(cSpack);
+	
+		// Posição X e Y
+		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]);
+		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]);
+		$("#lbl-x-pos").html(xPos);
+		$("#lbl-y-pos").html(yPos);
+	
+		// Epilogos
+		epil = localStorage.getItem("Save_" + s_slot).slice(RANGES["epilogos"][0], RANGES["epilogos"][1]);
+		var ep = EPILOGOS[epil][0];
+		$("#lbl-epilogos").html(ep);
+	
+		// Versão do game
+		gVersion = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][0];
+		gDetails = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][1];
+		$("#lbl-gameVersion").html(gVersion + " (" + gDetails + ")");
+		
+		// Mapas Obtidos - [WIP]
+		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
+		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
+		var mapStatus = undefined; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
+		$("#lbl-maps").html("[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")");
+	
+		// Room / Event [WIP]
+		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]);
+	
+		// Files
+		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]);
+	} catch (err){
+		var msg = "ERRO: Não foi possivel obter algumas informações do save! - " + err;
+		addLog("error", msg);
+		console.error(msg);
 	}
-	$("#lbl-jArma").html(jcw);
-
-	// Carlos - Arma equipada
-	cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
-	var ccw = ITEM[cArmaEquip][0];
-	if (ccw == "Slot Vazio"){
-		ccw = "Nenhuma arma equipada";
-	}
-	$("#lbl-cArma").html(ccw);
-
-	// Jill e Carlos - Sidepack
-	jSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill-side"][0], RANGES["jill-side"][1])
-	cSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlos-side"][0], RANGES["carlos-side"][1]);
-	var jSpack = SIDEPACK[jSide][0];
-	var cSpack = SIDEPACK[cSide][0];
-	$("#j-sidePack").html(jSpack);
-	$("#c-sidePack").html(cSpack);
-
-	// Posição X e Y
-	xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]);
-	yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]);
-	$("#lbl-x-pos").html(xPos);
-	$("#lbl-y-pos").html(yPos);
-
-	// Epilogos
-	epil = localStorage.getItem("Save_" + s_slot).slice(RANGES["epilogos"][0], RANGES["epilogos"][1]);
-	var ep = EPILOGOS[epil][0];
-	$("#lbl-epilogos").html(ep);
-
-	// Versão do game
-	gVersion = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][0];
-	gDetails = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][1];
-	$("#lbl-gameVersion").html(gVersion + " (" + gDetails + ")");
-	
-	// Mapas Obtidos - [WIP]
-	mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
-	mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
-	var mapStatus = undefined; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
-	$("#lbl-maps").html("[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")");
-
-	// Room / Event [WIP]
-	rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]);
-
-	// Files
-	j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]);
-
 	save_renderLife(s_slot);
 }
 

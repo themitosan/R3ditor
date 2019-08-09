@@ -78,7 +78,8 @@ function showNotify(titulo, texto, tempo){
 }
 
 /// Obter nome do arquivo
-function getFileName(fileName){ 
+function getFileName(file){
+	var fileName = file.toLowerCase();
 	var removePath = fileName.split(/(\\|\/)/g).pop();
 	var filterA = removePath.replace(".rdt", "");
 	var filterB = filterA.replace(".txt", "");
@@ -114,6 +115,15 @@ function currentTime(){
 		s = "0" + t.getSeconds(); 
 	}
 	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
+}
+
+// IndexOf com multiplas ocorrências
+function getAllIndexes(arr, val){
+    var indexes = [], i = -1;
+    while ((i = arr.indexOf(val, i+1)) != -1){
+        indexes.push(i);
+    }
+    return indexes;
 }
 
 // Formata valores hex para leitura interna

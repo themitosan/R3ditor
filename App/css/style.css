@@ -127,8 +127,8 @@ a{
 
 .log-holder{
     top: 622px;
+    width: 98%;
     color: #0f0;
-    width: 97.8%;
     padding: 6px;
     height: 88px;
     overflow: auto;
@@ -780,4 +780,49 @@ a{
     text-align: -webkit-center;
     box-shadow: 0 0 20px #07072f;
     background-image: linear-gradient(to bottom, #473cab, #251d65);
+}
+
+.RDT-holder{
+    width: 593px;
+    height: 476px;
+    overflow: auto;
+    margin-top: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-bottom: 4px;
+}
+
+.RDT-Item{
+    color: #fff;
+    padding: 6px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.RDT-item-bg{
+    background-image: linear-gradient(to bottom, #507499, #273c50);
+}
+
+.RDT-file-bg{
+    background-image: linear-gradient(to bottom, #796293, #273c50);
+}
+
+.RDT-Item-Misc{
+    width: 30%;
+    left: 130px;
+    height: 70px;
+    position: sticky;
+    margin-top: -70px;
+    padding-left: 10px;
+}
+
+.RDT-Item-Edit{
+    top: 53px;
+    left: 620px;
+    padding: 6px;
+    width: 678px;
+    height: 468px;
+    border-radius: 6px;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #5c6499, #192432);
 }

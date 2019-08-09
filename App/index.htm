@@ -51,10 +51,59 @@
 
 	<!-- FORM: RDT -->
 	<div class="none" id="menu-RDT">
-		<input type="button" id="RDT-menu-1" class="aba aba-left-fix" value="Geral" onclick="">
-		<input type="button" id="RDT-menu-2" class="aba" value="Mensagens (MSG)" onclick="">
+		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="Geral" onclick="RDT_showMenu(1);">
+		<input type="button" id="RDT-aba-menu-2" class="aba" value="Mensagens (MSG)" onclick="RDT_showMenu(2);">
+		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens / Files" onclick="RDT_showMenu(3);">
+		<!-- RDT: Menu Geral -->
 		<div class="menu" id="RDT_menu-1">
-			<!-- wip -->
+			<div class="menu-general-content" id="RDT-geral">
+				<center><font class="titulo">Informações Gerais</font></center>
+				Nome Interno: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+				Nome do Local: <font class="menu-geral-text" id="RDT_lbl-localName">???</font><br>
+				Local da cidade: <font class="menu-geral-text" id="RDT_lbl-localCity">???</font><br>
+				<div class="menu-separador"></div>
+				Stage: <font class="menu-geral-text" id="RDT_lbl-stage">???</font><br>
+				Dimenções: <font class="menu-geral-text" id="RDT_lbl-xyz">???</font><br>
+				Pos. de Entrada: <font class="menu-geral-text" id="RDT_lbl-posEntrada">???</font><br>
+				<div class="menu-separador"></div>
+				Total de Portas: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+				Total de Câmeras: <font class="menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
+				Total de Inimigos: <font class="menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
+				Total de Mensagens: <font class="menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
+				Total de Itens / Files: <font class="menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+			</div>
+		</div>
+		<!-- RDT: Mensagens -->
+		<div class="menu none" id="RDT_menu-2">
+			<div class="menu-general-content" id="RDT-geral">
+				<center><font class="titulo">Mensagens</font></center>
+				<center>WIP :(</center>
+			</div>
+		</div>
+		<!-- RDT: Itens -->
+		<div class="menu none" id="RDT_menu-3">
+			<div class="menu-general-content" id="RDT-geral">
+				<center><font class="titulo">Itens / Files (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
+				<div id="RDT-item-list" class="RDT-holder">
+					<!-- Os Itens dentro da RDT vão aqui -->
+				</div>
+				<!-- Mensagem: Não há itens -->
+				<div id="RDT-item-404">
+					<center>
+						Whoops... Parece que no mapa <font id="RDT-lbl-mapName">???</font> não tem nenhum item :(</font>
+					</center>
+				</div>
+			</div>
+			<!-- RDT: Item - Editar -->
+			<div class="RDT-Item-Edit" id="RDT-Item-Edit">
+				<center><font class="titulo">Editar</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font></center>
+				<div id="RDT-edit-item-select" class="none">
+					Item: <select class="item-select-mod" style="width: 600px;" id="RDT-item-select"></select>
+				</div>
+				<div id="RDT-edit-file-select" class="none">
+					Arquivo: <select class="item-select-mod" style="width: 600px;" id="RDT-file-select"></select>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -62,7 +111,6 @@
 	<div class="none" id="menu-MSG">
 		<div class="msg-addcomand-menu">
 			<h2 class="title-eventos">Adicionar Comandos</h2>
-			
 			<center>Estrutura</center>
 			<input type="button" value="Iniciar mensagem" class="botao-add-comando" onclick="MSG_renderDialog(1);">
 			<input type="button" value="Finalizar mensagem" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>

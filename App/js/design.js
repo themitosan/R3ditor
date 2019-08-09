@@ -4,7 +4,10 @@
 	Help me - please
 */
 
-var aba_atual = undefined;
+var RDT_aba_atual = undefined;
+var SAVE_aba_atual = undefined;
+var RDT_totalMenus = 3;
+var SAVE_totalMenus = 4;
 var request_render_save = undefined;
 var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
@@ -12,7 +15,7 @@ window.onclose = function(){
 	localStorage.clear();
 }
 
-window.onresize = function() {
+window.onresize = function(){
 	window.resizeBy(1340, 733);
 }
 
@@ -25,11 +28,10 @@ function scrollLog(){
 	document.getElementById("log-programa").scrollTop = document.getElementById("log-programa").scrollHeight;
 }
 
-function applyMenuFocus(menuId){
-	var totalMenus = 5; // Quantidade máxima de menus + 1
-	aba_atual = menuId;
-	var i = 1;
-	while(i < totalMenus){
+function SAVE_applyMenuFocus(menuId){
+	SAVE_aba_atual = menuId;
+	var i = 0;
+	while(i < SAVE_totalMenus){
 		$('#menu-' + i).removeClass('aba-select');
 		i++;
 	}
@@ -39,24 +41,7 @@ function applyMenuFocus(menuId){
 function main_menu(anim){
 	localStorage.clear();
 	if (anim === 0){ // Voltar
-		cleanMSGFields();
-		cleanForSaveLoad();
-		MSG_totalComandos = 0;
-		document.title = APP_NAME;
-		MSG_arquivoBruto = undefined;
-		SAVE_arquivoBruto = undefined;
-		ORIGINAL_FILENAME = undefined;
-		$("#menu-topo").css({"display": "block"});
-		$("#msg-lista-eventos").html("<!-- A lista de comandos foi limpa -->");
-		$("#log-programa").css({"height": "88px", "top": "622px"});
-
-		$("#menu-topo-save").css({"display": "none"});
-		$("#menu-topo-msg").css({"display": "none"});
-		$("#menu-topo-RDT").css({"display": "none"});
-
-		$("#menu-SAVE").css({"display": "none"});
-		$("#menu-MSG").css({"display": "none"});
-		$("#menu-RDT").css({"display": "none"});
+		reload();
 	} else {
 		$("#menu-topo").css({"display": "none"});
 	}
@@ -87,7 +72,7 @@ function SAVE_showMenu(menuId){
 			addInfo(0, "00");
 			addInfo(1, "00");
 			$("#log-programa").css({"height": "54px", "top": "656px"});
-			applyMenuFocus(1);
+			SAVE_applyMenuFocus(1);
 			$("#s-menu-general").css({"display": "block", "width": "80%"});
 			$("#save-geral").removeClass('none');
 			$("#save-geral").css({"height": "550px"});
@@ -105,7 +90,7 @@ function SAVE_showMenu(menuId){
 	}
 	if (menuId === 1){ // Menu JILL
 		addInfo(0, "00");
-		applyMenuFocus(2);
+		SAVE_applyMenuFocus(2);
 		$("#save-geral").addClass('none');
 		$("#save-carlos").addClass('none');
 		$("#msg-viewer").addClass('none');
@@ -113,7 +98,7 @@ function SAVE_showMenu(menuId){
 	}
 	if (menuId === 2){ // Menu Carlos
 		addInfo(1, "00");
-		applyMenuFocus(3);
+		SAVE_applyMenuFocus(3);
 		$("#save-jill").addClass('none');
 		$("#save-geral").addClass('none');
 		$("#msg-viewer").addClass('none');
@@ -121,7 +106,7 @@ function SAVE_showMenu(menuId){
 	}
 	if (menuId === 3){ // Menu Opções
 		addInfo(1, "00");
-		applyMenuFocus(4);
+		SAVE_applyMenuFocus(4);
 		$("#save-jill").addClass('none');
 		$("#save-geral").addClass('none');
 		$("#save-carlos").addClass('none');
@@ -317,10 +302,10 @@ function showModPoison(){
 
 function cancelShowModItem(){
 	$("#menu-mod-item").css({"display": "none"});
-	if (aba_atual === 1){
+	if (SAVE_aba_atual === 1){
 		$("#s-menu-general").css({"display": "block"});
 	}
-	if (aba_atual === 4){
+	if (SAVE_aba_atual === 4){
 		$("#o-menu-general").css({"display": "block"});
 	}
 	$("#j_box").css({"display": "block"});
@@ -504,8 +489,43 @@ function MSG_renderDialog(id, args, index, isMod){
 }
 
 /// RDT
-function RDT_showMenu(id) {
-	if (id === 1){
-		$("#log-programa").css({"height": "78px"});
+function RDT_showMenu(id){
+	var c = 1;
+	while(c < RDT_totalMenus + 1){
+		$("#RDT_menu-" + c).css({"display": "none"});
+		c++;
 	}
+	$("#RDT_lbl-totItens").html(RDT_totalItens);
+	$("#RDT_lbl-totalItens").html(RDT_totalItens);
+	$("#RDT-lbl-mapName").html(getFileName(ORIGINAL_FILENAME));
+	$("#menu-RDT").css({"display": "block"});
+	$("#RDT_menu-" + id).css({"display": "block"});
+	$("#log-programa").css({"height": "86px", "top": "626px"});
+	document.title = APP_NAME + " - Editor de Mapas (*.rdt) - " + ORIGINAL_FILENAME;
+	RDT_applyMenuFocus(id);
+	RDT_Error_Item_404();
+}
+
+function RDT_Error_Item_404(){
+	if (RDT_totalItens < 1){
+		$("#RDT_lbl-totItens").html("0");
+		$("#RDT_lbl-totalItens").html("0");
+		$("#RDT-Item-Edit").css({"display": "none"});
+		$("#RDT-item-list").css({"display": "none"});
+		$("#RDT-item-404").css({"display": "block"});
+	} else {
+		$("#RDT-item-404").css({"display": "none"});
+		$("#RDT-item-list").css({"display": "block"});
+		$("#RDT-Item-Edit").css({"display": "block"});
+	}
+}
+
+function RDT_applyMenuFocus(menuId){
+	RDT_aba_atual = menuId;
+	var i = 0;
+	while(i < RDT_totalMenus + 1){
+		$('#RDT-aba-menu-' + i).removeClass('aba-select');
+		i++;
+	}
+	$('#RDT-aba-menu-' + menuId).addClass('aba-select');
 }

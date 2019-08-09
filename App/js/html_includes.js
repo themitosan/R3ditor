@@ -18,7 +18,6 @@ var DIALOG_SELECT_SAVECOUNT = '<font class="titulo">Alterar Nº de Saves</font><b
 var DIALOG_SELECT_DIFICULDADE = '<font class="titulo">Alterar Dificuldade</font><br>Dificuldade selecionada: <font id="lbl-exchange-dificuldade">???</font><br>Alterar dificuldade para: <select id="ex-dificuldade-id" class="item-select-mod"><option value="01">Fácil</option><option value="00">Dificil</option></select>';
 
 // MSG
-
 var DIALOG_MSG_END = 'Valor Final: <input type="number" class="item-select-mod" min="1" max="10" step="1" placeholder="00" id="msg-fim-id">';
 var DIALOG_MSG_START = 'Velocidade do texto a ser exibido (de 1 até 10): <input type="number" class="item-select-mod" min="1" max="10" step="1" placeholder="2" id="msg-comeco-id"><br>(Info: Quanto menor o numero for, mais rápido o texto será escrito na tela)';
 var DIALOG_MSG_EXECSE = 'SE ID: <input type="text" class="item-select-mod" placeholder="00" id="msg-execse-id">';
@@ -26,3 +25,6 @@ var DIALOG_MSG_ADDTEXT = '<textarea placeholder="Escreva a sua mensagem aqui!" i
 var DIALOG_MSG_ADDCHAR = 'Selecione o Caracter: <select id="msg-char-id" class="item-select-mod"><option value="ea24">S.</option><option value="ea25">T.</option><option value="ea26">A.</option><option value="ea27">R.</option><option value="ea28">;</option></select>';
 var DIALOG_MSG_NAMEITEM = 'Item Hex: <input type="text" class="item-select-mod" placeholder="00" id="msg-lblitem-id">';
 var DIALOG_MSG_SHOWCAMERA = 'Camera ID: <input type="text" class="item-select-mod" placeholder="00" id="msg-cam-id">';
+
+// RDT
+
