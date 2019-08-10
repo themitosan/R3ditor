@@ -40,3 +40,7 @@ Ao selecionar, cole o mesmo na pasta aonde está o executável do game e renomei
 Você pode visualizar / editar as mensagens internas do game carregando arquivos .msg ou usando o campo "Hex Input".
 
 Note que você precisa usar um editor hexadecimal ou extrair os arquivos usando o programa <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> para poder visualizar as mensagens.
+
+### Arquivos de mapas (.rdt) [EXTREME WIP]
+Por enquanto você pode ver quais itens tem em poucos mapas, sem poder modificar.
+Espere por melhorias de compatibilidade e mais funcionalidades em breve!
