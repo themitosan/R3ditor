@@ -42,5 +42,6 @@ Você pode visualizar / editar as mensagens internas do game carregando arquivos
 Note que você precisa usar um editor hexadecimal ou extrair os arquivos usando o programa <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> para poder visualizar as mensagens.
 
 ### Arquivos de mapas (.rdt) [EXTREME WIP]
-Por enquanto você pode ver quais itens tem em poucos mapas, sem poder modificar.
+Por enquanto você pode visualizar quais itens, files ou mapas estão presentes dentro do arquivo, sem poder modificar.<br><br>
+Você pode ver como que está a lista de compatibilidade visualizando <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">essa tabela</a>.<br><br>
 Espere por melhorias de compatibilidade e mais funcionalidades em breve!
