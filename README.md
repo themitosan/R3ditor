@@ -4,7 +4,7 @@ Um editor de arquivos escrito em js para realizar estudos de engenharia reversa 
 ## Como instalar
 - Faça o download da versão mais recente do Node-Webkit e extraia o mesmo em uma pasta de sua preferência<br>(Clique <a href="http://nwjs.io" target="_blank">aqui</a> para ir até a pagina)
 
-- Baixe o conteúdo principal desse repositório e extraia e coloque todos os arquivos na mesma pasta que você extraiu o Node-Webkit (o arquivo "package.json" deve estar na mesma pasta que o executável "nw.exe".)
+- Baixe o conteúdo principal desse repositório e extraia e coloque todos os arquivos na mesma pasta que você extraiu o Node-Webkit (o arquivo "package.json" deve estar na mesma pasta que o executável "nw.exe").
 
 - Abra o programa executando o arquivo "nw.exe".
 
