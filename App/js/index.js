@@ -6,7 +6,7 @@
 
 var BETA = false;
 var fs = require('fs');
-var APP_VERSION = "1.0";
+var APP_VERSION = "[BETA] 0.1";
 var STATUS = "Indefinido";
 var arquivoBruto = undefined;
 var APP_PATH = process.cwd();

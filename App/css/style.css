@@ -492,6 +492,44 @@ a{
     text-shadow: 0 0 6px #000;
 }
 
+.RDT-item-select{
+    position: sticky;
+    width: 550px !important;
+    left: 740px;
+}
+
+.RDT-item-pos{
+    position: sticky;
+    width: 560px;
+    left: 740px;
+}
+
+.RDT-btn-apply{
+    width: 49%;
+    border: 1px;
+    padding: 16px;
+    margin-left: 4px;
+    border-radius: 0px;
+    border-style: double;
+    box-shadow: 0 0 15px #3d3d3d;
+    text-shadow: 0 0 10px #939393;
+    background-image: linear-gradient(to bottom, #222, #000);
+}
+
+.color-green{
+    color: #0f0;
+}
+
+.color-white{
+    color: #fff;
+}
+
+.RDT-applyBtn-div{
+    top: 88%;
+    width: 98%;
+    position: absolute;
+}
+
 .menu-alterar-item{
     top: 40%;
     left: 13.4%;
@@ -788,7 +826,7 @@ a{
 }
 
 .RDT-holder{
-    width: 622px;
+    width: 1288px;
     height: 476px;
     overflow: auto;
     margin-top: 4px;

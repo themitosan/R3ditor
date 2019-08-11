@@ -98,13 +98,28 @@
 				</div>
 			</div>
 			<!-- RDT: Item - Editar -->
-			<div class="RDT-Item-Edit" id="RDT-Item-Edit">
-				<center><font class="titulo">Editar</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font></center>
-				<div id="RDT-edit-item-select" class="none">
-					Item: <select class="item-select-mod" style="width: 600px;" id="RDT-item-select"></select>
-				</div>
-				<div id="RDT-edit-file-select" class="none">
-					Arquivo: <select class="item-select-mod" style="width: 600px;" id="RDT-file-select"></select>
+			<div class="RDT-Item-Edit none" id="RDT-Item-Edit">
+				<center><font class="titulo">Editar</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
+				<div id="RDT-item-edit-form">
+					<div id="RDT-edit-item-select" class="none">
+						Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
+						Quantidade: <input type="number" min="0" max="255" step="1" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
+					</div>
+					<div id="RDT-edit-file-select" class="none">
+						File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
+					</div>
+					<div id="RDT-edit-map-select" class="none">
+						Mapa: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
+					</div>
+					Posição X: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""><br>
+					Posição Y: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""><br>
+					Posição Z: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""><br>
+					Rotação: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""><br>
+					Animação: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="0000" value="">
+					<div class="RDT-applyBtn-div">
+						<input type="button" class="RDT-btn-apply color-white" value="Cancelar" onclick="RDT_editItemCancel();">
+						<input type="button" class="RDT-btn-apply color-green" value="Aplicar Alterações!" onclick="RDT_ITEM_APPLY();">
+					</div>
 				</div>
 			</div>
 		</div>
@@ -399,7 +414,7 @@
 			<img src="img/logo.png" draggable="false" alt="R3ditor-Logo" class="appLogo"><br>
 			<font class="textLOGO">R3ditor</font><br>
 			Versão: <font id="app_version">???</font><br>
-			Criado por @themitosan<br><br>
+			Criado por <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
 			Many Thanks to:<br><br>
 			<div class="about-tks">
 				MarkGrass - BioFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>

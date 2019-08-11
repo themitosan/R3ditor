@@ -498,6 +498,9 @@ function RDT_showMenu(id){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
 	}
+	$("#RDT-map-select").html(RDT_EDIT_MAP);
+	$("#RDT-file-select").html(RDT_EDIT_FILE);
+	$("#RDT-item-select").html(RDT_EDIT_ITEM);
 	$("#RDT_lbl-totalMaps").html(RDT_totalMapas);
 	$("#RDT_lbl-totalFiles").html(RDT_totalFiles);
 	$("#RDT_lbl-totalItens").html(RDT_totalItens);
@@ -519,15 +522,73 @@ function RDT_Error_Item_404(){
 		$("#RDT_lbl-totalMaps").html("0");
 		$("#RDT_lbl-totalItens").html("0");
 		$("#RDT_lbl-totalFiles").html("0");
-		$("#RDT-Item-Edit").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "none"});
 		$("#RDT-item-404").css({"display": "block"});
 		document.getElementById("RDT-aba-menu-3").value = "Itens / Files (0)";
 	} else {
 		$("#RDT-item-404").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "block"});
-		$("#RDT-Item-Edit").css({"display": "block"});
 	}
+}
+
+function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant){
+	var nome = undefined;
+	if (hex.length < 2){
+		hex = "0" + hex;
+	}
+	if (quant > 255){
+		quant = 255;
+	}
+	if (quant < 0){
+		quant = 0;
+	}
+	// Item
+	if (id === 1){
+		nome = ITEM[hex][0];
+		document.getElementById('RDT-item-select').value = hex;
+		$("#RDT-edit-item-select").removeClass("none");
+		$("#RDT-edit-file-select").addClass("none");
+		$("#RDT-edit-map-select").addClass("none");
+	}
+	// File
+	if (id === 2){
+		nome = FILES[hex][0];
+		document.getElementById('RDT-file-select').value = hex;
+		$("#RDT-edit-file-select").removeClass("none");
+		$("#RDT-edit-item-select").addClass("none");
+		$("#RDT-edit-map-select").addClass("none");
+	}
+	// Map
+	if (id === 3){
+		nome = RDT_MAPAS[hex][0];
+		document.getElementById('RDT-map-select').value = hex;
+		$("#RDT-edit-map-select").removeClass("none");
+		$("#RDT-edit-file-select").addClass("none");
+		$("#RDT-edit-item-select").addClass("none");
+	}
+	$("#RDT-lbl-item-edit").html(nome);
+	$("#RDT-lbl-edit-index").html(index);
+	document.getElementById('RDT_item-edit-X').value = posX;
+	document.getElementById('RDT_item-edit-Y').value = posY;
+	document.getElementById('RDT_item-edit-Z').value = posZ;
+	document.getElementById('RDT_item-edit-R').value = posR;
+	document.getElementById('RDT_item-edit-A').value = anim;
+	document.getElementById('RDT_item-edit-Quant').value = quant;
+	$("#RDT-Item-Edit").css({"display": "block"});
+	$("#RDT-item-list").css({"width": "622px"});
+}
+
+function RDT_editItemCancel(){
+	$("#RDT-Item-Edit").css({"display": "none"});
+	document.getElementById('RDT_item-edit-X').value = "";
+	document.getElementById('RDT_item-edit-Y').value = "";
+	document.getElementById('RDT_item-edit-Z').value = "";
+	document.getElementById('RDT_item-edit-R').value = "";
+	document.getElementById('RDT_item-edit-A').value = "";
+	document.getElementById('RDT_item-edit-Quant').value = "";
+	$("#RDT-item-list").css({"width": "1288px"});
+	$("#RDT-lbl-item-edit").html("Nenhum Item Selecionado");
+	$("#RDT-lbl-edit-index").html("N/A");
 }
 
 function RDT_applyMenuFocus(menuId){

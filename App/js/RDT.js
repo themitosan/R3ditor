@@ -183,28 +183,35 @@ function RDT_decompileItens(id, edit){
 function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	var tipo = undefined;
 	var cssFix = undefined;
+	var typeId = undefined;
 	var convert = undefined;
 	try{
 		if (parseInt(id, 16) < 133){
+			typeId = 1;
 			tipo = "Item";
 			cssFix = "RDT-item-bg";
 			convert = ITEM[id][0];
 			RDT_totalItens++;
 		}
 		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 162){
+			typeId = 2;
 			tipo = "File";
 			cssFix = "RDT-file-bg";
 			convert = FILES[id][0];
 			RDT_totalFiles++;
 		}
 		if (parseInt(id, 16) > 162){
+			typeId = 3;
 			tipo = "Mapa";
 			cssFix = "RDT-map-bg";
 			convert = RDT_MAPAS[id][0];
 			RDT_totalMapas++;
 		}
+		if (id.length < 2){
+			id = "0" + id;
+		}
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + ' (Hex: ' + id + ')</font>' + 
-		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modificar" onclick="RDT_editItem();"><br>Quantidade: ' + 
+		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modificar" onclick="RDT_displayItemEdit(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantidade: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>Posição X: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
 		'Posição Y: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Posição Z: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotação: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
 		'<div class="RDT-Item-Misc">Identificador: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animação: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>' + 
@@ -217,6 +224,6 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	}
 }
 
-function RDT_editItem(){
+function RDT_ITEM_APPLY(){
 	addLog("warn", "AVISO: Sinto muito mais acho que essa opção está em outro castelo! #WIP");
 }

@@ -188,21 +188,21 @@ var FILES = {
 	"9b": ["Photo A"],
 	"9c": ["Photo B"],
 	"9d": ["Photo C"],
-	"9e": ["Photo E"],
 	"9f": ["Photo D"],
+	"9e": ["Photo E"],
 	"a0": ["Clock Tower Poster Card"],
 	//
 	"a2": ["Classified Photo File"]
 }
 
 var RDT_MAPAS = {
-	"a4": ["Uptown Map"], // <-- verificar
+	"a4": ["Uptown Map"],
+	"a9": ["Police Station Map"],
 	"a5": ["Downtown Map"],
 	"a6": ["Clock Tower Map"],
+	"aa": ["Hospital Map"],
 	"a7": ["Park Map"],
-	"a8": ["Dead Factory Map"],
-	"a9": ["Police Station Map"],
-	"aa": ["Hospital Map"]
+	"a8": ["Dead Factory Map"]
 }
 
 var ATTR = {
