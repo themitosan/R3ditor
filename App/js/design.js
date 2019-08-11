@@ -4,10 +4,10 @@
 	Help me - please
 */
 
-var RDT_aba_atual = undefined;
-var SAVE_aba_atual = undefined;
 var RDT_totalMenus = 3;
 var SAVE_totalMenus = 4;
+var RDT_aba_atual = undefined;
+var SAVE_aba_atual = undefined;
 var request_render_save = undefined;
 var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
@@ -495,9 +495,13 @@ function RDT_showMenu(id){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
 	}
-	$("#RDT_lbl-totItens").html(RDT_totalItens);
+	$("#RDT_lbl-totalMaps").html(RDT_totalMapas);
+	$("#RDT_lbl-totalFiles").html(RDT_totalFiles);
 	$("#RDT_lbl-totalItens").html(RDT_totalItens);
+	$("#RDT_lbl-totItens").html(RDT_totalItensGeral);
 	$("#RDT-lbl-mapName").html(getFileName(ORIGINAL_FILENAME));
+	document.getElementById("RDT-aba-menu-3").value = "Itens, Files e Mapas (" + RDT_totalItensGeral + ")";
+	$("#RDT-lbl-FILENAME").html("Arquivo Atual: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
 	$("#menu-RDT").css({"display": "block"});
 	$("#RDT_menu-" + id).css({"display": "block"});
 	$("#log-programa").css({"height": "86px", "top": "626px"});
@@ -507,12 +511,15 @@ function RDT_showMenu(id){
 }
 
 function RDT_Error_Item_404(){
-	if (RDT_totalItens < 1){
+	if (RDT_totalItensGeral < 1){
 		$("#RDT_lbl-totItens").html("0");
+		$("#RDT_lbl-totalMaps").html("0");
 		$("#RDT_lbl-totalItens").html("0");
+		$("#RDT_lbl-totalFiles").html("0");
 		$("#RDT-Item-Edit").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "none"});
 		$("#RDT-item-404").css({"display": "block"});
+		document.getElementById("RDT-aba-menu-3").value = "Itens / Files (0)";
 	} else {
 		$("#RDT-item-404").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "block"});

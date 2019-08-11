@@ -25,6 +25,3 @@ var DIALOG_MSG_ADDTEXT = '<textarea placeholder="Escreva a sua mensagem aqui!" i
 var DIALOG_MSG_ADDCHAR = 'Selecione o Caracter: <select id="msg-char-id" class="item-select-mod"><option value="ea24">S.</option><option value="ea25">T.</option><option value="ea26">A.</option><option value="ea27">R.</option><option value="ea28">;</option></select>';
 var DIALOG_MSG_NAMEITEM = 'Item Hex: <input type="text" class="item-select-mod" placeholder="00" id="msg-lblitem-id">';
 var DIALOG_MSG_SHOWCAMERA = 'Camera ID: <input type="text" class="item-select-mod" placeholder="00" id="msg-cam-id">';
-
-// RDT
-

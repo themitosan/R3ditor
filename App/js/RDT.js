@@ -4,10 +4,13 @@
 	Help me - please
 */
 
-var RDT_ItensArray = []
-var RDT_totalItens = undefined;
+var RDT_ItensArray = [];
+var RDT_totalItensGeral = undefined;
 var RDT_itemIndexRAW = undefined;
 var RDT_arquivoBruto = undefined;
+var RDT_totalItens = 0;
+var RDT_totalFiles = 0;
+var RDT_totalMapas = 0;
 
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	localStorage.clear();
@@ -21,7 +24,41 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 
 function RDT_readItens(){
 	var c = 0;
+	RDT_ItensArray = [];
+	RDT_totalItens = 0;
+	RDT_totalFiles = 0;
+	RDT_totalMapas = 0;
+	RDT_totalItensGeral = 0;
+	
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310900");
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
+
+	c = 0;
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02318000"); // Imprensa, 1F
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
+
+	c = 0;
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310800"); // Imprensa, 2F
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
+
+	c = 0;
 	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310000"); // Padrão encontrado em (quase) todos os itens
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
+	
+	c = 0;
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310500");
 	while (c < RDT_itemIndexRAW.length){
 		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
 		c++;
@@ -42,16 +79,31 @@ function RDT_readItens(){
 	}
 
 	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310500");
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310300");
 	while (c < RDT_itemIndexRAW.length){
 		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
 		c++;
 	}
 
-	RDT_totalItens = RDT_ItensArray.length;
+	c = 0;
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310400"); // Shopping Dist. 3
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
 
 	c = 0;
-	while (c < RDT_totalItens){
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310a00"); // R503.rdt - Fábrica
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		c++;
+	}
+
+
+	RDT_totalItensGeral = RDT_ItensArray.length;
+
+	c = 0;
+	while (c < RDT_totalItensGeral){
 		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
 		var RDT_itemEndRange = RDT_ItensArray[c] + 64;
 		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
@@ -63,6 +115,7 @@ function RDT_readItens(){
 }
 
 function RDT_decompileItens(id, edit){
+	var RDT_CanRender = true;
 	var currentItem = localStorage.getItem("RDT_Item-" + id);
 	
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
@@ -92,7 +145,8 @@ function RDT_decompileItens(id, edit){
 		espaco3 	  = currentItem.slice(RANGES["RDT_item-0-espaco3"][0], 	   RANGES["RDT_item-0-espaco3"][1]);
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
 		final 		  = currentItem.slice(RANGES["RDT_item-0-final"][0], 	   RANGES["RDT_item-0-final"][1]);
-	} else {
+	}
+	if (header === "68"){
 		itemXX 		  = "[WIP]";
 		itemYY 		  = "[WIP]";
 		itemZZ 		  = "[WIP]";
@@ -105,29 +159,62 @@ function RDT_decompileItens(id, edit){
 		final 		  = "[WIP]";
 	}
 
-	if (edit === false){
-		RDT_renderItens(id, itemIdetifier, itemID, itemQuant, itemXX, itemYY, itemZZ, itemRR, itemMP);
+	var RDT_motivo = undefined;
+	console.log("Header: " + header + "\nHex: " + itemID);
+
+	if (header === "90" || header === "51" || header === "02"){
+		RDT_totalItensGeral--;
+		RDT_CanRender = false;
+		RDT_ItensArray.splice(id, 1);
+		localStorage.removeItem("RDT_Item-" + id);
+		RDT_motivo = "O suporto item, mapa ou file tem sua header desconhecida (" + header + ")";
+	}
+
+	if (RDT_CanRender === true){
+		if (edit === false){
+			RDT_renderItens(id, itemIdetifier, itemID, itemQuant, itemXX, itemYY, itemZZ, itemRR, itemMP, header);
+		}
+	} else {
+		console.warn("AVISO: Não foi possivel renderizar o item " + id + "! Motivo: " + RDT_motivo);
 	}
 
 }
 
-function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp){
+function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	var tipo = undefined;
 	var cssFix = undefined;
-	if (parseInt(id, 16) > 133){
-		cssFix = "RDT-file-bg";
-		tipo = "File";
-	} else {
-		tipo = "Item";
-		cssFix = "RDT-item-bg";
-	}
-	var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + id + ' (' + ITEM[id][0] + ')</font>' + 
+	var convert = undefined;
+	try{
+		if (parseInt(id, 16) < 133){
+			tipo = "Item";
+			cssFix = "RDT-item-bg";
+			convert = ITEM[id][0];
+			RDT_totalItens++;
+		}
+		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 162){
+			tipo = "File";
+			cssFix = "RDT-file-bg";
+			convert = FILES[id][0];
+			RDT_totalFiles++;
+		}
+		if (parseInt(id, 16) > 162){
+			tipo = "Mapa";
+			cssFix = "RDT-map-bg";
+			convert = RDT_MAPAS[id][0];
+			RDT_totalMapas++;
+		}
+		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + ' (Hex: ' + id + ')</font>' + 
 		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modificar" onclick="RDT_editItem();"><br>Quantidade: ' + 
-		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>Posição X: <font class="italic">' + x + '</font><br>' +
-		'Posição Y: <font class="italic">' + y + '</font><br>Posição Z: <font class="italic">' + z + '</font><br>Posição R: <font class="italic">' + r + '</font><br>' + 
-		'<div class="RDT-Item-Misc">Identificador: <font class="italic">' + ident + '</font><br>Animação: <font class="italic">' + mp + '</font><br></div></div>';
-
-	$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
+		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>Posição X: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
+		'Posição Y: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Posição Z: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotação: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
+		'<div class="RDT-Item-Misc">Identificador: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animação: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>' + 
+		'Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
+		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
+	} catch (err){
+		var msg = "ERRO: Não foi possivel descobrir o item " + id + " - " + msg;
+		console.error(msg);
+		addLog("error", msg);
+	}
 }
 
 function RDT_editItem(){

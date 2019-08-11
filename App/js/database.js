@@ -160,15 +160,49 @@ var ITEM = {
 	"82": ["Reloading tool", 								   "Com esse item, você consegue criar munição através das polvoras.", 																																	 															"0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
 	"83": ["Game inst. A", 									   "Manual de como jogar Resident Evil 3 / Biohazard 3.<br>Com esse manual, você aprende sobre objetos explosivos, O giro de 180º, Fuga de emergência, desvio de emergência e outras coisas.", 											 							"0px 446px 0px 57px", "-166px",  "13", "5", "17", "1", "13"],
 	"84": ["Game inst. B", 									   "Manual de como jogar Resident Evil 3 / Biohazard 3.<br>Com esse manual, você aprende sobre o sistema de criação de balas (Reloading Tool), Sobre as polvoras e suas combinações.", 													 							"0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
-	"85": ["(BOTU) Pote com solução ciana", 				   "BOT... Não, pera...<br><br>Com o nome interno de \"Game inst. A\", esse item pode ser usado quantas vezes que pelo visto não altera nada no game.<br><br>Sim, mais um item para encher linguiça.", 													 			"0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"],
-	
-	// Files
-	// (Usados em RDT)
-	
-	"96": ["Fax From Kendo"],
-	"a0": ["Clock Tower Poster Card"],
-	'a4': ["Downtown Map"]
+	"85": ["(BOTU) Pote com solução ciana", 				   "BOT... Não, pera...<br><br>Com o nome interno de \"Game inst. A\", esse item pode ser usado quantas vezes que pelo visto não altera nada no game.<br><br>Sim, mais um item para encher linguiça.", 													 			"0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
+}
 
+var FILES = {
+	"86": ["Dario's Memo"],
+	"87": ["Mercenary's Diary"],
+	"88": ["Business Fax"],
+	"89": ["Marvin's Report"],
+	"8a": ["David's Memo"],
+	"8b": ["City Guide"],
+	"8c": ["Reporter's Memo"],
+	"8d": ["Operation Instruction"],
+	"8e": ["Mercenary's Pocketbook"],
+	"8f": ["Art Picture Postercard"],
+	"90": ["Supervisor's Report"],
+	"91": ["Written Order To The Supervisors"],
+	"92": ["Director's Diary"],
+	"93": ["Manager's Diary"],
+	"94": ["Security Manual"],
+	"95": ["Mechanic's Memo"],
+	"96": ["Fax From Kendo"],
+	"97": ["Manager's Report"],
+	"98": ["Medical Instruction Manual"],
+	"99": ["Fax From H. Q."],
+	"9a": ["Incinerator Manual"],
+	"9b": ["Photo A"],
+	"9c": ["Photo B"],
+	"9d": ["Photo C"],
+	"9e": ["Photo E"],
+	"9f": ["Photo D"],
+	"a0": ["Clock Tower Poster Card"],
+	//
+	"a2": ["Classified Photo File"]
+}
+
+var RDT_MAPAS = {
+	"a4": ["Uptown Map"], // <-- verificar
+	"a5": ["Downtown Map"],
+	"a6": ["Clock Tower Map"],
+	"a7": ["Park Map"],
+	"a8": ["Dead Factory Map"],
+	"a9": ["Police Station Map"],
+	"aa": ["Hospital Map"]
 }
 
 var ATTR = {
