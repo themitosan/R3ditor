@@ -32,6 +32,7 @@
 	<!-- Menu RDT -->
 	<div class="menu-topo none" id="menu-topo-RDT">
 		<input type="button" class="botao-menu" value="Abrir RDT" onclick="triggerLoadRDT();">
+		<font id="RDT-lbl-FILENAME"></font>
 		<!-- Direita -->
 		<input type="button" class="botao-menu right" value="Voltar" onclick="main_menu(0);">
 	</div>
@@ -53,7 +54,7 @@
 	<div class="none" id="menu-RDT">
 		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="Geral" onclick="RDT_showMenu(1);">
 		<input type="button" id="RDT-aba-menu-2" class="aba" value="Mensagens (MSG)" onclick="RDT_showMenu(2);">
-		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens / Files" onclick="RDT_showMenu(3);">
+		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files e Mapas (???)" onclick="RDT_showMenu(3);">
 		<!-- RDT: Menu Geral -->
 		<div class="menu" id="RDT_menu-1">
 			<div class="menu-general-content" id="RDT-geral">
@@ -70,7 +71,9 @@
 				Total de Câmeras: <font class="menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
 				Total de Inimigos: <font class="menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
 				Total de Mensagens: <font class="menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
-				Total de Itens / Files: <font class="menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+				Total de Itens: <font class="menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+				Total de Files: <font class="menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
+				Total de Mapas: <font class="menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
 			</div>
 		</div>
 		<!-- RDT: Mensagens -->
@@ -83,14 +86,14 @@
 		<!-- RDT: Itens -->
 		<div class="menu none" id="RDT_menu-3">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Itens / Files (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
+				<center><font class="titulo">Itens, Files e Mapas (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
 				<div id="RDT-item-list" class="RDT-holder">
 					<!-- Os Itens dentro da RDT vão aqui -->
 				</div>
 				<!-- Mensagem: Não há itens -->
 				<div id="RDT-item-404">
 					<center>
-						Whoops... Parece que no mapa <font id="RDT-lbl-mapName">???</font> não tem nenhum item :(</font>
+						Whoops... Parece que no mapa <font id="RDT-lbl-mapName">???</font> não tem nenhum item, file e nem mapas! :(</font>
 					</center>
 				</div>
 			</div>
@@ -105,6 +108,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 	<!-- FORM: MSG -->
@@ -201,21 +205,23 @@
 					<div class="menu-separador"></div>
 					Slots de save sendo usados:<br>
 					<!-- Saves -->
-					<div class="save-number">01</div><div class="slot-save" onclick="save_renderSlot(1);" id="slt-save-1">N/A</div>
-					<div class="save-number">02</div><div class="slot-save" onclick="save_renderSlot(2);" id="slt-save-2">N/A</div>
-					<div class="save-number">03</div><div class="slot-save" onclick="save_renderSlot(3);" id="slt-save-3">N/A</div>
-					<div class="save-number">04</div><div class="slot-save" onclick="save_renderSlot(4);" id="slt-save-4">N/A</div>
-					<div class="save-number">05</div><div class="slot-save" onclick="save_renderSlot(5);" id="slt-save-5">N/A</div>
-					<div class="save-number">06</div><div class="slot-save" onclick="save_renderSlot(6);" id="slt-save-6">N/A</div><br>
-					<div class="save-number">07</div><div class="slot-save" onclick="save_renderSlot(7);" id="slt-save-7">N/A</div>
-					<div class="save-number">08</div><div class="slot-save" onclick="save_renderSlot(8);" id="slt-save-8">N/A</div>
-					<div class="save-number">09</div><div class="slot-save" onclick="save_renderSlot(9);" id="slt-save-9">N/A</div>
-					<div class="save-number">10</div><div class="slot-save" onclick="save_renderSlot(10);" id="slt-save-10">N/A</div>
-					<div class="save-number">11</div><div class="slot-save" onclick="save_renderSlot(11);" id="slt-save-11">N/A</div>
-					<div class="save-number">12</div><div class="slot-save" onclick="save_renderSlot(12);" id="slt-save-12">N/A</div><br>
-					<div class="save-number">13</div><div class="slot-save" onclick="save_renderSlot(13);" id="slt-save-13">N/A</div>
-					<div class="save-number">14</div><div class="slot-save" onclick="save_renderSlot(14);" id="slt-save-14">N/A</div>
-					<div class="save-number">15</div><div class="slot-save" onclick="save_renderSlot(15);" id="slt-save-15">N/A</div>
+					<div class="save-grid">
+						<div class="save-number">01</div><div class="slot-save" onclick="save_renderSlot(1);" id="slt-save-1">N/A</div>
+						<div class="save-number">02</div><div class="slot-save" onclick="save_renderSlot(2);" id="slt-save-2">N/A</div>
+						<div class="save-number">03</div><div class="slot-save" onclick="save_renderSlot(3);" id="slt-save-3">N/A</div>
+						<div class="save-number">04</div><div class="slot-save" onclick="save_renderSlot(4);" id="slt-save-4">N/A</div>
+						<div class="save-number">05</div><div class="slot-save" onclick="save_renderSlot(5);" id="slt-save-5">N/A</div>
+						<div class="save-number">06</div><div class="slot-save" onclick="save_renderSlot(6);" id="slt-save-6">N/A</div>
+						<div class="save-number">07</div><div class="slot-save" onclick="save_renderSlot(7);" id="slt-save-7">N/A</div>
+						<div class="save-number">08</div><div class="slot-save" onclick="save_renderSlot(8);" id="slt-save-8">N/A</div>
+						<div class="save-number">09</div><div class="slot-save" onclick="save_renderSlot(9);" id="slt-save-9">N/A</div>
+						<div class="save-number">10</div><div class="slot-save" onclick="save_renderSlot(10);" id="slt-save-10">N/A</div>
+						<div class="save-number">11</div><div class="slot-save" onclick="save_renderSlot(11);" id="slt-save-11">N/A</div>
+						<div class="save-number">12</div><div class="slot-save" onclick="save_renderSlot(12);" id="slt-save-12">N/A</div><br>
+						<div class="save-number">13</div><div class="slot-save" onclick="save_renderSlot(13);" id="slt-save-13">N/A</div>
+						<div class="save-number">14</div><div class="slot-save" onclick="save_renderSlot(14);" id="slt-save-14">N/A</div>
+						<div class="save-number">15</div><div class="slot-save" onclick="save_renderSlot(15);" id="slt-save-15">N/A</div>
+					</div>
 				</div>
 				<!-- Alterar -->
 				<div id="save-alterar" class="save-alterar-menu">
@@ -390,7 +396,7 @@
 	<!-- Sobre -->
 	<div class="about none" id="about-r3ditor">
 		<center>
-			<img src="img/logo.png" draggable="false" alt="R3ditor-Logo" title="R3ditor Logo" class="appLogo"><br>
+			<img src="img/logo.png" draggable="false" alt="R3ditor-Logo" class="appLogo"><br>
 			<font class="textLOGO">R3ditor</font><br>
 			Versão: <font id="app_version">???</font><br>
 			Criado por @themitosan<br><br>
@@ -408,6 +414,8 @@
 			<input type="button" class="botao-menu" value="Voltar" onclick="closeAbout();">
 		</center>
 	</div>
+	<!-- AppLogo -->
+	<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo">
 	<!-- File Loader -->
 	<div style="display: none;">
 		<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>

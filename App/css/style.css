@@ -373,7 +373,7 @@ a{
 
 .slot-save{
     height: 20px;
-    width: 134px;
+    width: 186px;
     cursor: pointer;
     margin-top: 4px;
     padding-top: 4px;
@@ -383,6 +383,11 @@ a{
     display: -webkit-inline-box;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+}
+
+.save-grid{
+    position: absolute;
+    width: 1300px;
 }
 
 .save-number{
@@ -783,7 +788,7 @@ a{
 }
 
 .RDT-holder{
-    width: 593px;
+    width: 622px;
     height: 476px;
     overflow: auto;
     margin-top: 4px;
@@ -807,6 +812,29 @@ a{
     background-image: linear-gradient(to bottom, #796293, #273c50);
 }
 
+.RDT-map-bg{
+    background-image: linear-gradient(to bottom, #4e8b72, #275046);
+}
+
+.RDT-item-lbl-fix{
+    position: sticky;
+    left: 80px;
+}
+
+.RDT-item-lbl-fix-2{
+    position: sticky;
+    left: 232px;
+}
+
+.logo-fundo{
+    top: 32%;
+    left: 42%;
+    z-index: -1;
+    opacity: 0.4;
+    filter: blur(2px);
+    position: absolute;
+}
+
 .RDT-Item-Misc{
     width: 30%;
     left: 130px;
@@ -818,9 +846,9 @@ a{
 
 .RDT-Item-Edit{
     top: 53px;
-    left: 620px;
+    left: 648px;
     padding: 6px;
-    width: 678px;
+    width: 650px;
     height: 468px;
     border-radius: 6px;
     position: absolute;

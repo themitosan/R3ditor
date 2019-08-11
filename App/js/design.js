@@ -44,6 +44,7 @@ function main_menu(anim){
 		reload();
 	} else {
 		$("#menu-topo").css({"display": "none"});
+		//$("#img-logo").fadeOut(200);
 	}
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Editor de Saves (*.sav)";
