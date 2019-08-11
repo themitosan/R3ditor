@@ -290,10 +290,10 @@ function CARREGAR_SAVE(sFile){
 	localStorage.setItem("Save_14", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
 	localStorage.setItem("Save_15", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
 
-	save_Backup();
 
 	// Render Infos
 	save_renderSlot(CURRENT_SAVE_SLOT);
+	save_Backup();
 }
 
 function save_renderSlot(slotID){
