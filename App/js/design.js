@@ -44,7 +44,6 @@ function main_menu(anim){
 		reload();
 	} else {
 		$("#menu-topo").css({"display": "none"});
-		//$("#img-logo").fadeOut(200);
 	}
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Editor de Saves (*.sav)";
@@ -64,6 +63,7 @@ function main_menu(anim){
 }
 
 function SAVE_showMenu(menuId){
+	$("#img-logo").fadeOut({duration: 100, queue: false});
 	if (request_render_save !== true){
 		$("#menu-SAVE").css({"display": "block"});
 	}
@@ -357,6 +357,7 @@ function closeAbout(){
 
 /// MSG
 function MSG_showMenu(id){
+	$("#img-logo").fadeOut({duration: 100, queue: false});
 	if (id === 1){ // Inicial
 		$("#menu-MSG").removeClass("none");
 		$("#menu-MSG").css({"display": "block"});
@@ -492,6 +493,7 @@ function MSG_renderDialog(id, args, index, isMod){
 /// RDT
 function RDT_showMenu(id){
 	var c = 1;
+	$("#img-logo").fadeOut({duration: 100, queue: false});
 	while(c < RDT_totalMenus + 1){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
