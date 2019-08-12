@@ -108,7 +108,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	// Finalizar Mensgagem
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Finalizar Mensagem <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
+			'(' + index + ') Function: End Message <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(2, ' + args + ', ' + index + ', true);"><br>Final Value: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>'
 	}
