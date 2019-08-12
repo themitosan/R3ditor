@@ -1,47 +1,46 @@
 # R3ditor
-Um editor de arquivos escrito em js para realizar estudos de engenharia reversa no game Resident Evil 3.
+An editor of files written in JS to perform reverse engineering studies on the Resident Evil 3 game.
 
 ## Como instalar
-- Faça o download da versão mais recente do Node-Webkit e extraia o mesmo em uma pasta de sua preferência<br>(Clique <a href="http://nwjs.io" target="_blank">aqui</a> para ir até a pagina)
+- Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a>)
 
-- Baixe o conteúdo principal desse repositório e extraia e coloque todos os arquivos na mesma pasta que você extraiu o Node-Webkit (o arquivo "package.json" deve estar na mesma pasta que o executável "nw.exe").
-
+- Download the main content from this repository and extract and place all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Abra o programa executando o arquivo "nw.exe".
 
-## Arquivos Suportados
+## Supported File Formats
 
 ### Bu00.sav (Saves) [wip]
-Você pode alterar diversos aspectos do seu save, como:
+You can change various aspects of your save, such as:
 
 - HP
-- Alterar IGT
-- Alterar Inventários
-- Alterar baús
-- Personagem atual
-- Status de envenenamento
-- Sidepack (Jill e Carlos)
-- Arma atual
-- Dificuldade
-- Roupa
-- Quantidade de Saves
-- Epílogos Desbloqueados
+- Change IGT
+- Change Inventories
+- Change chests
+- Current Character
+- Poisoning Status
+- Sidepack (Jill and Carlos)
+- Current Weapon
+- Difficulty
+- Clothes
+- Quantity of Saves
+- Unlocked Epilogues
 
-Em Breve:
+Soon:
 
 - Mapas Obtidos
 - Files Obtidos
 
-#### Importante
-Todas as mudanças que você fizer serão automáticamente aplicadas ao seu save.<br>
-Caso você queira recuperar seu save, abra a pasta "backup" e selecione um arquivo de backup.<br>
-Ao selecionar, cole o mesmo na pasta aonde está o executável do game e renomeie o arquivo de backup para "Bu00.sav"
+#### Important
+Any changes you make will automatically apply to your save.
+If you want to recover your save, open the "backup" folder and select a backup file. <br>
+When selecting, paste it into the folder where the game executable is and rename the backup file to "Bu00.sav"
 
 ### Arquivos de mensagem (.msg) [wip]
-Você pode visualizar / editar as mensagens internas do game carregando arquivos .msg ou usando o campo "Hex Input".
+You can view / edit the game's internal messages by loading .msg files or using the "Hex Input" field.
 
-Note que você precisa usar um editor hexadecimal ou extrair os arquivos usando o programa <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> para poder visualizar as mensagens.
+Note that you need to use a hex editor or extract the files using the <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> program to extract the messages.
 
-### Arquivos de mapas (.rdt) [EXTREME WIP]
-Por enquanto você pode visualizar quais itens, files ou mapas estão presentes dentro do arquivo, sem poder modificar.<br><br>
-Você pode ver como que está a lista de compatibilidade dos mapas visualizando <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">essa tabela</a>.<br><br>
-Espere por melhorias de compatibilidade e mais funcionalidades em breve!
+### Room Data Table (.rdt) [EXTREME WIP]
+For now you can view which items, files or maps are present within the file without being able to modify.<br><br>
+You can see how the map compatibility list looks by viewing <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">this sheet table</a>.<br><br>
+Expect compatibility improvements and more features soon!
