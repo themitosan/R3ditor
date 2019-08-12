@@ -13,10 +13,11 @@ var RDT_totalFiles = 0;
 var RDT_totalMapas = 0;
 
 function RDT_CARREGAR_ARQUIVO(rdtFile){
+	RDT_editItemCancel();
 	localStorage.clear();
 	ORIGINAL_FILENAME = rdtFile;
 	$("#RDT-item-list").empty();
-	var msg = "RDT - Carregado com sucesso! - File: " + rdtFile;
+	var msg = "RDT - The file was loaded Successfully! - File: " + rdtFile;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
 	addLog("log", msg);
 	RDT_readItens();
@@ -167,7 +168,7 @@ function RDT_decompileItens(id, edit){
 		RDT_CanRender = false;
 		RDT_ItensArray.splice(id, 1);
 		localStorage.removeItem("RDT_Item-" + id);
-		RDT_motivo = "O suporto item, mapa ou file tem sua header desconhecida (" + header + ")";
+		RDT_motivo = "Item, map or file has unknown header (" + header + ")";
 	}
 
 	if (RDT_CanRender === true){
@@ -175,7 +176,7 @@ function RDT_decompileItens(id, edit){
 			RDT_renderItens(id, itemIdetifier, itemID, itemQuant, itemXX, itemYY, itemZZ, itemRR, itemMP, header);
 		}
 	} else {
-		console.warn("AVISO: Não foi possivel renderizar o item " + id + "! Motivo: " + RDT_motivo);
+		console.warn("WARNING: Unable to render item " + id + " - " + RDT_motivo);
 	}
 
 }
@@ -211,19 +212,75 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 			id = "0" + id;
 		}
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + ' (Hex: ' + id + ')</font>' + 
-		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modificar" onclick="RDT_displayItemEdit(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantidade: ' + 
-		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>Posição X: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
-		'Posição Y: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Posição Z: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotação: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
-		'<div class="RDT-Item-Misc">Identificador: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animação: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>' + 
+		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_displayItemEdit(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantity: ' + 
+		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
+		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
+		'<div class="RDT-Item-Misc">Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>' + 
 		'Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
-		var msg = "ERRO: Não foi possivel descobrir o item " + id + " - " + msg;
+		var msg = "ERROR: Unable to render item " + id + " - " + msg;
 		console.error(msg);
 		addLog("error", msg);
 	}
 }
 
-function RDT_ITEM_APPLY(){
-	addLog("warn", "AVISO: Sinto muito mais acho que essa opção está em outro castelo! #WIP");
+function RDT_ITEM_APPLY(index, type){
+	var novaHex = undefined;
+	var nQuant = undefined;
+	if (type === 1){
+		novaHex = document.getElementById('RDT-item-select').value;
+		nQuant = document.getElementById('RDT_item-edit-Quant').value;
+	}
+	if (type === 2){
+		novaHex = document.getElementById('RDT-file-select').value;
+		nQuant = 1;
+	}
+	if (type === 3){
+		novaHex = document.getElementById('RDT-map-select').value;
+		nQuant = 1;
+	}
+	if (nQuant > 255){
+		nQuant = 255;
+	}
+	if (nQuant < 0){
+		nQuant = 0;
+	}
+	var quant = nQuant.toString(16);
+	if (quant.length < 2){
+		quant = "0" + quant;
+	}
+	var novaX = document.getElementById('RDT_item-edit-X').value;
+	var novaY = document.getElementById('RDT_item-edit-Y').value;
+	var novaZ = document.getElementById('RDT_item-edit-Z').value;
+	var novaR = document.getElementById('RDT_item-edit-R').value;
+	var novaAnim = document.getElementById('RDT_item-edit-A').value;
+	if (novaX === ""){
+		novaX = "0000";
+	}
+	if (novaY === ""){
+		novaY = "0000";
+	}
+	if (novaZ === ""){
+		novaZ = "0000";
+	}
+	if (novaR === ""){
+		novaR = "0000";
+	}
+	if (novaAnim === ""){
+		novaAnim = "0000";
+	}
+	
+	// Reconstruindo item
+	var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);   // 67??0231????
+	var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32); // Normalmente é 00 mas estou fazendo dessa forma para evitar erros
+	var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 40); // Deve conter alguma variavel usada em eventos globais, tipo quando o nemesis só aparece quando você pega o lockpick no R11A.rdt
+	var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
+	var RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
+
+	localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+}
+
+function RDT_RECOMPILE(){
+	
 }

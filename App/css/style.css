@@ -86,8 +86,8 @@ a{
 	border-radius: 4px;
 	padding-bottom: 4px;
 	padding-right: 10px;
-	background-color: #000;
 	text-shadow: 0 0 10px #888;
+	background-image: linear-gradient(to bottom, #202020, #000);
 }
 
 .info-icon-holder{
@@ -508,6 +508,7 @@ a{
     width: 49%;
     border: 1px;
     padding: 16px;
+    cursor: pointer;
     margin-left: 4px;
     border-radius: 0px;
     border-style: double;
@@ -593,8 +594,8 @@ a{
 
 .save-alterar-menu{
     top: 14px;
-    left: 1008px;
-    width: 278px;
+    left: 968px;
+    width: 320px;
     padding: 10px;
     border-radius: 6px;
     position: absolute;
@@ -788,6 +789,7 @@ a{
     float: right;
     border: none;
     width: 100px;
+    cursor: pointer;
     margin-top: 5px;
     padding-top: 5px;
     margin-right: 8px;

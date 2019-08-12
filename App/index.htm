@@ -25,100 +25,103 @@
 		<input type="button" class="botao-menu" value="Bio 3 MSG Editor (.msg)" onclick="main_menu(2);">
 		<input type="button" class="botao-menu" value="Bio 3 RDT Editor (.rdt)" onclick="main_menu(3);">
 		<!-- Direita -->
-		<input type="button" class="botao-menu right" value="Recarregar App" onclick="reload();">
-		<input type="button" class="botao-menu right" value="Sobre" onclick="showAbout();">
+		<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
+		<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
 	</div>
 
 	<!-- Menu RDT -->
 	<div class="menu-topo none" id="menu-topo-RDT">
-		<input type="button" class="botao-menu" value="Abrir RDT" onclick="triggerLoadRDT();">
+		<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoadRDT();">
 		<font id="RDT-lbl-FILENAME"></font>
 		<!-- Direita -->
-		<input type="button" class="botao-menu right" value="Voltar" onclick="main_menu(0);">
+		<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 	</div>
 	<!-- Menu MSG -->
 	<div class="menu-topo none" id="menu-topo-msg">
-		<input type="button" class="botao-menu" value="Abrir MSG" onclick="triggerLoadMSG();">
-		<input type="button" class="botao-menu" value="Gerar MSG" onclick="MSG_applyMSGCommand(true);">
+		<input type="button" class="botao-menu" value="Open MSG" onclick="triggerLoadMSG();">
+		<input type="button" class="botao-menu" value="Make MSG" onclick="MSG_applyMSGCommand(true);">
 		<!-- Direita -->
-		<input type="button" class="botao-menu right" value="Voltar" onclick="main_menu(0);">
+		<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 	</div>
 	<!-- Menu Saves -->
 	<div class="menu-topo none" id="menu-topo-save">
-		<input type="button" class="botao-menu" value="Abrir Save" onclick="triggerLoadSAVE();">
+		<input type="button" class="botao-menu" value="Open Save" onclick="triggerLoadSAVE();">
 		<!-- Direita -->
-		<input type="button" class="botao-menu right" value="Voltar" onclick="main_menu(0);">
+		<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 	</div>
 
 	<!-- FORM: RDT -->
 	<div class="none" id="menu-RDT">
-		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="Geral" onclick="RDT_showMenu(1);">
-		<input type="button" id="RDT-aba-menu-2" class="aba" value="Mensagens (MSG)" onclick="RDT_showMenu(2);">
-		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files e Mapas (???)" onclick="RDT_showMenu(3);">
+		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
+		<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (MSG)" onclick="RDT_showMenu(2);">
+		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 		<!-- RDT: Menu Geral -->
 		<div class="menu" id="RDT_menu-1">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Informações Gerais</font></center>
-				Nome Interno: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
-				Nome do Local: <font class="menu-geral-text" id="RDT_lbl-localName">???</font><br>
-				Local da cidade: <font class="menu-geral-text" id="RDT_lbl-localCity">???</font><br>
+				<center><font class="titulo">General</font></center>
+				Internal Name: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+				Local Name: <font class="menu-geral-text" id="RDT_lbl-localName">???</font><br>
+				City Location: <font class="menu-geral-text" id="RDT_lbl-localCity">???</font><br>
 				<div class="menu-separador"></div>
 				Stage: <font class="menu-geral-text" id="RDT_lbl-stage">???</font><br>
-				Dimenções: <font class="menu-geral-text" id="RDT_lbl-xyz">???</font><br>
-				Pos. de Entrada: <font class="menu-geral-text" id="RDT_lbl-posEntrada">???</font><br>
+				Dimensions: <font class="menu-geral-text" id="RDT_lbl-xyz">???</font><br>
+				Start Pos: <font class="menu-geral-text" id="RDT_lbl-posEntrada">???</font><br>
 				<div class="menu-separador"></div>
-				Total de Portas: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
-				Total de Câmeras: <font class="menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
-				Total de Inimigos: <font class="menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
-				Total de Mensagens: <font class="menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
-				Total de Itens: <font class="menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
-				Total de Files: <font class="menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
-				Total de Mapas: <font class="menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
+				Number Of Doors: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+				Number Of Cameras: <font class="menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
+				Number Of Enemies: <font class="menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
+				Number Of Messages: <font class="menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
+				Number Of Itens: <font class="menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+				Number Of Files: <font class="menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
+				Number Of Mapas: <font class="menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
 			</div>
 		</div>
 		<!-- RDT: Mensagens -->
 		<div class="menu none" id="RDT_menu-2">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Mensagens</font></center>
-				<center>WIP :(</center>
+				<center><font class="titulo">Messages</font></center>
+				<center>
+					WIP :(<br><br>
+					Can you give me a cookie?
+				</center>
 			</div>
 		</div>
 		<!-- RDT: Itens -->
 		<div class="menu none" id="RDT_menu-3">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Itens, Files e Mapas (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
+				<center><font class="titulo">Itens, Files And Maps (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
 				<div id="RDT-item-list" class="RDT-holder">
 					<!-- Os Itens dentro da RDT vão aqui -->
 				</div>
 				<!-- Mensagem: Não há itens -->
 				<div id="RDT-item-404">
 					<center>
-						Whoops... Parece que no mapa <font id="RDT-lbl-mapName">???</font> não tem nenhum item, file e nem mapas! :(</font>
+						Whoops... Looks like <font id="RDT-lbl-mapName">???</font> don't have any item, file or map! :(</font>
 					</center>
 				</div>
 			</div>
 			<!-- RDT: Item - Editar -->
 			<div class="RDT-Item-Edit none" id="RDT-Item-Edit">
-				<center><font class="titulo">Editar</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
+				<center><font class="titulo">Edit</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
 				<div id="RDT-item-edit-form">
 					<div id="RDT-edit-item-select" class="none">
 						Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
-						Quantidade: <input type="number" min="0" max="255" step="1" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
+						Quantity: <input type="number" min="0" max="255" step="1" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
 					</div>
 					<div id="RDT-edit-file-select" class="none">
 						File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
 					</div>
 					<div id="RDT-edit-map-select" class="none">
-						Mapa: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
+						Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 					</div>
-					Posição X: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""><br>
-					Posição Y: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""><br>
-					Posição Z: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""><br>
-					Rotação: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""><br>
-					Animação: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="0000" value="">
+					X Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""><br>
+					Y Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""><br>
+					Z Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""><br>
+					Rotation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""><br>
+					Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="0000" value="">
 					<div class="RDT-applyBtn-div">
-						<input type="button" class="RDT-btn-apply color-white" value="Cancelar" onclick="RDT_editItemCancel();">
-						<input type="button" class="RDT-btn-apply color-green" value="Aplicar Alterações!" onclick="RDT_ITEM_APPLY();">
+						<input type="button" class="RDT-btn-apply color-white" value="Cancel" onclick="RDT_editItemCancel();">
+						<input type="button" class="RDT-btn-apply color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!" onclick="">
 					</div>
 				</div>
 			</div>
@@ -131,34 +134,34 @@
 		<div class="msg-addcomand-menu">
 			<h2 class="title-eventos">Adicionar Comandos</h2>
 			<center>Estrutura</center>
-			<input type="button" value="Iniciar mensagem" class="botao-add-comando" onclick="MSG_renderDialog(1);">
-			<input type="button" value="Finalizar mensagem" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
-			<center>Texto & Caracteres especiais</center>
-			<input type="button" value="Exibir texto" class="botao-add-comando" onclick="MSG_renderDialog(3);">
-			<input type="button" value="Mostrar caracter especial" class="botao-add-comando" onclick="MSG_renderDialog(4);">
-			<input type="button" value="Mostrar nome de item" class="botao-add-comando" onclick="MSG_renderDialog(5);"><br><br>
-			<center>Efeitos</center>
-			<input type="button" value="Reproduzir SE" class="botao-add-comando" onclick="MSG_renderDialog(6);"><br><br>
-			<center>Posicionamento de camera & cenários</center>
-			<input type="button" value="Trocar câmera" class="botao-add-comando" onclick="MSG_renderDialog(7);">
+			<input type="button" value="Start Message" class="botao-add-comando" onclick="MSG_renderDialog(1);">
+			<input type="button" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
+			<center>Text and Special Chars</center>
+			<input type="button" value="Show Text" class="botao-add-comando" onclick="MSG_renderDialog(3);">
+			<input type="button" value="Show Special Char" class="botao-add-comando" onclick="MSG_renderDialog(4);">
+			<input type="button" value="Show Item Name" class="botao-add-comando" onclick="MSG_renderDialog(5);"><br><br>
+			<center>Effects</center>
+			<input type="button" value="Execute SE" class="botao-add-comando" onclick="MSG_renderDialog(6);"><br><br>
+			<center>Camera Position and Field</center>
+			<input type="button" value="Change Camera" class="botao-add-comando" onclick="MSG_renderDialog(7);">
 		</div>
 		<div class="msg-events" id="text-msg-events">
-			<h2 class="title-eventos">Lista de Comandos (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>
+			<h2 class="title-eventos">Script (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>
 			<div class="div-eventos" id="msg-lista-eventos">
 				<!-- lista de eventos vai aqui -->
 			</div>
 		</div>
 		<!-- Dialog: Adicionar Comando -->
 		<div class="dialog-addcomando" id="dialog-msg-addcomand">
-			<font class="titulo">Adicionar Comando - <font id="msg-addcomand-title">???</font></font>
+			<font class="titulo">Add Function - <font id="msg-addcomand-title">???</font></font>
 			<div class="msg-render" id="dialog-msg-render">
 				<!-- o dialogo será renderizado aqui -->
 			</div>
-			<input type="button" value="Cancelar" class="botao-menu" onclick="MSG_renderDialog(0);">
-			<input type="button" value="Aplicar" class="botao-menu" id="msg-addcomand-confirm" onclick="">
+			<input type="button" value="Cancel" class="botao-menu" onclick="MSG_renderDialog(0);">
+			<input type="button" value="Apply" class="botao-menu" id="msg-addcomand-confirm" onclick="">
 		</div>
 		<div class="msg-raw">
-			Hex - Visualização: <font style="float: right;">Tamanho da mensagem: <font id="lbl-msg-length">0</font></font><br>
+			Hex - Preview: <font style="float: right;">Message Length: <font id="lbl-msg-length">0</font></font><br>
 			<div class="menu-separador"></div>
 			<div id="text-msg-raw" style="user-select:all;">
 				<!-- Hex vai aqui -->
@@ -166,26 +169,26 @@
 		</div>
 		<!-- Legenda -->
 		<div class="msg-legend">
-			<center>(Hex) Legenda:</center>
+			<center>(Hex) Legend:</center>
 			<div class="menu-separador"></div>
-			FA XX <font class="msg-legenda-sticky">- Cabeçalho da Mensagem</font><br>
-			FE XX <font class="msg-legenda-sticky">- Final da Mensagem</font><br>
-			F3 XX <font class="msg-legenda-sticky">- Reproduzir SE</font><br>
-			F4 XX <font class="msg-legenda-sticky">- Trocar Camera</font><br>
-			F8 XX <font class="msg-legenda-sticky">- Mostrar Nome de Item</font><br>
+			FA XX <font class="msg-legenda-sticky">- Message Header</font><br>
+			FE XX <font class="msg-legenda-sticky">- End</font><br>
+			F3 XX <font class="msg-legenda-sticky">- Execute SE</font><br>
+			F4 XX <font class="msg-legenda-sticky">- Change Camera</font><br>
+			F8 XX <font class="msg-legenda-sticky">- Show Item Name</font><br>
 		</div>
 		<!-- MSG: Hex Input -->
 		<div class="msg-hex" id="text-hex-editor">
-			Hex Input - Tradutor:
+			Hex Input - Translator:
 			<div class="menu-separador"></div>
 			<textarea placeholder="Insira os valores hex aqui!" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="height: 128px;"></textarea>
-			<input type="button" class="botao-menu" style="float: right;" value="Traduzir" onclick="MSG_translateHexValues();">
+			<input type="button" class="botao-menu" style="float: right;" value="Translate!" onclick="MSG_translateHexValues();">
 		</div>
 	</div>
 
 	<!-- FORM: Save -->
 	<div class="none" id="menu-SAVE">
-		<input type="button" id="menu-1" class="aba aba-left-fix" value="Geral" onclick="SAVE_showMenu(0);">
+		<input type="button" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
 		<input type="button" id="menu-2" class="aba" value="Jill Valentine" onclick="SAVE_showMenu(1);">
 		<input type="button" id="menu-3" class="aba" value="Carlos Oliveira" onclick="SAVE_showMenu(2);">
 		<!-- Menu Geral -->
@@ -193,32 +196,32 @@
 			<!-- Menu Geral -->
 			<div class="menu-general-content none" id="save-geral">
 				<div id="s-menu-general">
-					<center><font class="titulo">Informações Gerais - Slot <font id="lbl-currentSlot">1</font></font></center>
-					Tempo de Game (IGT): <font class="menu-geral-text" id="lbl-time">???</font><br>
-					Dificuldade: <font class="menu-geral-text" id="lbl-dificuldade">???</font><br>
-					Personagem Atual: <font class="menu-geral-text" id="lbl-currentPlayer">???</font><br>
-					Status (Saúde): <font class="menu-geral-text" id="lbl-condition">???</font><br>
-					Envenenado(a): <font class="menu-geral-text" id="lbl-poison">???</font><br>
-					Local de Save: <font class="menu-geral-text" id="lbl-saveplace">???</font><br>
-					Local da cidade: <font class="menu-geral-text" id="lbl-city">???</font><br>
-					Nº de Saves: <font class="menu-geral-text" id="lbl-saves">???</font><br>
+					<center><font class="titulo">General - Current Slot: <font id="lbl-currentSlot">1</font></font></center>
+					In-Game Time (IGT): <font class="menu-geral-text" id="lbl-time">???</font><br>
+					Game Mode: <font class="menu-geral-text" id="lbl-dificuldade">???</font><br>
+					Current Player: <font class="menu-geral-text" id="lbl-currentPlayer">???</font><br>
+					Status (Health): <font class="menu-geral-text" id="lbl-condition">???</font><br>
+					Poison: <font class="menu-geral-text" id="lbl-poison">???</font><br>
+					Save Location: <font class="menu-geral-text" id="lbl-saveplace">???</font><br>
+					City Location: <font class="menu-geral-text" id="lbl-city">???</font><br>
+					Saves: <font class="menu-geral-text" id="lbl-saves">???</font><br>
 					<div class="menu-separador"></div>
-					Jill - Arma Atual: <font class="menu-geral-text" id="lbl-jArma">???</font><br>
-					Jill - Roupa Atual: <font class="menu-geral-text" id="lbl-outfit">???</font><br>
-					Jill - Sidepack (Mochila): <font class="menu-geral-text" id="j-sidePack">???</font><br>
-					Carlos - Arma Atual: <font class="menu-geral-text" id="lbl-cArma">???</font><br>
-					Carlos - Sidepack (Mochila): <font class="menu-geral-text" id="c-sidePack">???</font><br>
+					Jill - Current Weapon: <font class="menu-geral-text" id="lbl-jArma">???</font><br>
+					Jill - Current Outfit: <font class="menu-geral-text" id="lbl-outfit">???</font><br>
+					Jill - Sidepack: <font class="menu-geral-text" id="j-sidePack">???</font><br>
+					Carlos - Current Weapon: <font class="menu-geral-text" id="lbl-cArma">???</font><br>
+					Carlos - Sidepack: <font class="menu-geral-text" id="c-sidePack">???</font><br>
 					<div class="menu-separador"></div>
-					Versão / Edição do Game: <font class="menu-geral-text" id="lbl-gameVersion">???</font><br>
-					Mapas Obtidos: <font class="menu-geral-text" id="lbl-maps">???</font><br>
-					Files Obtidos: <font class="menu-geral-text" id="">???</font><br>
-					Epílogos Desbloqueados: <font class="menu-geral-text" id="lbl-epilogos">???</font><br>
+					Game version: <font class="menu-geral-text" id="lbl-gameVersion">???</font><br>
+					Obtained Maps: <font class="menu-geral-text" id="lbl-maps">???</font><br>
+					Obtained Files: <font class="menu-geral-text" id="">[WIP]</font><br>
+					Epilogues Unlocked: <font class="menu-geral-text" id="lbl-epilogos">???</font><br>
 					<div class="menu-separador"></div>
-					HP da Jill / Carlos: <font class="menu-geral-text" id="lbl-HP">???</font><br>
-					Posição X (hex): <font class="menu-geral-text" id="lbl-x-pos">???</font><br>
-					Posição Y (hex): <font class="menu-geral-text" id="lbl-y-pos">???</font><br>
+					Jill / Carlos HP: <font class="menu-geral-text" id="lbl-HP">???</font><br>
+					X Pos. (hex): <font class="menu-geral-text" id="lbl-x-pos">???</font><br>
+					Y Pos. (hex): <font class="menu-geral-text" id="lbl-y-pos">???</font><br>
 					<div class="menu-separador"></div>
-					Slots de save sendo usados:<br>
+					Save slots:<br>
 					<!-- Saves -->
 					<div class="save-grid">
 						<div class="save-number">01</div><div class="slot-save" onclick="save_renderSlot(1);" id="slt-save-1">N/A</div>
@@ -240,34 +243,34 @@
 				</div>
 				<!-- Alterar -->
 				<div id="save-alterar" class="save-alterar-menu">
-					<center><font class="titulo">Modificar</font></center><br>
-					Alterar Tempo: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Alterar"><br>
-					Alterar Dificuldade:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Alterar"><br>
-					Alterar Personagem Atual:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Alterar"><br>
-					Alterar Roupa:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Alterar"><br>
-					Alterar Quantidade de Saves: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Alterar"><br>
-					Alterar Quantidade de Epílogos:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Alterar"><br>
+					<center><font class="titulo">Modify</font></center><br>
+					Modify Time: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Modify"><br>
+					Modify Game mode:
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Modify"><br>
+					Modify Current Player:
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Modify"><br>
+					Modify Outfit:
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Modify"><br>
+					Modify Saves:   
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Modify"><br>
+					Modify Epilogues:
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Modify"><br>
 					<div class="menu-separador"></div>
-					Poison: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Alterar"><br>
-					Alterar HP: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Alterar"><br>
+					Modify HP: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Modify"><br>
+					Modify Poison Status: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Modify"><br>
 					<div class="menu-separador"></div>
-					Jill - Alterar Sidepack: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Alterar"><br>
-					Jill - Alterar Arma Equipada: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Alterar"><br>
+					Jill - Modify Sidepack: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Modify"><br>
+					Jill - Modify Current Weapon: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Modify"><br>
 					<div class="menu-separador"></div>
-					Carlos - Alterar Sidepack: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Alterar"><br>
-					Carlos - Alterar Arma Equipada: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Alterar"><br>
+					Carlos - Modify Sidepack: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Modify"><br>
+					Carlos - Modify Current Weapon: 
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Modify"><br>
 				</div>
 			</div>
 			<!-- Menu Jill Valentine -->
@@ -279,7 +282,7 @@
 					</div>
 					<!-- Baú -->
 					<div class="item-box" id="j_box">
-						<center><font class="title-inv">Baú (Item Box)</font><center>
+						<center><font class="title-inv">Item Box</font><center>
 						<div id="JILL-BOX">
 							<!-- os itens do baú da jill virão aqui -->
 						</div>
@@ -294,38 +297,38 @@
 							</div>
 						</div>
 					</div>
-					<!-- Inventário -->
+					<!-- Inventory -->
 					<div class="invent-fix" id="j_invent">
-						<center><font class="title-inv">Inventário</font><center>
+						<center><font class="title-inv">Inventory</font><center>
 						<div id="JILL-INVE" class="inventario">
-							<a id="btn-exchange-item-1" class="botao-menu invent-mod-btn">Alterar</a>
+							<a id="btn-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 							<font class="item-counter-invent-1" id="J-LBL-1" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-1" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Alterar</a>
+							<a id="btn-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
 							<font class="item-counter-invent-2" id="J-LBL-2" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-2" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Alterar</a>
+							<a id="btn-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
 							<font class="item-counter-invent-1" id="J-LBL-3" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-3" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Alterar</a>
+							<a id="btn-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
 							<font class="item-counter-invent-2" id="J-LBL-4" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-4" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Alterar</a>
+							<a id="btn-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
 							<font class="item-counter-invent-1" id="J-LBL-5" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-5" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Alterar</a>
+							<a id="btn-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
 							<font class="item-counter-invent-2" id="J-LBL-6" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-6" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Alterar</a>
+							<a id="btn-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
 							<font class="item-counter-invent-1" id="J-LBL-7" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-7" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Alterar</a>
+							<a id="btn-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
 							<font class="item-counter-invent-2" id="J-LBL-8" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-8" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Alterar</a>
+							<a id="btn-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
 							<font class="item-counter-invent-1" id="J-LBL-9" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-9" onclick="addInfo(0, '00');">
-							<a id="btn-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Alterar</a>
+							<a id="btn-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
 							<font class="item-counter-invent-2" id="J-LBL-10" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-10" onclick="addInfo(0, '00');">
 						</div>
@@ -341,7 +344,7 @@
 					</div>
 					<!-- Baú -->
 					<div class="item-box" id="c_box">
-						<center><font class="title-inv">Baú (Item Box)</font><center>
+						<center><font class="title-inv">Item Box</font><center>
 						<div id="CARLOS-BOX">
 							<!-- os itens do baú do Carlos virão aqui -->
 						</div>
@@ -355,38 +358,38 @@
 							</div>
 						</div>
 					</div>
-					<!-- Inventário -->
+					<!-- Inventory -->
 					<div class="invent-fix" id="c_invent">
-						<center><font class="title-inv">Inventário</font><center>
+						<center><font class="title-inv">Inventory</font><center>
 						<div id="CARLOS-INVE" class="inventario">
-							<a id="btn-c-exchange-item-1" class="botao-menu invent-mod-btn">Alterar</a>
+							<a id="btn-c-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 							<font class="item-counter-invent-1" id="C-LBL-1" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-1" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Alterar</a>
+							<a id="btn-c-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
 							<font class="item-counter-invent-2" id="C-LBL-2" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-2" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Alterar</a>
+							<a id="btn-c-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
 							<font class="item-counter-invent-1" id="C-LBL-3" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-3" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Alterar</a>
+							<a id="btn-c-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
 							<font class="item-counter-invent-2" id="C-LBL-4" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-4" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Alterar</a>
+							<a id="btn-c-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
 							<font class="item-counter-invent-1" id="C-LBL-5" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-5" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Alterar</a>
+							<a id="btn-c-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
 							<font class="item-counter-invent-2" id="C-LBL-6" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-6" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Alterar</a>
+							<a id="btn-c-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
 							<font class="item-counter-invent-1" id="C-LBL-7" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-7" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Alterar</a>
+							<a id="btn-c-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
 							<font class="item-counter-invent-2" id="C-LBL-8" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-8" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Alterar</a>
+							<a id="btn-c-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
 							<font class="item-counter-invent-1" id="C-LBL-9" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-9" onclick="addInfo(0, '00');">
-							<a id="btn-c-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Alterar</a>
+							<a id="btn-c-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
 							<font class="item-counter-invent-2" id="C-LBL-10" onclick="addInfo(0, '00');"></font>
 							<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-10" onclick="addInfo(0, '00');"
 							>
@@ -400,8 +403,8 @@
 			<div id="dialog_render">
 				<!-- os diálogos serão renderizados aqui -->
 			</div><br/>
-			<input type="button" value="Cancelar" class="botao-menu" id="btn-item-cancel" onclick="cancelShowModItem();">
-			<input type="button" value="Aplicar" class="botao-menu" id="btn-item-apply" onclick="">
+			<input type="button" value="Cancel" class="botao-menu" id="btn-item-cancel" onclick="cancelShowModItem();">
+			<input type="button" value="Apply" class="botao-menu" id="btn-item-apply" onclick="">
 		</div>
 	</div>
 	<!-- log -->
@@ -413,8 +416,8 @@
 		<center>
 			<img src="img/logo.png" draggable="false" alt="R3ditor-Logo" class="appLogo"><br>
 			<font class="textLOGO">R3ditor</font><br>
-			Versão: <font id="app_version">???</font><br>
-			Criado por <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
+			Version: <font id="app_version">???</font><br>
+			Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
 			Many Thanks to:<br><br>
 			<div class="about-tks">
 				MarkGrass - BioFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
@@ -426,7 +429,7 @@
 			Shinji Mikami / Capcom Dev 1 Team - Thanks by creating the game of my life!
 			<br><br>
 			Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
-			<input type="button" class="botao-menu" value="Voltar" onclick="closeAbout();">
+			<input type="button" class="botao-menu" value="Go Back" onclick="closeAbout();">
 		</center>
 	</div>
 	<!-- AppLogo -->

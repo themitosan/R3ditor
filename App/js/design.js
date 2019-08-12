@@ -46,17 +46,17 @@ function main_menu(anim){
 		$("#menu-topo").css({"display": "none"});
 	}
 	if (anim === 1){ // Save
-		document.title = APP_NAME + " - Editor de Saves (*.sav)";
+		document.title = APP_NAME + " - Save Editor (*.sav)";
 		$("#menu-topo-save").css({"display": "block"});
 	}
 	if (anim === 2){ // MSG
 		$("#msg-lbl-totalCommands").html(MSG_totalComandos);
-		document.title = APP_NAME + " - Editor de Mensagens (*.msg)";
+		document.title = APP_NAME + " - Message Editor (*.msg)";
 		$("#menu-topo-msg").css({"display": "block"});
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + " - Editor de Mapas (*.rdt)";
+		document.title = APP_NAME + " - Map Editor (*.rdt)";
 		$("#menu-topo-RDT").css({"display": "block"});
 		
 	}
@@ -74,7 +74,7 @@ function SAVE_showMenu(menuId){
 			addInfo(1, "00");
 			$("#log-programa").css({"height": "54px", "top": "656px"});
 			SAVE_applyMenuFocus(1);
-			$("#s-menu-general").css({"display": "block", "width": "80%"});
+			$("#s-menu-general").css({"display": "block", "width": "74%"});
 			$("#save-geral").removeClass('none');
 			$("#save-geral").css({"height": "550px"});
 			$("#menu-info").css({"height": "560px"});
@@ -368,9 +368,9 @@ function MSG_showMenu(id){
 
 function MSG_doTheTitleThing(){
 	if (ORIGINAL_FILENAME === undefined){
-		document.title = APP_NAME + " - Editor / Tradutor de Mensagens";
+		document.title = APP_NAME + " - Message Editor / Translator";
 	} else {
-		document.title = APP_NAME + " - Editor / Tradutor de Mensagens - File: " + ORIGINAL_FILENAME;
+		document.title = APP_NAME + " - Message Editor / Translator - File: " + ORIGINAL_FILENAME;
 	}
 }
 
@@ -409,7 +409,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Iniciar Mensagem
 	if (id === 1){ 
 		$("#dialog-msg-addcomand").css({"top": "192px"});
-		$("#msg-addcomand-title").html("Iniciar Mensagem");
+		$("#msg-addcomand-title").html("Start Message");
 		$("#dialog-msg-render").html(DIALOG_MSG_START);
 		document.getElementById('msg-comeco-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -420,7 +420,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Finalizar Mensagem
 	if (id === 2){
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Finalizar Mensagem");
+		$("#msg-addcomand-title").html("End Message");
 		$("#dialog-msg-render").html(DIALOG_MSG_END);
 		document.getElementById('msg-fim-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -431,12 +431,12 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Texto
 	if (id === 3){ 
 		$("#dialog-msg-addcomand").css({"top": "90px"});
-		$("#msg-addcomand-title").html("Exibir Texto");
+		$("#msg-addcomand-title").html("Show Text");
 		$("#dialog-msg-render").html(DIALOG_MSG_ADDTEXT);
 		var correcao = "";
 		if (localStorage.getItem('MSG_Mensagem-' + args) !== null){
 			args = localStorage.getItem('MSG_Mensagem-' + args);
-			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("(Cor Verde)", 'gi'), "[").replace(new RegExp("(Quebra de Linha)", 'gi'), "@").replace(new RegExp("Pausa", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
+			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
 		}
 		document.getElementById('msg-txt-toTrans').value = correcao;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -447,7 +447,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Caracter Especial
 	if (id === 4){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Exibir Caracter Especial");
+		$("#msg-addcomand-title").html("Show Special Char");
 		$("#dialog-msg-render").html(DIALOG_MSG_ADDCHAR);
 		document.getElementById('msg-char-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -458,7 +458,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Nome de Item
 	if (id === 5){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Exibir Nome de Item");
+		$("#msg-addcomand-title").html("Show Item Name");
 		$("#dialog-msg-render").html(DIALOG_MSG_NAMEITEM);
 		document.getElementById('msg-lblitem-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -469,7 +469,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Reproduzir SE
 	if (id === 6){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Executar SE");
+		$("#msg-addcomand-title").html("Play SE");
 		$("#dialog-msg-render").html(DIALOG_MSG_EXECSE);
 		document.getElementById('msg-execse-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -480,7 +480,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Trocar Câmera
 	if (id === 7){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Trocar Camera");
+		$("#msg-addcomand-title").html("Change Camera");
 		$("#dialog-msg-render").html(DIALOG_MSG_SHOWCAMERA);
 		document.getElementById('msg-cam-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -506,12 +506,12 @@ function RDT_showMenu(id){
 	$("#RDT_lbl-totalItens").html(RDT_totalItens);
 	$("#RDT_lbl-totItens").html(RDT_totalItensGeral);
 	$("#RDT-lbl-mapName").html(getFileName(ORIGINAL_FILENAME));
-	document.getElementById("RDT-aba-menu-3").value = "Itens, Files e Mapas (" + RDT_totalItensGeral + ")";
-	$("#RDT-lbl-FILENAME").html("Arquivo Atual: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
+	document.getElementById("RDT-aba-menu-3").value = "Itens, Files and Maps (" + RDT_totalItensGeral + ")";
+	$("#RDT-lbl-FILENAME").html("File name: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
 	$("#menu-RDT").css({"display": "block"});
 	$("#RDT_menu-" + id).css({"display": "block"});
 	$("#log-programa").css({"height": "86px", "top": "626px"});
-	document.title = APP_NAME + " - Editor de Mapas (*.rdt) - " + ORIGINAL_FILENAME;
+	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	RDT_applyMenuFocus(id);
 	RDT_Error_Item_404();
 }
@@ -524,7 +524,7 @@ function RDT_Error_Item_404(){
 		$("#RDT_lbl-totalFiles").html("0");
 		$("#RDT-item-list").css({"display": "none"});
 		$("#RDT-item-404").css({"display": "block"});
-		document.getElementById("RDT-aba-menu-3").value = "Itens / Files (0)";
+		document.getElementById("RDT-aba-menu-3").value = "Itens, Files and Maps (0)";
 	} else {
 		$("#RDT-item-404").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "block"});
@@ -574,6 +574,9 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	document.getElementById('RDT_item-edit-R').value = posR;
 	document.getElementById('RDT_item-edit-A').value = anim;
 	document.getElementById('RDT_item-edit-Quant').value = quant;
+	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
+		RDT_ITEM_APPLY(index, id);
+	}
 	$("#RDT-Item-Edit").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
 }

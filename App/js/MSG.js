@@ -15,7 +15,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_increment = true;
 	MSG_totalComandos = 0;
 	ORIGINAL_FILENAME = msgFile;
-	addLog("log", "MSG - Carregando arquivo MSG: " + msgFile);
+	addLog("log", "MSG - Loading MSG File: " + msgFile);
 	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 	scrollLog();
@@ -101,23 +101,23 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	// Iniciar Mensagem
 	if (com === 1){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Inicializar Mensagem / Alterar Velocidade de Exibição<input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(1, ' + args + ', ' + index + ', true);"><br>Velocidade de exibição: ' + 
+			'(' + index + ') Function: Start Message / Change text speed<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(1, ' + args + ', ' + index + ', true);"><br>Text Speed: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Finalizar Mensgagem
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Finalizar Mensagem <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(2, ' + args + ', ' + index + ', true);"><br>Valor Final: ' + 
+			'(' + index + ') Function: Finalizar Mensagem <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(2, ' + args + ', ' + index + ', true);"><br>Final Value: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>'
 	}
 	// Exibir Texto
 	if (com === 3){
 		var displayText = localStorage.getItem('MSG_Mensagem-' + index);
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-0" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Exibir Texto <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', true);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(3, \'' + index + '\', ' + index + ', true);"><br>Texto: ' + 
+			'(' + index + ') Function: Show Text <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', true);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(3, \'' + index + '\', ' + index + ', true);"><br>Text: ' + 
 			'<div class="italic msg-command-text-fix" id="msg-comand-args' + index + '">' + displayText + '</div></div>';
 	}
 	// Exibir Caracter Especial
@@ -125,29 +125,29 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		var MSG_CHAR = MSG_CHARESPECIAL[localStorage.getItem("MSG_comando-" + index)];
 		var RAW_COM = localStorage.getItem("MSG_comando-" + index);
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-3" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Mostrar Caracter Especial <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
+			'(' + index + ') Function: Show Special Char <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + MSG_CHAR + ')</font></div>';
 	}
 	// Exibir o nome de item
 	if (com === 5){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-5" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Mostrar Nome de Item <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(5, ' + args + ', ' + index + ', true);"><br>Item Hex: ' + 
+			'(' + index + ') Function: Show Item Name <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(5, ' + args + ', ' + index + ', true);"><br>Item Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + ITEM[args][0] + ')</font></div>';
 	}
 	// Reproduzir SE
 	if (com === 6){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-1" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Reproduzir SE <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(6, ' + args + ', ' + index + ', true);"><br>SE Hex: ' + 
+			'(' + index + ') Function: Execute SE <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(6, ' + args + ', ' + index + ', true);"><br>SE Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Trocar a Câmera
 	if (com === 7){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-2" id="msg-evento-' + index + '">' + 
-			'(' + index + ') COMANDO: Trocar Camera <input type="button" value="Remover" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
-			'<input type="button" value="Modificar" class="btn-remover-comando" onclick="MSG_renderDialog(7, ' + args + ', ' + index + ', true);"><br>Camera: ' + 
+			'(' + index + ') Function: Change Camera <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(7, ' + args + ', ' + index + ', true);"><br>Camera: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 
@@ -181,7 +181,7 @@ function MSG_translateHexValues(){
 	MSG_increment = true;
 	MSG_totalComandos = 0;
 	MSG_renderDialog(0);
-	$("#msg-lista-eventos").html("<!-- A lista de comandos foi limpa -->");
+	$("#msg-lista-eventos").html("<!-- You are not seeing me here! -->");
 	$("#msg-lbl-totalCommands").html(MSG_totalComandos);
 	var hValues = document.getElementById('msg-hex-toTrans').value;
 	if (hValues !== ""){
@@ -401,7 +401,7 @@ function MSG_applyMSGCommand(save){
 
 	if (save === true){
 		if (MSG_totalComandos !== 0){
-			var ask = prompt("Insira o nome do arquivo de mensagem");
+			var ask = prompt("Insert the file name");
 			if (ask !== null){
 				try{
 					if (ask === ""){
@@ -409,16 +409,16 @@ function MSG_applyMSGCommand(save){
 					}
 					var newMsgFile = APP_PATH + "\\MSG\\" + ask + ".msg";
 					fs.writeFileSync(newMsgFile, newHex, 'hex');
-					addLog("log", "SUCESSO: O arquivo " + ask + " foi gerado com sucesso!");
+					addLog("log", "INFO: The file " + ask + " was saved successfully!");
 					addLog("log", "Caminho: " + newMsgFile);
 				} catch(err){
-					addLog("error", "ERRO: Não foi possível salvar o arquivo " + ask + " - " + err);
+					addLog("error", "ERROR: Unable to save the MSG File " + ask + " - " + err);
 				}
 			} else {
-				addLog("log", "MSG: Usuário cancelou a operação");
+				addLog("log", "MSG: The user has canceled the form");
 			}
 		} else {
-			addLog("warn", "AVISO: Você não pode salvar uma mensagem que esteja vazia!");
+			addLog("warn", "WARNING: You can't save an empty save file!");
 		}
 	}
 	MSG_Commands = [];

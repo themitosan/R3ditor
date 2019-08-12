@@ -205,15 +205,15 @@ function MAKE_SAVE(slot){
 		// Final
 		if (TEMP_SLOT.length === RANGES["slot-offset"][0]){
 			localStorage.setItem("Save_" + slot, TEMP_SLOT);
-			addLog("log", "O slot " + slot + " foi salvo com sucesso!");
+			addLog("log", "The Slot " + slot + " was saved successfully!");
 			finalizeSave();
 		} else {
-			var msg = "Não foi possível salvar o slot por que o tamanho final do slot gerado não é igual ao esperado - Tamanho Esperado: " + RANGES["slot-offset"][0] + " - Tamanho atual: " + TEMP_SLOT.length;
-			console.error("ERRO: " + msg);
+			var msg = "Unable to save current slot because compilation is divergent size: Size Expected: " + RANGES["slot-offset"][0] + " - Current Size: " + TEMP_SLOT.length;
+			console.error("ERROR: " + msg);
 			addLog("error", msg);
 		}
 	} else {
-		var msg = "Não é possível gerar slot se o arquivo for indefinido! (File: " + ORIGINAL_FILENAME + ")"
+		var msg = "Unable to save the game save if you haven't opened it yet! (File: " + ORIGINAL_FILENAME + ")"
 		addLog("error", "ERRO: " + msg);
 		console.error(msg);
 	}
@@ -246,7 +246,7 @@ function CARREGAR_SAVE(sFile){
 	SAVE_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = sFile;
 	log_separador();
-	addLog("log", "Carregando arquivo de save: " + sFile);
+	addLog("log", "Loading save file: " + sFile);
 	log_separador();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	
@@ -302,7 +302,7 @@ function save_renderSlot(slotID){
 	}
 	resetTimer();
 	cleanForSaveLoad();
-	document.title = APP_NAME + " - Editor de Saves (*.sav) - Slot " + slotID + " - Arquivo: " + ORIGINAL_FILENAME;
+	document.title = APP_NAME + " - Save Editor (*.sav) - Slot " + slotID + " - File: " + ORIGINAL_FILENAME;
 	$("#lbl-currentSlot").html(slotID);
 	CURRENT_SAVE_SLOT = slotID;
 	save_renderInvent(slotID);
@@ -324,7 +324,7 @@ function save_renderSaveSlots() {
 			$("#slt-save-" + cu).addClass("slot-presente");
 		} else {
 			// Save Vazio
-			$("#slt-save-" + cu).html("Vazio");
+			$("#slt-save-" + cu).html("Empty");
 			$("#slt-save-" + cu).addClass("slot-ausente");
 		}
 		cu++;
@@ -378,10 +378,10 @@ function save_renderInvent(s_slot, mode){
 function save_renderBox(s_slot){
 	JILL_BAU = [];
 	CARLOS_BAU = [];
-	$("#JILL-BOX").html("<!-- Por enquanto nada... -->");
-	$("#CARLOS-BOX").html("<!-- Por enquanto nada... -->");
+	$("#JILL-BOX").html("<!-- What are you doing here buddy? -->");
+	$("#CARLOS-BOX").html("<!-- What are you doing here buddy? -->");
 	// Baú Jill
-	addLog("log", "Carregando Baú da Jill - 1º Slot...");
+	addLog("log", "Loading Jill Item Box...");
 	var totalItens = 63; // 63 = Total de slots no baú
 	var current = 0;
 	var position = RANGES["j-box"][0];
@@ -403,13 +403,13 @@ function save_renderBox(s_slot){
 			var AT = JILL_BAU[current].slice(4, 6); // Atributo
 			var NU = JILL_BAU[current].slice(6, 8); // Sempre deve ser 00
 			if (ATTR[AT] == undefined){
-				var msg = "(Baú) Item " + current + " contém atributo desconhecido: " + AT;
-				addLog("warn", "AVISO: " + msg);
-				showNotify("AVISO", msg, 10000);
-				console.warn("AVISO: " + msg);
-				addLog("log" , "Adicionando Item ao Baú - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantidade: " + parseInt("0x" + QU) + ", Atributo: " + AT + ", Nulo: " + VOID[NU]);
+				var msg = "(Item Box) Item " + current + " have an unknown attr.: " + AT;
+				addLog("warn", "WARNING: " + msg);
+				showNotify("WARNING", msg, 10000);
+				console.warn("WARNING: " + msg);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Null Check: " + VOID[NU]);
 			} else {
-				addLog("log" , "Adicionando Item ao Baú - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantidade: " + parseInt("0x" + QU) + ", Atributo: " + ATTR[AT][0] + ", Nulo: " + VOID[NU]);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Null Check: " + VOID[NU]);
 			}
 			ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
 			current++;
@@ -417,7 +417,7 @@ function save_renderBox(s_slot){
 	}
 	// Baú Carlos
 	log_separador();
-	addLog("log", "Carregando Baú do Carlos - 1º Slot...");
+	addLog("log", "Loading Carlos Item Box...");
 	log_separador();
 	current = 0;
 	position = RANGES["c-box"][0];
@@ -439,13 +439,13 @@ function save_renderBox(s_slot){
 			var AT = CARLOS_BAU[current].slice(4, 6); // Atributo
 			var NU = CARLOS_BAU[current].slice(6, 8); // Sempre deve ser 00
 			if (ATTR[AT] == undefined){
-				var msg = "(Baú) Item " + current + " contém atributo desconhecido: " + AT;
+				var msg = "(Item Box) Item " + current + " have unknown attr.: " + AT;
 				addLog("warn", "AVISO: " + msg);
-				showNotify("AVISO", msg, 10000);
-				console.warn("AVISO: " + msg);
-				addLog("log" , "Adicionando Item ao Baú - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantidade: " + parseInt("0x" + QU) + ", Atributo: " + AT + ", Nulo: " + VOID[NU]);
+				showNotify("WARNING", msg, 10000);
+				console.warn("WARNING: " + msg);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Null Check: " + VOID[NU]);
 			} else {
-				addLog("log" , "Adicionando Item ao Baú - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantidade: " + parseInt("0x" + QU) + ", Atributo: " + ATTR[AT][0] + ", Nulo: " + VOID[NU]);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Null Check: " + VOID[NU]);
 			}
 			ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
 			current++;
@@ -463,7 +463,7 @@ function save_renderInfos(s_slot){
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
 	
 		addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
-		addLog("log", "IGT Completa (Formato: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
+		addLog("log", "IGT Complete (Formato: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 		log_separador();
 	
 		// Dificuldade
@@ -499,16 +499,16 @@ function save_renderInfos(s_slot){
 		// Jill - Arma equipada
 		jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
 		var jcw = ITEM[jArmaEquip][0];
-		if (jcw == "Slot Vazio"){
-			jcw = "Nenhuma arma equipada";
+		if (jcw == "Empty Slot"){
+			jcw = "No Weapon Equiped";
 		}
 		$("#lbl-jArma").html(jcw);
 	
 		// Carlos - Arma equipada
 		cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
 		var ccw = ITEM[cArmaEquip][0];
-		if (ccw == "Slot Vazio"){
-			ccw = "Nenhuma arma equipada";
+		if (ccw == "Empty Slot"){
+			ccw = "No Weapon Equiped";
 		}
 		$("#lbl-cArma").html(ccw);
 	
@@ -548,7 +548,7 @@ function save_renderInfos(s_slot){
 		// Files
 		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]);
 	} catch (err){
-		var msg = "ERRO: Não foi possivel obter algumas informações do save! - " + err;
+		var msg = "ERROR: There is something wrong here... - " + err;
 		addLog("error", msg);
 		console.error(msg);
 	}
@@ -562,8 +562,8 @@ function save_renderLife(s_slot) {
 	var chkA = life.slice(0, 2);
 	var chkB = life.slice(2, 4);
 	var HP = undefined;
-	if (POISON[veneno][0] == "Sim"){
-		STATUS = "Envenenado(a)";
+	if (POISON[veneno][0] == "Yes"){
+		STATUS = "Poison";
 		co = "txt-poison";
 	} else {
 		var co = "txt-fine";
@@ -578,32 +578,32 @@ function save_renderLife(s_slot) {
 		}
 		// Status: MORTO! (Ou Hex 00 00)
 		if (HP < 0){
-			STATUS = "Indefinido";
+			STATUS = "Undefined";
 			co = "txt-fine";
 		}
 		// Status: Danger
 		if (HP < 11){
-			STATUS = "Perigo (Danger)";
+			STATUS = "Danger";
 			co = "txt-danger";
 		}
 		// Status: Caution Laranja
 		if (HP > 10 && HP < 31){
-			STATUS = "Cuidado (Caution Laranja)";
+			STATUS = "Caution";
 			co = "txt-caution-red";
 		}
 		// Status: Caution
 		if (HP > 30 && HP < 101){
-			STATUS = "Cuidado (Caution)";
+			STATUS = "Caution";
 			co = "txt-caution";
 		}
 		// Status: Fine
 		if (HP > 100){
-			STATUS = "Bem (Fine)";
+			STATUS = "Fine";
 			co = "txt-fine";
 		}
 		// Status: Hack
 		if (HP > 200){
-			STATUS = "Vida acima do normal (HP: " + HP + ")";
+			STATUS = "Life Hack! (HP: " + HP + ")";
 			co = "txt-fine";
 		}
 	}
@@ -625,14 +625,14 @@ function save_Backup(){
 			var backup_name = gDetails + "-" + getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".savbackup";
 			fs.writeFileSync(APP_PATH + "\\Backup\\" + backup_name, SAVE_arquivoBruto, 'hex');
 			log_separador();
-			addLog("log", "INFO: Backup foi criado com sucesso! - Nome do arquivo: " + backup_name);
-			addLog("log", "Pasta de destino: " + APP_PATH + "\\Backup\\" + backup_name);
+			addLog("log", "INFO: The backup was made successfully! - File: " + backup_name);
+			addLog("log", "Folder: " + APP_PATH + "\\Backup\\" + backup_name);
 			log_separador();
 		} catch (err){
-			addLog("error", "ERRO: Não foi possível fazer backup do arquivo de save! - " + err);
+			addLog("error", "ERROR: Unable to make backup! - " + err);
 		}
 	} else {
-		addLog("error", "ERRO: Não é possível criar um backup de save caso você não tenha especificado o mesmo!");
+		addLog("error", "ERROR: You can't make a backup if you haven't opened a save yet!");
 	}
 }
 
@@ -870,7 +870,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
 	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Alterar"></div>';
 	if (VNULO !== "00"){
-		var warnInfo = "AVISO: Valor Nulo Não corresponde ao valor esperado (Valor esperado: 00, Valor atual: " + VNULO + ") - " + VOID[VNULO] + " \nHEX: " + ITEMHEX + QUANTIDADE + ATRIBUTO + VNULO + " \nIndex: " + INDEX + " \nItem Hex: " + ITEMHEX + " (" + nome + ") \nQuantidade: " + QUANTIDADE + " (" + quan + ") \nAtributo: " + ATRIBUTO + " (" + atri + ") \nNulo: " + VNULO;
+		var warnInfo = "WARNING: Null check failed! (Expected Value: 00, Current: " + VNULO + ") - " + VOID[VNULO] + " \nHEX: " + ITEMHEX + QUANTIDADE + ATRIBUTO + VNULO + " \nIndex: " + INDEX + " \nItem Hex: " + ITEMHEX + " (" + nome + ") \nQuantity: " + QUANTIDADE + " (" + quan + ") \nAttr: " + ATRIBUTO + " (" + atri + ") \nNull Check: " + VNULO;
 		console.warn(warnInfo);
 		addLog("warn", warnInfo);
 	}
@@ -921,7 +921,7 @@ function addInfo(person, itemId){
 	if (itemId !== "00"){
 		$('#text-info-0' + person).html("<center>" + ITEM[itemId][0] + "</center><br>" + ITEM[itemId][1]);
 	} else {
-		$('#text-info-0' + person).html("<!-- Slot Vazio -->");
+		$('#text-info-0' + person).html("<!-- Empty Slot -->");
 	}
 
 	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
@@ -988,7 +988,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		cor = ATTR[atrib][1];
  		shad = ATTR[atrib][2];
 	} else {
-		var msg = "(" + p + ") Inventário - Item no slot " + block + " contém atributo desconhecido: " + atrib;
+		var msg = "(" + p + ") Inventory - The item on slot " + block + " have an unknown Attr! Attr: " + atrib;
 		addLog("warn", "AVISO: " + msg);
 		showNotify("AVISO", msg, 10000);
 		console.warn("AVISO: " + msg);
@@ -1027,7 +1027,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	if (quanti === ""){
 		quanti = "0";
 	}
-	addLog("log", "Inventário: " + p + " Slot: " + block + " - HEX: " + itemHex + quantHex + atrib + nulo + " - Item: " + itemHex + " (" + titulo + ") - Quantidade: " + quantHex + " (" + parseInt(quantHex, 16) + ") - Atributo: " + atrib + " (" + ATTR[atrib][0] + ")");
+	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex + quantHex + atrib + nulo + " - Item: " + itemHex + " (" + titulo + ") - Quantity: " + quantHex + " (" + parseInt(quantHex, 16) + ") - Attr.: " + atrib + " (" + ATTR[atrib][0] + ")");
 }
 
 /// Time Helpers
@@ -1064,6 +1064,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
    |					   06 01 00 00   - 00:00:00:04:83		   \||/									  |
    |					   07 01 00 00   - 00:00:00:04:84           \/ 									  |
    |																									  |
+   |	Oh, come on! I have to translate this too? Throw this at translate.google.com !					  |
    \______________________________________________________________________________________________________|
 */
 
@@ -1250,7 +1251,7 @@ function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	contadorFinal(0, 0, 0, 0, 0, h_0x2202);
 	contadorFinal(0, 0, 0, 0, 0, h_0x2203);
 	$("#lbl-time").html(hora + ":" + minutos + ":" + segundos);
-	document.getElementById("lbl-time").title = "Formato Completo\nDD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
+	document.getElementById("lbl-time").title = "Full Time Format\nDD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
 	//console.log("IGT: " + h_0x2200 + " - " + h_0x2201 + " - " + h_0x2202 + " - " + h_0x2203);
 }
 
