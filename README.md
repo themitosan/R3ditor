@@ -27,8 +27,7 @@ You can change various aspects of your save, such as:
 
 Soon:
 
-- Mapas Obtidos
-- Files Obtidos
+- Maps and files
 
 #### Important
 Any changes you make will automatically apply to your save.
