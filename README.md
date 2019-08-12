@@ -1,7 +1,7 @@
 # R3ditor
 An editor of files written in JS to perform reverse engineering studies on the Resident Evil 3 game.
 
-## Como instalar
+## How to install
 - Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a>)
 
 - Download the main content from this repository and extract and place all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
@@ -34,7 +34,7 @@ Any changes you make will automatically apply to your save.
 If you want to recover your save, open the "backup" folder and select a backup file. <br>
 When selecting, paste it into the folder where the game executable is and rename the backup file to "Bu00.sav"
 
-### Arquivos de mensagem (.msg) [wip]
+### Message Files (.msg) [wip]
 You can view / edit the game's internal messages by loading .msg files or using the "Hex Input" field.
 
 Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.
