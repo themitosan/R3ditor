@@ -506,7 +506,7 @@ function RDT_showMenu(id){
 	$("#RDT_lbl-totalItens").html(RDT_totalItens);
 	$("#RDT_lbl-totItens").html(RDT_totalItensGeral);
 	$("#RDT-lbl-mapName").html(getFileName(ORIGINAL_FILENAME));
-	document.getElementById("RDT-aba-menu-3").value = "Itens, Files and Maps (" + RDT_totalItensGeral + ")";
+	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
 	$("#RDT-lbl-FILENAME").html("File name: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
 	$("#menu-RDT").css({"display": "block"});
 	$("#RDT_menu-" + id).css({"display": "block"});

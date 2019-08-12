@@ -1,8 +1,8 @@
 /*
 
 	debug.js
-	themitosan
-	me ajuda pourra
+	themitosan/mscorehdr
+	me ajuda
 
 */
 
@@ -62,8 +62,8 @@ function testeInvent(){
 	addInvent(0, "17", "fe", 8, "01");
 	addInvent(0, "18", "fe", 9, "01");
 	addInvent(0, "19", "fe", 10, "01");
-	$("#JILL-BOX").html("<!-- nada -->");
-	$("#CARLOS-BOX").html("<!-- nada -->");
+	$("#JILL-BOX").html("<!-- nothing -->");
+	$("#CARLOS-BOX").html("<!-- nothing -->");
 	ADD_ITEM_BOX(0, "00", "00", "ff", "01", "00");
 	ADD_ITEM_BOX(0, "01", "01", "ff", "01", "00");
 	ADD_ITEM_BOX(0, "02", "02", "ff", "01", "00");

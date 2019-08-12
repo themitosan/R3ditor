@@ -82,14 +82,14 @@
 				<center><font class="titulo">Messages</font></center>
 				<center>
 					WIP :(<br><br>
-					Can you give me a cookie?
+					Can you give me a cookie? ~wink~
 				</center>
 			</div>
 		</div>
 		<!-- RDT: Itens -->
 		<div class="menu none" id="RDT_menu-3">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Itens, Files And Maps (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
+				<center><font class="titulo">Items, Files And Maps (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
 				<div id="RDT-item-list" class="RDT-holder">
 					<!-- Os Itens dentro da RDT vão aqui -->
 				</div>
@@ -132,8 +132,8 @@
 	<!-- FORM: MSG -->
 	<div class="none" id="menu-MSG">
 		<div class="msg-addcomand-menu">
-			<h2 class="title-eventos">Adicionar Comandos</h2>
-			<center>Estrutura</center>
+			<h2 class="title-eventos">Add Function</h2>
+			<center>Header</center>
 			<input type="button" value="Start Message" class="botao-add-comando" onclick="MSG_renderDialog(1);">
 			<input type="button" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
 			<center>Text and Special Chars</center>
@@ -181,7 +181,7 @@
 		<div class="msg-hex" id="text-hex-editor">
 			Hex Input - Translator:
 			<div class="menu-separador"></div>
-			<textarea placeholder="Insira os valores hex aqui!" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="height: 128px;"></textarea>
+			<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="height: 128px;"></textarea>
 			<input type="button" class="botao-menu" style="float: right;" value="Translate!" onclick="MSG_translateHexValues();">
 		</div>
 	</div>
@@ -245,32 +245,32 @@
 				<div id="save-alterar" class="save-alterar-menu">
 					<center><font class="titulo">Modify</font></center><br>
 					Modify Time: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Change"><br>
 					Modify Game mode:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Change"><br>
 					Modify Current Player:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Change"><br>
 					Modify Outfit:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Change"><br>
 					Modify Saves:   
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Change"><br>
 					Modify Epilogues:
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Change"><br>
 					<div class="menu-separador"></div>
 					Modify HP: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Change"><br>
 					Modify Poison Status: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Change"><br>
 					<div class="menu-separador"></div>
 					Jill - Modify Sidepack: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Change"><br>
 					Jill - Modify Current Weapon: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Change"><br>
 					<div class="menu-separador"></div>
 					Carlos - Modify Sidepack: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Change"><br>
 					Carlos - Modify Current Weapon: 
-					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Modify"><br>
+					<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Change"><br>
 				</div>
 			</div>
 			<!-- Menu Jill Valentine -->

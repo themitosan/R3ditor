@@ -17,7 +17,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	localStorage.clear();
 	ORIGINAL_FILENAME = rdtFile;
 	$("#RDT-item-list").empty();
-	var msg = "RDT - The file was loaded Successfully! - File: " + rdtFile;
+	var msg = "RDT - The file was loaded successfully! - File: " + rdtFile;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
 	addLog("log", msg);
 	RDT_readItens();
@@ -147,6 +147,7 @@ function RDT_decompileItens(id, edit){
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
 		final 		  = currentItem.slice(RANGES["RDT_item-0-final"][0], 	   RANGES["RDT_item-0-final"][1]);
 	}
+	// wip
 	if (header === "68"){
 		itemXX 		  = "[WIP]";
 		itemYY 		  = "[WIP]";
