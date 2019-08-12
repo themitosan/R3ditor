@@ -37,7 +37,7 @@ When selecting, paste it into the folder where the game executable is and rename
 ### Message Files (.msg) [wip]
 You can view / edit the game's internal messages by loading .msg files or using the "Hex Input" field.
 
-Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.
+<i>Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.</i>
 
 ### Room Data Table (.rdt) [EXTREME WIP]
 For now you can view which items, files or maps are present within the file without being able to modify.<br><br>
