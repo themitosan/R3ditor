@@ -31,11 +31,6 @@ Soon:
 
 - Maps and files
 
-#### Important
-Any changes you make will automatically apply to your save.
-If you want to recover your save, open the "backup" folder and select a backup file. <br>
-When selecting, paste it into the folder where the game executable is and rename the backup file to "Bu00.sav"
-
 ### Message Files (.msg) [WIP]
 You can view / edit the game's internal messages by loading .msg files or using the "Hex Input" field.
 
@@ -45,3 +40,7 @@ You can view / edit the game's internal messages by loading .msg files or using 
 You can change which item is in the room, change its position and its animation. [WIP]<br>
 You can see how the map compatibility list looks by viewing <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">this sheet table</a>.<br>
 Expect compatibility improvements and more features soon!
+
+#### Important
+Any changes you make will automatically apply to your files.
+If you want to recover your save / rdt, open the "backup" folder and select the file you want to recover. <br>
