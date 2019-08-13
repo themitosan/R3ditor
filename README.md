@@ -4,7 +4,7 @@
 An editor of files written in JS / Node-Webkit to perform reverse engineering studies on Resident Evil 3.
 
 ## How to install
-- Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a>)
+- Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a> to download)
 
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "nw.exe".
