@@ -4,10 +4,10 @@
 	Help me - please
 */
 
-var BETA = true;
+var BETA = false;
 var fs = require('fs');
 var APP_VERSION = "0.1 [BETA]";
-var STATUS = "Indefinido";
+var STATUS = "Undefined";
 var arquivoBruto = undefined;
 var APP_PATH = process.cwd();
 var APP_NAME = "R3ditor V." + APP_VERSION;

@@ -182,7 +182,7 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	var typeId = undefined;
 	var convert = undefined;
 	try{
-		if (parseInt(id, 16) < 133){
+		if (parseInt(id, 16) < 134){
 			typeId = 1;
 			tipo = "Item";
 			cssFix = "RDT-item-bg";
@@ -354,8 +354,6 @@ function RDT_RECOMPILE_Lv1(){
 				RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
 				c++;
 			}
-	
-			console.log(RDT_CLONE);
 
 			// Generate the final file
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_CLONE, 'hex');
