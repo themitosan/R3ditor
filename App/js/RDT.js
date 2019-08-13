@@ -16,11 +16,10 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_editItemCancel();
 	localStorage.clear();
 	ORIGINAL_FILENAME = rdtFile;
-	$("#RDT-item-list").empty();
-	var msg = "RDT - The file was loaded successfully! - File: " + rdtFile;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
-	addLog("log", msg);
+	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	RDT_readItens();
+	RDT_showMenu(1);
 }
 
 function RDT_readItens(){
@@ -30,6 +29,7 @@ function RDT_readItens(){
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
 	RDT_totalItensGeral = 0;
+	$("#RDT-item-list").empty();
 	
 	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310900");
 	while (c < RDT_itemIndexRAW.length){
@@ -100,19 +100,17 @@ function RDT_readItens(){
 		c++;
 	}
 
-
 	RDT_totalItensGeral = RDT_ItensArray.length;
 
 	c = 0;
 	while (c < RDT_totalItensGeral){
 		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
-		var RDT_itemEndRange = RDT_ItensArray[c] + 64;
+		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
 		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
 		localStorage.setItem("RDT_Item-" + c, RDT_ITEMRAW);
 		RDT_decompileItens(c, false);
 		c++;
 	}
-	RDT_showMenu(1);
 }
 
 function RDT_decompileItens(id, edit){
@@ -123,17 +121,15 @@ function RDT_decompileItens(id, edit){
 	var itemIdetifier = currentItem.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
 	var espaco1		  = currentItem.slice(RANGES["RDT_item-espaco1"][0], 	   RANGES["RDT_item-espaco1"][1]);
 
-	var itemXX = undefined;
-	var itemYY = undefined;
-	var itemZZ = undefined;
-	var itemRR = undefined;
-	var itemID = undefined;
-	var espaco2 = undefined;
-	var itemQuant = undefined;
-	var espaco3 = undefined;
-	var itemMP = undefined;
-	var final = undefined;
-
+	var itemXX 		  = undefined;
+	var itemYY 		  = undefined;
+	var itemZZ 		  = undefined;
+	var itemRR 		  = undefined;
+	var itemID 		  = undefined;
+	var espaco2 	  = undefined;
+	var itemQuant 	  = undefined;
+	var espaco3 	  = undefined;
+	var itemMP 	 	  = undefined;
 
 	if (header === "67"){
 		itemXX 		  = currentItem.slice(RANGES["RDT_item-0-itemXX"][0], 	   RANGES["RDT_item-0-itemXX"][1]);
@@ -145,7 +141,6 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-0-itemQuant"][0],   RANGES["RDT_item-0-itemQuant"][1]);
 		espaco3 	  = currentItem.slice(RANGES["RDT_item-0-espaco3"][0], 	   RANGES["RDT_item-0-espaco3"][1]);
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
-		final 		  = currentItem.slice(RANGES["RDT_item-0-final"][0], 	   RANGES["RDT_item-0-final"][1]);
 	}
 	// wip
 	if (header === "68"){
@@ -158,11 +153,10 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-1-itemQuant"][0],   RANGES["RDT_item-1-itemQuant"][1]);
 		espaco3 	  = "[WIP]";
 		itemMP 		  = "[WIP]";
-		final 		  = "[WIP]";
 	}
 
 	var RDT_motivo = undefined;
-	console.log("Header: " + header + "\nHex: " + itemID);
+	//console.log("Header: " + header + "\nHex: " + itemID);
 
 	if (header === "90" || header === "51" || header === "02"){
 		RDT_totalItensGeral--;
@@ -212,12 +206,13 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		if (id.length < 2){
 			id = "0" + id;
 		}
-		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + ' (Hex: ' + id + ')</font>' + 
-		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_displayItemEdit(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantity: ' + 
+		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
+		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_displayItemEdit' + 
+		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
-		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
-		'<div class="RDT-Item-Misc">Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>' + 
-		'Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
+		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: ' + 
+		'<font class="italic RDT-item-lbl-fix">' + r + '</font><br><div class="RDT-Item-Misc">Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>' + 
+		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "ERROR: Unable to render item " + id + " - " + msg;
@@ -231,7 +226,7 @@ function RDT_ITEM_APPLY(index, type){
 	var nQuant = undefined;
 	if (type === 1){
 		novaHex = document.getElementById('RDT-item-select').value;
-		nQuant = document.getElementById('RDT_item-edit-Quant').value;
+		nQuant = parseInt(document.getElementById('RDT_item-edit-Quant').value);
 	}
 	if (type === 2){
 		novaHex = document.getElementById('RDT-file-select').value;
@@ -251,11 +246,11 @@ function RDT_ITEM_APPLY(index, type){
 	if (quant.length < 2){
 		quant = "0" + quant;
 	}
-	var novaX = document.getElementById('RDT_item-edit-X').value;
-	var novaY = document.getElementById('RDT_item-edit-Y').value;
-	var novaZ = document.getElementById('RDT_item-edit-Z').value;
-	var novaR = document.getElementById('RDT_item-edit-R').value;
-	var novaAnim = document.getElementById('RDT_item-edit-A').value;
+	var novaX = document.getElementById('RDT_item-edit-X').value.slice(0, 4);
+	var novaY = document.getElementById('RDT_item-edit-Y').value.slice(0, 4);
+	var novaZ = document.getElementById('RDT_item-edit-Z').value.slice(0, 4);
+	var novaR = document.getElementById('RDT_item-edit-R').value.slice(0, 4);
+	var novaAnim = document.getElementById('RDT_item-edit-A').value.slice(0, 2);
 	if (novaX === ""){
 		novaX = "0000";
 	}
@@ -269,19 +264,125 @@ function RDT_ITEM_APPLY(index, type){
 		novaR = "0000";
 	}
 	if (novaAnim === ""){
-		novaAnim = "0000";
+		novaAnim = "00";
 	}
 	
-	// Reconstruindo item
-	var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);   // 67??0231????
-	var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32); // Normalmente é 00 mas estou fazendo dessa forma para evitar erros
-	var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 40); // Deve conter alguma variavel usada em eventos globais, tipo quando o nemesis só aparece quando você pega o lockpick no R11A.rdt
-	var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
-	var RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
+	var canBuild = true;
+	var error = undefined;
 
-	localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+	if (novaX.length < 4){
+		canBuild = false;
+		error = "The X var must be 16 bytes long!";
+	}
+
+	if (novaY.length < 4){
+		canBuild = false;
+		error = "The Y var must be 16 bytes long!";
+	}
+
+	if (novaZ.length < 4){
+		canBuild = false;
+		error = "The Z var must be 16 bytes long!";
+	}
+
+	if (novaR.length < 4){
+		canBuild = false;
+		error = "The R var must be 16 bytes long!";
+	}
+
+	if (novaAnim.length < 2){
+		canBuild = false;
+		error = "The Animation var must be 8 bytes long!";
+	}
+
+	// Reconstruindo item
+	if (canBuild === true){
+		var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);  
+		var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32);
+		var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 42);
+		var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
+		var RDT_ITEM_COMPILADO = undefined
+		if (BETA === true){
+			RDT_ITEM_COMPILADO = header + " " + novaX + " " + novaY + " " + novaZ + " " + novaR + " " + novaHex + " " + offset1 + " " + quant + " " + offset2 + " " + novaAnim + " " + offset3;
+			console.log("Hex Gerada: " + RDT_ITEM_COMPILADO);
+		}
+
+		RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
+		
+		if (BETA === true){
+			console.log(RDT_ITEM_COMPILADO);
+		}
+
+		localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+	
+		RDT_RECOMPILE_Lv1();
+
+	} else {
+		addLog("warn", "WARNING: " + error);
+	}
 }
 
-function RDT_RECOMPILE(){
+function RDT_Backup(){
+	checkFolders();
+	if (RDT_arquivoBruto !== undefined){
+		try{
+			var backup_name = getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".rdtbackup";
+			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
+			log_separador();
+			addLog("log", "INFO: A backup of your RDT file was made successfully! - File: " + backup_name);
+			addLog("log", "Folder: " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
+		} catch (err){
+			addLog("error", "ERROR: Unable to make backup! - " + err);
+		}
+	} else {
+		addLog("error", "ERROR: You can't make a backup if you haven't opened a map yet!");
+	}
+}
+
+function RDT_RECOMPILE_Lv1(){
+	if (ORIGINAL_FILENAME !== undefined){
+		RDT_Backup();
+		try{
+			log_separador();
+			var RDT_CLONE = RDT_arquivoBruto;
+			var c = 0;
 	
+			// Apply Itens
+			while(c < RDT_ItensArray.length){
+				var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
+				var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 52), RDT_CLONE.length);
+				RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+				c++;
+			}
+	
+			console.log(RDT_CLONE);
+
+			// Generate the final file
+			fs.writeFileSync(ORIGINAL_FILENAME, RDT_CLONE, 'hex');
+			addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
+			addLog("log", "Folder: " + ORIGINAL_FILENAME);
+			log_separador();
+
+			RDT_doAfterSave();
+			RDT_arquivoBruto = RDT_CLONE;
+			RDT_readItens();
+
+		} catch(err){
+			console.error(err);
+			addLog("error", "ERROR: Something went wrong! " + err);
+		}
+	} else {
+		addLog("error", "You cannot save an RDT file if you have not opened it!");
+	}
+}
+
+function RDT_doAfterSave(){
+	RDT_totalItensGeral = undefined;
+	RDT_itemIndexRAW = undefined;
+	RDT_arquivoBruto = undefined;
+	RDT_ItensArray = [];
+	RDT_totalItens = 0;
+	RDT_totalFiles = 0;
+	RDT_totalMapas = 0;
+	RDT_editItemCancel();
 }

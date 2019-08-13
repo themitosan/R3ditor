@@ -463,7 +463,7 @@ function save_renderInfos(s_slot){
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
 	
 		addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
-		addLog("log", "IGT Complete (Formato: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
+		addLog("log", "IGT Complete (Format: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 		log_separador();
 	
 		// Dificuldade
@@ -623,10 +623,10 @@ function save_Backup(){
 	if (SAVE_arquivoBruto !== undefined){
 		try{
 			var backup_name = gDetails + "-" + getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".savbackup";
-			fs.writeFileSync(APP_PATH + "\\Backup\\" + backup_name, SAVE_arquivoBruto, 'hex');
+			fs.writeFileSync(APP_PATH + "\\Backup\\SAV\\" + backup_name, SAVE_arquivoBruto, 'hex');
 			log_separador();
-			addLog("log", "INFO: The backup was made successfully! - File: " + backup_name);
-			addLog("log", "Folder: " + APP_PATH + "\\Backup\\" + backup_name);
+			addLog("log", "INFO: A backup of your save file was made successfully! - File: " + backup_name);
+			addLog("log", "Folder: " + APP_PATH + "\\Backup\\SAV\\" + backup_name);
 			log_separador();
 		} catch (err){
 			addLog("error", "ERROR: Unable to make backup! - " + err);

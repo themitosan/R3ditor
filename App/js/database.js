@@ -50,7 +50,7 @@ var ITEM = {
 	"26": ["Mix of Green and Red Herbs", 					   "This combination can heal your life completely without removing poisoning status.", 																													   													 "0px 58px 0px 446px",  "-943px", "3", "1", "10", "8", "3"],
 	"27": ["Mix of 3 Green Herbs", 							   "This combination can heal your life completely without removing poisoning status.", 																																   										 "0px 0px 0px 501px",  "-1055px", "3", "1", "11", "9", "3"],
 	"28": ["Mix of 2x Green Herbs + Blue Herb", 			   "This combination can heal little more than a green weed alone and removes the poison status.", 																									   															 "0px 502px 0px 0px",    "-54px", "4", "1", "12", "0", "4"],
-	"29": ["All Herbs Mix",			     					   "This combination completely heals your life, including removing the poison status of the current character.", 																		   																		 "0px 446px 0px 57px",  "-166px", "4", "1", "13", "1", "4"],
+	"29": ["Mix of all Herbs",		     					   "This combination completely heals your life, including removing the poison status of the current character.", 																		   																		 "0px 446px 0px 57px",  "-166px", "4", "1", "13", "1", "4"],
 	"2a": ["First aid spray kit",	 						   "Kit that supports up to three first aid kit units.",																													 																   					 "0px 392px 0px 112px", "-277px", "4", "1", "14", "2", "4"],
 	"2b": ["Square crank", 									   "Square Tip Crank - Used in uptown to open a cabinet full of grenade launcher bullets.", 																																   									 "0px 335px 0px 168px", "-390px", "4", "1", "15", "3", "4"],
 	"2c": ["(BOTU) Red Medal",								   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in red color.<br><br>Item discarded during the development process.", 																					   												 "0px 280px 0px 224px", "-500px", "4", "1", "16", "4", "4"],
@@ -173,7 +173,6 @@ var FILES = {
 	"9f": ["Photo D"],
 	"9e": ["Photo E"],
 	"a0": ["Clock Tower Poster Card"],
-	//
 	"a2": ["Classified Photo File"]
 }
 
@@ -868,22 +867,22 @@ var RANGES = {
 
 	// Item Ranges
 
-	"RDT_item-header": 			[0, 2],
-	"RDT_item-itemIdetifier": 	[2, 4],
-	"RDT_item-espaco1": 		[4, 12],
+	"RDT_item-header": 			[0, 2], // OK
+	"RDT_item-itemIdetifier": 	[2, 4], // OK
+	"RDT_item-espaco1": 		[4, 12], // OK
 
 	// Se a Header do Item for 67
 
-	"RDT_item-0-itemXX": 		[12, 16],
-	"RDT_item-0-itemYY": 		[16, 20],
-	"RDT_item-0-itemZZ": 		[20, 24],
-	"RDT_item-0-itemRR": 		[24, 28],
-	"RDT_item-0-itemID": 		[28, 30],
-	"RDT_item-0-espaco2": 		[30, 32],
-	"RDT_item-0-itemQuant":		[32, 34],
-	"RDT_item-0-espaco3": 		[34, 40],
-	"RDT_item-0-itemMP": 		[40, 44],
-	"RDT_item-0-final": 		[44, 80],
+	"RDT_item-0-itemXX": 		[12, 16], // OK
+	"RDT_item-0-itemYY": 		[16, 20], // OK
+	"RDT_item-0-itemZZ": 		[20, 24], // OK
+	"RDT_item-0-itemRR": 		[24, 28], // OK
+
+	"RDT_item-0-itemID": 		[28, 30], // OK
+	"RDT_item-0-espaco2": 		[30, 32], // OK
+	"RDT_item-0-itemQuant":		[32, 34], // OK
+	"RDT_item-0-espaco3": 		[34, 42], // OK
+	"RDT_item-0-itemMP": 		[42, 44], // OK
 
 	// Se a Header do item for 68
 
@@ -896,7 +895,6 @@ var RANGES = {
 	"RDT_item-1-espaco2": 		[46, 48], // OK
 	"RDT_item-1-itemQuant":		[48, 50], // OK
 
-	"RDT_item-1-espaco3": 		[34, 40],
-	"RDT_item-1-itemMP": 		[40, 44],
-	"RDT_item-1-final": 		[44, 80]
+	"RDT_item-1-espaco3": 		[34, 42],
+	"RDT_item-1-itemMP": 		[42, 44],
 }

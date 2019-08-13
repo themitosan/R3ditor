@@ -4,7 +4,7 @@
 	Help me - please
 */
 
-var BETA = false;
+var BETA = true;
 var fs = require('fs');
 var APP_VERSION = "0.1 [BETA]";
 var STATUS = "Indefinido";
@@ -31,6 +31,12 @@ function load(){
 function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Backup") == false){
 		fs.mkdirSync(APP_PATH + "\\Backup");
+	}
+	if (fs.existsSync(APP_PATH + "\\Backup\\SAV") == false){
+		fs.mkdirSync(APP_PATH + "\\Backup\\SAV");
+	}
+	if (fs.existsSync(APP_PATH + "\\Backup\\RDT") == false){
+		fs.mkdirSync(APP_PATH + "\\Backup\\RDT");
 	}
 	if (fs.existsSync(APP_PATH + "\\MSG") == false){
 		fs.mkdirSync(APP_PATH + "\\MSG");

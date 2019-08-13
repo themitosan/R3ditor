@@ -498,6 +498,7 @@ function RDT_showMenu(id){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
 	}
+	RDT_editItemCancel();
 	$("#RDT-map-select").html(RDT_EDIT_MAP);
 	$("#RDT-file-select").html(RDT_EDIT_FILE);
 	$("#RDT-item-select").html(RDT_EDIT_ITEM);
@@ -510,6 +511,7 @@ function RDT_showMenu(id){
 	$("#RDT-lbl-FILENAME").html("File name: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
 	$("#menu-RDT").css({"display": "block"});
 	$("#RDT_menu-" + id).css({"display": "block"});
+	document.getElementById("RDT-item-list").scrollTop = 0;
 	$("#log-programa").css({"height": "86px", "top": "626px"});
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	RDT_applyMenuFocus(id);
@@ -589,8 +591,8 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_item-edit-R').value = "";
 	document.getElementById('RDT_item-edit-A').value = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
+	$("#RDT-lbl-item-edit").html("No item select");
 	$("#RDT-item-list").css({"width": "1288px"});
-	$("#RDT-lbl-item-edit").html("Nenhum Item Selecionado");
 	$("#RDT-lbl-edit-index").html("N/A");
 }
 

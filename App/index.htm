@@ -118,7 +118,7 @@
 					Y Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""><br>
 					Z Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""><br>
 					Rotation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""><br>
-					Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="0000" value="">
+					Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value="">
 					<div class="RDT-applyBtn-div">
 						<input type="button" class="RDT-btn-apply color-white" value="Cancel" onclick="RDT_editItemCancel();">
 						<input type="button" class="RDT-btn-apply color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!" onclick="">
@@ -435,7 +435,7 @@
 	<!-- AppLogo -->
 	<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo">
 	<!-- File Loader -->
-	<div style="display: none;">
+	<div class="none">
 		<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>
 		<input type="file" value="" onchange="setLoadMSGFile();" id="loadMSGForm" accept=".msg"/>
 		<input type="file" value="" onchange="setLoadSaveFile();" id="loadSaveForm" accept=".sav"/>
