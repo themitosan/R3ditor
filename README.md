@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" width="120" height="120">
+
 # R3ditor
 An editor of files written in JS to perform reverse engineering studies on the Resident Evil 3 game.
 
@@ -40,6 +42,6 @@ You can view / edit the game's internal messages by loading .msg files or using 
 <i>Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.</i>
 
 ### Room Data Table (.rdt) [EXTREME WIP]
-You can change which item is in the room, change its position and its animation. [WIP]<br><br>
-You can see how the map compatibility list looks by viewing <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">this sheet table</a>.<br><br>
+You can change which item is in the room, change its position and its animation. [WIP]<br>
+You can see how the map compatibility list looks by viewing <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">this sheet table</a>.<br>
 Expect compatibility improvements and more features soon!
