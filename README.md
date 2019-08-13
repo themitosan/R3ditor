@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
 
 # R3ditor
-An editor of files written in JS / Node-Webkit to perform reverse engineering studies on the Resident Evil 3 game.
+An editor of files written in JS / Node-Webkit to perform reverse engineering studies on Resident Evil 3.
 
 ## How to install
 - Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a>)
@@ -42,6 +42,8 @@ You can see how the map compatibility list looks by viewing <a href="https://doc
 
 Expect compatibility improvements and more features soon!
 
-#### Important
+## Important
 Any changes you make will automatically apply to your files.
 If you want to recover your save / rdt, open the "backup" folder and select the file you want to recover. <br>
+
+<i>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i>
