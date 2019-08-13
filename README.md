@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" width="120" height="120">
+<img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
 
 # R3ditor
 An editor of files written in JS to perform reverse engineering studies on the Resident Evil 3 game.
