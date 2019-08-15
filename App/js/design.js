@@ -515,10 +515,10 @@ function RDT_showMenu(id){
 	$("#log-programa").css({"height": "86px", "top": "626px"});
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	RDT_applyMenuFocus(id);
-	RDT_Error_Item_404();
+	RDT_Error_404();
 }
 
-function RDT_Error_Item_404(){
+function RDT_Error_404(){
 	if (RDT_totalItensGeral < 1){
 		$("#RDT_lbl-totItens").html("0");
 		$("#RDT_lbl-totalMaps").html("0");

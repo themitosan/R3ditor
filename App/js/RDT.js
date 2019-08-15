@@ -141,6 +141,7 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-0-itemQuant"][0],   RANGES["RDT_item-0-itemQuant"][1]);
 		espaco3 	  = currentItem.slice(RANGES["RDT_item-0-espaco3"][0], 	   RANGES["RDT_item-0-espaco3"][1]);
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
+		$("#RDT-btn-aplicarItem").css({"display": "inline"});
 	}
 	// wip
 	if (header === "68"){
@@ -153,6 +154,7 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-1-itemQuant"][0],   RANGES["RDT_item-1-itemQuant"][1]);
 		espaco3 	  = "[WIP]";
 		itemMP 		  = "[WIP]";
+		$("#RDT-btn-aplicarItem").css({"display": "none"});
 	}
 
 	var RDT_motivo = undefined;

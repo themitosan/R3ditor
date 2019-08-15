@@ -40,8 +40,10 @@
 	<div class="menu-topo none" id="menu-topo-msg">
 		<input type="button" class="botao-menu" value="Open MSG" onclick="triggerLoadMSG();">
 		<input type="button" class="botao-menu" value="Make MSG" onclick="MSG_applyMSGCommand(true);">
+		<input type="button" class="botao-menu none" value="Save MSG in RDT" onclick="MSG_applyMSGCommand(true);">
 		<!-- Direita -->
 		<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+		<input type="button" class="botao-menu right none" value="Return to RDT" onclick="">
 	</div>
 	<!-- Menu Saves -->
 	<div class="menu-topo none" id="menu-topo-save">
@@ -53,7 +55,7 @@
 	<!-- FORM: RDT -->
 	<div class="none" id="menu-RDT">
 		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
-		<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (MSG)" onclick="RDT_showMenu(2);">
+		<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (WIP)" onclick="RDT_showMenu(2);">
 		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 		<!-- RDT: Menu Geral -->
 		<div class="menu" id="RDT_menu-1">
@@ -79,22 +81,18 @@
 		<!-- RDT: Mensagens -->
 		<div class="menu none" id="RDT_menu-2">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Messages</font></center>
-				<center>
-					WIP :(<br><br>
-					Can you give me a cookie? ~wink~
-				</center>
+				<center><font class="titulo">Messages - [WIP]</font></center>
 			</div>
 		</div>
 		<!-- RDT: Itens -->
 		<div class="menu none" id="RDT_menu-3">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Items, Files And Maps (Total: <font id="RDT_lbl-totItens">???</font>)</font></center>
+				<center><font class="titulo">Items, Files And Maps - Total: <font id="RDT_lbl-totItens">???</font></font></center>
 				<div id="RDT-item-list" class="RDT-holder">
 					<!-- Os Itens dentro da RDT vão aqui -->
 				</div>
 				<!-- Mensagem: Não há itens -->
-				<div id="RDT-item-404">
+				<div id="RDT-item-404" class="none">
 					<center>
 						Whoops... Looks like <font id="RDT-lbl-mapName">???</font> don't have any item, file or map! :(</font>
 					</center>
@@ -126,7 +124,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 	<!-- FORM: MSG -->
@@ -180,8 +177,7 @@
 		<!-- MSG: Hex Input -->
 		<div class="msg-hex" id="text-hex-editor">
 			Hex Input - Translator:
-			<div class="menu-separador"></div>
-			<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="height: 128px;"></textarea>
+			<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="margin-top: 8px;height: 128px;"></textarea>
 			<input type="button" class="botao-menu" style="float: right;" value="Translate!" onclick="MSG_translateHexValues();">
 		</div>
 	</div>

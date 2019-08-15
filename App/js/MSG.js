@@ -8,6 +8,7 @@ var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_Commands = undefined;
 var MSG_arquivoBruto = undefined;
+var MSG_DECRYPT_LV1_LAST = "";
 
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_Commands = [];
@@ -19,6 +20,59 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 	scrollLog();
+}
+
+function MSG_startMSGDecrypt_Lv1(RAW_DATA){
+	MSG_DECRYPT_LV1_LAST = "";
+	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
+	var formatHex = RAW_DATA.match(/.{2,2}/g);
+	var c = 0;
+	while(c < formatHex.length){
+		MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + " ";
+		c++; 
+	}
+	MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST.slice(0, parseInt(MSG_DECRYPT_LV1_LAST.length - 1));
+	var t = undefined;
+	if (RAW_DATA_ARRAY !== null){
+		t = RAW_DATA_ARRAY.length;
+	} else {
+		t = 0;
+	}
+	var cAtual = 0;
+	var textoHex = "";
+	var startPoint = 0;
+	var textoTraduzido = "";
+	var COMMAND = undefined;
+	var COMMAND_HEX = undefined;
+	var COMMAND_ATTR = undefined;
+	var final = "";
+	while (startPoint < t){
+		// Se for um comando / função especial
+		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
+			if (textoTraduzido !== ""){
+				final = final + " " + textoTraduzido;
+				textoTraduzido = "";
+				textoHex = "";
+				cAtual++;
+			}
+			COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][2];
+			final = final + " " + COMMAND;
+			startPoint = startPoint + 2;
+			cAtual++;
+		} else {
+			textoHex = textoHex + RAW_DATA_ARRAY[startPoint];
+			textoTraduzido = textoTraduzido + MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
+			startPoint++;
+		}
+	}
+	if (textoTraduzido !== ""){
+		final = final + " " + textoTraduzido;
+		textoTraduzido = "";
+		textoHex = "";
+		cAtual++;
+	}
+	final = final.slice(3, parseInt(final.length - 2));
+	return final;
 }
 
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
@@ -53,7 +107,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 
 	while (startPoint < t){
 
-		// Se for um comando especial
+		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 
 			if (textoTraduzido !== ""){

@@ -54,8 +54,8 @@ var ITEM = {
 	"2a": ["First aid spray kit",	 						   "Kit that supports up to three first aid kit units.",																													 																   					 "0px 392px 0px 112px", "-277px", "4", "1", "14", "2", "4"],
 	"2b": ["Square crank", 									   "Square Tip Crank - Used in uptown to open a cabinet full of grenade launcher bullets.", 																																   									 "0px 335px 0px 168px", "-390px", "4", "1", "15", "3", "4"],
 	"2c": ["(BOTU) Red Medal",								   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in red color.<br><br>Item discarded during the development process.", 																					   												 "0px 280px 0px 224px", "-500px", "4", "1", "16", "4", "4"],
-	"2d": ["(BOTU) Yellow Medal", 							   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in yellow color.<br><br>Item discarded during the development process.", 																						   										 "0px 227px 0px 280px", "-609px", "4", "1", "17", "5", "4"],
-	"2e": ["(BOTU) Blue Medal",								   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in blue color.<br><br>Item discarded during the development process.", 																						   										 "0px 168px 0px 335px", "-722px", "4", "1", "18", "6", "4"],
+	"2d": ["(BOTU) Blue Medal", 							   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in yellow color.<br><br>Item discarded during the development process.", 																						   										 "0px 227px 0px 280px", "-609px", "4", "1", "17", "5", "4"],
+	"2e": ["(BOTU) Golden Medal",							   "BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in blue color.<br><br>Item discarded during the development process.", 																						   										 "0px 168px 0px 335px", "-722px", "4", "1", "18", "6", "4"],
 	"2f": ["Jill's S.T.A.R.S card", 						   "Jill Valentine S.T.A.R.S ID Card.<br>Used to get the drawer password in the RPD file room if you run away from nemesis.", 																					   												 "0px 114px 0px 392px", "-833px", "4", "1", "19", "7", "4"],
 	"30": ["(BOTU) Oil can labelled 'Giga Oil'",    		   "BOTU!<br><br>This item would be used to make the item \"Mixed Oil\".<br><br>Item discarded during the development process.", 																						   										 "0px 58px 0px 446px",   "-943px", "4", "2", "0", "8", "4"],
 	"31": ["Battery", 										   "Battery used to power the elevator that leads to the power station in Downtown.", 																																					   						 "0px 0px 0px 501px",   "-1055px", "4", "2", "1", "9", "4"],
@@ -237,14 +237,14 @@ var PLAYERS = {
 }
 
 var ROUPA = {
-	"00": ["Normal clothes"],
+	"00": ["Normal"],
 	"01": ["Biker"],
 	"02": ["S.T.A.R.S uniform"],
-	"03": ["Disco inferno"],
+	"03": ["Disco Inferno"],
 	"04": ["Cop + miniskirt"],
 	"05": ["Jill as Regina (Dino Crisis)"],
 	"06": ["Blue mini skirt with black top and boots"],
-	"07": ["Social outfit"]
+	"07": ["SocSPECIAL ial utfit"]
 }
 
 var SIDEPACK = {
@@ -310,12 +310,12 @@ var MSG_DICIONARIO = {
 	"00": [false, " "],
 	"01": [false, "."],
 	"02": [false, ">"],
-	"03": [false, "(CHAR ESPECIAL 1)"],
-	"04": [false, "(CHAR ESPECIAL 2)"],
+	"03": [false, "(SPECIAL CHAR 1)"],
+	"04": [false, "(SPECIAL CHAR 2)"],
 	"05": [false, "("],
 	"06": [false, ")"],
-	"07": [false, "(CHAR ESPECIAL 3)"],
-	"08": [false, "(CHAR ESPECIAL 4)"],
+	"07": [false, "(SPECIAL CHAR 3)"],
+	"08": [false, "(SPECIAL CHAR 4)"],
 	"09": [false, "\""],
 	"0a": [false, "\""],
 	"0b": [false, "(Down Arrow)"],
@@ -367,7 +367,7 @@ var MSG_DICIONARIO = {
 	"39": [false, "-"],
 	"3a": [false, "'"],
 	"3b": [false, "-"],
-	"3c": [false, "(CHAR ESPECIAL 5)"],
+	"3c": [false, "(SPECIAL CHAR 5)"],
 	"3d": [false, "a"],
 	"3e": [false, "b"],
 	"3f": [false, "c"],
@@ -550,7 +550,7 @@ var MSG_DICIONARIO = {
 	"f2": [false, "(Unknown Char / Function Nº 155 - Hex: f2)"],
 	"f6": [false, "(Unknown Char / Function Nº 159 - Hex: f6)"],
 	"f7": [false, "(Unknown Char / Function Nº 160 - Hex: f7)"],
-	"f9": [false, "(Green Color)"],			// Formatação - Cor Verde
+	"f9": [false, "(Green Color)"],	   // Formatação - Cor Verde
 	"fb": [false, "(Yes / No)"],
 	"fc": [false, "(Line Break)<br>"], // Enter
 	"fd": [false, "(Pause)"],
@@ -569,7 +569,7 @@ var MSG_DICIONARIO = {
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
 	*/
 	"f4": [true, "(Function: Change Camera)", 			 7],
-	"f5": [false, "(Char ou Função Não-Mapeada Nº 158 - Hex: f5)"] // Comando usado na cutscene "Septemer, 28".
+	"f5": [false, "(Unknown Char / Function Nº 158 - Hex: f5)"] // Comando usado na cutscene "Septemer, 28".
 }
 
 var MSG_CHARESPECIAL = {

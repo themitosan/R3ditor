@@ -169,7 +169,7 @@ a{
 	margin-top: 4px;
 	height: 2px;
 	color: #fff;
-	width: 95%;
+	width: 84%;
 }
 
 .box-fix-lbl{
@@ -715,6 +715,13 @@ a{
 
 .italic{
     font-style: italic;
+    word-wrap: break-word;
+}
+
+.RDT-MSG-FIX{
+    width: 90%;
+    margin-top: -18px;
+    margin-left: 92px;
 }
 
 .div-eventos{
@@ -854,6 +861,10 @@ a{
 
 .RDT-map-bg{
     background-image: linear-gradient(to bottom, #4e8b72, #275046);
+}
+
+.RDT-MSG-bg{
+    background-image: linear-gradient(to bottom, #645f71, #3f3d61);
 }
 
 .RDT-item-lbl-fix{
