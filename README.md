@@ -19,11 +19,11 @@ You can change various aspects of your save, such as:
 - Change Inventories
 - Change chests
 - Current Character
+- Current Outfit
 - Poisoning Status
 - Sidepack (Jill and Carlos)
 - Current Weapon
 - Difficulty
-- Clothes
 - Quantity of Saves
 - Unlocked Epilogues
 
