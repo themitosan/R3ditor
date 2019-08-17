@@ -38,8 +38,6 @@ You can view / edit the game's internal messages by loading .msg files or using 
 
 ### Room Data Table (.rdt) [EXTREME WIP]
 You can change which item is in the room, change its position and its animation. [WIP]<br>
-You can see how the map compatibility list looks by viewing <a href="https://docs.google.com/spreadsheets/d/1HviJVXH_3NpgZEdMI1Cdplyqqy3IUm92QJE5c7CF1_w" target="_blank">this spreadsheet</a>.<br>
-
 Expect compatibility improvements and more features soon!
 
 ## Important
