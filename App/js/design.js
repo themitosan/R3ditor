@@ -36,6 +36,7 @@ function SAVE_applyMenuFocus(menuId){
 		i++;
 	}
 	$('#menu-' + menuId).addClass('aba-select');
+	scrollLog();
 }
 
 function main_menu(anim){
@@ -58,7 +59,6 @@ function main_menu(anim){
 	if (anim === 3){ // RDT
 		document.title = APP_NAME + " - Map Editor (*.rdt)";
 		$("#menu-topo-RDT").css({"display": "block"});
-		
 	}
 }
 
@@ -83,7 +83,6 @@ function SAVE_showMenu(menuId){
 			$("#save-jill").addClass('none');
 		}
 		request_render_save = false;
-		scrollLog();
 	} else {
 		$("#log-programa").css({"height": "86px", "top": "626px"});
 		$("#save-geral").css({"height": "530px"});
@@ -114,6 +113,7 @@ function SAVE_showMenu(menuId){
 		$("#msg-viewer").removeClass('none');
 		$("#o-menu-general").css({"display": "block"});
 	}
+	scrollLog();
 }
 
 function cleanForSaveLoad(){
@@ -141,9 +141,9 @@ function cleanForSaveLoad(){
 
 function showModItem(modo, person, pos, itemId){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_ITEM);
 	hideMenusForDialog();
-	$("#lbl-exchange-item").html(ITEM[itemId][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ITEM;
+	document.getElementById("lbl-exchange-item").innerHTML = ITEM[itemId][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyItem(modo, person, pos);
 		cancelShowModItem(0);
@@ -153,9 +153,9 @@ function showModItem(modo, person, pos, itemId){
 
 function showModPerson(person){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_PERSON);
 	hideMenusForDialog();
-	$("#lbl-exchange-person").html(PLAYERS[person][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_PERSON;
+	document.getElementById("lbl-exchange-person").innerHTML = PLAYERS[person][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyPerson();
 		cancelShowModItem(1);
@@ -165,9 +165,9 @@ function showModPerson(person){
 
 function showModDificuldade(diff){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_DIFICULDADE);
 	hideMenusForDialog();
-	$("#lbl-exchange-dificuldade").html(DIFICULDADE[diff][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_DIFICULDADE;
+	document.getElementById("lbl-exchange-dificuldade").innerHTML = DIFICULDADE[diff][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyDificuldade();
 		cancelShowModItem(2);
@@ -177,9 +177,9 @@ function showModDificuldade(diff){
 
 function showModRoupa(roupa){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_ROUPA);
 	hideMenusForDialog();
-	$("#lbl-exchange-roupas").html(ROUPA[roupa][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ROUPA;
+	document.getElementById("lbl-exchange-roupas").innerHTML = ROUPA[roupa][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyRoupa();
 		cancelShowModItem(3);
@@ -189,9 +189,9 @@ function showModRoupa(roupa){
 
 function showModSaveCount(nSaves){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_SAVECOUNT);
 	hideMenusForDialog();
-	$("#lbl-exchange-savecount").html(parseInt("0x" + nSaves));
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_SAVECOUNT;
+	document.getElementById("lbl-exchange-savecount").innerHTML = parseInt("0x" + nSaves);
 	document.getElementById("btn-item-apply").onclick = function(){
 		applySaveCount();
 		cancelShowModItem(4);
@@ -201,10 +201,10 @@ function showModSaveCount(nSaves){
 
 function showModHP(showLife){
 	adjustDialogSave(40);
-	var ll = showLife.slice(0, 2);
-	$("#dialog_render").html(DIALOG_SELECT_HP);
 	hideMenusForDialog();
-	$("#lbl-exchange-HP").html(parseInt("0x" + ll));
+	var ll = showLife.slice(0, 2);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_HP;
+	document.getElementById("lbl-exchange-HP").innerHTML = parseInt("0x" + ll);
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyHP();
 		cancelShowModItem(5);
@@ -214,9 +214,9 @@ function showModHP(showLife){
 
 function showModEpilogos(eps){
 	adjustDialogSave(37);
-	$("#dialog_render").html(DIALOG_SELECT_EPILOGO);
 	hideMenusForDialog();
-	$("#lbl-exchange-epilogues").html(EPILOGOS[eps][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_EPILOGO;
+	document.getElementById("lbl-exchange-epilogues").innerHTML = EPILOGOS[eps][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyEpil();
 		cancelShowModItem(6);
@@ -226,9 +226,9 @@ function showModEpilogos(eps){
 
 function showModIGT(){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_IGT);
 	hideMenusForDialog();
-	$("#lbl-exchange-IGT").html(hora + ":" + minutos + ":" + segundos);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_IGT;
+	document.getElementById("lbl-exchange-IGT").innerHTML = hora + ":" + minutos + ":" + segundos;
 	document.getElementById("btn-item-apply").onclick = function(){
 		makeHexTime();
 		cancelShowModItem(7);
@@ -238,7 +238,7 @@ function showModIGT(){
 
 function showModSidepack(person){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_SIDEPACK);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_SIDEPACK;
 	var pp = undefined;
 	var st = undefined;
 	if (person === 1){ // J
@@ -248,9 +248,9 @@ function showModSidepack(person){
 		pp = "Carlos Oliveira";
 		st = SIDEPACK[cSide][0];
 	}
-	$("#person-sidepack").html(pp);
 	hideMenusForDialog();
-	$("#lbl-exchange-sidepack").html(st);
+	document.getElementById("person-sidepack").innerHTML = pp;
+	document.getElementById("lbl-exchange-sidepack").innerHTML = st;
 	document.getElementById("btn-item-apply").onclick = function(){
 		applySidepack(person);
 		cancelShowModItem(8);
@@ -260,7 +260,7 @@ function showModSidepack(person){
 
 function showModCurrentArma(person){
 	adjustDialogSave(34);
-	$("#dialog_render").html(DIALOG_SELECT_ARMA);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ARMA;
 	var pp = undefined;
 	var st = undefined;
 	var arma = undefined;
@@ -276,9 +276,9 @@ function showModCurrentArma(person){
 	} else {
 		st = ITEM[arma][0];
 	}
-	$("#person-arma").html(pp);
 	hideMenusForDialog();
-	$("#lbl-exchange-arma").html(st);
+	document.getElementById("person-arma").innerHTML = pp;
+	document.getElementById("lbl-exchange-arma").innerHTML = st;
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyArma(person);
 		cancelShowModItem(9);
@@ -288,9 +288,9 @@ function showModCurrentArma(person){
 
 function showModPoison(){
 	adjustDialogSave(40);
-	$("#dialog_render").html(DIALOG_SELECT_POISON);
 	hideMenusForDialog();
-	$("#lbl-exchange-poison").html(POISON[veneno][0]);
+	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_POISON;
+	document.getElementById("lbl-exchange-poison").innerHTML = POISON[veneno][0];
 	document.getElementById("btn-item-apply").onclick = function(){
 		applyPoison();
 		cancelShowModItem(10);
@@ -357,6 +357,7 @@ function closeAbout(){
 
 /// MSG
 function MSG_showMenu(id){
+	scrollLog();
 	$("#img-logo").fadeOut({duration: 100, queue: false});
 	if (id === 1){ // Inicial
 		$("#menu-MSG").removeClass("none");
@@ -378,9 +379,9 @@ function cleanMSGFields(){
 	MSG_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = undefined;
 	document.getElementById('msg-hex-toTrans').value = "";
-	$("#text-msg-hexToASCII").html("");
-	$("#div-msg-traduzido").html("");
-	$("#text-msg-raw").html("");
+	document.getElementById("text-msg-hexToASCII").innerHTML = "";
+	document.getElementById("div-msg-traduzido").innerHTML = "";
+	document.getElementById("text-msg-raw").innerHTML = "";
 }
 
 function MSG_clearHexTextfield(){
@@ -401,7 +402,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	if (id === 0){
 		$("#text-msg-events").css({"display": "block"});
 		$("#dialog-msg-addcomand").css({"display": "none"});
-		$("#dialog-msg-render").html("<!-- Dialogo vazio - por enquanto... -->");
+		document.getElementById("dialog-msg-render").innerHTML = "<!-- Hallo! -->";
 	} else {
 		$("#dialog-msg-addcomand").css({"display": "block"});
 		$("#text-msg-events").css({"display": "none"});
@@ -409,8 +410,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Iniciar Mensagem
 	if (id === 1){ 
 		$("#dialog-msg-addcomand").css({"top": "192px"});
-		$("#msg-addcomand-title").html("Start Message");
-		$("#dialog-msg-render").html(DIALOG_MSG_START);
+		document.getElementById("msg-addcomand-title").innerHTML = "Start Message";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_START;
 		document.getElementById('msg-comeco-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_STARTMSG(index, isMod);
@@ -420,8 +421,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Finalizar Mensagem
 	if (id === 2){
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("End Message");
-		$("#dialog-msg-render").html(DIALOG_MSG_END);
+		document.getElementById("msg-addcomand-title").innerHTML = "End Message";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_END;
 		document.getElementById('msg-fim-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_ENDMSG(index, isMod);
@@ -430,10 +431,10 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Exibir Texto
 	if (id === 3){ 
-		$("#dialog-msg-addcomand").css({"top": "90px"});
-		$("#msg-addcomand-title").html("Show Text");
-		$("#dialog-msg-render").html(DIALOG_MSG_ADDTEXT);
 		var correcao = "";
+		$("#dialog-msg-addcomand").css({"top": "90px"});
+		document.getElementById("msg-addcomand-title").innerHTML = "Show Text";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_ADDTEXT;
 		if (localStorage.getItem('MSG_Mensagem-' + args) !== null){
 			args = localStorage.getItem('MSG_Mensagem-' + args);
 			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
@@ -446,9 +447,12 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Exibir Caracter Especial
 	if (id === 4){ 
+		if (args == ""){
+			args = "ea24";
+		}
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Show Special Char");
-		$("#dialog-msg-render").html(DIALOG_MSG_ADDCHAR);
+		document.getElementById("msg-addcomand-title").innerHTML = "Show Special Char";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_ADDCHAR;
 		document.getElementById('msg-char-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_ADDCHAR(index, isMod);
@@ -458,8 +462,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Nome de Item
 	if (id === 5){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Show Item Name");
-		$("#dialog-msg-render").html(DIALOG_MSG_NAMEITEM);
+		document.getElementById("msg-addcomand-title").innerHTML = "Show Item Name";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_NAMEITEM;
 		document.getElementById('msg-lblitem-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_SHOWITEMNAME(index, isMod);
@@ -469,8 +473,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Reproduzir SE
 	if (id === 6){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Play SE");
-		$("#dialog-msg-render").html(DIALOG_MSG_EXECSE);
+		document.getElementById("msg-addcomand-title").innerHTML = "Play SE";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_EXECSE;
 		document.getElementById('msg-execse-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_EXECSE(index, isMod);
@@ -480,8 +484,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Trocar Câmera
 	if (id === 7){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
-		$("#msg-addcomand-title").html("Change Camera");
-		$("#dialog-msg-render").html(DIALOG_MSG_SHOWCAMERA);
+		document.getElementById("msg-addcomand-title").innerHTML = "Change Camera";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_SHOWCAMERA;
 		document.getElementById('msg-cam-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_SHOWCAMERA(index, isMod);
@@ -493,47 +497,58 @@ function MSG_renderDialog(id, args, index, isMod){
 /// RDT
 function RDT_showMenu(id){
 	var c = 1;
-	$("#img-logo").fadeOut({duration: 100, queue: false});
+	$("#img-logo").css({"display": "none"});
 	while(c < RDT_totalMenus + 1){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
 	}
 	RDT_editItemCancel();
-	$("#RDT-map-select").html(RDT_EDIT_MAP);
-	$("#RDT-file-select").html(RDT_EDIT_FILE);
-	$("#RDT-item-select").html(RDT_EDIT_ITEM);
-	$("#RDT_lbl-totalMaps").html(RDT_totalMapas);
-	$("#RDT_lbl-totalFiles").html(RDT_totalFiles);
-	$("#RDT_lbl-totalItens").html(RDT_totalItens);
-	$("#RDT_lbl-totItens").html(RDT_totalItensGeral);
-	$("#RDT-lbl-mapName").html(getFileName(ORIGINAL_FILENAME));
+	if (RDT_totalItensGeral < 0){
+		RDT_totalItensGeral = 0;
+	}
+	document.getElementById("RDT-item-list").scrollTop = 0;
+	document.getElementById("RDT_MSG-holder").scrollTop = 0;
+	document.getElementById("RDT-map-select").innerHTML = RDT_EDIT_MAP;
+	document.getElementById("RDT-file-select").innerHTML = RDT_EDIT_FILE;
+	document.getElementById("RDT-item-select").innerHTML = RDT_EDIT_ITEM;
+	document.getElementById("RDT_lbl-totMsg").innerHTML = RDT_totalMessages;
+	document.getElementById("RDT_lbl-totalMaps").innerHTML = RDT_totalMapas;
+	document.getElementById("RDT_lbl-totalFiles").innerHTML = RDT_totalFiles;
+	document.getElementById("RDT_lbl-totalItens").innerHTML = RDT_totalItens;
+	document.getElementById("RDT_lbl-totalMsg").innerHTML = RDT_totalMessages;
+	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
+	document.getElementById("RDT-lbl-mapName").innerHTML = getFileName(ORIGINAL_FILENAME);
+	document.getElementById("RDT-msg-mapName").innerHTML = getFileName(ORIGINAL_FILENAME);
+	document.getElementById("RDT-aba-menu-2").value = "Messages (" + RDT_totalMessages + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
-	$("#RDT-lbl-FILENAME").html("File name: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
+	document.getElementById("RDT-lbl-FILENAME").innerHTML = "File name: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt";
 	$("#menu-RDT").css({"display": "block"});
 	$("#RDT_menu-" + id).css({"display": "block"});
-	document.getElementById("RDT-item-list").scrollTop = 0;
 	$("#log-programa").css({"height": "86px", "top": "626px"});
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	RDT_applyMenuFocus(id);
 	RDT_Error_404();
+	scrollLog();
 }
 
 function RDT_Error_404(){
+	if (RDT_totalMessages < 1){
+		$("#RDT-msg-404").css({"display": "block"});
+		$("#RDT_MSG-holder").css({"display": "none"});
+	} else {
+		$("#RDT-msg-404").css({"display": "none"});
+		$("#RDT_MSG-holder").css({"display": "block"});
+	}
 	if (RDT_totalItensGeral < 1){
-		$("#RDT_lbl-totItens").html("0");
-		$("#RDT_lbl-totalMaps").html("0");
-		$("#RDT_lbl-totalItens").html("0");
-		$("#RDT_lbl-totalFiles").html("0");
-		$("#RDT-item-list").css({"display": "none"});
 		$("#RDT-item-404").css({"display": "block"});
-		document.getElementById("RDT-aba-menu-3").value = "Itens, Files and Maps (0)";
+		$("#RDT-item-list").css({"display": "none"});
 	} else {
 		$("#RDT-item-404").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "block"});
 	}
 }
 
-function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant){
+function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant, header){
 	var nome = undefined;
 	if (hex.length < 2){
 		hex = "0" + hex;
@@ -568,8 +583,8 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-item-select").addClass("none");
 	}
-	$("#RDT-lbl-item-edit").html(nome);
-	$("#RDT-lbl-edit-index").html(index);
+	document.getElementById("RDT-lbl-item-edit").innerHTML = nome;
+	document.getElementById("RDT-lbl-edit-index").innerHTML = index;
 	document.getElementById('RDT_item-edit-X').value = posX;
 	document.getElementById('RDT_item-edit-Y').value = posY;
 	document.getElementById('RDT_item-edit-Z').value = posZ;
@@ -579,21 +594,28 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
 		RDT_ITEM_APPLY(index, id);
 	}
+
+	if (header === "67"){
+		$("#RDT-btn-aplicarItem").css({"display": "inline"});
+	} else {
+		$("#RDT-btn-aplicarItem").css({"display": "none"});
+	}
+
 	$("#RDT-Item-Edit").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
 }
 
 function RDT_editItemCancel(){
 	$("#RDT-Item-Edit").css({"display": "none"});
+	$("#RDT-item-list").css({"width": "1288px"});
 	document.getElementById('RDT_item-edit-X').value = "";
 	document.getElementById('RDT_item-edit-Y').value = "";
 	document.getElementById('RDT_item-edit-Z').value = "";
 	document.getElementById('RDT_item-edit-R').value = "";
 	document.getElementById('RDT_item-edit-A').value = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
-	$("#RDT-lbl-item-edit").html("No item select");
-	$("#RDT-item-list").css({"width": "1288px"});
-	$("#RDT-lbl-edit-index").html("N/A");
+	document.getElementById("RDT-lbl-edit-index").innerHTML = "N/A";
+	document.getElementById("RDT-lbl-item-edit").innerHTML = "No item select";
 }
 
 function RDT_applyMenuFocus(menuId){
@@ -604,4 +626,5 @@ function RDT_applyMenuFocus(menuId){
 		i++;
 	}
 	$('#RDT-aba-menu-' + menuId).addClass('aba-select');
+	scrollLog();
 }

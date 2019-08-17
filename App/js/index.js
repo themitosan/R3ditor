@@ -57,16 +57,15 @@ function addLog(type, texto){
 	}
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$("#log-programa").append(logTemplate);
-	scrollLog();
 }
 
 // Notificações desktop
 function showNotify(titulo, texto, tempo){
 	if (titulo == ""){
-		titulo = "R3ditor - Notificação";
+		titulo = "R3ditor - Notification";
 	}
 	if (texto == "") {
-		texto = "Mensagem";
+		texto = "Message";
 	}
 	try{
 		var iconPath = process.execPath.replace("nw.exe", "App\\img\\logo.png");
@@ -78,7 +77,7 @@ function showNotify(titulo, texto, tempo){
 	}
 	catch(err){
 		if (DEBUG == true){
-			console.error("(Notificação) Erro: " + err);
+			console.error("(Notification) Error: " + err);
 		}
 	}
 }
@@ -123,7 +122,7 @@ function currentTime(){
 	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
 }
 
-// IndexOf com multiplas ocorrências
+/// IndexOf com multiplas ocorrências
 function getAllIndexes(arr, val){
     var indexes = [], i = -1;
     while ((i = arr.indexOf(val, i+1)) != -1){
@@ -132,12 +131,19 @@ function getAllIndexes(arr, val){
     return indexes;
 }
 
-// Formata valores hex para leitura interna
+/// Formata valores hex para leitura interna
 function solveHEX(hex){
 	var res = hex.replace(new RegExp(" ", 'g'), "");
 	var fin = res.toLowerCase();
 	//copyToClipboard(fin);
 	return fin;
+}
+
+/// Função WIP
+
+function WIP(){
+	addLog('warn', "Sorry buddy... #WIP");
+	scrollLog();
 }
 
 /*

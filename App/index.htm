@@ -55,7 +55,7 @@
 	<!-- FORM: RDT -->
 	<div class="none" id="menu-RDT">
 		<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
-		<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (WIP)" onclick="RDT_showMenu(2);">
+		<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (???)" onclick="RDT_showMenu(2);">
 		<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 		<!-- RDT: Menu Geral -->
 		<div class="menu" id="RDT_menu-1">
@@ -81,7 +81,16 @@
 		<!-- RDT: Mensagens -->
 		<div class="menu none" id="RDT_menu-2">
 			<div class="menu-general-content" id="RDT-geral">
-				<center><font class="titulo">Messages - [WIP]</font></center>
+				<center><font class="titulo">Messages - Total: <font id="RDT_lbl-totMsg">???</font></font></center>
+				<div id="RDT_MSG-holder" class="RDT-holder">
+					<!-- The messages will be placed here -->
+				</div>
+				<!-- 404: Não há MSG -->
+				<div id="RDT-msg-404" class="none">
+					<center>
+						Whoops... Looks like <font id="RDT-msg-mapName">???</font> don't have any messages! :(</font>
+					</center>
+				</div>
 			</div>
 		</div>
 		<!-- RDT: Itens -->
@@ -91,7 +100,7 @@
 				<div id="RDT-item-list" class="RDT-holder">
 					<!-- Os Itens dentro da RDT vão aqui -->
 				</div>
-				<!-- Mensagem: Não há itens -->
+				<!-- 404: Não há itens -->
 				<div id="RDT-item-404" class="none">
 					<center>
 						Whoops... Looks like <font id="RDT-lbl-mapName">???</font> don't have any item, file or map! :(</font>
@@ -158,9 +167,9 @@
 			<input type="button" value="Apply" class="botao-menu" id="msg-addcomand-confirm" onclick="">
 		</div>
 		<div class="msg-raw">
-			Hex - Preview: <font style="float: right;">Message Length: <font id="lbl-msg-length">0</font></font><br>
+			Hex - Preview: <font class="right">Message Length: <font id="lbl-msg-length">0</font></font><br>
 			<div class="menu-separador"></div>
-			<div id="text-msg-raw" style="user-select:all;">
+			<div id="text-msg-raw" class="user-can-select">
 				<!-- Hex vai aqui -->
 			</div>
 		</div>
@@ -177,8 +186,8 @@
 		<!-- MSG: Hex Input -->
 		<div class="msg-hex" id="text-hex-editor">
 			Hex Input - Translator:
-			<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit" style="margin-top: 8px;height: 128px;"></textarea>
-			<input type="button" class="botao-menu" style="float: right;" value="Translate!" onclick="MSG_translateHexValues();">
+			<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit txtarea-hex-fix"></textarea>
+			<input type="button" class="botao-menu" class="right" value="Translate!" onclick="MSG_translateHexValues();">
 		</div>
 	</div>
 
@@ -287,7 +296,7 @@
 					<div class="menu-re3-box" id="j_info">
 						<center><font class="title-inv">Info</font><center>
 						<div class="info-icon-holder">
-							<img src="img/details-00.png" draggable="false" style="display: none;" id="icon-info-00">
+							<img src="img/details-00.png" draggable="false" class="none" id="icon-info-00">
 							<div class="info-details" id="text-info-00">
 								<!-- as infos vão aqui -->
 							</div>
@@ -348,7 +357,7 @@
 					<div class="menu-re3-box" id="c_info">
 						<center><font class="title-inv">Info</font><center>
 						<div class="info-icon-holder">
-							<img src="img/details-00.png" draggable="false" style="display: none;" id="icon-info-01">
+							<img src="img/details-00.png" draggable="false" class="none" id="icon-info-01">
 							<div class="info-details" id="text-info-01">
 								<!-- as infos vão aqui -->
 							</div>

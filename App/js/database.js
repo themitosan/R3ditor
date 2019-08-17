@@ -187,26 +187,26 @@ var RDT_MAPAS = {
 }
 
 var ATTR = {
-	"00": ["None",							 	"#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
-	"01": ["Remaining ammo in green",			"#008400", "0 0 2px #004200"],
-	"02": ["% remaining in green", 				"#008400", "0 0 2px #004200"],
-	"03": ["Inf. ammo in green", 				"#008400", "0 0 2px #004200"],
-	"05": ["Remaining ammo in red",			    "#840000", "0 0 2px #310000"],
-	"06": ["% remaining in red", 				"#840000", "0 0 2px #310000"],
-	"07": ["Inf. ammo in red", 				    "#840000", "0 0 2px #310000"],
-	"0d": ["Remaining ammo in blue", 		    "#9393ff", "0 0 2px #004242"],
-	"0e": ["% remaining in blue", 				"#9393ff", "0 0 2px #004242"],
-	"0f": ["Inf. ammo in blue", 	 			"#9393ff", "0 0 2px #004242"],
-	"16": ["Attr. used by M4A1 Assault Rifle", 	"#840000", "0 0 2px #310000"],
+	"00": ["None",								  "#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
+	"01": ["Remaining ammo in green",		   "#008400", "0 0 2px #004200"],
+	"02": ["% remaining in green", 			   "#008400", "0 0 2px #004200"],
+	"03": ["Inf. ammo in green", 			   "#008400", "0 0 2px #004200"],
+	"05": ["Remaining ammo in red",			   "#840000", "0 0 2px #310000"],
+	"06": ["% remaining in red", 			   "#840000", "0 0 2px #310000"],
+	"07": ["Inf. ammo in red", 				   "#840000", "0 0 2px #310000"],
+	"0d": ["Remaining ammo in blue", 		   "#9393ff", "0 0 2px #004242"],
+	"0e": ["% remaining in blue", 			   "#9393ff", "0 0 2px #004242"],
+	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
+	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
 	
 	// Atributos Desconhecidos
-	"17": ["Attr. found in Nightmare Mod", 	    "#fff", "0 0 2px #0f0"],  // Atributo encontrado na shotgun do Carlos
-	"0b": ["Attr. found in some versions", 	    "#fff", "0 0 2px #0f0"]
+	"17": ["Attr. found in Nightmare Mod", 	   "#fff", "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
+	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
 }
 
 var VOID = {
-	"00": "OK!",											// Condição normal
-	"80": "Condição anormal da versão francesa/Taiwan"		// Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
+	"00": "OK!",									   // Condição normal
+	"80": "Condição anormal da versão francesa/Taiwan" // Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
 }
 
 var CIDADE = {
@@ -244,7 +244,7 @@ var ROUPA = {
 	"04": ["Cop + miniskirt"],
 	"05": ["Jill as Regina (Dino Crisis)"],
 	"06": ["Blue mini skirt with black top and boots"],
-	"07": ["SocSPECIAL ial utfit"]
+	"07": ["Social Suit"]
 }
 
 var SIDEPACK = {
@@ -291,9 +291,9 @@ var EPILOGOS = {
 	"05": ["5"],
 	"06": ["6"],
 	"07": ["7"],
-	"0c": ["All"], // Encontrado esse valor na versão francesa
 	"08": ["All"],
-	"09": ["All"]
+	"09": ["All"],
+	"0c": ["All"] // Encontrado esse valor na versão francesa
 }
 
 var DIFICULDADE = {
@@ -558,12 +558,12 @@ var MSG_DICIONARIO = {
 	
 	// Comandos especiais
 
-	"fa": [true, "(Funcrion: Show Message)", 	    	 1],
-	"fe": [true, "(Funcrion: End Message)",				 2],
-	"ea": [true, "(Funcrion: Show Special Char)",		 4], // (Depende do valor inserido)
-	"f0": [true, "(Funcrion: Show Special Char)",		 4], // (Depende do valor inserido)
-	"f8": [true, "(Funcrion: Show Item Name)",	 		 5],
-	"f3": [true, "(Funcrion: Play SE)", 			     6], // (Depende do valor inserido) 
+	"fa": [true, "(Function: Show Message)", 	    	 1],
+	"fe": [true, "(Function: End Message)",				 2],
+	"ea": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
+	"f0": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
+	"f8": [true, "(Function: Show Item Name)",	 		 5],
+	"f3": [true, "(Function: Play SE)", 			     6], // (Depende do valor inserido) 
 	/* 
 		Info: Se o valor na frente de F3 for 43, O game irá executar o som da arma equipada.
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
@@ -581,7 +581,7 @@ var MSG_CHARESPECIAL = {
 }
 
 var MSG_DICIONARIO_REVERSO = {
-	// Caracteres especiais
+	// Special Char Thing - you are not seeing this!
 	";": "ea28",
 	// Comum
 	" ": "00",

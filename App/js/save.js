@@ -303,7 +303,7 @@ function save_renderSlot(slotID){
 	resetTimer();
 	cleanForSaveLoad();
 	document.title = APP_NAME + " - Save Editor (*.sav) - Slot " + slotID + " - File: " + ORIGINAL_FILENAME;
-	$("#lbl-currentSlot").html(slotID);
+	document.getElementById("lbl-currentSlot").innerHTML = slotID;
 	CURRENT_SAVE_SLOT = slotID;
 	save_renderInvent(slotID);
 }
@@ -320,17 +320,17 @@ function save_renderSaveSlots() {
 			// Save presente
 			var totVSave = localStorage.getItem("Save_" + cu).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
 			var locSave = localStorage.getItem("Save_" + cu).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
-			$("#slt-save-" + cu).html("(" + parseInt(totVSave, 16) + ") " + LOCAIS[locSave][0]);
+			document.getElementById("slt-save-" + cu).innerHTML = "(" + parseInt(totVSave, 16) + ") " + LOCAIS[locSave][0];
 			$("#slt-save-" + cu).addClass("slot-presente");
 		} else {
 			// Save Vazio
-			$("#slt-save-" + cu).html("Empty");
+			document.getElementById("slt-save-" + cu).innerHTML = "Empty";
 			$("#slt-save-" + cu).addClass("slot-ausente");
 		}
 		cu++;
 	}
-
 	// Final
+	scrollLog();
 	SAVE_showMenu(0);
 }
 
@@ -378,8 +378,8 @@ function save_renderInvent(s_slot, mode){
 function save_renderBox(s_slot){
 	JILL_BAU = [];
 	CARLOS_BAU = [];
-	$("#JILL-BOX").html("<!-- What are you doing here buddy? -->");
-	$("#CARLOS-BOX").html("<!-- What are you doing here buddy? -->");
+	document.getElementById("JILL-BOX").innerHTML = "<!-- Hey, can you give me a cookie? ~wink~ -->";
+	document.getElementById("CARLOS-BOX").innerHTML = "<!-- Hey, can you give me a cookie? ~wink~ -->";
 	// Baú Jill
 	addLog("log", "Loading Jill Item Box...");
 	var totalItens = 63; // 63 = Total de slots no baú
@@ -469,32 +469,32 @@ function save_renderInfos(s_slot){
 		// Dificuldade
 		dificuldade = localStorage.getItem("Save_" + s_slot).slice(RANGES["leveldificuldade"][0], RANGES["leveldificuldade"][1]);
 		var diffi = DIFICULDADE[dificuldade][0];
-		$("#lbl-dificuldade").html(diffi);
+		document.getElementById("lbl-dificuldade").innerHTML = diffi;
 	
 		// Saves
 		totalVezesSaves = localStorage.getItem("Save_" + s_slot).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
 		var tvs = parseInt("0x" + totalVezesSaves);
-		$("#lbl-saves").html(tvs);
+		document.getElementById("lbl-saves").innerHTML = tvs;
 	
 		// Sala de Save
 		localSave = localStorage.getItem("Save_" + s_slot).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
 		var nomeLocSave = LOCAIS[localSave][0];
-		$("#lbl-saveplace").html(nomeLocSave);
+		document.getElementById("lbl-saveplace").innerHTML = nomeLocSave;
 	
 		// Local da cidade
 		lCidade = localStorage.getItem("Save_" + s_slot).slice(RANGES["localCidade"][0], RANGES["localCidade"][1]);
 		var lCity = CIDADE[lCidade][0];
-		$("#lbl-city").html(lCity);
+		document.getElementById("lbl-city").innerHTML = lCity;
 	
 		// Roupa
 		outf = localStorage.getItem("Save_" + s_slot).slice(RANGES["roupaAtual"][0], RANGES["roupaAtual"][1]);
 		var costumeJill = ROUPA[outf][0];
-		$("#lbl-outfit").html(costumeJill);
+		document.getElementById("lbl-outfit").innerHTML = costumeJill;
 		
 		// Player Atual
 		cPlayer = localStorage.getItem("Save_" + s_slot).slice(RANGES["characterAtual"][0], RANGES["characterAtual"][1]);
 		var plr = PLAYERS[cPlayer][0];
-		$("#lbl-currentPlayer").html(plr);
+		document.getElementById("lbl-currentPlayer").innerHTML = plr;
 	
 		// Jill - Arma equipada
 		jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
@@ -502,7 +502,7 @@ function save_renderInfos(s_slot){
 		if (jcw == "Empty Slot"){
 			jcw = "No Weapon Equiped";
 		}
-		$("#lbl-jArma").html(jcw);
+		document.getElementById("lbl-jArma").innerHTML = jcw;
 	
 		// Carlos - Arma equipada
 		cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
@@ -510,37 +510,37 @@ function save_renderInfos(s_slot){
 		if (ccw == "Empty Slot"){
 			ccw = "No Weapon Equiped";
 		}
-		$("#lbl-cArma").html(ccw);
+		document.getElementById("lbl-cArma").innerHTML = ccw;
 	
 		// Jill e Carlos - Sidepack
 		jSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill-side"][0], RANGES["jill-side"][1])
 		cSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlos-side"][0], RANGES["carlos-side"][1]);
 		var jSpack = SIDEPACK[jSide][0];
 		var cSpack = SIDEPACK[cSide][0];
-		$("#j-sidePack").html(jSpack);
-		$("#c-sidePack").html(cSpack);
+		document.getElementById("j-sidePack").innerHTML = jSpack;
+		document.getElementById("c-sidePack").innerHTML = cSpack;
 	
 		// Posição X e Y
 		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]);
 		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]);
-		$("#lbl-x-pos").html(xPos);
-		$("#lbl-y-pos").html(yPos);
+		document.getElementById("lbl-x-pos").innerHTML = xPos;
+		document.getElementById("lbl-y-pos").innerHTML = yPos;
 	
 		// Epilogos
 		epil = localStorage.getItem("Save_" + s_slot).slice(RANGES["epilogos"][0], RANGES["epilogos"][1]);
 		var ep = EPILOGOS[epil][0];
-		$("#lbl-epilogos").html(ep);
+		document.getElementById("lbl-epilogos").innerHTML = ep;
 	
 		// Versão do game
 		gVersion = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][0];
 		gDetails = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][1];
-		$("#lbl-gameVersion").html(gVersion + " (" + gDetails + ")");
+		document.getElementById("lbl-gameVersion").innerHTML = gVersion + " (" + gDetails + ")";
 		
 		// Mapas Obtidos - [WIP]
 		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
 		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
 		var mapStatus = undefined; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
-		$("#lbl-maps").html("[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")");
+		document.getElementById("lbl-maps").innerHTML = "[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")";
 	
 		// Room / Event [WIP]
 		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]);
@@ -607,13 +607,13 @@ function save_renderLife(s_slot) {
 			co = "txt-fine";
 		}
 	}
-	$("#lbl-condition").html(STATUS);
-	$("#JILL-LIFESTATUS").html(STATUS);
 	$("#JILL-LIFESTATUS").addClass(co);
 	$("#CARLOS-LIFESTATUS").addClass(co);
-	$("#CARLOS-LIFESTATUS").html(STATUS);
-	$("#lbl-poison").html(POISON[veneno][0]);
-	$("#lbl-HP").html(HP + " (Hex: " + chkA + " " + chkB + ")");
+	document.getElementById("lbl-condition").innerHTML = STATUS;
+	document.getElementById("JILL-LIFESTATUS").innerHTML = STATUS;
+	document.getElementById("CARLOS-LIFESTATUS").innerHTML = STATUS;
+	document.getElementById("lbl-poison").innerHTML = POISON[veneno][0];
+	document.getElementById("lbl-HP").innerHTML = HP + " (Hex: " + chkA + " " + chkB + ")";
 	save_renderBox(s_slot);
 }
 
@@ -884,7 +884,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 		var vq = document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML;
 		if (vq !== ""){
 			$("#b-" + PERSON + "-q-lbl-" + INDEX).css({"margin-left": "-562px"});
-			$("#b-" + PERSON + "-q-lbl-" + INDEX).html(vq + "%");
+			document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML = vq + "%";
 		}
 	}
 }
@@ -919,9 +919,9 @@ function addInfo(person, itemId){
 		s++;
 	}
 	if (itemId !== "00"){
-		$('#text-info-0' + person).html("<center>" + ITEM[itemId][0] + "</center><br>" + ITEM[itemId][1]);
+		document.getElementById('text-info-0' + person).innerHTML = "<center>" + ITEM[itemId][0] + "</center><br>" + ITEM[itemId][1];
 	} else {
-		$('#text-info-0' + person).html("<!-- Empty Slot -->");
+		document.getElementById('text-info-0' + person).innerHTML = "<!-- Empty Slot -->";
 	}
 
 	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
@@ -1009,7 +1009,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 				$("#J-LBL-" + block).css({"margin-left": "60px"});
 			}
 		}
-		$("#J-LBL-" + block).html(quanti);
+		document.getElementById("J-LBL-" + block).innerHTML = quanti;
 		$("#J-LBL-" + block).css({color: cor, "text-shadow": shad});
 		$("#J-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px" });
 	} else { // Inventário do Carlos
@@ -1020,7 +1020,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		document.getElementById("C-LBL-" + block).onclick = function(){
 			addInfo(person, itemHex);
 		}
-		$("#C-LBL-" + block).html(quanti);
+		document.getElementById("C-LBL-" + block).innerHTML = quanti;
 		$("#C-LBL-" + block).css({color: cor, "text-shadow": shad});
 		$("#C-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px" });
 	}
@@ -1250,7 +1250,7 @@ function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	contadorFinal(0, 0, 0, 0, 0, h_0x2201);
 	contadorFinal(0, 0, 0, 0, 0, h_0x2202);
 	contadorFinal(0, 0, 0, 0, 0, h_0x2203);
-	$("#lbl-time").html(hora + ":" + minutos + ":" + segundos);
+	document.getElementById("lbl-time").innerHTML = hora + ":" + minutos + ":" + segundos;
 	document.getElementById("lbl-time").title = "Full Time Format\nDD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
 	//console.log("IGT: " + h_0x2200 + " - " + h_0x2201 + " - " + h_0x2202 + " - " + h_0x2203);
 }
@@ -1262,7 +1262,7 @@ function resetTimer(){
 	minutos   = 0;
 	hora      = 0;
 	dia       = 0;
-	$("#lbl-time").html("00:00:00");
+	document.getElementById("lbl-time").innerHTML = "00:00:00";
 }
 
 function resetIGT(){

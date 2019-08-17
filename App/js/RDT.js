@@ -4,8 +4,12 @@
 	Help me - please
 */
 
+var RDT_MSG_END = [];
 var RDT_ItensArray = [];
+var RDT_messagesArray = [];
 var RDT_totalItensGeral = undefined;
+var RDT_totalMessages = undefined;
+var RDT_messasgesRaw = undefined;
 var RDT_itemIndexRAW = undefined;
 var RDT_arquivoBruto = undefined;
 var RDT_totalItens = 0;
@@ -17,9 +21,12 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	localStorage.clear();
 	ORIGINAL_FILENAME = rdtFile;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
+	document.getElementById('RDT-aba-menu-2').disabled = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
+	log_separador();
 	RDT_readItens();
 	RDT_showMenu(1);
+	scrollLog();
 }
 
 function RDT_readItens(){
@@ -31,74 +38,16 @@ function RDT_readItens(){
 	RDT_totalItensGeral = 0;
 	$("#RDT-item-list").empty();
 	
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310900");
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02318000"); // Imprensa, 1F
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310800"); // Imprensa, 2F
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310000"); // Padrão encontrado em (quase) todos os itens
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-	
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310500");
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310100");
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310200");
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310300");
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310400"); // Shopping Dist. 3
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
-
-	c = 0;
-	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, "02310a00"); // R503.rdt - Fábrica
-	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
-		c++;
-	}
+	RDT_generateItemIndexRaw("02310900");
+	RDT_generateItemIndexRaw("02318000");
+	RDT_generateItemIndexRaw("02310800");
+	RDT_generateItemIndexRaw("02310000"); // Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310500");
+	RDT_generateItemIndexRaw("02310100");
+	RDT_generateItemIndexRaw("02310200");
+	RDT_generateItemIndexRaw("02310300");
+	RDT_generateItemIndexRaw("02310400");
+	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - Fábrica
 
 	RDT_totalItensGeral = RDT_ItensArray.length;
 
@@ -109,6 +58,16 @@ function RDT_readItens(){
 		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
 		localStorage.setItem("RDT_Item-" + c, RDT_ITEMRAW);
 		RDT_decompileItens(c, false);
+		c++;
+	}
+	RDT_readMessages();
+}
+
+function RDT_generateItemIndexRaw(str){
+	var c = 0;
+	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, str);
+	while (c < RDT_itemIndexRAW.length){
+		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
 		c++;
 	}
 }
@@ -141,7 +100,6 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-0-itemQuant"][0],   RANGES["RDT_item-0-itemQuant"][1]);
 		espaco3 	  = currentItem.slice(RANGES["RDT_item-0-espaco3"][0], 	   RANGES["RDT_item-0-espaco3"][1]);
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
-		$("#RDT-btn-aplicarItem").css({"display": "inline"});
 	}
 	// wip
 	if (header === "68"){
@@ -154,7 +112,6 @@ function RDT_decompileItens(id, edit){
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-1-itemQuant"][0],   RANGES["RDT_item-1-itemQuant"][1]);
 		espaco3 	  = "[WIP]";
 		itemMP 		  = "[WIP]";
-		$("#RDT-btn-aplicarItem").css({"display": "none"});
 	}
 
 	var RDT_motivo = undefined;
@@ -210,14 +167,14 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		}
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
 		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_displayItemEdit' + 
-		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ');"><br>Quantity: ' + 
+		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
 		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: ' + 
 		'<font class="italic RDT-item-lbl-fix">' + r + '</font><br><div class="RDT-Item-Misc">Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>' + 
 		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
-		var msg = "ERROR: Unable to render item " + id + " - " + msg;
+		var msg = "RDT - ERROR: Unable to render item " + id + " - " + msg;
 		console.error(msg);
 		addLog("error", msg);
 	}
@@ -324,6 +281,147 @@ function RDT_ITEM_APPLY(index, type){
 	}
 }
 
+function RDT_readMessages(){
+	var c = 0;
+	RDT_MSG_END = [];
+	var RDT_readTry = 0;
+	RDT_messasgesRaw = [];
+	RDT_totalMessages = 0;
+	RDT_messagesArray = [];
+	document.getElementById('RDT_MSG-holder').innerHTML = "<!-- Hello :) -->";
+
+	// Pattern of function start message
+	RDT_pickStartMessages("fa02");
+	RDT_readTry++;
+
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa00");
+		RDT_readTry++;
+	}
+
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa01");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa03");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa04");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa05");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa06");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa07");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa08");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa09");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		RDT_pickStartMessages("fa10");
+		RDT_readTry++;
+	}
+	if (RDT_messagesArray.length < 1){
+		addLog('warn', 'RDT - R3ditor was unable to find any messages on this file!');
+		scrollLog();
+	}
+
+	// Finding the end of every message
+	c = 0;
+	while(c < RDT_messagesArray.length){
+		RDT_MSG_END = getAllIndexes(RDT_arquivoBruto, "fe");
+		// This will elimiate (almost) every wrong guess of end message!
+		var r = undefined;
+		if (RDT_arquivoBruto.length > 14088){
+			r = parseInt(RDT_arquivoBruto.length / 14.5);
+		} else {
+			r = 9999;
+		}
+		while(RDT_MSG_END[0] < RDT_messagesArray[0] || RDT_MSG_END[0] < r){
+			RDT_MSG_END.splice(0, 1);
+		}
+		c++;
+	}
+
+	// Make the message and insert them on localStorage
+	c = 0;
+	while(c < RDT_messagesArray.length){
+		if (RDT_MSG_END[c] === undefined || RDT_MSG_END[c] === NaN){
+			console.log("Parando!");
+			break;
+		}
+		var MESSAGE = undefined;
+		var MESSAGE_RAW = undefined;
+		if (parseInt(RDT_MSG_END[c] + 4) < RDT_messagesArray[c]){
+			var subs = c;
+			while(parseInt(RDT_MSG_END[subs] + 4) < RDT_messagesArray[c]){
+				subs++;
+			}
+			console.log("Tentativas: " + RDT_readTry + " - C: " + c + " Subs On " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[subs] + 4));
+			MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[subs] + 4));
+		} else {
+			if (RDT_messagesArray[c] === parseInt(RDT_MSG_END[c] + 4)){
+				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c + 1] + 4));
+				console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
+			} else {
+				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c] + 4));
+				console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c] + 4));
+			}
+		}
+		MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
+		console.log("Mensagem " + c + ":\n" + MESSAGE);
+		if (MESSAGE.length > 500 || MESSAGE.length < 15){
+			addLog('warn', "RDT - Avoiding message " + c + ": It is too big or small to be a real message!");
+		} else {
+			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
+			RDT_renderMessages(c);
+			RDT_totalMessages++;
+		}
+		c++;
+	}
+	addLog('log', 'RDT - Message scanning completed with ' + RDT_readTry + ' attempts and found ' + RDT_totalMessages + ' messages.');
+	scrollLog();
+}
+
+function RDT_pickStartMessages(str){
+	var c = 0;
+	RDT_messasgesRaw = getAllIndexes(RDT_arquivoBruto, str);
+	while (c < RDT_messasgesRaw.length){
+		if (RDT_messasgesRaw[c] > RDT_ItensArray[0]){
+			RDT_messagesArray.push(RDT_messasgesRaw[c]);
+		} else {
+			if (RDT_totalItensGeral < 1 && RDT_messasgesRaw[c] > 9999){ // In the most cases, the number is higher than 9999
+				RDT_messagesArray.push(RDT_messasgesRaw[c]);
+			} else {
+				console.log("RDT - Wrong message index! - Index: " + RDT_messasgesRaw[c]);
+				RDT_messasgesRaw.splice(c, 1);
+			}
+		}
+		c++;
+	}
+}
+
+function RDT_renderMessages(id){
+	var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(localStorage.getItem("RDT_MESSAGE-" + id));
+	var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
+		'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
+	$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+}
+
 function RDT_Backup(){
 	checkFolders();
 	if (RDT_arquivoBruto !== undefined){
@@ -372,7 +470,7 @@ function RDT_RECOMPILE_Lv1(){
 			addLog("error", "ERROR: Something went wrong! " + err);
 		}
 	} else {
-		addLog("error", "You cannot save an RDT file if you have not opened it!");
+		addLog("error", "ERROR - You cannot save an RDT file if you have not opened it!");
 	}
 }
 
@@ -380,9 +478,14 @@ function RDT_doAfterSave(){
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;
+	RDT_messagesArray = [];
+	RDT_messasgesRaw = [];
+	RDT_totalMessages = 0;
 	RDT_ItensArray = [];
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
+	RDT_MSG_END = [];
 	RDT_editItemCancel();
+	scrollLog();
 }

@@ -718,12 +718,6 @@ a{
     word-wrap: break-word;
 }
 
-.RDT-MSG-FIX{
-    width: 90%;
-    margin-top: -18px;
-    margin-left: 92px;
-}
-
 .div-eventos{
     height: 338px;
     padding: 10px;
@@ -819,9 +813,9 @@ a{
 }
 
 .dialog-addcomando{
-    top: 208px;
-    left: 66px;
     width: 58%;
+    left: 66px;
+    top: 208px;
     display: none;
     padding-top: 4px;
     position: absolute;
@@ -841,7 +835,6 @@ a{
     margin-top: 4px;
     padding-left: 6px;
     padding-right: 6px;
-    padding-bottom: 4px;
 }
 
 .RDT-Item{
@@ -863,8 +856,17 @@ a{
     background-image: linear-gradient(to bottom, #4e8b72, #275046);
 }
 
-.RDT-MSG-bg{
-    background-image: linear-gradient(to bottom, #645f71, #3f3d61);
+.RDT-msg-bg{
+    background-image: linear-gradient(to bottom, #7f8470, #2e322a);
+}
+
+.txtarea-hex-fix{
+    height: 128px;
+    margin-top: 8px;
+}
+
+.user-can-select{
+    user-select:all;
 }
 
 .RDT-item-lbl-fix{
@@ -875,6 +877,14 @@ a{
 .RDT-item-lbl-fix-2{
     position: sticky;
     left: 218px;
+}
+
+.RDT-message-content{
+    width: 84%;
+    min-height: 18px;
+    margin-top: -18px;
+    margin-left: 94px;
+    text-align: -webkit-left;
 }
 
 .logo-fundo{

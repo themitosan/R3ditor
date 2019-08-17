@@ -7,8 +7,8 @@
 var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_Commands = undefined;
-var MSG_arquivoBruto = undefined;
 var MSG_DECRYPT_LV1_LAST = "";
+var MSG_arquivoBruto = undefined;
 
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_Commands = [];
@@ -23,13 +23,22 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 }
 
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
+	var c = 0; // The great c = 0!
 	MSG_DECRYPT_LV1_LAST = "";
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	var formatHex = RAW_DATA.match(/.{2,2}/g);
-	var c = 0;
-	while(c < formatHex.length){
-		MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + " ";
-		c++; 
+	try{
+		while(c < formatHex.length){
+			MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + " ";
+			c++; 
+		}
+	} catch(err){
+		document.getElementById('RDT-aba-menu-2').disabled = "disabled";
+		addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
+		addLog('error', err);
+		console.error(err);
+		log_separador();
+		scrollLog();
 	}
 	MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST.slice(0, parseInt(MSG_DECRYPT_LV1_LAST.length - 1));
 	var t = undefined;
@@ -39,28 +48,28 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		t = 0;
 	}
 	var cAtual = 0;
-	var textoHex = "";
+	var final = "";
 	var startPoint = 0;
 	var textoTraduzido = "";
 	var COMMAND = undefined;
-	var COMMAND_HEX = undefined;
-	var COMMAND_ATTR = undefined;
-	var final = "";
 	while (startPoint < t){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 			if (textoTraduzido !== ""){
 				final = final + " " + textoTraduzido;
 				textoTraduzido = "";
-				textoHex = "";
 				cAtual++;
 			}
-			COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][2];
+			// Special char
+			if (RAW_DATA_ARRAY[startPoint] === "ea"){
+				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
+			} else {
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
+			}
 			final = final + " " + COMMAND;
 			startPoint = startPoint + 2;
 			cAtual++;
 		} else {
-			textoHex = textoHex + RAW_DATA_ARRAY[startPoint];
 			textoTraduzido = textoTraduzido + MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
 			startPoint++;
 		}
@@ -68,20 +77,16 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	if (textoTraduzido !== ""){
 		final = final + " " + textoTraduzido;
 		textoTraduzido = "";
-		textoHex = "";
 		cAtual++;
 	}
-	final = final.slice(3, parseInt(final.length - 2));
 	return final;
 }
 
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
-	$("#msg-lista-eventos").empty();
+	document.getElementById("msg-lista-eventos").innerHTML = "<!-- you are not seeing me! -->";
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
-
-	$("#lbl-msg-length").html(RAW_DATA.length);
-
+	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length;
 	var t = undefined;
 	if (RAW_DATA_ARRAY !== null){
 		t = RAW_DATA_ARRAY.length;
@@ -90,12 +95,10 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	}
 	var finalArray = "";
 	var c = 0;
-
 	while(c < t){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
 		c++;
 	}
-
 	// Render lista de comandos
 	var cAtual = 0;
 	var textoHex = "";
@@ -104,12 +107,9 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var COMMAND = undefined;
 	var COMMAND_HEX = undefined;
 	var COMMAND_ATTR = undefined;
-
 	while (startPoint < t){
-
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
-
 			if (textoTraduzido !== ""){
 				localStorage.setItem("MSG_comando-" + cAtual, textoHex);
 				localStorage.setItem("MSG_Mensagem-" + cAtual, textoTraduzido);
@@ -118,14 +118,11 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 				textoHex = "";
 				cAtual++;
 			}
-
 			COMMAND_HEX = RAW_DATA_ARRAY[startPoint];
 			COMMAND_ATTR = RAW_DATA_ARRAY[startPoint + 1];
 			COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][2];
-
 			MSG_Commands.push([COMMAND_HEX, COMMAND_ATTR]);
 			localStorage.setItem("MSG_comando-" + cAtual, COMMAND_HEX + COMMAND_ATTR);
-
 			startPoint = startPoint + 2;
 			cAtual++;
 		} else {
@@ -134,7 +131,6 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 			startPoint++;
 		}
 	}
-
 	if (textoTraduzido !== ""){
 		localStorage.setItem("MSG_comando-" + cAtual, textoHex);
 		localStorage.setItem("MSG_Mensagem-" + cAtual, textoTraduzido);
@@ -143,9 +139,8 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 		textoHex = "";
 		cAtual++;
 	}
-
 	// Final
-	$("#text-msg-raw").html(finalArray);
+	document.getElementById("text-msg-raw").innerHTML = finalArray;
 	MSG_doTheTitleThing();
 	MSG_renderCommands();
 }
@@ -210,7 +205,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		MSG_totalComandos++;
 	}
 	$("#msg-lista-eventos").append(COM_HTML_TEMPLATE);
-	$("#msg-lbl-totalCommands").html(MSG_totalComandos);
+	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 }
 
 function MSG_renderCommands(){
@@ -235,8 +230,8 @@ function MSG_translateHexValues(){
 	MSG_increment = true;
 	MSG_totalComandos = 0;
 	MSG_renderDialog(0);
-	$("#msg-lista-eventos").html("<!-- You are not seeing me here! -->");
-	$("#msg-lbl-totalCommands").html(MSG_totalComandos);
+	document.getElementById("msg-lista-eventos").innerHTML = "<!-- You are not seeing me here! -->";
+	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	var hValues = document.getElementById('msg-hex-toTrans').value;
 	if (hValues !== ""){
 		var solved = solveHEX(hValues);
@@ -423,7 +418,7 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 }
 
 function MSG_applyMSGCommand(save){
-	$("#msg-lbl-totalCommands").html(MSG_totalComandos);
+	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	var newHex = "";
 	var c = 0;
 	while(c !== MSG_totalComandos + 1){
@@ -450,8 +445,8 @@ function MSG_applyMSGCommand(save){
 		c++;
 	}
 
-	$("#lbl-msg-length").html(newHex.length);
-	$("#text-msg-raw").html(finalArray);
+	document.getElementById("lbl-msg-length").innerHTML = newHex.length;
+	document.getElementById("text-msg-raw").innerHTML = finalArray;
 
 	if (save === true){
 		if (MSG_totalComandos !== 0){
