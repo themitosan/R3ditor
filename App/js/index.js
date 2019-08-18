@@ -5,11 +5,11 @@
 */
 
 var BETA = false;
-var fs = require('fs');
-var APP_VERSION = "0.1 [BETA]";
+var fs = undefined;
+var APP_PATH = undefined;
 var STATUS = "Undefined";
 var arquivoBruto = undefined;
-var APP_PATH = process.cwd();
+var APP_VERSION = "0.1 [BETA]";
 var APP_NAME = "R3ditor V." + APP_VERSION;
 var ORIGINAL_FILENAME = undefined;
 
@@ -18,7 +18,6 @@ window.onload = function(){
 }
 
 function load(){
-	checkFolders();
 	localStorage.clear();
 	console.info(APP_NAME);
 	addLog("log", APP_NAME);
@@ -26,6 +25,15 @@ function load(){
 	$("#app_version").html(APP_VERSION);
 	request_render_save = false;
 	log_separador();
+	try{
+		fs = require('fs');
+		APP_PATH = process.cwd();
+		checkFolders();
+	} catch(err){
+		console.error(err);
+		addLog('error', 'ERROR: Unable to use require or process... Wait... This is Chrome or Firefox?');
+		addLog('error', err);
+	}
 }
 
 function checkFolders(){
@@ -160,7 +168,7 @@ function triggerLoadSAVE(){
 function setLoadSaveFile(){
 	var cFile = document.getElementById('loadSaveForm')
 	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
-		if (DEBUG == true){
+		if (BETA == true){
 			addLog("log", "Load Save: Usuário cancelou o formulário");
 		}
 	} else {
@@ -177,7 +185,7 @@ function triggerLoadMSG(){
 function setLoadMSGFile(){
 	var cFile = document.getElementById('loadMSGForm')
 	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
-		if (DEBUG == true){
+		if (BETA == true){
 			addLog("log", "Load MSG: Usuário cancelou o formulário");
 		}
 	} else {
@@ -194,7 +202,7 @@ function triggerLoadRDT(){
 function setLoadRDTFile(){
 	var cFile = document.getElementById('loadRDTForm')
 	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
-		if (DEBUG == true){
+		if (BETA == true){
 			addLog("log", "Load RDT: Usuário cancelou o formulário");
 		}
 	} else {

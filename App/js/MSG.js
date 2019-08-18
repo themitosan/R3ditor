@@ -25,6 +25,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	var c = 0; // The great c = 0!
 	MSG_DECRYPT_LV1_LAST = "";
+	$("#RDT-aba-menu-2").css({"display": "inline"});
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	var formatHex = RAW_DATA.match(/.{2,2}/g);
 	try{
@@ -33,7 +34,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			c++; 
 		}
 	} catch(err){
-		document.getElementById('RDT-aba-menu-2').disabled = "disabled";
+		$("#RDT-aba-menu-2").css({"display": "none"});
 		addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
 		addLog('error', err);
 		console.error(err);
@@ -66,9 +67,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			}
 			// Show Item Name
 			if (RAW_DATA_ARRAY[startPoint] === "f8"){
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " " + ITEM[RAW_DATA_ARRAY[startPoint + 1]][0] + ")";
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " Item: " + ITEM[RAW_DATA_ARRAY[startPoint + 1]][0] + ")";
 			} else {
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
 			}
 			final = final + " " + COMMAND;
 			startPoint = startPoint + 2;
@@ -103,7 +104,6 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
 		c++;
 	}
-	// Render lista de comandos
 	var cAtual = 0;
 	var textoHex = "";
 	var startPoint = 0;
@@ -201,6 +201,13 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-2" id="msg-evento-' + index + '">' + 
 			'(' + index + ') Function: Change Camera <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(7, ' + args + ', ' + index + ', true);"><br>Camera: ' + 
+			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+	}
+	// COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
+	if (com === 8){
+		COM_HTML_TEMPLATE = '<div class="evento evt-type-8" id="msg-evento-' + index + '">' + 
+			'(' + index + ') Function: Unknown Function (F5) <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(8, ' + args + ', ' + index + ', true);"><br>Args: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 
@@ -406,7 +413,34 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 	MSG_applyMSGCommand(false);
 }
 
+// Unknown Function F5
+function MSG_COMMAND_F5(index, isModify){
+	if (isModify === undefined){
+		isModify = false;
+	}
+	MSG_increment = false;
+	var attrFinal = document.getElementById('msg-f5-id').value;
+	if (attrFinal === ""){
+		attrFinal = "00";
+	}
+	if (parseInt(attrFinal, 16) < 0){
+		attrFinal = "01";
+	}
+	if (parseInt(attrFinal, 16) > 255){
+		attrFinal = "ff";
+	}
+	if (attrFinal.length < 2){
+		attrFinal = "0" + attrFinal;
+	}
+	localStorage.setItem("MSG_comando-" + index, "f5" + attrFinal);
+	if (isModify === false){
+		MSG_totalComandos++;
+	}
+	MSG_applyMSGCommand(false);
+}
+
 // Lado escuro do código
+// Like... DON'T TOUCH THIS PART!
 function MSG_REMOVECOMMAND(comandId, isTxt){
 	MSG_totalComandos--;
 	MSG_increment = false;

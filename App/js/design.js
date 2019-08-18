@@ -272,7 +272,7 @@ function showModCurrentArma(person){
 		arma = cArmaEquip;
 	}
 	if (arma === "00"){
-		st = "Nenhuma arma equipada";
+		st = "No Weapon Equiped";
 	} else {
 		st = ITEM[arma][0];
 	}
@@ -398,7 +398,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	if (isMod === undefined){
 		isMod = false;
 	}
-	// Cancelar Form
+	// Cancel Form
 	if (id === 0){
 		$("#text-msg-events").css({"display": "block"});
 		$("#dialog-msg-addcomand").css({"display": "none"});
@@ -489,6 +489,17 @@ function MSG_renderDialog(id, args, index, isMod){
 		document.getElementById('msg-cam-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_SHOWCAMERA(index, isMod);
+			MSG_renderDialog(0);
+		}
+	}
+	// Comando desconhecido usado em r101.rdt
+	if (id === 8){ 
+		$("#dialog-msg-addcomand").css({"top": "200px"});
+		document.getElementById("msg-addcomand-title").innerHTML = "Unknown Function (F5)";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_FUNCTIONF5;
+		document.getElementById('msg-f5-id').value = args;
+		document.getElementById('msg-addcomand-confirm').onclick = function(){
+			MSG_COMMAND_F5(index, isMod);
 			MSG_renderDialog(0);
 		}
 	}

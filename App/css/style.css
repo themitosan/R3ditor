@@ -768,6 +768,12 @@ a{
     background-image: linear-gradient(to right, #804987, transparent);
 }
 
+.evt-type-8{ /* Comando: Comandon desconhecido usado em r101.rdt */
+    width: 96%;
+    margin-left: 30px;
+    background-image: linear-gradient(to right, #bd93a3d6, transparent);
+}
+
 .evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
     background-image: linear-gradient(to right, #ba0000, transparent);
 }

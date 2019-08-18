@@ -25,6 +25,7 @@ var DIALOG_MSG_ADDTEXT = '<textarea placeholder="Write your message here!" id="m
 var DIALOG_MSG_ADDCHAR = 'Select the Char: <select id="msg-char-id" class="item-select-mod"><option value="ea24">S.</option><option value="ea25">T.</option><option value="ea26">A.</option><option value="ea27">R.</option><option value="ea28">;</option></select>';
 var DIALOG_MSG_NAMEITEM = 'Item Hex: <input type="text" class="item-select-mod" placeholder="00" id="msg-lblitem-id">';
 var DIALOG_MSG_SHOWCAMERA = 'Camera ID: <input type="text" class="item-select-mod" placeholder="00" id="msg-cam-id">';
+var DIALOG_MSG_FUNCTIONF5 = 'Args: <input type="text" class="item-select-mod" placeholder="00" id="msg-f5-id">';
 
 // RDT
 var RDT_EDIT_MAP = '<option value="a4">Uptown Map</option><option value="a9">Police Station Map</option><option value="a5">Downtown Map</option><option value="a6">Clock Tower Map</option><option value="aa">Hospital Map</option><option value="a7">Park Map</option><option value="a8">Dead Factory Map</option>';

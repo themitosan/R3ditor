@@ -173,6 +173,7 @@ var FILES = {
 	"9f": ["Photo D"],
 	"9e": ["Photo E"],
 	"a0": ["Clock Tower Poster Card"],
+	// Info: Hex A1 makes the game freeze and crash
 	"a2": ["Classified Photo File"]
 }
 
@@ -558,19 +559,19 @@ var MSG_DICIONARIO = {
 	
 	// Comandos especiais
 
-	"fa": [true, "(Function: Show Message)", 	    	 1],
-	"fe": [true, "(Function: End Message)",				 2],
-	"ea": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
-	"f0": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
+	"fa": [true, "(Function: Show Message ", 	    	 1],
+	"fe": [true, "(Function: End Message ",				 2],
+	"ea": [true, "(Function: Show Special Char ",		 4], // (Depende do valor inserido)
+	"f0": [true, "(Function: Show Special Char ",		 4], // (Depende do valor inserido)
 	"f8": [true, "(Function: Show Item Name ",	 		 5],
-	"f3": [true, "(Function: Play SE)", 			     6], // (Depende do valor inserido) 
+	"f3": [true, "(Function: Play SE ", 			     6], // (Depende do valor inserido) 
 	/* 
 		Info: Se o valor na frente de F3 for 43, O game irá executar o som da arma equipada.
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
 		Isso depende do soundset que foi carregado no mapa
 	*/
 	"f4": [true, "(Function: Change Camera)", 			 7],
-	"f5": [false, "(Unknown Char / Function Nº 158 - Hex: f5)"] // Comando usado na cutscene "Septemer, 28".
+	"f5": [true, "(Unknown Command used on R101.rdt)", 	 8] // Comando usado na cutscene "Septemer, 28".
 }
 
 var MSG_CHARESPECIAL = {
