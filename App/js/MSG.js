@@ -63,6 +63,10 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			// Special char
 			if (RAW_DATA_ARRAY[startPoint] === "ea"){
 				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
+			}
+			// Show Item Name
+			if (RAW_DATA_ARRAY[startPoint] === "f8"){
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " " + ITEM[RAW_DATA_ARRAY[startPoint + 1]][0] + ")";
 			} else {
 				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
 			}

@@ -148,7 +148,7 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 			convert = ITEM[id][0];
 			RDT_totalItens++;
 		}
-		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 162){
+		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 163){
 			typeId = 2;
 			tipo = "File";
 			cssFix = "RDT-file-bg";
@@ -347,6 +347,7 @@ function RDT_readMessages(){
 		// This will elimiate (almost) every wrong guess of end message!
 		var r = undefined;
 		if (RDT_arquivoBruto.length > 14088){
+			// In the most part of the files, the messages is found after 14.5% of the file!
 			r = parseInt(RDT_arquivoBruto.length / 14.5);
 		} else {
 			r = 9999;
@@ -447,7 +448,7 @@ function RDT_RECOMPILE_Lv1(){
 			var RDT_CLONE = RDT_arquivoBruto;
 			var c = 0;
 	
-			// Apply Itens
+			// Apply Itens, Maps and Files
 			while(c < RDT_ItensArray.length){
 				var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
 				var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 52), RDT_CLONE.length);
@@ -463,6 +464,7 @@ function RDT_RECOMPILE_Lv1(){
 
 			RDT_doAfterSave();
 			RDT_arquivoBruto = RDT_CLONE;
+			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
 			RDT_readItens();
 
 		} catch(err){

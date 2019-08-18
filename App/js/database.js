@@ -562,11 +562,12 @@ var MSG_DICIONARIO = {
 	"fe": [true, "(Function: End Message)",				 2],
 	"ea": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
 	"f0": [true, "(Function: Show Special Char)",		 4], // (Depende do valor inserido)
-	"f8": [true, "(Function: Show Item Name)",	 		 5],
+	"f8": [true, "(Function: Show Item Name ",	 		 5],
 	"f3": [true, "(Function: Play SE)", 			     6], // (Depende do valor inserido) 
 	/* 
 		Info: Se o valor na frente de F3 for 43, O game irá executar o som da arma equipada.
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
+		Isso depende do soundset que foi carregado no mapa
 	*/
 	"f4": [true, "(Function: Change Camera)", 			 7],
 	"f5": [false, "(Unknown Char / Function Nº 158 - Hex: f5)"] // Comando usado na cutscene "Septemer, 28".
