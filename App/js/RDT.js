@@ -282,10 +282,12 @@ function RDT_readMessages(){
 	RDT_messasgesRaw = [];
 	RDT_totalMessages = 0;
 	RDT_messagesArray = [];
-	if (getFileName(ORIGINAL_FILENAME).toLowerCase() === "r101"){ // HACKS - Não me orgulho disso - 2!
-		RDT_MSG_finalLenght = 63990;
-	} else {
-		RDT_MSG_finalLenght = 43840;
+	if (BETA === false){
+		if (getFileName(ORIGINAL_FILENAME).toLowerCase() === "r101"){ // HACKS - Não me orgulho disso - 2!
+			RDT_MSG_finalLenght = 63990;
+		} else {
+			RDT_MSG_finalLenght = 43840;
+		}
 	}
 	document.getElementById('RDT_MSG-holder').innerHTML = "<!-- Hello :) -->";
 

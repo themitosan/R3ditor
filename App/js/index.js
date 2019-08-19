@@ -4,7 +4,7 @@
 	Help me - please
 */
 
-var BETA = true;
+var BETA = false;
 var fs = undefined;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
