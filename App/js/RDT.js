@@ -350,6 +350,12 @@ function RDT_readMessages(){
 		c++;
 	}
 
+	c = 0;
+	while(c < RDT_MSG_END.length){
+		RDT_MSGEndMessageFilter();
+		c++;
+	}
+
 	// Make the message, inspect the result and insert them on localStorage
 	c = 0;
 	while(c < RDT_messagesArray.length){
@@ -362,14 +368,14 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 2;
 			RDT_canAdd_reason = "The current pos. in RDT_MSG_END (" + c + ") is Null or Undefined!";
 		}
-		if (RDT_messagesArray[c] > 44226 || RDT_MSG_END[c] > 44226){
+		if (RDT_messagesArray[c] > 43840 || RDT_MSG_END[c] > 43840){
 			break;
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message position is very far than usual!";
 		}
-		var MESSAGE_RAW = 0;
 		var MESSAGE = undefined;
+		var MESSAGE_RAW = undefined;
 		if (parseInt(RDT_MSG_END[c] + 4) < RDT_messagesArray[c]){
 			var subs = c;
 			while(parseInt(RDT_MSG_END[subs] + 4) < RDT_messagesArray[c]){
@@ -381,19 +387,27 @@ function RDT_readMessages(){
 			if (RDT_messagesArray[c] === parseInt(RDT_MSG_END[c] + 4)){
 				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c + 1] + 4));
 				if (BETA === true){
+					console.log("Modo com finalização na proxima casa");
 					console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
 				}
 			} else {
-				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c] + 4));
-				if (BETA === true){
+				// Fix for cases like R20B.RDT
+				if (RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4)).indexOf("fa") === -1){
+					MESSAGE_RAW = RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4));
+					console.log("Modo sem inicialização - 1");
+					console.log("Ranges: " + parseInt(RDT_MSG_END[c] + 4) + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
+				} else {
+					MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c] + 4));
+					console.log("Mensagem em modo normal");
 					console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c] + 4));
 				}
 			}
 		}
+
 		MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
 		console.log("Message " + c + ":\n" + MESSAGE);
 
-		// HACKS
+		// HACKS - não me orgulho disso
 		var RDT_MSG_infoAdicional = undefined;
 		if (MESSAGE.indexOf("fa023c03950397039a03c403") === 0){
 			RDT_MSG_infoAdicional = "fa023c03950397039a03c403";
@@ -405,7 +419,7 @@ function RDT_readMessages(){
 		// Process of Validation - Let's see if MESSAGE contains a REAL message!
 
 		// Step 1 - Length
-		if (MESSAGE.length > 550 || MESSAGE.length < 14){
+		if (MESSAGE.length > 550 || MESSAGE.length < 15){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "It is too big (or small) to be a real message!";
@@ -448,8 +462,91 @@ function RDT_readMessages(){
 		}
 		c++;
 	}
+
+	// Second fix for R20B.RDT
+	var valorTemp = parseInt(c - RDT_MSG_END.length);
+	var valorFinal = valorTemp - valorTemp - valorTemp;
+	if (RDT_MSG_END[c] !== RDT_MSG_END.length && valorFinal < 4){
+		while(c < RDT_MSG_END.length){
+			if (RDT_MSG_END[c + 1] === undefined || RDT_MSG_END[c + 1] === NaN){
+				break;
+			} else {
+				var RDT_canAdd = true;
+				var RDT_canAdd_lvl = 0;
+				var MESSAGE = undefined;
+				var RDT_canAdd_reason = "";
+				var MESSAGE_RAW = undefined;
+				var RDT_MSG_infoAdicional = "";
+				if (RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4)).indexOf("fa") === -1){
+					MESSAGE_RAW = RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4));
+					console.log("Modo sem inicialização - 2");
+					console.log("Ranges: " + parseInt(RDT_MSG_END[c] + 4) + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
+					MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
+					
+					// Step 1 - Length
+					if (MESSAGE.length > 550 || MESSAGE.length < 15){
+						RDT_canAdd = false;
+						RDT_canAdd_lvl = 1;
+						RDT_canAdd_reason = "It is too big (or small) to be a real message!";
+					}
+			
+					// Step 2 - Number of specific hex values
+					// Case: Yes / No
+					var RDT_MSGfilter1 = getAllIndexes(MESSAGE, "fb");
+					if (RDT_MSGfilter1.length > 2){
+						RDT_canAdd = false;
+						RDT_canAdd_lvl = 1;
+						RDT_canAdd_reason = "The message contains more than 2 cases of <i>(Yes / No)</i> option!";
+					}
+			
+					// Step 3 - Number of specific hex values
+					// Case: Unknown hex appears more than usual - 78
+					var RDT_MSGfilter2 = getAllIndexes(MESSAGE, "78");
+					if (RDT_MSGfilter2.length > 2){
+						RDT_canAdd = false;
+						RDT_canAdd_lvl = 1;
+						RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78";
+					}
+			
+					// Final process
+					if (RDT_canAdd === true){
+						localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
+						localStorage.setItem("RDT_MESSAGE_ADICIONAL-" + c, RDT_MSG_infoAdicional);
+						RDT_renderMessages(c);
+						RDT_totalMessages++;
+					} else {
+						var msg = "Something went wrong in message analysis - Message: " + c + " (Final part) - Reason: ";
+						if (RDT_canAdd_lvl === 1){
+							console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+							addLog('warn', "WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+						}
+						if (RDT_canAdd_lvl === 2){
+							console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+							addLog('error', "ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+						}
+					}
+				} else {
+					console.log("Skipping last verification on RDT_MSG_END[" + c + "]");
+				}
+			}
+			c++;
+		}
+	} else {
+		console.log("RDT - MSG: Done!");
+	}
+
 	addLog('log', 'RDT - Message scanning completed with ' + RDT_readTry + ' attempts and found ' + RDT_totalMessages + ' messages.');
 	scrollLog();
+}
+
+function RDT_MSGEndMessageFilter(){
+	var d = 0;
+	while(d < RDT_MSG_END.length){
+		if (RDT_MSG_END[d] > 43840){
+			RDT_MSG_END.splice(d, 1);
+		}
+		d++;
+	}
 }
 
 function RDT_pickStartMessages(str){
