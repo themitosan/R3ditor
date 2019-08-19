@@ -63,6 +63,11 @@ function DEBUG_splitHex(hex){
 	return fina.slice(0, fina.length - 1);
 }
 
+function DEBUG_RDTMSGRANGE(value){
+	RDT_MSG_finalLenght = parseInt(value);
+	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+}
+
 function testeInvent(){
 	addInvent(0, "10", "fe", 1, "02");
 	addInvent(0, "11", "fe", 2, "16");

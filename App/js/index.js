@@ -165,14 +165,14 @@ function triggerLoadSAVE(){
 }
 
 function setLoadSaveFile(){
-	var cFile = document.getElementById('loadSaveForm')
-	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
+	var cFile = document.getElementById('loadSaveForm').files[0]
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
 			addLog("log", "Load Save: Usuário cancelou o formulário");
 		}
 	} else {
 		SAVE_arquivoBruto = undefined;
-		CARREGAR_SAVE(cFile.files[0].path);
+		CARREGAR_SAVE(cFile.path);
 	}
 }
 
@@ -182,14 +182,14 @@ function triggerLoadMSG(){
 }
 
 function setLoadMSGFile(){
-	var cFile = document.getElementById('loadMSGForm')
-	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
+	var cFile = document.getElementById('loadMSGForm').files[0]
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
 			addLog("log", "Load MSG: Usuário cancelou o formulário");
 		}
 	} else {
 		MSG_arquivoBruto = undefined;
-		MSG_CARREGAR_ARQUIVO(cFile.files[0].path);
+		MSG_CARREGAR_ARQUIVO(cFile.path);
 	}
 }
 
@@ -199,13 +199,13 @@ function triggerLoadRDT(){
 }
 
 function setLoadRDTFile(){
-	var cFile = document.getElementById('loadRDTForm')
-	if (cFile.files[0].path === null || cFile.files[0].path === undefined || cFile.files[0].path === ""){
+	var cFile = document.getElementById('loadRDTForm').files[0]
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
 			addLog("log", "Load RDT: Usuário cancelou o formulário");
 		}
 	} else {
 		RDT_arquivoBruto = undefined;
-		RDT_CARREGAR_ARQUIVO(cFile.files[0].path);
+		RDT_CARREGAR_ARQUIVO(cFile.path);
 	}
 }

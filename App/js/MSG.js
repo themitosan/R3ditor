@@ -72,6 +72,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			if (RAW_DATA_ARRAY[startPoint] === "ea"){
 				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
 			}
+			if (RAW_DATA_ARRAY[startPoint] === "f3" || RAW_DATA_ARRAY[startPoint] === "f5"){
+				COMMAND = "";
+			}
 			final = final + " " + COMMAND;
 			startPoint = startPoint + 2;
 			cAtual++;

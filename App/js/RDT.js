@@ -5,16 +5,17 @@
 */
 
 var RDT_MSG_END = [];
-var RDT_ItensArray = [];
-var RDT_messagesArray = [];
-var RDT_totalItensGeral = undefined;
-var RDT_totalMessages = undefined;
-var RDT_messasgesRaw = undefined;
-var RDT_itemIndexRAW = undefined;
-var RDT_arquivoBruto = undefined;
 var RDT_totalItens = 0;
 var RDT_totalFiles = 0;
 var RDT_totalMapas = 0;
+var RDT_ItensArray = [];
+var RDT_messagesArray = [];
+var RDT_MSG_finalLenght = 0;
+var RDT_messasgesRaw = undefined;
+var RDT_itemIndexRAW = undefined;
+var RDT_arquivoBruto = undefined;
+var RDT_totalMessages = undefined;
+var RDT_totalItensGeral = undefined;
 
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_editItemCancel();
@@ -275,11 +276,17 @@ function RDT_ITEM_APPLY(index, type){
 
 function RDT_readMessages(){
 	var c = 0;
+	console.clear();
 	RDT_MSG_END = [];
 	var RDT_readTry = 0;
 	RDT_messasgesRaw = [];
 	RDT_totalMessages = 0;
 	RDT_messagesArray = [];
+	if (getFileName(ORIGINAL_FILENAME).toLowerCase() === "r101"){ // HACKS - Não me orgulho disso - 2!
+		RDT_MSG_finalLenght = 63990;
+	} else {
+		RDT_MSG_finalLenght = 43840;
+	}
 	document.getElementById('RDT_MSG-holder').innerHTML = "<!-- Hello :) -->";
 
 	// Pattern of function start message
@@ -368,7 +375,7 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 2;
 			RDT_canAdd_reason = "The current pos. in RDT_MSG_END (" + c + ") is Null or Undefined!";
 		}
-		if (RDT_messagesArray[c] > 43840 || RDT_MSG_END[c] > 43840){
+		if (RDT_messagesArray[c] > RDT_MSG_finalLenght || RDT_MSG_END[c] > RDT_MSG_finalLenght){
 			break;
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
@@ -407,7 +414,7 @@ function RDT_readMessages(){
 		MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
 		console.log("Message " + c + ":\n" + MESSAGE);
 
-		// HACKS - não me orgulho disso
+		// HACKS - Não me orgulho disso - 2!
 		var RDT_MSG_infoAdicional = undefined;
 		if (MESSAGE.indexOf("fa023c03950397039a03c403") === 0){
 			RDT_MSG_infoAdicional = "fa023c03950397039a03c403";
@@ -419,7 +426,7 @@ function RDT_readMessages(){
 		// Process of Validation - Let's see if MESSAGE contains a REAL message!
 
 		// Step 1 - Length
-		if (MESSAGE.length > 550 || MESSAGE.length < 15){
+		if (MESSAGE.length > 550 || MESSAGE.length < 17){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "It is too big (or small) to be a real message!";
@@ -441,6 +448,15 @@ function RDT_readMessages(){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78";
+		}
+
+		// Step 4 - Number of specific hex values
+		// Case: Hex FF appears more than usual
+		var RDT_MSGfilter3 = getAllIndexes(MESSAGE, "ff");
+		if (RDT_MSGfilter3.length > 2){
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 1;
+			RDT_canAdd_reason = "The message contains more than 2 cases of ff!";
 		}
 
 		// Final process
@@ -542,7 +558,7 @@ function RDT_readMessages(){
 function RDT_MSGEndMessageFilter(){
 	var d = 0;
 	while(d < RDT_MSG_END.length){
-		if (RDT_MSG_END[d] > 43840){
+		if (RDT_MSG_END[d] > RDT_MSG_finalLenght){
 			RDT_MSG_END.splice(d, 1);
 		}
 		d++;
