@@ -4,14 +4,14 @@
 	Help me - please
 */
 
-var BETA = false;
+var BETA = true;
 var fs = undefined;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
 var arquivoBruto = undefined;
 var APP_VERSION = "0.1 [BETA]";
-var APP_NAME = "R3ditor V." + APP_VERSION;
 var ORIGINAL_FILENAME = undefined;
+var APP_NAME = "R3ditor V." + APP_VERSION;
 
 window.onload = function(){
 	load();
@@ -30,6 +30,7 @@ function load(){
 		APP_PATH = process.cwd();
 		checkFolders();
 	} catch(err){
+
 		console.error(err);
 		addLog('error', 'ERROR: Unable to use require or process... Wait... This is Chrome or Firefox?');
 		addLog('error', err);
@@ -85,7 +86,7 @@ function showNotify(titulo, texto, tempo){
 	}
 	catch(err){
 		if (DEBUG == true){
-			console.error("(Notification) Error: " + err);
+			console.error("(Notification) ERROR: " + err);
 		}
 	}
 }
@@ -143,12 +144,10 @@ function getAllIndexes(arr, val){
 function solveHEX(hex){
 	var res = hex.replace(new RegExp(" ", 'g'), "");
 	var fin = res.toLowerCase();
-	//copyToClipboard(fin);
 	return fin;
 }
 
 /// Função WIP
-
 function WIP(){
 	addLog('warn', "Sorry buddy... #WIP");
 	scrollLog();

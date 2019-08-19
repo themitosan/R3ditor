@@ -51,6 +51,18 @@ function reloadJsFile(src) {
     head.appendChild(script);
 }
 
+/// Undo solvehex
+function DEBUG_splitHex(hex){
+	var c = 0;
+	var fina = "";
+	var rw = hex.match(/.{1,2}/g);
+	while(c < rw.length){
+		fina = fina + rw[c] + " ";
+		c++;
+	}
+	return fina.slice(0, fina.length - 1);
+}
+
 function testeInvent(){
 	addInvent(0, "10", "fe", 1, "02");
 	addInvent(0, "11", "fe", 2, "16");

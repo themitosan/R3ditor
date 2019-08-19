@@ -61,15 +61,16 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				textoTraduzido = "";
 				cAtual++;
 			}
+			// Show Item Name
+			if (RAW_DATA_ARRAY[startPoint] === "f8"){
+				console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1]);
+				COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
+			} else {
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
+			}
 			// Special char
 			if (RAW_DATA_ARRAY[startPoint] === "ea"){
 				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
-			}
-			// Show Item Name
-			if (RAW_DATA_ARRAY[startPoint] === "f8"){
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " Item: " + ITEM[RAW_DATA_ARRAY[startPoint + 1]][0] + ")";
-			} else {
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
 			}
 			final = final + " " + COMMAND;
 			startPoint = startPoint + 2;
@@ -89,7 +90,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
-	document.getElementById("msg-lista-eventos").innerHTML = "<!-- you are not seeing me! -->";
+	document.getElementById("msg-lista-eventos").innerHTML = "<!-- You are not seeing me! -->";
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length;
 	var t = undefined;

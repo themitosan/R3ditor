@@ -263,21 +263,13 @@ function RDT_ITEM_APPLY(index, type){
 		var RDT_ITEM_COMPILADO = undefined
 		if (BETA === true){
 			RDT_ITEM_COMPILADO = header + " " + novaX + " " + novaY + " " + novaZ + " " + novaR + " " + novaHex + " " + offset1 + " " + quant + " " + offset2 + " " + novaAnim + " " + offset3;
-			console.log("Hex Gerada: " + RDT_ITEM_COMPILADO);
+			console.log("Index: " + index + " - New Hex: " + RDT_ITEM_COMPILADO);
 		}
-
 		RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
-		
-		if (BETA === true){
-			console.log(RDT_ITEM_COMPILADO);
-		}
-
 		localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-	
 		RDT_RECOMPILE_Lv1();
-
 	} else {
-		addLog("warn", "WARNING: " + error);
+		addLog("warn", "WARNING: There was an error while processing: " + error);
 	}
 }
 
@@ -348,7 +340,7 @@ function RDT_readMessages(){
 		var r = undefined;
 		if (RDT_arquivoBruto.length > 14088){
 			// In the most part of the files, the messages is found after 14.5% of the file!
-			r = parseInt(RDT_arquivoBruto.length / 14.5);
+			r = parseInt(RDT_arquivoBruto.length / 20);
 		} else {
 			r = 9999;
 		}
@@ -358,39 +350,101 @@ function RDT_readMessages(){
 		c++;
 	}
 
-	// Make the message and insert them on localStorage
+	// Make the message, inspect the result and insert them on localStorage
 	c = 0;
 	while(c < RDT_messagesArray.length){
+		var RDT_canAdd = true;
+		var RDT_canAdd_lvl = 0;
+		var RDT_canAdd_reason = "";
 		if (RDT_MSG_END[c] === undefined || RDT_MSG_END[c] === NaN){
-			console.log("Parando!");
 			break;
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 2;
+			RDT_canAdd_reason = "The current pos. in RDT_MSG_END (" + c + ") is Null or Undefined!";
 		}
+		if (RDT_messagesArray[c] > 44226 || RDT_MSG_END[c] > 44226){
+			break;
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 1;
+			RDT_canAdd_reason = "The message position is very far than usual!";
+		}
+		var MESSAGE_RAW = 0;
 		var MESSAGE = undefined;
-		var MESSAGE_RAW = undefined;
 		if (parseInt(RDT_MSG_END[c] + 4) < RDT_messagesArray[c]){
 			var subs = c;
 			while(parseInt(RDT_MSG_END[subs] + 4) < RDT_messagesArray[c]){
 				subs++;
 			}
-			console.log("Tentativas: " + RDT_readTry + " - C: " + c + " Subs On " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[subs] + 4));
+			console.log("Attempts: " + RDT_readTry + " - Index: " + c + " Subs: " + subs + " - " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[subs] + 4));
 			MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[subs] + 4));
 		} else {
 			if (RDT_messagesArray[c] === parseInt(RDT_MSG_END[c] + 4)){
 				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c + 1] + 4));
-				console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
+				if (BETA === true){
+					console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
+				}
 			} else {
 				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c] + 4));
-				console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c] + 4));
+				if (BETA === true){
+					console.log("Ranges: " + RDT_messagesArray[c] + ", " + parseInt(RDT_MSG_END[c] + 4));
+				}
 			}
 		}
 		MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
-		console.log("Mensagem " + c + ":\n" + MESSAGE);
-		if (MESSAGE.length > 500 || MESSAGE.length < 15){
-			addLog('warn', "RDT - Avoiding message " + c + ": It is too big or small to be a real message!");
+		console.log("Message " + c + ":\n" + MESSAGE);
+
+		// HACKS
+		var RDT_MSG_infoAdicional = undefined;
+		if (MESSAGE.indexOf("fa023c03950397039a03c403") === 0){
+			RDT_MSG_infoAdicional = "fa023c03950397039a03c403";
+			MESSAGE = MESSAGE.slice(RDT_MSG_infoAdicional.length, MESSAGE.length);
 		} else {
+			RDT_MSG_infoAdicional = "";
+		}
+
+		// Process of Validation - Let's see if MESSAGE contains a REAL message!
+
+		// Step 1 - Length
+		if (MESSAGE.length > 550 || MESSAGE.length < 14){
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 1;
+			RDT_canAdd_reason = "It is too big (or small) to be a real message!";
+		}
+
+		// Step 2 - Number of specific hex values
+		// Case: Yes / No
+		var RDT_MSGfilter1 = getAllIndexes(MESSAGE, "fb");
+		if (RDT_MSGfilter1.length > 2){
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 1;
+			RDT_canAdd_reason = "The message contains more than 2 cases of <i>(Yes / No)</i> option!";
+		}
+
+		// Step 3 - Number of specific hex values
+		// Case: Unknown hex appears more than usual - 78
+		var RDT_MSGfilter2 = getAllIndexes(MESSAGE, "78");
+		if (RDT_MSGfilter2.length > 2){
+			RDT_canAdd = false;
+			RDT_canAdd_lvl = 1;
+			RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78";
+		}
+
+		// Final process
+		if (RDT_canAdd === true){
 			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
+			localStorage.setItem("RDT_MESSAGE_ADICIONAL-" + c, RDT_MSG_infoAdicional);
 			RDT_renderMessages(c);
 			RDT_totalMessages++;
+		} else {
+			var msg = "Something went wrong in message analysis - Message: " + c + " - Reason: ";
+			if (RDT_canAdd_lvl === 1){
+				console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+				addLog('warn', "WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+			}
+			if (RDT_canAdd_lvl === 2){
+				console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+				addLog('error', "ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+			}
 		}
 		c++;
 	}
@@ -400,12 +454,21 @@ function RDT_readMessages(){
 
 function RDT_pickStartMessages(str){
 	var c = 0;
+	var r = undefined;
+	if (RDT_arquivoBruto.length > 14088){
+		// In the most part of the files, the messages is found after 14.5% of the file!
+		// Also, 14088 is the size of the smallest file - R10F.RDT (Boutique)
+		r = parseInt(RDT_arquivoBruto.length / 20);
+	} else {
+		r = 9999;
+	}
 	RDT_messasgesRaw = getAllIndexes(RDT_arquivoBruto, str);
 	while (c < RDT_messasgesRaw.length){
 		if (RDT_messasgesRaw[c] > RDT_ItensArray[0]){
 			RDT_messagesArray.push(RDT_messasgesRaw[c]);
 		} else {
-			if (RDT_totalItensGeral < 1 && RDT_messasgesRaw[c] > 9999){ // In the most cases, the number is higher than 9999
+			// In the most cases, the number is higher than 9999
+			if (RDT_totalItensGeral < 1 && RDT_messasgesRaw[c] > r){
 				RDT_messagesArray.push(RDT_messasgesRaw[c]);
 			} else {
 				console.log("RDT - Wrong message index! - Index: " + RDT_messasgesRaw[c]);
