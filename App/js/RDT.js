@@ -340,7 +340,7 @@ function RDT_readMessages(){
 		var r = undefined;
 		if (RDT_arquivoBruto.length > 14088){
 			// In the most part of the files, the messages is found after 14.5% of the file!
-			r = parseInt(RDT_arquivoBruto.length / 20);
+			r = 7000;
 		} else {
 			r = 9999;
 		}
@@ -555,7 +555,7 @@ function RDT_pickStartMessages(str){
 	if (RDT_arquivoBruto.length > 14088){
 		// In the most part of the files, the messages is found after 14.5% of the file!
 		// Also, 14088 is the size of the smallest file - R10F.RDT (Boutique)
-		r = parseInt(RDT_arquivoBruto.length / 20);
+		r = 7000;
 	} else {
 		r = 9999;
 	}
