@@ -605,13 +605,11 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
 		RDT_ITEM_APPLY(index, id);
 	}
-
 	if (header === "67"){
 		$("#RDT-btn-aplicarItem").css({"display": "inline"});
 	} else {
 		$("#RDT-btn-aplicarItem").css({"display": "none"});
 	}
-
 	$("#RDT-Item-Edit").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
 }

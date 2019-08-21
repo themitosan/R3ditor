@@ -34,7 +34,6 @@ var SAVE_INDICADOR_HEADER 	      = undefined; // Header completa
 var SAVE_INDICADOR_HEADER_START   = undefined; // 0x0000 até 0x2000
 var SAVE_INDICADOR_HEADER_MIDDLE  = undefined;
 var SAVE_INDICADOR_HEADER_END     = undefined;
-
 var S_HEADER 					  = undefined; // Cabeçalho de cada slot de save
 var S_END 					      = undefined; // Final de cada slot de save
 var range_0x2204_0x2207           = undefined;
@@ -144,7 +143,6 @@ var dia       = 0;
 function MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
 		S_HEADER = localStorage.getItem("Save_" + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); 					// 0x2000 - 0x21FF
-
 		// Gerando Inventário da Jill
 		var J_INV_TEMP = "";
 		var c = 0;
@@ -152,7 +150,6 @@ function MAKE_SAVE(slot){
 			J_INV_TEMP = J_INV_TEMP + JILL_INVENT[c];
 			c++;
 		}
-
 		// Gerando Baú da Jill
 		var J_BOX_TEMP = "";
 		c = 0;
@@ -160,7 +157,6 @@ function MAKE_SAVE(slot){
 			J_BOX_TEMP = J_BOX_TEMP + JILL_BAU[c];
 			c++;
 		}
-
 		// Gerando Inventário do Carlos
 		var C_INV_TEMP = "";
 		var c = 0;
@@ -168,7 +164,6 @@ function MAKE_SAVE(slot){
 			C_INV_TEMP = C_INV_TEMP + CARLOS_INVENT[c];
 			c++;
 		}
-
 		// Gerando Baú do Carlos
 		var C_BOX_TEMP = "";
 		c = 0;
@@ -176,7 +171,6 @@ function MAKE_SAVE(slot){
 			C_BOX_TEMP = C_BOX_TEMP + CARLOS_BAU[c];
 			c++;
 		}
-
 		// Ranges não mapeadas
 		range_0x2204_0x2207 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2204-0x2207"][0], RANGES["0x2204-0x2207"][1]); // 0x2204 - 0x2207
 		range_0x2209_0x220D = localStorage.getItem("Save_" + slot).slice(RANGES["0x2209-0x220D"][0], RANGES["0x2209-0x220D"][1]); // 0x2209 - 0x220D
@@ -193,15 +187,12 @@ function MAKE_SAVE(slot){
 		range_0x2537_0x254B = localStorage.getItem("Save_" + slot).slice(RANGES["0x2537-0x254B"][0], RANGES["0x2537-0x254B"][1]); // 0x2537 - 0x254B
 		range_0x2674_0x2674 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2674-0x2674"][0], RANGES["0x2674-0x2674"][1]); // 0x2674
 		range_0x2677_0x28D3 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2677-0x28D3"][0], RANGES["0x2677-0x28D3"][1]); // 0x2677 - 0x28D3
-	
 		S_END = localStorage.getItem("Save_" + slot).slice(RANGES["save_END"][0], RANGES["save_END"][1]);
-	
 		TEMP_SLOT = S_HEADER + IGTExtract + range_0x2204_0x2207 + dificuldade + range_0x2209_0x220D + xPos + range_0x2210_0x2211 + yPos + life + epil + 
 		range_0x2217_0x2217 + totalVezesSaves + range_0x2219_0x2219 + veneno + localSave + range_0x221C_0x224D + lCidade + range_0x224F_0x224F + rEvent + 
 		range_0x2251_0x225D + cPlayer + range_0x225F_0x23FE + mapExtractA + range_0x2400_0x2402 + mapExtractB + j_files + range_0x240A_0x240B + J_INV_TEMP + 
 		J_BOX_TEMP + range_0x2534_0x2534 + jArmaEquip + jSide + range_0x2537_0x254B + C_INV_TEMP + C_BOX_TEMP + range_0x2674_0x2674 + cArmaEquip + cSide + 
 		range_0x2677_0x28D3 + outf + S_END;
-	
 		// Final
 		if (TEMP_SLOT.length === RANGES["slot-offset"][0]){
 			localStorage.setItem("Save_" + slot, TEMP_SLOT);
@@ -249,10 +240,8 @@ function CARREGAR_SAVE(sFile){
 	addLog("log", "Loading save file: " + sFile);
 	log_separador();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
-	
 	// Montar Arquivo Nas variaveis para reconstruir novamente
 	// Essa parte do processo será feita aqui pois essas informações não serão modificadas pelo usuário
-
 	INDICADOR_01 = SAVE_arquivoBruto.slice(RANGES["he-indicador-1"][0],   RANGES["he-indicador-1"][1]);
 	INDICADOR_02 = SAVE_arquivoBruto.slice(RANGES["he-indicador-2"][0],   RANGES["he-indicador-2"][1]);
 	INDICADOR_03 = SAVE_arquivoBruto.slice(RANGES["he-indicador-3"][0],   RANGES["he-indicador-3"][1]);
@@ -272,11 +261,9 @@ function CARREGAR_SAVE(sFile){
 	SAVE_INDICADOR_HEADER_MIDDLE = SAVE_arquivoBruto.slice(RANGES["he-esp-meio"][0],   RANGES["he-esp-meio"][1]);
 	SAVE_INDICADOR_HEADER_END 	 = SAVE_arquivoBruto.slice(RANGES["he-esp-final"][0],  RANGES["he-esp-final"][1]);
 	SAVE_INDICADOR_HEADER 		 = SAVE_INDICADOR_HEADER_START + INDICADOR_01 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_02 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_03 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_04 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_05 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_06 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_07 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_08 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_09 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_10 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_11 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_12 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + SAVE_INDICADOR_HEADER_END;
-	
 	localStorage.setItem("Save_1", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	  RANGES["slot-offset"][0] * 2));
 	localStorage.setItem("Save_2", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 2,  RANGES["slot-offset"][0] * 3));
 	localStorage.setItem("Save_3", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 3,  RANGES["slot-offset"][0] * 4));
- 
 	localStorage.setItem("Save_4", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 4,  RANGES["slot-offset"][0] * 5));
 	localStorage.setItem("Save_5", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 5,  RANGES["slot-offset"][0] * 6));
 	localStorage.setItem("Save_6", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 6,  RANGES["slot-offset"][0] * 7));
@@ -289,8 +276,6 @@ function CARREGAR_SAVE(sFile){
 	localStorage.setItem("Save_13", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 13, RANGES["slot-offset"][0] * 14));
 	localStorage.setItem("Save_14", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
 	localStorage.setItem("Save_15", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
-
-
 	// Render Infos
 	save_renderSlot(CURRENT_SAVE_SLOT);
 	save_Backup();
@@ -459,43 +444,34 @@ function save_renderInfos(s_slot){
 		log_separador();
 		// Render Time
 		IGTExtract = localStorage.getItem("Save_" + s_slot).slice(RANGES["IGT"][0], RANGES["IGT"][1]);
-		
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
-	
 		addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
 		addLog("log", "IGT Complete (Format: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 		log_separador();
-	
 		// Dificuldade
 		dificuldade = localStorage.getItem("Save_" + s_slot).slice(RANGES["leveldificuldade"][0], RANGES["leveldificuldade"][1]);
 		var diffi = DIFICULDADE[dificuldade][0];
 		document.getElementById("lbl-dificuldade").innerHTML = diffi;
-	
 		// Saves
 		totalVezesSaves = localStorage.getItem("Save_" + s_slot).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
 		var tvs = parseInt("0x" + totalVezesSaves);
 		document.getElementById("lbl-saves").innerHTML = tvs;
-	
 		// Sala de Save
 		localSave = localStorage.getItem("Save_" + s_slot).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
 		var nomeLocSave = LOCAIS[localSave][0];
 		document.getElementById("lbl-saveplace").innerHTML = nomeLocSave;
-	
 		// Local da cidade
 		lCidade = localStorage.getItem("Save_" + s_slot).slice(RANGES["localCidade"][0], RANGES["localCidade"][1]);
 		var lCity = CIDADE[lCidade][0];
 		document.getElementById("lbl-city").innerHTML = lCity;
-	
 		// Roupa
 		outf = localStorage.getItem("Save_" + s_slot).slice(RANGES["roupaAtual"][0], RANGES["roupaAtual"][1]);
 		var costumeJill = ROUPA[outf][0];
 		document.getElementById("lbl-outfit").innerHTML = costumeJill;
-		
 		// Player Atual
 		cPlayer = localStorage.getItem("Save_" + s_slot).slice(RANGES["characterAtual"][0], RANGES["characterAtual"][1]);
 		var plr = PLAYERS[cPlayer][0];
 		document.getElementById("lbl-currentPlayer").innerHTML = plr;
-	
 		// Jill - Arma equipada
 		jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
 		var jcw = ITEM[jArmaEquip][0];
@@ -503,7 +479,6 @@ function save_renderInfos(s_slot){
 			jcw = "No Weapon Equiped";
 		}
 		document.getElementById("lbl-jArma").innerHTML = jcw;
-	
 		// Carlos - Arma equipada
 		cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
 		var ccw = ITEM[cArmaEquip][0];
@@ -511,7 +486,6 @@ function save_renderInfos(s_slot){
 			ccw = "No Weapon Equiped";
 		}
 		document.getElementById("lbl-cArma").innerHTML = ccw;
-	
 		// Jill e Carlos - Sidepack
 		jSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill-side"][0], RANGES["jill-side"][1])
 		cSide = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlos-side"][0], RANGES["carlos-side"][1]);
@@ -519,23 +493,19 @@ function save_renderInfos(s_slot){
 		var cSpack = SIDEPACK[cSide][0];
 		document.getElementById("j-sidePack").innerHTML = jSpack;
 		document.getElementById("c-sidePack").innerHTML = cSpack;
-	
 		// Posição X e Y
 		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]);
 		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]);
 		document.getElementById("lbl-x-pos").innerHTML = xPos;
 		document.getElementById("lbl-y-pos").innerHTML = yPos;
-	
 		// Epilogos
 		epil = localStorage.getItem("Save_" + s_slot).slice(RANGES["epilogos"][0], RANGES["epilogos"][1]);
 		var ep = EPILOGOS[epil][0];
 		document.getElementById("lbl-epilogos").innerHTML = ep;
-	
 		// Versão do game
 		gVersion = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][0];
 		gDetails = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][1];
 		document.getElementById("lbl-gameVersion").innerHTML = gVersion + " (" + gDetails + ")";
-		
 		// Mapas Obtidos - [WIP]
 		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
 		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
@@ -544,7 +514,6 @@ function save_renderInfos(s_slot){
 	
 		// Room / Event [WIP]
 		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]);
-	
 		// Files
 		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]);
 	} catch (err){
@@ -625,8 +594,8 @@ function save_Backup(){
 			var backup_name = gDetails + "-" + getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".savbackup";
 			fs.writeFileSync(APP_PATH + "\\Backup\\SAV\\" + backup_name, SAVE_arquivoBruto, 'hex');
 			log_separador();
-			addLog("log", "INFO: A backup of your save file was made successfully! - File: " + backup_name);
-			addLog("log", "Folder: " + APP_PATH + "\\Backup\\SAV\\" + backup_name);
+			addLog("log", "INFO - The backup was made successfully! - File: " + backup_name);
+			addLog("log", "Folder - " + APP_PATH + "\\Backup\\SAV\\" + backup_name);
 			log_separador();
 		} catch (err){
 			addLog("error", "ERROR: Unable to make backup! - " + err);
@@ -1031,7 +1000,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 }
 
 /// Time Helpers
-
 /*  _____________________________________________________________________________________________________
    |																									 \
    |   Tempo - 0x2200 até 0x2203 - Valor de 32 Bits (00 00 00 00)										  |
@@ -1095,14 +1063,12 @@ function contador0x2204(multiplier) {
 }
 
 function contadorFinal(DD, HH, MM, SS, DC, MS){
-
 	milesimos = parseInt(milesimos);
 	decimos = parseInt(decimos);
 	segundos = parseInt(segundos);
 	minutos = parseInt(minutos);
 	hora = parseInt(hora);
 	dia = parseInt(dia);
-
 	if (DD === undefined || DD === null){
 		DD = 0;
 	} else {
@@ -1136,7 +1102,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 	//console.log(DD + " - " + HH + " - " + MM + " - " + SS + " - " + DC + " - " + MS);
 	var restante = undefined;
 	var minus = 999 - 1;
-
 	// Milésimos
 	if (MS > minus){
 		while (MS > minus){
@@ -1154,7 +1119,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			decimos++;
 		}
 	}
-
 	// Décimos 
 	if (DC > 59){
 		while(DC > 59){
@@ -1170,7 +1134,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			segundos++;
 		}
 	}
-
 	// Segundos 
 	if (SS > 59){
 		while(SS > 59){
@@ -1186,7 +1149,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			minutos++;
 		}
 	}
-
 	// Minutos
 	if (MM > 59){
 		while(MM > 59){
@@ -1202,7 +1164,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			hora++;
 		}
 	}
-
 	// Hora
 	if (HH > 23){
 		while(HH > 23){
@@ -1218,7 +1179,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			dia++;
 		}
 	}
-
 	if (milesimos.toString().length < 2){
 		milesimos = "0" + milesimos;
 	}

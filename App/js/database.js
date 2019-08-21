@@ -1,11 +1,7 @@
 /*
-
 	R3ditor - Database.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
-
-	Item = Nome, Info Adicional, Baú Clip, Baú Margin-left, index imagem baú, index imagem info, index quantidade de loop
-
 */
 
 var ITEM = {
@@ -255,7 +251,7 @@ var SIDEPACK = {
 }
 
 var VERSAO = {
-	"000000000000": ["Undefined", 						  "HEX zerada (00)"],
+	"000000000000": ["Undefined", 						 		  "Hex: 00"],
 	"4241534c5553": ["Russian / Nightmare (Or Darkness) Mod", 	   "BASLUS"],
 	"4245534c4553": ["Mediakite / Xplosiv", 					   "BESLES"],
 	"4249534c5053": ["Chinese / Japanese / Taiwan Version", 	   "BISLPS"]
@@ -704,7 +700,6 @@ var RANGES = {
 		
 		O Inicio do arquivo de save contém um pequeno espaço nulo "00" até o primeiro indicador de save na posição
 		0x80 (51 00 00 00 00 20 00 00 FF FF + Versão do game).
-
 		Entre cada indicador, existe um espaço de 68 espaços nulos até a posição do save de Nº 15.
 		Após isso, eu não percebi nenhuma mudança no espaço em diante até o 1º slot de save (0x2000).
 

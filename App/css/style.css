@@ -966,6 +966,13 @@ li{
     float: center;
 }
 
+.code{
+    padding: 4px;
+    color: #b2b2d3;
+    border-radius: 4px;
+    background-color: #000;
+}
+
 .update_subtitle{
     font-size: x-large;
     font-style: italic;

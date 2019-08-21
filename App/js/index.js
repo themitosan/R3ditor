@@ -3,14 +3,14 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var BETA = true;
+var BETA = false;
 var fs = undefined;
-var internal_version = 2;
+var internal_version = 3;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
 var arquivoBruto = undefined;
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.2.1 [BETA]";
+var APP_VERSION = "0.2.3 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
@@ -217,6 +217,11 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 	});
 }
 
+/*
+
+	Update
+
+*/
 function checkForUpdates(){
 	R3DITOR_downloadFile("https://raw.githubusercontent.com/themitosan/R3ditor/master/version.r3ditor", APP_PATH + "\\App\\check.r3ditor");
 	var wait = setInterval(function(){
@@ -226,12 +231,6 @@ function checkForUpdates(){
 		}
 	}, 50);
 }
-
-/*
-
-	Update
-
-*/
 
 function R3DITOR_readUpdate(file){
 	var update_info = [];
@@ -357,7 +356,7 @@ function setLoadSaveFile(){
 	var cFile = document.getElementById('loadSaveForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
-			addLog("log", "Load Save: Usu?io cancelou o formul?io");
+			addLog("log", "Sav -: Load Canceled!");
 		}
 	} else {
 		SAVE_arquivoBruto = undefined;
@@ -374,7 +373,7 @@ function setLoadMSGFile(){
 	var cFile = document.getElementById('loadMSGForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
-			addLog("log", "Load MSG: Usu?io cancelou o formul?io");
+			addLog("log", "MSG - Load Canceled!");
 		}
 	} else {
 		MSG_arquivoBruto = undefined;
@@ -391,7 +390,7 @@ function setLoadRDTFile(){
 	var cFile = document.getElementById('loadRDTForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		if (BETA == true){
-			addLog("log", "Load RDT: Usu?io cancelou o formul?io");
+			addLog("log", "RDT - Load Canceled!");
 		}
 	} else {
 		RDT_arquivoBruto = undefined;
