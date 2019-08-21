@@ -5,6 +5,7 @@
 */
 var BETA = false;
 var fs = undefined;
+var forceUpdat = 0;
 var internal_version = 3;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
@@ -36,6 +37,17 @@ function load(){
 		addLog('error', 'ERROR: Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR: This is not Node-Webkit! ÕwÕ');
 		addLog('error', err);
+	}
+}
+
+function forceUpdate(){
+	forceUpdat++;
+	if (forceUpdat === 10){
+		internal_version--;
+		addLog('log', '<font id="hidden_msg" class="none"><i>Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you! - Evans.</i></font>');
+		scrollLog();
+		$("#img-logo").fadeOut({duration: 2200, queue: false});
+		$("#hidden_msg").fadeIn({duration: 2200, queue: false});
 	}
 }
 
