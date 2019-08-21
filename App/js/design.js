@@ -617,8 +617,8 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 }
 
 function RDT_editItemCancel(){
-	$("#RDT-Item-Edit").css({"display": "none"});
 	$("#RDT-item-list").css({"width": "1288px"});
+	$("#RDT-Item-Edit").css({"display": "none"});
 	document.getElementById('RDT_item-edit-X').value = "";
 	document.getElementById('RDT_item-edit-Y').value = "";
 	document.getElementById('RDT_item-edit-Z').value = "";
@@ -637,5 +637,40 @@ function RDT_applyMenuFocus(menuId){
 		i++;
 	}
 	$('#RDT-aba-menu-' + menuId).addClass('aba-select');
+	scrollLog();
+}
+
+// Updater
+function R3DITORshowUpdate(){
+	$("#menu-topo").css({"display": "none"});
+	$("#R3ditor_update").css({"display": "block"});
+}
+
+function R3DITORcloseUpdate(){
+	$("#menu-topo").css({"display": "block"});
+	$("#R3ditor_update").css({"display": "none"});
+}
+
+function R3DITORshowUpdateProgress(){
+	document.title = APP_NAME + " - Updating...";
+	$("#R3ditor_update").css({"display": "none"});
+	$("#progress_window").css({"display": "block"});
+}
+
+function R3DITOR_movePercent(percent, status){
+	var p = parseInt(percent);
+	if (p < 0){
+		p = 0;
+	}
+	if (p > 100){
+		p = 100;
+	}
+	if (status === "" || status === undefined || status === null){
+		status = "Message";
+	}
+	addLog('log', "UPDATE - " + status);
+	document.getElementById('update_status').innerHTML = status;
+	document.getElementById('update_percent').innerHTML = p + "%";
+	$("#update_progressbar").css({"width": p + "%"});
 	scrollLog();
 }

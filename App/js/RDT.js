@@ -455,7 +455,7 @@ function RDT_readMessages(){
 		// Step 4 - Number of specific hex values
 		// Case: Hex FF appears more than usual
 		var RDT_MSGfilter3 = getAllIndexes(MESSAGE, "ff");
-		if (RDT_MSGfilter3.length > 2){
+		if (RDT_MSGfilter3.length > 1){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of ff!";

@@ -18,7 +18,6 @@
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
 <body>
-
 	<!-- Menu Principal -->
 	<div class="menu-topo" id="menu-topo">
 		<input type="button" class="botao-menu" value="Bio 3 Save Editor (.sav)" onclick="main_menu(1);">
@@ -27,8 +26,8 @@
 		<!-- Direita -->
 		<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
 		<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
+		<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
 	</div>
-
 	<!-- Menu RDT -->
 	<div class="menu-topo none" id="menu-topo-RDT">
 		<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoadRDT();">
@@ -439,6 +438,28 @@
 			Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
 			<input type="button" class="botao-menu" value="Go Back" onclick="closeAbout();">
 		</center>
+	</div>
+	<!-- Update Info -->
+	<div id="R3ditor_update" class="new_update none">
+		<center>
+			<font class="titulo">There is a new update!</font><br>
+			New version: <font id="new_version">???</font>
+			<div class="update_details">
+				<center><font id="new_version_title" class="update_subtitle">???</font></center><br>
+				<div id="updates_info" class="li_div">
+					<!-- Os updates vão aqui! -->
+				</div>
+			</div>
+			<input type="button" class="RDT-btn-apply color-white" style="width: 30%;" id="RDT-btn-cancelUpdate" value="Cancel" onclick="R3DITORcloseUpdate();">
+			<input type="button" class="RDT-btn-apply color-green" style="width: 30%;" id="RDT-btn-aplicarUpdate" value="APPLY UPDATE!" onclick="R3DITOR_applyUpdate();">
+		</center>
+	</div>
+	<!-- Update Progress -->
+	<div id="progress_window" class="update_progress_window none">
+		Status: <font id="update_status">???</font><br>
+		Overall: <font id="update_percent">???</font><br>
+		<div class="progressBar" id="update_progressbar"></div>
+		<input type="button" value="Reload App" class="botao-menu none" id="btn_update_ok" onclick="reload();">
 	</div>
 	<!-- AppLogo -->
 	<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo">

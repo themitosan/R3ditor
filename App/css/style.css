@@ -921,3 +921,63 @@ a{
     position: absolute;
     background-image: linear-gradient(to bottom, #5c6499, #192432);
 }
+
+.new_update{
+    top: 6px;
+    left: 8px;
+    color: #fff;
+    width: 1326px;
+    height: 616px;
+    position: absolute;
+    border-radius: 6px;
+    background-image: linear-gradient(to bottom, #4d4d4d, #151b26);
+}
+
+.update_details{
+    width: 98%;
+    color: #fff;
+    height: 486px;
+    overflow: auto;
+    margin-top: 4px;
+    padding-top: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    text-align: -webkit-left;
+    background-image: linear-gradient(180deg, #68638a, #29273300);
+}
+
+.li_div{
+    overflow: auto;
+}
+
+.center{
+    float: center;
+}
+
+.update_subtitle{
+    font-size: x-large;
+    font-style: italic;
+}
+
+.update_progress_window{
+    top: 558px;
+    height: 44px;
+    width: 1306px;
+    padding: 10px;
+    position: absolute;
+    border-radius: 6px;
+    text-align: -webkit-left;
+    background-image: linear-gradient(to bottom, #4f4566, #1a1624);
+}
+
+.progressBar{
+    width: 0.1%;
+    height: 6px;
+    margin-top: 4px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background-color: #0f0;
+    box-shadow: 0 0 10px #26562e;
+}
