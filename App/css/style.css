@@ -35,6 +35,16 @@ a{
     color: #fff;
 }
 
+li{
+    margin-top: 6px;
+}
+
+.feature_title{
+    font-size: x-large;
+    text-shadow: 0 0 10px #555;
+    text-decoration: underline;
+}
+
 .about{
     background-image: linear-gradient(to bottom, #442d59, #0e0b22);
     border-radius: 230px;

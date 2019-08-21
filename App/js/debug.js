@@ -68,6 +68,11 @@ function DEBUG_RDTMSGRANGE(value){
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
 
+function DEBUG_TESTUPDATE(html){
+	document.getElementById('updates_info').innerHTML = "<ul>" + html + "</ul>";
+	$("#R3ditor_update").css({"display": "block"});
+}
+
 function testeInvent(){
 	addInvent(0, "10", "fe", 1, "02");
 	addInvent(0, "11", "fe", 2, "16");

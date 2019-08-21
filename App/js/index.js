@@ -5,12 +5,12 @@
 */
 var BETA = true;
 var fs = undefined;
-var internal_version = 1;
+var internal_version = 2;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
 var arquivoBruto = undefined;
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.1 [BETA]";
+var APP_VERSION = "0.2.1 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
