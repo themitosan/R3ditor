@@ -1,4 +1,4 @@
-3
+4
 0.2.3
 Small Modifications!
 <font class="feature_title">HTML</font><br><li>A tiny organization was made to make the code better</li><br><font class="feature_title">Index</font><br><li>Some portuguese dialog was translated to english!</li><br><font class="feature_title">DEBUG</font><br><li>The internal variable <font class="code" style="">BETA</font> has been changed false, making the messages appear again (<i>sorry</i>)</li><li>A huge function used to debug the save editor was removed, making the file smaller!</li><br><font class="feature_title">Save</font><br><li>Small optimizations to make the code better!</li><br><font class="feature_title">Database</font><br><li>So small modifications were made that I honestly don't think they should even get into this log!</li>
