@@ -9,6 +9,9 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "nw.exe".
 
+## How to update
+- Just click on "Check for updates" and follow the instructions!
+
 ## Supported File Formats
 
 ### Bu00.sav (Saves) [WIP]
@@ -43,5 +46,9 @@ Expect compatibility improvements and more features soon!
 ## Important
 Any changes you make will automatically apply to your files.
 If you want to recover your save / rdt, open the "backup" folder and select the file you want to recover. <br>
+
+### Third-Party software used on this project
+- <a href="https://www.7-zip.org/" target="_blank">7zip</a>
+- <a href="https://github.com/pmandin/reevengi-tools" target="_blank">Reevengi-tools - Rofs Unpacker (Compiled)</a>
 
 <i>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i>
