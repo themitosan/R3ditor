@@ -5,7 +5,7 @@
 */
 
 var forceUpdat = 0;
-var TEST_RELEASE = true;
+var TEST_RELEASE = false;
 var internal_version = 5;
 
 function forceUpdate(){
