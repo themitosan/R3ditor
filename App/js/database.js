@@ -845,17 +845,15 @@ var RANGES = {
 	"room_event": 		[1184, 1186], // Room / Event 					 - 0x2250
 	"mapas-a": 			[2046, 2048], // Mapas do Game (Primeira Hex) 	 - 0x23FF
 	"mapas-b": 			[2054, 2056], // Mapas do Game (Segunda Hex)	 - 0x2403
-	"jill_files": 		[2056, 2068], // Files do game 					 - 0x2404 até 0x2409
-	"pos-X":   			[1052, 1056], // Posição X no mapa atual 		 - 0x220E até 0x221F
-	"pos-Y":            [1060, 1064], // Posição Y no mapa atual 		 - 0x2212 até 0x2213
-	"IGT": 				[1024, 1032], // IGT (In-Game Time) Tempo Atual  - 0x2200 até 0x2203
-	"characterHP":    	[1064, 1068], // HP do personagem atual. 		 - 0x2214 até 0x2215
-	"j-box": 			[2152, 2656], // Baú da Jill 					 - 0x2535 até 0x2530
-	"c-box": 			[2792, 3296], // Baú do Carlos 					 - 0x2574 até 0x2580
-
+	"jill_files": 		[2056, 2068], // Files do game 					 - 0x2404 to 0x2409
+	"pos-X":   			[1052, 1056], // Posição X no mapa atual 		 - 0x220E to 0x221F
+	"pos-Y":            [1060, 1064], // Posição Y no mapa atual 		 - 0x2212 to 0x2213
+	"IGT": 				[1024, 1032], // IGT (In-Game Time) Tempo Atual  - 0x2200 to 0x2203
+	"characterHP":    	[1064, 1068], // HP do personagem atual. 		 - 0x2214 to 0x2215
+	"j-box": 			[2152, 2656], // Baú da Jill 					 - 0x2535 to 0x2530
+	"c-box": 			[2792, 3296], // Baú do Carlos 					 - 0x2574 to 0x2580
 	////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////
-
 	/*
 
 		RDT Ranges

@@ -1,11 +1,8 @@
 /*
-
 	debug.js
 	themitosan/mscorehdr
 	me ajuda
-
 */
-
 function renderRanges(modo, first) {
 	if (modo == 0){ // invent
 		var tot = 11;
@@ -68,7 +65,6 @@ function DEBUG_RDTMSGRANGE(value){
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
 
-function DEBUG_TESTUPDATE(html){
-	document.getElementById('updates_info').innerHTML = "<ul>" + html + "</ul>";
-	$("#R3ditor_update").css({"display": "block"});
+function DEBUG_TESTUPDATE(){
+	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
 }

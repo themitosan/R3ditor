@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
 var RDT_totalFiles = 0;
