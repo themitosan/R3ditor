@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-
 var RDT_totalMenus = 3;
 var SAVE_totalMenus = 4;
 var RDT_aba_atual = undefined;
@@ -20,6 +19,7 @@ window.onresize = function(){
 }
 
 function reload(){
+	process.chdir(TEMP_APP_PATH);
 	localStorage.clear();
 	location.reload();
 }
@@ -51,9 +51,10 @@ function main_menu(anim){
 		$("#menu-topo-save").css({"display": "block"});
 	}
 	if (anim === 2){ // MSG
-		$("#msg-lbl-totalCommands").html(MSG_totalComandos);
 		document.title = APP_NAME + " - Message Editor (*.msg)";
+		$("#msg-lbl-totalCommands").html(MSG_totalComandos);
 		$("#menu-topo-msg").css({"display": "block"});
+		$("#menu-topo-MOD").css({"display": "none"});
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
@@ -63,6 +64,7 @@ function main_menu(anim){
 }
 
 function SAVE_showMenu(menuId){
+	$("#menu-topo-MOD").css({"display": "none"});
 	$("#img-logo").fadeOut({duration: 100, queue: false});
 	if (request_render_save !== true){
 		$("#menu-SAVE").css({"display": "block"});
@@ -346,13 +348,8 @@ function log_separador() {
 function showAbout(){
 	$("#menu-topo").css({"display": "none"});
 	$("#log-programa").css({"display": "none"});
+	$("#menu-topo-MOD").css({"display": "none"});
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
-}
-
-function closeAbout(){
-	$("#about-r3ditor").css({"display": "none"});
-	$("#log-programa").css({"display": "block"});
-	$("#menu-topo").css({"display": "block"});
 }
 
 /// MSG
@@ -509,6 +506,7 @@ function MSG_renderDialog(id, args, index, isMod){
 function RDT_showMenu(id){
 	var c = 1;
 	$("#img-logo").css({"display": "none"});
+	$("#menu-topo-MOD").css({"display": "none"});
 	while(c < RDT_totalMenus + 1){
 		$("#RDT_menu-" + c).css({"display": "none"});
 		c++;
@@ -643,19 +641,16 @@ function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});
 	$("#R3ditor_update").css({"display": "block"});
 }
-
 function R3DITORcloseUpdate(){
 	$("#menu-topo").css({"display": "block"});
 	$("#R3ditor_update").css({"display": "none"});
 }
-
 function R3DITORshowUpdateProgress(){
 	document.title = APP_NAME + " - Updating...";
 	$("#R3ditor_update").css({"display": "none"});
 	$("#progress_window").css({"display": "block"});
 }
-
-function R3DITOR_movePercent(percent, status){
+function R3DITOR_movePercent(id, percent, status){
 	var p = parseInt(percent);
 	if (p < 0){
 		p = 0;
@@ -663,12 +658,40 @@ function R3DITOR_movePercent(percent, status){
 	if (p > 100){
 		p = 100;
 	}
-	if (status === "" || status === undefined || status === null){
-		status = "Message";
+	// Update
+	if (id === 0){
+		if (status === "" || status === undefined || status === null){
+			status = "Message";
+		}
+		addLog('log', "Process - " + status);
+		document.getElementById('update_status').innerHTML = status;
+		document.getElementById('update_percent').innerHTML = p + "%";
+		$("#update_progressbar").css({"width": p + "%"});
+		scrollLog();
 	}
-	addLog('log', "UPDATE - " + status);
-	document.getElementById('update_status').innerHTML = status;
-	document.getElementById('update_percent').innerHTML = p + "%";
-	$("#update_progressbar").css({"width": p + "%"});
-	scrollLog();
+	// Wizard
+	if (id === 1){
+		$("#WZ_progressbar").animate({"width": p + "%"}, {duration: 250, queue: false});
+	}
+}
+
+/// Run game
+function R3DITOR_RUNGAME(id){
+	if (id === 0){
+		$("#img-logo").css({"display": "none"});
+		$("#menu-topo").css({"display": "none"});
+		$("#menu-topo-MOD").css({"display": "none"});
+	} else {
+		if (EXEC_BIO3_original !== ""){
+			$("#btn_run_bio3").css({"display": "inline"});
+		}
+		if (EXEC_BIO3_MERCE !== ""){
+			$("#btn_run_merce").css({"display": "inline"});
+		}
+		if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+			$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+		}
+		$("#img-logo").fadeIn({duration: 100, queue: false});
+		$("#menu-topo").fadeIn({duration: 100, queue: false});
+	}
 }

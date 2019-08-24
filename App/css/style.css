@@ -35,7 +35,7 @@ a{
     color: #fff;
 }
 
-li{
+.updater_title_holder, li{
     margin-top: 6px;
 }
 
@@ -955,7 +955,7 @@ li{
     border-radius: 6px;
     margin-bottom: 10px;
     text-align: -webkit-left;
-    background-image: linear-gradient(180deg, #68638a, #29273300);
+    background-image: linear-gradient(to bottom, #0e0e0e, #29273300);
 }
 
 .li_div{
@@ -968,14 +968,20 @@ li{
 
 .code{
     padding: 4px;
-    color: #b2b2d3;
+    color: #bfffc1;
+    user-select: all;
     border-radius: 4px;
-    background-color: #000;
+    font-family: monospace;
+    background-color: #010101;
 }
 
 .update_subtitle{
     font-size: x-large;
     font-style: italic;
+}
+
+.mod_menu{
+    top: 80%;
 }
 
 .update_progress_window{
@@ -997,4 +1003,20 @@ li{
     margin-bottom: 8px;
     background-color: #0f0;
     box-shadow: 0 0 10px #26562e;
+}
+
+.WZ_info{
+    padding: 4px;
+}
+
+.wizard{
+    top: 28%;
+    left: 28%;
+    width: 640px;
+    height: auto;
+    padding: 10px;
+    position: absolute;
+    margin-left: -50px;
+    border-radius: 6px;
+    background-color: #4c4c4c;
 }

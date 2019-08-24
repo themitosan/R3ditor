@@ -5,11 +5,11 @@
 */
 var BETA = false;
 var fs = undefined;
+var RE3_RUNNING = false;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
-var arquivoBruto = undefined;
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.2.4 [BETA]";
+var APP_VERSION = "0.2.5 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
@@ -17,7 +17,6 @@ var APP_NAME = "R3ditor V." + APP_VERSION;
 window.onload = function(){
 	load();
 }
-
 function load(){
 	localStorage.clear();
 	console.info(APP_NAME);
@@ -30,8 +29,10 @@ function load(){
 		fs = require('fs');
 		APP_PATH = process.cwd();
 		checkFolders();
+		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
+		$("#img-logo").fadeOut({duration: 2200, queue: false});
 		addLog('error', 'ERROR: Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR: This is not Node-Webkit! ÕwÕ');
 		addLog('error', err);
@@ -52,6 +53,9 @@ function checkFolders(){
 	}
 	if (fs.existsSync(APP_PATH + "\\Update") == false){
 		fs.mkdirSync(APP_PATH + "\\Update");
+	}
+	if (fs.existsSync(APP_PATH + "\\Assets") == false){
+		fs.mkdirSync(APP_PATH + "\\Assets");
 	}
 	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
 		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
@@ -80,7 +84,7 @@ function addLog(type, texto){
 	$("#log-programa").append(logTemplate);
 }
 
-// Notifica?es Desktop
+// Notifications Desktop
 function showNotify(titulo, texto, tempo){
 	if (titulo == ""){
 		titulo = "R3ditor - Notification";
@@ -104,6 +108,61 @@ function showNotify(titulo, texto, tempo){
 	}
 }
 
+function R3DITOR_RUN_RE3(mode){
+	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === "" || GAME_PATH === "" || GAME_PATH === undefined){
+		addLog('error', 'ERROR - The game path is not defined!');
+		console.error("ERROR - The game path is not defined!");
+	} else {
+		try{
+			R3DITOR_RUNGAME(0);
+			if (WZ_showWizard === true){
+				$("#WZ_BTN_2").css({"display": "none"});
+				document.title = APP_NAME + " - TESTING Resident Evil 3 / Biohazard 3...";
+			} else {
+				RE3_RUNNING = true;
+				document.title = APP_NAME + " - RUNNING Resident Evil 3 / Biohazard 3...";
+			}
+			if (mode === 0){
+				process.chdir(GAME_PATH);
+			} else {
+				process.chdir(APP_PATH + "\\Assets");
+			}
+			runExternalSoftware(EXEC_BIO3_original);
+		}catch(err){
+			if (WZ_showWizard === true){
+				$("#WZ_BTN_2").css({"display": "inline"});
+			}
+			console.error("ERROR - Something went wrong! - " + err);
+			addLog('error', 'ERROR - Something went wrong! - ' + err);
+		}
+	}
+}
+
+function R3DITOR_RUN_MERCE(mode){
+	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === "" || GAME_PATH === "" || GAME_PATH === undefined){
+		addLog('error', 'ERROR - The game path is not defined!');
+		console.error("ERROR - The game path is not defined!");
+	} else {
+		try{
+			R3DITOR_RUNGAME(0);
+			RE3_RUNNING = true;
+			if (mode === 0){
+				process.chdir(GAME_PATH);
+			} else {
+				process.chdir(APP_PATH + "\\Assets");
+			}
+			document.title = APP_NAME + " - RUNNING Mercenaries...";
+			runExternalSoftware(EXEC_BIO3_MERCE);
+		}catch(err){
+			if (WZ_showWizard === true){
+				$("#WZ_BTN_2").css({"display": "inline"});
+			}
+			console.error("ERROR - Something went wrong! - " + err);
+			addLog('error', 'ERROR - Something went wrong! - ' + err);
+		}
+	}
+}
+
 // Remover pastas recursivamente
 function deleteFolderRecursive(path){
 	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);
@@ -119,7 +178,8 @@ function getFileName(file){
 	var filterD = filterC.replace(".sav", "");
 	var filterE = filterD.replace(".exe", "");
 	var filterF = filterE.replace(".ini", "");
-	return filterF;
+	var filterG = filterF.replace(".r3ditor", "");
+	return filterG;
 }
 
 /// Obter Dia, Data e Hora
@@ -179,18 +239,32 @@ function runExternalSoftware(exe, args){
 	}
 	const ls = spawn(exe, args);
 	ls.stdout.on('data', (data) => {
-		addLog('log', "External App: " + data);
+		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
 	});
 	ls.stderr.on('data', (data) => {
-		addLog('log', "External App: " + data);
+		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
 		EXTERNAL_APP_RUNNING = false;
+		if (WZ_showWizard === true && WZ_lastMenu === 3){
+			$("#WZ_BTN_2").css({"display": "inline"});
+		}
+		if (RE3_RUNNING === true){
+			RE3_RUNNING = false;
+			R3DITOR_RUNGAME(1);
+		}
+		document.title = APP_NAME;
+		process.chdir(TEMP_APP_PATH);
 		if (exe !== "cmd"){
-			addLog('log', 'External App: The application was finished with exit code ' + code) + '.';
+			if (exe === EXEC_BIO3_original || exe === EXEC_BIO3_MERCE){
+				addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code ' + code + '.');
+			} else {
+				addLog('log', 'External App - The application was finished with exit code ' + code + '.');
+			}
 			scrollLog();
+			return code;
 		}
 	});
 }
@@ -221,6 +295,24 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 
 */
 
+/// Wizard
+function triggerLoadWZ(){
+	$("#loadWZForm").trigger('click');
+}
+
+function setLoadWIZARDFile(){
+	var cFile = document.getElementById('loadWZForm').files[0]
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (BETA == true){
+			addLog("log", "Wizard - Load Canceled!");
+		}
+	} else {
+		BIO3_original = undefined;
+		WZ_LOADRE3(cFile.path);
+		document.getElementById('loadWZForm').value = "";
+	}
+}
+
 /// Save
 function triggerLoadSAVE(){
 	$("#loadSaveForm").trigger('click');
@@ -235,6 +327,7 @@ function setLoadSaveFile(){
 	} else {
 		SAVE_arquivoBruto = undefined;
 		CARREGAR_SAVE(cFile.path);
+		document.getElementById('loadSaveForm').value = "";
 	}
 }
 
@@ -252,6 +345,7 @@ function setLoadMSGFile(){
 	} else {
 		MSG_arquivoBruto = undefined;
 		MSG_CARREGAR_ARQUIVO(cFile.path);
+		document.getElementById('loadMSGForm').value = "";
 	}
 }
 
@@ -269,5 +363,6 @@ function setLoadRDTFile(){
 	} else {
 		RDT_arquivoBruto = undefined;
 		RDT_CARREGAR_ARQUIVO(cFile.path);
+		document.getElementById('loadRDTForm').value = "";
 	}
 }

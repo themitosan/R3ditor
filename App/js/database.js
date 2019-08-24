@@ -552,9 +552,7 @@ var MSG_DICIONARIO = {
 	"fc": [false, "(Line Break)<br>"], // Enter
 	"fd": [false, "(Pause)"],
 	"ff": [false, "(Unknown CHAR)"],
-	
 	// Comandos especiais
-
 	"fa": [true, "(Function: Show Message ", 	    	 1],
 	"fe": [true, "(Function: End Message ",				 2],
 	"ea": [true, "(Function: Show Special Char ",		 4], // (Depende do valor inserido)

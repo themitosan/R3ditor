@@ -1,24 +1,22 @@
 /*
 	R3ditor - update.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	fa 05 00 fc 28 4b 4e 41 49 00 25 4c 4f 51 49 00 21 50 00 2f 45 50 00 20 4b 48 4b 4e 00 1d 49 41 50 fe 00
 */
-
 var forceUpdat = 0;
 var TEST_RELEASE = false;
-var internal_version = 5;
-
+var internal_version = 6;
+var R3DITOR_check_for_updates = 0;
 function forceUpdate(){
 	forceUpdat++;
 	if (forceUpdat === 10){
 		internal_version--;
-		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans.</i></font>');
+		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		scrollLog();
 		$("#img-logo").fadeOut({duration: 2200, queue: false});
 		$("#hidden_msg").fadeIn({duration: 2200, queue: false});
 	}
 }
-
 function checkForUpdates(){
 	R3DITOR_downloadFile("https://raw.githubusercontent.com/themitosan/R3ditor/master/version.r3ditor", APP_PATH + "\\App\\check.r3ditor");
 	var wait = setInterval(function(){
@@ -28,7 +26,6 @@ function checkForUpdates(){
 		}
 	}, 50);
 }
-
 function R3DITOR_readUpdate(file){
 	var c = 3;
 	var update_info = [];
@@ -70,45 +67,43 @@ function R3DITOR_readUpdate(file){
 }
 
 /// Apply Update
-
 function R3DITOR_applyUpdate(){
 	R3DITORshowUpdateProgress();
 	if (fs.existsSync(APP_PATH + "\\App\\check.r3ditor") === true){
 		fs.unlinkSync(APP_PATH + "\\App\\check.r3ditor");
 	}
-	R3DITOR_movePercent(1, "Downloading \"Master\" branch from GitHub...");
+	R3DITOR_movePercent(0, 1, "Downloading \"Master\" branch from GitHub...");
 	R3DITOR_downloadFile("https://codeload.github.com/themitosan/R3ditor/zip/master", APP_PATH + "\\Update\\master.zip");
 	var timer = setInterval(function(){
 		if (DOWNLOAD_COMPLETE === true){
 			clearInterval(timer);
-			R3DITOR_movePercent(15, "Download Complete!");
+			R3DITOR_movePercent(0, 15, "Download Complete!");
 			R3DITOR_update_0();
 		}
 	}, 50);
 }
-
 function R3DITOR_update_0(){
 	clearInterval(timer);
 	if (fs.existsSync(APP_PATH + "\\Update\\master.zip") === true){
-		R3DITOR_movePercent(20, "Extracting Package...");
+		R3DITOR_movePercent(0, 20, "Extracting Package...");
 		runExternalSoftware(APP_PATH + "\\App\\tools\\7za.exe", ["x", APP_PATH + "\\Update\\master.zip", "-o" + APP_PATH + "\\Update\\Extract", "-aoa"]);
 		var timer = setInterval(function(){
 			if (EXTERNAL_APP_RUNNING === false){
 				clearInterval(timer);
-				R3DITOR_movePercent(25, "Extract OK!");
+				R3DITOR_movePercent(0, 25, "Extract OK!");
 				R3DITOR_update_1();
 			}
 		}, 50);
 	} else {
-		addLog('error', 'ERROR: Something went wrong! - The download files was not found!');
+		addLog('error', 'ERROR: Something went wrong! - The download file was not found!');
 		scrollLog();
+		R3DITOR_applyUpdate();
 	}
 }
-
 function R3DITOR_update_1(){
-	R3DITOR_movePercent(26, "Removing zip file...");
+	R3DITOR_movePercent(0, 26, "Removing zip file...");
 	fs.unlinkSync(APP_PATH + "\\Update\\master.zip");
-	R3DITOR_movePercent(40, "Removing old files...");
+	R3DITOR_movePercent(0, 40, "Removing old files...");
 	deleteFolderRecursive(APP_PATH + "\\App");
 	var timer = setInterval(function(){
 		if (EXTERNAL_APP_RUNNING === false){
@@ -117,11 +112,10 @@ function R3DITOR_update_1(){
 		}
 	}, 50);
 }
-
 function R3DITOR_update_2(){
 	if (fs.existsSync(APP_PATH + "\\App") == false){
 		fs.mkdirSync(APP_PATH + "\\App");
-		R3DITOR_movePercent(50, "Moving the new files...");
+		R3DITOR_movePercent(0, 50, "Moving the new files...");
 		runExternalSoftware("cmd", ["/C", "xcopy", APP_PATH + "\\Update\\Extract\\R3ditor-master\\App\\*", APP_PATH + "\\App\\", '/h', '/i', '/c', '/k', '/e', '/r', '/y']);
 		var timer = setInterval(function(){
 			if (EXTERNAL_APP_RUNNING === false){
@@ -135,10 +129,9 @@ function R3DITOR_update_2(){
 		scrollLog();
 	}
 }
-
 function R3DITOR_update_3(){
 	clearInterval(timer);
-	R3DITOR_movePercent(75, "Cleaning some files...");
+	R3DITOR_movePercent(0, 75, "Cleaning some files...");
 	deleteFolderRecursive(APP_PATH + "\\Update");
 	var timer = setInterval(function(){
 		if (EXTERNAL_APP_RUNNING === false){
@@ -147,9 +140,8 @@ function R3DITOR_update_3(){
 		}
 	}, 50);
 }
-
 function R3DITOR_update_4(){
-	R3DITOR_movePercent(100, "Update Ok!");
+	R3DITOR_movePercent(0, 100, "Update Ok!");
 	document.title = APP_NAME + " - Update Ok!";
 	$("#img-logo").fadeOut({duration: 2000, queue: false});
 	$("#btn_update_ok").fadeIn({duration: 500, queue: false});

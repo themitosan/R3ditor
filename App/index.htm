@@ -10,9 +10,11 @@
 		<!-- Execs -->
 		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/design.js"></script>
+		<script type="text/javascript" src="js/wizard.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/update.js"></script>
 		<!-- Modulos -->
+		<script type="text/javascript" src="js/bio3ini.js"></script>
 		<script type="text/javascript" src="js/save.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
@@ -20,7 +22,7 @@
 	</head>
 	<body>
 		<!-- Menu Principal -->
-		<div class="menu-topo" id="menu-topo">
+		<div class="menu-topo none" id="menu-topo">
 			<input type="button" class="botao-menu" value="Bio 3 Save Editor (.sav)" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="Bio 3 MSG Editor (.msg)" onclick="main_menu(2);">
 			<input type="button" class="botao-menu" value="Bio 3 RDT Editor (.rdt)" onclick="main_menu(3);">
@@ -29,6 +31,15 @@
 			<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
 			<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
 		</div>
+
+		<!-- Menu MOD -->
+		<div class="menu-topo mod_menu none" id="menu-topo-MOD">
+			<input type="button" class="botao-menu none" id="btn_run_bio3" value="Run Resident Evil 3 / Bio 3" onclick="R3DITOR_RUN_RE3(0);">
+			<input type="button" class="botao-menu none" id="btn_run_merce" value="Run Mercenaries" onclick="R3DITOR_RUN_MERCE(0);">
+			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" value="Run Mercenaries (Mod)" onclick="R3DITOR_RUN_MERCE(1);">
+			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="R3DITOR_RUN_RE3(1);">
+		</div>
+
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
 			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoadRDT();">
@@ -434,7 +445,7 @@
 				Shinji Mikami / Capcom Dev 1 Team - Thanks by creating the game of my life!
 				<br><br>
 				Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
-				<input type="button" class="botao-menu" value="Go Back" onclick="closeAbout();">
+				<input type="button" class="botao-menu" value="Go Back" onclick="reload();">
 			</center>
 		</div>
 		<!-- Update Info -->
@@ -443,7 +454,7 @@
 				<font class="titulo">There is a new update!</font><br>
 				New version: <font id="new_version">???</font>
 				<div class="update_details">
-					<center><font id="new_version_title" class="update_subtitle">???</font></center><br>
+					<div class="updater_title_holder"><center><font id="new_version_title" class="update_subtitle">???</font></center></div>
 					<div id="updates_info" class="li_div">
 						<!-- Os updates vão aqui! -->
 					</div>
@@ -459,6 +470,20 @@
 			<div class="progressBar" id="update_progressbar"></div>
 			<input type="button" value="Reload App" class="botao-menu none" id="btn_update_ok" onclick="reload();">
 		</div>
+
+		<!-- Wizard -->
+		<div class="wizard none" id="WZ_dialog">
+			<center><font class="titulo" id="WZ_title">???</font></center><br>
+			<div id="WZ_content" class="WZ_info">
+				<!-- os dialogos aparecerão aqui -->
+			</div>
+			<div class="progressBar none" id="WZ_progressbar"></div>
+			<center>
+				<input type="button" id="WZ_BTN_1" class="botao-menu" value="???">
+				<input type="button" id="WZ_BTN_2" class="botao-menu" value="???">
+			</center>
+		</div>
+
 		<!-- AppLogo -->
 		<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
 		<!-- File Loader -->
@@ -466,6 +491,7 @@
 			<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>
 			<input type="file" value="" onchange="setLoadMSGFile();" id="loadMSGForm" accept=".msg"/>
 			<input type="file" value="" onchange="setLoadSaveFile();" id="loadSaveForm" accept=".sav"/>
+			<input type="file" value="" onchange="setLoadWIZARDFile();" id="loadWZForm" accept=".exe"/>
 		</div>
 	</body>
 </html>
