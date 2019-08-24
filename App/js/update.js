@@ -5,7 +5,7 @@
 */
 var forceUpdat = 0;
 var TEST_RELEASE = false;
-var internal_version = 7;
+var internal_version = 8;
 var R3DITOR_check_for_updates = 0;
 function forceUpdate(){
 	forceUpdat++;
