@@ -1,5 +1,5 @@
-6
-0.2.5
+8
+0.2.6
 Game Launcher and Wizard guide!
 <font class="feature_title">Improvements:</font><br>
 <li>R3ditor now have a <u>Wizard guide</u>!<br>The first time you open the program (or in this case, update it) you will see a welcome screen for the program!<br><br>You can enable new options like starting the game via R3ditor <s>(unlike BIO3GPS that doesn't work!)</s> And also extracting Rofs files simply and conveniently - not to mention that in this mode you can open the game in various ways or change the same without touching the original files.<br><br>When you finish the initial process, the unpacked version of the game will be in the "Assets" folder - inside the R3ditor folder.<br><br><i>Little by little, R3ditor is becoming a great modification interface of the best game ever!</i></li><br>
