@@ -11,10 +11,11 @@ function forceUpdate(){
 	forceUpdat++;
 	if (forceUpdat === 10){
 		internal_version--;
+		TEST_RELEASE = true;
 		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
-		scrollLog();
 		$("#img-logo").fadeOut({duration: 2200, queue: false});
 		$("#hidden_msg").fadeIn({duration: 2200, queue: false});
+		scrollLog();
 	}
 }
 function checkForUpdates(){
