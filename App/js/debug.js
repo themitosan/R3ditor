@@ -66,6 +66,6 @@ function DEBUG_RDTMSGRANGE(value){
 }
 
 function DEBUG_TESTUPDATE(){
-	TEST_RELEASE = true;
+	TEST_RELEASE = false;
 	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
 }

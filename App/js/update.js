@@ -5,7 +5,7 @@
 */
 var forceUpdat = 0;
 var TEST_RELEASE = false;
-var internal_version = 6;
+var internal_version = 7;
 var R3DITOR_check_for_updates = 0;
 function forceUpdate(){
 	forceUpdat++;
@@ -39,7 +39,7 @@ function R3DITOR_readUpdate(file){
 			if (TEST_RELEASE === true){
 				$("#aplicarUpdate").css({"display": "none"});
 			} else {
-				$("#aplicarUpdate").css({"display": "block"});
+				$("#aplicarUpdate").css({"display": "inline"});
 			}
 			document.getElementById('new_version').innerHTML = update_info[1];
 			document.getElementById('new_version_title').innerHTML = update_info[2];
