@@ -3,7 +3,7 @@ With this file you can see my roadmap for this project.
 This file can (and will be) modified several times!
 
 ## Room Data Table (RDT)
-- ~~Read items, files and maps!~~
+- Read items, files and maps! [wip]
 - Read messages of every single RDT file! (FA 02) [WIP]
 - Read all Doors
 - Read Enemies on map
