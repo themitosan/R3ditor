@@ -106,7 +106,7 @@ function SAVE_showMenu(menuId){
 		$("#msg-viewer").addClass('none');
 		$("#save-carlos").removeClass('none');
 	}
-	if (menuId === 3){ // Menu OpÃ§Ãµes
+	if (menuId === 3){ // Menu Opções
 		addInfo(1, "00");
 		SAVE_applyMenuFocus(4);
 		$("#save-jill").addClass('none');
@@ -363,7 +363,6 @@ function MSG_showMenu(id){
 		MSG_doTheTitleThing();
 	}
 }
-
 function MSG_doTheTitleThing(){
 	if (ORIGINAL_FILENAME === undefined){
 		document.title = APP_NAME + " - Message Editor / Translator";
@@ -371,20 +370,16 @@ function MSG_doTheTitleThing(){
 		document.title = APP_NAME + " - Message Editor / Translator - File: " + ORIGINAL_FILENAME;
 	}
 }
-
 function cleanMSGFields(){
 	MSG_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = undefined;
 	document.getElementById('msg-hex-toTrans').value = "";
-	document.getElementById("text-msg-hexToASCII").innerHTML = "";
 	document.getElementById("div-msg-traduzido").innerHTML = "";
-	document.getElementById("text-msg-raw").innerHTML = "";
+	document.getElementById("text-msg-raw").innerHTML = " ";
 }
-
 function MSG_clearHexTextfield(){
 	document.getElementById('msg-hex-toTrans').value = "";
 }
-
 function MSG_renderDialog(id, args, index, isMod){
 	if (args === undefined){
 		args = "";
@@ -434,7 +429,7 @@ function MSG_renderDialog(id, args, index, isMod){
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_ADDTEXT;
 		if (localStorage.getItem('MSG_Mensagem-' + args) !== null){
 			args = localStorage.getItem('MSG_Mensagem-' + args);
-			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(FormataÃ§Ã£o: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
+			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
 		}
 		document.getElementById('msg-txt-toTrans').value = correcao;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -478,7 +473,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Trocar CÃ¢mera
+	// Trocar Câmera
 	if (id === 7){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Change Camera";
@@ -538,6 +533,30 @@ function RDT_showMenu(id){
 	RDT_applyMenuFocus(id);
 	RDT_Error_404();
 	scrollLog();
+}
+
+function RDT_BG_display(){
+	if (enable_mod === true){
+		var c = 0;
+		while (c < 9){
+			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG")){
+				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
+				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
+				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
+				$("#RDT_BG_1").fadeIn({duration: 500, queue: false});
+				$("#RDT_BG_2").fadeIn({duration: 500, queue: false});
+				$("#RDT_BG_3").fadeIn({duration: 500, queue: false});
+				break;
+			} else {
+				c++;
+			}
+		}
+		if (c === 9 || c > 9){
+			$("#RDT_BG_1").css({"display": "none"});
+			$("#RDT_BG_2").css({"display": "none"});
+			$("#RDT_BG_3").css({"display": "none"});
+		}
+	}
 }
 
 function RDT_Error_404(){

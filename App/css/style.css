@@ -107,6 +107,7 @@ a{
 .menu{
     top: 84px;
     width: 98%;
+    z-index: 1;
     padding: 6px;
     height: 530px;
     overflow: auto;
@@ -149,14 +150,14 @@ a{
 }
 
 .menu-general-content{
-    width: 99%;
-	color: #fff;
+    z-index: 1;
+    color: #fff;
     padding: 4px;
     height: 520px;
     margin-top: 2px;
     border-radius: 6px;
     text-shadow: 0 0 5px #367948;
-    background-image: linear-gradient(to bottom, #212121, #000123);
+    background-image: linear-gradient(to bottom, #212121c7, #000123b5);
 }
 
 .menu-geral-text{
@@ -1019,4 +1020,19 @@ a{
     margin-left: -50px;
     border-radius: 6px;
     background-color: #4c4c4c;
+}
+
+.RDT_BG_IMAGE{
+    top: 16px;
+    left: 10px;
+    opacity: 1;
+    z-index: -1;
+    height: 514px;
+    width: 1300px;
+    filter: blur(2px);
+    border-radius: 6px;
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }

@@ -40,12 +40,14 @@ function copyToClipboard(text) {
 
 /// Reload js file
 function reloadJsFile(src) {
-	console.log("Recarregando Script: " + src);
+	console.info("Recarregando Script: " + src);
+	addLog('error', "Recarregando Script: " + src);
     $('script[src="' + src + '"]').remove();
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
     script.src = src;
     head.appendChild(script);
+    scrollLog();
 }
 
 /// Undo solvehex
@@ -60,12 +62,21 @@ function DEBUG_splitHex(hex){
 	return fina.slice(0, fina.length - 1);
 }
 
-function DEBUG_RDTMSGRANGE(value){
+function DEBUG_RDT_MSG_END_RANGE(value){
+	BETA = true;
+	reloadJsFile('js/database.js');
 	RDT_MSG_finalLenght = parseInt(value);
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
 
+function DEBUG_RDT_MSG_START_RANGE(value){
+	BETA = true;
+	reloadJsFile('js/database.js');
+	RDT_MSG_startLength = parseInt(value);
+	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+}
+
 function DEBUG_TESTUPDATE(){
-	TEST_RELEASE = false;
+	TEST_RELEASE = true;
 	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
 }

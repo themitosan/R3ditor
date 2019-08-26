@@ -4,16 +4,16 @@ This file can (and will be) modified several times!
 
 ## Room Data Table (RDT)
 - ~~Read items, files and maps!~~
-- Read messages of every single RDT file! (FA 02)
+- Read messages of every single RDT file! (FA 02) [WIP]
 - Read all Doors
 - Read Enemies on map
 - Edit the messages on MSG editor
 - Edit every type of item, file or maps! (Header 68)
 - Edit all Doors
 - Edit Enemies on map
-- Add a Screenshot of map in General Tab (BSS)
+- ~~Add a Screenshot of map in all tabs (BSS)~~
 
-## Saves (RDT)
+## Saves (Bu00.sav)
 - Read the maps info
 - Read the files info
 - Modify how many (and which one) files you have
@@ -21,7 +21,7 @@ This file can (and will be) modified several times!
 - Add the ability to exchange where you are in the game
 - Add Invencible Mode (Add a lot of health to Jill / Carlos)
 
-## Bio3.ini (INI)
+## Bio3.ini (INI) [WIP]
 - Create this section on App
 - Modify Res.
 - Modify BPP
@@ -34,9 +34,9 @@ This file can (and will be) modified several times!
 
 ## Advanced and Long-Term Goals
 - ~~Create a updater~~
-- Upgrade the updater design! (I know, this hurts my eyes too!)
-- Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)
-- Ask the user where the game is Installed to make all the tools work simultaneously
-- Add the option to extract all the rofs files
+- ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
+- ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
+- ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
+- Add the option to extract all the rofs files [WIP]
 - Add the backup function in case of unwanted action (Or bug - who knows...)
-- Misc: Add support for saves from RE2! (They are very similar!)
+- Misc: Add support for saves from RE2! (They are very similar! ~~ - Also, don't expect this sooner! ~~)

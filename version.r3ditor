@@ -1,9 +1,10 @@
-8
-0.2.6
-Game Launcher and Wizard guide!
+9
+0.2.7
+Small steps in direction of freedom!
 <font class="feature_title">Improvements:</font><br>
-<li>R3ditor now have a <u>Wizard guide</u>!<br>The first time you open the program (or in this case, update it) you will see a welcome screen for the program!<br><br>You can enable new options like starting the game via R3ditor <s>(unlike BIO3GPS that doesn't work!)</s> And also extracting Rofs files simply and conveniently - not to mention that in this mode you can open the game in various ways or change the same without touching the original files.<br><br>When you finish the initial process, the unpacked version of the game will be in the "Assets" folder - inside the R3ditor folder.<br><br><i>Little by little, R3ditor is becoming a great modification interface of the best game ever!</i></li><br>
-<li>The modification part of configuration files (Bio3.ini) was started because it is necessary in the process of extracting Rofs files.<br>I <i>believe</i> a good deal of the internal code has been written!</li><br>
-<li>The update screen has improved a little - at least it's not as rude to look as the one you're seeing right now!</li><br>
-<font class="feature_title">Bug-fixes:</font><br>
-<li>An old bug that doesn't allow you to open the same file more than once has been removed - finally!</li><br>
+<li>Now you can have a visual reference of the file you are editing!<br>
+If you do the initial process and extract the game assets, you will see that the background of the tabs will show an image corresponding to the map you have opened!</li><br>
+<li>The reading of the messages is more accurate! <i><s>(<u>With some hacks</u> - relax, i will get rid of them asap!)</s></i><br>This was done with some new filters on the search process!</li><br>
+<font class="feature_title">Bugfixes:</font><br>
+<li>The error on file R214 was fixed! (Unknown Header)</li><br>
+<li>A small bug on MSG visualization was removed.<br><i>(I think nobody noticed this)</i></li><br>

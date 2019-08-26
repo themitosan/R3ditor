@@ -9,11 +9,10 @@ var RE3_RUNNING = false;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.2.6 [BETA]";
+var APP_VERSION = "0.2.7 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
-
 window.onload = function(){
 	load();
 }
@@ -117,10 +116,14 @@ function R3DITOR_RUN_RE3(mode){
 			R3DITOR_RUNGAME(0);
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({"display": "none"});
-				document.title = APP_NAME + " - TESTING Resident Evil 3 / Biohazard 3...";
+				var msg = " - TESTING Resident Evil 3 / Biohazard 3...";
+				document.title = APP_NAME + msg;
+				addLog('log', "INFO" + msg);
 			} else {
 				RE3_RUNNING = true;
-				document.title = APP_NAME + " - RUNNING Resident Evil 3 / Biohazard 3...";
+				var msg = " - RUNNING Resident Evil 3 / Biohazard 3...";
+				document.title = APP_NAME + msg;
+				addLog('log', "INFO" + msg);
 			}
 			if (mode === 0){
 				process.chdir(GAME_PATH);
@@ -303,9 +306,8 @@ function triggerLoadWZ(){
 function setLoadWIZARDFile(){
 	var cFile = document.getElementById('loadWZForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		if (BETA == true){
-			addLog("log", "Wizard - Load Canceled!");
-		}
+		addLog("log", "Wizard - Load Canceled!");
+		scrollLog();
 	} else {
 		BIO3_original = undefined;
 		WZ_LOADRE3(cFile.path);
@@ -321,9 +323,8 @@ function triggerLoadSAVE(){
 function setLoadSaveFile(){
 	var cFile = document.getElementById('loadSaveForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		if (BETA == true){
-			addLog("log", "Save - Load Canceled!");
-		}
+		addLog("log", "Save - Load Canceled!");
+		scrollLog();
 	} else {
 		SAVE_arquivoBruto = undefined;
 		CARREGAR_SAVE(cFile.path);
@@ -339,9 +340,8 @@ function triggerLoadMSG(){
 function setLoadMSGFile(){
 	var cFile = document.getElementById('loadMSGForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		if (BETA == true){
-			addLog("log", "MSG - Load Canceled!");
-		}
+		addLog("log", "MSG - Load Canceled!");
+		scrollLog();
 	} else {
 		MSG_arquivoBruto = undefined;
 		MSG_CARREGAR_ARQUIVO(cFile.path);
@@ -357,10 +357,12 @@ function triggerLoadRDT(){
 function setLoadRDTFile(){
 	var cFile = document.getElementById('loadRDTForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		if (BETA == true){
-			addLog("log", "RDT - Load Canceled!");
-		}
+		addLog("log", "RDT - Load Canceled!");
+		scrollLog();
 	} else {
+		if (BETA === true){
+			BETA = false;
+		}
 		RDT_arquivoBruto = undefined;
 		RDT_CARREGAR_ARQUIVO(cFile.path);
 		document.getElementById('loadRDTForm').value = "";

@@ -470,9 +470,9 @@ function WZ_LOADRE3(refile){
 }
 
 function WZ_makeConfigs(){
+	EXEC_BIO3_MERCE = "";
 	R3DITOR_movePercent(1, 99);
 	R3DITOR_movePercent(0, 95, "Creating Configs File...");
-	EXEC_BIO3_MERCE = "";
 	GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "").replace("Bio3_PC.exe", "");
 	if (fs.existsSync(GAME_PATH + "bio3_pc_mercenaries.exe") === true){
 		EXEC_BIO3_MERCE = GAME_PATH + "bio3_pc_mercenaries.exe";

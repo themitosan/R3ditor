@@ -141,6 +141,48 @@ var ITEM = {
 	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
 }
 
+var RDT_MSG_MENSAGENSINVALIDAS = {
+	"fa02fdb4fa00fcfa02fe82": [true],
+	"fa00000099ff00000e01aafe67": [true],
+	"0e000d909db85a36a5506d91d141fe55": [true],
+	"0100000000aafc16010000000015fe20": [true],
+	"0113000000aafc20011300000015fe36": [true],
+	"0f0001f0f118c9f2e546ec140e41fea3": [true],
+	"1f000f808f01f469f2007db00a41fef5": [true],
+	"0f000f808f46b3beb116bb801241feaa": [true],
+	"fa02fc000000aecdd4ae70ea1880696275a666000000fe00": [true]
+}
+
+var RDT_MSG_LISTANEGRA = {
+	// Ordem: Mapa, Start Range & End Range
+	// Em breve essas hacks não estarão mais aqui
+	"r101": [0,     63390],
+	"r102": [5000,      0],
+	"r103": [0,     63390],
+	"r104": [1206,      0],
+	"r105": [0,     48000],
+	"r106": [0,    500000],
+	"r114": [0,     16529],
+	"r116": [0,     14360],
+	"r119": [0, 	 9000],
+	"r11b": [0,     80000],
+	"r120": [0,     58700],
+	"r121": [0,     62002],
+	"r201": [0,     80000],
+	"r205": [0,     69000],
+	"r208": [0,     70000],
+	"r209": [1, 		0],
+	"r20a": [500,  100000],
+	"r20c": [0,     80000],
+	"r211": [0,    100000],
+	"r214": [0,     70000],
+	"r215": [0,     81000],
+	"r30b": [0, 	90000],
+	"r316": [1998, 	83000],
+	"r317": [0,     82000],
+	"r40b": [0,     82010]
+}
+
 var FILES = {
 	"86": ["Dario's Memo"],
 	"87": ["Mercenary's Diary"],
