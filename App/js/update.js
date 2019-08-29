@@ -5,7 +5,7 @@
 */
 var forceUpdat = 0;
 var TEST_RELEASE = false;
-var internal_version = 9;
+var internal_version = 10;
 var R3DITOR_check_for_updates = 0;
 function forceUpdate(){
 	forceUpdat++;
@@ -19,13 +19,18 @@ function forceUpdate(){
 	}
 }
 function checkForUpdates(){
-	R3DITOR_downloadFile("https://raw.githubusercontent.com/themitosan/R3ditor/master/version.r3ditor", APP_PATH + "\\App\\check.r3ditor");
-	var wait = setInterval(function(){
-		if (DOWNLOAD_COMPLETE === true){
-			R3DITOR_readUpdate(APP_PATH + "\\App\\check.r3ditor");
-			clearInterval(wait);
-		}
-	}, 50);
+	if (navigator.onLine === true){
+		R3DITOR_downloadFile("https://raw.githubusercontent.com/themitosan/R3ditor/master/version.r3ditor", APP_PATH + "\\Update\\check.r3ditor");
+		var wait = setInterval(function(){
+			if (DOWNLOAD_COMPLETE === true){
+				R3DITOR_readUpdate(APP_PATH + "\\Update\\check.r3ditor");
+				clearInterval(wait);
+			}
+		}, 50);
+	} else {
+		addLog('error', 'ERROR - You are offline!');
+		scrollLog();
+	}
 }
 function R3DITOR_readUpdate(file){
 	var c = 3;
@@ -69,19 +74,29 @@ function R3DITOR_readUpdate(file){
 
 /// Apply Update
 function R3DITOR_applyUpdate(){
-	R3DITORshowUpdateProgress();
-	if (fs.existsSync(APP_PATH + "\\App\\check.r3ditor") === true){
-		fs.unlinkSync(APP_PATH + "\\App\\check.r3ditor");
-	}
-	R3DITOR_movePercent(0, 1, "Downloading \"Master\" branch from GitHub...");
-	R3DITOR_downloadFile("https://codeload.github.com/themitosan/R3ditor/zip/master", APP_PATH + "\\Update\\master.zip");
-	var timer = setInterval(function(){
-		if (DOWNLOAD_COMPLETE === true){
-			clearInterval(timer);
-			R3DITOR_movePercent(0, 15, "Download Complete!");
-			R3DITOR_update_0();
+	if (navigator.onLine === true){
+		R3DITORshowUpdateProgress();
+		if (fs.existsSync(APP_PATH + "\\App\\check.r3ditor") === true){
+			fs.unlinkSync(APP_PATH + "\\App\\check.r3ditor");
 		}
-	}, 50);
+		R3DITOR_movePercent(0, 1, "Downloading \"Master\" branch from GitHub...");
+		R3DITOR_downloadFile("https://codeload.github.com/themitosan/R3ditor/zip/master", APP_PATH + "\\Update\\master.zip");
+		var timer = setInterval(function(){
+			if (DOWNLOAD_COMPLETE === true){
+				clearInterval(timer);
+				R3DITOR_movePercent(0, 15, "Download Complete!");
+				R3DITOR_update_0();
+			}
+		}, 50);
+	} else {
+		document.title = APP_NAME + " - ERROR!";
+		addLog('error', 'ERROR - You are offline!');
+		R3DITOR_movePercent(0, 100, "ERROR - You are offline!");
+		addLog('error', 'Check your internet status, Reload R3ditor and try again!');
+		$("#btn_update_ok").fadeIn({duration: 200, queue: false});
+		$("#progress_window").css({"top": "528px", "height": "74px"});
+		scrollLog();
+	}
 }
 function R3DITOR_update_0(){
 	clearInterval(timer);

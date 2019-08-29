@@ -8,8 +8,11 @@ var fs = undefined;
 var RE3_RUNNING = false;
 var APP_PATH = undefined;
 var STATUS = "Undefined";
+var EXTERNAL_APP_PID = 0;
+var HEX_EDITOR = undefined;
+var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.2.7 [BETA]";
+var APP_VERSION = "0.2.8 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
@@ -56,6 +59,12 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Assets") == false){
 		fs.mkdirSync(APP_PATH + "\\Assets");
 	}
+	if (fs.existsSync(APP_PATH + "\\Configs") == false){
+		fs.mkdirSync(APP_PATH + "\\Configs");
+	}
+	if (fs.existsSync(APP_PATH + "\\Configs\\RDT") == false){
+		fs.mkdirSync(APP_PATH + "\\Configs\\RDT");
+	}
 	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
 		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
 	}
@@ -81,6 +90,19 @@ function addLog(type, texto){
 	}
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$("#log-programa").append(logTemplate);
+}
+
+function openFileOnHex(file){
+	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
+		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
+			runExternalSoftware(HEX_EDITOR, [file]);
+		} else {
+			addLog('error', 'ERROR - You can\'t open a file on hex editor if you don\'t specify it!');
+		}
+	} else {
+		addLog('error', 'ERROR - You can\'t open a hex editor if you don\'t specify where it is!');
+		scrollLog();
+	}
 }
 
 // Notifications Desktop
@@ -131,7 +153,7 @@ function R3DITOR_RUN_RE3(mode){
 				process.chdir(APP_PATH + "\\Assets");
 			}
 			runExternalSoftware(EXEC_BIO3_original);
-		}catch(err){
+		} catch (err) {
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({"display": "inline"});
 			}
@@ -139,6 +161,7 @@ function R3DITOR_RUN_RE3(mode){
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
+	scrollLog();
 }
 
 function R3DITOR_RUN_MERCE(mode){
@@ -164,6 +187,7 @@ function R3DITOR_RUN_MERCE(mode){
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
+	scrollLog();
 }
 
 // Remover pastas recursivamente
@@ -234,6 +258,12 @@ function WIP(){
 	scrollLog();
 }
 
+function killExternalSoftware(){
+	if (EXTERNAL_APP_PID !== 0){
+		process.kill(EXTERNAL_APP_PID);
+	}
+}
+
 function runExternalSoftware(exe, args){
 	EXTERNAL_APP_RUNNING = true;
 	const { spawn } = require('child_process');
@@ -241,6 +271,7 @@ function runExternalSoftware(exe, args){
 		args = [''];
 	}
 	const ls = spawn(exe, args);
+	EXTERNAL_APP_PID = ls.pid;
 	ls.stdout.on('data', (data) => {
 		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
@@ -251,6 +282,7 @@ function runExternalSoftware(exe, args){
 	});
 	ls.on('close', (code) => {
 		EXTERNAL_APP_RUNNING = false;
+		EXTERNAL_APP_PID = 0;
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
 			$("#WZ_BTN_2").css({"display": "inline"});
 		}
@@ -302,6 +334,9 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 function triggerLoadWZ(){
 	$("#loadWZForm").trigger('click');
 }
+function triggerLoadWZHex(){
+	$("#loadWZHexForm").trigger('click');
+}
 
 function setLoadWIZARDFile(){
 	var cFile = document.getElementById('loadWZForm').files[0]
@@ -312,6 +347,17 @@ function setLoadWIZARDFile(){
 		BIO3_original = undefined;
 		WZ_LOADRE3(cFile.path);
 		document.getElementById('loadWZForm').value = "";
+	}
+}
+function setLoadHexEditorFile(){
+	var cFile = document.getElementById('loadWZHexForm').files[0]
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		addLog("log", "Wizard (HEX) - Load Canceled!");
+		scrollLog();
+	} else {
+		BIO3_original = undefined;
+		WZ_LOADHEX(cFile.path);
+		document.getElementById('loadWZHexForm').value = "";
 	}
 }
 

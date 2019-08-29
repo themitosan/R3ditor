@@ -39,6 +39,26 @@ a{
     margin-top: 6px;
 }
 
+.padding-left{
+    padding-left: 4px;
+}
+
+.red{
+    color: #f00;
+    text-shadow: 0 0 10px #ff8e8e;
+}
+
+.green{
+    color: #0f0;
+    text-shadow: 0 0 10px #0f0;
+}
+
+.MSG_MISC_MENU{
+    top: 588px;
+    width: 598px;
+    display: none;
+}
+
 .feature_title{
     font-size: x-large;
     text-shadow: 0 0 10px #555;
@@ -74,7 +94,11 @@ a{
 
 .msg-legenda-sticky{
     position: sticky;
-    left: 54px;
+    left: 50px;
+}
+
+.btn-apply-small{
+    width: 30%;
 }
 
 .menu-topo{
@@ -98,6 +122,13 @@ a{
 	padding-right: 10px;
 	text-shadow: 0 0 10px #888;
 	background-image: linear-gradient(to bottom, #202020, #000);
+}
+
+.botao-aplicar{
+    color: #fff;
+    box-shadow: 0 0 4px #002808;
+    text-shadow: 0 0 10px #1cff00;
+    background-image: linear-gradient(to bottom, #009a3a, #003f18);
 }
 
 .info-icon-holder{
@@ -785,8 +816,21 @@ a{
     background-image: linear-gradient(to right, #bd93a3d6, transparent);
 }
 
+.evt-type-9{ /* Comando: Trocar Cor do Texto */
+    width: 96%;
+    margin-left: 30px;
+    background-image: linear-gradient(to right, #00950b, transparent);
+}
+
 .evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
     background-image: linear-gradient(to right, #ba0000, transparent);
+}
+
+.camPreview{
+    display: none;
+    height: 260px;
+    padding-top: 10px;
+    box-shadow: 0 0 10px #41419c;
 }
 
 .botao-add-comando{
@@ -830,9 +874,10 @@ a{
 }
 
 .dialog-addcomando{
-    width: 58%;
-    left: 66px;
     top: 208px;
+    left: 66px;
+    width: 58%;
+    height: auto;
     display: none;
     padding-top: 4px;
     position: absolute;
@@ -1010,6 +1055,10 @@ a{
     padding: 4px;
 }
 
+.btn-apply-fix{
+    margin-top: -4px;
+}
+
 .wizard{
     top: 28%;
     left: 28%;
@@ -1027,8 +1076,8 @@ a{
     left: 10px;
     opacity: 1;
     z-index: -1;
-    height: 514px;
-    width: 1300px;
+    height: 516px;
+    width: 1306px;
     filter: blur(2px);
     border-radius: 6px;
     position: absolute;

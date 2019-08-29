@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-
 var SAVE_arquivoBruto = undefined;
 var CURRENT_SAVE_SLOT = 1;
 
@@ -23,13 +22,11 @@ var INDICADOR_12 = undefined;
 var INDICADOR_13 = undefined;
 var INDICADOR_14 = undefined;
 var INDICADOR_15 = undefined;
-
 /*
 
 	Ranges
 
 */
-
 var SAVE_INDICADOR_HEADER 	      = undefined; // Header completa
 var SAVE_INDICADOR_HEADER_START   = undefined; // 0x0000 até 0x2000
 var SAVE_INDICADOR_HEADER_MIDDLE  = undefined;

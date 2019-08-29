@@ -1,10 +1,23 @@
-9
-0.2.7
-Small steps in direction of freedom!
+10
+0.2.8
+The leap of faith!
 <font class="feature_title">Improvements:</font><br>
-<li>Now you can have a visual reference of the file you are editing!<br>
-If you do the initial process and extract the game assets, you will see that the background of the tabs will show an image corresponding to the map you have opened!</li><br>
-<li>The reading of the messages is more accurate! <i><s>(<u>With some hacks</u> - relax, i will get rid of them asap!)</s></i><br>This was done with some new filters on the search process!</li><br>
+<li>GENERAL: Now you can open the current file you are editing on Hex Editor of your choice!<br>To do that, run the inicial setup again and select your hex editor!</li>
+<li>GENERAL: Fancy new buttons labeled "Reload RDT", "Reload MSG" and "Reload SAV" are available! - <i>Nice!</i></li>
+<li>GENERAL: Now you can open the game while you edit RDT files.<br><i>Yes, i know it was a huge mistake implement this feature without allowing to use it while you edit the files!</i></li><br>
+<li>RDT: You can finally edit RDT Messages! - <i>Yaaay!</i> [WIP]<br>
+To do that, you need to follow these Rules:<br><br>
+1) Do not edit any message that contains <font class="code">(Unknown Char / Function Nº XX - Hex: XX)</font> - <strong>YOU WILL BREAK YOUR FILE!</strong><br><i>(i warned you!)</i><br><br>
+2) You can only save the message if you keep the same size of the original message! <i>(this will change soon)</i><br><br>
+<i>Info: some RDT's are still displaying duplicate messages or not showing all the messages properly or all the messages at all.</i></li><br>
+<li>RDT: There are new filters to avoid displaying garbage messages!<br><i>(Belive, this will be discarted in the next update!)</i></li>
+<li>RDT: For each file you open, a map file will be generated to avoid analyzing the same file all the time and wasting time and processing.<br><i>In short - R3ditor is now working similarly to the RPCS3 emulator!</i></li><br>
+<li>MSG: Overall changes was made to work together witg RDT editor!</li>
+<li>MSG: Change text color are now a function, with more colors to choose!</li>
+<li>MSG: Now the change camera function displays all current camera available with a preview of selected option!<br><i>(Only avaliable if you run the setup)</i></li><br>
+<li>UPDATER: The updater will check if you are online before try to update!</li><br><br>
+
 <font class="feature_title">Bugfixes:</font><br>
-<li>The error on file R214 was fixed! (Unknown Header)</li><br>
-<li>A small bug on MSG visualization was removed.<br><i>(I think nobody noticed this)</i></li><br>
+<li>MSG: A small bug was removed when the program try to clean the functions / hex preview</li>
+<li>MSG: The function "Yes / No" and oher things was fixed on Text editor / reverse dictionary</li>
+<li>HTML: Some duplicated IDs on HTML was fixed.</li>

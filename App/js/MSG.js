@@ -3,25 +3,47 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-
+var MSG_LENGTH = 0;
+var MSG_MAX_LENGTH = 0;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_Commands = undefined;
+var MSG_FILL_PASS = undefined;
 var MSG_DECRYPT_LV1_LAST = "";
+var MSG_useSeekCameras = false;
 var MSG_arquivoBruto = undefined;
-
+var MSG_CURRENT_RDT_MESSAGE_END = 0;
+var MSG_CURRENT_RDT_MESSAGE_START = 0;
 function MSG_CARREGAR_ARQUIVO(msgFile){
+	MSG_LENGTH = 0;
 	MSG_Commands = [];
+	MSG_FILL_PASS = "";
 	localStorage.clear();
 	MSG_increment = true;
 	MSG_totalComandos = 0;
+	MSG_useSeekCameras = false;
 	ORIGINAL_FILENAME = msgFile;
 	addLog("log", "MSG - Loading MSG File: " + msgFile);
 	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
+	$("#MSG_openInHex").css({"display": "inline"});
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 	scrollLog();
 }
-
+function MSG_goBackToRDT(){
+	MSG_LENGTH = 0;
+	MSG_Commands = [];
+	MSG_MAX_LENGTH = 0;
+	MSG_FILL_PASS = "";
+	localStorage.clear();
+	MSG_increment = true;
+	TRANSFER_MSG_TO_RDT();
+	MSG_totalComandos = 0;
+	MSG_useSeekCameras = false;
+	MSG_CURRENT_RDT_MESSAGE_END = 0;
+	MSG_CURRENT_RDT_MESSAGE_START = 0;
+	document.title = APP_NAME + " - Please wait...";
+	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+}
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	var c = 0; // The great c = 0!
 	MSG_DECRYPT_LV1_LAST = "";
@@ -63,7 +85,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			}
 			// Show Item Name
 			if (RAW_DATA_ARRAY[startPoint] === "f8"){
-				console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1]);
+				console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1] + " (F8 " + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ")");
 				COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
 			} else {
 				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
@@ -71,6 +93,14 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			// Special char
 			if (RAW_DATA_ARRAY[startPoint] === "ea"){
 				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
+			}
+			// Text Color
+			if (RAW_DATA_ARRAY[startPoint] === "f9"){
+				if (RAW_DATA_ARRAY[startPoint + 1] === "00"){
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ")";
+				} else {
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ")";
+				}
 			}
 			if (RAW_DATA_ARRAY[startPoint] === "f3" || RAW_DATA_ARRAY[startPoint] === "f5"){
 				COMMAND = "";
@@ -90,10 +120,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	}
 	return final;
 }
-
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
-	document.getElementById("msg-lista-eventos").innerHTML = "<!-- You are not seeing me! -->";
+	document.getElementById("msg-lista-eventos").innerHTML = " ";
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length;
 	var t = undefined;
@@ -152,7 +181,6 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_doTheTitleThing();
 	MSG_renderCommands();
 }
-
 function MSG_addCommandToList(com, args, hexCommand, index){
 	var COM_HTML_TEMPLATE = undefined;
 	// Iniciar Mensagem
@@ -214,6 +242,22 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(8, ' + args + ', ' + index + ', true);"><br>Args: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
+	// Trocar a cor do texto
+	if (com === 9){
+		var cor = undefined;
+		var argsFilter = undefined;
+		if (args === "00"){
+			cor = MSG_TEXTCOLOR[args];
+			argsFilter = args;
+		} else {
+			argsFilter = args.toString().slice(1);
+			cor = MSG_TEXTCOLOR[args.slice(1)];
+		}
+		COM_HTML_TEMPLATE = '<div class="evento evt-type-9" id="msg-evento-' + index + '">' + 
+			'(' + index + ') Function: Change Text Color <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(9, \'' + argsFilter + '\', ' + index + ', true);"><br>Color: ' + 
+			'<font class="italic" id="msg-comand-args' + index + '">' + cor + '</font></div>';
+	}
 
 	// Final
 	if (MSG_increment == true){
@@ -222,10 +266,10 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	$("#msg-lista-eventos").append(COM_HTML_TEMPLATE);
 	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 }
-
 function MSG_renderCommands(){
 	var total = MSG_Commands.length;
 	var c = 0;
+	MSG_renderMSGLength(total);
 	while(c !== total){
 		var COM = undefined;
 		if (MSG_Commands[c][0] === 3){
@@ -239,13 +283,14 @@ function MSG_renderCommands(){
 		c++;
 	}
 }
-
 function MSG_translateHexValues(){
 	MSG_Commands = [];
 	MSG_increment = true;
 	MSG_totalComandos = 0;
 	MSG_renderDialog(0);
-	document.getElementById("msg-lista-eventos").innerHTML = "<!-- You are not seeing me here! -->";
+	$("#lbl-msg-length").removeClass("red");
+	document.title = APP_NAME + " - Message Editor / Translator";
+	document.getElementById("msg-lista-eventos").innerHTML = " ";
 	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	var hValues = document.getElementById('msg-hex-toTrans').value;
 	if (hValues !== ""){
@@ -258,7 +303,32 @@ function MSG_translateHexValues(){
 		cleanMSGFields();
 	}
 }
-
+function MSG_seekCameras(){
+	if (RDT_arquivoBruto !== undefined && enable_mod === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
+		MSG_useSeekCameras = true;
+		console.log("usando modo camera preview");
+		var c = 0; // Here we goooo...
+		$("#msg-cam-id").css({"display": "none"});
+		var listCameras = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(ORIGINAL_FILENAME).toUpperCase()));
+		while(c < listCameras.length){
+			if (listCameras[c].indexOf(".SLD") !== -1 || listCameras[c].length !== 10){
+				listCameras.splice(c, 1);
+			}
+			c++;
+		}
+		c = 0;
+		while(c < listCameras.length){
+			var camId = listCameras[c].slice(4, 6).toLowerCase();
+			$("#msg-selectCam-id").append('<option value="' + camId + '">Camera ' + camId.toUpperCase() + '</option>');
+			c++;
+		}
+		$("#MSG_camPreview").css({"display": "inline"});
+		$("#msg-selectCam-id").css({"display": "inline"});
+		$("#dialog-msg-addcomand").css({"top": "54px", "height": "382"});
+		MSG_renderCamPreview();
+	}
+}
+// Comandos / Funções
 function MSG_COMMAND_STARTMSG(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -281,7 +351,7 @@ function MSG_COMMAND_STARTMSG(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_ENDMSG(index, isModify){
@@ -303,7 +373,7 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_SHOWITEMNAME(index, isModify){
@@ -328,7 +398,7 @@ function MSG_COMMAND_SHOWITEMNAME(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_EXECSE(index, isModify){
@@ -353,7 +423,7 @@ function MSG_COMMAND_EXECSE(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_ADDCHAR(index, isModify){
@@ -366,7 +436,7 @@ function MSG_COMMAND_ADDCHAR(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_SHOWCAMERA(index, isModify){
@@ -391,7 +461,7 @@ function MSG_COMMAND_SHOWCAMERA(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 function MSG_COMMAND_ADDTEXT(index, isModify){
@@ -417,7 +487,7 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
 // Unknown Function F5
@@ -443,11 +513,50 @@ function MSG_COMMAND_F5(index, isModify){
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
 
-// Lado escuro do código
-// Like... DON'T TOUCH THIS PART!
+function MSG_COMMAND_TEXTCOLOR(index, isModify){
+	if (isModify === undefined){
+		isModify = false;
+	}
+	MSG_increment = false;
+	var newCommand = "f9";
+	var attrFinal = document.getElementById('msg-selectColor-id').value;
+	if (attrFinal.length < 2){
+		newCommand = "f90"
+	}
+	localStorage.setItem("MSG_comando-" + index, newCommand + attrFinal);
+	if (isModify === false){
+		MSG_totalComandos++;
+	}
+	MSG_applyMSGCommand(0);
+}
+
+// The dark side of this ENTIRE CODE!
+// Like... DON'T TOUCH THIS PART - FOR REAL!
+function MSG_SAVE_ON_RDT(msgHex){
+	if (MSG_totalComandos !== 0 && RDT_arquivoBruto !== undefined && ORIGINAL_FILENAME !== undefined){
+		RDT_Backup();
+		var RDT_START = RDT_arquivoBruto.slice(0, parseInt(MSG_CURRENT_RDT_MESSAGE_START));
+		var RDT_END = RDT_arquivoBruto.slice(parseInt(MSG_CURRENT_RDT_MESSAGE_END), RDT_arquivoBruto.length);
+		var NEW_RDT = RDT_START + msgHex + RDT_END;
+		try {
+			fs.writeFileSync(ORIGINAL_FILENAME, NEW_RDT, 'hex');
+			log_separador();
+			addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
+			addLog("log", "Folder: " + ORIGINAL_FILENAME);
+			log_separador();
+		} catch(err){
+			var msgError = "ERROR - Something went wrong while saving - ";
+			addLog('error', msgError + err);
+			console.error(msgError + err);
+		}
+	} else {
+		addLog('ERROR - Function list are empty or RDT file was not defined!');
+	}
+	scrollLog();
+}
 function MSG_REMOVECOMMAND(comandId, isTxt){
 	MSG_totalComandos--;
 	MSG_increment = false;
@@ -459,10 +568,9 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 	}
 	$("#msg-evento-" + comandId).remove();
 	localStorage.removeItem("MSG_comando-" + comandId);
-	MSG_applyMSGCommand(false);
+	MSG_applyMSGCommand(0);
 }
-
-function MSG_applyMSGCommand(save){
+function MSG_applyMSGCommand(mode){
 	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	var newHex = "";
 	var c = 0;
@@ -475,7 +583,6 @@ function MSG_applyMSGCommand(save){
 		}
 	}
 	var RAW_DATA_ARRAY = newHex.match(/.{1,2}/g);
-
 	var u = undefined;
 	if (RAW_DATA_ARRAY !== null){
 		u = RAW_DATA_ARRAY.length;
@@ -483,19 +590,19 @@ function MSG_applyMSGCommand(save){
 		u = 0;
 	}
 	var finalArray = "";
-	var c = 0;
-
+	c = 0;
 	while(c < u){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
 		c++;
 	}
-
-	document.getElementById("lbl-msg-length").innerHTML = newHex.length;
+	MSG_LENGTH = newHex.length;
 	document.getElementById("text-msg-raw").innerHTML = finalArray;
-
-	if (save === true){
+	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH;
+	var useFillMessage = document.getElementById('MSG_chkbok_fillMessage').checked;
+	// Save to file
+	if (mode === 1){
 		if (MSG_totalComandos !== 0){
-			var ask = prompt("Insert the file name");
+			var ask = prompt("Please insert the file name");
 			if (ask !== null){
 				try{
 					if (ask === ""){
@@ -506,16 +613,63 @@ function MSG_applyMSGCommand(save){
 					addLog("log", "INFO: The file " + ask + " was saved successfully!");
 					addLog("log", "Caminho: " + newMsgFile);
 				} catch(err){
-					addLog("error", "ERROR: Unable to save the MSG File " + ask + " - " + err);
+					addLog("error", "ERROR - Unable to save the MSG File " + ask + " - " + err);
 				}
 			} else {
-				addLog("log", "MSG: The user has canceled the form");
+				addLog("log", "MSG - The user has canceled this operation!");
 			}
 		} else {
-			addLog("warn", "WARNING: You can't save an empty save file!");
+			addLog("warn", "WARNING - You can't save an empty save file!");
+		}
+	}
+	// Fill message to max length
+	if (RDT_arquivoBruto !== undefined && useFillMessage === true && mode === 2){
+		MSG_fillMessage(finalArray);
+		MSG_SAVE_ON_RDT(MSG_FILL_PASS);
+		MSG_goBackToRDT();
+	} else {
+		if (mode === 2 && MSG_totalComandos !== 0){ // SAVE MESSAGE ON RDT (I'm very tense writing this lines!)
+			MSG_SAVE_ON_RDT(newHex);
+			MSG_goBackToRDT();
 		}
 	}
 	MSG_Commands = [];
+	MSG_FILL_PASS = "";
 	localStorage.clear();
 	MSG_startMSGDecrypt_Lv2(newHex);
+	scrollLog();
+}
+function MSG_fillMessage(currentHex){
+	var c = 0;
+	var hexCompiled = solveHEX(currentHex);
+	if (MSG_MAX_LENGTH !== 0 && RDT_arquivoBruto !== undefined && MSG_LENGTH < MSG_MAX_LENGTH){
+		addLog('log', 'INFO - Using Autofill mode...');
+		var firstTrim = undefined;
+		var finalTrim = undefined;
+		if (hexCompiled.indexOf("fe") !== -1){
+			firstTrim = hexCompiled.slice(0, hexCompiled.indexOf("fe"));
+		} else {
+			firstTrim = hexCompiled;
+		}
+		var offset = hexCompiled.length;
+		if (firstTrim.length < MSG_MAX_LENGTH){
+			var temp = firstTrim;
+			while(firstTrim.length !== MSG_MAX_LENGTH){
+				firstTrim = firstTrim + "00";
+			}
+			finalTrim = firstTrim.slice(0, parseInt(firstTrim.length - 4));
+		}
+		var splitAgain = finalTrim.slice(4, offset);
+		var splitZero = finalTrim.slice(offset, finalTrim.length);
+
+		MSG_FILL_PASS = "fa02" + splitZero + splitAgain + "fe00";
+
+		//console.log("splitAgain:\n" + splitAgain + "\n\nsplitZero:\n" + splitZero + "\n\nFinal:\n" + MSG_FILL_PASS + "\n\nSize: " + MSG_FILL_PASS.length);
+	} else {
+		if (MSG_LENGTH === MSG_MAX_LENGTH){
+			addLog('log', 'INFO - Skipping Fill Message function because the Message size is the same of the original');
+			MSG_FILL_PASS = currentHex;
+		}
+	}
+	scrollLog();
 }
