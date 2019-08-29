@@ -8,6 +8,7 @@ var GAME_PATH = "";
 var WZ_lastMenu = 0;
 var enable_mod = false;
 var WZ_EXTRACTLIST = [];
+var WZ_skipRofs = false;
 var WZ_showWizard = true;
 var EXEC_rofs = undefined;
 var TEMP_APP_PATH = undefined;
@@ -79,13 +80,14 @@ function WZ_showWizardDialog(id){
 		// Confirm
 		if (id === 3){
 			R3DITOR_movePercent(1, 40);
+			console.log(GAME_PATH + "\n" + EXEC_BIO3_original);
 			GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "");
 			$("#WZ_BTN_2").css({"display": "inline"});
-			document.getElementById('WZ_title').innerHTML = "Great!";
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_3;
-			document.getElementById('wz_lbl_path').innerHTML = EXEC_BIO3_original;
-			document.getElementById('WZ_BTN_1').value = "No!";
+			document.getElementById('WZ_title').innerHTML = "Great!";
 			document.getElementById('WZ_BTN_2').value = "Yes!";
+			document.getElementById('WZ_BTN_1').value = "No!";
+			document.getElementById('wz_lbl_path').innerHTML = GAME_PATH;
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				EXEC_BIO3_original = "";
 				GAME_PATH = "";
@@ -140,6 +142,7 @@ function WZ_showWizardDialog(id){
 			document.getElementById('WZ_BTN_1').value = "No";
 			document.getElementById('WZ_BTN_2').value = "Yes";
 			document.getElementById('WZ_BTN_1').onclick = function(){
+				WZ_skipRofs = true;
 				WZ_makeConfigs();
 			};
 			document.getElementById('WZ_BTN_2').onclick = function(){
@@ -501,8 +504,8 @@ function WZ_skip(){
 }
 function WZ_LOADRE3(refile){
 	var file = getFileName(refile);
-	EXEC_BIO3_original = file;
 	if (file === "residentevil3"){
+		EXEC_BIO3_original = refile;
 		WZ_showWizardDialog(3);
 	} else {
 		WZ_showWizardDialog(2);
@@ -519,10 +522,7 @@ function WZ_makeConfigs(){
 	EXEC_BIO3_MERCE = "";
 	R3DITOR_movePercent(1, 99);
 	R3DITOR_movePercent(0, 95, "Creating Configs File...");
-	GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "").replace("Bio3_PC.exe", "");
-	if (fs.existsSync(GAME_PATH + "bio3_pc_mercenaries.exe") === true){
-		EXEC_BIO3_MERCE = GAME_PATH + "bio3_pc_mercenaries.exe";
-	}
+	GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "");
 	if (fs.existsSync(GAME_PATH + "RE3_MERCE.exe") === true){
 		EXEC_BIO3_MERCE = GAME_PATH + "RE3_MERCE.exe";
 	}
@@ -533,11 +533,12 @@ function WZ_makeConfigs(){
 }
 function WZ_saveConfigs(){
 	try{
-		var useautofill = document.getElementById('MSG_chkbok_fillMessage').checked;
-		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR + "\n" + useautofill;
+		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR;
 		fs.writeFileSync(APP_PATH + "\\Configs\\configs.r3ditor", CONFIGS, 'utf-8');
-		if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor" && WZ_showWizard == true)){
+		if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor" && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
+		} else {
+			reload();
 		}
 	} catch(err){
 		if (WZ_showWizard === true){
@@ -584,11 +585,6 @@ function WZ_loadFiles(file){
 		HEX_EDITOR = cfgs[6];
 	} else {
 		HEX_EDITOR = "";
-	}
-	if (cfgs[7] !== undefined){
-		document.getElementById('MSG_chkbok_fillMessage').checked = JSON.parse(cfgs[7]);
-	} else {
-		document.getElementById('MSG_chkbok_fillMessage').checked = false;
 	}
 	// Visuals
 	if (EXEC_BIO3_original !== ""){

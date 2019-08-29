@@ -16,7 +16,6 @@ To do that, you need to follow these Rules:<br><br>
 <li>MSG: Change text color are now a function, with more colors to choose!</li>
 <li>MSG: Now the change camera function displays all current camera available with a preview of selected option!<br><i>(Only avaliable if you run the setup)</i></li><br>
 <li>UPDATER: The updater will check if you are online before try to update!</li><br><br>
-
 <font class="feature_title">Bugfixes:</font><br>
 <li>MSG: A small bug was removed when the program try to clean the functions / hex preview</li>
 <li>MSG: The function "Yes / No" and oher things was fixed on Text editor / reverse dictionary</li>

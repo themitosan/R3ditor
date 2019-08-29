@@ -345,6 +345,7 @@ function setLoadWIZARDFile(){
 		scrollLog();
 	} else {
 		BIO3_original = undefined;
+		console.log(cFile.path);
 		WZ_LOADRE3(cFile.path);
 		document.getElementById('loadWZForm').value = "";
 	}
@@ -355,7 +356,8 @@ function setLoadHexEditorFile(){
 		addLog("log", "Wizard (HEX) - Load Canceled!");
 		scrollLog();
 	} else {
-		BIO3_original = undefined;
+		HEX_EDITOR = undefined;
+		console.log(cFile.path);
 		WZ_LOADHEX(cFile.path);
 		document.getElementById('loadWZHexForm').value = "";
 	}
