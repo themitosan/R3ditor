@@ -78,5 +78,5 @@ function DEBUG_RDT_MSG_START_RANGE(value){
 
 function DEBUG_TESTUPDATE(){
 	TEST_RELEASE = true;
-	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
+	R3DITOR_readUpdate(APP_PATH + "\\App\\version.r3ditor");
 }

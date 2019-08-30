@@ -105,7 +105,6 @@ function addLog(type, texto){
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$("#log-programa").append(logTemplate);
 }
-
 function openFileOnHex(file){
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
 		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
@@ -118,7 +117,6 @@ function openFileOnHex(file){
 		scrollLog();
 	}
 }
-
 // Notifications Desktop
 function showNotify(titulo, texto, tempo){
 	if (titulo == ""){
@@ -142,7 +140,7 @@ function showNotify(titulo, texto, tempo){
 		}
 	}
 }
-
+/// RUN RE3
 function R3DITOR_RUN_RE3(mode){
 	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === "" || GAME_PATH === "" || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
@@ -203,12 +201,10 @@ function R3DITOR_RUN_MERCE(mode){
 	}
 	scrollLog();
 }
-
 // Remover pastas recursivamente
 function deleteFolderRecursive(path){
 	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);
 };
-
 /// Obter nome do arquivo
 function getFileName(file){
 	var fileName = file.toLowerCase();
@@ -222,7 +218,6 @@ function getFileName(file){
 	var filterG = filterF.replace(".r3ditor", "");
 	return filterG;
 }
-
 /// Obter Dia, Data e Hora
 function currentTime(){
 	var t = new Date;
@@ -249,35 +244,34 @@ function currentTime(){
 	}
 	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
 }
-
 /// IndexOf com multiplas ocorr?cias
 function getAllIndexes(arr, val){
-    var indexes = [], i = -1;
-    while ((i = arr.indexOf(val, i+1)) != -1){
-        indexes.push(i);
-    }
-    return indexes;
+	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
+    	var indexes = [], i = -1;
+    	while ((i = arr.indexOf(val, i+1)) != -1){
+    	    indexes.push(i);
+    	}
+    	return indexes;
+	} else {
+		console.error("ERROR - Invalid arguments on getAllIndexes!");
+	}
 }
-
 /// Formata valores hex para leitura interna
 function solveHEX(hex){
 	var res = hex.replace(new RegExp(" ", 'g'), "");
 	var fin = res.toLowerCase();
 	return fin;
 }
-
 /// Function  WIP
 function WIP(){
 	addLog('warn', "Sorry buddy... #WIP");
 	scrollLog();
 }
-
 function killExternalSoftware(){
 	if (EXTERNAL_APP_PID !== 0){
 		process.kill(EXTERNAL_APP_PID);
 	}
 }
-
 function runExternalSoftware(exe, args){
 	EXTERNAL_APP_RUNNING = true;
 	const { spawn } = require('child_process');

@@ -440,11 +440,19 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Cancel Form
 	if (id === 0){
 		$("#text-msg-events").css({"display": "block"});
-		$("#dialog-msg-addcomand").css({"display": "none", "height": "auto"});
 		document.getElementById("dialog-msg-render").innerHTML = " ";
+		$("#dialog-msg-addcomand").css({"display": "none", "height": "auto"});
+		if (MSG_totalComandos !== 0){
+			$("#MSG_saveAs").css({"display": "inline"});
+		}
+		if (RDT_arquivoBruto !== undefined && MSG_arquivoBruto === undefined){
+			$("#MSG_applyMessageRDT").css({"display": "inline"});
+		}
 	} else {
-		$("#dialog-msg-addcomand").css({"display": "block"});
+		$("#MSG_saveAs").css({"display": "none"});
 		$("#text-msg-events").css({"display": "none"});
+		$("#MSG_applyMessageRDT").css({"display": "none"});
+		$("#dialog-msg-addcomand").css({"display": "block"});
 	}
 	// Iniciar Mensagem
 	if (id === 1){

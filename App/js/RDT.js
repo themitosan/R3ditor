@@ -286,7 +286,7 @@ function RDT_ITEM_APPLY(index, type){
 }
 function RDT_readMessages(){
 	var c = 0;
-	console.clear();
+	//console.clear();
 	RDT_MSG_END = [];
 	var RDT_readTry = 0;
 	RDT_messasgesRaw = [];
@@ -660,15 +660,7 @@ function RDT_readMessages(){
 			localStorage.setItem("RDT_MESSAGE-START-" + c, MSGSTART);
 			localStorage.setItem("RDT_MESSAGE-END-" + c, MSGEND);
 			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
-			if (RDT_generateMapFile === true && BETA == false){
-				RDT_FILEMAP_MSG.push(MSGSTART + "\n" + MSGEND);
-			} else {
-				RDT_FILEMAP_MSG = [];
-			}
-			if (BETA === true){
-				RDT_renderMessages(c, MSGSTART, MSGEND);
-				RDT_totalMessages++;
-			}
+			RDT_totalMessages++;
 		} else {
 			var msg = "Something went wrong in message analysis - Message: " + c + " - Reason: ";
 			if (RDT_canAdd_lvl === 1){
@@ -939,15 +931,7 @@ function RDT_readMessages(){
 						localStorage.setItem("RDT_MESSAGE-START-" + c, MSGSTART);
 						localStorage.setItem("RDT_MESSAGE-END-" + c, MSGEND);
 						localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
-						if (RDT_generateMapFile === true && BETA == false){
-							RDT_FILEMAP_MSG.push(MSGSTART + "\n" + MSGEND);
-						} else {
-							RDT_FILEMAP_MSG = [];
-						}
-						if (BETA === true){
-							RDT_renderMessages(c, MSGSTART, MSGEND);
-							RDT_totalMessages++;
-						}
+						RDT_totalMessages++;
 					} else {
 						var msg = "Something went wrong in message analysis - Message: " + c + " (Final part) - Reason: ";
 						if (RDT_canAdd_lvl === 1){
@@ -983,12 +967,44 @@ function RDT_readMessages(){
 	}
 	console.info("\nTeste atual: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
 	if (RDT_generateMapFile === true && BETA === false){
-		RDT_makeRDTConfigFile();
+		RDT_postMessageProcess();
 	}
 	if (BETA === true){
 		RDT_showMenu(1);
 	}
 	scrollLog();
+}
+function RDT_postMessageProcess(){
+	var c = 1;
+	while (c < RDT_totalMessages && RDT_totalMessages !== 1){
+		var cMessage = localStorage.getItem("RDT_MESSAGE-" + c);
+		var pMessage = localStorage.getItem("RDT_MESSAGE-" + parseInt(c - 1));
+		if (pMessage !== null && pMessage !== undefined){
+			if (getAllIndexes(pMessage, cMessage).length > 0 || pMessage.indexOf(cMessage) !== -1){
+				localStorage.removeItem("RDT_MESSAGE-" + c);
+				localStorage.removeItem("RDT_MESSAGE-END-" + c);
+				localStorage.removeItem("RDT_MESSAGE-START-" + c);
+				localStorage.removeItem("RDT_MESSAGE_ADICIONAL-" + c);
+			}
+			c++;
+		} else {
+			c++;
+		}
+	}
+	c = 0;
+	RDT_FILEMAP_MSG = [];
+	while(c < RDT_totalMessages){
+		var ED = parseInt(localStorage.getItem("RDT_MESSAGE-END-" + c));
+		var ST = parseInt(localStorage.getItem("RDT_MESSAGE-START-" + c));
+		console.log(ST + " - " + ED);
+		if (ST !== 0 && ED !== 0){
+			RDT_FILEMAP_MSG.push(ST + "\n" + ED);
+			c++;
+		} else {
+			c++;
+		}
+	}
+	RDT_makeRDTConfigFile();
 }
 function RDT_lookForRDTConfigFile(){
 	var c = 0;
@@ -998,6 +1014,7 @@ function RDT_lookForRDTConfigFile(){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap)");
 		if (BETA === false){
 			var mapfile = [];
+			RDT_FILEMAP_MSG = [];
 			RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8').toString().split('\n').forEach(function(line){ 
 				mapfile.push(line); 
 			});
@@ -1015,7 +1032,10 @@ function RDT_lookForRDTConfigFile(){
 				index_id = mapfile[parseInt(firstIndex + soma)];
 				e_offset = mapfile[parseInt(firstEndOffset + soma)];
 				s_offset = mapfile[parseInt(firstStartOffset + soma)];
-				RDT_renderMessages(index_id, s_offset, e_offset);
+				if (index_id !== undefined && s_offset !== undefined && e_offset !== undefined){
+					RDT_FILEMAP_MSG.push(s_offset + "\n" + e_offset);
+					RDT_renderMessages(index_id, s_offset, e_offset);
+				}
 				soma = soma + 3;
 				c++;
 			}
@@ -1033,7 +1053,7 @@ function RDT_lookForRDTConfigFile(){
 }
 function RDT_renderMessages(id, startOffset, endOffset){
 	var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
-	console.log("RDT Map File - Message " + id + ":\n" + SAMPLE + "\n\nHex View:\n" + DEBUG_splitHex(SAMPLE));
+	console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE + "\n\nHex View:\n" + DEBUG_splitHex(SAMPLE));
 	var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
 	var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="RDT_transferMessageToMSG(' + startOffset + ', ' + endOffset + ');">' + 
 		'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
@@ -1041,13 +1061,19 @@ function RDT_renderMessages(id, startOffset, endOffset){
 }
 function RDT_makeRDTConfigFile(){
 	var c = 0; // The great c!
+	var fatorMinus = 0;
 	var foundMessages = "";
 	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[MESSAGES]\n";
 	while(c < RDT_FILEMAP_MSG.length){
-		foundMessages = foundMessages + c + "\n" + RDT_FILEMAP_MSG[c] + "\n";
+		if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
+			console.warn("WARN - Skipping Message " + c + " - It's a NaN Case!");
+			fatorMinus++;
+		} else {
+			foundMessages = foundMessages + parseInt(c - fatorMinus) + "\n" + RDT_FILEMAP_MSG[c] + "\n";
+		}
 		c++;
 	}
-	var totalMessages = RDT_FILEMAP_MSG.length + "\n";
+	var totalMessages = parseInt(RDT_FILEMAP_MSG.length - fatorMinus) + "\n";
 	var FILE_COMPILED = fileHeader + totalMessages + foundMessages;
 	try{
 		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
