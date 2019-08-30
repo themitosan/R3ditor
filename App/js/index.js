@@ -44,12 +44,6 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Backup") == false){
 		fs.mkdirSync(APP_PATH + "\\Backup");
 	}
-	if (fs.existsSync(APP_PATH + "\\Backup\\SAV") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup\\SAV");
-	}
-	if (fs.existsSync(APP_PATH + "\\Backup\\RDT") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup\\RDT");
-	}
 	if (fs.existsSync(APP_PATH + "\\MSG") == false){
 		fs.mkdirSync(APP_PATH + "\\MSG");
 	}
@@ -62,6 +56,12 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Configs") == false){
 		fs.mkdirSync(APP_PATH + "\\Configs");
 	}
+	if (fs.existsSync(APP_PATH + "\\Backup\\SAV") == false){
+		fs.mkdirSync(APP_PATH + "\\Backup\\SAV");
+	}
+	if (fs.existsSync(APP_PATH + "\\Backup\\RDT") == false){
+		fs.mkdirSync(APP_PATH + "\\Backup\\RDT");
+	}
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT") == false){
 		fs.mkdirSync(APP_PATH + "\\Configs\\RDT");
 	}
@@ -71,8 +71,8 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Update\\master.zip") === true){
 		fs.unlinkSync(APP_PATH + "\\Update\\master.zip");
 	}
-	if (fs.existsSync(APP_PATH + "\\App\\check.r3ditor") === true){
-		fs.unlinkSync(APP_PATH + "\\App\\check.r3ditor");
+	if (fs.existsSync(APP_PATH + "\\App\\Update\\check.r3ditor") === true){
+		fs.unlinkSync(APP_PATH + "\\App\\Update\\check.r3ditor");
 	}
 }
 
