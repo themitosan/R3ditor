@@ -14,7 +14,6 @@ var EXEC_rofs = undefined;
 var TEMP_APP_PATH = undefined;
 var EXEC_BIO3_MERCE = undefined;
 var EXEC_BIO3_original = undefined;
-
 function WZ_verifyConfigFile(){
 	TEMP_APP_PATH = APP_PATH;
 	if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor") === false){
@@ -25,7 +24,6 @@ function WZ_verifyConfigFile(){
 		WZ_loadFiles(APP_PATH + "\\Configs\\configs.r3ditor");
 	}
 }
-
 function WZ_showWizardDialog(id){
 	WZ_lastMenu = id;
 	if (WZ_showWizard === true){
@@ -195,7 +193,6 @@ function WZ_showWizardDialog(id){
 		scrollLog();
 	}
 }
-
 // Extract game assets process
 function WZ_STARTFINALPROCESS(){
 	$("#WZ_BTN_1").css({"display": "none"});
@@ -215,7 +212,6 @@ function WZ_STARTFINALPROCESS(){
 		WZ_EXTRACT_ROFS_0();
 	}
 }
-
 function WZ_EXTRACT_ROFS_0(){
 	fs.mkdirSync(APP_PATH + "\\Assets");
 	process.chdir(APP_PATH + "\\Assets");
@@ -233,7 +229,6 @@ function WZ_EXTRACT_ROFS_0(){
 		WZ_EXTRACT_ROFS_1();
 	}
 }
-
 function WZ_EXTRACT_ROFS_1(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs2.dat") === true){
@@ -250,7 +245,6 @@ function WZ_EXTRACT_ROFS_1(){
 		WZ_EXTRACT_ROFS_2();
 	}
 }
-
 function WZ_EXTRACT_ROFS_2(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs3.dat") === true){
@@ -267,7 +261,6 @@ function WZ_EXTRACT_ROFS_2(){
 		WZ_EXTRACT_ROFS_3();
 	}
 }
-
 function WZ_EXTRACT_ROFS_3(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs4.dat") === true){
@@ -284,7 +277,6 @@ function WZ_EXTRACT_ROFS_3(){
 		WZ_EXTRACT_ROFS_4();
 	}
 }
-
 function WZ_EXTRACT_ROFS_4(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs5.dat") === true){
@@ -301,7 +293,6 @@ function WZ_EXTRACT_ROFS_4(){
 		WZ_EXTRACT_ROFS_5();
 	}
 }
-
 function WZ_EXTRACT_ROFS_5(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs6.dat") === true){
@@ -318,7 +309,6 @@ function WZ_EXTRACT_ROFS_5(){
 		WZ_EXTRACT_ROFS_6();
 	}
 }
-
 function WZ_EXTRACT_ROFS_6(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs7.dat") === true){
@@ -335,7 +325,6 @@ function WZ_EXTRACT_ROFS_6(){
 		WZ_EXTRACT_ROFS_7();
 	}
 }
-
 function WZ_EXTRACT_ROFS_7(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs8.dat") === true){
@@ -352,7 +341,6 @@ function WZ_EXTRACT_ROFS_7(){
 		WZ_EXTRACT_ROFS_8();
 	}
 }
-
 function WZ_EXTRACT_ROFS_8(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs9.dat") === true){
@@ -369,7 +357,6 @@ function WZ_EXTRACT_ROFS_8(){
 		WZ_EXTRACT_ROFS_9();
 	}
 }
-
 function WZ_EXTRACT_ROFS_9(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs10.dat") === true){
@@ -386,7 +373,6 @@ function WZ_EXTRACT_ROFS_9(){
 		WZ_EXTRACT_ROFS_10();
 	}
 }
-
 function WZ_EXTRACT_ROFS_10(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs11.dat") === true){
@@ -403,7 +389,6 @@ function WZ_EXTRACT_ROFS_10(){
 		WZ_EXTRACT_ROFS_11();
 	}
 }
-
 function WZ_EXTRACT_ROFS_11(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs12.dat") === true){
@@ -420,7 +405,6 @@ function WZ_EXTRACT_ROFS_11(){
 		WZ_EXTRACT_ROFS_12();
 	}
 }
-
 function WZ_EXTRACT_ROFS_12(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs13.dat") === true){
@@ -437,7 +421,6 @@ function WZ_EXTRACT_ROFS_12(){
 		WZ_EXTRACT_ROFS_13();
 	}
 }
-
 function WZ_EXTRACT_ROFS_13(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs14.dat") === true){
@@ -454,7 +437,6 @@ function WZ_EXTRACT_ROFS_13(){
 		WZ_EXTRACT_ROFS_14();
 	}
 }
-
 function WZ_EXTRACT_ROFS_14(){
 	process.chdir(APP_PATH + "\\Assets");
 	if (fs.existsSync(GAME_PATH + "Rofs15.dat") === true){
@@ -471,7 +453,6 @@ function WZ_EXTRACT_ROFS_14(){
 		WZ_finishExtract();
 	}
 }
-
 function WZ_finishExtract(){
 	R3DITOR_movePercent(1, 97);
 	process.chdir(TEMP_APP_PATH);
@@ -491,7 +472,6 @@ function WZ_finishExtract(){
 	}
 	WZ_makeConfigs();
 }
-
 function WZ_skip(){
 	EXEC_BIO3_original = "";
 	SHOW_EDITONHEX = false;

@@ -71,7 +71,6 @@ function R3DITOR_readUpdate(file){
 	}
 	scrollLog();
 }
-
 /// Apply Update
 function R3DITOR_applyUpdate(){
 	if (navigator.onLine === true){

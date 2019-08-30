@@ -598,7 +598,6 @@ function MSG_applyMSGCommand(mode){
 	MSG_LENGTH = newHex.length;
 	document.getElementById("text-msg-raw").innerHTML = finalArray;
 	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH;
-	var useFillMessage = document.getElementById('MSG_chkbok_fillMessage').checked;
 	// Save to file
 	if (mode === 1){
 		if (MSG_totalComandos !== 0){
@@ -622,54 +621,13 @@ function MSG_applyMSGCommand(mode){
 			addLog("warn", "WARNING - You can't save an empty save file!");
 		}
 	}
-	// Fill message to max length
-	if (RDT_arquivoBruto !== undefined && useFillMessage === true && mode === 2){
-		MSG_fillMessage(finalArray);
-		MSG_SAVE_ON_RDT(MSG_FILL_PASS);
+	if (mode === 2 && MSG_totalComandos !== 0){ // SAVE MESSAGE ON RDT (I'm very tense writing this lines!)
+		MSG_SAVE_ON_RDT(newHex);
 		MSG_goBackToRDT();
-	} else {
-		if (mode === 2 && MSG_totalComandos !== 0){ // SAVE MESSAGE ON RDT (I'm very tense writing this lines!)
-			MSG_SAVE_ON_RDT(newHex);
-			MSG_goBackToRDT();
-		}
 	}
 	MSG_Commands = [];
 	MSG_FILL_PASS = "";
 	localStorage.clear();
 	MSG_startMSGDecrypt_Lv2(newHex);
-	scrollLog();
-}
-function MSG_fillMessage(currentHex){
-	var c = 0;
-	var hexCompiled = solveHEX(currentHex);
-	if (MSG_MAX_LENGTH !== 0 && RDT_arquivoBruto !== undefined && MSG_LENGTH < MSG_MAX_LENGTH){
-		addLog('log', 'INFO - Using Autofill mode...');
-		var firstTrim = undefined;
-		var finalTrim = undefined;
-		if (hexCompiled.indexOf("fe") !== -1){
-			firstTrim = hexCompiled.slice(0, hexCompiled.indexOf("fe"));
-		} else {
-			firstTrim = hexCompiled;
-		}
-		var offset = hexCompiled.length;
-		if (firstTrim.length < MSG_MAX_LENGTH){
-			var temp = firstTrim;
-			while(firstTrim.length !== MSG_MAX_LENGTH){
-				firstTrim = firstTrim + "00";
-			}
-			finalTrim = firstTrim.slice(0, parseInt(firstTrim.length - 4));
-		}
-		var splitAgain = finalTrim.slice(4, offset);
-		var splitZero = finalTrim.slice(offset, finalTrim.length);
-
-		MSG_FILL_PASS = "fa02" + splitZero + splitAgain + "fe00";
-
-		//console.log("splitAgain:\n" + splitAgain + "\n\nsplitZero:\n" + splitZero + "\n\nFinal:\n" + MSG_FILL_PASS + "\n\nSize: " + MSG_FILL_PASS.length);
-	} else {
-		if (MSG_LENGTH === MSG_MAX_LENGTH){
-			addLog('log', 'INFO - Skipping Fill Message function because the Message size is the same of the original');
-			MSG_FILL_PASS = currentHex;
-		}
-	}
 	scrollLog();
 }

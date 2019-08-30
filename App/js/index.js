@@ -38,6 +38,7 @@ function load(){
 		addLog('error', 'ERROR: Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR: This is not Node-Webkit! ÕwÕ');
 		addLog('error', err);
+		scrollLog();
 	}
 }
 function checkFolders(){
@@ -56,6 +57,12 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Configs") == false){
 		fs.mkdirSync(APP_PATH + "\\Configs");
 	}
+	if (fs.existsSync(APP_PATH + "\\README.md") == true){
+		fs.unlinkSync(APP_PATH + "\\README.md");
+	};
+	if (fs.existsSync(APP_PATH + "\\Roadmap.md") == true){
+		fs.unlinkSync(APP_PATH + "\\Roadmap.md");
+	};
 	if (fs.existsSync(APP_PATH + "\\Backup\\SAV") == false){
 		fs.mkdirSync(APP_PATH + "\\Backup\\SAV");
 	}
@@ -65,6 +72,9 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT") == false){
 		fs.mkdirSync(APP_PATH + "\\Configs\\RDT");
 	}
+	if (fs.existsSync(APP_PATH + "\\version.r3ditor") == true){
+		fs.unlinkSync(APP_PATH + "\\version.r3ditor");
+	};
 	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
 		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
 	}

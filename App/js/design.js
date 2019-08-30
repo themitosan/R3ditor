@@ -362,14 +362,6 @@ function MSG_showMenu(id){
 	if (id === 1){ // Inicial
 		$("#menu-MSG").css({"display": "block"});
 		$("#log-programa").css({"height": "84px"});
-		$("#MSG_miscOptions").css({"width": "598px"});
-		if (RDT_arquivoBruto !== undefined && MSG_MAX_LENGTH !== 0){
-			$("#MSG_miscOptions").css({"display": "block"});
-			$("#MSG_hexPrev").css({"height": "110px"});
-		} else {
-			$("#MSG_miscOptions").css({"display": "none"});
-			$("#MSG_hexPrev").css({"height": "150px"});
-		}
 		MSG_doTheTitleThing();
 	}
 }
