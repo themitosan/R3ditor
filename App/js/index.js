@@ -311,7 +311,6 @@ function runExternalSoftware(exe, args){
 		}
 	});
 }
-
 /// Download Files
 function R3DITOR_downloadFile(url, nomedoarquivo){
 	if (fs.existsSync(nomedoarquivo) === true){
@@ -331,13 +330,31 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
     	});
 	});
 }
-
+function parsePositive(value){
+	return value - value - value;
+}
+function processBIO3Vars(hex){
+	if (hex.length === 4){
+		var numerofinal = 0;
+		var first = parseInt(hex.slice(0, 2), 16);
+		var second = parseInt(hex.slice(2, 4), 16);
+		while(second !== 0){
+			numerofinal = numerofinal + 255;
+			numerofinal++;
+			second--;
+		}
+		while(first !== 0){
+			numerofinal++;
+			first--;
+		}
+		return numerofinal;
+	}
+}
 /*
 
 	Triggers
 
 */
-
 /// Wizard
 function triggerLoadWZ(){
 	$("#loadWZForm").trigger('click');
@@ -345,7 +362,6 @@ function triggerLoadWZ(){
 function triggerLoadWZHex(){
 	$("#loadWZHexForm").trigger('click');
 }
-
 function setLoadWIZARDFile(){
 	var cFile = document.getElementById('loadWZForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
@@ -370,12 +386,10 @@ function setLoadHexEditorFile(){
 		document.getElementById('loadWZHexForm').value = "";
 	}
 }
-
 /// Save
 function triggerLoadSAVE(){
 	$("#loadSaveForm").trigger('click');
 }
-
 function setLoadSaveFile(){
 	var cFile = document.getElementById('loadSaveForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
@@ -387,12 +401,10 @@ function setLoadSaveFile(){
 		document.getElementById('loadSaveForm').value = "";
 	}
 }
-
 /// MSG
 function triggerLoadMSG(){
 	$("#loadMSGForm").trigger('click');
 }
-
 function setLoadMSGFile(){
 	var cFile = document.getElementById('loadMSGForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
@@ -404,12 +416,10 @@ function setLoadMSGFile(){
 		document.getElementById('loadMSGForm').value = "";
 	}
 }
-
 /// RDT
 function triggerLoadRDT(){
 	$("#loadRDTForm").trigger('click');
 }
-
 function setLoadRDTFile(){
 	var cFile = document.getElementById('loadRDTForm').files[0]
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){

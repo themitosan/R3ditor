@@ -16,6 +16,7 @@ var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
 var RDT_FILEMAP_MSG = [];
+var RDT_MSG_POINTERS = [];
 var RDT_MAPFILE = undefined;
 var RDT_generateMapFile = false;
 
@@ -975,29 +976,14 @@ function RDT_readMessages(){
 	scrollLog();
 }
 function RDT_postMessageProcess(){
-	var c = 1;
-	while (c < RDT_totalMessages && RDT_totalMessages !== 1){
-		var cMessage = localStorage.getItem("RDT_MESSAGE-" + c);
-		var pMessage = localStorage.getItem("RDT_MESSAGE-" + parseInt(c - 1));
-		if (pMessage !== null && pMessage !== undefined){
-			if (getAllIndexes(pMessage, cMessage).length > 0 || pMessage.indexOf(cMessage) !== -1){
-				localStorage.removeItem("RDT_MESSAGE-" + c);
-				localStorage.removeItem("RDT_MESSAGE-END-" + c);
-				localStorage.removeItem("RDT_MESSAGE-START-" + c);
-				localStorage.removeItem("RDT_MESSAGE_ADICIONAL-" + c);
-			}
-			c++;
-		} else {
-			c++;
-		}
-	}
-	c = 0;
+	var c = 0;
 	RDT_FILEMAP_MSG = [];
 	while(c < RDT_totalMessages){
 		var ED = parseInt(localStorage.getItem("RDT_MESSAGE-END-" + c));
 		var ST = parseInt(localStorage.getItem("RDT_MESSAGE-START-" + c));
-		console.log(ST + " - " + ED);
 		if (ST !== 0 && ED !== 0){
+			console.log(localStorage.getItem("RDT_MESSAGE-END-" + c));
+			console.log(localStorage.getItem("RDT_MESSAGE-START-" + c));
 			RDT_FILEMAP_MSG.push(ST + "\n" + ED);
 			c++;
 		} else {
@@ -1012,50 +998,126 @@ function RDT_lookForRDTConfigFile(){
 	document.getElementById('RDT_MSG-holder').innerHTML = " ";
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap)");
-		if (BETA === false){
-			var mapfile = [];
-			RDT_FILEMAP_MSG = [];
-			RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8').toString().split('\n').forEach(function(line){ 
-				mapfile.push(line); 
-			});
-
-			// Messages
-			var soma = 0;
-			var firstIndex = 5;
-			var firstEndOffset = 7;
-			var firstStartOffset = 6;
-			var index_id = undefined;
-			var e_offset = undefined;
-			var s_offset = undefined;
-			var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf("[MESSAGES]") + 1)]);
-			while(c < tMessages){
-				index_id = mapfile[parseInt(firstIndex + soma)];
-				e_offset = mapfile[parseInt(firstEndOffset + soma)];
-				s_offset = mapfile[parseInt(firstStartOffset + soma)];
-				if (index_id !== undefined && s_offset !== undefined && e_offset !== undefined){
-					RDT_FILEMAP_MSG.push(s_offset + "\n" + e_offset);
-					RDT_renderMessages(index_id, s_offset, e_offset);
-				}
-				soma = soma + 3;
-				c++;
-			}
-
-			// Final
-			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
-			RDT_totalMessages = tMessages;
-			RDT_showMenu(1);
-		} else {
-			RDT_startMessageAnalysis();
+		var mapfile = [];
+		RDT_FILEMAP_MSG = [];
+		RDT_MSG_POINTERS = [];
+		RDT_messagesArray = [];
+		RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8').toString().split('\n').forEach(function(line){ 
+			mapfile.push(line); 
+		});
+		// Messages (MSG)
+		var soma = 0;
+		var firstEndOffset = 5;
+		var firstStartOffset = 6;
+		var e_offset = undefined;
+		var s_offset = undefined;
+		var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf("[POINTERS]") + 1)]);
+		while(c < tMessages){
+			s_offset = mapfile[parseInt(firstEndOffset + soma)];
+			e_offset = mapfile[parseInt(firstStartOffset + soma)];
+			RDT_MSG_POINTERS.push(RDT_arquivoBruto.slice(parseInt(s_offset), parseInt(e_offset)));
+			soma = soma + 2;
+			c++;
 		}
+		c = 0;
+		var pointerCompiled = "";
+		while (c < RDT_MSG_POINTERS.length){
+			pointerCompiled = pointerCompiled + RDT_MSG_POINTERS[c];
+			c++;
+		}
+		c = 1;
+		soma = 0;
+		var SIZE = 0;
+		var POS_END = 0;
+		var POS_START = 0;
+		var LAST_POS_END = 0;
+		var MSG_START = RDT_arquivoBruto.indexOf(pointerCompiled) + pointerCompiled.length;
+		while(c < RDT_MSG_POINTERS.length){
+			if (c !== RDT_MSG_POINTERS.length - 1){
+				var pAtual = RDT_MSG_POINTERS[parseInt(c)];
+				var pProximo = RDT_MSG_POINTERS[parseInt(c + 1)];
+				console.log(pAtual + "\n" + pProximo);
+				SIZE = parsePositive(parseInt(processBIO3Vars(pAtual) - processBIO3Vars(pProximo)) * 2);
+				//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\
+				if (POS_START === 0 && LAST_POS_END === 0){
+					console.log(processBIO3Vars(pAtual) + " - " + processBIO3Vars(pProximo));
+					POS_START = MSG_START;
+					POS_END = MSG_START + SIZE;
+					RDT_messagesArray.push(POS_START, POS_END);
+				} else {
+					console.log(processBIO3Vars(pAtual) + " - " + processBIO3Vars(pProximo));
+					POS_START = LAST_POS_END;
+					POS_END = POS_START + SIZE;
+					RDT_messagesArray.push(POS_START, POS_END);
+				}
+				console.log(POS_START + " - " + POS_END + "\n\n" + MSG_startMSGDecrypt_Lv1(RDT_arquivoBruto.slice(POS_START, POS_END)) + "\n\nHex: \n" + DEBUG_splitHex(RDT_arquivoBruto.slice(POS_START, POS_END)));
+				LAST_POS_END = POS_END;
+				c++;
+			} else {
+				break;
+			}
+		}
+		c = 0;
+		soma = 0;
+		// Final
+		var sta_offset = 0;
+		var end_offset = 1;
+		while(c < RDT_messagesArray.length){
+			if (c !== RDT_messagesArray.length - 1){
+				sta_offset = RDT_messagesArray[c];
+				end_offset = RDT_messagesArray[c + 1];
+				console.log(sta_offset + " - " + end_offset);
+				RDT_renderMessages(soma, sta_offset, end_offset);
+				c = c + 2;
+				soma++;
+			} else {
+				break;
+			}
+		}
+		// Final
+		RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
+		RDT_totalMessages = soma;
+		RDT_showMenu(1);
 	} else {
 		RDT_startMessageAnalysis();
 	}
 }
+function RDT_findPointers(){
+	if (RDT_totalMessages !== 0){
+		var pont = "";
+		var fatorA = 4;
+		var fatorB = 0;
+		var totalVezesPush = 0;
+		var startFirstMessage = parseInt(RDT_FILEMAP_MSG[0].slice(0, RDT_FILEMAP_MSG[0].indexOf("-")));
+		console.log("Procurando ponteiro com base em " + startFirstMessage);
+		while(totalVezesPush < RDT_totalMessages * 4){
+			if (pont === "0000" || pont === "0100"){
+				break;
+			} else {
+				fatorA = fatorA + 4;
+				fatorB = fatorB + 4;
+				pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+				console.log("Found: " + pont);
+			}
+			totalVezesPush++;
+		}
+		if (pont === "0000" || pont === "0100"){
+			console.log("Ponteiro Encontrado! (Tipo: " + pont + ")");
+			console.log("Resultado: \n\nQuantas vezes foi procurado: " + totalVezesPush + "\nFator A: " + fatorA + "\nFator B: " + fatorB + "\nPos: " + parseInt(startFirstMessage - fatorA) + " - " + parseInt(startFirstMessage - fatorB));
+			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
+		} else {
+			console.error("ERROR!!");
+		}
+	}
+}
 function RDT_renderMessages(id, startOffset, endOffset){
 	var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
-	console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE + "\n\nHex View:\n" + DEBUG_splitHex(SAMPLE));
+	
+	console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE);
+	console.log("Hex View:\n" + DEBUG_splitHex(SAMPLE));
+
 	var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
-	var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="RDT_transferMessageToMSG(' + startOffset + ', ' + endOffset + ');">' + 
+	var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
 		'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
 	$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
 }
@@ -1063,18 +1125,43 @@ function RDT_makeRDTConfigFile(){
 	var c = 0; // The great c!
 	var fatorMinus = 0;
 	var foundMessages = "";
-	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[MESSAGES]\n";
+	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n";
 	while(c < RDT_FILEMAP_MSG.length){
 		if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
 			console.warn("WARN - Skipping Message " + c + " - It's a NaN Case!");
+			RDT_FILEMAP_MSG.splice(c, 1);
 			fatorMinus++;
 		} else {
 			foundMessages = foundMessages + parseInt(c - fatorMinus) + "\n" + RDT_FILEMAP_MSG[c] + "\n";
 		}
 		c++;
 	}
-	var totalMessages = parseInt(RDT_FILEMAP_MSG.length - fatorMinus) + "\n";
-	var FILE_COMPILED = fileHeader + totalMessages + foundMessages;
+	console.log(RDT_FILEMAP_MSG);
+	var ponteiro_start = RDT_findPointers()[1];
+	var max = RDT_findPointers()[0];
+	RDT_messagesArray = [];
+	RDT_totalMessages = 0;
+	foundMessages = "";
+	var PONTEIRO = "";
+	RDT_MSG_END = [];
+	//
+	var increment_A = 0;
+	var increment_B = 4;
+	var totalMessages = 0;
+	c = 0;
+	while(c < parseInt(max + 1)){
+		PONTEIRO = PONTEIRO + parseInt(ponteiro_start + increment_A) + "\n" + parseInt(ponteiro_start + increment_B) + "\n";
+		increment_A = increment_A + 4;
+		increment_B = increment_B + 4;
+		totalMessages++;
+		c++;
+	}
+
+	totalMessages = totalMessages + "\n";
+
+	// Final
+	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
+	//console.log(FILE_COMPILED);
 	try{
 		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
 		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');

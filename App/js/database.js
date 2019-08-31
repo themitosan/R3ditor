@@ -613,16 +613,39 @@ var MSG_TEXTCOLOR = {
 }
 
 var MSG_CHARESPECIAL = {
+	"ea10": "L2",
+	"ea11": "R2",
+	"ea12": "&",
+	"ea13": "...",
+	"ea14": "[",
+	"ea15": "]",
+	"ea16": "L1",
+	"ea17": "R1",
+	"ea18": "PS1 Triangle",
+	"ea19": "PS1 Circle",
+	"ea1a": "PS1 Cross",
+	"ea1b": "PS1 Square",
+	"ea1c": "Blank Square",
+	"ea1d": "Alternative Cross",
 	"ea24": "S.",
 	"ea25": "T.",
 	"ea26": "A.",
 	"ea27": "R.",
-	"ea28": ";"
+	"ea28": ";",
+	"ea29": "I",
+	"ea2a": "II",
+	"ea2b": "III",
+	"ea2c": "%",
+	"ea35": "!?"
 }
 
 var MSG_DICIONARIO_REVERSO = {
 	// You are not seeing this!
 	";": "ea28",
+	"%": "ea2c",
+	"&": "ea12",
+	"[": "ea14",
+	"]": "ea15",
 	// Comum
 	" ": "00",
 	".": "01",

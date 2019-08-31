@@ -569,8 +569,9 @@ a{
 
 .menu-alterar-item{
     top: 40%;
-    left: 13.4%;
     width: 70%;
+    z-index: 1;
+    left: 13.4%;
     padding-top: 4px;
     position: absolute;
     padding-left: 20px;

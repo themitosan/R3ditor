@@ -5,7 +5,6 @@
 */
 var SAVE_arquivoBruto = undefined;
 var CURRENT_SAVE_SLOT = 1;
-
 // Mapa dos Saves
 var INDICADOR_01 = undefined;
 var INDICADOR_02 = undefined;
@@ -23,9 +22,7 @@ var INDICADOR_13 = undefined;
 var INDICADOR_14 = undefined;
 var INDICADOR_15 = undefined;
 /*
-
 	Ranges
-
 */
 var SAVE_INDICADOR_HEADER 	      = undefined; // Header completa
 var SAVE_INDICADOR_HEADER_START   = undefined; // 0x0000 até 0x2000
@@ -48,95 +45,69 @@ var range_0x2534_0x2534 		  = undefined;
 var range_0x2537_0x254B			  = undefined;
 var range_0x2674_0x2674			  = undefined;
 var range_0x2677_0x28D3			  = undefined;
-
 /*
-
 	Variaveis de Save
-
 */
-
 // Baú
 var JILL_BAU = [];
 var CARLOS_BAU = [];
-
 // Inventários
 var JILL_INVENT = [];
 var CARLOS_INVENT = [];
-
 // Dificuldade
 var dificuldade = undefined;
-
 // Total Saves
 var totalVezesSaves = undefined;
-
 // Sala de Save
 var localSave = undefined;
-
 // Local da cidade
 var lCidade = undefined;
-
 // Roupa
 var outf = undefined;
-
 // Player Atual
 var cPlayer = undefined;
-
 // Jill - Arma equipada
 var jArmaEquip = undefined;
-
 // Carlos - Arma equipada
 var cArmaEquip = undefined;
-
 // Jill e Carlos - Sidepack
 var jSide = undefined;
 var cSide = undefined;
-
 // Posição X e Y
 var xPos = undefined;
 var yPos = undefined;
-
 // Room / Event
 var rEvent = undefined
-
 // Epilogos
 var epil = undefined;
-
 // Files
 var j_files = undefined;
-
 // Versão do game
 var gVersion = undefined;
 var gDetails = undefined;
-
 // Mapas Obtidos - wip
 var mapExtractA = undefined;
 var mapExtractB = undefined;
-
 // Vida e Poison
 var life = undefined;
 var veneno = undefined;
-
+var SAV_godMode = false;
 // Tempo
 var IGTExtract = undefined;
 var h_0x2200 = undefined;
 var h_0x2201 = undefined;
 var h_0x2202 = undefined;
 var h_0x2203 = undefined;
-
 /* 
-
 	Misc.
-
 */
-
 // Variaveis de tempo
 var milesimos = 0;
-var decimos   = 0;
 var segundos  = 0;
+var decimos   = 0;
 var minutos   = 0;
 var hora      = 0;
 var dia       = 0;
-
 function MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
 		S_HEADER = localStorage.getItem("Save_" + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); 					// 0x2000 - 0x21FF
@@ -206,8 +177,7 @@ function MAKE_SAVE(slot){
 		console.error(msg);
 	}
 }
-
-function finalizeSave() {
+function finalizeSave(){
 	var FILE = SAVE_INDICADOR_HEADER + 
 	localStorage.Save_1 + 
 	localStorage.Save_2 + 
@@ -228,7 +198,6 @@ function finalizeSave() {
 	TEMP_SLOT = "";
 	CARREGAR_SAVE(ORIGINAL_FILENAME);
 }
-
 function CARREGAR_SAVE(sFile){
 	localStorage.clear();
 	SAVE_arquivoBruto = undefined;
@@ -277,7 +246,6 @@ function CARREGAR_SAVE(sFile){
 	save_renderSlot(CURRENT_SAVE_SLOT);
 	save_Backup();
 }
-
 function save_renderSlot(slotID){
 	if (slotID < 1 || slotID > 15 || slotID === undefined){
 		slotID === 1;
@@ -289,7 +257,6 @@ function save_renderSlot(slotID){
 	CURRENT_SAVE_SLOT = slotID;
 	save_renderInvent(slotID);
 }
-
 function save_renderSaveSlots() {
 	var cu = 1;
 	var to = 16;
@@ -315,7 +282,6 @@ function save_renderSaveSlots() {
 	scrollLog();
 	SAVE_showMenu(0);
 }
-
 function save_renderInvent(s_slot, mode){
 	JILL_INVENT = [];
 	CARLOS_INVENT = [];
@@ -356,7 +322,6 @@ function save_renderInvent(s_slot, mode){
 	}
 	save_renderInfos(s_slot);
 }
-
 function save_renderBox(s_slot){
 	JILL_BAU = [];
 	CARLOS_BAU = [];
@@ -435,7 +400,6 @@ function save_renderBox(s_slot){
 	}
 	save_renderSaveSlots();
 }
-
 function save_renderInfos(s_slot){
 	try{
 		log_separador();
@@ -520,8 +484,7 @@ function save_renderInfos(s_slot){
 	}
 	save_renderLife(s_slot);
 }
-
-function save_renderLife(s_slot) {
+function save_renderLife(s_slot){
 	// HP (Vida do personagem atual)
 	life = localStorage.getItem('Save_' + s_slot).slice(RANGES["characterHP"][0], RANGES["characterHP"][1]);
 	veneno = localStorage.getItem('Save_' + s_slot).slice(RANGES["characterPoison"][0], RANGES["characterPoison"][1]);
@@ -540,7 +503,7 @@ function save_renderLife(s_slot) {
 			HP = parseInt("0x" + chkA);
 		} else {
 			// ...hack
-			HP = parseInt("0x" + chkA + chkB);
+			HP = processBIO3Vars(chkA + chkB);
 		}
 		// Status: MORTO! (Ou Hex 00 00)
 		if (HP < 0){
@@ -582,7 +545,6 @@ function save_renderLife(s_slot) {
 	document.getElementById("lbl-HP").innerHTML = HP + " (Hex: " + chkA + " " + chkB + ")";
 	save_renderBox(s_slot);
 }
-
 // Fazer Backup
 function save_Backup(){
 	checkFolders();
@@ -601,7 +563,6 @@ function save_Backup(){
 		addLog("error", "ERROR: You can't make a backup if you haven't opened a save yet!");
 	}
 }
-
 function applyItem(mode, person, pos){
 	var itemId = document.getElementById("ex-item-id").value;
 	var attr = document.getElementById("ex-item-attr").value;
@@ -636,29 +597,25 @@ function applyItem(mode, person, pos){
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
-function applyPerson() {
+function applyPerson(){
 	var personagemNovo = document.getElementById('ex-person-id').value;
 	cPlayer = personagemNovo;
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
-function applyDificuldade() {
+function applyDificuldade(){
 	var dificuldadeNova = document.getElementById('ex-dificuldade-id').value;
 	dificuldade = dificuldadeNova;
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
-function applyRoupa() {
+function applyRoupa(){
 	var rou = document.getElementById('ex-roupa-id').value;
 	outf = rou;
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
-function applySidepack(ppzu) {
+function applySidepack(ppzu){
 	var sdpack = document.getElementById('ex-sidepack-id').value;
 	if (ppzu === 1){
 		jSide = sdpack;
@@ -668,8 +625,7 @@ function applySidepack(ppzu) {
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
-function applyArma(personzu) {
+function applyArma(personzu){
 	var newArma = document.getElementById('ex-arma-id').value;
 	if (personzu === 1){
 		jArmaEquip = newArma;
@@ -679,14 +635,12 @@ function applyArma(personzu) {
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function applyPoison() {
 	var newPoison = document.getElementById('ex-poison-id').value;
 	veneno = newPoison;
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function applySaveCount(){
 	var totvezes = document.getElementById('ex-savecount-id').value;
 	if (totvezes == ""){
@@ -706,7 +660,6 @@ function applySaveCount(){
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function applyHP(){
 	var newHP = document.getElementById('ex-HP-id').value;
 	if (newHP < 0){
@@ -719,18 +672,21 @@ function applyHP(){
 	if (newHPPlus.length < 2){
 		newHPPlus = "0" + newHPPlus;
 	}
-	life = newHPPlus + "00";
+	if (SAV_godMode === false){
+		life = newHPPlus + "00";
+	} else {
+		SAV_godMode = false;
+		life = "6810";
+	}
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function applyEpil(){
 	var newEps = document.getElementById('ex-epilogues-id').value;
 	epil = newEps;
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function makeHexTime(){
 	var HH = document.getElementById('ex-IGT-HH').value;
 	var MM = document.getElementById('ex-IGT-MM').value;
@@ -806,7 +762,6 @@ function makeHexTime(){
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-
 function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 	var quan = parseInt("0x" + QUANTIDADE);	
 	var atri = ATTR[ATRIBUTO][0];
@@ -834,7 +789,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 	'<img src="img/box-set-' + imse + '.png" draggable="false" class="b-icon" style="clip-path: inset(' + clip + '); margin-left:' + marg + ';" id="boxicon-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">' + 
 	'<font class="b-quant-lbl" id="b-' + PERSON + '-q-lbl-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');" style="color: ' + colo + ';text-shadow: ' + cfundo + ';">' + quan + '</font>' + 
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
-	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Alterar"></div>';
+	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Modify"></div>';
 	if (VNULO !== "00"){
 		var warnInfo = "WARNING: Null check failed! (Expected Value: 00, Current: " + VNULO + ") - " + VOID[VNULO] + " \nHEX: " + ITEMHEX + QUANTIDADE + ATRIBUTO + VNULO + " \nIndex: " + INDEX + " \nItem Hex: " + ITEMHEX + " (" + nome + ") \nQuantity: " + QUANTIDADE + " (" + quan + ") \nAttr: " + ATRIBUTO + " (" + atri + ") \nNull Check: " + VNULO;
 		console.warn(warnInfo);
@@ -854,7 +809,6 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 		}
 	}
 }
-
 // Render Info
 function addInfo(person, itemId){
 	$('#icon-info-0' + person).css({display: "none"});
@@ -893,7 +847,6 @@ function addInfo(person, itemId){
 	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
 	$('#icon-info-0' + person).css({display: "inline", "clip-path": "inset(0px " + finalA + "px 0px " + finalB + "px)", "margin-left": finalMargin + "px"});
 }
-
 function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	// Infos
 	var titulo = ITEM[itemHex][0];
@@ -995,7 +948,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	}
 	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex + quantHex + atrib + nulo + " - Item: " + itemHex + " (" + titulo + ") - Quantity: " + quantHex + " (" + parseInt(quantHex, 16) + ") - Attr.: " + atrib + " (" + ATTR[atrib][0] + ")");
 }
-
 /// Time Helpers
 /*  _____________________________________________________________________________________________________
    |																									 \
@@ -1004,7 +956,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
    |																									  |
    |	    Formato: DD:HH:MM:SS:DS 																	  |
    |    																								  |
-   |   Quando o primeiro chega ao seu valor máximo (255 / FF), ele aumenta por 1 o próximo endereço       |
+   |   Quando o primeiro chega ao seu valor máximo (255 / FF), ele aumenta o próximo endeereço em 1.      |
    |   Exemplo: se o tempo for 00:00:00:04:75 (Quatro Segundos e 75 Milésimos) Em HEX estará              |
    |   ff 00 00 00. Quando mais um milésimo se passar, será quatro segundos e 76 milésimos, 		 	  |
    |   e em HEX estará: 00 01 00 00.																	  |
@@ -1029,36 +981,30 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
    |					   06 01 00 00   - 00:00:00:04:83		   \||/									  |
    |					   07 01 00 00   - 00:00:00:04:84           \/ 									  |
    |																									  |
-   |	Oh, come on! I have to translate this too? Throw this at translate.google.com !					  |
+   |	Oh, come on! I have to translate this too? Throw this at translate.google.com! 					  |
    \______________________________________________________________________________________________________|
 */
-
 function contador0x2200(hex0x2200){
 	// Formula: 0x2200 * Milésimos
 	var timeOffset = parseInt(hex0x2200, 16) * 1000;
 	return timeOffset;
 }
-
-function contador0x2201(multiplier) {
+function contador0x2201(multiplier){
 	var m = parseInt(multiplier, 16) * 255;
 	return contador0x2200(m.toString(16));
 }
-
-function contador0x2202(multiplier) {
+function contador0x2202(multiplier){
 	var m = parseInt(multiplier, 16) * 255;
 	return contador0x2201(m.toString(16));
 }
-
-function contador0x2203(multiplier) {
+function contador0x2203(multiplier){
 	var m = parseInt(multiplier, 16) * 255;
 	return contador0x2202(m.toString(16));
 }
-
-function contador0x2204(multiplier) {
+function contador0x2204(multiplier){
 	var m = parseInt(multiplier, 16) * 255;
 	return contador0x2203(m.toString(16));
 }
-
 function contadorFinal(DD, HH, MM, SS, DC, MS){
 	milesimos = parseInt(milesimos);
 	decimos = parseInt(decimos);
@@ -1196,7 +1142,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 	}
 	//console.log("DD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 }
-
 function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	resetTimer();
 	h_0x2200 = contador0x2200(p0x2200);
@@ -1211,7 +1156,6 @@ function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	document.getElementById("lbl-time").title = "Full Time Format\nDD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
 	//console.log("IGT: " + h_0x2200 + " - " + h_0x2201 + " - " + h_0x2202 + " - " + h_0x2203);
 }
-
 function resetTimer(){
 	milesimos = 0;
 	decimos   = 0;
@@ -1221,7 +1165,6 @@ function resetTimer(){
 	dia       = 0;
 	document.getElementById("lbl-time").innerHTML = "00:00:00";
 }
-
 function resetIGT(){
 	IGTExtract = "00000000";
 	request_render_save = true;
