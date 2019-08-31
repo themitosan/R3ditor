@@ -9,25 +9,20 @@ var RDT_aba_atual = undefined;
 var SAVE_aba_atual = undefined;
 var request_render_save = undefined;
 var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
-
 window.onclose = function(){
 	localStorage.clear();
 }
-
 window.onresize = function(){
 	window.resizeBy(1340, 733);
 }
-
 function reload(){
 	process.chdir(TEMP_APP_PATH);
 	localStorage.clear();
 	location.reload();
 }
-
 function scrollLog(){
 	document.getElementById("log-programa").scrollTop = document.getElementById("log-programa").scrollHeight;
 }
-
 function SAVE_applyMenuFocus(menuId){
 	SAVE_aba_atual = menuId;
 	var i = 0;
@@ -38,7 +33,6 @@ function SAVE_applyMenuFocus(menuId){
 	$('#menu-' + menuId).addClass('aba-select');
 	scrollLog();
 }
-
 function main_menu(anim){
 	localStorage.clear();
 	if (anim === 0){ // Voltar
@@ -82,11 +76,11 @@ function SAVE_showMenu(menuId){
 			$("#log-programa").css({"height": "54px", "top": "656px"});
 			SAVE_applyMenuFocus(1);
 			$("#s-menu-general").css({"display": "block", "width": "74%"});
-			$("#save-geral").removeClass('none');
 			$("#save-geral").css({"height": "550px"});
 			$("#menu-info").css({"height": "560px"});
-			$("#msg-viewer").addClass('none');
+			$("#save-geral").removeClass('none');
 			$("#save-carlos").addClass('none');
+			$("#msg-viewer").addClass('none');
 			$("#save-jill").addClass('none');
 		}
 		request_render_save = false;
@@ -99,8 +93,8 @@ function SAVE_showMenu(menuId){
 		addInfo(0, "00");
 		SAVE_applyMenuFocus(2);
 		$("#save-geral").addClass('none');
-		$("#save-carlos").addClass('none');
 		$("#msg-viewer").addClass('none');
+		$("#save-carlos").addClass('none');
 		$("#save-jill").removeClass('none');
 	}
 	if (menuId === 2){ // Menu Carlos
@@ -256,7 +250,6 @@ function showModSidepack(person){
 	}
 	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
 }
-
 function showModCurrentArma(person){
 	adjustDialogSave(34);
 	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ARMA;
@@ -284,7 +277,6 @@ function showModCurrentArma(person){
 	}
 	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
 }
-
 function showModPoison(){
 	adjustDialogSave(40);
 	hideMenusForDialog();
@@ -299,7 +291,6 @@ function showModPoison(){
 	}
 	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
 }
-
 function cancelShowModItem(){
 	$("#menu-mod-item").css({"display": "none"});
 	if (SAVE_aba_atual === 1){

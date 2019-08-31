@@ -676,7 +676,7 @@ function applyHP(){
 		life = newHPPlus + "00";
 	} else {
 		SAV_godMode = false;
-		life = "6810";
+		life = "3075";
 	}
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);

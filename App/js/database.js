@@ -1,9 +1,8 @@
 /*
 	R3ditor - Database.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Help me - please!
 */
-
 var ITEM = {
 	"00": ["Empty Slot", 									   "", 																																																									   						 "0px 502px 0px 0px",     "-54px", "0", "0", "0", "0", "0"],
 	"01": ["Combat Knife", 									   "It is a simple combat Knife<br><br>It can be very useful when you are low on ammunition. In the hand of those who know how to use, it does damage!", 																								   		 "0px 446px 0px 57px",   "-166px", "0", "0", "1", "1", "0"],
@@ -179,7 +178,6 @@ var FILES = {
 	// Info: Hex A1 makes the game freeze and crash
 	"a2": ["Classified Photo File"]
 }
-
 var RDT_MAPAS = {
 	"a4": ["Uptown Map"],
 	"a9": ["Police Station Map"],
@@ -189,7 +187,6 @@ var RDT_MAPAS = {
 	"a7": ["Park Map"],
 	"a8": ["Dead Factory Map"]
 }
-
 var ATTR = {
 	"00": ["None",								  "#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
 	"01": ["Remaining ammo in green",		   "#008400", "0 0 2px #004200"],
@@ -207,12 +204,10 @@ var ATTR = {
 	"17": ["Attr. found in Nightmare Mod", 	   "#fff", "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
 	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
 }
-
 var VOID = {
 	"00": "OK!",									   // Condição normal
 	"80": "Condição anormal da versão francesa/Taiwan" // Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
 }
-
 var CIDADE = {
 	"00": ["Uptown (Including RPD)"],
     "01": ["Downtown"],
@@ -222,7 +217,6 @@ var CIDADE = {
     "05": ["Shows first the Mercenaries-minigame ending, then the ending video of the main game (the one without Barry Burton, assuming 0x2250 has been set to 00. If not, then it only crashes)."],
     "06": ["Downtown again. I have no idea what's different here. This may be after the scene where Jill falls trough the parking lot floor."]
 }
-
 var PLAYERS = {
 	"00": ["Jill with normal outfit"],
 	"01": ["Jill with normal outfit + sidepack"],
@@ -239,7 +233,6 @@ var PLAYERS = {
 	"0c": ["Dario"],
 	"0f": ["Tofu"]
 }
-
 var ROUPA = {
 	"00": ["Normal"],
 	"01": ["Biker"],
@@ -250,25 +243,21 @@ var ROUPA = {
 	"06": ["Blue mini skirt with black top and boots"],
 	"07": ["Social Suit"]
 }
-
 var SIDEPACK = {
 	"00": ["Undefined"],
 	"0a": ["Sidepack Enabled"],
 	"08": ["Sidepack Disabled"] 
 }
-
 var VERSAO = {
 	"000000000000": ["Undefined", 						 	  "Hex 00"],
 	"4241534c5553": ["Russian / Nightmare (Or Darkness) Mod", "BASLUS"],
 	"4245534c4553": ["Mediakite / Xplosiv", 				  "BESLES"],
 	"4249534c5053": ["Chinese / Japanese / Taiwan Version",   "BISLPS"]
 }
-
 var POISON = {
 	"8f": ["Yes"],
 	"00": ["No"]  
 }
-
 var LOCAIS = {
 	"00": ["Warehouse"],
 	"01": ["Allley"],
@@ -285,7 +274,6 @@ var LOCAIS = {
 	"0a": ["Resting Room"],
 	"0b": ["Monitor Room"]
 }
-
 var EPILOGOS = {
 	"00": ["None"],
 	"01": ["1"],
@@ -299,7 +287,6 @@ var EPILOGOS = {
 	"09": ["All"],
 	"0c": ["All"] // Encontrado esse valor na versão francesa
 }
-
 var DIFICULDADE = {
 	"01": ["Easy"],
 	"00": ["Hard"]
@@ -309,7 +296,6 @@ var DIFICULDADE = {
 var MAPAS = {
 	"0000": "Undefined"
 }
-
 var MSG_DICIONARIO = {
 	"00": [false, " ", false],
 	"01": [false, ".", false],
@@ -574,7 +560,6 @@ var MSG_DICIONARIO = {
 	"f5": [true, "(Unknown Command used on R101.rdt ", 	 8], // Comando usado na cutscene "Septemer, 28".
 	"f9": [true, "(Function: Text Color ", 				 9]	 // Formatação - Cor Verde
 }
-
 var MSG_TEXTCOLOR = {
 	/* 
 		Text Colors:
@@ -638,7 +623,6 @@ var MSG_CHARESPECIAL = {
 	"ea2c": "%",
 	"ea35": "!?"
 }
-
 var MSG_DICIONARIO_REVERSO = {
 	// You are not seeing this!
 	";": "ea28",
@@ -758,7 +742,6 @@ var RANGES = {
 	"gameEdition":  		[276, 288],
 	/*
 		Header (Cabeçalho)
-		
 		O Inicio do arquivo de save contém um pequeno espaço nulo "00" até o primeiro indicador de save na posição
 		0x80 (51 00 00 00 00 20 00 00 FF FF + Versão do game).
 		Entre cada indicador, existe um espaço de 68 espaços nulos até a posição do save de Nº 15.
@@ -769,7 +752,6 @@ var RANGES = {
 	"he-esp-incial": 	    [0, 256], // Espaço inicial até o 1º indicador
 	"he-esp-meio":   	  [304, 512], // Espaço entre cada indicador
 	"he-esp-final":    [3888, 16384], // Espaço final até o 1º slot de save
-
 	"he-indicador-1":     [256, 304], //  Indicador do 1º Slot
 	"he-indicador-2":     [512, 560], //  Indicador do 2º Slot
 	"he-indicador-3":     [768, 816], //  Indicador do 3º Slot
@@ -785,18 +767,15 @@ var RANGES = {
 	"he-indicador-13":  [3328, 3376], // Indicador do 13º Slot
 	"he-indicador-14":  [3584, 3632], // Indicador do 14º Slot
 	"he-indicador-15":  [3840, 3888], // Indicador do 15º Slot
-
 	/* 			
-		Save - Info por slot
-		
+		Save - Info por slot:
 		Uma das diferenças do save do Resident Evil 2 comparado ao Resident Evil 3 é que agora o jogador
 		está limitado a 15 slots de saves, pois todos eles estão em um único arquivo. Porém, por mais que 
 		dessa forma os arquivos de save de cada jogos sejam distintos, os dois tem o cabeçalho de save (0x2000) 
 		com o começo semelhante. (SC..)
 
 		Ordem de variaveis do save:
-		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\
-			   Nome 		     Hex Pos. 														 |
+			   Nome 		     Hex Pos. 	
 		1) Header (SC...) 		 0x2000 														OK
 		2) Tempo IGT 	  		 0x2200 até 0x2203												OK
 		@) 0x2204-2207																			OK
@@ -836,22 +815,15 @@ var RANGES = {
 		24) Sidepack do Carlos   0x2676 														OK
 		25) Roupa da Jill 		 0x28D4															OK
 		26) Final do Save 		 0x28D5 até 0x3FFF												OK
-		|																						 |
-		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~/
 	*/
-	
 	// Headers
-
 	"save_HEADER": 		   [0, 1024], // Header do save (SC..)
 	"save_END": 	   [4522, 16384], // Final do save
-
     /*
 		Espaços não mapeados:
-
 		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas através de engenharia reversa.
 		Eles serão preservados para poder reconstruir o arquivo de save inteiro novamente.
     */
-
     "0x2204-0x2207": 	[1032, 1040], // Espaço entre IGT e Dificuldade
     "0x2209-0x220D":    [1042, 1052], // Espaço entre Dificuldade e Posição X
     "0x2210-0x2211": 	[1056, 1060], // Espaço entre Posição X e Posição Y
@@ -867,9 +839,7 @@ var RANGES = {
     "0x2537-0x254B":    [2670, 2712], // Espaço entre Sidepack da Jill e Inventário do carlos
     "0x2674-0x2674": 	[3304, 3306], // Espaço entre o Baú do carlos e a arma atual do carlos
     "0x2677-0x28D3": 	[3310, 4520], // Espaço entre arma atual do carlos até a roupa atual da Jill
-
     // Outras variaveis
-
 	"jillInvent-1":		[2072, 2080], // Inventário da Jill   - Slot 01  - 0x240C
 	"jillInvent-2":		[2080, 2088], // Inventário da Jill   - Slot 02  - 0x2410
 	"jillInvent-3":		[2088, 2096], // Inventário da Jill   - Slot 03  - 0x2414
@@ -912,27 +882,21 @@ var RANGES = {
 	"characterHP":    	[1064, 1068], // HP do personagem atual. 		 - 0x2214 to 0x2215
 	"j-box": 			[2152, 2656], // Baú da Jill 					 - 0x2535 to 0x2530
 	"c-box": 			[2792, 3296], // Baú do Carlos 					 - 0x2574 to 0x2580
-	////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
 	/*
-
 		RDT Ranges
-
 	*/
-
 	// Item Ranges
-
 	"RDT_item-header": 			[0, 2], // OK
 	"RDT_item-itemIdetifier": 	[2, 4], // OK
 	"RDT_item-espaco1": 		[4, 12], // OK
 
 	// Se a Header do Item for 67
-
 	"RDT_item-0-itemXX": 		[12, 16], // OK
 	"RDT_item-0-itemYY": 		[16, 20], // OK
 	"RDT_item-0-itemZZ": 		[20, 24], // OK
 	"RDT_item-0-itemRR": 		[24, 28], // OK
-
 	"RDT_item-0-itemID": 		[28, 30], // OK
 	"RDT_item-0-espaco2": 		[30, 32], // OK
 	"RDT_item-0-itemQuant":		[32, 34], // OK
