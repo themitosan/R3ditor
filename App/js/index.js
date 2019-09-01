@@ -351,9 +351,7 @@ function processBIO3Vars(hex){
 	}
 }
 /*
-
 	Triggers
-
 */
 /// Wizard
 function triggerLoadWZ(){

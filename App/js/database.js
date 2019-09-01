@@ -902,9 +902,7 @@ var RANGES = {
 	"RDT_item-0-itemQuant":		[32, 34], // OK
 	"RDT_item-0-espaco3": 		[34, 42], // OK
 	"RDT_item-0-itemMP": 		[42, 44], // OK
-
 	// Se a Header do item for 68
-
 	"RDT_item-1-itemXX": 		[12, 16],
 	"RDT_item-1-itemYY": 		[16, 20],
 	"RDT_item-1-itemZZ": 		[20, 24],
@@ -915,5 +913,5 @@ var RANGES = {
 	"RDT_item-1-itemQuant":		[48, 50], // OK
 
 	"RDT_item-1-espaco3": 		[34, 42],
-	"RDT_item-1-itemMP": 		[42, 44],
+	"RDT_item-1-itemMP": 		[58, 60]
 }

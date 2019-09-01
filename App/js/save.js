@@ -535,6 +535,11 @@ function save_renderLife(s_slot){
 			STATUS = "Life Hack! (HP: " + HP + ")";
 			co = "txt-fine";
 		}
+		// Status: God Mode
+		if (HP > 29999){
+			STATUS = "Unfair! (HP: " + HP + ")";
+			co = "txt-fine";
+		}
 	}
 	$("#JILL-LIFESTATUS").addClass(co);
 	$("#CARLOS-LIFESTATUS").addClass(co);
@@ -665,8 +670,8 @@ function applyHP(){
 	if (newHP < 0){
 		newHP = 0;
 	}
-	if (newHP > 255){
-		newHP = 255;
+	if (newHP > 30000){
+		newHP = 30000;
 	}
 	var newHPPlus = parseInt(newHP).toString(16);
 	if (newHPPlus.length < 2){

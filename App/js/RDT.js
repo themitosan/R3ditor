@@ -70,10 +70,14 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - Fábrica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
+	
 	while (c < RDT_totalItensGeral){
 		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
 		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
 		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
+		if (RDT_ITEMRAW.slice(0, 2) === "68"){
+			RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, parseInt(RDT_itemEndRange + 8));
+		}
 		localStorage.setItem("RDT_Item-" + c, RDT_ITEMRAW);
 		RDT_decompileItens(c, false);
 		c++;
@@ -127,7 +131,7 @@ function RDT_decompileItens(id, edit){
 		espaco2 	  = currentItem.slice(RANGES["RDT_item-1-espaco2"][0],	   RANGES["RDT_item-1-espaco2"][1]);
 		itemQuant 	  = currentItem.slice(RANGES["RDT_item-1-itemQuant"][0],   RANGES["RDT_item-1-itemQuant"][1]);
 		espaco3 	  = "[WIP]";
-		itemMP 		  = "[WIP]";
+		itemMP 		  = currentItem.slice(RANGES["RDT_item-1-itemMP"][0], 	   RANGES["RDT_item-1-itemMP"][1]);
 	}
 
 	var RDT_motivo = undefined;
@@ -246,43 +250,49 @@ function RDT_ITEM_APPLY(index, type){
 		canBuild = false;
 		error = "The X var must be 16 bytes long!";
 	}
-
 	if (novaY.length < 4){
 		canBuild = false;
 		error = "The Y var must be 16 bytes long!";
 	}
-
 	if (novaZ.length < 4){
 		canBuild = false;
 		error = "The Z var must be 16 bytes long!";
 	}
-
 	if (novaR.length < 4){
 		canBuild = false;
 		error = "The R var must be 16 bytes long!";
 	}
-
 	if (novaAnim.length < 2){
 		canBuild = false;
 		error = "The Animation var must be 8 bytes long!";
 	}
-
 	// Reconstruindo item
 	if (canBuild === true){
+		var RDT_ITEM_COMPILADO = undefined;
 		var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);  
-		var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32);
-		var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 42);
-		var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
-		var RDT_ITEM_COMPILADO = undefined
-		if (BETA === true){
-			RDT_ITEM_COMPILADO = header + " " + novaX + " " + novaY + " " + novaZ + " " + novaR + " " + novaHex + " " + offset1 + " " + quant + " " + offset2 + " " + novaAnim + " " + offset3;
-			console.log("Index: " + index + " - New Hex: " + RDT_ITEM_COMPILADO);
+		if (header.slice(0, 2) === "67"){
+			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32);
+			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 42);
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
+			if (BETA === true){
+				RDT_ITEM_COMPILADO = header + " " + novaX + " " + novaY + " " + novaZ + " " + novaR + " " + novaHex + " " + offset1 + " " + quant + " " + offset2 + " " + novaAnim + " " + offset3;
+				console.log("Index: " + index + "\nNew Hex: " + RDT_ITEM_COMPILADO);
+			}
+			RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
+			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+			RDT_RECOMPILE_Lv1();
+		} else {
+			// Header 68
+			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // Até item id
+			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(46, 48); // 00 entre item id e quantidade
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // quantidade até anim
+			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
+			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+			RDT_RECOMPILE_Lv1();
 		}
-		RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
-		localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-		RDT_RECOMPILE_Lv1();
 	} else {
 		addLog("warn", "WARNING: There was an error while processing: " + error);
+		scrollLog();
 	}
 }
 function RDT_readMessages(){
@@ -1262,18 +1272,25 @@ function RDT_Backup(){
 	}
 }
 function RDT_RECOMPILE_Lv1(){
+	var c = 0;
 	if (ORIGINAL_FILENAME !== undefined){
 		RDT_Backup();
 		try{
 			log_separador();
 			var RDT_CLONE = RDT_arquivoBruto;
-			var c = 0;
 	
 			// Apply Itens, Maps and Files
 			while(c < RDT_ItensArray.length){
-				var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
-				var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 52), RDT_CLONE.length);
-				RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+				var NEW_ITEM = localStorage.getItem("RDT_Item-" + c);
+				if (NEW_ITEM.slice(0, 2) === "67"){
+					var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
+					var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 52), RDT_CLONE.length);
+					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+				} else {
+					var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
+					var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 60), RDT_CLONE.length);
+					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+				}
 				c++;
 			}
 
@@ -1289,12 +1306,14 @@ function RDT_RECOMPILE_Lv1(){
 			RDT_readItens();
 
 		} catch(err){
+			addLog("error", "ERROR: Something went wrong on save process!");
+			addLog("error", err);
 			console.error(err);
-			addLog("error", "ERROR: Something went wrong! " + err);
 		}
 	} else {
 		addLog("error", "ERROR - You cannot save an RDT file if you have not opened it!");
 	}
+	scrollLog();
 }
 function RDT_doAfterSave(){
 	RDT_totalItensGeral = undefined;

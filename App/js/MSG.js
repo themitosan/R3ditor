@@ -465,29 +465,36 @@ function MSG_COMMAND_SHOWCAMERA(index, isModify){
 }
 
 function MSG_COMMAND_ADDTEXT(index, isModify){
-	if (isModify === undefined){
-		isModify = false;
-	}
-	MSG_increment = false;
 	var textToTrans = document.getElementById('msg-txt-toTrans').value;
-	var RAW_DATA_ARRAY = textToTrans.match(/.{1,1}/g);
-	var t = undefined;
-	if (RAW_DATA_ARRAY !== null){
-		t = RAW_DATA_ARRAY.length;
+	if (textToTrans !== ""){
+		MSG_renderDialog(0);
+		if (isModify === undefined){
+			isModify = false;
+		}
+		MSG_increment = false;
+		var RAW_DATA_ARRAY = textToTrans.match(/.{1,1}/g);
+		var t = undefined;
+		if (RAW_DATA_ARRAY !== null){
+			t = RAW_DATA_ARRAY.length;
+		} else {
+			t = 0;
+		}
+		var txtFinal = "";
+		var startPoint = 0;
+		while (startPoint < t){
+			txtFinal = txtFinal + MSG_DICIONARIO_REVERSO[RAW_DATA_ARRAY[startPoint]];
+			startPoint++;
+		}
+		localStorage.setItem("MSG_comando-" + index, txtFinal);
+		if (isModify === false){
+			MSG_totalComandos++;
+		}
+		MSG_applyMSGCommand(0);
 	} else {
-		t = 0;
+		alert("ERROR: The textbox is empty!");
+		addLog('warn', 'WARNING - The textbox is empty!');
+		scrollLog();
 	}
-	var txtFinal = "";
-	var startPoint = 0;
-	while (startPoint < t){
-		txtFinal = txtFinal + MSG_DICIONARIO_REVERSO[RAW_DATA_ARRAY[startPoint]];
-		startPoint++;
-	}
-	localStorage.setItem("MSG_comando-" + index, txtFinal);
-	if (isModify === false){
-		MSG_totalComandos++;
-	}
-	MSG_applyMSGCommand(0);
 }
 
 // Unknown Function F5
@@ -515,7 +522,7 @@ function MSG_COMMAND_F5(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
+// Text Color
 function MSG_COMMAND_TEXTCOLOR(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -532,7 +539,6 @@ function MSG_COMMAND_TEXTCOLOR(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 // The dark side of this ENTIRE CODE!
 // Like... DON'T TOUCH THIS PART - FOR REAL!
 function MSG_SAVE_ON_RDT(msgHex){
