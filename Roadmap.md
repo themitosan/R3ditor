@@ -19,7 +19,7 @@ This file can (and will be) modified several times!
 - Modify how many (and which one) maps you have
 - Modify how many (and which one) files you have
 - Add the ability to exchange where you are in the game
-- ~~Add Invencible Mode (Add a lot of health to Jill / Carlos)~~
+- ~~Add God Mode (Add a lot of health to Jill / Carlos)~~
 
 ## Bio3.ini (INI) [WIP]
 - Create this section on App
