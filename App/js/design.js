@@ -400,6 +400,7 @@ function showModPoison(){
 }
 function cancelShowModItem(){
 	main_closeFileList();
+	$("#SAV_openFileList").css({"display": "inline"});
 	$("#menu-mod-item").css({"display": "none"});
 	if (SAVE_aba_atual === 1){
 		$("#s-menu-general").css({"display": "block"});
@@ -432,6 +433,7 @@ function hideMenusForDialog(){
 }
 function adjustDialogSave(percent){
 	main_closeFileList();
+	$("#SAV_openFileList").css({"display": "none"});
 	$("#menu-mod-item").css({"top": percent + "%"});
 }
 function log_separador() {
