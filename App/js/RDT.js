@@ -49,7 +49,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_BG_display();
 	scrollLog();
 }
-
 function RDT_readItens(){
 	var c = 0;
 	RDT_totalItens = 0;

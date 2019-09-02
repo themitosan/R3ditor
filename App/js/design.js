@@ -23,18 +23,106 @@ function reload(){
 function scrollLog(){
 	document.getElementById("log-programa").scrollTop = document.getElementById("log-programa").scrollHeight;
 }
-function SAVE_applyMenuFocus(menuId){
-	SAVE_aba_atual = menuId;
-	var i = 0;
-	while(i < SAVE_totalMenus){
-		$('#menu-' + i).removeClass('aba-select');
-		i++;
+/// General
+function main_renderFileList(id){
+	var c = 0;
+	document.getElementById("fileListHolder").innerHTML = " ";
+	// RDT
+	if (id === 3){
+		document.getElementById('fileList_title').innerHTML = "File List";
+		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\") === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
+			var listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".RDT"));
+			if (listRDT.length < 1){
+				listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".rdt"));
+			}
+			while(c < listRDT.length){
+				var mFile = undefined;
+				var origName = "Unknown";
+				var origCity = "Unknown";
+				var imgPreview = undefined;
+				var f = document.getElementById("fileListHolder").innerHTML;
+				var currentRDT = APP_PATH + "\\Assets\\DATA_E\\RDT\\" + listRDT[c];
+				var RDT_name = getFileName(currentRDT).toUpperCase();
+				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
+					imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
+				} else if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG") === true){
+					imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG";
+				} else {
+					imgPreview = APP_PATH + "\\App\\img\\404.png";
+				}
+				if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap") === true){
+					mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap";
+				} else {
+					mFile = "There is no map file for this RDT. Open it to generate!";
+				}
+				if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
+					origName = RDT_locations[RDT_name][0];
+					origCity = RDT_locations[RDT_name][1];
+				}
+				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
+					' onclick="RDT_CARREGAR_ARQUIVO(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
+					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: ' + mFile + 
+					'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
+				$("#fileListHolder").append(fileList_HTML_template);
+				c++;
+			}
+			$("#avaliable_fileList").css({"display": "block"});
+		} else {
+			console.warn('WARN - Unable to render FileList!');
+			addLog('warn', 'WARN - Unable to render FileList!');
+			scrollLog();
+		}
 	}
-	$('#menu-' + menuId).addClass('aba-select');
-	scrollLog();
+	// Save
+	if (id === 2){
+		document.getElementById('fileList_title').innerHTML = "Saves";
+		if (fs.existsSync(APP_PATH + "\\Assets\\Save\\") === true){
+			var SAV_list = fs.readdirSync(APP_PATH + "\\Assets\\Save\\").filter(fn => fn.endsWith(".SAV"));
+			if (SAV_list.length < 1){
+				SAV_list = fs.readdirSync(APP_PATH + "\\Assets\\Save\\").filter(fn => fn.endsWith(".sav"));
+			}
+			while (c < SAV_list.length){
+				var currentSAV = SAV_list[c];
+				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_b" id="SAV_file_' + c + '"' + 
+					' onclick="CARREGAR_SAVE(\'' + APP_PATH.replace(new RegExp("\\\\", "gi"), "/") + "/Assets/Save/" + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
+					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Mod)<div class="menu-separador"></div>' + 
+					'Path: ' + APP_PATH.replace(new RegExp("\\\\", "gi"), "/") + "\\Assets\\Save\\" + currentSAV + '</div>';
+				$("#fileListHolder").append(fileList_HTML_template);
+				c++;
+			}
+			c = 0;
+			SAV_list = fs.readdirSync(GAME_PATH).filter(fn => fn.endsWith(".SAV"));
+			if (SAV_list.length < 1){
+				SAV_list = fs.readdirSync(GAME_PATH).filter(fn => fn.endsWith(".sav"));
+			}
+			while (c < SAV_list.length){
+				var currentSAV = SAV_list[c];
+				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_c" id="SAV_file_' + c + '"' + 
+					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
+					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)<div class="menu-separador"></div>' + 
+					'Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
+				$("#fileListHolder").append(fileList_HTML_template);
+				c++;
+			}
+			$("#avaliable_fileList").css({"display": "block"});
+		} else {
+			console.warn('WARN - Unable to render FileList!');
+			addLog('warn', 'WARN - Unable to render FileList!');
+			scrollLog();
+		}
+	}
+}
+function main_openFileList(){
+	$("#avaliable_fileList").css({"display": "block"});
+	$("#FILELIST_goBackBtn").css({"display": "inline"});
+}
+function main_closeFileList(){
+	$("#avaliable_fileList").css({"display": "none"});
+	$("#FILELIST_goBackBtn").css({"display": "none"});
 }
 function main_menu(anim){
 	localStorage.clear();
+	$("#avaliable_fileList").css({"display": "none"});
 	if (anim === 0){ // Voltar
 		reload();
 	} else {
@@ -43,6 +131,7 @@ function main_menu(anim){
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Save Editor (*.sav)";
 		$("#menu-topo-save").css({"display": "block"});
+		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG
 		document.title = APP_NAME + " - Message Editor (*.msg)";
@@ -54,9 +143,28 @@ function main_menu(anim){
 	if (anim === 3){ // RDT
 		document.title = APP_NAME + " - Map Editor (*.rdt)";
 		$("#menu-topo-RDT").css({"display": "block"});
+		if (enable_mod === true){
+			main_renderFileList(3);
+		} else {
+			$("#avaliable_fileList").css({"display": "none"});
+		}
 	}
 }
+/// Save
+function SAVE_applyMenuFocus(menuId){
+	var i = 0; // i? why not c?
+	main_closeFileList();
+	SAVE_aba_atual = menuId;
+	$("#SAV_openFileList").css({"display": "inline"});
+	while(i < SAVE_totalMenus){
+		$('#menu-' + i).removeClass('aba-select');
+		i++;
+	}
+	$('#menu-' + menuId).addClass('aba-select');
+	scrollLog();
+}
 function SAVE_showMenu(menuId){
+	main_closeFileList();
 	$("#SAV_reload").css({"display": "inline"});
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#img-logo").fadeOut({duration: 100, queue: false});
@@ -119,6 +227,7 @@ function SAVE_showMenu(menuId){
 function cleanForSaveLoad(){
 	var cu = 1;
 	var to = 16;
+	main_closeFileList();
 	adjustDialogSave(40);
 	$("#JILL-BOX").empty();
 	$("#CARLOS-BOX").empty();
@@ -139,6 +248,7 @@ function cleanForSaveLoad(){
 	}
 }
 function showModItem(modo, person, pos, itemId){
+	main_closeFileList();
 	adjustDialogSave(40);
 	hideMenusForDialog();
 	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ITEM;
@@ -289,6 +399,7 @@ function showModPoison(){
 	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
 }
 function cancelShowModItem(){
+	main_closeFileList();
 	$("#menu-mod-item").css({"display": "none"});
 	if (SAVE_aba_atual === 1){
 		$("#s-menu-general").css({"display": "block"});
@@ -319,7 +430,8 @@ function hideMenusForDialog(){
 	$("#CARLOS-STATUS").css({"display": "none"});
 	$("#s-menu-general").css({"display": "none"});
 }
-function adjustDialogSave(percent) {
+function adjustDialogSave(percent){
+	main_closeFileList();
 	$("#menu-mod-item").css({"top": percent + "%"});
 }
 function log_separador() {
@@ -327,6 +439,7 @@ function log_separador() {
 }
 /// About
 function showAbout(){
+	main_closeFileList();
 	$("#menu-topo").css({"display": "none"});
 	$("#log-programa").css({"display": "none"});
 	$("#menu-topo-MOD").css({"display": "none"});
@@ -335,8 +448,8 @@ function showAbout(){
 /// MSG
 function MSG_showMenu(id){
 	scrollLog();
+	main_closeFileList();
 	$("#img-logo").css({"display": "none"});
-	$("#lbl-msg-length").removeClass("red");
 	if (SHOW_EDITONHEX === true && MSG_arquivoBruto !== undefined){
 		$("#MSG_openInHex").css({"display": "inline"});
 	} else {
@@ -361,6 +474,7 @@ function MSG_doTheTitleThing(){
 	}
 }
 function TRANSFER_MSG_TO_RDT(){
+	main_closeFileList();
 	$("#menu-MSG").css({"display": "none"});
 	$("#menu-topo-msg").css({"display": "none"});
 	$("#MSG_openInHex").css({"display": "none"});
@@ -563,13 +677,14 @@ function MSG_renderCamPreview(){
 		document.getElementById('MSG_camPreview').src = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + ".JPG";
 	}
 }
-
 /// RDT
 function RDT_showMenu(id){
 	var c = 1;
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	$("#img-logo").css({"display": "none"});
+	$("#avaliable_fileList").css({"display": "none"});
 	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
+		$("#RDT_openFileList").css({"display": "inline"});
 		$("#RDT_MSG-holder").css({"height": "430px"});
 		$("#RDT_menu-" + id).css({"height": "482px"});
 		$("#RDT-item-list").css({"height": "428px"});
@@ -579,6 +694,7 @@ function RDT_showMenu(id){
 		$("#RDT-msgs").css({"height": "472px"});
 		$("#RDT-ifm").css({"height": "472px"});
 	} else {
+		$("#RDT_openFileList").css({"display": "none"});
 		$("#menu-topo-MOD").css({"display": "none"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
 		$("#RDT_menu-" + id).css({"height": "528px"});
@@ -601,6 +717,13 @@ function RDT_showMenu(id){
 		$("#RDT_openInHex").css({"display": "inline"});
 	} else {
 		$("#RDT_openInHex").css({"display": "none"});
+	}
+	if (RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()] !== undefined && RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()] !== null){
+		document.getElementById('RDT_lbl-localName').innerHTML = RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()][0];
+		document.getElementById('RDT_lbl-localCity').innerHTML = RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()][1];
+	} else {
+		document.getElementById('RDT_lbl-localName').innerHTML = "Unknown";
+		document.getElementById('RDT_lbl-localCity').innerHTML = "Unknown";
 	}
 	$("#RDT_reload").css({"display": "inline"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
@@ -628,9 +751,8 @@ function RDT_showMenu(id){
 	scrollLog();
 }
 function TRANSFER_RDT_TO_MSG(){
+	main_closeFileList();
 	document.title = APP_NAME + " - Transfering message...";
-	$("#lbl-msg-length").addClass("green");
-	$("#lbl-msg-length").removeClass("red");
 	$("#menu-RDT").css({"display": "none"});
 	$("#RDT_BG_1").css({"display": "none"});
 	$("#RDT_BG_2").css({"display": "none"});
@@ -688,6 +810,8 @@ function RDT_Error_404(){
 	}
 }
 function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant, header){
+	main_closeFileList();
+	$("#RDT_openFileList").css({"display": "none"});
 	var nome = undefined;
 	if (hex.length < 2){
 		hex = "0" + hex;
@@ -748,6 +872,10 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	$("#RDT-item-list").css({"width": "622px"});
 }
 function RDT_editItemCancel(){
+	main_closeFileList();
+	if (enable_mod === true){
+		$("#RDT_openFileList").css({"display": "inline"});
+	}
 	$("#RDT-item-list").css({"width": "1288px"});
 	$("#RDT-Item-Edit").css({"display": "none"});
 	document.getElementById('RDT_item-edit-X').value = "";

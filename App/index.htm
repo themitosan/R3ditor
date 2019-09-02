@@ -47,6 +47,7 @@
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_openFileList();">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
@@ -66,6 +67,15 @@
 			<input type="button" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
+		</div>
+		<!-- Lista de Arquivos Disponiveis -->
+		<div class="fileList none" id="avaliable_fileList">
+			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
+			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList()" class="botao-menu btn-goBack-fix none right">
+			<div id="fileListHolder" class="fileList_files">
+				<!-- A lista de arquivos vai aqui -->
+			</div>
 		</div>
 		<!-- FORM: RDT -->
 		<div class="none" id="menu-RDT">
@@ -139,11 +149,11 @@
 						<div id="RDT-edit-map-select" class="none">
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
-						<div id="RDT_item_X">X Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""></div>
-						<div id="RDT_item_Y">Y Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""></div>
-						<div id="RDT_item_Z">Z Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""></div>
-						<div id="RDT_item_R">Rotation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""></div>
-						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value=""></div>
+						<div class="none" id="RDT_item_X">X Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""></div><br>
+						<div class="none" id="RDT_item_Y">Y Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""></div><br>
+						<div class="none" id="RDT_item_Z">Z Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""></div><br>
+						<div class="none" id="RDT_item_R">Rotation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""></div><br>
+						<div class="none" id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value=""></div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!" onclick="">

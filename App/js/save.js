@@ -260,6 +260,7 @@ function save_renderSlot(slotID){
 function save_renderSaveSlots() {
 	var cu = 1;
 	var to = 16;
+	main_closeFileList();
 	var checker = undefined;
 	var tmpSaveSlot = undefined;
 	while(cu < to){
@@ -767,7 +768,7 @@ function makeHexTime(){
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
+function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	var quan = parseInt("0x" + QUANTIDADE);	
 	var atri = ATTR[ATRIBUTO][0];
 	var colo = ATTR[ATRIBUTO][1];
@@ -816,6 +817,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO) {
 }
 // Render Info
 function addInfo(person, itemId){
+	main_closeFileList();
 	$('#icon-info-0' + person).css({display: "none"});
 	var imgSet = ITEM[itemId][5];
 	var offsetRequest = ITEM[itemId][6];

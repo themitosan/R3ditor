@@ -914,6 +914,11 @@ a{
 .btn-apply-fix{
     margin-top: -4px;
 }
+.btn-goBack-fix{
+    top: 10px;
+    left: 620px;
+    position: absolute;
+}
 .wizard{
     top: 28%;
     left: 28%;
@@ -938,4 +943,48 @@ a{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+.fileList{
+    top: 54px;
+    width: 50%;
+    z-index: 2;
+    padding: 6px;
+    height: 514px;
+    border-radius: 6px;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #545454, #505050);
+}
+.fileList_files{
+    width: auto;
+    padding: 6px;
+    height: 466px;
+    overflow: auto;
+    border-radius: 4px;
+    background-color: #222;
+    box-shadow: 0 0 10px #3c3c3c;
+}
+.fileList_img{
+    width: 110px;
+    border-radius: 4px;
+}
+.fileList_item{
+    padding: 4px;
+    height: 82.5px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+.fileList_details{
+    margin-top: -86px;
+    margin-left: 116px;
+}
+.fileList_item_color_a{
+    background-image: linear-gradient(to right, #7a7a92, transparent);
+}
+.fileList_item_color_b{
+    background-image: linear-gradient(to right, #353592, transparent);
+}
+.fileList_item_color_c{
+    background-image: linear-gradient(to right, #2a2a6f, transparent);
 }

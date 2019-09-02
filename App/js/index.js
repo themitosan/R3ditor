@@ -6,8 +6,8 @@
 var BETA = false;
 var fs = undefined;
 var RE3_RUNNING = false;
-var APP_PATH = undefined;
 var STATUS = "Undefined";
+var APP_PATH = undefined;
 var EXTERNAL_APP_PID = 0;
 var HEX_EDITOR = undefined;
 var SHOW_EDITONHEX = false;
@@ -89,7 +89,6 @@ function checkFolders(){
 		fs.unlinkSync(APP_PATH + "\\App\\Update\\check.r3ditor");
 	}
 }
-
 /// Log
 function addLog(type, texto){
 	var classe = undefined;
@@ -106,6 +105,7 @@ function addLog(type, texto){
 	$("#log-programa").append(logTemplate);
 }
 function openFileOnHex(file){
+	main_closeFileList();
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
 		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
 			runExternalSoftware(HEX_EDITOR, [file]);
@@ -142,6 +142,7 @@ function showNotify(titulo, texto, tempo){
 }
 /// RUN RE3
 function R3DITOR_RUN_RE3(mode){
+	main_closeFileList();
 	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === "" || GAME_PATH === "" || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
 		console.error("ERROR - The game path is not defined!");
@@ -175,8 +176,8 @@ function R3DITOR_RUN_RE3(mode){
 	}
 	scrollLog();
 }
-
 function R3DITOR_RUN_MERCE(mode){
+	main_closeFileList();
 	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === "" || GAME_PATH === "" || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
 		console.error("ERROR - The game path is not defined!");
@@ -244,7 +245,7 @@ function currentTime(){
 	}
 	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
 }
-/// IndexOf com multiplas ocorr?cias
+/// IndexOf com multiplas ocorrêcias
 function getAllIndexes(arr, val){
 	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
     	var indexes = [], i = -1;
