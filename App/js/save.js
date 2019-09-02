@@ -179,21 +179,9 @@ function MAKE_SAVE(slot){
 }
 function finalizeSave(){
 	var FILE = SAVE_INDICADOR_HEADER + 
-	localStorage.Save_1 + 
-	localStorage.Save_2 + 
-	localStorage.Save_3 + 
-	localStorage.Save_4 + 
-	localStorage.Save_5 + 
-	localStorage.Save_6 + 
-	localStorage.Save_7 + 
-	localStorage.Save_8 + 
-	localStorage.Save_9 + 
-	localStorage.Save_10 + 
-	localStorage.Save_11 + 
-	localStorage.Save_12 + 
-	localStorage.Save_13 + 
-	localStorage.Save_14 + 
-	localStorage.Save_15
+	localStorage.Save_1 + localStorage.Save_2 + localStorage.Save_3 + localStorage.Save_4 + localStorage.Save_5 + 
+	localStorage.Save_6 + localStorage.Save_7 + localStorage.Save_8 + localStorage.Save_9 + localStorage.Save_10 + 
+	localStorage.Save_11 + localStorage.Save_12 + localStorage.Save_13 + localStorage.Save_14 + localStorage.Save_15
 	fs.writeFileSync(ORIGINAL_FILENAME, FILE, 'hex');
 	TEMP_SLOT = "";
 	CARREGAR_SAVE(ORIGINAL_FILENAME);
@@ -343,7 +331,6 @@ function save_renderBox(s_slot){
 	current = 0;
 	while(current !== l){
 		if (current > l){
-			console.log("PAROU!");
 			break;
 		} else {
 			var IT = JILL_BAU[current].slice(0, 2); // Nome do Item
@@ -379,7 +366,6 @@ function save_renderBox(s_slot){
 	current = 0;
 	while(current !== l){
 		if (current > l){
-			console.log("PAROU!");
 			break;
 		} else {
 			var IT = CARLOS_BAU[current].slice(0, 2); // Nome do Item
@@ -850,7 +836,6 @@ function addInfo(person, itemId){
 	} else {
 		document.getElementById('text-info-0' + person).innerHTML = "<!-- Empty Slot -->";
 	}
-
 	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
 	$('#icon-info-0' + person).css({display: "inline", "clip-path": "inset(0px " + finalA + "px 0px " + finalB + "px)", "margin-left": finalMargin + "px"});
 }
@@ -882,7 +867,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	if (atrib === "03" || atrib === "07" || atrib === "0f"){
 		quanti = "Inf.";
 	}
-
 	// Pixels
 	var startA = 956;
 	var startB = 0;
@@ -890,7 +874,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var marginOffset = 110;
 	var fix = 4;
 	var s = 0;
-
 	// Finais
 	var finalA = startA;
 	var finalB = startB;
@@ -909,7 +892,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	} else {
 		p = "Carlos";
 	}
-	
 	if (ATTR[atrib] !== undefined){
 		cor = ATTR[atrib][1];
  		shad = ATTR[atrib][2];
@@ -919,7 +901,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		showNotify("AVISO", msg, 10000);
 		console.warn("AVISO: " + msg);
 	}
-
 	if (person == 0){ // Inventário da Jill
 		document.getElementById("J-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
 		document.getElementById("J-icon-" + block).onclick = function(){

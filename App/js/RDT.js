@@ -94,11 +94,9 @@ function RDT_generateItemIndexRaw(str){
 function RDT_decompileItens(id, edit){
 	var RDT_CanRender = true;
 	var currentItem = localStorage.getItem("RDT_Item-" + id);
-	
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
 	var itemIdetifier = currentItem.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
 	var espaco1		  = currentItem.slice(RANGES["RDT_item-espaco1"][0], 	   RANGES["RDT_item-espaco1"][1]);
-
 	var itemXX 		  = undefined;
 	var itemYY 		  = undefined;
 	var itemZZ 		  = undefined;

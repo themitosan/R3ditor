@@ -11,6 +11,7 @@ var request_render_save = undefined;
 var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 window.onclose = function(){
 	localStorage.clear();
+	killExternalSoftware();
 }
 window.onresize = function(){
 	window.resizeBy(1340, 733);
@@ -86,7 +87,7 @@ function main_renderFileList(id){
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_b" id="SAV_file_' + c + '"' + 
 					' onclick="CARREGAR_SAVE(\'' + APP_PATH.replace(new RegExp("\\\\", "gi"), "/") + "/Assets/Save/" + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
 					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Mod)<div class="menu-separador"></div>' + 
-					'Path: ' + APP_PATH.replace(new RegExp("\\\\", "gi"), "/") + "\\Assets\\Save\\" + currentSAV + '</div>';
+					'Path: ' + APP_PATH.replace(new RegExp("\\\\", "gi"), "/") + "/Assets/Save/" + currentSAV + '</div>';
 				$("#fileListHolder").append(fileList_HTML_template);
 				c++;
 			}
