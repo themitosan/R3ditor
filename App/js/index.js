@@ -34,9 +34,12 @@ function load(){
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
+		document.title = "FATAL ERROR!";
 		$("#img-logo").fadeOut({duration: 2200, queue: false});
-		addLog('error', 'ERROR: Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
-		addLog('error', 'ERROR: This is not Node-Webkit! ÕwÕ');
+		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
+		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! OwO');
+		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
+		log_separador();
 		addLog('error', err);
 		scrollLog();
 	}

@@ -48,10 +48,15 @@ function reloadJsFile(src) {
     scrollLog();
 }
 /// Undo solvehex
-function DEBUG_splitHex(hex){
+function DEBUG_splitHex(hex, mode){
 	var c = 0;
 	var fina = "";
-	var rw = hex.match(/.{1,2}/g);
+	var rw = undefined
+	if (mode == 0){
+		rw = hex.match(/.{1,2}/g);
+	} else {
+		rw = hex.match(/.{1,4}/g);
+	}
 	while(c < rw.length){
 		fina = fina + rw[c] + " ";
 		c++;

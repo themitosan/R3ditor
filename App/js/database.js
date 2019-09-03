@@ -134,19 +134,33 @@ var ITEM = {
 	"7f": ["Facility key (With Barcode)", 					   "One of the keys to the abandoned factory.<br>With the barcode, you can get the rocket launcher near the end.<br><br>With her you can access a room with an elevator.", 										 												 "0px 114px 0px 392px", "-833px", "12", "5", "13", "7", "12"],
 	"80": ["Boutique key", 									   "Boutique key, where you can change clothes during gameplay.<br><br>This Function is only available in Playstation and Gamecube version.", 																						     						 "0px 58px 0px 446px", "-943px",  "12", "5", "14", "8", "12"],
 	"81": ["Ink ribbon", 									   "By far, it is one of the most classic items in the entire Resident Evil / Biohazard franchise.<br><br>When in inventory, you can use it on the typewriter to saving your progress.", 							 											 "0px 0px 0px 501px", "-1055px",  "12", "5", "15", "9", "12"],
-	"82": ["Reloading tool", 								   "With this item, you can create ammo through gunpowder.", 																																	 																 "0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
+	"82": ["Reloading tool", 								   "With this item, you can create ammo combining with gunpowder.", 																																	 																 "0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
 	"83": ["Game inst. A", 									   "Manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180 ° Rotation, Emergency Escape, Emergency Bypass, and more.", 											 								 "0px 446px 0px 57px", "-166px",  "13", "5", "17", "1", "13"],
 	"84": ["Game inst. B", 									   "Manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.", 													 														 "0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
 	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
 }
-
 var RDT_MSG_MENSAGENSINVALIDAS = {
 	"fa02fdb4fa00fcfa02fe82": [true],
 	"fa00000099ff00000e01aafe67": [true],
 	"fa00000067000000fa00000099ff00000e01aafe67": [true],
-	"fa02fc000000aecdd4ae70ea1880696275a666000000fe00": [true]
+	"fa02fc000000aecdd4ae70ea1880696275a666000000fe00": [true],
 }
-
+var RDT_hack = "fa00fcfa01fe29fa00fcfa01fe64fa00fcfa01fe51fa00fcfa01fe49fa00fcfa01fe37fa00fcfa01fe74fa00fcfa01fe2bfa00fcfa01fe5ffa00fcfa01fe93fa00fcfa01fe1ffa00fcfa01fe65fa00fcfa01fe64fa00fcfa01fe11fa00fcfa01feb4fa00fcfa01fe31fa00fcfa01fe6ffa00fcfa01fe21fa02fcfe00";
+var RDT_FIRSTPOINTERTYPE = {
+	"0000": [true],
+	"0100": [true],
+	"ffff": [true],
+	"ff02": [true],
+	"ad04": [true],
+	"ff31": [true]
+}
+var RDT_SECONDPOINTERTYPE = {
+	"0800": [true],
+	"4868": [true],
+	"81d6": [true],
+	"3000": [true],
+	"0101": [true]
+}
 var FILES = {
 	"86": ["Dario's Memo"],
 	"87": ["Mercenary's Diary"],

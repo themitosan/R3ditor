@@ -47,7 +47,7 @@
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
-			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_openFileList();">
+			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3);">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
@@ -73,7 +73,7 @@
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
 			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList()" class="botao-menu btn-goBack-fix none right">
-			<div id="fileListHolder" class="fileList_files">
+			<div id="fileListHolder" class="fileList_files none">
 				<!-- A lista de arquivos vai aqui -->
 			</div>
 		</div>
@@ -94,6 +94,7 @@
 					<div class="menu-separador"></div>
 					Stage: <font class="menu-geral-text" id="RDT_lbl-stage">???</font><br>
 					Dimensions: <font class="menu-geral-text" id="RDT_lbl-xyz">???</font><br>
+					Message Pointer: <font class="menu-geral-text" id="RDT_lbl-msg_pointer">???</font><br>
 					<div class="menu-separador"></div>
 					Number Of Doors: <font class="menu-geral-text" id="RDT_lbl-internalName">???</font><br>
 					Number Of Cameras: <font class="menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>

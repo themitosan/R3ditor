@@ -67,7 +67,9 @@ function main_renderFileList(id){
 				$("#fileListHolder").append(fileList_HTML_template);
 				c++;
 			}
+			$("#FILELIST_goBackBtn").css({"display": "inline"});
 			$("#avaliable_fileList").css({"display": "block"});
+			$("#fileListHolder").css({"display": "block"});
 		} else {
 			console.warn('WARN - Unable to render FileList!');
 			addLog('warn', 'WARN - Unable to render FileList!');
@@ -106,6 +108,7 @@ function main_renderFileList(id){
 				c++;
 			}
 			$("#avaliable_fileList").css({"display": "block"});
+			$("#fileListHolder").css({"display": "block"});
 		} else {
 			console.warn('WARN - Unable to render FileList!');
 			addLog('warn', 'WARN - Unable to render FileList!');
@@ -156,7 +159,9 @@ function SAVE_applyMenuFocus(menuId){
 	var i = 0; // i? why not c?
 	main_closeFileList();
 	SAVE_aba_atual = menuId;
-	$("#SAV_openFileList").css({"display": "inline"});
+	if (GAME_PATH !== "" && GAME_PATH !== undefined){
+		$("#SAV_openFileList").css({"display": "inline"});
+	}
 	while(i < SAVE_totalMenus){
 		$('#menu-' + i).removeClass('aba-select');
 		i++;
@@ -364,7 +369,7 @@ function showModCurrentArma(person){
 	var pp = undefined;
 	var st = undefined;
 	var arma = undefined;
-	if (person === 1){ // J
+	if (person === 1){ // Jill
 		pp = "Jill Valentine";
 		arma = jArmaEquip;
 	} else {
@@ -401,7 +406,9 @@ function showModPoison(){
 }
 function cancelShowModItem(){
 	main_closeFileList();
-	$("#SAV_openFileList").css({"display": "inline"});
+	if (GAME_PATH !== "" && GAME_PATH !== undefined){
+		$("#SAV_openFileList").css({"display": "inline"});
+	}
 	$("#menu-mod-item").css({"display": "none"});
 	if (SAVE_aba_atual === 1){
 		$("#s-menu-general").css({"display": "block"});
@@ -728,6 +735,10 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-localName').innerHTML = "Unknown";
 		document.getElementById('RDT_lbl-localCity').innerHTML = "Unknown";
 	}
+	var RDT_MSG_P = "Undefined - This map don't have any messages!";
+	if (RDT_MSG_POINTERS[0] !== undefined){
+		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
+	}
 	$("#RDT_reload").css({"display": "inline"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
@@ -736,6 +747,7 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_mapFileName").innerHTML = RDT_MAPFILE;
 	document.getElementById("RDT-file-select").innerHTML = RDT_EDIT_FILE;
 	document.getElementById("RDT-item-select").innerHTML = RDT_EDIT_ITEM;
+	document.getElementById("RDT_lbl-msg_pointer").innerHTML = RDT_MSG_P;
 	document.getElementById("RDT_lbl-totMsg").innerHTML = RDT_totalMessages;
 	document.getElementById("RDT_lbl-totalMaps").innerHTML = RDT_totalMapas;
 	document.getElementById("RDT_lbl-totalFiles").innerHTML = RDT_totalFiles;
