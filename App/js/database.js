@@ -159,7 +159,13 @@ var RDT_SECONDPOINTERTYPE = {
 	"4868": [true],
 	"81d6": [true],
 	"3000": [true],
-	"0101": [true]
+	"0101": [true],
+	"5756": [true],
+	"1000": [true],
+	"1840": [true],
+	"050b": [true],
+	"1100": [true],
+	"2121": [true]
 }
 var FILES = {
 	"86": ["Dario's Memo"],

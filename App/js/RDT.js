@@ -415,25 +415,6 @@ function RDT_readMessages(){
 		} else {
 			MESSAGE = "";
 		}
-		//console.log("Message " + c + ":\n" + MESSAGE);
-
-		// HACKS - Não me orgulho disso - 2!
-		var RDT_MSG_infoAdicional = undefined;
-		if (MESSAGE.indexOf("fa023c03950397039a03c403") === 0){
-			RDT_MSG_infoAdicional = "fa023c03950397039a03c403";
-			MESSAGE = MESSAGE.slice(RDT_MSG_infoAdicional.length, MESSAGE.length);
-		} else {
-			RDT_MSG_infoAdicional = "";
-		}
-
-		// Process of Validation - Let's see if MESSAGE contains a REAL message!
-
-		// Step 1 - Length
-		if (MESSAGE.length > 500 || MESSAGE.length < 17){
-			RDT_canAdd = false;
-			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "It is too big (or small) to be a real message!";
-		}
 
 		// Step 2 - Number of specific hex value
 		// Case: Yes / No
@@ -467,18 +448,6 @@ function RDT_readMessages(){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "This message is listed as a fake message on database!";
-		}
-
-		var d = 0;
-		// Step 6 - Every single message contain 8 bytes per char or 16 per command
-		var MESSAGE_SPLIT = MESSAGE.match(/.{1,2}/g);
-		while(RDT_canAdd == true && d < MESSAGE_SPLIT.length){
-			if (MESSAGE_SPLIT[d].length < 2){
-				RDT_canAdd = false;
-				RDT_canAdd_lvl = 1;
-				RDT_canAdd_reason = "The message hex is broken!";
-			}
-			d++;
 		}
 
 		// Step 7 - Number of specific hex value
@@ -698,12 +667,6 @@ function RDT_readMessages(){
 					//console.log("Modo sem inicialização - 2");
 					//console.log("Ranges: " + parseInt(RDT_MSG_END[c] + 4) + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
 					MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
-					// Step 1 - Length
-					if (MESSAGE.length > 500 || MESSAGE.length < 15){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "It is too big (or small) to be a real message!";
-					}
 					// Step 2 - Number of specific hex values
 					// Case: Yes / No
 					var RDT_MSGfilter1 = getAllIndexes(MESSAGE, "fb");
@@ -733,17 +696,6 @@ function RDT_readMessages(){
 						RDT_canAdd = false;
 						RDT_canAdd_lvl = 1;
 						RDT_canAdd_reason = "This message is listed as a fake message on database!";
-					}
-					var d = 0;
-					// Step 6 - Every single message contain 8 bytes per char or 16 per command
-					var MESSAGE_SPLIT = MESSAGE.match(/.{1,2}/g);
-					while(RDT_canAdd == true && d < MESSAGE_SPLIT.length){
-						if (MESSAGE_SPLIT[d].length < 2){
-							RDT_canAdd = false;
-							RDT_canAdd_lvl = 1;
-							RDT_canAdd_reason = "The message hex is broken!";
-						}
-						d++;
 					}
 					// Step 7 - Number of specific hex value
 					// Case: Hex 00 appears WAY more than usual
@@ -1194,15 +1146,19 @@ function RDT_MSG_pointerTest(mode, fPointer){
 	}
 } 
 function RDT_renderMessages(id, startOffset, endOffset){
-	var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
-	
-	console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE);
-	console.log("Hex View:\n" + DEBUG_splitHex(SAMPLE, 0));
-
-	var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
-	var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
-		'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
-	$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+	if (startOffset !== endOffset){
+		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
+		console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE);
+		console.log("Hex View:\n" + DEBUG_splitHex(SAMPLE, 0));
+		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
+		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
+			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
+		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+	} else {
+		console.warn('WARN - Message ' + id + ' contains start offset and offset with same value!');
+		addLog('warn', 'WARN - Message ' + id + ' contains start offset and offset with same value!');
+		scrollLog();
+	}
 }
 function RDT_makeRDTConfigFile(){
 	var c = 0;
