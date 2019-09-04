@@ -321,12 +321,10 @@ function RDT_readMessages(){
 	RDT_pickStartMessages("fa08");
 	RDT_pickStartMessages("fa09");
 	RDT_pickStartMessages("fa10");
-
 	if (RDT_messagesArray.length < 1){
 		addLog('warn', 'RDT - R3ditor was unable to find any messages on this file!');
 		scrollLog();
 	}
-
 	// Finding the end of every message
 	c = 0;
 	while(c < RDT_messagesArray.length){
@@ -344,20 +342,17 @@ function RDT_readMessages(){
 		}
 		c++;
 	}
-
 	c = 0;
 	while(c < RDT_MSG_END.length){
 		RDT_MSGEndMessageFilter();
 		c++;
 	}
-
 	// Make the message, inspect the result and insert them on localStorage
 	c = 0;
 	while(c < RDT_messagesArray.length){
 		var RDT_canAdd = true;
 		var RDT_canAdd_lvl = 0;
 		var RDT_canAdd_reason = "";
-
 		if (RDT_MSG_END[c] === undefined || RDT_MSG_END[c] === NaN){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 2;
@@ -409,13 +404,11 @@ function RDT_readMessages(){
 				}
 			}
 		}
-
 		if (MESSAGE_RAW !== undefined){
 			MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
 		} else {
 			MESSAGE = "";
 		}
-
 		// Step 2 - Number of specific hex value
 		// Case: Yes / No
 		var RDT_MSGfilter = getAllIndexes(MESSAGE, "fb");
@@ -424,7 +417,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of <i>(Yes / No)</i> option!";
 		}
-
 		// Step 3 - Number of specific hex value
 		// Case: Unknown hex appears more than usual - 78
 		RDT_MSGfilter = getAllIndexes(MESSAGE, "78");
@@ -433,7 +425,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78 (Total: " + RDT_MSGfilter.length + ")";
 		}
-
 		// Step 4 - Number of specific hex value
 		// Case: Hex FF appears more than usual
 		RDT_MSGfilter = getAllIndexes(MESSAGE, "ff");
@@ -442,14 +433,12 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of ff!";
 		}
-
 		// Step 5 - Known fake messages
 		if (RDT_MSG_MENSAGENSINVALIDAS[solveHEX(MESSAGE)] !== undefined){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "This message is listed as a fake message on database!";
 		}
-
 		// Step 7 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
 		RDT_MSGfilter = getAllIndexes(MESSAGE, "00");
@@ -458,7 +447,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains WAY more cases of 00! (Total: " + RDT_MSGfilter.length + ")";
 		}
-
 		// Step 8 - Duplicate
 		// Case: Message contains part / is the same message of previous search
 		if (RDT_MSG_CURRENT_TEST === 2){
@@ -473,7 +461,6 @@ function RDT_readMessages(){
 				S2++;
 			}
 		}
-
 		// Step 9 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
 		RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, "dc").length + getAllIndexes(MESSAGE, "ba").length);
@@ -482,21 +469,12 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains WAY more cases of DC or BA! (Total: " + RDT_MSGfilter + ")";
 		}
-
 		// Step 10 - Especific size with abnormal fe attr
 		// Case: Message with size 32 and FE attr !== 00
 		if (MESSAGE.length === 32 && MESSAGE.slice(MESSAGE.length - 2) !== "00"){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 1)";
-		}
-
-		// Step 11 - Skip Climax Messages
-		// Case: Message Like "Fight The Monster", "Enter the Police Station"
-		if (MESSAGE.indexOf("fa00fba0") !== -1 || MESSAGE.indexOf("fa02fba0") !== -1){
-			RDT_canAdd = false;
-			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "Skipping Climax Messages - this kind of message are not selected on this tab";
 		}
 
 		// Step 12 - Another pattern
@@ -506,7 +484,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 2)";
 		}
-
 		// Step 13 - Use more than 3 times Function F8 (show item name) / Wrong Offset
 		// Case: Another Wrong Offset
 		if (MESSAGE.Length > 31 && getAllIndexes(MESSAGE, "f8").length > 3 && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
@@ -514,7 +491,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 3)";
 		}
-
 		// Step 14 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.slice(0, 2) !== "fa" && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
@@ -522,7 +498,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 4)";
 		}
-
 		// Step 15 - Show Unknown Item Name
 		// Case: Command F8 with attr higher than 85
 		if (getAllIndexes(MESSAGE, "f8").length > 0){
@@ -538,7 +513,6 @@ function RDT_readMessages(){
 				C2++;
 			}
 		}
-
 		// Step 16 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.slice(parseInt(MESSAGE.length - 8), MESSAGE.length) === "fbb9fe00"){
@@ -546,7 +520,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 5)";
 		}
-
 		// Step 17 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 2), MESSAGE.length) !== "00"){
@@ -554,7 +527,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 6)";
 		}
-
 		// Step 18 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.length < 38 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && getAllIndexes(MESSAGE, "bafa00").length > 0){
@@ -562,7 +534,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 7)";
 		}
-
 		// Step 19 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && MESSAGE.slice(0, 4) === "fa00"){
@@ -570,7 +541,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 8)";
 		}
-
 		// Step 20 - Count of unknown functions and hex integrity
 		// Case: Message with a lot of unknown functions / chars
 		var hexAnalysis = MESSAGE.match(/.{1,2}/g);
@@ -595,7 +565,6 @@ function RDT_readMessages(){
 				RDT_canAdd_reason = "The message contains more unknown function than usual! (Total: " + tot_unk + ")";
 			}
 		}
-
 		// Step 21 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.indexOf("5d") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00" && MESSAGE.indexOf("fa00") !== -1){
@@ -603,7 +572,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 9)";
 		}
-
 		// Step 22 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
 		if (MESSAGE.indexOf("7dfafef2") !== -1 && MESSAGE.length < 24 || MESSAGE.indexOf("68") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00"){
@@ -611,7 +579,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 10)";
 		}
-
 		// Step 23 - Another Pattern - Variant of 13!
 		// Case: Another wrong offset
 		if (MESSAGE.indexOf("c7") !== -1 && MESSAGE.indexOf("e5") !== -1 && MESSAGE.slice(0, 4) !== "fa02"){
@@ -619,7 +586,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 11)";
 		}
-
 		// Step 24 - Another Pattern - Variant of 13!
 		// Case: Map R20C.RDT returning 60+ messages!
 		if (MESSAGE.slice(MESSAGE.length - 8, MESSAGE.length - 6) === "fa" && getAllIndexes(MESSAGE, "00").length > 71 && MESSAGE.length > 70 && MESSAGE.slice(MESSAGE.length - 4, MESSAGE.length) !== "fe00" && MESSAGE.slice(0, 4) !== "fa02"){
@@ -627,12 +593,10 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 12)";
 		}
-
 		// Final process
 		if (RDT_canAdd === true){
 			var MSGSTART = RDT_arquivoBruto.indexOf(MESSAGE);
 			var MSGEND = parseInt(RDT_arquivoBruto.indexOf(MESSAGE) + MESSAGE.length);
-			localStorage.setItem("RDT_MESSAGE_ADICIONAL-" + c, RDT_MSG_infoAdicional);
 			localStorage.setItem("RDT_MESSAGE-START-" + c, MSGSTART);
 			localStorage.setItem("RDT_MESSAGE-END-" + c, MSGEND);
 			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
@@ -647,240 +611,6 @@ function RDT_readMessages(){
 			}
 		}
 		c++;
-	}
-	// Second fix for R20B.RDT
-	var valorTemp = parseInt(c - RDT_MSG_END.length);
-	var valorFinal = valorTemp - valorTemp - valorTemp;
-	if (RDT_MSG_END[c] !== RDT_MSG_END.length && valorFinal < 4){
-		while(c < RDT_MSG_END.length){
-			if (RDT_MSG_END[c + 1] === undefined || RDT_MSG_END[c + 1] === NaN){
-				break;
-			} else {
-				var RDT_canAdd = true;
-				var RDT_canAdd_lvl = 0;
-				var MESSAGE = undefined;
-				var RDT_canAdd_reason = "";
-				var MESSAGE_RAW = undefined;
-				var RDT_MSG_infoAdicional = "";
-				if (RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4)).indexOf("fa") === -1){
-					MESSAGE_RAW = RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4));
-					//console.log("Modo sem inicialização - 2");
-					//console.log("Ranges: " + parseInt(RDT_MSG_END[c] + 4) + ", " + parseInt(RDT_MSG_END[c + 1] + 4));
-					MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
-					// Step 2 - Number of specific hex values
-					// Case: Yes / No
-					var RDT_MSGfilter1 = getAllIndexes(MESSAGE, "fb");
-					if (RDT_MSGfilter1.length > 2){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message contains more than 2 cases of <i>(Yes / No)</i> option!";
-					}
-					// Step 3 - Number of specific hex values
-					// Case: Unknown hex appears more than usual - 78
-					var RDT_MSGfilter2 = getAllIndexes(MESSAGE, "78");
-					if (RDT_MSGfilter2.length > 2){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78";
-					}
-					// Step 4 - Number of specific hex value
-					// Case: Hex FF appears more than usual
-					RDT_MSGfilter = getAllIndexes(MESSAGE, "ff");
-					if (RDT_MSGfilter.length > 2){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message contains more than 2 cases of ff!";
-					}
-					// Step 5 - Known fake messages
-					if (RDT_MSG_MENSAGENSINVALIDAS[solveHEX(MESSAGE)] !== undefined){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "This message is listed as a fake message on database!";
-					}
-					// Step 7 - Number of specific hex value
-					// Case: Hex 00 appears WAY more than usual
-					RDT_MSGfilter = getAllIndexes(MESSAGE, "00");
-					if (RDT_MSGfilter.length > 61){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message contains WAY more cases of 00! (Total: " + RDT_MSGfilter.length + ")";
-					}
-					// Step 8 - Duplicate
-					// Case: Message contains part / is the same message of previous search
-					if (RDT_MSG_CURRENT_TEST === 2){
-						var S2 = 0;
-						while(S2 < RDT_MSG_RESULT_1){
-							var prev = localStorage.getItem("RDT_MESSAGE-" + S2);
-							if (prev === MESSAGE || prev !== null && prev.indexOf(MESSAGE) !== -1){
-								RDT_canAdd = false;
-								RDT_canAdd_lvl = 1;
-								RDT_canAdd_reason = "This message is a duplicate of another message!";
-							}
-							S2++;
-						}
-					}
-					// Step 9 - Number of specific hex value
-					// Case: Hex 00 appears WAY more than usual
-					RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, "dc").length + getAllIndexes(MESSAGE, "ba").length);
-					if (RDT_MSGfilter > 1){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message contains WAY more cases of DC or BA! (Total: " + RDT_MSGfilter + ")";
-					}
-					// Step 10 - Especific size with abnormal fe attr
-					// Case: Message with size 32 and FE attr !== 00
-					if (MESSAGE.length === 32 && MESSAGE.slice(MESSAGE.length - 2) !== "00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset!";
-					}
-					// Step 11 - Skip Nemesis Messages
-					// Case: Message Like "Fight The Monster", "Enter the Police Station"
-					if (MESSAGE.indexOf("fa00fba0") !== -1 || MESSAGE.indexOf("fa02fba0") !== -1){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "Skipping Climax Messages - this kind of message are not selected on this tab";
-					}
-					// Step 12 - Another pattern
-					// Case: Contains FE with strange pattern (100 = 64 in hex)
-					if (getAllIndexes(MESSAGE, "fa").length > 2 && parseInt(MESSAGE.slice(MESSAGE.length - 2), 16) > 100){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Case 2)";
-					}
-					// Step 13 - Use more than 3 times Function F8 (show item name) Or Wrong Offset
-					// Case: Message was extracted from wrong offset
-					if (MESSAGE.Length < 32 && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00" || MESSAGE.Length > 31 && getAllIndexes(MESSAGE, "f8").length > 3 && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Case 3)";
-					}
-					// Step 14 - Variant of 13
-					// Case: Message was extracted from wrong offset
-					if (MESSAGE.slice(0, 2) !== "fa" && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Case 4)";
-					}
-					// Step 15 - Show Unknown Item Name
-					// Case: Command F8 with attr higher than 85
-					if (getAllIndexes(MESSAGE, "f8").length > 0){
-						var C2 = 0;
-						var F8Cases = getAllIndexes(MESSAGE, "f8");
-						while(C2 < F8Cases.length){
-							var caseSlice = MESSAGE.slice(parseInt(F8Cases[C2] + 2), parseInt(F8Cases[C2] + 4));
-							if (parseInt(caseSlice, 16) > 133){
-								RDT_canAdd = false;
-								RDT_canAdd_lvl = 1;
-								RDT_canAdd_reason = "Command F8 have Attr higher than 85! (Value: " + caseSlice + ")";
-							}
-							C2++;
-						}
-					}
-					// Step 16 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.slice(parseInt(MESSAGE.length - 8), MESSAGE.length) === "fbb9fe00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 5)";
-					}
-					// Step 17 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 2), MESSAGE.length) !== "00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 6)";
-					}
-					// Step 18 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.length < 38 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && getAllIndexes(MESSAGE, "bafa00").length > 0){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 7)";
-					}
-					// Step 19 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && MESSAGE.slice(0, 4) === "fa00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 8)";
-					}
-					// Step 20 - Count of unknown functions and hex integrity
-					// Case: Message with a lot of unknown functions / chars
-					var hexAnalysis = MESSAGE.match(/.{1,2}/g);
-					if (hexAnalysis !== null && hexAnalysis.length > 0){
-						var C2 = 0;
-						var tot_unk = 0;
-						while(C2 < hexAnalysis.length){
-							if (hexAnalysis[C2].length > 1){
-								if (MSG_DICIONARIO[hexAnalysis[C2]][0] === false && MSG_DICIONARIO[hexAnalysis[C2]][2] === true){
-									tot_unk++;
-								}
-							} else {
-								RDT_canAdd = false;
-								RDT_canAdd_lvl = 1;
-								RDT_canAdd_reason = "The hex integrity of this message is broken!";
-							}
-							C2++;
-						}
-						if (tot_unk > 3){
-							RDT_canAdd = false;
-							RDT_canAdd_lvl = 1;
-							RDT_canAdd_reason = "The message contains more unknown function than usual! (Total: " + tot_unk + ")";
-						}
-					}
-					// Step 21 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.indexOf("5d") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00" && MESSAGE.indexOf("fa00") !== -1){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 9)";
-					}
-					// Step 22 - Another Pattern - Variant of 13
-					// Case: Another wrong offset
-					if (MESSAGE.indexOf("7dfafef2") !== -1 && MESSAGE.length < 24 || MESSAGE.indexOf("68") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 10)";
-					}
-					// Step 23 - Another Pattern - Variant of 13!
-					// Case: Another wrong offset
-					if (MESSAGE.indexOf("c7") !== -1 && MESSAGE.indexOf("e5") !== -1 && MESSAGE.slice(0, 4) !== "fa02"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 11)";
-					}
-					// Step 24 - Another Pattern - Variant of 13!
-					// Case: Map R20C.RDT returning 60+ messages!
-					if (MESSAGE.slice(MESSAGE.length - 8, MESSAGE.length - 6) === "fa" && getAllIndexes(MESSAGE, "00").length > 71 && MESSAGE.length > 70 && MESSAGE.slice(MESSAGE.length - 4, MESSAGE.length) !== "fe00" && MESSAGE.slice(0, 4) !== "fa02"){
-						RDT_canAdd = false;
-						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 12)";
-					}
-					// Final process
-					if (RDT_canAdd === true){
-						var MSGSTART = RDT_arquivoBruto.indexOf(MESSAGE);
-						var MSGEND = parseInt(RDT_arquivoBruto.indexOf(MESSAGE) + MESSAGE.length);
-						localStorage.setItem("RDT_MESSAGE_ADICIONAL-" + c, RDT_MSG_infoAdicional);
-						localStorage.setItem("RDT_MESSAGE-START-" + c, MSGSTART);
-						localStorage.setItem("RDT_MESSAGE-END-" + c, MSGEND);
-						localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
-						RDT_totalMessages++;
-					} else {
-						var msg = "Something went wrong in message analysis - Message: " + c + " (Final part) - Reason: ";
-						if (RDT_canAdd_lvl === 1){
-							//console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-						}
-						if (RDT_canAdd_lvl === 2){
-							//console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-						}
-					}
-				} else {
-					console.log("Skipping last verification on RDT_MSG_END[" + c + "]");
-				}
-			}
-			c++;
-		}
 	}
 	log_separador();
 	addLog('log', 'RDT - Message scanning completed the test ' + RDT_MSG_CURRENT_TEST + ' and found ' + RDT_totalMessages + ' messages.');
@@ -1066,6 +796,7 @@ function RDT_findPointers(){
 		}
 		var startFirstMessage = parseInt(RDT_FILEMAP_MSG[0].slice(0, RDT_FILEMAP_MSG[0].indexOf("-")));
 		// Remover isso depois
+		var RDT_hack = "fa00fc";
 		if (RDT_arquivoBruto.indexOf(RDT_hack) !== -1){
 			startFirstMessage = parseInt(RDT_arquivoBruto.indexOf(RDT_hack));
 		}
