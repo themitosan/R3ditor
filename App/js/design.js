@@ -691,7 +691,7 @@ function MSG_renderCamPreview(){
 /// RDT
 function RDT_showMenu(id){
 	var c = 1;
-	LOOP_COUNTER = 0;
+	RDT_loop = 0;
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	$("#img-logo").css({"display": "none"});
 	$("#avaliable_fileList").css({"display": "none"});
@@ -795,11 +795,13 @@ function TRANSFER_RDT_TO_MSG(){
 function RDT_BG_display(){
 	if (enable_mod === true){
 		var c = 0;
+		var found = false;
 		while (c < 9){
 			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG")){
-				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
-				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
-				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)"});
+				found = true;
+				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
+				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
+				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
 				$("#RDT_BG_1").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_2").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_3").fadeIn({duration: 500, queue: false});
@@ -807,6 +809,11 @@ function RDT_BG_display(){
 			} else {
 				c++;
 			}
+		}
+		if (found == false){
+			$("#RDT_BG_1").css({"background-image": "url(img/404.png)", "filter": "blur(4px)"});
+			$("#RDT_BG_2").css({"background-image": "url(img/404.png)", "filter": "blur(4px)"});
+			$("#RDT_BG_3").css({"background-image": "url(img/404.png)", "filter": "blur(4px)"});
 		}
 	}
 }

@@ -670,7 +670,7 @@ function RDT_findPointers(){
 		}
 		console.log("Looking for pointer with base " + startFirstMessage);
 		while(totalVezesPush < RDT_totalMessages * 20){
-			if (getFileName(ORIGINAL_FILENAME) === "r304" || getFileName(ORIGINAL_FILENAME) === "r30d" || getFileName(ORIGINAL_FILENAME) === "r311"){
+			if (RDT_mapHack2[getFileName(ORIGINAL_FILENAME)] !== undefined){
 				if (RDT_POINTERTYPE4[pont] !== undefined){
 					break;
 				} else {
@@ -935,7 +935,7 @@ function RDT_startMessageAnalysis(){
 }
 function RDT_lookForRDTConfigFile(){
 	var c = 0;
-	if (getFileName(ORIGINAL_FILENAME) === "r216"){
+	if (getFileName(ORIGINAL_FILENAME) === "r216" || getFileName(ORIGINAL_FILENAME) === "r50b" || getFileName(ORIGINAL_FILENAME) === "r212"){
 		RDT_loop = 4;
 	} else {
 		RDT_loop++;
@@ -985,7 +985,7 @@ function RDT_lookForRDTConfigFile(){
 			var sta_offset = 0;
 			var end_offset = 1;
 			var LAST_POS_END = 0;
-			if (getFileName(ORIGINAL_FILENAME) === "r40c"){
+			if (RDT_mapHack[getFileName(ORIGINAL_FILENAME)] !== undefined){
 				MSG_START = e_offset;
 			} else {
 				MSG_START = RDT_arquivoBruto.indexOf(pointerCompiled) + pointerCompiled.length;

@@ -90,9 +90,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				if (checkItem < 134){
 					COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
 				} else {
-					COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
-					//RDT_requestFix(0);
-					//break;
+					//COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
+					RDT_requestFix(0);
+					break;
 				}
 			} else {
 				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";

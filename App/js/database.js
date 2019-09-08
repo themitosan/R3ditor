@@ -139,22 +139,50 @@ var ITEM = {
 	"84": ["Game inst. B", 									   "This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.", 													 												 "0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
 	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
 }
+// Preciso remover isso depois
+var RDT_mapHack = {
+	"r40c": true,
+	"r410": true,
+	"r413": true,
+	"r415": true,
+	"r714": true,
+	"r712": true,
+	"r70f": true,
+	"r70d": true,
+	"r61c": true
+}
+var RDT_mapHack2 = {
+	"r304": true,
+	"r30d": true,
+	"r311": true,
+	"r415": true,
+	"r501": true,
+	"r50a": true,
+	"r50d": true
+}
 var RDT_FIRSTPOINTERTYPE = {
 	"0000": true,
 	"0100": true,
 	"ffff": true,
 	"ff02": true,
 	"ad04": true,
-	"ff31": true
+	"ff31": true,
+	"10b8": true,
+	"0189": true,
+	"38b8": true,
+	"7810": true
 }
 var RDT_THIRDPOINTERTYPE = {
 	"0800": true,
-	"0100": true
+	"0100": true,
+	"10b8": true
 }
 var RDT_POINTERTYPE4 = {
 	"1000": true,
 	"2800": true,
-	"3800": true
+	"3800": true,
+	"4010": true,
+	"1800": true
 }
 var RDT_SECONDPOINTERTYPE = {
 	"0800": true,
@@ -453,7 +481,6 @@ var RDT_locations = {
 	"R50F": ["Elevator to Extraction Point", "Dead Factory"],
 	"R510": ["Bridge to Dead Factory", "Park"]
 }
-
 // 	WIP
 var MAPAS = {
 	"0000": "Undefined"
