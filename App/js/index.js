@@ -41,8 +41,8 @@ function load(){
 		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		log_separador();
 		addLog('error', err);
-		scrollLog();
 	}
+	scrollLog();
 }
 function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Backup") == false){
@@ -107,6 +107,12 @@ function addLog(type, texto){
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$("#log-programa").append(logTemplate);
 }
+function clearInternalLog(){
+	document.getElementById("log-programa").innerHTML = "";
+	addLog("log", APP_NAME);
+	scrollLog();
+}
+/// Open in Hex Editor
 function openFileOnHex(file){
 	main_closeFileList();
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
@@ -128,8 +134,11 @@ function showNotify(titulo, texto, tempo){
 	if (texto == "") {
 		texto = "Message";
 	}
-	try{
-		var iconPath = process.execPath.replace("nw.exe", "App\\img\\logo.png");
+	if (tempo === null || tempo === undefined || tempo === ""){
+		tempo = 4000;
+	}
+	try{	
+		var iconPath = APP_PATH + "\\App\\img\\logo.png";
 		var NOTIFY = new Notification(titulo, {
 			icon: iconPath,
 			body: texto,

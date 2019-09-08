@@ -27,10 +27,11 @@ function scrollLog(){
 /// General
 function main_renderFileList(id){
 	var c = 0;
-	document.getElementById("fileListHolder").innerHTML = " ";
+	document.getElementById("fileListHolder").innerHTML = "";
 	// RDT
 	if (id === 3){
 		document.getElementById('fileList_title').innerHTML = "File List";
+		$("#fileListHolder").css({"height": "466px"});
 		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\") === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
 			var listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".RDT"));
 			if (listRDT.length < 1){
@@ -690,6 +691,7 @@ function MSG_renderCamPreview(){
 /// RDT
 function RDT_showMenu(id){
 	var c = 1;
+	LOOP_COUNTER = 0;
 	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
 	$("#img-logo").css({"display": "none"});
 	$("#avaliable_fileList").css({"display": "none"});
@@ -762,6 +764,11 @@ function RDT_showMenu(id){
 	$("#RDT_menu-" + id).css({"display": "block"});
 	$("#menu-RDT").css({"display": "block"});
 	RDT_applyMenuFocus(id);
+
+	if (getFileName(ORIGINAL_FILENAME) === "r212" || getFileName(ORIGINAL_FILENAME) === "r20b" || getFileName(ORIGINAL_FILENAME) === "r216"){
+		$("#RDT-aba-menu-2").css({"display": "none"});
+	}
+
 	RDT_Error_404();
 	scrollLog();
 }
@@ -801,17 +808,13 @@ function RDT_BG_display(){
 				c++;
 			}
 		}
-		if (c === 9 || c > 9){
-			$("#RDT_BG_1").css({"display": "none"});
-			$("#RDT_BG_2").css({"display": "none"});
-			$("#RDT_BG_3").css({"display": "none"});
-		}
 	}
 }
 function RDT_Error_404(){
 	if (RDT_totalMessages < 1){
 		$("#RDT-msg-404").css({"display": "block"});
 		$("#RDT_MSG-holder").css({"display": "none"});
+		$("#RDT-aba-menu-2").css({"display": "none"});
 	} else {
 		$("#RDT-msg-404").css({"display": "none"});
 		$("#RDT_MSG-holder").css({"display": "block"});

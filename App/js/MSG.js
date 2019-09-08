@@ -86,7 +86,14 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			// Show Item Name
 			if (RAW_DATA_ARRAY[startPoint] === "f8"){
 				console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1] + " (F8 " + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ")");
-				COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
+				var checkItem = parseInt(RAW_DATA_ARRAY[startPoint + 1], 16);
+				if (checkItem < 134){
+					COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
+				} else {
+					COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
+					//RDT_requestFix(0);
+					//break;
+				}
 			} else {
 				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
 			}

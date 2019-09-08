@@ -15,10 +15,14 @@ var RDT_MSG_RESULT_3 = 0;
 var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
+var RDT_loop = 0;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
 var RDT_MAPFILE = undefined;
 var RDT_generateMapFile = false;
+var startFirstMessage = undefined;
+var RDT_requestReloadWithFix0 = false;
+var RDT_requestReloadWithFix1 = false;
 
 var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
@@ -28,8 +32,9 @@ var RDT_messasgesRaw = undefined;
 var RDT_itemIndexRAW = undefined;
 var RDT_totalMessages = undefined;
 var RDT_totalItensGeral = undefined;
-
 function RDT_CARREGAR_ARQUIVO(rdtFile){
+	RDT_loop = 0;
+	RDT_doAfterSave();
 	RDT_editItemCancel();
 	localStorage.clear();
 	RDT_FILEMAP_MSG = [];
@@ -41,8 +46,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
+	startFirstMessage = undefined;
+	$("#RDT-aba-menu-2").css({"display": "inline"});
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
 	document.getElementById('RDT-aba-menu-2').disabled = "";
+	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
 	RDT_readItens();
@@ -130,10 +138,8 @@ function RDT_decompileItens(id, edit){
 		espaco3 	  = "[WIP]";
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-1-itemMP"][0], 	   RANGES["RDT_item-1-itemMP"][1]);
 	}
-
 	var RDT_motivo = undefined;
 	//console.log("Header: " + header + "\nHex: " + itemID + "\nHex Completa:\n" + currentItem);
-
 	if (header === "90" || header === "51" || header === "02" || header === "c0"){
 		RDT_totalItensGeral--;
 		RDT_CanRender = false;
@@ -305,10 +311,10 @@ function RDT_readMessages(){
 	if (RDT_MSG_CURRENT_TEST > 4){
 		RDT_MSG_CURRENT_TEST = 4;
 	}
-	var current_rdt = getFileName(ORIGINAL_FILENAME).toLowerCase()
+	var current_rdt = getFileName(ORIGINAL_FILENAME).toLowerCase();
 	RDT_MSG_startLength = 0;
 	RDT_MSG_finalLenght = RDT_arquivoBruto.length;
-	document.getElementById('RDT_MSG-holder').innerHTML = " ";
+	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	// Pattern of function start message
 	RDT_pickStartMessages("fa02");
 	RDT_pickStartMessages("fa00");
@@ -353,6 +359,7 @@ function RDT_readMessages(){
 		var RDT_canAdd = true;
 		var RDT_canAdd_lvl = 0;
 		var RDT_canAdd_reason = "";
+
 		if (RDT_MSG_END[c] === undefined || RDT_MSG_END[c] === NaN){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 2;
@@ -433,12 +440,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains more than 2 cases of ff!";
 		}
-		// Step 5 - Known fake messages
-		if (RDT_MSG_MENSAGENSINVALIDAS[solveHEX(MESSAGE)] !== undefined){
-			RDT_canAdd = false;
-			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "This message is listed as a fake message on database!";
-		}
 		// Step 7 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
 		RDT_MSGfilter = getAllIndexes(MESSAGE, "00");
@@ -446,20 +447,6 @@ function RDT_readMessages(){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message contains WAY more cases of 00! (Total: " + RDT_MSGfilter.length + ")";
-		}
-		// Step 8 - Duplicate
-		// Case: Message contains part / is the same message of previous search
-		if (RDT_MSG_CURRENT_TEST === 2){
-			var S2 = 0;
-			while(S2 < RDT_MSG_RESULT_1){
-				var prev = localStorage.getItem("RDT_MESSAGE-" + S2);
-				if (prev === MESSAGE || prev !== null && prev.indexOf(MESSAGE) !== -1){
-					RDT_canAdd = false;
-					RDT_canAdd_lvl = 1;
-					RDT_canAdd_reason = "This message is a duplicate of another message!";
-				}
-				S2++;
-			}
 		}
 		// Step 9 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
@@ -476,7 +463,6 @@ function RDT_readMessages(){
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 1)";
 		}
-
 		// Step 12 - Another pattern
 		// Case: Contains FE with strange pattern (100 = 64 in hex)
 		if (getAllIndexes(MESSAGE, "fa").length > 2 && parseInt(MESSAGE.slice(MESSAGE.length - 2), 16) > 100){
@@ -634,11 +620,21 @@ function RDT_readMessages(){
 }
 function RDT_postMessageProcess(){
 	var c = 0;
+	var plus = 0;
+	console.log("Post Message: \nTotal Messages: " + RDT_totalMessages + "\n\n" + localStorage.getItem("RDT_MESSAGE-END-" + c) + "\n" + localStorage.getItem("RDT_MESSAGE-START-" + c));
+	if (RDT_totalMessages === 1){
+		plus = 1;
+	}
 	RDT_FILEMAP_MSG = [];
-	while(c < RDT_totalMessages){
+	var fixValue = 0;
+	if (RDT_requestReloadWithFix1 === true){
+		fixValue = 1;
+	}
+	while(c < parseInt(RDT_totalMessages + fixValue)){
 		var ED = parseInt(localStorage.getItem("RDT_MESSAGE-END-" + c));
 		var ST = parseInt(localStorage.getItem("RDT_MESSAGE-START-" + c));
-		if (ST !== 0 && ED !== 0){
+		console.log("Adicionando itens na RDT_FILEMAP_MSG: \n" + localStorage.getItem("RDT_MESSAGE-START-" + c) + "\n" + localStorage.getItem("RDT_MESSAGE-END-" + c));
+		if (ST !== 0 && ED !== 0 && RDT_arquivoBruto.slice(ST, ST + 2) === "fa"){
 			RDT_FILEMAP_MSG.push(ST + "\n" + ED);
 			c++;
 		} else {
@@ -647,11 +643,307 @@ function RDT_postMessageProcess(){
 	}
 	RDT_makeRDTConfigFile();
 }
+function RDT_findPointers(){
+	var c = 0;
+	document.title = APP_NAME + " - Generating File Map (Step 3 / 4)";
+	if (getFileName(ORIGINAL_FILENAME) === "r40c"){
+		RDT_totalMessages++;
+	}
+	if (RDT_totalMessages !== 0){
+		var pont = "";
+		var fatorA = 4;
+		var fatorB = 0;
+		var totalVezesPush = 0;
+		while (c < RDT_FILEMAP_MSG.length){
+			if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
+				RDT_FILEMAP_MSG.splice(c, 1);
+			}
+			c++;
+		}
+		if (startFirstMessage === undefined){
+			var askPrompt = prompt("File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"");
+			if (askPrompt !== "" && askPrompt !== null && RDT_arquivoBruto.indexOf(solveHEX(askPrompt)) !== -1){
+				startFirstMessage = RDT_arquivoBruto.indexOf(solveHEX(askPrompt));
+			} else {
+				RDT_findPointers();
+			}
+		}
+		console.log("Looking for pointer with base " + startFirstMessage);
+		while(totalVezesPush < RDT_totalMessages * 20){
+			if (getFileName(ORIGINAL_FILENAME) === "r304" || getFileName(ORIGINAL_FILENAME) === "r30d" || getFileName(ORIGINAL_FILENAME) === "r311"){
+				if (RDT_POINTERTYPE4[pont] !== undefined){
+					break;
+				} else {
+					fatorA = fatorA + 4;
+					fatorB = fatorB + 4;
+					pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+						fatorA = 4;
+						fatorB = 0;
+						totalVezesPush = 0;
+						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+					} else {
+						console.log("Pointer - Current Result: " + pont);
+						totalVezesPush++;
+					}
+				}
+			} else {
+				if (getFileName(ORIGINAL_FILENAME) === "r210" || getFileName(ORIGINAL_FILENAME) === "r301"){
+					if (RDT_THIRDPOINTERTYPE[pont] !== undefined){
+						break;
+					} else {
+						fatorA = fatorA + 4;
+						fatorB = fatorB + 4;
+						pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+						if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+							fatorA = 4;
+							fatorB = 0;
+							totalVezesPush = 0;
+							startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+						} else {
+							console.log("Pointer - Current Result: " + pont);
+							totalVezesPush++;
+						}
+					}
+				} else {
+					if (getFileName(ORIGINAL_FILENAME) === "r30d"){
+						if (RDT_THIRDPOINTERTYPE[pont] !== undefined){
+							break;
+						} else {
+							fatorA = fatorA + 4;
+							fatorB = fatorB + 4;
+							pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+								fatorA = 4;
+								fatorB = 0;
+								totalVezesPush = 0;
+								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+							} else {
+								console.log("Pointer - Current Result: " + pont);
+								totalVezesPush++;
+							}
+						}
+					} else {
+						if (RDT_FIRSTPOINTERTYPE[pont] !== undefined){
+							break;
+						} else {
+							fatorA = fatorA + 4;
+							fatorB = fatorB + 4;
+							pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+								fatorA = 4;
+								fatorB = 0;
+								totalVezesPush = 0;
+								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+							} else {
+								console.log("Pointer - Current Result: " + pont);
+								totalVezesPush++;
+							}
+						}
+					}
+				}
+			}
+		}
+		var fake = pont;
+		var pointerTest = RDT_MSG_pointerTest(parseInt(startFirstMessage - fatorB));
+		if (pointerTest === false){
+			pont = "";
+			fatorA = 4;
+			fatorB = 0;
+			totalVezesPush = 0;
+			while(totalVezesPush < RDT_totalMessages * 20){
+				if (RDT_SECONDPOINTERTYPE[pont] !== undefined && pont !== fake){
+					break;
+				} else {
+					fatorA = fatorA + 4;
+					fatorB = fatorB + 4;
+					pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
+					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+						fatorA = 4;
+						fatorB = 0;
+						totalVezesPush = 0;
+						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+					} else {
+						console.log("Pointer - Current Result: " + pont);
+						totalVezesPush++;
+					}
+				}
+			}
+		}
+		if (RDT_FIRSTPOINTERTYPE[pont] !== undefined || RDT_SECONDPOINTERTYPE[pont] !== undefined || RDT_THIRDPOINTERTYPE !== undefined){
+			console.log("Pointer Found! (Type: " + pont + ")");
+			console.log("Result: \n\nTotal Searches: " + totalVezesPush + "\nFator A: " + fatorA + "\nFator B: " + fatorB + "\nPos: " + parseInt(startFirstMessage - fatorA) + " - " + parseInt(startFirstMessage - fatorB));
+			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
+		} else {
+			console.error("ERROR - Unable to find pointers on this file!");
+			addLog('error', "ERROR - Unable to find pointers on this file!");
+			scrollLog();
+		}
+	}
+}
+function RDT_MSG_pointerTest(fPointer){
+	var firstPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer, fPointer + 4));
+	var secondPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer + 4, fPointer + 8));
+	if (parseInt(secondPointer - firstPointer) < 0){
+		console.log("Pointer test deu errado!\n Second: " + secondPointer + " - First: " + firstPointer);
+		return false;
+	} else {
+		return true;
+	}
+} 
+function RDT_renderMessages(id, startOffset, endOffset){
+	if (startOffset !== endOffset){
+		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
+		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
+		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
+			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
+		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+	}
+}
+function RDT_makeRDTConfigFile(){
+	var c = 0;
+	var fatorMinus = 0;
+	var foundMessages = "";
+	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n";
+	console.log(RDT_FILEMAP_MSG);
+	while(c < RDT_FILEMAP_MSG.length){
+		if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
+			console.warn("WARN - Skipping Message " + c + " - It's a NaN Case!");
+			RDT_FILEMAP_MSG.splice(c, 1);
+			fatorMinus++;
+		} else {
+			foundMessages = foundMessages + parseInt(c - fatorMinus) + "\n" + RDT_FILEMAP_MSG[c] + "\n";
+		}
+		c++;
+	}
+	var PONTEIRO = "";
+	foundMessages = "";
+	var totalMessages = 0;
+	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	if (RDT_FILEMAP_MSG.length !== 0){
+		if (RDT_requestReloadWithFix0 === true){
+			var CASE1 = RDT_arquivoBruto.indexOf("fa00fc");
+			if (CASE1 !== -1 && CASE1 < parseInt(RDT_FILEMAP_MSG[0].slice(0, RDT_FILEMAP_MSG[0].indexOf("-")))){
+				RDT_FILEMAP_MSG[0] = CASE1 + "-" + RDT_FILEMAP_MSG[0].slice(RDT_FILEMAP_MSG[0].indexOf("-"), RDT_FILEMAP_MSG[0].length);
+			}
+		}
+		var ponteiro_start = RDT_findPointers()[1];
+		var max = RDT_findPointers()[0];
+		RDT_messagesArray = [];
+		RDT_totalMessages = 0;
+		RDT_MSG_END = [];
+		var increment_A = 0;
+		var increment_B = 4;
+		c = 0;
+		while(c < parseInt(max + 1)){
+			PONTEIRO = PONTEIRO + parseInt(ponteiro_start + increment_A) + "\n" + parseInt(ponteiro_start + increment_B) + "\n";
+			increment_A = increment_A + 4;
+			increment_B = increment_B + 4;
+			totalMessages++;
+			c++;
+		}
+	} else {
+		addLog('info', 'INFO - R3ditor was unable to find any messages on this file!');
+		scrollLog();
+	}
+	document.title = APP_NAME + " - Generating File Map (Step 4 / 4)";
+	totalMessages = totalMessages + "\n";
+	// Final
+	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
+	try{
+		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
+		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');
+		log_separador();
+		RDT_generateMapFile = false;
+	} catch (err){
+		console.error("ERROR - Something went wrong while saving RDT map!\n" + err);
+		addLog('error', "ERROR - Something went wrong while saving RDT map!");
+		addLog('error', err);
+	}
+	RDT_lookForRDTConfigFile();
+	scrollLog();
+}
+function RDT_generateDummyMapFile(){
+	var FILE_COMPILED = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n0";
+	try{
+		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
+		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');
+		log_separador();
+		RDT_generateMapFile = false;
+	} catch (err){
+		console.error("ERROR - Something went wrong while saving RDT map!\n" + err);
+		addLog('error', "ERROR - Something went wrong while saving RDT map!");
+		addLog('error', err);
+	}
+}
+function RDT_requestFix(fix){
+	localStorage.clear();
+	RDT_FILEMAP_MSG = [];
+	RDT_FILEMAP_MSG = [];
+	RDT_MSG_POINTERS = [];
+	RDT_totalMessages = 0;
+	RDT_messagesArray = [];
+	RDT_MAPFILE = undefined;
+	RDT_generateMapFile = false;
+	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
+		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap");
+	}
+	if (fix === 0){
+		RDT_requestReloadWithFix0 = true;
+	}
+	if (fix === 1){
+		RDT_requestReloadWithFix1 = true;
+	}
+	log_separador();
+	addLog("warn", "WARN - Generating map file using fix " + fix);
+	log_separador();
+	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+}
+function RDT_finishMessageAnalysis(){
+	document.title = APP_NAME + " - Generating File Map (Step 2 / 4)";
+	if (RDT_MSG_RESULT_1 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_1 > RDT_MSG_RESULT_3 || RDT_MSG_RESULT_1 > RDT_MSG_RESULT_4){
+		RDT_MSG_CURRENT_TEST = 1;
+	}
+	if (RDT_MSG_RESULT_2 < RDT_MSG_RESULT_1 || RDT_MSG_RESULT_2 < RDT_MSG_RESULT_3 || RDT_MSG_RESULT_2 < RDT_MSG_RESULT_4){
+		RDT_MSG_CURRENT_TEST = 2;
+	}
+	if (RDT_MSG_RESULT_3 > RDT_MSG_RESULT_1 || RDT_MSG_RESULT_3 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_3 > RDT_MSG_RESULT_4){
+		RDT_MSG_CURRENT_TEST = 3;
+	}
+	if (RDT_MSG_RESULT_4 > RDT_MSG_RESULT_1 || RDT_MSG_RESULT_4 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_4 > RDT_MSG_RESULT_3){
+		RDT_MSG_CURRENT_TEST = 4;
+	}
+	RDT_generateMapFile = true;
+	console.info("\nMelhor Opção: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
+	RDT_readMessages();
+	addLog('log', 'RDT - Analysis Complete!');
+	scrollLog();
+}
+function RDT_startMessageAnalysis(){
+	document.title = APP_NAME + " - Generating File Map (Step 1 / 4)";
+	RDT_generateMapFile = false;
+	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	RDT_readMessages();
+	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	RDT_readMessages();
+	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	RDT_readMessages();
+	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	RDT_readMessages();
+	RDT_finishMessageAnalysis();
+}
 function RDT_lookForRDTConfigFile(){
 	var c = 0;
+	if (getFileName(ORIGINAL_FILENAME) === "r216"){
+		RDT_loop = 4;
+	} else {
+		RDT_loop++;
+	}
 	RDT_generateMapFile = false;
+	startFirstMessage = undefined;
 	document.title = APP_NAME + " - Please wait...";
-	document.getElementById('RDT_MSG-holder').innerHTML = " ";
+	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap)");
 		var mapfile = [];
@@ -683,23 +975,31 @@ function RDT_lookForRDTConfigFile(){
 				pointerCompiled = pointerCompiled + RDT_MSG_POINTERS[c];
 				c++;
 			}
-			console.log("Pointers: " + pointerCompiled + "\nHex: " + DEBUG_splitHex(pointerCompiled, 1));
+			console.log("File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + " - Pointers: " + pointerCompiled + "\nHex: " + DEBUG_splitHex(pointerCompiled, 1));
 			c = 1;
 			soma = 0;
 			var SIZE = 0;
 			var POS_END = 0;
+			var MSG_START = 0;
 			var POS_START = 0;
 			var sta_offset = 0;
 			var end_offset = 1;
 			var LAST_POS_END = 0;
-			var MSG_START = RDT_arquivoBruto.indexOf(pointerCompiled) + pointerCompiled.length;
+			if (getFileName(ORIGINAL_FILENAME) === "r40c"){
+				MSG_START = e_offset;
+			} else {
+				MSG_START = RDT_arquivoBruto.indexOf(pointerCompiled) + pointerCompiled.length;
+			}
+			if (getFileName(ORIGINAL_FILENAME) === "r301"){
+				RDT_MSG_POINTERS.splice(0, 1);
+			}
+			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), pointerCompiled);
 			if (RDT_MSG_POINTERS.length !== 2){
 				while(c < RDT_MSG_POINTERS.length){
 					if (c !== RDT_MSG_POINTERS.length - 1){
 						var pAtual = RDT_MSG_POINTERS[parseInt(c)];
 						var pProximo = RDT_MSG_POINTERS[parseInt(c + 1)];
 						SIZE = parsePositive(parseInt(processBIO3Vars(pAtual) - processBIO3Vars(pProximo)) * 2);
-						//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\
 						if (POS_START === 0 && LAST_POS_END === 0){
 							POS_START = MSG_START;
 							POS_END = MSG_START + SIZE;
@@ -763,234 +1063,70 @@ function RDT_lookForRDTConfigFile(){
 			while(c < parseInt(RDT_messagesArray.length - 1)){
 				sta_offset = RDT_messagesArray[c];
 				end_offset = RDT_messagesArray[c + 1];
-				RDT_renderMessages(soma, sta_offset, end_offset);
+				if (sta_offset !== end_offset){
+					console.log("Message " + soma + ": \nStart: " + sta_offset + "\nEnd: " + end_offset); 
+					console.log(RDT_arquivoBruto.slice(sta_offset, end_offset) + "\nHex: " + DEBUG_splitHex(RDT_arquivoBruto.slice(sta_offset, end_offset), 0));
+					RDT_renderMessages(soma, sta_offset, end_offset);
+				} else {
+					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
+					addLog('warn', 'Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
+					scrollLog();
+				}
 				c = c + 2;
 				soma++;
 			}
 			RDT_totalMessages = soma;
 		} else {
 			RDT_totalMessages = 0;
+		}
+		if (RDT_requestReloadWithFix1 === false && RDT_totalMessages === 0){
+			RDT_requestFix(1);
+		}
+		if (RDT_requestReloadWithFix1 === true && RDT_totalMessages === 0){
+			RDT_requestReloadWithFix1 = false;
 			addLog('log', 'INFO - R3ditor was unable to find any messages on this map!');
 			scrollLog();
 		}
+		if (RDT_requestReloadWithFix0 === true){
+			RDT_totalMessages = 0;
+			RDT_requestReloadWithFix0 = false;
+			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+		}
 		// Final
+		startFirstMessage = undefined;
 		RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 		RDT_showMenu(1);
 	} else {
-		RDT_startMessageAnalysis();
-	}
-}
-function RDT_findPointers(){
-	var c = 0;
-	document.title = APP_NAME + " - Generating File Map (Step 3 / 4)";
-	if (RDT_totalMessages !== 0){
-		var pont = "";
-		var fatorA = 4;
-		var fatorB = 0;
-		var totalVezesPush = 0;
-		while (c < RDT_FILEMAP_MSG.length){
-			if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
-				RDT_FILEMAP_MSG.splice(c, 1);
-			}
-			c++;
-		}
-		var startFirstMessage = parseInt(RDT_FILEMAP_MSG[0].slice(0, RDT_FILEMAP_MSG[0].indexOf("-")));
-		// Remover isso depois
-		var RDT_hack = "fa00fc";
-		if (RDT_arquivoBruto.indexOf(RDT_hack) !== -1){
-			startFirstMessage = parseInt(RDT_arquivoBruto.indexOf(RDT_hack));
-		}
-		console.log("Looking for pointer with base " + startFirstMessage);
-		while(totalVezesPush < RDT_totalMessages * 20){
-			if (RDT_FIRSTPOINTERTYPE[pont] !== undefined){
-				break;
+		if (RDT_loop < 3){
+			RDT_startMessageAnalysis();
+		} else {
+			RDT_generateDummyMapFile();
+			RDT_totalMessages = 0;
+			startFirstMessage = undefined;
+			RDT_requestReloadWithFix0 = false;
+			RDT_requestReloadWithFix1 = false;
+			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
+				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			} else {
-				fatorA = fatorA + 4;
-				fatorB = fatorB + 4;
-				pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-				if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
-					fatorA = 4;
-					fatorB = 0;
-					totalVezesPush = 0;
-					startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
-				} else {
-					console.log("Pointer - Current Result: " + pont);
-					totalVezesPush++;
-				}
+				RDT_MAPFILE = "The map was not generated due an error";
 			}
-		}
-		var fake = pont;
-		var pointerTest = RDT_MSG_pointerTest(0, parseInt(startFirstMessage - fatorB));
-		if (pointerTest === false){
-			pont = "";
-			fatorA = 4;
-			fatorB = 0;
-			totalVezesPush = 0;
-			while(totalVezesPush < RDT_totalMessages * 20){
-				if (RDT_SECONDPOINTERTYPE[pont] !== undefined && pont !== fake){
-					break;
-				} else {
-					fatorA = fatorA + 4;
-					fatorB = fatorB + 4;
-					pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
-						fatorA = 4;
-						fatorB = 0;
-						totalVezesPush = 0;
-						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
-					} else {
-						console.log("Pointer - Current Result: " + pont);
-						totalVezesPush++;
-					}
-				}
-			}
-		}
-		if (RDT_FIRSTPOINTERTYPE[pont] !== undefined || RDT_SECONDPOINTERTYPE[pont] !== undefined){
-			console.log("Pointer Found! (Type: " + pont + ")");
-			console.log("Result: \n\nTotal Searches: " + totalVezesPush + "\nFator A: " + fatorA + "\nFator B: " + fatorB + "\nPos: " + parseInt(startFirstMessage - fatorA) + " - " + parseInt(startFirstMessage - fatorB));
-			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
-		} else {
-			console.error("ERROR - Unable to find pointers on this file!");
-			addLog('error', "ERROR - Unable to find pointers on this file!");
-			scrollLog();
+			RDT_showMenu(1);
 		}
 	}
-}
-function RDT_MSG_pointerTest(mode, fPointer){
-	var firstPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer, fPointer + 4));
-	var secondPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer + 4, fPointer + 8));
-	if (mode === 0){
-		if (parseInt(secondPointer - firstPointer) < 0){
-			console.log("Pointer test deu errado!\n S: " + secondPointer + " - P: " + firstPointer);
-			return false;
-		} else {
-			return true;
-		}
-	}
-	if (mode === 1){
-		if (parseInt(firstPointer - secondPointer) < 0){
-			console.log("Pointer test deu errado!\n S: " + secondPointer + " - P: " + firstPointer);
-			return false;
-		} else {
-			return true;
-		}
-	}
-} 
-function RDT_renderMessages(id, startOffset, endOffset){
-	if (startOffset !== endOffset){
-		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
-		console.log("RDT Map File - Start: " + startOffset + " - End: " + endOffset + "\n\nMessage " + id + ":\n" + SAMPLE);
-		console.log("Hex View:\n" + DEBUG_splitHex(SAMPLE, 0));
-		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
-		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
-			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
-		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
-	} else {
-		console.warn('WARN - Message ' + id + ' contains start offset and offset with same value!');
-		addLog('warn', 'WARN - Message ' + id + ' contains start offset and offset with same value!');
-		scrollLog();
-	}
-}
-function RDT_makeRDTConfigFile(){
-	var c = 0;
-	var fatorMinus = 0;
-	var foundMessages = "";
-	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n";
-	while(c < RDT_FILEMAP_MSG.length){
-		if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
-			console.warn("WARN - Skipping Message " + c + " - It's a NaN Case!");
-			RDT_FILEMAP_MSG.splice(c, 1);
-			fatorMinus++;
-		} else {
-			foundMessages = foundMessages + parseInt(c - fatorMinus) + "\n" + RDT_FILEMAP_MSG[c] + "\n";
-		}
-		c++;
-	}
-	var PONTEIRO = "";
-	foundMessages = "";
-	var totalMessages = 0;
-	if (RDT_FILEMAP_MSG.length !== 0){
-	var ponteiro_start = RDT_findPointers()[1];
-		var max = RDT_findPointers()[0];
-		RDT_messagesArray = [];
-		RDT_totalMessages = 0;
-		RDT_MSG_END = [];
-		var increment_A = 0;
-		var increment_B = 4;
-		c = 0;
-		while(c < parseInt(max + 1)){
-			PONTEIRO = PONTEIRO + parseInt(ponteiro_start + increment_A) + "\n" + parseInt(ponteiro_start + increment_B) + "\n";
-			increment_A = increment_A + 4;
-			increment_B = increment_B + 4;
-			totalMessages++;
-			c++;
-		}
-	} else {
-		addLog('info', 'INFO - R3ditor was unable to find any messages on this file!');
-		scrollLog();
-	}
-	document.title = APP_NAME + " - Generating File Map (Step 4 / 4)";
-	totalMessages = totalMessages + "\n";
-	// Final
-	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
-	try{
-		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
-		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');
-		log_separador();
-		RDT_generateMapFile = false;
-	} catch (err){
-		console.error("ERROR while saving RDT map!\n" + err);
-		addLog('error', "ERROR - Something went wrong while saving RDT map!");
-		addLog('error', err);
-	}
-	RDT_lookForRDTConfigFile();
-	scrollLog();
-}
-function RDT_finishMessageAnalysis(){
-	document.title = APP_NAME + " - Generating File Map (Step 2 / 4)";
-	if (RDT_MSG_RESULT_1 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_1 > RDT_MSG_RESULT_3 || RDT_MSG_RESULT_1 > RDT_MSG_RESULT_4){
-		RDT_MSG_CURRENT_TEST = 1;
-	}
-	if (RDT_MSG_RESULT_2 < RDT_MSG_RESULT_1 || RDT_MSG_RESULT_2 < RDT_MSG_RESULT_3 || RDT_MSG_RESULT_2 < RDT_MSG_RESULT_4){
-		RDT_MSG_CURRENT_TEST = 2;
-	}
-	if (RDT_MSG_RESULT_3 > RDT_MSG_RESULT_1 || RDT_MSG_RESULT_3 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_3 > RDT_MSG_RESULT_4){
-		RDT_MSG_CURRENT_TEST = 3;
-	}
-	if (RDT_MSG_RESULT_4 > RDT_MSG_RESULT_1 || RDT_MSG_RESULT_4 > RDT_MSG_RESULT_2 || RDT_MSG_RESULT_4 > RDT_MSG_RESULT_3){
-		RDT_MSG_CURRENT_TEST = 4;
-	}
-	RDT_generateMapFile = true;
-	console.info("\nMelhor Opção: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
-	RDT_readMessages();
-	addLog('log', 'RDT - Analysis Complete!');
-	scrollLog();
-}
-function RDT_startMessageAnalysis(){
-	document.title = APP_NAME + " - Generating File Map (Step 1 / 4)";
-	RDT_generateMapFile = false;
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
-	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
-	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
-	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
-	RDT_readMessages();
-	RDT_finishMessageAnalysis();
 }
 function RDT_transferMessageToMSG(startOffset, endOffset){
-	var msg_transfer = RDT_arquivoBruto.slice(startOffset, endOffset);
-	if (msg_transfer !== null){
-		MSG_MAX_LENGTH = msg_transfer.length;
-		MSG_CURRENT_RDT_MESSAGE_END = parseInt(endOffset);
-		MSG_CURRENT_RDT_MESSAGE_START = parseInt(startOffset);
-		MSG_startMSGDecrypt_Lv2(msg_transfer);
-		TRANSFER_RDT_TO_MSG();
-	} else {
-		addLog('error', 'ERROR - Unable to read message because it was not found!');
-		scrollLog();
-	}
+	WIP();
+	//var msg_transfer = RDT_arquivoBruto.slice(startOffset, endOffset);
+	//if (msg_transfer !== null){
+	//	MSG_MAX_LENGTH = msg_transfer.length;
+	//	MSG_CURRENT_RDT_MESSAGE_END = parseInt(endOffset);
+	//	MSG_CURRENT_RDT_MESSAGE_START = parseInt(startOffset);
+	//	MSG_startMSGDecrypt_Lv2(msg_transfer);
+	//	TRANSFER_RDT_TO_MSG();
+	//} else {
+	//	addLog('error', 'ERROR - Unable to read message because it was not found!');
+	//	scrollLog();
+	//}
 }
 function RDT_MSGEndMessageFilter(){
 	var d = 0;
@@ -1025,13 +1161,13 @@ function RDT_Backup(){
 			var backup_name = getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".rdtbackup";
 			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
-			addLog("log", "INFO: A backup of your RDT file was made successfully! - File: " + backup_name);
-			addLog("log", "Folder: " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
+			addLog("log", "INFO - A backup of your RDT file was made successfully! - File: " + backup_name);
+			addLog("log", "Folder - " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
 		} catch (err){
-			addLog("error", "ERROR: Unable to make backup! - " + err);
+			addLog("error", "ERROR - Unable to make backup! - " + err);
 		}
 	} else {
-		addLog("error", "ERROR: You can't make a backup if you haven't opened a map yet!");
+		addLog("error", "ERROR - You can't make a backup if you haven't opened a map yet!");
 	}
 }
 function RDT_RECOMPILE_Lv1(){
@@ -1041,7 +1177,6 @@ function RDT_RECOMPILE_Lv1(){
 		try{
 			log_separador();
 			var RDT_CLONE = RDT_arquivoBruto;
-	
 			// Apply Itens, Maps and Files
 			while(c < RDT_ItensArray.length){
 				var NEW_ITEM = localStorage.getItem("RDT_Item-" + c);
@@ -1056,7 +1191,6 @@ function RDT_RECOMPILE_Lv1(){
 				}
 				c++;
 			}
-
 			// Generate the final file
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_CLONE, 'hex');
 			addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");

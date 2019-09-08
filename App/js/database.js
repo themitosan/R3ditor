@@ -88,7 +88,7 @@ var ITEM = {
 	"51": ["Vaccine medium", 								   "One of the solutions to create the cure against T-Virus.<br><br>Combine with the base vaccine item to create the item \"Vaccine\".", 																						 	  	 						 "0px 446px 0px 57px", "-166px",   "8", "3", "13", "1", "8"], 
 	"52": ["Vaccine base", 									   "One of the solutions to create the cure against T-Virus.<br><br>Combine with the item Vaccine medium to create the item \"Vaccine\".", 																								 					  	 "0px 392px 0px 112px", "-277px",  "8", "3", "14", "2", "8"], 
 	"53": ["Unknown Sigpro SP 2009 handgun", 				   "Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don't have any ingame utility.", 																	 									 "0px 335px 0px 168px", "-390px",   "8", "0", "2", "3", "8"], 
-	"54": ["Unknown Sigpro SP 2009 handgun", 				   "Aka: Pistola Esquecida<br><br>Acho que os Devs resolveram colocar essas pistolas aqui sÃ³ para encher o espaÃ§o mesmo, por que elas nÃ£o tem nenhuma utilidade ingame.", 																	 					 "0px 280px 0px 224px", "-500px",   "8", "0", "2", "4", "8"], 
+	"54": ["Unknown Sigpro SP 2009 handgun", 				   "Aka: Pistola Esquecida<br><br>Acho que os Devs resolveram colocar essas pistolas aqui só para encher o espaço mesmo, por que elas não tem nenhuma utilidade ingame.", 																	 					 "0px 280px 0px 224px", "-500px",   "8", "0", "2", "4", "8"], 
 	"55": ["Vaccine", 										   "Vacina criada com os itens Vaccine base e Vaccine medium.<br>Use na Jill para curar ela do T-Virus.", 																																	 					 "0px 227px 0px 280px", "-609px",  "8", "3", "15", "5", "8"], 
 	"56": ["Unknown Sigpro SP 2009 handgun", 				   "Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don't have any ingame utility.", 																	 									 "0px 168px 0px 335px", "-722px",   "8", "0", "2", "6", "8"], 
 	"57": ["Unknown Sigpro SP 2009 handgun", 				   "Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don't have any ingame utility.", 																	 									 "0px 114px 0px 392px", "-833px",   "8", "0", "2", "7", "8"], 
@@ -114,7 +114,7 @@ var ITEM = {
 	"6b": ["Gun powder BBA", 								   "Gunpowder BBA.<br>This combination can generate up to 120 pistol bullets.",																														 															 "0px 114px 0px 392px", "-833px", "10", "4", "14", "7", "10"],
 	"6c": ["Gun powder BBB", 								   "Gunpowder BBB.<br>This combination can generate many shotgun bullets.",																														 																 "0px 58px 0px 446px", "-943px",  "10", "4", "15", "8", "10"],
 	"6d": ["Gun powder CCC", 								   "Gunpowder CCC.<br>This combination can generate magnum bullets!",																														 																	 "0px 0px 0px 501px", "-1055px",  "10", "4", "16", "9", "10"],
-	"6e": ["Infinite bullets", 								   "Unfair!<br><br>The deal is simple - combine this wonder with the weapon you want to have infinite ammo and voilÃ¡!", 																													 					 "0px 502px 0px 0px", "-54px",    "11", "4", "17", "0", "11"],
+	"6e": ["Infinite bullets", 								   "Unfair!<br><br>The deal is simple - combine this wonder with the weapon you want to have infinite ammo and voilá!", 																													 					 "0px 502px 0px 0px", "-54px",    "11", "4", "17", "0", "11"],
 	"6f": ["Water sample", 									   "Water sample used on a quality meter near the end.<br><br><center>~~~BEEP-BOOP~~~</center>", 																															 									 "0px 446px 0px 57px", "-166px",  "11", "4", "18", "1", "11"],
 	"70": ["System disk", 									   "Disk used to open a security door in abandoned factory.<br><br>Get ready for nemmy!", 																													 													 "0px 392px 0px 112px", "-277px", "11", "4", "19", "2", "11"],
 	"71": ["Dummy key", 									   "Apparently the RE3 Devs have forgotten one of the RE2 keys here...", 																															 															 "0px 335px 0px 168px", "-390px",  "11", "5", "0", "3", "11"],
@@ -134,38 +134,48 @@ var ITEM = {
 	"7f": ["Facility key (With Barcode)", 					   "One of the keys to the abandoned factory.<br>With the barcode, you can get the rocket launcher near the end.<br><br>With her you can access a room with an elevator.", 										 												 "0px 114px 0px 392px", "-833px", "12", "5", "13", "7", "12"],
 	"80": ["Boutique key", 									   "Boutique key, where you can change clothes during gameplay.<br><br>This Function is only available in Playstation and Gamecube version.", 																						     						 "0px 58px 0px 446px", "-943px",  "12", "5", "14", "8", "12"],
 	"81": ["Ink ribbon", 									   "By far, it is one of the most classic items in the entire Resident Evil / Biohazard franchise.<br><br>When in inventory, you can use it on the typewriter to saving your progress.", 							 											 "0px 0px 0px 501px", "-1055px",  "12", "5", "15", "9", "12"],
-	"82": ["Reloading tool", 								   "With this item, you can create ammo combining with gunpowder.", 																																	 																 "0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
-	"83": ["Game inst. A", 									   "Manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180 Â° Rotation, Emergency Escape, Emergency Bypass, and more.", 											 								 "0px 446px 0px 57px", "-166px",  "13", "5", "17", "1", "13"],
-	"84": ["Game inst. B", 									   "Manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.", 													 														 "0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
+	"82": ["Reloading tool", 								   "With this item, you can create ammo combining with gunpowder.", 																																	 														 "0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
+	"83": ["Game inst. A", 									   "This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180 ° Rotation, Emergency Escape, Emergency Bypass, and more.", 											 						 "0px 446px 0px 57px", "-166px",  "13", "5", "17", "1", "13"],
+	"84": ["Game inst. B", 									   "This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.", 													 												 "0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
 	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
 }
-var RDT_MSG_MENSAGENSINVALIDAS = {
-	"fa02fdb4fa00fcfa02fe82": [true],
-	"fa00000099ff00000e01aafe67": [true],
-	"fa00000067000000fa00000099ff00000e01aafe67": [true],
-	"fa02fc000000aecdd4ae70ea1880696275a666000000fe00": [true],
-}
 var RDT_FIRSTPOINTERTYPE = {
-	"0000": [true],
-	"0100": [true],
-	"ffff": [true],
-	"ff02": [true],
-	"ad04": [true],
-	"ff31": [true]
+	"0000": true,
+	"0100": true,
+	"ffff": true,
+	"ff02": true,
+	"ad04": true,
+	"ff31": true
+}
+var RDT_THIRDPOINTERTYPE = {
+	"0800": true,
+	"0100": true
+}
+var RDT_POINTERTYPE4 = {
+	"1000": true,
+	"2800": true,
+	"3800": true
 }
 var RDT_SECONDPOINTERTYPE = {
-	"0800": [true],
-	"4868": [true],
-	"81d6": [true],
-	"3000": [true],
-	"0101": [true],
-	"5756": [true],
-	"1000": [true],
-	"1840": [true],
-	"050b": [true],
-	"1100": [true],
-	"2121": [true],
-	"0707": [true]
+	"0800": true,
+	"2808": true,
+	"4868": true,
+	"81d6": true,
+	"3000": true,
+	"0101": true,
+	"5756": true,
+	"1000": true,
+	"1840": true,
+	"050b": true,
+	"1100": true,
+	"2121": true,
+	"0707": true,
+	"9038": true,
+	"3820": true,
+	"6030": true,
+	"1919": true,
+	"5020": true,
+	"30a0": true
 }
 var FILES = {
 	"86": ["Dario's Memo"],
@@ -225,8 +235,8 @@ var ATTR = {
 	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
 }
 var VOID = {
-	"00": "OK!",									   // CondiÃ§Ã£o normal
-	"80": "CondiÃ§Ã£o anormal da versÃ£o francesa/Taiwan" // CondiÃ§Ã£o anormal encontrado na versÃ£o francesa. Pode ser um hack que outra pessoa tenha feito antes
+	"00": "OK!",									   // Condição normal
+	"80": "Condição anormal da versão francesa/Taiwan" // Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
 }
 var CIDADE = {
 	"00": ["Uptown (Including RPD)"],
@@ -305,7 +315,7 @@ var EPILOGOS = {
 	"07": ["7"],
 	"08": ["All"],
 	"09": ["All"],
-	"0c": ["All"] // Encontrado esse valor na versÃ£o francesa
+	"0c": ["All"] // Encontrado esse valor na versão francesa
 }
 var DIFICULDADE = {
 	"01": ["Easy"],
@@ -536,162 +546,162 @@ var MSG_DICIONARIO = {
 	"54": [false, "x", false],
 	"55": [false, "y", false],
 	"56": [false, "z", false],
-	"57": [false, "(Unknown Char / Function NÂº 00 - Hex: 57)", true],
-	"58": [false, "(Unknown Char / Function NÂº 01 - Hex: 58)", true],
-	"59": [false, "(Unknown Char / Function NÂº 02 - Hex: 59)", true],
-	"5a": [false, "(Unknown Char / Function NÂº 03 - Hex: 5a)", true],
-	"5b": [false, "(Unknown Char / Function NÂº 04 - Hex: 5b)", true],
-	"5c": [false, "(Unknown Char / Function NÂº 05 - Hex: 5c)", true],
-	"5d": [false, "(Unknown Char / Function NÂº 06 - Hex: 5d)", true],
-	"5e": [false, "(Unknown Char / Function NÂº 07 - Hex: 5e)", true],
-	"5f": [false, "(Unknown Char / Function NÂº 08 - Hex: 5f)", true],
-	"60": [false, "(Unknown Char / Function NÂº 09 - Hex: 60)", true],
-	"61": [false, "(Unknown Char / Function NÂº 10 - Hex: 61)", true],
-	"62": [false, "(Unknown Char / Function NÂº 11 - Hex: 62)", true],
-	"63": [false, "(Unknown Char / Function NÂº 12 - Hex: 63)", true],
-	"64": [false, "(Unknown Char / Function NÂº 13 - Hex: 64)", true],
-	"65": [false, "(Unknown Char / Function NÂº 14 - Hex: 65)", true],
-	"66": [false, "(Unknown Char / Function NÂº 15 - Hex: 66)", true],
-	"67": [false, "(Unknown Char / Function NÂº 16 - Hex: 67)", true],
-	"68": [false, "(Unknown Char / Function NÂº 17 - Hex: 68)", true],
-	"69": [false, "(Unknown Char / Function NÂº 18 - Hex: 69)", true],
-	"6a": [false, "(Unknown Char / Function NÂº 19 - Hex: 6a)", true],
-	"6b": [false, "(Unknown Char / Function NÂº 20 - Hex: 6b)", true],
-	"6c": [false, "(Unknown Char / Function NÂº 21 - Hex: 6c)", true],
-	"6d": [false, "(Unknown Char / Function NÂº 22 - Hex: 6d)", true],
-	"6e": [false, "(Unknown Char / Function NÂº 23 - Hex: 6e)", true],
-	"6f": [false, "(Unknown Char / Function NÂº 24 - Hex: 6f)", true],
-	"70": [false, "(Unknown Char / Function NÂº 25 - Hex: 70)", true],
-	"71": [false, "(Unknown Char / Function NÂº 26 - Hex: 71)", true],
-	"72": [false, "(Unknown Char / Function NÂº 27 - Hex: 72)", true],
-	"73": [false, "(Unknown Char / Function NÂº 28 - Hex: 73)", true],
-	"74": [false, "(Unknown Char / Function NÂº 29 - Hex: 74)", true],
-	"75": [false, "(Unknown Char / Function NÂº 30 - Hex: 75)", true],
-	"76": [false, "(Unknown Char / Function NÂº 31 - Hex: 76)", true],
-	"77": [false, "(Unknown Char / Function NÂº 32 - Hex: 77)", true],
-	"78": [false, "(Unknown Char / Function NÂº 33 - Hex: 78)", true],
-	"79": [false, "(Unknown Char / Function NÂº 34 - Hex: 79)", true],
-	"7a": [false, "(Unknown Char / Function NÂº 35 - Hex: 7a)", true],
-	"7b": [false, "(Unknown Char / Function NÂº 36 - Hex: 7b)", true],
-	"7c": [false, "(Unknown Char / Function NÂº 37 - Hex: 7c)", true],
-	"7d": [false, "(Unknown Char / Function NÂº 38 - Hex: 7d)", true],
-	"7e": [false, "(Unknown Char / Function NÂº 39 - Hex: 7e)", true],
-	"7f": [false, "(Unknown Char / Function NÂº 40 - Hex: 7f)", true],
-	"80": [false, "(Unknown Char / Function NÂº 41 - Hex: 80)", true],
-	"81": [false, "(Unknown Char / Function NÂº 42 - Hex: 81)", true],
-	"82": [false, "(Unknown Char / Function NÂº 43 - Hex: 82)", true],
-	"83": [false, "(Unknown Char / Function NÂº 44 - Hex: 83)", true],
-	"84": [false, "(Unknown Char / Function NÂº 45 - Hex: 84)", true],
-	"85": [false, "(Unknown Char / Function NÂº 46 - Hex: 85)", true],
-	"86": [false, "(Unknown Char / Function NÂº 47 - Hex: 86)", true],
-	"87": [false, "(Unknown Char / Function NÂº 48 - Hex: 87)", true],
-	"88": [false, "(Unknown Char / Function NÂº 49 - Hex: 88)", true],
-	"89": [false, "(Unknown Char / Function NÂº 50 - Hex: 89)", true],
-	"8a": [false, "(Unknown Char / Function NÂº 51 - Hex: 8a)", true],
-	"8b": [false, "(Unknown Char / Function NÂº 52 - Hex: 8b)", true],
-	"8c": [false, "(Unknown Char / Function NÂº 53 - Hex: 8c)", true],
-	"8d": [false, "(Unknown Char / Function NÂº 54 - Hex: 8d)", true],
-	"8e": [false, "(Unknown Char / Function NÂº 55 - Hex: 8e)", true],
-	"8f": [false, "(Unknown Char / Function NÂº 56 - Hex: 8f)", true],
-	"90": [false, "(Unknown Char / Function NÂº 57 - Hex: 90)", true],
-	"91": [false, "(Unknown Char / Function NÂº 58 - Hex: 91)", true],
-	"92": [false, "(Unknown Char / Function NÂº 59 - Hex: 92)", true],
-	"93": [false, "(Unknown Char / Function NÂº 60 - Hex: 93)", true],
-	"94": [false, "(Unknown Char / Function NÂº 61 - Hex: 94)", true],
-	"95": [false, "(Unknown Char / Function NÂº 62 - Hex: 95)", true],
-	"96": [false, "(Unknown Char / Function NÂº 63 - Hex: 96)", true],
-	"97": [false, "(Unknown Char / Function NÂº 64 - Hex: 97)", true],
-	"98": [false, "(Unknown Char / Function NÂº 65 - Hex: 98)", true],
-	"99": [false, "(Unknown Char / Function NÂº 66 - Hex: 99)", true],
-	"9a": [false, "(Unknown Char / Function NÂº 67 - Hex: 9a)", true],
-	"9b": [false, "(Unknown Char / Function NÂº 68 - Hex: 9b)", true],
-	"9c": [false, "(Unknown Char / Function NÂº 69 - Hex: 9c)", true],
-	"9d": [false, "(Unknown Char / Function NÂº 70 - Hex: 9d)", true],
-	"9e": [false, "(Unknown Char / Function NÂº 71 - Hex: 9e)", true],
-	"9f": [false, "(Unknown Char / Function NÂº 72 - Hex: 9f)", true],
-	"a0": [false, "(Unknown Char / Function NÂº 73 - Hex: a0)", true],
-	"a1": [false, "(Unknown Char / Function NÂº 74 - Hex: a1)", true],
-	"a2": [false, "(Unknown Char / Function NÂº 75 - Hex: a2)", true],
-	"a3": [false, "(Unknown Char / Function NÂº 76 - Hex: a3)", true],
-	"a4": [false, "(Unknown Char / Function NÂº 77 - Hex: a4)", true],
-	"a5": [false, "(Unknown Char / Function NÂº 78 - Hex: a5)", true],
-	"a6": [false, "(Unknown Char / Function NÂº 79 - Hex: a6)", true],
-	"a7": [false, "(Unknown Char / Function NÂº 80 - Hex: a7)", true],
-	"a8": [false, "(Unknown Char / Function NÂº 81 - Hex: a8)", true],
-	"a9": [false, "(Unknown Char / Function NÂº 82 - Hex: a9)", true],
-	"aa": [false, "(Unknown Char / Function NÂº 83 - Hex: aa)", true],
-	"ab": [false, "(Unknown Char / Function NÂº 84 - Hex: ab)", true],
-	"ac": [false, "(Unknown Char / Function NÂº 85 - Hex: ac)", true],
-	"ad": [false, "(Unknown Char / Function NÂº 86 - Hex: ad)", true],
-	"ae": [false, "(Unknown Char / Function NÂº 87 - Hex: ae)", true],
-	"af": [false, "(Unknown Char / Function NÂº 88 - Hex: af)", true],
-	"b0": [false, "(Unknown Char / Function NÂº 89 - Hex: b0)", true],
-	"b1": [false, "(Unknown Char / Function NÂº 90 - Hex: b1)", true],
-	"b2": [false, "(Unknown Char / Function NÂº 91 - Hex: b2)", true],
-	"b3": [false, "(Unknown Char / Function NÂº 92 - Hex: b3)", true],
-	"b4": [false, "(Unknown Char / Function NÂº 93 - Hex: b4)", true],
-	"b5": [false, "(Unknown Char / Function NÂº 94 - Hex: b5)", true],
-	"b6": [false, "(Unknown Char / Function NÂº 95 - Hex: b6)", true],
-	"b7": [false, "(Unknown Char / Function NÂº 96 - Hex: b7)", true],
-	"b8": [false, "(Unknown Char / Function NÂº 97 - Hex: b8)", true],
-	"b9": [false, "(Unknown Char / Function NÂº 98 - Hex: b9)", true],
-	"ba": [false, "(Unknown Char / Function NÂº 99 - Hex: ba)", true],
-	"bb": [false, "(Unknown Char / Function NÂº 100 - Hex: bb)", true],
-	"bc": [false, "(Unknown Char / Function NÂº 101 - Hex: bc)", true],
-	"bd": [false, "(Unknown Char / Function NÂº 102 - Hex: bd)", true],
-	"be": [false, "(Unknown Char / Function NÂº 103 - Hex: be)", true],
-	"bf": [false, "(Unknown Char / Function NÂº 104 - Hex: bf)", true],
-	"c0": [false, "(Unknown Char / Function NÂº 105 - Hex: c0)", true],
-	"c1": [false, "(Unknown Char / Function NÂº 106 - Hex: c1)", true],
-	"c2": [false, "(Unknown Char / Function NÂº 107 - Hex: c2)", true],
-	"c3": [false, "(Unknown Char / Function NÂº 108 - Hex: c3)", true],
-	"c4": [false, "(Unknown Char / Function NÂº 109 - Hex: c4)", true],
-	"c5": [false, "(Unknown Char / Function NÂº 110 - Hex: c5)", true],
-	"c6": [false, "(Unknown Char / Function NÂº 111 - Hex: c6)", true],
-	"c7": [false, "(Unknown Char / Function NÂº 112 - Hex: c7)", true],
-	"c8": [false, "(Unknown Char / Function NÂº 113 - Hex: c8)", true],
-	"c9": [false, "(Unknown Char / Function NÂº 114 - Hex: c9)", true],
-	"ca": [false, "(Unknown Char / Function NÂº 115 - Hex: ca)", true],
-	"cb": [false, "(Unknown Char / Function NÂº 116 - Hex: cb)", true],
-	"cc": [false, "(Unknown Char / Function NÂº 117 - Hex: cc)", true],
-	"cd": [false, "(Unknown Char / Function NÂº 118 - Hex: cd)", true],
-	"ce": [false, "(Unknown Char / Function NÂº 119 - Hex: ce)", true],
-	"cf": [false, "(Unknown Char / Function NÂº 120 - Hex: cf)", true],
-	"d0": [false, "(Unknown Char / Function NÂº 121 - Hex: d0)", true],
-	"d1": [false, "(Unknown Char / Function NÂº 122 - Hex: d1)", true],
-	"d2": [false, "(Unknown Char / Function NÂº 123 - Hex: d2)", true],
-	"d3": [false, "(Unknown Char / Function NÂº 124 - Hex: d3)", true],
-	"d4": [false, "(Unknown Char / Function NÂº 125 - Hex: d4)", true],
-	"d5": [false, "(Unknown Char / Function NÂº 126 - Hex: d5)", true],
-	"d6": [false, "(Unknown Char / Function NÂº 127 - Hex: d6)", true],
-	"d7": [false, "(Unknown Char / Function NÂº 128 - Hex: d7)", true],
-	"d8": [false, "(Unknown Char / Function NÂº 129 - Hex: d8)", true],
-	"d9": [false, "(Unknown Char / Function NÂº 130 - Hex: d9)", true],
-	"da": [false, "(Unknown Char / Function NÂº 131 - Hex: da)", true],
-	"db": [false, "(Unknown Char / Function NÂº 132 - Hex: db)", true],
-	"dc": [false, "(Unknown Char / Function NÂº 133 - Hex: dc)", true],
-	"dd": [false, "(Unknown Char / Function NÂº 134 - Hex: dd)", true],
-	"de": [false, "(Unknown Char / Function NÂº 135 - Hex: de)", true],
-	"df": [false, "(Unknown Char / Function NÂº 136 - Hex: df)", true],
-	"e0": [false, "(Unknown Char / Function NÂº 137 - Hex: e0)", true],
-	"e1": [false, "(Unknown Char / Function NÂº 138 - Hex: e1)", true],
-	"e2": [false, "(Unknown Char / Function NÂº 139 - Hex: e2)", true],
-	"e3": [false, "(Unknown Char / Function NÂº 141 - Hex: e3)", true],
-	"e4": [false, "(Unknown Char / Function NÂº 142 - Hex: e4)", true],
-	"e5": [false, "(Unknown Char / Function NÂº 143 - Hex: e5)", true],
-	"e6": [false, "(Unknown Char / Function NÂº 144 - Hex: e6)", true],
-	"e7": [false, "(Unknown Char / Function NÂº 145 - Hex: e7)", true],
-	"e8": [false, "(Unknown Char / Function NÂº 146 - Hex: e8)", true],
-	"e9": [false, "(Unknown Char / Function NÂº 147 - Hex: e9)", true],
-	"eb": [false, "(Unknown Char / Function NÂº 148 - Hex: eb)", true],
-	"ec": [false, "(Unknown Char / Function NÂº 149 - Hex: ec)", true],
-	"ed": [false, "(Unknown Char / Function NÂº 150 - Hex: ed)", true],
-	"ee": [false, "(Unknown Char / Function NÂº 151 - Hex: ee)", true],
-	"ef": [false, "(Unknown Char / Function NÂº 152 - Hex: ef)", true],
-	"f1": [false, "(Unknown Char / Function NÂº 154 - Hex: f1)", true],
-	"f2": [false, "(Unknown Char / Function NÂº 155 - Hex: f2)", true],
-	"f6": [false, "(Unknown Char / Function NÂº 159 - Hex: f6)", true],
-	"f7": [false, "(Unknown Char / Function NÂº 160 - Hex: f7)", true],
+	"57": [false, "(Unknown Char / Function Nº 00 - Hex: 57)", true],
+	"58": [false, "(Unknown Char / Function Nº 01 - Hex: 58)", true],
+	"59": [false, "(Unknown Char / Function Nº 02 - Hex: 59)", true],
+	"5a": [false, "(Unknown Char / Function Nº 03 - Hex: 5a)", true],
+	"5b": [false, "(Unknown Char / Function Nº 04 - Hex: 5b)", true],
+	"5c": [false, "(Unknown Char / Function Nº 05 - Hex: 5c)", true],
+	"5d": [false, "(Unknown Char / Function Nº 06 - Hex: 5d)", true],
+	"5e": [false, "(Unknown Char / Function Nº 07 - Hex: 5e)", true],
+	"5f": [false, "(Unknown Char / Function Nº 08 - Hex: 5f)", true],
+	"60": [false, "(Unknown Char / Function Nº 09 - Hex: 60)", true],
+	"61": [false, "(Unknown Char / Function Nº 10 - Hex: 61)", true],
+	"62": [false, "(Unknown Char / Function Nº 11 - Hex: 62)", true],
+	"63": [false, "(Unknown Char / Function Nº 12 - Hex: 63)", true],
+	"64": [false, "(Unknown Char / Function Nº 13 - Hex: 64)", true],
+	"65": [false, "(Unknown Char / Function Nº 14 - Hex: 65)", true],
+	"66": [false, "(Unknown Char / Function Nº 15 - Hex: 66)", true],
+	"67": [false, "(Unknown Char / Function Nº 16 - Hex: 67)", true],
+	"68": [false, "(Unknown Char / Function Nº 17 - Hex: 68)", true],
+	"69": [false, "(Unknown Char / Function Nº 18 - Hex: 69)", true],
+	"6a": [false, "(Unknown Char / Function Nº 19 - Hex: 6a)", true],
+	"6b": [false, "(Unknown Char / Function Nº 20 - Hex: 6b)", true],
+	"6c": [false, "(Unknown Char / Function Nº 21 - Hex: 6c)", true],
+	"6d": [false, "(Unknown Char / Function Nº 22 - Hex: 6d)", true],
+	"6e": [false, "(Unknown Char / Function Nº 23 - Hex: 6e)", true],
+	"6f": [false, "(Unknown Char / Function Nº 24 - Hex: 6f)", true],
+	"70": [false, "(Unknown Char / Function Nº 25 - Hex: 70)", true],
+	"71": [false, "(Unknown Char / Function Nº 26 - Hex: 71)", true],
+	"72": [false, "(Unknown Char / Function Nº 27 - Hex: 72)", true],
+	"73": [false, "(Unknown Char / Function Nº 28 - Hex: 73)", true],
+	"74": [false, "(Unknown Char / Function Nº 29 - Hex: 74)", true],
+	"75": [false, "(Unknown Char / Function Nº 30 - Hex: 75)", true],
+	"76": [false, "(Unknown Char / Function Nº 31 - Hex: 76)", true],
+	"77": [false, "(Unknown Char / Function Nº 32 - Hex: 77)", true],
+	"78": [false, "(Unknown Char / Function Nº 33 - Hex: 78)", true],
+	"79": [false, "(Unknown Char / Function Nº 34 - Hex: 79)", true],
+	"7a": [false, "(Unknown Char / Function Nº 35 - Hex: 7a)", true],
+	"7b": [false, "(Unknown Char / Function Nº 36 - Hex: 7b)", true],
+	"7c": [false, "(Unknown Char / Function Nº 37 - Hex: 7c)", true],
+	"7d": [false, "(Unknown Char / Function Nº 38 - Hex: 7d)", true],
+	"7e": [false, "(Unknown Char / Function Nº 39 - Hex: 7e)", true],
+	"7f": [false, "(Unknown Char / Function Nº 40 - Hex: 7f)", true],
+	"80": [false, "(Unknown Char / Function Nº 41 - Hex: 80)", true],
+	"81": [false, "(Unknown Char / Function Nº 42 - Hex: 81)", true],
+	"82": [false, "(Unknown Char / Function Nº 43 - Hex: 82)", true],
+	"83": [false, "(Unknown Char / Function Nº 44 - Hex: 83)", true],
+	"84": [false, "(Unknown Char / Function Nº 45 - Hex: 84)", true],
+	"85": [false, "(Unknown Char / Function Nº 46 - Hex: 85)", true],
+	"86": [false, "(Unknown Char / Function Nº 47 - Hex: 86)", true],
+	"87": [false, "(Unknown Char / Function Nº 48 - Hex: 87)", true],
+	"88": [false, "(Unknown Char / Function Nº 49 - Hex: 88)", true],
+	"89": [false, "(Unknown Char / Function Nº 50 - Hex: 89)", true],
+	"8a": [false, "(Unknown Char / Function Nº 51 - Hex: 8a)", true],
+	"8b": [false, "(Unknown Char / Function Nº 52 - Hex: 8b)", true],
+	"8c": [false, "(Unknown Char / Function Nº 53 - Hex: 8c)", true],
+	"8d": [false, "(Unknown Char / Function Nº 54 - Hex: 8d)", true],
+	"8e": [false, "(Unknown Char / Function Nº 55 - Hex: 8e)", true],
+	"8f": [false, "(Unknown Char / Function Nº 56 - Hex: 8f)", true],
+	"90": [false, "(Unknown Char / Function Nº 57 - Hex: 90)", true],
+	"91": [false, "(Unknown Char / Function Nº 58 - Hex: 91)", true],
+	"92": [false, "(Unknown Char / Function Nº 59 - Hex: 92)", true],
+	"93": [false, "(Unknown Char / Function Nº 60 - Hex: 93)", true],
+	"94": [false, "(Unknown Char / Function Nº 61 - Hex: 94)", true],
+	"95": [false, "(Unknown Char / Function Nº 62 - Hex: 95)", true],
+	"96": [false, "(Unknown Char / Function Nº 63 - Hex: 96)", true],
+	"97": [false, "(Unknown Char / Function Nº 64 - Hex: 97)", true],
+	"98": [false, "(Unknown Char / Function Nº 65 - Hex: 98)", true],
+	"99": [false, "(Unknown Char / Function Nº 66 - Hex: 99)", true],
+	"9a": [false, "(Unknown Char / Function Nº 67 - Hex: 9a)", true],
+	"9b": [false, "(Unknown Char / Function Nº 68 - Hex: 9b)", true],
+	"9c": [false, "(Unknown Char / Function Nº 69 - Hex: 9c)", true],
+	"9d": [false, "(Unknown Char / Function Nº 70 - Hex: 9d)", true],
+	"9e": [false, "(Unknown Char / Function Nº 71 - Hex: 9e)", true],
+	"9f": [false, "(Unknown Char / Function Nº 72 - Hex: 9f)", true],
+	"a0": [false, "(Unknown Char / Function Nº 73 - Hex: a0)", true],
+	"a1": [false, "(Unknown Char / Function Nº 74 - Hex: a1)", true],
+	"a2": [false, "(Unknown Char / Function Nº 75 - Hex: a2)", true],
+	"a3": [false, "(Unknown Char / Function Nº 76 - Hex: a3)", true],
+	"a4": [false, "(Unknown Char / Function Nº 77 - Hex: a4)", true],
+	"a5": [false, "(Unknown Char / Function Nº 78 - Hex: a5)", true],
+	"a6": [false, "(Unknown Char / Function Nº 79 - Hex: a6)", true],
+	"a7": [false, "(Unknown Char / Function Nº 80 - Hex: a7)", true],
+	"a8": [false, "(Unknown Char / Function Nº 81 - Hex: a8)", true],
+	"a9": [false, "(Unknown Char / Function Nº 82 - Hex: a9)", true],
+	"aa": [false, "(Unknown Char / Function Nº 83 - Hex: aa)", true],
+	"ab": [false, "(Unknown Char / Function Nº 84 - Hex: ab)", true],
+	"ac": [false, "(Unknown Char / Function Nº 85 - Hex: ac)", true],
+	"ad": [false, "(Unknown Char / Function Nº 86 - Hex: ad)", true],
+	"ae": [false, "(Unknown Char / Function Nº 87 - Hex: ae)", true],
+	"af": [false, "(Unknown Char / Function Nº 88 - Hex: af)", true],
+	"b0": [false, "(Unknown Char / Function Nº 89 - Hex: b0)", true],
+	"b1": [false, "(Unknown Char / Function Nº 90 - Hex: b1)", true],
+	"b2": [false, "(Unknown Char / Function Nº 91 - Hex: b2)", true],
+	"b3": [false, "(Unknown Char / Function Nº 92 - Hex: b3)", true],
+	"b4": [false, "(Unknown Char / Function Nº 93 - Hex: b4)", true],
+	"b5": [false, "(Unknown Char / Function Nº 94 - Hex: b5)", true],
+	"b6": [false, "(Unknown Char / Function Nº 95 - Hex: b6)", true],
+	"b7": [false, "(Unknown Char / Function Nº 96 - Hex: b7)", true],
+	"b8": [false, "(Unknown Char / Function Nº 97 - Hex: b8)", true],
+	"b9": [false, "(Unknown Char / Function Nº 98 - Hex: b9)", true],
+	"ba": [false, "(Unknown Char / Function Nº 99 - Hex: ba)", true],
+	"bb": [false, "(Unknown Char / Function Nº 100 - Hex: bb)", true],
+	"bc": [false, "(Unknown Char / Function Nº 101 - Hex: bc)", true],
+	"bd": [false, "(Unknown Char / Function Nº 102 - Hex: bd)", true],
+	"be": [false, "(Unknown Char / Function Nº 103 - Hex: be)", true],
+	"bf": [false, "(Unknown Char / Function Nº 104 - Hex: bf)", true],
+	"c0": [false, "(Unknown Char / Function Nº 105 - Hex: c0)", true],
+	"c1": [false, "(Unknown Char / Function Nº 106 - Hex: c1)", true],
+	"c2": [false, "(Unknown Char / Function Nº 107 - Hex: c2)", true],
+	"c3": [false, "(Unknown Char / Function Nº 108 - Hex: c3)", true],
+	"c4": [false, "(Unknown Char / Function Nº 109 - Hex: c4)", true],
+	"c5": [false, "(Unknown Char / Function Nº 110 - Hex: c5)", true],
+	"c6": [false, "(Unknown Char / Function Nº 111 - Hex: c6)", true],
+	"c7": [false, "(Unknown Char / Function Nº 112 - Hex: c7)", true],
+	"c8": [false, "(Unknown Char / Function Nº 113 - Hex: c8)", true],
+	"c9": [false, "(Unknown Char / Function Nº 114 - Hex: c9)", true],
+	"ca": [false, "(Unknown Char / Function Nº 115 - Hex: ca)", true],
+	"cb": [false, "(Unknown Char / Function Nº 116 - Hex: cb)", true],
+	"cc": [false, "(Unknown Char / Function Nº 117 - Hex: cc)", true],
+	"cd": [false, "(Unknown Char / Function Nº 118 - Hex: cd)", true],
+	"ce": [false, "(Unknown Char / Function Nº 119 - Hex: ce)", true],
+	"cf": [false, "(Unknown Char / Function Nº 120 - Hex: cf)", true],
+	"d0": [false, "(Unknown Char / Function Nº 121 - Hex: d0)", true],
+	"d1": [false, "(Unknown Char / Function Nº 122 - Hex: d1)", true],
+	"d2": [false, "(Unknown Char / Function Nº 123 - Hex: d2)", true],
+	"d3": [false, "(Unknown Char / Function Nº 124 - Hex: d3)", true],
+	"d4": [false, "(Unknown Char / Function Nº 125 - Hex: d4)", true],
+	"d5": [false, "(Unknown Char / Function Nº 126 - Hex: d5)", true],
+	"d6": [false, "(Unknown Char / Function Nº 127 - Hex: d6)", true],
+	"d7": [false, "(Unknown Char / Function Nº 128 - Hex: d7)", true],
+	"d8": [false, "(Unknown Char / Function Nº 129 - Hex: d8)", true],
+	"d9": [false, "(Unknown Char / Function Nº 130 - Hex: d9)", true],
+	"da": [false, "(Unknown Char / Function Nº 131 - Hex: da)", true],
+	"db": [false, "(Unknown Char / Function Nº 132 - Hex: db)", true],
+	"dc": [false, "(Unknown Char / Function Nº 133 - Hex: dc)", true],
+	"dd": [false, "(Unknown Char / Function Nº 134 - Hex: dd)", true],
+	"de": [false, "(Unknown Char / Function Nº 135 - Hex: de)", true],
+	"df": [false, "(Unknown Char / Function Nº 136 - Hex: df)", true],
+	"e0": [false, "(Unknown Char / Function Nº 137 - Hex: e0)", true],
+	"e1": [false, "(Unknown Char / Function Nº 138 - Hex: e1)", true],
+	"e2": [false, "(Unknown Char / Function Nº 139 - Hex: e2)", true],
+	"e3": [false, "(Unknown Char / Function Nº 141 - Hex: e3)", true],
+	"e4": [false, "(Unknown Char / Function Nº 142 - Hex: e4)", true],
+	"e5": [false, "(Unknown Char / Function Nº 143 - Hex: e5)", true],
+	"e6": [false, "(Unknown Char / Function Nº 144 - Hex: e6)", true],
+	"e7": [false, "(Unknown Char / Function Nº 145 - Hex: e7)", true],
+	"e8": [false, "(Unknown Char / Function Nº 146 - Hex: e8)", true],
+	"e9": [false, "(Unknown Char / Function Nº 147 - Hex: e9)", true],
+	"eb": [false, "(Unknown Char / Function Nº 148 - Hex: eb)", true],
+	"ec": [false, "(Unknown Char / Function Nº 149 - Hex: ec)", true],
+	"ed": [false, "(Unknown Char / Function Nº 150 - Hex: ed)", true],
+	"ee": [false, "(Unknown Char / Function Nº 151 - Hex: ee)", true],
+	"ef": [false, "(Unknown Char / Function Nº 152 - Hex: ef)", true],
+	"f1": [false, "(Unknown Char / Function Nº 154 - Hex: f1)", true],
+	"f2": [false, "(Unknown Char / Function Nº 155 - Hex: f2)", true],
+	"f6": [false, "(Unknown Char / Function Nº 159 - Hex: f6)", true],
+	"f7": [false, "(Unknown Char / Function Nº 160 - Hex: f7)", true],
 	"fb": [false, "(Yes / No)", false],
 	"fc": [false, "(Line Break)<br>", false], // Enter
 	"fd": [false, "(Pause)", false],
@@ -704,13 +714,13 @@ var MSG_DICIONARIO = {
 	"f8": [true, "(Function: Show Item Name ",	 		 5],
 	"f3": [true, "(Function: Play SE ", 			     6], // (Depende do valor inserido) 
 	/* 
-		Info: Se o valor na frente de F3 for 43, O game irÃ¡ executar o som da arma equipada.
-		Mas, quando esse comando for executado, alguns sons de menu / porta irÃ£o deixar de ser reproduzidos.
+		Info: Se o valor na frente de F3 for 43, O game irá executar o som da arma equipada.
+		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
 		Isso depende do soundset que foi carregado no mapa
 	*/
 	"f4": [true, "(Function: Change Camera ", 			 7],
 	"f5": [true, "(Unknown Command used on R101.rdt ", 	 8], // Comando usado na cutscene "Septemer, 28".
-	"f9": [true, "(Function: Text Color ", 				 9]	 // FormataÃ§Ã£o - Cor Verde
+	"f9": [true, "(Function: Text Color ", 				 9]	 // Formatação - Cor Verde
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -861,27 +871,27 @@ var MSG_DICIONARIO_REVERSO = {
 	"x": "54",
 	"y": "55",
 	"z": "56",
-	// AcentuaÃ§Ãµes
-	"Ã¼": "51",
-	"Ãº": "51",
-	"Ã¹": "51",
-	"Ã»": "51",
-	"Ãª": "41",
-	"Ã©": "41",
-	"Ã¨": "41",
-	"Ã«": "41",
-	"Ã§": "3f",
-	"Ãµ": "4b",
-	"Ã³": "4b",
-	"Ã²": "4b",
-	"Ã´": "4b",
-	"Ã¶": "4b",
-	"Ã£": "3d",
-	"Ã¡": "3d",
-	"Ã ": "3d",
-	"Ã¢": "3d",
-	"Ã¤": "3d",
-	// FunÃ§Ãµes Especiais
+	// Acentuações
+	"ü": "51",
+	"ú": "51",
+	"ù": "51",
+	"û": "51",
+	"ê": "41",
+	"é": "41",
+	"è": "41",
+	"ë": "41",
+	"ç": "3f",
+	"õ": "4b",
+	"ó": "4b",
+	"ò": "4b",
+	"ô": "4b",
+	"ö": "4b",
+	"ã": "3d",
+	"á": "3d",
+	"à": "3d",
+	"â": "3d",
+	"ä": "3d",
+	// Funções Especiais
 	"{": "09", // Aspas Duplas Abrindo
 	"}": "0a", // Aspas Duplas Fechando 
 	"*": "fb00", // Pergunta - Yes / No
@@ -889,45 +899,45 @@ var MSG_DICIONARIO_REVERSO = {
 	"|": "fd00"  // Pausa no Texto
 }
 var RANGES = {
-	// EdiÃ§Ã£o do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
+	// Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 	"gameEdition":  		[276, 288],
 	/*
-		Header (CabeÃ§alho)
-		O Inicio do arquivo de save contÃ©m um pequeno espaÃ§o nulo "00" atÃ© o primeiro indicador de save na posiÃ§Ã£o
-		0x80 (51 00 00 00 00 20 00 00 FF FF + VersÃ£o do game).
-		Entre cada indicador, existe um espaÃ§o de 68 espaÃ§os nulos atÃ© a posiÃ§Ã£o do save de NÂº 15.
-		ApÃ³s isso, eu nÃ£o percebi nenhuma mudanÃ§a no espaÃ§o em diante atÃ© o 1Âº slot de save (0x2000).
+		Header (Cabeçalho)
+		O Inicio do arquivo de save contém um pequeno espaço nulo "00" até o primeiro indicador de save na posição
+		0x80 (51 00 00 00 00 20 00 00 FF FF + Versão do game).
+		Entre cada indicador, existe um espaço de 68 espaços nulos até a posição do save de Nº 15.
+		Após isso, eu não percebi nenhuma mudança no espaço em diante até o 1º slot de save (0x2000).
 	*/
 	"slot-offset":  		 [16384], // Distancia (offset) entre cada slot de save
-	"he-esp-incial": 	    [0, 256], // EspaÃ§o inicial atÃ© o 1Âº indicador
-	"he-esp-meio":   	  [304, 512], // EspaÃ§o entre cada indicador
-	"he-esp-final":    [3888, 16384], // EspaÃ§o final atÃ© o 1Âº slot de save
-	"he-indicador-1":     [256, 304], //  Indicador do 1Âº Slot
-	"he-indicador-2":     [512, 560], //  Indicador do 2Âº Slot
-	"he-indicador-3":     [768, 816], //  Indicador do 3Âº Slot
-	"he-indicador-4":   [1024, 1072], //  Indicador do 4Âº Slot
-	"he-indicador-5":   [1280, 1328], //  Indicador do 5Âº Slot
-	"he-indicador-6":   [1536, 1584], //  Indicador do 6Âº Slot
-	"he-indicador-7":   [1792, 1840], //  Indicador do 7Âº Slot
-	"he-indicador-8":   [2048, 2096], //  Indicador do 8Âº Slot
-	"he-indicador-9":   [2304, 2352], //  Indicador do 9Âº Slot
-	"he-indicador-10":  [2560, 2608], // Indicador do 10Âº Slot
-	"he-indicador-11":  [2816, 2864], // Indicador do 11Âº Slot
-	"he-indicador-12":  [3072, 3120], // Indicador do 12Âº Slot
-	"he-indicador-13":  [3328, 3376], // Indicador do 13Âº Slot
-	"he-indicador-14":  [3584, 3632], // Indicador do 14Âº Slot
-	"he-indicador-15":  [3840, 3888], // Indicador do 15Âº Slot
+	"he-esp-incial": 	    [0, 256], // Espaço inicial até o 1º indicador
+	"he-esp-meio":   	  [304, 512], // Espaço entre cada indicador
+	"he-esp-final":    [3888, 16384], // Espaço final até o 1º slot de save
+	"he-indicador-1":     [256, 304], //  Indicador do 1º Slot
+	"he-indicador-2":     [512, 560], //  Indicador do 2º Slot
+	"he-indicador-3":     [768, 816], //  Indicador do 3º Slot
+	"he-indicador-4":   [1024, 1072], //  Indicador do 4º Slot
+	"he-indicador-5":   [1280, 1328], //  Indicador do 5º Slot
+	"he-indicador-6":   [1536, 1584], //  Indicador do 6º Slot
+	"he-indicador-7":   [1792, 1840], //  Indicador do 7º Slot
+	"he-indicador-8":   [2048, 2096], //  Indicador do 8º Slot
+	"he-indicador-9":   [2304, 2352], //  Indicador do 9º Slot
+	"he-indicador-10":  [2560, 2608], // Indicador do 10º Slot
+	"he-indicador-11":  [2816, 2864], // Indicador do 11º Slot
+	"he-indicador-12":  [3072, 3120], // Indicador do 12º Slot
+	"he-indicador-13":  [3328, 3376], // Indicador do 13º Slot
+	"he-indicador-14":  [3584, 3632], // Indicador do 14º Slot
+	"he-indicador-15":  [3840, 3888], // Indicador do 15º Slot
 	/* 			
 		Save - Info por slot:
-		Uma das diferenÃ§as do save do Resident Evil 2 comparado ao Resident Evil 3 Ã© que agora o jogador
-		estÃ¡ limitado a 15 slots de saves, pois todos eles estÃ£o em um Ãºnico arquivo. PorÃ©m, por mais que 
-		dessa forma os arquivos de save de cada jogos sejam distintos, os dois tem o cabeÃ§alho de save (0x2000) 
-		com o comeÃ§o semelhante. (SC..)
+		Uma das diferenças do save do Resident Evil 2 comparado ao Resident Evil 3 é que agora o jogador
+		está limitado a 15 slots de saves, pois todos eles estão em um único arquivo. Porém, por mais que 
+		dessa forma os arquivos de save de cada jogos sejam distintos, os dois tem o cabeçalho de save (0x2000) 
+		com o começo semelhante. (SC..)
 
 		Ordem de variaveis do save:
 			   Nome 		     Hex Pos. 	
 		1) Header (SC...) 		 0x2000 														OK
-		2) Tempo IGT 	  		 0x2200 atÃ© 0x2203												OK
+		2) Tempo IGT 	  		 0x2200 até 0x2203												OK
 		@) 0x2204-2207																			OK
 		3) Dificuldade 	  		 0x2208 														OK
 		@) 0x2209-0x220D 																		OK
@@ -935,9 +945,9 @@ var RANGES = {
 		@) 0x2210-0x2211 																		OK
 		5) Coordenadas Y  		 0x2212 														OK
 		6) HP Jill/Carlos 		 0x2214 														OK
-		7) EpÃ­logos 	  		 0x2216															OK
+		7) Epílogos 	  		 0x2216															OK
 		@) 0x2217-0x2217																		OK
-		8) NÂº Saves 	  		 0x2218 														OK
+		8) Nº Saves 	  		 0x2218 														OK
 		9) Poison Status 		 0x221A 														OK
 		10) Nome da sala de save 0x221B 														OK
 		@) 0x221C-0x224D 																		OK
@@ -950,70 +960,70 @@ var RANGES = {
 		14) Mapas A 			 0x23FF 														OK
 		@) 0x2400-0x2402 																		OK
 		15) Mapas B 			 0x2403 														OK
-		16) Files 				 0x2404 atÃ© 0x2409 												OK
+		16) Files 				 0x2404 até 0x2409 												OK
 		@) 0x240A-0x240B 																		OK
-		17) Invent.  da Jill     0x240C atÃ© 0x2433 (Levando em conta os 32 Bits de cada slot) 	OK
-		18) BaÃº da Jill 		 0x2434 atÃ© 0x2533 (Levando em conta os 32 Bits de cada slot)   OK
+		17) Invent.  da Jill     0x240C até 0x2433 (Levando em conta os 32 Bits de cada slot) 	OK
+		18) Baú da Jill 		 0x2434 até 0x2533 (Levando em conta os 32 Bits de cada slot)   OK
 		@) 0x2534-0x2534																		OK
 		19) Arma atual da Jill   0x2535 		   (8 Bits, apenas a ID da arma)				OK
 		20) Sidepack da Jill     0x2536 														OK
 		@) 0x2537-0x254B 																		OK
-		21) Invent.  do Carlos   0x254C atÃ© 0x2573 (Levando em conta os 32 Bits de cada slot)   OK
-		22) BaÃº do Carlos 		 0x2574 atÃ© 0x2673 (Levando em conta os 32 Bits de cada slot)   OK
+		21) Invent.  do Carlos   0x254C até 0x2573 (Levando em conta os 32 Bits de cada slot)   OK
+		22) Baú do Carlos 		 0x2574 até 0x2673 (Levando em conta os 32 Bits de cada slot)   OK
 		@) 0x2674-0x2674 																		OK
 		23) Arma atual do Carlos 0x2675			   (8 Bits, apenas a ID da arma)				OK
 		24) Sidepack do Carlos   0x2676 														OK
 		25) Roupa da Jill 		 0x28D4															OK
-		26) Final do Save 		 0x28D5 atÃ© 0x3FFF												OK
+		26) Final do Save 		 0x28D5 até 0x3FFF												OK
 	*/
 	// Headers
 	"save_HEADER": 		   [0, 1024], // Header do save (SC..)
 	"save_END": 	   [4522, 16384], // Final do save
     /*
-		EspaÃ§os nÃ£o mapeados:
-		Esses espaÃ§os contÃ©m posiÃ§Ãµes hex com outras variaveis que nÃ£o foram mapeadas / desobertas atravÃ©s de engenharia reversa.
-		Eles serÃ£o preservados para poder reconstruir o arquivo de save inteiro novamente.
+		Espaços não mapeados:
+		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas através de engenharia reversa.
+		Eles serão preservados para poder reconstruir o arquivo de save inteiro novamente.
     */
-    "0x2204-0x2207": 	[1032, 1040], // EspaÃ§o entre IGT e Dificuldade
-    "0x2209-0x220D":    [1042, 1052], // EspaÃ§o entre Dificuldade e PosiÃ§Ã£o X
-    "0x2210-0x2211": 	[1056, 1060], // EspaÃ§o entre PosiÃ§Ã£o X e PosiÃ§Ã£o Y
-    "0x2217-0x2217": 	[1070, 1072], // EspaÃ§o entre Epilogos e NÂº de Saves
-    "0x2219-0x2219": 	[1074, 1076], // EspaÃ§o entre NÂº de Saves e Poison
-    "0x221C-0x224D":    [1080, 1180], // EspaÃ§o entre Nome da sala de save e Local da cidade
-    "0x224F-0x224F": 	[1182, 1184], // EspaÃ§o entre Local da cidade e Room / Event
-    "0x2251-0x225D":    [1186, 1212], // EspaÃ§o entre Room Event e Personagem atual
-    "0x225F-0x23FE":    [1214, 2046], // EspaÃ§o entre Personagem Atual e Mapas A
-    "0x2400-0x2402": 	[2048, 2054], // EspaÃ§o entre Mapas A e Mapas B
-    "0x240A-0x240B": 	[2068, 2072], // EspaÃ§o entre Files e inventÃ¡rio da Jill
-    "0x2534-0x2534": 	[2664, 2666], // EspaÃ§o entre BaÃº da jill e arma atual da jill
-    "0x2537-0x254B":    [2670, 2712], // EspaÃ§o entre Sidepack da Jill e InventÃ¡rio do carlos
-    "0x2674-0x2674": 	[3304, 3306], // EspaÃ§o entre o BaÃº do carlos e a arma atual do carlos
-    "0x2677-0x28D3": 	[3310, 4520], // EspaÃ§o entre arma atual do carlos atÃ© a roupa atual da Jill
+    "0x2204-0x2207": 	[1032, 1040], // Espaço entre IGT e Dificuldade
+    "0x2209-0x220D":    [1042, 1052], // Espaço entre Dificuldade e Posição X
+    "0x2210-0x2211": 	[1056, 1060], // Espaço entre Posição X e Posição Y
+    "0x2217-0x2217": 	[1070, 1072], // Espaço entre Epilogos e Nº de Saves
+    "0x2219-0x2219": 	[1074, 1076], // Espaço entre Nº de Saves e Poison
+    "0x221C-0x224D":    [1080, 1180], // Espaço entre Nome da sala de save e Local da cidade
+    "0x224F-0x224F": 	[1182, 1184], // Espaço entre Local da cidade e Room / Event
+    "0x2251-0x225D":    [1186, 1212], // Espaço entre Room Event e Personagem atual
+    "0x225F-0x23FE":    [1214, 2046], // Espaço entre Personagem Atual e Mapas A
+    "0x2400-0x2402": 	[2048, 2054], // Espaço entre Mapas A e Mapas B
+    "0x240A-0x240B": 	[2068, 2072], // Espaço entre Files e inventário da Jill
+    "0x2534-0x2534": 	[2664, 2666], // Espaço entre Baú da jill e arma atual da jill
+    "0x2537-0x254B":    [2670, 2712], // Espaço entre Sidepack da Jill e Inventário do carlos
+    "0x2674-0x2674": 	[3304, 3306], // Espaço entre o Baú do carlos e a arma atual do carlos
+    "0x2677-0x28D3": 	[3310, 4520], // Espaço entre arma atual do carlos até a roupa atual da Jill
     // Outras variaveis
-	"jillInvent-1":		[2072, 2080], // InventÃ¡rio da Jill   - Slot 01  - 0x240C
-	"jillInvent-2":		[2080, 2088], // InventÃ¡rio da Jill   - Slot 02  - 0x2410
-	"jillInvent-3":		[2088, 2096], // InventÃ¡rio da Jill   - Slot 03  - 0x2414
-	"jillInvent-4":		[2096, 2104], // InventÃ¡rio da Jill   - Slot 04  - 0x2418
-	"jillInvent-5":		[2104, 2112], // InventÃ¡rio da Jill   - Slot 05  - 0x241C
-	"jillInvent-6":		[2112, 2120], // InventÃ¡rio da Jill   - Slot 06  - 0x2420
-	"jillInvent-7":		[2120, 2128], // InventÃ¡rio da Jill   - Slot 07  - 0x2424
-	"jillInvent-8":		[2128, 2136], // InventÃ¡rio da Jill   - Slot 08  - 0x2428
-	"jillInvent-9":		[2136, 2144], // InventÃ¡rio da Jill   - Slot 09  - 0x242C
-	"jillInvent-10":	[2144, 2152], // InventÃ¡rio da Jill   - Slot 10  - 0x2430
-	"carlosInvent-1":   [2712, 2720], // InventÃ¡rio do Carlos - Slot 01  - 0x254C
-	"carlosInvent-2":   [2720, 2728], // InventÃ¡rio do Carlos - Slot 02  - 0x2550
-	"carlosInvent-3":   [2728, 2736], // InventÃ¡rio do Carlos - Slot 03  - 0x2554
-	"carlosInvent-4":   [2736, 2744], // InventÃ¡rio do Carlos - Slot 04  - 0x2558
-	"carlosInvent-5":   [2744, 2752], // InventÃ¡rio do Carlos - Slot 05  - 0x255c
-	"carlosInvent-6":   [2752, 2760], // InventÃ¡rio do Carlos - Slot 06  - 0x2560
-	"carlosInvent-7":   [2760, 2768], // InventÃ¡rio do Carlos - Slot 07  - 0x2564
-	"carlosInvent-8":   [2768, 2776], // InventÃ¡rio do Carlos - Slot 08  - 0x2568
-	"carlosInvent-9":   [2776, 2784], // InventÃ¡rio do Carlos - Slot 09  - 0x256C
-	"carlosInvent-10":  [2784, 2792], // InventÃ¡rio do Carlos - Slot 10  - 0x2570
+	"jillInvent-1":		[2072, 2080], // Inventário da Jill   - Slot 01  - 0x240C
+	"jillInvent-2":		[2080, 2088], // Inventário da Jill   - Slot 02  - 0x2410
+	"jillInvent-3":		[2088, 2096], // Inventário da Jill   - Slot 03  - 0x2414
+	"jillInvent-4":		[2096, 2104], // Inventário da Jill   - Slot 04  - 0x2418
+	"jillInvent-5":		[2104, 2112], // Inventário da Jill   - Slot 05  - 0x241C
+	"jillInvent-6":		[2112, 2120], // Inventário da Jill   - Slot 06  - 0x2420
+	"jillInvent-7":		[2120, 2128], // Inventário da Jill   - Slot 07  - 0x2424
+	"jillInvent-8":		[2128, 2136], // Inventário da Jill   - Slot 08  - 0x2428
+	"jillInvent-9":		[2136, 2144], // Inventário da Jill   - Slot 09  - 0x242C
+	"jillInvent-10":	[2144, 2152], // Inventário da Jill   - Slot 10  - 0x2430
+	"carlosInvent-1":   [2712, 2720], // Inventário do Carlos - Slot 01  - 0x254C
+	"carlosInvent-2":   [2720, 2728], // Inventário do Carlos - Slot 02  - 0x2550
+	"carlosInvent-3":   [2728, 2736], // Inventário do Carlos - Slot 03  - 0x2554
+	"carlosInvent-4":   [2736, 2744], // Inventário do Carlos - Slot 04  - 0x2558
+	"carlosInvent-5":   [2744, 2752], // Inventário do Carlos - Slot 05  - 0x255c
+	"carlosInvent-6":   [2752, 2760], // Inventário do Carlos - Slot 06  - 0x2560
+	"carlosInvent-7":   [2760, 2768], // Inventário do Carlos - Slot 07  - 0x2564
+	"carlosInvent-8":   [2768, 2776], // Inventário do Carlos - Slot 08  - 0x2568
+	"carlosInvent-9":   [2776, 2784], // Inventário do Carlos - Slot 09  - 0x256C
+	"carlosInvent-10":  [2784, 2792], // Inventário do Carlos - Slot 10  - 0x2570
 	"leveldificuldade": [1040, 1042], // Level de Dificuldade 			 - 0x2208
 	"totalSaves": 		[1072, 1074], // Total de saves 				 - 0x2218
 	"localSave": 		[1078, 1080], // ID da sala de save 			 - 0x221B
-	"epilogos": 		[1068, 1070], // Total de EpÃ­logos desbloqueados - 0x2216
+	"epilogos": 		[1068, 1070], // Total de Epílogos desbloqueados - 0x2216
 	"localCidade": 		[1180, 1182], // Local da cidade aonde foi salvo - 0x224E
 	"roupaAtual": 		[4520, 4522], // Roupa atual 					 - 0x28D4
 	"characterAtual": 	[1212, 1214], // Personagem atual 				 - 0x225E
@@ -1021,17 +1031,17 @@ var RANGES = {
 	"carlosArma": 		[3306, 3308], // Arma atual do carlos 			 - 0x2675
 	"jill-side": 		[2668, 2670], // Sidepack da Jill 				 - 0x2536
 	"carlos-side": 		[3308, 3310], // Sidepack do Carlos 			 - 0x2676
-	"characterPoison":  [1076, 1078], // Personagem estÃ¡ com poison 	 - 0x221A
+	"characterPoison":  [1076, 1078], // Personagem está com poison 	 - 0x221A
 	"room_event": 		[1184, 1186], // Room / Event 					 - 0x2250
 	"mapas-a": 			[2046, 2048], // Mapas do Game (Primeira Hex) 	 - 0x23FF
 	"mapas-b": 			[2054, 2056], // Mapas do Game (Segunda Hex)	 - 0x2403
 	"jill_files": 		[2056, 2068], // Files do game 					 - 0x2404 to 0x2409
-	"pos-X":   			[1052, 1056], // PosiÃ§Ã£o X no mapa atual 		 - 0x220E to 0x221F
-	"pos-Y":            [1060, 1064], // PosiÃ§Ã£o Y no mapa atual 		 - 0x2212 to 0x2213
+	"pos-X":   			[1052, 1056], // Posição X no mapa atual 		 - 0x220E to 0x221F
+	"pos-Y":            [1060, 1064], // Posição Y no mapa atual 		 - 0x2212 to 0x2213
 	"IGT": 				[1024, 1032], // IGT (In-Game Time) Tempo Atual  - 0x2200 to 0x2203
 	"characterHP":    	[1064, 1068], // HP do personagem atual. 		 - 0x2214 to 0x2215
-	"j-box": 			[2152, 2656], // BaÃº da Jill 					 - 0x2535 to 0x2530
-	"c-box": 			[2792, 3296], // BaÃº do Carlos 					 - 0x2574 to 0x2580
+	"j-box": 			[2152, 2656], // Baú da Jill 					 - 0x2535 to 0x2530
+	"c-box": 			[2792, 3296], // Baú do Carlos 					 - 0x2574 to 0x2580
 	///////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////
 	/*
