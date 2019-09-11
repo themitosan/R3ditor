@@ -186,16 +186,20 @@ function main_menu(anim){
 		} else {
 			$("#avaliable_fileList").css({"display": "none"});
 		}
+		RDT_checkBKP();
 		if (RDT_lastFileOpened !== ""){
 			main_renderFileList(1);
 		}
-		if (RDT_lastBackup !== ""){
-			$("#RDT_restoreLastBackup").css({"display": "inline"});
-		} else {
-			$("#RDT_restoreLastBackup").css({"display": "none"});
-		}
 	}
 }
+function RDT_checkBKP(){
+	if (RDT_lastBackup !== "" && fs.existsSync(RDT_lastBackup) === true){
+		$("#RDT_restoreLastBackup").css({"display": "inline"});
+	} else {
+		$("#RDT_restoreLastBackup").css({"display": "none"});
+	}
+}
+
 /// Save
 function SAVE_applyMenuFocus(menuId){
 	var i = 0; // i? why not c?
@@ -766,6 +770,7 @@ function RDT_showMenu(id){
 	if (RDT_MSG_POINTERS[0] !== undefined){
 		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
 	}
+	RDT_checkBKP();
 	$("#RDT_reload").css({"display": "inline"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
