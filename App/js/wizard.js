@@ -594,7 +594,13 @@ function WZ_loadFiles(file){
 		$("#btn_run_bio3-mod").css({"display": "inline"});
 		$("#btn_run_merce-mod").css({"display": "inline"});
 	}
-	$("#menu-topo").fadeIn({duration: 100, queue: false});
+	if (fs.existsSync(APP_PATH + "\\forceupdate.txt") == true){
+		fs.unlinkSync(APP_PATH + "\\forceupdate.txt");
+		$("#menu-topo").css({"display": "none"});
+		R3DITOR_applyUpdate();
+	} else {
+		$("#menu-topo").fadeIn({duration: 100, queue: false});
+	}
 	if (R3DITOR_check_for_updates === true){
 		checkForUpdates();
 	}
