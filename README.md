@@ -46,12 +46,12 @@ You can view / edit the game's internal messages by loading .msg files or using 
 You can change messages, which item is in the room, change its position and its animation. [WIP]<br>
 Expect compatibility improvements and more features soon!
 
-## Important
+### Important
 Any changes you make will automatically apply to your files.
 If you want to recover your save, open the "backup" folder and select the file you want to recover. <br><br>
 You can restore your RDT by using the "Restore Last Backup" button on "BIO3 RDT Editor".
 
-### Third-Party software used on this project
+## Third-Party software used on this project
 - <a href="https://www.7-zip.org/" target="_blank">7zip</a>
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">Reevengi-tools - Rofs Unpacker (Compiled)</a>
 
