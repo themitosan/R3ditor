@@ -84,6 +84,7 @@ function checkFolders(){
 	}
 	if (fs.existsSync(APP_PATH + "\\forceupdate.txt") == true){
 		fs.unlinkSync(APP_PATH + "\\forceupdate.txt");
+		$("#menu-topo").css({"display": "none"});
 		R3DITOR_applyUpdate();
 	};
 	if (fs.existsSync(APP_PATH + "\\Update\\master.zip") === true){
