@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Isso está indo longe demais!
 */
-
 var GAME_PATH = "";
 var WZ_lastMenu = 0;
 var enable_mod = false;
@@ -511,14 +510,19 @@ function WZ_makeConfigs(){
 	}
 	WZ_saveConfigs();
 }
-function WZ_saveConfigs(){
+function WZ_saveConfigs(justSave){
 	try{
-		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR;
+		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR + "\n" + RDT_lastFileOpened + "\n" + RDT_lastBackup;
 		fs.writeFileSync(APP_PATH + "\\Configs\\configs.r3ditor", CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor" && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
 		} else {
-			reload();
+			if (justSave === true){
+				addLog('log', 'CONFIGS - Configs Saved!');
+				scrollLog();
+			} else {
+				reload();
+			}
 		}
 	} catch(err){
 		if (WZ_showWizard === true){
@@ -565,6 +569,16 @@ function WZ_loadFiles(file){
 		HEX_EDITOR = cfgs[6];
 	} else {
 		HEX_EDITOR = "";
+	}
+	if (cfgs[7] !== undefined){
+		RDT_lastFileOpened = cfgs[7];
+	} else {
+		RDT_lastFileOpened = "";
+	}
+	if (cfgs[8] !== undefined){
+		RDT_lastBackup = cfgs[8];
+	} else {
+		RDT_lastBackup = "";
 	}
 	// Visuals
 	if (EXEC_BIO3_original !== ""){

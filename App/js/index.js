@@ -12,7 +12,7 @@ var EXTERNAL_APP_PID = 0;
 var HEX_EDITOR = undefined;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
-var APP_VERSION = "0.2.8 [BETA]";
+var APP_VERSION = "0.2.9 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
@@ -34,25 +34,29 @@ function load(){
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
-		document.title = "FATAL ERROR!";
 		$("#img-logo").fadeOut({duration: 2200, queue: false});
+		document.title = "Hey - What you are trying to do?";
 		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
-		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! OwO');
+		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
 		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		log_separador();
 		addLog('error', err);
 	}
+	if (BETA === true){
+		console.error("ERROR - BETA is true!");
+		addLog('error', 'BETA is true!');
+	}
 	scrollLog();
 }
 function checkFolders(){
-	if (fs.existsSync(APP_PATH + "\\Backup") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup");
-	}
 	if (fs.existsSync(APP_PATH + "\\MSG") == false){
 		fs.mkdirSync(APP_PATH + "\\MSG");
 	}
 	if (fs.existsSync(APP_PATH + "\\Update") == false){
 		fs.mkdirSync(APP_PATH + "\\Update");
+	}
+	if (fs.existsSync(APP_PATH + "\\Backup") == false){
+		fs.mkdirSync(APP_PATH + "\\Backup");
 	}
 	if (fs.existsSync(APP_PATH + "\\Assets") == false){
 		fs.mkdirSync(APP_PATH + "\\Assets");
@@ -75,9 +79,6 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT") == false){
 		fs.mkdirSync(APP_PATH + "\\Configs\\RDT");
 	}
-	if (fs.existsSync(APP_PATH + "\\version.r3ditor") == true){
-		fs.unlinkSync(APP_PATH + "\\version.r3ditor");
-	};
 	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
 		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
 	}
@@ -91,6 +92,9 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\App\\Update\\check.r3ditor") === true){
 		fs.unlinkSync(APP_PATH + "\\App\\Update\\check.r3ditor");
 	}
+	if (fs.existsSync(APP_PATH + "\\version.r3ditor") == true && BETA === false){
+		fs.unlinkSync(APP_PATH + "\\version.r3ditor");
+	};
 }
 /// Log
 function addLog(type, texto){
@@ -257,7 +261,7 @@ function currentTime(){
 	}
 	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
 }
-/// IndexOf com multiplas ocorr√™cias
+/// IndexOf com multiplas ocorrÍcias
 function getAllIndexes(arr, val){
 	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
     	var indexes = [], i = -1;
@@ -346,7 +350,32 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 function parsePositive(value){
 	return value - value - value;
 }
+function parseHex(value){
+	return parseInt(value / 2).toString(16);
+}
+function parseDecimalToBIO3Var(value, mode){
+	var number = parseInt(value);
+	// Mode 0: XXXX
+	if (mode === 0){
+		var primeiraCasa = 0;
+		var segundaCasa = 0;
+		while (number > 254){
+			number = parseInt(number - 255);
+			segundaCasa++;
+		}
+		primeiraCasa = number.toString(16);
+		segundaCasa = segundaCasa.toString(16);
+		if (primeiraCasa.length < 2){
+			primeiraCasa = "0" + primeiraCasa;
+		}
+		if (segundaCasa.length < 2){
+			segundaCasa = "0" + segundaCasa;
+		}
+		return primeiraCasa + segundaCasa;
+	}
+}
 function processBIO3Vars(hex){
+	console.log("PROCESS BIO3 VARS - Processando Var: " + hex);
 	if (hex.length === 4){
 		var numerofinal = 0;
 		var first = parseInt(hex.slice(0, 2), 16);

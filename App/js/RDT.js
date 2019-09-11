@@ -15,24 +15,29 @@ var RDT_MSG_RESULT_3 = 0;
 var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
+var mapfile = [];
 var RDT_loop = 0;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
 var RDT_MAPFILE = undefined;
+var RDT_requestReload = false;
 var RDT_generateMapFile = false;
 var startFirstMessage = undefined;
 var RDT_requestReloadWithFix0 = false;
 var RDT_requestReloadWithFix1 = false;
 
+var RDT_lastBackup = "";
 var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
 var RDT_MSG_startLength = 0;
+var RDT_lastFileOpened = "";
 var RDT_arquivoBruto = undefined;
 var RDT_messasgesRaw = undefined;
 var RDT_itemIndexRAW = undefined;
 var RDT_totalMessages = undefined;
 var RDT_totalItensGeral = undefined;
 function RDT_CARREGAR_ARQUIVO(rdtFile){
+	mapfile = [];
 	RDT_loop = 0;
 	RDT_doAfterSave();
 	RDT_editItemCancel();
@@ -46,8 +51,13 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
+	if (RDT_lastFileOpened !== ORIGINAL_FILENAME){
+		RDT_lastFileOpened = rdtFile;
+		WZ_saveConfigs(true);
+	}
 	startFirstMessage = undefined;
 	$("#RDT-aba-menu-2").css({"display": "inline"});
+	$("#RDT-aba-menu-3").css({"display": "inline"});
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
 	document.getElementById('RDT-aba-menu-2').disabled = "";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
@@ -613,7 +623,7 @@ function RDT_readMessages(){
 	if (RDT_MSG_CURRENT_TEST === 4){
 		RDT_MSG_RESULT_3 = RDT_totalMessages;
 	}
-	if (RDT_generateMapFile === true && BETA === false){
+	if (RDT_generateMapFile === true){
 		RDT_postMessageProcess();
 	}
 	scrollLog();
@@ -790,15 +800,6 @@ function RDT_MSG_pointerTest(fPointer){
 	} else {
 		return true;
 	}
-} 
-function RDT_renderMessages(id, startOffset, endOffset){
-	if (startOffset !== endOffset){
-		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
-		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
-		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="WIP();">' + 
-			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
-		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
-	}
 }
 function RDT_makeRDTConfigFile(){
 	var c = 0;
@@ -819,6 +820,7 @@ function RDT_makeRDTConfigFile(){
 	var PONTEIRO = "";
 	foundMessages = "";
 	var totalMessages = 0;
+	RDT_requestReload = true;
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	if (RDT_FILEMAP_MSG.length !== 0){
 		if (RDT_requestReloadWithFix0 === true){
@@ -946,7 +948,6 @@ function RDT_lookForRDTConfigFile(){
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap)");
-		var mapfile = [];
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
@@ -954,8 +955,8 @@ function RDT_lookForRDTConfigFile(){
 			mapfile.push(line); 
 		});
 		// Messages (MSG)
-		//console.clear();
 		var soma = 0;
+		console.clear();
 		var firstEndOffset = 5;
 		var firstStartOffset = 6;
 		var e_offset = undefined;
@@ -984,6 +985,7 @@ function RDT_lookForRDTConfigFile(){
 			var POS_START = 0;
 			var sta_offset = 0;
 			var end_offset = 1;
+			var BLOCK_MSGS = "";
 			var LAST_POS_END = 0;
 			if (RDT_mapHack[getFileName(ORIGINAL_FILENAME)] !== undefined){
 				MSG_START = e_offset;
@@ -1009,6 +1011,7 @@ function RDT_lookForRDTConfigFile(){
 							POS_END = POS_START + SIZE;
 							RDT_messagesArray.push(POS_START, POS_END);
 						}
+						BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 						LAST_POS_END = POS_END;
 						c++;
 					} else {
@@ -1026,6 +1029,7 @@ function RDT_lookForRDTConfigFile(){
 								POS_END = parseInt(SEEK[0] + 4);
 								RDT_messagesArray.push(POS_START, POS_END);
 							}
+							BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 						} else {
 							console.error('Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
 							addLog('error', 'Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
@@ -1049,6 +1053,7 @@ function RDT_lookForRDTConfigFile(){
 						POS_END = parseInt(SEEK[0] + 4);
 						RDT_messagesArray.push(POS_START, POS_END);
 					}
+					BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 				} else {
 					console.error('Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
 					addLog('error', 'Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
@@ -1066,7 +1071,10 @@ function RDT_lookForRDTConfigFile(){
 				if (sta_offset !== end_offset){
 					console.log("Message " + soma + ": \nStart: " + sta_offset + "\nEnd: " + end_offset); 
 					console.log(RDT_arquivoBruto.slice(sta_offset, end_offset) + "\nHex: " + DEBUG_splitHex(RDT_arquivoBruto.slice(sta_offset, end_offset), 0));
-					RDT_renderMessages(soma, sta_offset, end_offset);
+					sessionStorage.setItem("MESSAGE_HEX_" + parseInt(soma + 1), RDT_arquivoBruto.slice(sta_offset, end_offset));
+					sessionStorage.setItem("MESSAGE_START_" + parseInt(soma + 1), sta_offset);
+					sessionStorage.setItem("MESSAGE_END_" + parseInt(soma + 1), end_offset);
+					RDT_renderMessages(parseInt(soma + 1), sta_offset, end_offset);
 				} else {
 					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
 					addLog('warn', 'Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
@@ -1093,9 +1101,44 @@ function RDT_lookForRDTConfigFile(){
 			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 		}
 		// Final
-		startFirstMessage = undefined;
-		RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
-		RDT_showMenu(1);
+		if (RDT_requestReload === false){
+			startFirstMessage = undefined;
+
+			var block_size_hex = mapfile[parseInt(mapfile.indexOf("[MSGBLOCK]") + 1)];
+			var block_size_str = parseInt(block_size_hex, 16);
+			var c_block_size_hex = BLOCK_MSGS.length.toString(16);
+			var c_block_size_str = BLOCK_MSGS.length;
+			if (c_block_size_str === block_size_str){
+				$("#RDT_lbl-msg_c_blockHex").addClass('green');
+				$("#RDT_lbl-msg_c_blockStr").addClass('green');
+				$("#RDT_lbl-msg_c_blockHex").removeClass('red');
+				$("#RDT_lbl-msg_c_blockStr").removeClass('red');
+			} else {
+				$("#RDT_lbl-msg_c_blockHex").addClass('red');
+				$("#RDT_lbl-msg_c_blockStr").addClass('red');
+				$("#RDT_lbl-msg_c_blockHex").removeClass('green');
+				$("#RDT_lbl-msg_c_blockStr").removeClass('green');
+			}
+			document.getElementById('RDT_lbl-msg_blockStr').innerHTML = block_size_str;
+			document.getElementById('RDT_lbl-msg_c_blockStr').innerHTML = c_block_size_str;
+			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = block_size_hex.toUpperCase();
+			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = c_block_size_hex.toUpperCase();
+			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
+			RDT_showMenu(1);
+		} else {
+			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8');
+			var BLOCK_SECTOR = newMapFile + "\n[MSGBLOCK]\n" + BLOCK_MSGS.length.toString(16) + "\n";
+			try{
+				fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", BLOCK_SECTOR, 'utf-8');
+			}catch(err){
+				console.error(err);
+				addLog('error', 'ERROR - Something went wrong while saving mapfile!');
+				addLog('error', err);
+				scrollLog();
+			}
+			RDT_requestReload = false;
+			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+		}
 	} else {
 		if (RDT_loop < 3){
 			RDT_startMessageAnalysis();
@@ -1114,19 +1157,29 @@ function RDT_lookForRDTConfigFile(){
 		}
 	}
 }
-function RDT_transferMessageToMSG(startOffset, endOffset){
-	WIP();
-	//var msg_transfer = RDT_arquivoBruto.slice(startOffset, endOffset);
-	//if (msg_transfer !== null){
-	//	MSG_MAX_LENGTH = msg_transfer.length;
-	//	MSG_CURRENT_RDT_MESSAGE_END = parseInt(endOffset);
-	//	MSG_CURRENT_RDT_MESSAGE_START = parseInt(startOffset);
-	//	MSG_startMSGDecrypt_Lv2(msg_transfer);
-	//	TRANSFER_RDT_TO_MSG();
-	//} else {
-	//	addLog('error', 'ERROR - Unable to read message because it was not found!');
-	//	scrollLog();
-	//}
+function RDT_renderMessages(id, startOffset, endOffset){
+	if (startOffset !== endOffset){
+		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
+		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
+		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="RDT_transferMessageToMSG(' + id + ');">' + 
+			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
+		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+	}
+}
+function RDT_transferMessageToMSG(msgId){
+	var msg_transfer = sessionStorage.getItem("MESSAGE_HEX_" + msgId);
+	if (msg_transfer !== null && msg_transfer !== undefined){
+		MSG_ID = msgId;
+		console.clear();
+		document.getElementById('RDT_MSG_NUMBER').innerHTML = "Message " + msgId + " - ";
+		MSG_CURRENT_RDT_MESSAGE_END = parseInt(sessionStorage.getItem("MESSAGE_END_" + msgId));
+		MSG_CURRENT_RDT_MESSAGE_START = parseInt(sessionStorage.getItem("MESSAGE_START_" + msgId));
+		MSG_startMSGDecrypt_Lv2(msg_transfer);
+		TRANSFER_RDT_TO_MSG();
+	} else {
+		addLog('error', 'ERROR - Unable to read message because it was not found!');
+		scrollLog();
+	}
 }
 function RDT_MSGEndMessageFilter(){
 	var d = 0;
@@ -1163,11 +1216,49 @@ function RDT_Backup(){
 			log_separador();
 			addLog("log", "INFO - A backup of your RDT file was made successfully! - File: " + backup_name);
 			addLog("log", "Folder - " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
+			RDT_lastBackup = APP_PATH + "\\Backup\\RDT\\" + backup_name;
+			WZ_saveConfigs(true);
 		} catch (err){
 			addLog("error", "ERROR - Unable to make backup! - " + err);
 		}
 	} else {
 		addLog("error", "ERROR - You can't make a backup if you haven't opened a map yet!");
+	}
+}
+function RDT_restoreLastBackup(){
+	if (RDT_lastBackup !== ""){
+		var loc = "Unknown";
+		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf("-")).toUpperCase();
+		if (RDT_locations[mName] !== undefined && RDT_locations[mName] !== null){
+			loc = RDT_locations[mName][0];
+		}
+		var ask = confirm("Restore Last Backup\n\nMap: " + mName + "\nOriginal Local Name: " + loc + "\nPath: " + RDT_lastBackup + "\n\nDo you want to proceed?");
+		if (ask === true){
+			try{
+				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + mName + ".RDT") === true){
+					fs.unlinkSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + mName + ".RDT");
+				}
+				RDT_restoreLastBackup_1(mName);
+			} catch (err){
+				console.error(err);
+				addLog('error', "ERROR - Unable to delete RDT!");
+				addLog('error', err);
+			}
+		}
+	}
+}
+function RDT_restoreLastBackup_1(name){
+	try{
+		var BK = fs.readFileSync(RDT_lastBackup, 'hex');
+		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + ".RDT", BK, 'hex');
+		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
+		if (ORIGINAL_FILENAME !== undefined){
+			RDT_CARREGAR_ARQUIVO(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + ".RDT");
+		}
+	} catch (err){
+		console.error(err);
+		addLog('error', "ERROR - Unable to restore backup!");
+		addLog('error', err);
 	}
 }
 function RDT_RECOMPILE_Lv1(){
@@ -1201,7 +1292,7 @@ function RDT_RECOMPILE_Lv1(){
 			RDT_arquivoBruto = RDT_CLONE;
 			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
 			RDT_readItens();
-
+			$("#RDT-aba-menu-3").trigger('click');
 		} catch(err){
 			addLog("error", "ERROR: Something went wrong on save process!");
 			addLog("error", err);

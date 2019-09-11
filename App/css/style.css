@@ -158,7 +158,11 @@ a{
 }
 .menu-geral-text{
 	position: sticky;
-    left: 200px;
+    left: 176px;
+}
+.RDT-menu-geral-text{
+    position: sticky;
+    left: 256px;
 }
 .menu-general-btn{
     left: 1230px;
@@ -551,14 +555,14 @@ a{
 }
 .msg-raw{
     top: 455px;
-    width: 44%;
+    width: 620px;
     height: 150px;
     overflow: auto;
     margin-top: 4px;
     padding-top: 6px;
-    position: absolute;
     padding-left: 10px;
     border-radius: 6px;
+    position: absolute;
     padding-right: 10px;
     padding-bottom: 6px;
     background-image: linear-gradient(to bottom, #283a29, #13251e);
@@ -590,8 +594,8 @@ a{
 }
 .msg-legend{
     top: 459px;
-    left: 622px;
-    width: 312px;
+    left: 654px;
+    width: 280px;
     height: 150px;
     overflow: auto;
     padding-top: 6px;
