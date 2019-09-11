@@ -41,6 +41,12 @@ a{
     color: #0f0;
     text-shadow: 0 0 10px #0f0;
 }
+.RDT_lbl_pointers{
+    left: 200px;
+    width: 1090px;
+    position: sticky;
+    margin-top: -18px;
+}
 .blockUsage{
     top: 590px;
     width: 628px;
