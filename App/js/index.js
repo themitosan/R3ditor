@@ -3,6 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var e_e = 0;
 var BETA = false;
 var fs = undefined;
 var RE3_RUNNING = false;
@@ -21,12 +22,14 @@ window.onload = function(){
 }
 function load(){
 	localStorage.clear();
-	console.info(APP_NAME);
+	sessionStorage.clear();
 	addLog("log", APP_NAME);
+	log_separador();
+	console.info(APP_NAME);
 	document.title = APP_NAME;
 	$("#app_version").html(APP_VERSION);
 	request_render_save = false;
-	log_separador();
+	currentTime();
 	try{
 		fs = require('fs');
 		APP_PATH = process.cwd();
@@ -240,6 +243,12 @@ function currentTime(){
 	var y = t.getFullYear();
 	var mi = t.getMinutes();
 	var m = t.getMonth() + 1;
+	if (m === 9 && d === 28 && e_e === 0){
+		e_e++;
+		addLog('log', '<font class="none" id="special_msg"><i>' + atob(special_day) + '</i></font>');
+		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		scrollLog();
+	}
 	if (d.toString().length < 2){
 		d = "0" + t.getDate();
 	}

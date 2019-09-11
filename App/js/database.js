@@ -925,6 +925,7 @@ var MSG_DICIONARIO_REVERSO = {
 	"@": "fc", // Enter / Break line
 	"|": "fd00"  // Pausa no Texto
 }
+var special_day = "IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu";
 var RANGES = {
 	// Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 	"gameEdition":  		[276, 288],

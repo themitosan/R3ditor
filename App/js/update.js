@@ -1,7 +1,6 @@
 /*
 	R3ditor - update.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	fa 05 00 fc 28 4b 4e 41 49 00 25 4c 4f 51 49 00 21 50 00 2f 45 50 00 20 4b 48 4b 4e 00 1d 49 41 50 fe 00
 */
 var forceUpdat = 0;
 var TEST_RELEASE = false;
@@ -10,8 +9,7 @@ var R3DITOR_check_for_updates = false;
 function forceUpdate(){
 	forceUpdat++;
 	if (forceUpdat === 10){
-		internal_version--;
-		TEST_RELEASE = true;
+		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		$("#img-logo").fadeOut({duration: 2200, queue: false});
 		$("#hidden_msg").fadeIn({duration: 2200, queue: false});
