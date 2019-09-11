@@ -14,6 +14,27 @@ var MSG_useSeekCameras = false;
 var MSG_arquivoBruto = undefined;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
+function MSG_goBackToRDT(){
+	document.title = APP_NAME + " - Please wait...";
+	localStorage.clear();
+	sessionStorage.clear();
+	//
+	MSG_LENGTH = 0;
+	RDT_resetVars();
+	MSG_ID = undefined;
+	MSG_increment = true;
+	MSG_totalComandos = 0;
+	MSG_Commands = undefined;
+	MSG_FILL_PASS = undefined;
+	MSG_DECRYPT_LV1_LAST = "";
+	MSG_useSeekCameras = false;
+	MSG_arquivoBruto = undefined;
+	MSG_CURRENT_RDT_MESSAGE_END = 0;
+	MSG_CURRENT_RDT_MESSAGE_START = 0;
+	TRANSFER_MSG_TO_RDT();
+	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+	$("#RDT-aba-menu-2").trigger('click');
+}
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_LENGTH = 0;
 	MSG_Commands = [];
@@ -29,22 +50,6 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	$("#MSG_openInHex").css({"display": "inline"});
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 	scrollLog();
-}
-function MSG_goBackToRDT(){
-	document.title = APP_NAME + " - Please wait...";
-	MSG_LENGTH = 0;
-	MSG_Commands = [];
-	MSG_FILL_PASS = "";
-	localStorage.clear();
-	MSG_increment = true;
-	TRANSFER_MSG_TO_RDT();
-	MSG_totalComandos = 0;
-	sessionStorage.clear();
-	MSG_useSeekCameras = false;
-	MSG_CURRENT_RDT_MESSAGE_END = 0;
-	MSG_CURRENT_RDT_MESSAGE_START = 0;
-	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
-	$("#RDT-aba-menu-2").trigger('click');
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	var c = 0; // The great c = 0!
@@ -663,8 +668,10 @@ function MSG_applyMSGCommand(mode){
 	var POINTER_HOLD = undefined;
 	document.getElementById("text-msg-raw").innerHTML = finalArray;
 	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH + " (Hex: " + parseHex(MSG_LENGTH).toUpperCase() + ")";
-	if (localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase()) !== null){
-		POINTER_HOLD = localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase());
+	if (ORIGINAL_FILENAME !== undefined){
+		if (localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase()) !== null){
+			POINTER_HOLD = localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase());
+		}
 	}
 	// Save to file
 	if (mode === 1){
@@ -692,13 +699,14 @@ function MSG_applyMSGCommand(mode){
 	if (mode === 2 && MSG_totalComandos !== 0){ // SAVE MESSAGE ON RDT (I STILL very tense writing this lines!)
 		MSG_SAVE_ON_RDT(newHex);
 		MSG_goBackToRDT();
+	} else {
+		MSG_Commands = [];
+		MSG_FILL_PASS = "";
+		localStorage.clear();
+		if (POINTER_HOLD !== undefined){
+			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
+		}
+		MSG_startMSGDecrypt_Lv2(newHex);
+		scrollLog();
 	}
-	MSG_Commands = [];
-	MSG_FILL_PASS = "";
-	localStorage.clear();
-	if (POINTER_HOLD !== undefined){
-		localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
-	}
-	MSG_startMSGDecrypt_Lv2(newHex);
-	scrollLog();
 }

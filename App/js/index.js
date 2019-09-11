@@ -353,11 +353,12 @@ function parseDecimalToBIO3Var(value, mode){
 	var number = parseInt(value);
 	// Mode 0: XXXX
 	if (mode === 0){
-		var primeiraCasa = 0;
 		var segundaCasa = 0;
-		while (number > 254){
+		var primeiraCasa = 0;
+		while (number > 255){
 			number = parseInt(number - 255);
 			segundaCasa++;
+			number--;
 		}
 		primeiraCasa = number.toString(16);
 		segundaCasa = segundaCasa.toString(16);

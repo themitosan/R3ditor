@@ -36,6 +36,36 @@ var RDT_messasgesRaw = undefined;
 var RDT_itemIndexRAW = undefined;
 var RDT_totalMessages = undefined;
 var RDT_totalItensGeral = undefined;
+function RDT_resetVars(){
+	mapfile = [];
+	RDT_loop = 0;
+	RDT_MSG_END = [];
+	RDT_totalItens = 0;
+	RDT_totalFiles = 0;
+	RDT_totalMapas = 0;
+	RDT_ItensArray = [];
+	RDT_MSG_RESULT_1 = 0;
+	RDT_MSG_RESULT_2 = 0;
+	RDT_MSG_RESULT_3 = 0;
+	RDT_MSG_RESULT_4 = 0;
+	RDT_FILEMAP_MSG = [];
+	RDT_MSG_POINTERS = [];
+	RDT_messagesArray = [];
+	RDT_MSG_finalLenght = 0;
+	RDT_MSG_startLength = 0;
+	RDT_MAPFILE = undefined;
+	RDT_MSG_CURRENT_TEST = 0;
+	RDT_requestReload = false;
+	RDT_generateMapFile = false;
+	RDT_arquivoBruto = undefined;
+	RDT_messasgesRaw = undefined;
+	RDT_itemIndexRAW = undefined;
+	startFirstMessage = undefined;
+	RDT_totalMessages = undefined;
+	RDT_totalItensGeral = undefined;
+	RDT_requestReloadWithFix0 = false;
+	RDT_requestReloadWithFix1 = false;
+}
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	mapfile = [];
 	RDT_loop = 0;
@@ -78,13 +108,13 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310900");
 	RDT_generateItemIndexRaw("02318000");
 	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000"); // Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310000");// Padrão encontrado em (quase) todos os itens
 	RDT_generateItemIndexRaw("02310500");
 	RDT_generateItemIndexRaw("02310100");
 	RDT_generateItemIndexRaw("02310200");
 	RDT_generateItemIndexRaw("02310300");
 	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - Fábrica
+	RDT_generateItemIndexRaw("02310a00");// R503.rdt - Fábrica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	
@@ -961,6 +991,7 @@ function RDT_lookForRDTConfigFile(){
 		var firstStartOffset = 6;
 		var e_offset = undefined;
 		var s_offset = undefined;
+		var pointerSplit = "Undefined";
 		var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf("[POINTERS]") + 1)]);
 		if (tMessages !== 0){
 			while(c < tMessages){
@@ -971,9 +1002,11 @@ function RDT_lookForRDTConfigFile(){
 				c++;
 			}
 			c = 0;
+			pointerSplit = "";
 			var pointerCompiled = "";
 			while (c < RDT_MSG_POINTERS.length){
 				pointerCompiled = pointerCompiled + RDT_MSG_POINTERS[c];
+				pointerSplit = pointerSplit + RDT_MSG_POINTERS[c].toUpperCase() + " ";
 				c++;
 			}
 			console.log("File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + " - Pointers: " + pointerCompiled + "\nHex: " + DEBUG_splitHex(pointerCompiled, 1));
@@ -1118,6 +1151,7 @@ function RDT_lookForRDTConfigFile(){
 			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
 			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(c_block_size_str, 0).toUpperCase() + " - String: " + c_block_size_str + ")";
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
+			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
 			RDT_showMenu(1);
 		} else {
 			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8');
