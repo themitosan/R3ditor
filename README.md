@@ -49,7 +49,8 @@ Expect compatibility improvements and more features soon!
 
 ## Important
 Any changes you make will automatically apply to your files.
-If you want to recover your save / rdt, open the "backup" folder and select the file you want to recover. <br>
+If you want to recover your save, open the "backup" folder and select the file you want to recover. <br>
+You can restore your RDT by using the "Restore Last Backup" button on "BIO3 RDT Editor".
 
 ### Third-Party software used on this project
 - <a href="https://www.7-zip.org/" target="_blank">7zip</a>
