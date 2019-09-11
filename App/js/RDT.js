@@ -1115,8 +1115,8 @@ function RDT_lookForRDTConfigFile(){
 				$("#RDT_lbl-msg_c_blockHex").addClass('red');
 				$("#RDT_lbl-msg_c_blockHex").removeClass('green');
 			}
-			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = block_size_hex.toUpperCase() + " (String: " + block_size_str + ")";
-			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = c_block_size_hex.toUpperCase() + " (String: " + c_block_size_str + ")";
+			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
+			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(c_block_size_str, 0).toUpperCase() + " - String: " + c_block_size_str + ")";
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			RDT_showMenu(1);
 		} else {

@@ -39,6 +39,7 @@ function MSG_goBackToRDT(){
 	MSG_increment = true;
 	TRANSFER_MSG_TO_RDT();
 	MSG_totalComandos = 0;
+	sessionStorage.clear();
 	MSG_useSeekCameras = false;
 	MSG_CURRENT_RDT_MESSAGE_END = 0;
 	MSG_CURRENT_RDT_MESSAGE_START = 0;
@@ -584,8 +585,8 @@ function MAKE_NEW_POINTERS(msg_hex){
 			break;
 		}
 	}
-	//console.info("Novos Ponteiros:");
-	//console.info(NEW_POINTERS + "\n" + NEW_POINTERS.match(/.{1,4}/g));
+	console.info("Novos Ponteiros:");
+	console.info(NEW_POINTERS + "\n" + NEW_POINTERS.match(/.{1,4}/g));
 	return NEW_POINTERS;
 }
 function MSG_SAVE_ON_RDT(msgHex){
@@ -672,12 +673,12 @@ function MSG_applyMSGCommand(mode){
 			if (ask !== null){
 				try{
 					if (ask === ""){
-						ask = "Mensagem";
+						ask = "Message";
 					}
 					var newMsgFile = APP_PATH + "\\MSG\\" + ask + ".msg";
 					fs.writeFileSync(newMsgFile, newHex, 'hex');
 					addLog("log", "INFO: The file " + ask + " was saved successfully!");
-					addLog("log", "Caminho: " + newMsgFile);
+					addLog("log", "Path: " + newMsgFile);
 				} catch(err){
 					addLog("error", "ERROR - Unable to save the MSG File " + ask + " - " + err);
 				}

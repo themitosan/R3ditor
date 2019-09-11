@@ -371,7 +371,6 @@ function parseDecimalToBIO3Var(value, mode){
 	}
 }
 function processBIO3Vars(hex){
-	console.log("PROCESS BIO3 VARS - Processando Var: " + hex);
 	if (hex.length === 4){
 		var numerofinal = 0;
 		var first = parseInt(hex.slice(0, 2), 16);
