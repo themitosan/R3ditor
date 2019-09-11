@@ -1110,19 +1110,13 @@ function RDT_lookForRDTConfigFile(){
 			var c_block_size_str = BLOCK_MSGS.length;
 			if (c_block_size_str === block_size_str){
 				$("#RDT_lbl-msg_c_blockHex").addClass('green');
-				$("#RDT_lbl-msg_c_blockStr").addClass('green');
 				$("#RDT_lbl-msg_c_blockHex").removeClass('red');
-				$("#RDT_lbl-msg_c_blockStr").removeClass('red');
 			} else {
 				$("#RDT_lbl-msg_c_blockHex").addClass('red');
-				$("#RDT_lbl-msg_c_blockStr").addClass('red');
 				$("#RDT_lbl-msg_c_blockHex").removeClass('green');
-				$("#RDT_lbl-msg_c_blockStr").removeClass('green');
 			}
-			document.getElementById('RDT_lbl-msg_blockStr').innerHTML = block_size_str;
-			document.getElementById('RDT_lbl-msg_c_blockStr').innerHTML = c_block_size_str;
-			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = block_size_hex.toUpperCase();
-			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = c_block_size_hex.toUpperCase();
+			document.getElementById('RDT_lbl-msg_blockHex').innerHTML = block_size_hex.toUpperCase() + " (String: " + block_size_str + ")";
+			document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = c_block_size_hex.toUpperCase() + " (String: " + c_block_size_str + ")";
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			RDT_showMenu(1);
 		} else {
