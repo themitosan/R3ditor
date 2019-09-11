@@ -475,7 +475,7 @@ function setLoadRDTFile(){
 			BETA = false;
 		}
 		RDT_arquivoBruto = undefined;
-		RDT_CARREGAR_ARQUIVO(cFile.path);
+		RDT_openFile(cFile.path);
 		document.getElementById('loadRDTForm').value = "";
 	}
 }

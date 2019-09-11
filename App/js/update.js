@@ -8,7 +8,7 @@ var internal_version = 11;
 var R3DITOR_check_for_updates = false;
 function forceUpdate(){
 	forceUpdat++;
-	if (forceUpdat === 10){
+	if (forceUpdat > 9){
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		$("#img-logo").fadeOut({duration: 2200, queue: false});

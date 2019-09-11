@@ -53,7 +53,7 @@ function main_renderFileList(id){
 			origCity = RDT_locations[RDT_name][1];
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
-			' onclick="RDT_CARREGAR_ARQUIVO(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
+			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
 			'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: ' + mFile + 
 			'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$("#RDT_recentFile").append(fileList_HTML_template);
@@ -94,7 +94,7 @@ function main_renderFileList(id){
 					origCity = RDT_locations[RDT_name][1];
 				}
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
-					' onclick="RDT_CARREGAR_ARQUIVO(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
+					' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
 					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: ' + mFile + 
 					'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 				$("#fileListHolder").append(fileList_HTML_template);
@@ -199,7 +199,6 @@ function RDT_checkBKP(){
 		$("#RDT_restoreLastBackup").css({"display": "none"});
 	}
 }
-
 /// Save
 function SAVE_applyMenuFocus(menuId){
 	var i = 0; // i? why not c?
@@ -595,7 +594,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Iniciar Mensagem
 	if (id === 1){
 		$("#dialog-msg-addcomand").css({"top": "192px"});
-		document.getElementById("msg-addcomand-title").innerHTML = "Start Message";
+		document.getElementById("msg-addcomand-title").innerHTML = "Start Message / Text Speed";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_START;
 		document.getElementById('msg-comeco-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){

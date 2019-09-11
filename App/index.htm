@@ -43,7 +43,7 @@
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
 			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoadRDT();">
-			<input type="button" class="botao-menu none" id="RDT_reload" value="Reload RDT" onclick="RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);">
+			<input type="button" class="botao-menu none" id="RDT_reload" value="Reload RDT" onclick="RDT_openFile(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
@@ -179,7 +179,7 @@
 			<div class="msg-addcomand-menu">
 				<h2 class="title-eventos">Add Function</h2>
 				<center>Header</center>
-				<input type="button" value="Start Message" class="botao-add-comando" onclick="MSG_renderDialog(1);">
+				<input type="button" value="Start Message / Text Speed" class="botao-add-comando" onclick="MSG_renderDialog(1);">
 				<input type="button" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
 				<center>Text and Special Chars</center>
 				<input type="button" value="Show Text" class="botao-add-comando" onclick="MSG_renderDialog(3);">

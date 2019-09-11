@@ -756,8 +756,7 @@ var MSG_TEXTCOLOR = {
 		Regardless the first number (3), The 2nd number (0) always gonna be the color.
 		(01, 31, 21, 51 and F1 are the same text color - in this case, Green.)
 
-		"Close Tag" is used to stop displaying the text with special color - like when we close a tag in HTML. 
-
+		"Close Tag" is used to stop displaying the text with special color - like when we close a tag in HTML.
 		Example:
 
 		  1					2					3
@@ -785,7 +784,6 @@ var MSG_TEXTCOLOR = {
 	"f": "Transparent",
 	"00": "Close Tag" 
 }
-
 var MSG_CHARESPECIAL = {
 	"ea10": "L2",
 	"ea11": "R2",
@@ -925,10 +923,11 @@ var MSG_DICIONARIO_REVERSO = {
 	"@": "fc", // Enter / Break line
 	"|": "fd00"  // Pausa no Texto
 }
+// :)
 var special_day = "IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu";
 var RANGES = {
 	// Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
-	"gameEdition":  		[276, 288],
+	"gameEdition":  	  [276, 288],
 	/*
 		Header (Cabeçalho)
 		O Inicio do arquivo de save contém um pequeno espaço nulo "00" até o primeiro indicador de save na posição
