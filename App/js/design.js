@@ -584,9 +584,11 @@ function MSG_renderDialog(id, args, index, isMod){
 		}
 		if (RDT_arquivoBruto !== undefined && MSG_arquivoBruto === undefined){
 			$("#MSG_applyMessageRDT").css({"display": "inline"});
+			$("#btn-goback-rdt").css({"display": "inline"});
 		}
 	} else {
 		$("#MSG_saveAs").css({"display": "none"});
+		$("#btn-goback-rdt").css({"display": "none"});
 		$("#text-msg-events").css({"display": "none"});
 		$("#MSG_applyMessageRDT").css({"display": "none"});
 		$("#dialog-msg-addcomand").css({"display": "block"});
@@ -806,6 +808,7 @@ function TRANSFER_RDT_TO_MSG(){
 	$("#RDT_BG_1").css({"display": "none"});
 	$("#RDT_BG_2").css({"display": "none"});
 	$("#RDT_BG_3").css({"display": "none"});
+	$("#MSG_hexPrev").css({"height": "114px"});
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#menu-topo-RDT").css({"display": "none"});
 	$("#RDT_openInHex").css({"display": "none"});
@@ -813,6 +816,7 @@ function TRANSFER_RDT_TO_MSG(){
 	$("#menu-topo-msg").css({"display": "block"});
 	$("#RDT_MSG_NUMBER").css({"display": "inline"});
 	$("#btn-goback-rdt").css({"display": "inline"});
+	$("#MSG_RDT_BLOCKUSAGE").css({"display": "block"});
 	$("#MSG_applyMessageRDT").css({"display": "inline"});
 	document.getElementById('RDT_MSG-holder').innerHTML = " ";
 	document.getElementById('MSG_saveAs').value = 'Save as MSG';

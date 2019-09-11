@@ -21,6 +21,7 @@ var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
 var RDT_MAPFILE = undefined;
 var RDT_requestReload = false;
+var block_size_hex = undefined;
 var RDT_generateMapFile = false;
 var startFirstMessage = undefined;
 var RDT_requestReloadWithFix0 = false;
@@ -56,6 +57,7 @@ function RDT_resetVars(){
 	RDT_MAPFILE = undefined;
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_requestReload = false;
+	block_size_hex = undefined;
 	RDT_generateMapFile = false;
 	RDT_arquivoBruto = undefined;
 	RDT_messasgesRaw = undefined;
@@ -82,6 +84,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MSG_RESULT_4 = 0;
 	RDT_MAPFILE = undefined;
 	RDT_MSG_CURRENT_TEST = 0;
+	block_size_hex = undefined;
 	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
 	if (RDT_lastFileOpened !== ORIGINAL_FILENAME){
@@ -1141,26 +1144,28 @@ function RDT_lookForRDTConfigFile(){
 		// Final
 		if (RDT_requestReload === false){
 			startFirstMessage = undefined;
-
 			if (RDT_totalMessages !== 0){
-				var block_size_hex = mapfile[parseInt(mapfile.indexOf("[MSGBLOCK]") + 1)];
+				block_size_hex = mapfile[parseInt(mapfile.indexOf("[MSGBLOCK]") + 1)];
 				var block_size_str = parseInt(block_size_hex, 16);
 				var c_block_size_hex = BLOCK_MSGS.length.toString(16);
 				var c_block_size_str = BLOCK_MSGS.length;
 				if (c_block_size_str === block_size_str){
+					$("#MSG_RDT_lbl_blockUsage").addClass('green');
 					$("#RDT_lbl-msg_c_blockHex").addClass('green');
 					$("#RDT_lbl-msg_c_blockHex").removeClass('red');
 				} else {
 					$("#RDT_lbl-msg_c_blockHex").addClass('red');
 					$("#RDT_lbl-msg_c_blockHex").removeClass('green');
+					$("#MSG_RDT_lbl_blockUsage").removeClass('green');
 				}
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
-				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(c_block_size_str, 0).toUpperCase() + " - String: " + c_block_size_str + ")";
+				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
+				document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = block_size_hex.toUpperCase();
+				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
 			} else {
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Undefined";
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Undefined";
 			}
-
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
 			RDT_showMenu(1);

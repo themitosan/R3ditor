@@ -558,6 +558,29 @@ function MSG_COMMAND_TEXTCOLOR(index, isModify){
 }
 // The dark side of this ENTIRE FILE!
 // Like... DON'T TOUCH THIS PART - FOR REAL!
+function MSG_renderPreviewBlock(c_msg_hex){
+	if (RDT_arquivoBruto !== undefined){
+		var c = 1;
+		var msgs = "";
+		var t = parseInt(RDT_totalMessages + 1);
+		while(c < t){
+			if (c === MSG_ID){
+				c++;
+			} else {
+				msgs = msgs + sessionStorage.getItem("MESSAGE_HEX_" + c);
+				c++;
+			}
+		}
+		msgs = msgs + c_msg_hex;
+		console.log(msgs);
+		if (msgs.length === parseInt(block_size_hex, 16)){
+			$("#MSG_RDT_lbl_blockUsage").addClass('green');
+		} else {
+			$("#MSG_RDT_lbl_blockUsage").removeClass('green');
+		}
+		return msgs.length.toString(16).toUpperCase() + " (" + Math.floor((msgs.length / parseInt(block_size_hex, 16)) * 100) + "%)";
+	}
+}
 function MAKE_NEW_POINTERS(msg_hex){
 	var c = 0;
 	var NEXT_POINTER = undefined;
@@ -672,6 +695,9 @@ function MSG_applyMSGCommand(mode){
 		if (localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase()) !== null){
 			POINTER_HOLD = localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase());
 		}
+	}
+	if (RDT_arquivoBruto !== undefined){
+		document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = MSG_renderPreviewBlock(newHex);
 	}
 	// Save to file
 	if (mode === 1){

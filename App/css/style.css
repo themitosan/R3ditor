@@ -41,6 +41,16 @@ a{
     color: #0f0;
     text-shadow: 0 0 10px #0f0;
 }
+.blockUsage{
+    top: 590px;
+    width: 628px;
+    padding: 6px;
+    height: auto;
+    display: none;
+    position: absolute;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom, #555, #222);
+}
 .feature_title{
     font-size: x-large;
     text-shadow: 0 0 10px #555;
