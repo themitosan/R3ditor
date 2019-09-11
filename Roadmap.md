@@ -4,13 +4,14 @@ This file can (and will be) modified several times!
 
 ## Room Data Table (RDT)
 - Read items, files and maps! [WIP]
-- Read messages of every single RDT file! (FA 02) [WIP] [Almost There...]
+- Read messages of every single RDT file! (FA 02) [WIP]
 - Read all Doors
 - Read Enemies on map
 - Edit the messages on MSG editor
 - Edit every type of item, file or maps! (Header 68)
 - Edit all Doors
 - Edit Enemies on map
+- Add suport for itens, files and maps with header 68
 - ~~Add a Screenshot of map in all tabs (BSS)~~
 
 ## Saves (Bu00.sav)
@@ -38,5 +39,5 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - Add the option to extract all the Rofs files [WIP 50%]
-- Add the backup function in case of unwanted action (Or bug - who knows...)
+- ~~Add restore backup function on RDT~~
 - Misc: Add support for saves from RE2! ~~(They are very similar! - Also, don't expect this sooner!)~~
