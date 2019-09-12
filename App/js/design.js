@@ -3,7 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var RDT_totalMenus = 3;
+var RDT_totalMenus = 4;
 var SAVE_totalMenus = 4;
 var RDT_aba_atual = undefined;
 var SAVE_aba_atual = undefined;
@@ -726,6 +726,7 @@ function RDT_showMenu(id){
 		$("#RDT_recentFile").remove();
 	}
 	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
+		$("#RDT-canvas-hold").css({"height": "472px"});
 		$("#RDT_openFileList").css({"display": "inline"});
 		$("#RDT_MSG-holder").css({"height": "430px"});
 		$("#RDT_menu-" + id).css({"height": "482px"});
@@ -736,10 +737,11 @@ function RDT_showMenu(id){
 		$("#RDT-msgs").css({"height": "472px"});
 		$("#RDT-ifm").css({"height": "472px"});
 	} else {
+		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT_openFileList").css({"display": "none"});
-		$("#menu-topo-MOD").css({"display": "none"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
 		$("#RDT_menu-" + id).css({"height": "528px"});
+		$("#menu-topo-MOD").css({"display": "none"});
 		$("#RDT-item-list").css({"height": "472px"});
 		$("#RDT-Item-Edit").css({"height": "458px"});
 		$("#RDT_BG_" + id).css({"height": "512px"});
@@ -772,6 +774,9 @@ function RDT_showMenu(id){
 		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
 	}
 	RDT_checkBKP();
+	if (id !== 4){
+		$("#RDT-aba-menu-4").css({'display': 'none'});
+	}
 	$("#RDT_reload").css({"display": "inline"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
@@ -832,9 +837,11 @@ function RDT_BG_display(){
 				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
 				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
 				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
+				$("#RDT_BG_4").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
 				$("#RDT_BG_1").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_2").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_3").fadeIn({duration: 500, queue: false});
+				$("#RDT_BG_4").fadeIn({duration: 500, queue: false});
 				break;
 			} else {
 				c++;
@@ -844,6 +851,7 @@ function RDT_BG_display(){
 			$("#RDT_BG_1").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
 			$("#RDT_BG_2").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
 			$("#RDT_BG_3").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
+			$("#RDT_BG_4").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
 		}
 	}
 }
@@ -903,28 +911,25 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-item-select").addClass("none");
 	}
-	document.getElementById('RDT_item-edit-X').value = posX;
-	document.getElementById('RDT_item-edit-Y').value = posY;
-	document.getElementById('RDT_item-edit-Z').value = posZ;
-	document.getElementById('RDT_item-edit-R').value = posR;
-	document.getElementById('RDT_item-edit-A').value = anim;
+	document.getElementById('RDT_item-edit-X').innerHTML = posX.toUpperCase();
+	document.getElementById('RDT_item-edit-Y').innerHTML = posY.toUpperCase();
+	document.getElementById('RDT_item-edit-Z').innerHTML = posZ.toUpperCase();
+	document.getElementById('RDT_item-edit-R').innerHTML = posR.toUpperCase();
+	document.getElementById('RDT_item-edit-A').value = anim.toUpperCase();
 	document.getElementById('RDT_item-edit-Quant').value = quant;
 	document.getElementById("RDT-lbl-item-edit").innerHTML = nome;
 	document.getElementById("RDT-lbl-edit-index").innerHTML = index;
 	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
 		RDT_ITEM_APPLY(index, id);
 	}
-	if (header === "67"){
-		$("#RDT_item_X").css({"display": "inline"});
-		$("#RDT_item_Y").css({"display": "inline"});
-		$("#RDT_item_Z").css({"display": "inline"});
-		$("#RDT_item_R").css({"display": "inline"});
-	} else {
-		$("#RDT_item_X").css({"display": "none"});
-		$("#RDT_item_Y").css({"display": "none"});
-		$("#RDT_item_Z").css({"display": "none"});
-		$("#RDT_item_R").css({"display": "none"});
+	document.getElementById('RDT_canvas_btn_apply').onclick = function(){
+		RDT_hideCanvasTab();
+		$("#RDT_editItemBtn_" + index).trigger('click');
 	}
+	$("#RDT_item_X").css({"display": "block"});
+	$("#RDT_item_Y").css({"display": "block"});
+	$("#RDT_item_Z").css({"display": "block"});
+	$("#RDT_item_R").css({"display": "block"});
 	$("#RDT-Item-Edit").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
 }
@@ -935,11 +940,11 @@ function RDT_editItemCancel(){
 	}
 	$("#RDT-item-list").css({"width": "1288px"});
 	$("#RDT-Item-Edit").css({"display": "none"});
-	document.getElementById('RDT_item-edit-X').value = "";
-	document.getElementById('RDT_item-edit-Y').value = "";
-	document.getElementById('RDT_item-edit-Z').value = "";
-	document.getElementById('RDT_item-edit-R').value = "";
 	document.getElementById('RDT_item-edit-A').value = "";
+	document.getElementById('RDT_item-edit-X').innerHTML = "";
+	document.getElementById('RDT_item-edit-Y').innerHTML = "";
+	document.getElementById('RDT_item-edit-Z').innerHTML = "";
+	document.getElementById('RDT_item-edit-R').innerHTML = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
 	document.getElementById("RDT-lbl-edit-index").innerHTML = "N/A";
 	document.getElementById("RDT-lbl-item-edit").innerHTML = "No item select";
@@ -954,6 +959,12 @@ function RDT_applyMenuFocus(menuId){
 	$('#RDT-aba-menu-' + menuId).addClass('aba-select');
 	scrollLog();
 }
+function RDT_showCanvasTab(){
+	$("#RDT-aba-menu-4").css({'display': 'inline'});
+	RDT_selectPoint(RDT_selectedPoint);
+	RDT_showMenu(4);
+}
+
 // Updater
 function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});
@@ -996,16 +1007,19 @@ function R3DITOR_movePercent(id, percent, status){
 function R3DITOR_RUNGAME(id){
 	if (id === 0){
 		$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
 		$("#RDT-item-list").css({"height": "472px"});
 		$("#RDT-Item-Edit").css({"height": "458px"});
 		$("#RDT_menu-1").css({"height": "528px"});
 		$("#RDT_menu-2").css({"height": "528px"});
 		$("#RDT_menu-3").css({"height": "528px"});
+		$("#RDT_menu-4").css({"height": "528px"});
 		$("#RDT-geral").css({"height": "516px"});
 		$("#RDT_BG_1").css({"height": "512px"});
 		$("#RDT_BG_2").css({"height": "512px"});
 		$("#RDT_BG_3").css({"height": "512px"});
+		$("#RDT_BG_4").css({"height": "512px"});
 		$("#RDT-msgs").css({"height": "516px"});
 		$("#RDT-ifm").css({"height": "516px"});
 	} else {
@@ -1016,16 +1030,19 @@ function R3DITOR_RUNGAME(id){
 			$("#btn_run_merce").css({"display": "inline"});
 		}
 		if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+			$("#RDT-canvas-hold").css({"height": "472px"});
 			$("#RDT_MSG-holder").css({"height": "430px"});
 			$("#RDT-item-list").css({"height": "428px"});
 			$("#RDT-Item-Edit").css({"height": "418px"});
 			$("#RDT_menu-1").css({"height": "482px"});
 			$("#RDT_menu-2").css({"height": "482px"});
 			$("#RDT_menu-3").css({"height": "482px"});
+			$("#RDT_menu-4").css({"height": "482px"});
 			$("#RDT-geral").css({"height": "472px"});
 			$("#RDT_BG_1").css({"height": "470px"});
 			$("#RDT_BG_2").css({"height": "470px"});
 			$("#RDT_BG_3").css({"height": "470px"});
+			$("#RDT_BG_4").css({"height": "470px"});
 			$("#RDT-msgs").css({"height": "472px"});
 			$("#RDT-ifm").css({"height": "472px"});
 			$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});

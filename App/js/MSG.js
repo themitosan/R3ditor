@@ -578,7 +578,7 @@ function MSG_renderPreviewBlock(c_msg_hex){
 		} else {
 			$("#MSG_RDT_lbl_blockUsage").removeClass('green');
 		}
-		return msgs.length.toString(16).toUpperCase() + " (" + Math.floor((msgs.length / parseInt(block_size_hex, 16)) * 100) + "%)";
+		return msgs.length.toString(16).toUpperCase() + " (" + parsePercentage(msgs.length, parseInt(block_size_hex, 16)) + "%)";
 	}
 }
 function MAKE_NEW_POINTERS(msg_hex){

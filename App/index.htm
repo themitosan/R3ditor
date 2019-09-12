@@ -73,7 +73,7 @@
 		<!-- Lista de Arquivos Disponiveis -->
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
-			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList()" class="botao-menu btn-goBack-fix none right">
+			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right">
 			<div id="fileListHolder" class="fileList_files none">
 				<!-- A lista de arquivos vai aqui -->
 			</div>
@@ -89,6 +89,34 @@
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
+			<input type="button" id="RDT-aba-menu-4" class="aba" value="Pos. Edit">
+			<!-- RDT: Canvas -->
+			<div class="menu" id="RDT_menu-4">
+				<div class="menu-general-content" id="RDT-canvas-hold">
+					<div id="RDT_BG_4" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Edit Position</font></center>
+					<div class="infoXY0">X: 0000<br>Y: 0000</div>
+					<div class="infoXY1">X: FFFF<br>Y: FFFF</div>
+					<div class="infoXY2">X: FFFF<br>Y: 0000</div>
+					<div class="infoXYLine"></div>
+					<div id="RDT_CANVAS_0" class="divCanvas">
+						<!-- render vai aqui -->
+					</div>
+					<div class="canvasInfos">
+						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br><br>
+						Item Name: <font id="RDT_lbl_canvasItemName">???</font></center>
+						X BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_x_hex"><font class="padding-left">X BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_x_bio"><br>
+						Y BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_y_hex"><font class="padding-left">Y BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_y_bio"><br>
+						Z BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_z_hex"><font class="padding-left">Z BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_z_bio"><br>
+						R BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_r_hex"><font class="padding-left">R BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_r_bio"><br>
+						X: <input type="range" id="RDT_slider_X" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_px">???</font><br>
+						Y: <input type="range" id="RDT_slider_Y" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_py">???</font><br>
+						Z: <input type="range" id="RDT_slider_Z" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pz">???</font><br>
+						R: <input type="range" id="RDT_slider_R" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pr">???</font><br>
+						<center><input type="button" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Menu Geral -->
 			<div class="menu" id="RDT_menu-1">
 				<div class="menu-general-content" id="RDT-geral">
@@ -161,14 +189,15 @@
 						<div id="RDT-edit-map-select" class="none">
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
-						<div class="none" id="RDT_item_X">X Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-X" placeholder="0000" value=""></div><br>
-						<div class="none" id="RDT_item_Y">Y Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Y" placeholder="0000" value=""></div><br>
-						<div class="none" id="RDT_item_Z">Z Position: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Z" placeholder="0000" value=""></div><br>
-						<div class="none" id="RDT_item_R">Rotation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-R" placeholder="0000" value=""></div><br>
+						<input type="button" class="botao-menu RDT_btn_fix1" onclick="RDT_showCanvasTab();" value="Edit Pos.">
+						<div style="margin-top: 8px;" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
+						<div style="margin-top: -5px;" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
+						<div style="margin-top: -5px;" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
+						<div style="margin-top: -5px;" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
 						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value=""></div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!" onclick="">
+							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>
@@ -461,10 +490,6 @@
 				<input type="button" value="Apply" class="botao-menu" id="btn-item-apply" onclick="">
 			</div>
 		</div>
-		<!-- log -->
-		<div class="log-holder" id="log-programa">
-			<!-- os logs vão aparecer aqui -->
-		</div>
 		<!-- Sobre -->
 		<div class="about none" id="about-r3ditor">
 			<center>
@@ -523,6 +548,10 @@
 		</div>
 		<!-- AppLogo -->
 		<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
+		<!-- Log -->
+		<div class="log-holder" id="log-programa">
+			<!-- os logs vão aparecer aqui -->
+		</div>
 		<!-- File Loader -->
 		<div class="none">
 			<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>

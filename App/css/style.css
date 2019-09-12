@@ -17,7 +17,7 @@
 html{
     -webkit-user-select: none;
 }
-body {
+body{
     background-image: linear-gradient(to bottom, #000, #0f0c23);
 	color: #fff;
 }
@@ -831,6 +831,12 @@ a{
     position: sticky;
     left: 218px;
 }
+.RDT_btn_fix1{
+    top: 174px;
+    left: 166px;
+    padding: 16px;
+    position: absolute;
+}
 .RDT-message-content{
     width: 84%;
     min-height: 18px;
@@ -1007,4 +1013,95 @@ a{
 }
 .fileList_item_color_c{
     background-image: linear-gradient(to right, #2a2a6f, transparent);
+}
+/*
+    MAD EXPERIMENT
+*/
+.divCanvas{
+    border: 2px;
+    width: 430px;
+    height: 430px;
+    margin-left: 2px;
+    border-radius: 2px;
+    border-color: #fff;
+    border-style: solid;
+    background-color: #000;
+    background-position: center;
+    background-image: url("../Img/Grade.png");
+}
+.render-item{
+    top: 0px;
+    left: 0px;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    text-align: -webkit-center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.render-item-select{
+    box-shadow: 0 0 16px #fff;
+}
+.render-item-color-1{ /* Item */
+    text-shadow: 0 0 2px #124800;
+    background-image: linear-gradient(to bottom, #1aac00, #2c7300);
+}
+.render-item-color-2{ /* File */
+    text-shadow: 0 0 2px #aa98df;
+    background-image: linear-gradient(to bottom, #776191, #2a3e53);
+}
+.render-item-color-3{ /* Map */
+    text-shadow: 0 0 2px #00ff99;
+    background-image: linear-gradient(to bottom, #4d8a71, #275046);
+}
+.infoXY0{
+    top: 14px;
+    left: 10px;
+    position: absolute;
+}
+.infoXY1{
+    top: 450px;
+    left: 450px;
+    position: absolute;
+}
+.infoXY2{
+    top: 14px;
+    left: 450px;
+    position: absolute;
+}
+.infoXYLine{
+    top: 266px;
+    left: -76px;
+    height: 1px;
+    width: 610px;
+    position: absolute;
+    transform: rotate(45deg);
+    background-color: #ffffff;
+    box-shadow: 0 0 10px #b1b1b1;
+}
+.canvasInfos{
+    background-image: linear-gradient(to bottom, #555, #333);
+    border-radius: 6px;
+    position: absolute;
+    padding: 6px;
+    width: 380px;
+    left: 462px;
+    top: 60px;
+}
+.box-fix{
+    width: 90px;
+}
+input[type="range" i] {
+    position: relative;
+    margin-right: 6px;
+    margin-top: 4px;
+    width: 82%;
+    top: 6px;
+}
+.secondfieldSticky{
+    position: sticky;
+    left: 740px;
 }

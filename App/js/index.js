@@ -358,6 +358,9 @@ function parsePositive(value){
 function parseHex(value){
 	return parseInt(value / 2).toString(16);
 }
+function calcCanvasXY(value, max){
+	return value / 100 * max;
+}
 function parseDecimalToBIO3Var(value, mode){
 	var number = parseInt(value);
 	// Mode 0: XXXX
@@ -396,6 +399,9 @@ function processBIO3Vars(hex){
 		}
 		return numerofinal;
 	}
+}
+function parsePercentage(current, maximum){
+	return Math.floor((current / maximum) * 100);
 }
 /*
 	Triggers

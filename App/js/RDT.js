@@ -3,6 +3,12 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var RDT_selectedPoint = 0;
+var RDT_CURRENT_X = "";
+var RDT_CURRENT_Y = "";
+var RDT_CURRENT_Z = "";
+var RDT_CURRENT_R = "";
+
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
 var RDT_totalFiles = 0;
@@ -17,6 +23,7 @@ var RDT_MSG_CURRENT_TEST = 0;
 
 var mapfile = [];
 var RDT_loop = 0;
+var RDT_loading = false;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
 var RDT_MAPFILE = undefined;
@@ -44,6 +51,7 @@ function RDT_resetVars(){
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
+	RDT_loading = false;
 	RDT_ItensArray = [];
 	RDT_MSG_RESULT_1 = 0;
 	RDT_MSG_RESULT_2 = 0;
@@ -75,6 +83,7 @@ function RDT_openFile(file){
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	mapfile = [];
 	RDT_doAfterSave();
+	RDT_loading = true;
 	RDT_editItemCancel();
 	localStorage.clear();
 	RDT_FILEMAP_MSG = [];
@@ -93,11 +102,14 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		WZ_saveConfigs(true);
 	}
 	startFirstMessage = undefined;
+	$("#RDT-aba-menu-4").css({'display': 'none'});
 	$("#RDT-aba-menu-2").css({"display": "inline"});
 	$("#RDT-aba-menu-3").css({"display": "inline"});
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
+	document.getElementById('RDT_CANVAS_0').innerHTML = "";
 	document.getElementById('RDT-aba-menu-2').disabled = "";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
 	RDT_readItens();
@@ -152,15 +164,15 @@ function RDT_decompileItens(id, edit){
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
 	var itemIdetifier = currentItem.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
 	var espaco1		  = currentItem.slice(RANGES["RDT_item-espaco1"][0], 	   RANGES["RDT_item-espaco1"][1]);
-	var itemXX 		  = undefined;
-	var itemYY 		  = undefined;
-	var itemZZ 		  = undefined;
-	var itemRR 		  = undefined;
-	var itemID 		  = undefined;
-	var espaco2 	  = undefined;
-	var itemQuant 	  = undefined;
-	var espaco3 	  = undefined;
-	var itemMP 	 	  = undefined;
+	var itemXX;
+	var itemYY;
+	var itemZZ;
+	var itemRR;
+	var itemID;
+	var espaco2;
+	var itemQuant;
+	var espaco3;
+	var itemMP;
 
 	if (header === "67"){
 		itemXX 		  = currentItem.slice(RANGES["RDT_item-0-itemXX"][0], 	   RANGES["RDT_item-0-itemXX"][1]);
@@ -185,7 +197,7 @@ function RDT_decompileItens(id, edit){
 		espaco3 	  = "[WIP]";
 		itemMP 		  = currentItem.slice(RANGES["RDT_item-1-itemMP"][0], 	   RANGES["RDT_item-1-itemMP"][1]);
 	}
-	var RDT_motivo = undefined;
+	var RDT_motivo;
 	//console.log("Header: " + header + "\nHex: " + itemID + "\nHex Completa:\n" + currentItem);
 	if (header === "90" || header === "51" || header === "02" || header === "c0"){
 		RDT_totalItensGeral--;
@@ -203,10 +215,10 @@ function RDT_decompileItens(id, edit){
 	}
 }
 function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
-	var tipo = undefined;
-	var cssFix = undefined;
-	var typeId = undefined;
-	var convert = undefined;
+	var tipo;
+	var cssFix;
+	var typeId;
+	var convert;
 	try{
 		if (parseInt(id, 16) < 134){
 			typeId = 1;
@@ -232,8 +244,9 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		if (id.length < 2){
 			id = "0" + id;
 		}
+		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
-		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_displayItemEdit' + 
+		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
 		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
 		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: ' + 
@@ -242,9 +255,10 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id + " - " + msg;
-		console.error(msg);
 		addLog("error", msg);
+		console.error(msg);
 	}
+	scrollLog();
 }
 function RDT_ITEM_APPLY(index, type){
 	var novaHex = undefined;
@@ -271,10 +285,10 @@ function RDT_ITEM_APPLY(index, type){
 	if (quant.length < 2){
 		quant = "0" + quant;
 	}
-	var novaX = document.getElementById('RDT_item-edit-X').value.slice(0, 4);
-	var novaY = document.getElementById('RDT_item-edit-Y').value.slice(0, 4);
-	var novaZ = document.getElementById('RDT_item-edit-Z').value.slice(0, 4);
-	var novaR = document.getElementById('RDT_item-edit-R').value.slice(0, 4);
+	var novaX = document.getElementById('RDT_lbl_point_x_hex').value.slice(0, 4).toLowerCase();
+	var novaY = document.getElementById('RDT_lbl_point_y_hex').value.slice(0, 4).toLowerCase();
+	var novaZ = document.getElementById('RDT_lbl_point_z_hex').value.slice(0, 4).toLowerCase();
+	var novaR = document.getElementById('RDT_lbl_point_r_hex').value.slice(0, 4).toLowerCase();
 	var novaAnim = document.getElementById('RDT_item-edit-A').value.slice(0, 2);
 	if (novaX === ""){
 		novaX = "0000";
@@ -291,10 +305,8 @@ function RDT_ITEM_APPLY(index, type){
 	if (novaAnim === ""){
 		novaAnim = "00";
 	}
-	
+	var error;
 	var canBuild = true;
-	var error = undefined;
-
 	if (novaX.length < 4){
 		canBuild = false;
 		error = "The X var must be 16 bytes long!";
@@ -346,7 +358,7 @@ function RDT_ITEM_APPLY(index, type){
 }
 function RDT_readMessages(){
 	var c = 0;
-	//console.clear();
+	console.clear();
 	RDT_MSG_END = [];
 	var RDT_readTry = 0;
 	RDT_messasgesRaw = [];
@@ -1159,7 +1171,7 @@ function RDT_lookForRDTConfigFile(){
 					$("#MSG_RDT_lbl_blockUsage").removeClass('green');
 				}
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
-				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
+				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
 				document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = block_size_hex.toUpperCase();
 				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
 			} else {
@@ -1168,6 +1180,7 @@ function RDT_lookForRDTConfigFile(){
 			}
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
+			RDT_loading = false;
 			RDT_showMenu(1);
 		} else {
 			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8');
@@ -1211,6 +1224,171 @@ function RDT_renderMessages(id, startOffset, endOffset){
 			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
 		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
 	}
+}
+function RDT_hideCanvasTab(){
+	var c = 0;
+	var cItem = localStorage.getItem('RDT_Item-' + RDT_selectedPoint);
+	var offset1 = cItem.slice(0, RANGES["RDT_item-0-itemXX"][0]);
+	var offset2 = cItem.slice(RANGES["RDT_item-0-itemRR"][1], cItem.length);
+	var X = document.getElementById('RDT_lbl_point_x_hex').value.toLowerCase();
+	var Y = document.getElementById('RDT_lbl_point_y_hex').value.toLowerCase();
+	var Z = document.getElementById('RDT_lbl_point_z_hex').value.toLowerCase();
+	var R = document.getElementById('RDT_lbl_point_r_hex').value.toLowerCase();
+	
+	var NOVA_POS = offset1 + X + Y + Z + R + offset2;
+	localStorage.setItem('RDT_Item-' + RDT_selectedPoint, NOVA_POS);
+
+	document.getElementById('RDT-item-list').innerHTML = "";
+	document.getElementById('RDT_CANVAS_0').innerHTML = "";
+
+	var tItems = RDT_totalItens;
+	RDT_totalItens = 0;
+
+	while(c < tItems){
+		console.warn(localStorage.getItem("RDT_Item-" + c));
+		RDT_decompileItens(c, false);
+		c++;
+	}
+
+	//
+	$("#RDT-aba-menu-4").css({'display': 'none'});
+	$("#RDT-aba-menu-3").trigger('click');
+}
+function RDT_selectPoint(id){
+	var c = 0;
+	RDT_selectedPoint = id;
+	document.getElementById('RDT_lbl_selectedPoint').innerHTML = RDT_selectedPoint;
+	var cItem = localStorage.getItem("RDT_Item-" + RDT_selectedPoint);
+	if (cItem.slice(0, 2) === "67"){
+		RDT_CURRENT_X = cItem.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
+		RDT_CURRENT_Y = cItem.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
+		RDT_CURRENT_Z = cItem.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
+		RDT_CURRENT_R = cItem.slice(RANGES["RDT_item-0-itemRR"][0], RANGES["RDT_item-0-itemRR"][1]);
+		var itemName = cItem.slice(RANGES["RDT_item-0-itemID"][0], RANGES["RDT_item-0-itemID"][1]);
+		document.getElementById('RDT_lbl_point_x_bio').value = processBIO3Vars(RDT_CURRENT_X);
+		document.getElementById('RDT_lbl_point_y_bio').value = processBIO3Vars(RDT_CURRENT_Y);
+		document.getElementById('RDT_lbl_point_z_bio').value = processBIO3Vars(RDT_CURRENT_Z);
+		document.getElementById('RDT_lbl_point_r_bio').value = processBIO3Vars(RDT_CURRENT_R);
+		document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X.toUpperCase();
+		document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y.toUpperCase();
+		document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z.toUpperCase();
+		document.getElementById('RDT_lbl_point_r_hex').value = RDT_CURRENT_R.toUpperCase();
+		document.getElementById('RDT_lbl_px').innerHTML = processBIO3Vars(RDT_CURRENT_X);
+		document.getElementById('RDT_lbl_py').innerHTML = processBIO3Vars(RDT_CURRENT_Y);
+		document.getElementById('RDT_lbl_pz').innerHTML = processBIO3Vars(RDT_CURRENT_Z);
+		document.getElementById('RDT_lbl_pr').innerHTML = processBIO3Vars(RDT_CURRENT_R);
+		document.getElementById('RDT_slider_X').value = processBIO3Vars(RDT_CURRENT_X);
+		document.getElementById('RDT_slider_Y').value = processBIO3Vars(RDT_CURRENT_Y);
+		document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
+		document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
+		if (parseInt(itemName, 16) < 134){
+			document.getElementById('RDT_lbl_canvasItemName').innerHTML = ITEM[itemName][0];
+		}
+		if (parseInt(itemName, 16) > 133 && parseInt(itemName, 16) < 163){
+			document.getElementById('RDT_lbl_canvasItemName').innerHTML = FILES[itemName][0];
+		}
+		if (parseInt(itemName, 16) > 162){
+			document.getElementById('RDT_lbl_canvasItemName').innerHTML = RDT_MAPAS[itemName][0];
+		}
+		while (c < 100){
+			$("#RDT_ICONCANVAS_" + c).removeClass('render-item-select');
+			c++;
+		}
+		$("#RDT_ICONCANVAS_" + RDT_selectedPoint).addClass('render-item-select');
+	} else {
+		document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
+	}
+}
+function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
+	var tipo;
+	var nome;
+	if (parseInt(hex, 16) < 134){
+		tipo = "Item";
+		nome = "(" + hex + ") " + ITEM[hex][0];
+	}
+	if (parseInt(hex, 16) > 133 && parseInt(hex, 16) < 163){
+		tipo = "File";
+		nome = "(" + hex + ") " + FILES[hex][0];
+	}
+	if (parseInt(hex, 16) > 162){
+		tipo = "Map";
+		nome = "(" + hex + ") " + RDT_MAPAS[hex][0];
+	}
+	if (x === "" || x === undefined){
+		x = "0000";
+	}
+	if (y === "" || y === undefined){
+		y = "0000";
+	}
+	if (z === "" || z === undefined){
+		z = "0000";
+	}
+	if (r === "" || r === undefined){
+		r = "0000";
+	}
+	var HTML_ICONCANVAS_TEMPLATE = '<div class="render-item render-item-color-' + type + '" title="Type: ' + tipo + '\nName: ' + nome + 
+		'\n\nOriginal Info:\nX: ' + processBIO3Vars(x) + ' (' + x.toUpperCase() + ')\nY: ' + processBIO3Vars(y) + ' (' + y.toUpperCase() + ')\nZ: ' + processBIO3Vars(z) + 
+		' (' + z.toUpperCase() + ')\nR: ' + processBIO3Vars(r) + ' (' + r.toUpperCase() + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
+	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410) + 14;
+	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410) + 52;
+	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
+	//var posR = processBIO3Vars(r) / 16; // <-- isso não está correto ainda
+
+	// Final
+	$("#RDT_CANVAS_0").append(HTML_ICONCANVAS_TEMPLATE);
+	$("#RDT_ICONCANVAS_" + id).css({"left": posX + "px", "top": posY + "px", "transform": "scale(" + posZ + ")"});
+}
+function RDT_updateCanvasInfos(mode){
+	// Ranges
+	if (mode === 0){
+		RDT_CURRENT_X = parseDecimalToBIO3Var(document.getElementById('RDT_slider_X').value, 0);
+		RDT_CURRENT_Y = parseDecimalToBIO3Var(document.getElementById('RDT_slider_Y').value, 0);
+		RDT_CURRENT_Z = parseDecimalToBIO3Var(document.getElementById('RDT_slider_Z').value, 0);
+		RDT_CURRENT_R = parseDecimalToBIO3Var(document.getElementById('RDT_slider_R').value, 0);
+	}
+	// Decimal
+	if (mode === 1){
+		RDT_CURRENT_X = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_x_bio').value, 0);
+		RDT_CURRENT_Y = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_y_bio').value, 0);
+		RDT_CURRENT_Z = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_z_bio').value, 0);
+		RDT_CURRENT_R = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_r_bio').value, 0);
+	}
+	// Bio 3 Mode
+	if (mode === 2){
+		if (document.getElementById('RDT_lbl_point_x_hex').value.length > 3){
+			RDT_CURRENT_X = document.getElementById('RDT_lbl_point_x_hex').value;
+		}
+		if (document.getElementById('RDT_lbl_point_y_hex').value.length > 3){
+			RDT_CURRENT_Y = document.getElementById('RDT_lbl_point_y_hex').value;
+		}
+		if (document.getElementById('RDT_lbl_point_z_hex').value.length > 3){
+			RDT_CURRENT_Z = document.getElementById('RDT_lbl_point_z_hex').value;
+		}
+		if (document.getElementById('RDT_lbl_point_r_hex').value.length > 3){
+			RDT_CURRENT_R = document.getElementById('RDT_lbl_point_r_hex').value;
+		}
+	}
+	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_X), 65535), 410) + 14;
+	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Y), 65535), 410) + 52;
+	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Z), 65535), 0.5) + 1;
+	//var posR = processBIO3Vars(RDT_CURRENT_R) / 16;
+	document.getElementById('RDT_lbl_point_x_bio').value = processBIO3Vars(RDT_CURRENT_X);
+	document.getElementById('RDT_lbl_point_y_bio').value = processBIO3Vars(RDT_CURRENT_Y);
+	document.getElementById('RDT_lbl_point_z_bio').value = processBIO3Vars(RDT_CURRENT_Z);
+	document.getElementById('RDT_lbl_point_r_bio').value = processBIO3Vars(RDT_CURRENT_R);
+	document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X.toUpperCase();
+	document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y.toUpperCase();
+	document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z.toUpperCase();
+	document.getElementById('RDT_lbl_point_r_hex').value = RDT_CURRENT_R.toUpperCase();
+	document.getElementById('RDT_lbl_px').innerHTML = processBIO3Vars(RDT_CURRENT_X);
+	document.getElementById('RDT_lbl_py').innerHTML = processBIO3Vars(RDT_CURRENT_Y);
+	document.getElementById('RDT_lbl_pz').innerHTML = processBIO3Vars(RDT_CURRENT_Z);
+	document.getElementById('RDT_lbl_pr').innerHTML = processBIO3Vars(RDT_CURRENT_R);
+	document.getElementById('RDT_slider_X').value = processBIO3Vars(RDT_CURRENT_X);
+	document.getElementById('RDT_slider_Y').value = processBIO3Vars(RDT_CURRENT_Y);
+	document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
+	document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
+	$("#RDT_ICONCANVAS_" + RDT_selectedPoint).css({"left": posX + "px", "top": posY + "px", "transform": "scale(" + posZ + ")"});
 }
 function RDT_transferMessageToMSG(msgId){
 	var msg_transfer = sessionStorage.getItem("MESSAGE_HEX_" + msgId);
@@ -1336,6 +1514,7 @@ function RDT_RECOMPILE_Lv1(){
 
 			RDT_doAfterSave();
 			RDT_arquivoBruto = RDT_CLONE;
+			document.getElementById('RDT_CANVAS_0').innerHTML = "";
 			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$("#RDT-aba-menu-3").trigger('click');
