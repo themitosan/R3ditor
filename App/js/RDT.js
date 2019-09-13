@@ -1348,6 +1348,18 @@ function RDT_updateCanvasInfos(mode){
 	}
 	// Decimal
 	if (mode === 1){
+		if (document.getElementById('RDT_lbl_point_x_bio').value > 65535){
+			document.getElementById('RDT_lbl_point_x_bio').value = 65535;
+		}
+		if (document.getElementById('RDT_lbl_point_y_bio').value > 65535){
+			document.getElementById('RDT_lbl_point_y_bio').value = 65535;
+		}
+		if (document.getElementById('RDT_lbl_point_z_bio').value > 65535){
+			document.getElementById('RDT_lbl_point_z_bio').value = 65535;
+		}
+		if (document.getElementById('RDT_lbl_point_r_bio').value > 65535){
+			document.getElementById('RDT_lbl_point_r_bio').value = 65535;
+		}
 		RDT_CURRENT_X = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_x_bio').value, 0);
 		RDT_CURRENT_Y = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_y_bio').value, 0);
 		RDT_CURRENT_Z = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_z_bio').value, 0);
