@@ -1367,16 +1367,40 @@ function RDT_updateCanvasInfos(mode){
 	}
 	// Bio 3 Mode
 	if (mode === 2){
-		if (document.getElementById('RDT_lbl_point_x_hex').value.length > 3){
+		if (parseInt(document.getElementById('RDT_lbl_point_x_hex').value, 16) > 65535){
+			document.getElementById('RDT_lbl_point_x_hex').value = "FFFF";
+		}
+		if (parseInt(document.getElementById('RDT_lbl_point_y_hex').value, 16) > 65535){
+			document.getElementById('RDT_lbl_point_y_hex').value = "FFFF";
+		}
+		if (parseInt(document.getElementById('RDT_lbl_point_z_hex').value, 16) > 65535){
+			document.getElementById('RDT_lbl_point_z_hex').value = "FFFF";
+		}
+		if (parseInt(document.getElementById('RDT_lbl_point_r_hex').value, 16) > 65535){
+			document.getElementById('RDT_lbl_point_r_hex').value = "FFFF";
+		}
+		if (document.getElementById('RDT_lbl_point_x_hex').value === ""){
+			document.getElementById('RDT_lbl_point_x_hex').value = "0000";
+		}
+		if (document.getElementById('RDT_lbl_point_y_hex').value === ""){
+			document.getElementById('RDT_lbl_point_y_hex').value = "0000";
+		}
+		if (document.getElementById('RDT_lbl_point_z_hex').value === ""){
+			document.getElementById('RDT_lbl_point_z_hex').value = "0000";
+		}
+		if (document.getElementById('RDT_lbl_point_r_hex').value === ""){
+			document.getElementById('RDT_lbl_point_r_hex').value = "0000";
+		}
+		if (document.getElementById('RDT_lbl_point_x_hex').value.length > 3 && document.getElementById('RDT_lbl_point_x_hex').value.length < 5){
 			RDT_CURRENT_X = document.getElementById('RDT_lbl_point_x_hex').value;
 		}
-		if (document.getElementById('RDT_lbl_point_y_hex').value.length > 3){
+		if (document.getElementById('RDT_lbl_point_y_hex').value.length > 3 && document.getElementById('RDT_lbl_point_y_hex').value.length < 5){
 			RDT_CURRENT_Y = document.getElementById('RDT_lbl_point_y_hex').value;
 		}
-		if (document.getElementById('RDT_lbl_point_z_hex').value.length > 3){
+		if (document.getElementById('RDT_lbl_point_z_hex').value.length > 3 && document.getElementById('RDT_lbl_point_z_hex').value.length < 5){
 			RDT_CURRENT_Z = document.getElementById('RDT_lbl_point_z_hex').value;
 		}
-		if (document.getElementById('RDT_lbl_point_r_hex').value.length > 3){
+		if (document.getElementById('RDT_lbl_point_r_hex').value.length > 3 && document.getElementById('RDT_lbl_point_r_hex').value.length < 5){
 			RDT_CURRENT_R = document.getElementById('RDT_lbl_point_r_hex').value;
 		}
 	}
