@@ -3,15 +3,15 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var MSG_ID;
+var MSG_Commands;
+var MSG_FILL_PASS;
 var MSG_LENGTH = 0;
-var MSG_ID = undefined;
+var MSG_arquivoBruto;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
-var MSG_Commands = undefined;
-var MSG_FILL_PASS = undefined;
 var MSG_DECRYPT_LV1_LAST = "";
 var MSG_useSeekCameras = false;
-var MSG_arquivoBruto = undefined;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
 function MSG_goBackToRDT(){

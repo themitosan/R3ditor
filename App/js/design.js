@@ -3,11 +3,11 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var RDT_aba_atual;
+var SAVE_aba_atual;
 var RDT_totalMenus = 4;
 var SAVE_totalMenus = 4;
-var RDT_aba_atual = undefined;
-var SAVE_aba_atual = undefined;
-var request_render_save = undefined;
+var request_render_save;
 var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 window.onclose = function(){
 	localStorage.clear();
@@ -930,8 +930,8 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	$("#RDT_item_Y").css({"display": "block"});
 	$("#RDT_item_Z").css({"display": "block"});
 	$("#RDT_item_R").css({"display": "block"});
-	$("#RDT-Item-Edit").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
+	$("#RDT-Item-Edit").css({"display": "block"});
 }
 function RDT_editItemCancel(){
 	main_closeFileList();

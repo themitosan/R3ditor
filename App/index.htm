@@ -98,21 +98,29 @@
 					<div class="infoXY0">X: 0000<br>Y: 0000</div>
 					<div class="infoXY1">X: FFFF<br>Y: FFFF</div>
 					<div class="infoXY2">X: FFFF<br>Y: 0000</div>
+					<div class="infoXY3">X: 0000<br>Y: FFFF</div>
 					<div class="infoXYLine"></div>
+					<div class="infoXY2Line"></div>
 					<div id="RDT_CANVAS_0" class="divCanvas">
 						<!-- render vai aqui -->
 					</div>
 					<div class="canvasInfos">
-						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br><br>
+						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br>
 						Item Name: <font id="RDT_lbl_canvasItemName">???</font></center>
-						X BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_x_hex"><font class="padding-left">X BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_x_bio"><br>
-						Y BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_y_hex"><font class="padding-left">Y BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_y_bio"><br>
-						Z BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_z_hex"><font class="padding-left">Z BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_z_bio"><br>
-						R BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_r_hex"><font class="padding-left">R BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_r_bio"><br>
-						X: <input type="range" id="RDT_slider_X" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_px">???</font><br>
-						Y: <input type="range" id="RDT_slider_Y" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_py">???</font><br>
-						Z: <input type="range" id="RDT_slider_Z" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pz">???</font><br>
-						R: <input type="range" id="RDT_slider_R" value="0" min="0" max="65535" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pr">???</font><br>
+						<div class="canvasInfoOverflow">
+							X BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_x_hex"><font class="padding-left">X BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_x_bio"><br>
+							Y BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_y_hex"><font class="padding-left">Y BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_y_bio"><br>
+							Z BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_z_hex"><font class="padding-left">Z BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_z_bio"><br>
+							R BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_r_hex"><font class="padding-left">R BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id=	"RDT_lbl_point_r_bio"><br>
+							X: <input type="range" id="RDT_slider_X" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_px">0</font><br>
+							Y: <input type="range" id="RDT_slider_Y" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_py">0</font><br>
+							Z: <input type="range" id="RDT_slider_Z" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pz">0</font><br>
+							R: <input type="range" id="RDT_slider_R" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pr">0</font><br>
+							D1: <input type="range" id="RDT_slider_D" value="0" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(0);"><font id="RDT_lbl_pd">0</font><br>
+							D2: <input type="range" id="RDT_slider_D2" value="0" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(1);"><font id="RDT_lbl_pd2">0</font><br>
+							<br>
+							<input type="button" value="Center Pos." class="botao-menu" onclick="RDT_canvasResetPos();">
+						</div><br>
 						<center><input type="button" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
 					</div>
 				</div>

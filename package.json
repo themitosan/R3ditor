@@ -1,22 +1,25 @@
 {
   "main": "App/index.htm",
   "name": "R3ditor",
-  "description": "Um programa que serve para editar algumns tipos de arquivos do game resident evil 3 pc",
+  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",
   "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",
-  "version": "1.0.0",
-  "keywords": [ "R3ditor", "node-webkit" ],
+  "version": "0.2.9",
+  "keywords": [
+    "R3ditor",
+    "node-webkit"
+  ],
   "window": {
-    "title": "R3ditor - Aguarde...",
-    "toolbar": false,
+    "title": "R3ditor - Wait...",
+    "icon": "App/img/logo.png",
     "fullscreen": false,
-    "frame": true,
-    "width": 1341,
-    "height": 707,
-    "icon" : "App/img/logo.png",
     "min_width": 1340,
     "min_height": 706,
     "max_width": 1340,
-    "max_height": 706
+    "max_height": 706,
+    "toolbar": false,
+    "frame": true,
+    "width": 1341,
+    "height": 707
   },
   "webkit": {
     "plugin": true

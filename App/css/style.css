@@ -27,6 +27,13 @@ u{
 a{
     color: #fff;
 }
+input[type="range" i]{
+    position: relative;
+    margin-right: 6px;
+    margin-top: 4px;
+    width: 82%;
+    top: 6px;
+}
 .updater_title_holder, li{
     margin-top: 6px;
 }
@@ -1018,12 +1025,14 @@ a{
     MAD EXPERIMENT
 */
 .divCanvas{
+    left: 62px;
     border: 2px;
     width: 430px;
     height: 430px;
     margin-left: 2px;
     border-radius: 2px;
     border-color: #fff;
+    position: absolute;
     border-style: solid;
     background-color: #000;
     background-position: center;
@@ -1032,6 +1041,7 @@ a{
 .render-item{
     top: 0px;
     left: 0px;
+    z-index: 4;
     color: #fff;
     width: 18px;
     height: 18px;
@@ -1064,22 +1074,39 @@ a{
 }
 .infoXY1{
     top: 450px;
-    left: 450px;
+    left: 500px;
     position: absolute;
 }
 .infoXY2{
     top: 14px;
-    left: 450px;
+    left: 500px;
+    position: absolute;
+}
+.infoXY3{
+    top: 450px;
+    left: 8px;
     position: absolute;
 }
 .infoXYLine{
+    z-index: 3;
     top: 266px;
-    left: -76px;
+    left: -26px;
     height: 1px;
     width: 610px;
     position: absolute;
+    background-color: #fff;
     transform: rotate(45deg);
-    background-color: #ffffff;
+    box-shadow: 0 0 10px #b1b1b1;
+}
+.infoXY2Line{
+    z-index: 3;
+    top: 266px;
+    left: -26px;
+    height: 1px;
+    width: 610px;
+    position: absolute;
+    background-color: #fff;
+    transform: rotate(135deg);
     box-shadow: 0 0 10px #b1b1b1;
 }
 .canvasInfos{
@@ -1087,21 +1114,19 @@ a{
     border-radius: 6px;
     position: absolute;
     padding: 6px;
-    width: 380px;
-    left: 462px;
-    top: 60px;
+    width: 446px;
+    left: 560px;
+    top: 46px;
 }
 .box-fix{
-    width: 90px;
-}
-input[type="range" i] {
-    position: relative;
-    margin-right: 6px;
-    margin-top: 4px;
-    width: 82%;
-    top: 6px;
+    width: 112px;
 }
 .secondfieldSticky{
     position: sticky;
-    left: 740px;
+    left: 756px;
+}
+.canvasInfoOverflow{
+    padding-right: 10px;
+    overflow: auto;
+    height: 324px;
 }

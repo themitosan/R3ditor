@@ -3,19 +3,21 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var fs;
+var memjs;
 var e_e = 0;
+var APP_PATH;
+var HEX_EDITOR;
+var BIO3Process;
 var BETA = false;
-var fs = undefined;
+var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
 var STATUS = "Undefined";
-var APP_PATH = undefined;
 var EXTERNAL_APP_PID = 0;
-var HEX_EDITOR = undefined;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
 var APP_VERSION = "0.2.9 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
-var ORIGINAL_FILENAME = undefined;
 var APP_NAME = "R3ditor V." + APP_VERSION;
 window.onload = function(){
 	load();
@@ -37,8 +39,8 @@ function load(){
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
-		$("#img-logo").fadeOut({duration: 2200, queue: false});
-		document.title = "Hey - What you are trying to do?";
+		$("#img-logo").fadeOut({duration: 5000, queue: false});
+		document.title = "Whoops...";
 		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
 		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
@@ -361,6 +363,10 @@ function parseHex(value){
 function calcCanvasXY(value, max){
 	return value / 100 * max;
 }
+function calcBIO3Numbers(n){
+	var a = parseInt(n) + 32767;
+	return a;
+}
 function parseDecimalToBIO3Var(value, mode){
 	var number = parseInt(value);
 	// Mode 0: XXXX
@@ -398,6 +404,14 @@ function processBIO3Vars(hex){
 			first--;
 		}
 		return numerofinal;
+	}
+}
+function processBIO3Numbers(number){
+	if (number < -32767){
+		return -32767;
+	}
+	if (number > 32767){
+		return 32767;
 	}
 }
 function parsePercentage(current, maximum){

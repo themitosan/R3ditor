@@ -3,27 +3,26 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Can you give me a coffee? ~wink~
 */
-
-var BIO3INI_arquivoBruto = undefined;
+var BIO3INI_arquivoBruto;
 
 // General
-var BIO3INI_Save = undefined;
-var BIO3INI_Movie = undefined;
-var BIO3INI_Rofs1 = undefined;
-var BIO3INI_Rofs2 = undefined;
-var BIO3INI_Rofs3 = undefined;
-var BIO3INI_Rofs4 = undefined;
-var BIO3INI_Rofs5 = undefined;
-var BIO3INI_Rofs6 = undefined;
-var BIO3INI_Rofs7 = undefined;
-var BIO3INI_Rofs8 = undefined;
-var BIO3INI_Rofs9 = undefined;
-var BIO3INI_Rofs10 = undefined;
-var BIO3INI_Rofs11 = undefined;
-var BIO3INI_Rofs12 = undefined;
-var BIO3INI_Rofs13 = undefined;
-var BIO3INI_Rofs14 = undefined;
-var BIO3INI_Rofs15 = undefined;
+var BIO3INI_Save;
+var BIO3INI_Movie;
+var BIO3INI_Rofs1;
+var BIO3INI_Rofs2;
+var BIO3INI_Rofs3;
+var BIO3INI_Rofs4;
+var BIO3INI_Rofs5;
+var BIO3INI_Rofs6;
+var BIO3INI_Rofs7;
+var BIO3INI_Rofs8;
+var BIO3INI_Rofs9;
+var BIO3INI_Rofs10;
+var BIO3INI_Rofs11;
+var BIO3INI_Rofs12;
+var BIO3INI_Rofs13;
+var BIO3INI_Rofs14;
+var BIO3INI_Rofs15;
 
 // Video Config
 // True == On || False == Off
@@ -67,13 +66,9 @@ var BIO3INI_kb_keyE = "";
 var BIO3INI_sound_device = "NULL";
 var BIO3INI_sound_seVol = 65534;
 var BIO3INI_sound_bgmVol = 65534;
-
 /*
-
 	Functions
-
 */
-
 function BIO3INI_MAKE_WZINI(mode){
 	BIO3INI_Save = ".\\Save";
 	BIO3INI_Movie = ".\\zmovie";
@@ -116,7 +111,6 @@ function BIO3INI_MAKE_WZINI(mode){
 	}
 	BIO3INI_MAKEFILE(APP_PATH + "\\Assets");
 }
-
 function BIO3INI_MAKEFILE(path){
 	var FINAL = "[General]\n" + 
 		"Save=" + BIO3INI_Save + "\n" + 
@@ -170,7 +164,6 @@ function BIO3INI_MAKEFILE(path){
 		"Device=" + BIO3INI_sound_device + "\n" + 
 		"SEvol=" + BIO3INI_sound_seVol + "\n" + 
 		"BGMvol=" + BIO3INI_sound_bgmVol + "\n\n";
-
 	// Saving the file!
 	try{
 		fs.writeFileSync(path + "\\Bio3.ini", FINAL, 'utf-8');

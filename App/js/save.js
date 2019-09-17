@@ -3,48 +3,48 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var SAVE_arquivoBruto = undefined;
+var SAVE_arquivoBruto;
 var CURRENT_SAVE_SLOT = 1;
 // Mapa dos Saves
-var INDICADOR_01 = undefined;
-var INDICADOR_02 = undefined;
-var INDICADOR_03 = undefined;
-var INDICADOR_04 = undefined;
-var INDICADOR_05 = undefined;
-var INDICADOR_06 = undefined;
-var INDICADOR_07 = undefined;
-var INDICADOR_08 = undefined;
-var INDICADOR_09 = undefined;
-var INDICADOR_10 = undefined;
-var INDICADOR_11 = undefined;
-var INDICADOR_12 = undefined;
-var INDICADOR_13 = undefined;
-var INDICADOR_14 = undefined;
-var INDICADOR_15 = undefined;
+var INDICADOR_01;
+var INDICADOR_02;
+var INDICADOR_03;
+var INDICADOR_04;
+var INDICADOR_05;
+var INDICADOR_06;
+var INDICADOR_07;
+var INDICADOR_08;
+var INDICADOR_09;
+var INDICADOR_10;
+var INDICADOR_11;
+var INDICADOR_12;
+var INDICADOR_13;
+var INDICADOR_14;
+var INDICADOR_15;
 /*
 	Ranges
 */
-var SAVE_INDICADOR_HEADER 	      = undefined; // Header completa
-var SAVE_INDICADOR_HEADER_START   = undefined; // 0x0000 até 0x2000
-var SAVE_INDICADOR_HEADER_MIDDLE  = undefined;
-var SAVE_INDICADOR_HEADER_END     = undefined;
-var S_HEADER 					  = undefined; // Cabeçalho de cada slot de save
-var S_END 					      = undefined; // Final de cada slot de save
-var range_0x2204_0x2207           = undefined;
-var range_0x2209_0x220D           = undefined;
-var range_0x2210_0x2211           = undefined;
-var range_0x2217_0x2217           = undefined;
-var range_0x2219_0x2219           = undefined;
-var range_0x221C_0x224D           = undefined;
-var range_0x224F_0x224F           = undefined;
-var range_0x2251_0x225D           = undefined;
-var range_0x225F_0x23FE           = undefined;
-var range_0x2400_0x2402           = undefined;
-var range_0x240A_0x240B			  = undefined;
-var range_0x2534_0x2534 		  = undefined;
-var range_0x2537_0x254B			  = undefined;
-var range_0x2674_0x2674			  = undefined;
-var range_0x2677_0x28D3			  = undefined;
+var SAVE_INDICADOR_HEADER;			 // Header completa
+var SAVE_INDICADOR_HEADER_START;	 // 0x0000 até 0x2000
+var SAVE_INDICADOR_HEADER_MIDDLE;						
+var SAVE_INDICADOR_HEADER_END;
+var S_HEADER;						 // Cabeçalho de cada slot de save
+var S_END;							 // Final de cada slot de save
+var range_0x2204_0x2207;							
+var range_0x2209_0x220D;							
+var range_0x2210_0x2211;							
+var range_0x2217_0x2217;							
+var range_0x2219_0x2219;							
+var range_0x221C_0x224D;							
+var range_0x224F_0x224F;							
+var range_0x2251_0x225D;							
+var range_0x225F_0x23FE;							
+var range_0x2400_0x2402;							
+var range_0x240A_0x240B;							
+var range_0x2534_0x2534;							
+var range_0x2537_0x254B;							
+var range_0x2674_0x2674;							
+var range_0x2677_0x28D3;							
 /*
 	Variaveis de Save
 */
@@ -55,49 +55,49 @@ var CARLOS_BAU = [];
 var JILL_INVENT = [];
 var CARLOS_INVENT = [];
 // Dificuldade
-var dificuldade = undefined;
+var dificuldade;
 // Total Saves
-var totalVezesSaves = undefined;
+var totalVezesSaves;
 // Sala de Save
-var localSave = undefined;
+var localSave;
 // Local da cidade
-var lCidade = undefined;
+var lCidade;
 // Roupa
-var outf = undefined;
+var outf;
 // Player Atual
-var cPlayer = undefined;
+var cPlayer;
 // Jill - Arma equipada
-var jArmaEquip = undefined;
+var jArmaEquip;
 // Carlos - Arma equipada
-var cArmaEquip = undefined;
+var cArmaEquip;
 // Jill e Carlos - Sidepack
-var jSide = undefined;
-var cSide = undefined;
+var jSide;
+var cSide;
 // Posição X e Y
-var xPos = undefined;
-var yPos = undefined;
+var xPos;
+var yPos;
 // Room / Event
-var rEvent = undefined
+var rEvent
 // Epilogos
-var epil = undefined;
+var epil;
 // Files
-var j_files = undefined;
+var j_files;
 // Versão do game
-var gVersion = undefined;
-var gDetails = undefined;
+var gVersion;
+var gDetails;
 // Mapas Obtidos - wip
-var mapExtractA = undefined;
-var mapExtractB = undefined;
+var mapExtractA;
+var mapExtractB;
 // Vida e Poison
-var life = undefined;
-var veneno = undefined;
+var life;
+var veneno;
 var SAV_godMode = false;
 // Tempo
-var IGTExtract = undefined;
-var h_0x2200 = undefined;
-var h_0x2201 = undefined;
-var h_0x2202 = undefined;
-var h_0x2203 = undefined;
+var IGTExtract;
+var h_0x2200;
+var h_0x2201;
+var h_0x2202;
+var h_0x2203;
 /* 
 	Misc.
 */
@@ -339,12 +339,11 @@ function save_renderBox(s_slot){
 			var NU = JILL_BAU[current].slice(6, 8); // Sempre deve ser 00
 			if (ATTR[AT] == undefined){
 				var msg = "(Item Box) Item " + current + " have an unknown attr.: " + AT;
-				addLog("warn", "WARNING: " + msg);
-				showNotify("WARNING", msg, 10000);
 				console.warn("WARNING: " + msg);
-				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Null Check: " + VOID[NU]);
+				addLog("warn", "WARNING: " + msg);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (aka. null): " + NU);
 			} else {
-				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Null Check: " + VOID[NU]);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (aka. null): " + NU);
 			}
 			ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
 			current++;
@@ -374,12 +373,11 @@ function save_renderBox(s_slot){
 			var NU = CARLOS_BAU[current].slice(6, 8); // Sempre deve ser 00
 			if (ATTR[AT] == undefined){
 				var msg = "(Item Box) Item " + current + " have unknown attr.: " + AT;
-				addLog("warn", "AVISO: " + msg);
-				showNotify("WARNING", msg, 10000);
-				console.warn("WARNING: " + msg);
-				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Null Check: " + VOID[NU]);
+				console.warn("WARN - " + msg);
+				addLog("warn", "WARN - " + msg);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (Aka. Null) " + NU);
 			} else {
-				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Null Check: " + VOID[NU]);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (Aka. Null) " + NU);
 			}
 			ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
 			current++;
@@ -492,7 +490,7 @@ function save_renderLife(s_slot){
 			// ...hack
 			HP = processBIO3Vars(chkA + chkB);
 		}
-		// Status: MORTO! (Ou Hex 00 00)
+		// Status: MORTO! (Ou Hex FFFF FFFF FFFF FFFF)
 		if (HP < 0){
 			STATUS = "Undefined";
 			co = "txt-fine";
@@ -782,11 +780,6 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	'<font class="b-quant-lbl" id="b-' + PERSON + '-q-lbl-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');" style="color: ' + colo + ';text-shadow: ' + cfundo + ';">' + quan + '</font>' + 
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
 	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Modify"></div>';
-	if (VNULO !== "00"){
-		var warnInfo = "WARNING: Null check failed! (Expected Value: 00, Current: " + VNULO + ") - " + VOID[VNULO] + " \nHEX: " + ITEMHEX + QUANTIDADE + ATRIBUTO + VNULO + " \nIndex: " + INDEX + " \nItem Hex: " + ITEMHEX + " (" + nome + ") \nQuantity: " + QUANTIDADE + " (" + quan + ") \nAttr: " + ATRIBUTO + " (" + atri + ") \nNull Check: " + VNULO;
-		console.warn(warnInfo);
-		addLog("warn", warnInfo);
-	}
 	if (PERSON === 0){ // Adicionar item ao baú da jill
 		$("#JILL-BOX").append(HTMLTEMPLATE);
 	} else {		  // Adicionar item ao baú do carlos
@@ -897,9 +890,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
  		shad = ATTR[atrib][2];
 	} else {
 		var msg = "(" + p + ") Inventory - The item on slot " + block + " have an unknown Attr! Attr: " + atrib;
-		addLog("warn", "AVISO: " + msg);
-		showNotify("AVISO", msg, 10000);
-		console.warn("AVISO: " + msg);
+		addLog("warn", "WARN: " + msg);
+		console.warn("WARN: " + msg);
 	}
 	if (person == 0){ // Inventário da Jill
 		document.getElementById("J-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
@@ -939,7 +931,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 /// Time Helpers
 /*  _____________________________________________________________________________________________________
    |																									 \
-   |   Tempo - 0x2200 até 0x2203 - Valor de 32 Bits (00 00 00 00)										  |
+   |   Tempo - 0x2200 até 0x2203 - Valor 32 bytes (00 00 00 00)											  |
    |______________________________________________________________________________________________________|
    |																									  |
    |	    Formato: DD:HH:MM:SS:DS 																	  |

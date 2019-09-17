@@ -21,29 +21,29 @@ var RDT_MSG_RESULT_3 = 0;
 var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
+var RDT_MAPFILE;
 var mapfile = [];
 var RDT_loop = 0;
+var block_size_hex;
+var startFirstMessage;
 var RDT_loading = false;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
-var RDT_MAPFILE = undefined;
 var RDT_requestReload = false;
-var block_size_hex = undefined;
 var RDT_generateMapFile = false;
-var startFirstMessage = undefined;
 var RDT_requestReloadWithFix0 = false;
 var RDT_requestReloadWithFix1 = false;
 
+var RDT_arquivoBruto;
+var RDT_messasgesRaw;
+var RDT_itemIndexRAW;
+var RDT_totalMessages;
+var RDT_totalItensGeral;
 var RDT_lastBackup = "";
 var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
 var RDT_MSG_startLength = 0;
 var RDT_lastFileOpened = "";
-var RDT_arquivoBruto = undefined;
-var RDT_messasgesRaw = undefined;
-var RDT_itemIndexRAW = undefined;
-var RDT_totalMessages = undefined;
-var RDT_totalItensGeral = undefined;
 function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
@@ -1329,8 +1329,8 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var HTML_ICONCANVAS_TEMPLATE = '<div class="render-item render-item-color-' + type + '" title="Type: ' + tipo + '\nName: ' + nome + 
 		'\n\nOriginal Info:\nX: ' + processBIO3Vars(x) + ' (' + x.toUpperCase() + ')\nY: ' + processBIO3Vars(y) + ' (' + y.toUpperCase() + ')\nZ: ' + processBIO3Vars(z) + 
 		' (' + z.toUpperCase() + ')\nR: ' + processBIO3Vars(r) + ' (' + r.toUpperCase() + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
-	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410) + 14;
-	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410) + 52;
+	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
+	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
 	//var posR = processBIO3Vars(r) / 16; // <-- isso não está correto ainda
 
@@ -1416,8 +1416,8 @@ function RDT_updateCanvasInfos(mode){
 			RDT_CURRENT_R = document.getElementById('RDT_lbl_point_r_hex').value;
 		}
 	}
-	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_X), 65535), 410) + 14;
-	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Y), 65535), 410) + 52;
+	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_X), 65535), 410);
+	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Z), 65535), 0.5) + 1;
 	//var posR = processBIO3Vars(RDT_CURRENT_R) / 16;
 	document.getElementById('RDT_lbl_point_x_bio').value = processBIO3Vars(RDT_CURRENT_X);
@@ -1437,6 +1437,30 @@ function RDT_updateCanvasInfos(mode){
 	document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
 	document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
 	$("#RDT_ICONCANVAS_" + RDT_selectedPoint).css({"left": posX + "px", "top": posY + "px", "transform": "scale(" + posZ + ")"});
+}
+function RDT_posMoveDiagonal(mode){
+	if (mode === 0){
+		document.getElementById('RDT_slider_X').value = document.getElementById('RDT_slider_D').value;
+		document.getElementById('RDT_slider_Y').value = document.getElementById('RDT_slider_D').value;
+		document.getElementById('RDT_lbl_pd').innerHTML = document.getElementById('RDT_slider_D').value;
+	}
+	if (mode === 1){
+		var x = 65535 - document.getElementById('RDT_slider_D2').value;
+		var y = 0 + document.getElementById('RDT_slider_D2').value;
+		document.getElementById('RDT_slider_X').value = x;
+		document.getElementById('RDT_slider_Y').value = y;
+		document.getElementById('RDT_lbl_pd2').innerHTML = document.getElementById('RDT_slider_D2').value;
+	}
+	RDT_updateCanvasInfos(0);
+}
+function RDT_canvasResetPos(){
+	document.getElementById('RDT_slider_X').value = 32767;
+	document.getElementById('RDT_slider_Y').value = 32767;
+	document.getElementById('RDT_slider_D').value = 32767;
+	document.getElementById('RDT_slider_D2').value = 32767;
+	document.getElementById('RDT_lbl_pd').innerHTML = "32767";
+	document.getElementById('RDT_lbl_pd2').innerHTML = "32767";
+	RDT_updateCanvasInfos(0);
 }
 function RDT_transferMessageToMSG(msgId){
 	var msg_transfer = sessionStorage.getItem("MESSAGE_HEX_" + msgId);

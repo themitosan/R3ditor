@@ -1,9 +1,10 @@
 /*
 	debug.js
-	themitosan/mscorehdr
+	Por mitosan/mscore/misto_quente/mscorehdr
 	me ajuda
 */
-function renderRanges(modo, first) {
+var TESTEVAR = 0;
+function renderRanges(modo, first){
 	if (modo == 0){ // invent
 		var tot = 11;
 		var c = 1;
@@ -15,7 +16,7 @@ function renderRanges(modo, first) {
 			c++;
 		}
 		console.log("Pronto - OK!");
-	} else { 		// Baú
+	} else { 		// BaÃº
 		var tot = 65;
 		var c = 1;
 		var a = undefined;
@@ -28,7 +29,7 @@ function renderRanges(modo, first) {
 		console.log("Pronto - OK!");
 	}
 }
-function copyToClipboard(text) {
+function copyToClipboard(text){
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);
     dummy.value = text;
@@ -37,7 +38,7 @@ function copyToClipboard(text) {
     document.body.removeChild(dummy);
 }
 /// Reload js file
-function reloadJsFile(src) {
+function reloadJsFile(src){
 	console.info("Recarregando Script: " + src);
 	addLog('error', "Recarregando Script: " + src);
     $('script[src="' + src + '"]').remove();
@@ -51,7 +52,7 @@ function reloadJsFile(src) {
 function DEBUG_splitHex(hex, mode){
 	var c = 0;
 	var fina = "";
-	var rw = undefined
+	var rw = undefined;
 	if (mode == 0){
 		rw = hex.match(/.{1,2}/g);
 	} else {
@@ -78,4 +79,17 @@ function DEBUG_RDT_MSG_START_RANGE(value){
 function DEBUG_TESTUPDATE(){
 	TEST_RELEASE = true;
 	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
+}
+function DEBUG_RESETSLIDER(){
+	document.getElementById('RDT_slider_X').value = 0;
+	document.getElementById('RDT_slider_Y').value = 0;
+	document.getElementById('RDT_slider_Z').value = 0;
+	document.getElementById('RDT_slider_R').value = 0;
+	document.getElementById('RDT_slider_D').value = 0;
+	RDT_updateCanvasInfos(0);
+}
+function DEBUG_TESTER(){
+	TESTEVAR = document.getElementById('RDT_slider_TESTE').value;
+	console.log(TESTEVAR);
+	RDT_updateCanvasInfos(0);
 }
