@@ -1,16 +1,16 @@
-::-webkit-scrollbar {
+::-webkit-scrollbar{
     width: 8px;
     border-radius: 4px;
 }
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track{
     background: #292929;
     border-radius: 4px;
 }
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb{
     background: #e7e7e7;
     border-radius: 4px;
 }
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover{
     background: #fafafa; 
     border-radius: 4px;
 }
@@ -26,6 +26,9 @@ u{
 }
 a{
     color: #fff;
+}
+audio{
+    width: 100%;
 }
 input[type="range" i]{
     position: relative;
@@ -55,8 +58,8 @@ input[type="range" i]{
     margin-top: -18px;
 }
 .blockUsage{
-    top: 590px;
-    width: 628px;
+    top: 596px;
+    width: 632px;
     padding: 6px;
     height: auto;
     display: none;
@@ -578,8 +581,8 @@ input[type="range" i]{
 }
 .msg-raw{
     top: 455px;
-    width: 620px;
-    height: 150px;
+    width: 624px;
+    height: 152px;
     overflow: auto;
     margin-top: 4px;
     padding-top: 6px;
@@ -595,11 +598,11 @@ input[type="range" i]{
     width: 926px;
     height: 396px;
     margin-top: 4px;
-    overflow: hidden;
     padding-top: 6px;
-    position: absolute;
+    overflow: hidden;
     padding-left: 10px;
     border-radius: 6px;
+    position: absolute;
     padding-right: 10px;
     padding-bottom: 6px;
     background-image: linear-gradient(to bottom, #2b3e46, #212121);
@@ -617,9 +620,9 @@ input[type="range" i]{
 }
 .msg-legend{
     top: 459px;
-    left: 654px;
+    left: 656px;
     width: 280px;
-    height: 150px;
+    height: 152px;
     overflow: auto;
     padding-top: 6px;
     position: absolute;
@@ -647,7 +650,7 @@ input[type="range" i]{
     top: 414px;
     left: 960px;
     width: 351px;
-    height: 195px;
+    height: 197px;
     padding-top: 6px;
     position: absolute;
     padding-left: 10px;
@@ -815,7 +818,7 @@ input[type="range" i]{
     background-image: linear-gradient(to bottom, #507499, #273c50);
 }
 .RDT-file-bg{
-    background-image: linear-gradient(to bottom, #796293, #273c50);
+    background-image: linear-gradient(to bottom, #796293, #433850);
 }
 .RDT-map-bg{
     background-image: linear-gradient(to bottom, #4e8b72, #275046);

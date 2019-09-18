@@ -29,11 +29,13 @@ var startFirstMessage;
 var RDT_loading = false;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
+var RDT_currentAudio = "";
 var RDT_requestReload = false;
 var RDT_generateMapFile = false;
 var RDT_requestReloadWithFix0 = false;
 var RDT_requestReloadWithFix1 = false;
 
+var RDT_totalAudios;
 var RDT_arquivoBruto;
 var RDT_messasgesRaw;
 var RDT_itemIndexRAW;
@@ -51,6 +53,7 @@ function RDT_resetVars(){
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
+	RDT_totalAudios = 0;
 	RDT_loading = false;
 	RDT_ItensArray = [];
 	RDT_MSG_RESULT_1 = 0;
@@ -113,6 +116,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_CANVAS_0').innerHTML = "";
 	document.getElementById('RDT-aba-menu-2').disabled = "";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	document.getElementById('RDT_audio_holder').innerHTML = "";
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
@@ -140,7 +144,6 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310a00");// R503.rdt - Fábrica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
-	
 	while (c < RDT_totalItensGeral){
 		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
 		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
@@ -152,7 +155,50 @@ function RDT_readItens(){
 		RDT_decompileItens(c, false);
 		c++;
 	}
+	RDT_getAllRelatedAudios();
 	RDT_lookForRDTConfigFile();
+}
+function RDT_getAllRelatedAudios(){
+	var c = 0;
+	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
+	var getAudioArray = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\").filter(fn => fn.startsWith("M" + MAPID));
+	while(c < getAudioArray.length){
+		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-file-bg" id="RDT_audio_details-' + c + '">' +
+			'(' + c + ') File Name: <font class="italic RDT-item-lbl-fix user-can-select">' + getAudioArray[c] + '</font>' + 
+			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Remove" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';RDT_deleteAudio();">' + 
+			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoadWav();">' + 
+			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Open" ' + 
+			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), "/") + "/Assets/DATA_A/VOICE/" + getAudioArray[c] + '\']);"><br>Path: <font class="italic">' + 
+			APP_PATH.replace(new RegExp('\\\\', 'g'), "/") + "/Assets/DATA_A/VOICE/" + getAudioArray[c] + '</font><br></div>';
+		$("#RDT_audio_holder").append(AUDIO_HTML_TEMPLATE);
+		c++;
+	}
+	RDT_totalAudios = getAudioArray.length;
+}
+function RDT_replaceWavFile(file){
+	var deleteFile = APP_PATH + "\\Assets\\DATA_A\\VOICE\\" + RDT_currentAudio;
+	var askConfirm = confirm("File: " + RDT_currentAudio + "\nNew File: " + getFileName(file).toUpperCase() + "\n\nR3ditor will replace this file.\nDo you accept this?");
+	if (askConfirm === true){
+		fs.unlinkSync(deleteFile);
+		var newWaveFile = fs.readFileSync(file, 'hex');
+		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\" + RDT_currentAudio.toUpperCase(), newWaveFile, 'hex');
+		addLog('log', 'WAV - Replace successfull!');
+	} else {
+		addLog('warn', 'WARN - Operation Canceled!');
+	}
+	scrollLog();
+}
+function RDT_deleteAudio(){
+	var deleteFile = APP_PATH + "\\Assets\\DATA_A\\VOICE\\" + RDT_currentAudio;
+	var askConfirm = confirm("File: " + RDT_currentAudio + "\n\nR3ditor will delete this file.\nDo you accept this?");
+	if (askConfirm === true){
+		fs.unlinkSync(deleteFile);
+		addLog('log', 'WAV - Done!');
+		RDT_openFile(ORIGINAL_FILENAME);
+	} else {
+		addLog('warn', 'WARN - Operation Canceled!');
+	}
+	scrollLog();
 }
 function RDT_generateItemIndexRaw(str){
 	var c = 0;
@@ -164,7 +210,7 @@ function RDT_generateItemIndexRaw(str){
 }
 function RDT_decompileItens(id, edit){
 	var RDT_CanRender = true;
-	var currentItem = localStorage.getItem("RDT_Item-" + id);
+	var currentItem   = localStorage.getItem("RDT_Item-" + id);
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
 	var itemIdetifier = currentItem.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
 	var espaco1		  = currentItem.slice(RANGES["RDT_item-espaco1"][0], 	   RANGES["RDT_item-espaco1"][1]);

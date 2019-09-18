@@ -420,6 +420,20 @@ function parsePercentage(current, maximum){
 /*
 	Triggers
 */
+/// RDT_audio
+function triggerLoadWav(){
+	$("#loadWAVForm").trigger('click');
+}
+function setLoadWAVFile(){
+	var cFile = document.getElementById('loadWAVForm').files[0];
+	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		addLog("log", "WAV - Load Canceled!");
+		scrollLog();
+	} else {
+		RDT_replaceWavFile(cFile.path);
+		document.getElementById('loadWAVForm').value = "";
+	}
+}
 /// Wizard
 function triggerLoadWZ(){
 	$("#loadWZForm").trigger('click');
@@ -428,25 +442,23 @@ function triggerLoadWZHex(){
 	$("#loadWZHexForm").trigger('click');
 }
 function setLoadWIZARDFile(){
-	var cFile = document.getElementById('loadWZForm').files[0]
+	var cFile = document.getElementById('loadWZForm').files[0];
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		addLog("log", "Wizard - Load Canceled!");
 		scrollLog();
 	} else {
 		BIO3_original = undefined;
-		console.log(cFile.path);
 		WZ_LOADRE3(cFile.path);
 		document.getElementById('loadWZForm').value = "";
 	}
 }
 function setLoadHexEditorFile(){
-	var cFile = document.getElementById('loadWZHexForm').files[0]
+	var cFile = document.getElementById('loadWZHexForm').files[0];
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		addLog("log", "Wizard (HEX) - Load Canceled!");
 		scrollLog();
 	} else {
 		HEX_EDITOR = undefined;
-		console.log(cFile.path);
 		WZ_LOADHEX(cFile.path);
 		document.getElementById('loadWZHexForm').value = "";
 	}
@@ -456,7 +468,7 @@ function triggerLoadSAVE(){
 	$("#loadSaveForm").trigger('click');
 }
 function setLoadSaveFile(){
-	var cFile = document.getElementById('loadSaveForm').files[0]
+	var cFile = document.getElementById('loadSaveForm').files[0];
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		addLog("log", "Save - Load Canceled!");
 		scrollLog();
@@ -471,7 +483,7 @@ function triggerLoadMSG(){
 	$("#loadMSGForm").trigger('click');
 }
 function setLoadMSGFile(){
-	var cFile = document.getElementById('loadMSGForm').files[0]
+	var cFile = document.getElementById('loadMSGForm').files[0];
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		addLog("log", "MSG - Load Canceled!");
 		scrollLog();
@@ -486,7 +498,7 @@ function triggerLoadRDT(){
 	$("#loadRDTForm").trigger('click');
 }
 function setLoadRDTFile(){
-	var cFile = document.getElementById('loadRDTForm').files[0]
+	var cFile = document.getElementById('loadRDTForm').files[0];
 	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
 		addLog("log", "RDT - Load Canceled!");
 		scrollLog();

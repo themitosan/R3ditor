@@ -18,7 +18,6 @@ function MSG_goBackToRDT(){
 	document.title = APP_NAME + " - Please wait...";
 	localStorage.clear();
 	sessionStorage.clear();
-	//
 	MSG_LENGTH = 0;
 	RDT_resetVars();
 	MSG_ID = undefined;
@@ -196,18 +195,18 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_renderCommands();
 }
 function MSG_addCommandToList(com, args, hexCommand, index){
-	var COM_HTML_TEMPLATE = undefined;
+	var COM_HTML_TEMPLATE;
 	// Iniciar Mensagem
 	if (com === 1){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Start Message / Change text speed<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Start Message / Change text speed (FA)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(1, ' + args + ', ' + index + ', true);"><br>Text Speed: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Finalizar Mensgagem
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: End Message <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
+			'(' + index + ') Function: End Message (FE)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(2, ' + args + ', ' + index + ', true);"><br>Final Value: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>'
 	}
@@ -224,42 +223,42 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		var MSG_CHAR = MSG_CHARESPECIAL[localStorage.getItem("MSG_comando-" + index)];
 		var RAW_COM = localStorage.getItem("MSG_comando-" + index);
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-3" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Show Special Char <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Show Special Char (EA)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + MSG_CHAR + ')</font></div>';
 	}
 	// Exibir o nome de item
 	if (com === 5){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-5" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Show Item Name <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Show Item Name (F8)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(5, ' + args + ', ' + index + ', true);"><br>Item Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + ITEM[args][0] + ')</font></div>';
 	}
 	// Reproduzir SE
 	if (com === 6){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-1" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Execute SE <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Execute SE (F3)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(6, ' + args + ', ' + index + ', true);"><br>SE Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Trocar a Câmera
 	if (com === 7){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-2" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Change Camera <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Change Camera (F4)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(7, ' + args + ', ' + index + ', true);"><br>Camera: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
 	if (com === 8){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-8" id="msg-evento-' + index + '">' + 
-			'(' + index + ') Function: Unknown Function (F5) <input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + index + ') Function: Unknown Function (F5)<input type="button" value="Remove" class="btn-remover-comando" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando" onclick="MSG_renderDialog(8, ' + args + ', ' + index + ', true);"><br>Args: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Trocar a cor do texto
 	if (com === 9){
-		var cor = undefined;
-		var argsFilter = undefined;
+		var cor;
+		var argsFilter;
 		if (args === "00"){
 			cor = MSG_TEXTCOLOR[args];
 			argsFilter = args;
@@ -284,7 +283,7 @@ function MSG_renderCommands(){
 	var c = 0;
 	MSG_renderMSGLength(total);
 	while(c !== total){
-		var COM = undefined;
+		var COM;
 		if (MSG_Commands[c][0] === 3){
 			COM = 3;
 		} else {
@@ -365,7 +364,6 @@ function MSG_COMMAND_STARTMSG(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_ENDMSG(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -387,7 +385,6 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_SHOWITEMNAME(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -412,7 +409,6 @@ function MSG_COMMAND_SHOWITEMNAME(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_EXECSE(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -437,7 +433,6 @@ function MSG_COMMAND_EXECSE(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_ADDCHAR(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -450,7 +445,6 @@ function MSG_COMMAND_ADDCHAR(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_SHOWCAMERA(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
@@ -480,7 +474,6 @@ function MSG_COMMAND_SHOWCAMERA(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
-
 function MSG_COMMAND_ADDTEXT(index, isModify){
 	var textToTrans = document.getElementById('msg-txt-toTrans').value;
 	if (textToTrans !== ""){
@@ -490,7 +483,7 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 		}
 		MSG_increment = false;
 		var RAW_DATA_ARRAY = textToTrans.match(/.{1,1}/g);
-		var t = undefined;
+		var t;
 		if (RAW_DATA_ARRAY !== null){
 			t = RAW_DATA_ARRAY.length;
 		} else {
@@ -513,7 +506,6 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 		scrollLog();
 	}
 }
-
 // Unknown Function F5
 function MSG_COMMAND_F5(index, isModify){
 	if (isModify === undefined){
@@ -556,6 +548,26 @@ function MSG_COMMAND_TEXTCOLOR(index, isModify){
 	}
 	MSG_applyMSGCommand(0);
 }
+// Insert Hex Manual
+function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
+	var attrFinal = document.getElementById('msg-insertHexManual').value;
+	if (attrFinal !== ""){
+		if (isModify === undefined){
+			isModify = false;
+		}
+		MSG_increment = false;
+		localStorage.setItem("MSG_comando-" + index, solveHEX(attrFinal));
+		if (isModify === false){
+			MSG_totalComandos++;
+		}
+		MSG_applyMSGCommand(0);
+		MSG_renderDialog(0);
+	} else {
+		alert("ERROR: The textbox is empty!");
+		addLog('warn', 'WARNING - The textbox is empty!');
+		scrollLog();
+	}
+}
 // The dark side of this ENTIRE FILE!
 // Like... DON'T TOUCH THIS PART - FOR REAL!
 function MSG_renderPreviewBlock(c_msg_hex){
@@ -572,7 +584,6 @@ function MSG_renderPreviewBlock(c_msg_hex){
 			}
 		}
 		msgs = msgs + c_msg_hex;
-		console.log(msgs);
 		if (msgs.length === parseInt(block_size_hex, 16)){
 			$("#MSG_RDT_lbl_blockUsage").addClass('green');
 		} else {
@@ -588,23 +599,19 @@ function MAKE_NEW_POINTERS(msg_hex){
 	var NEW_POINTERS = OLD_POINTERS[0];
 	console.log("Ponteiros antigos: " + localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
 	while(c < OLD_POINTERS.length){
-		console.log("Processando Ponteiro " + c + "\nMSG HEX: " + sessionStorage.getItem("MESSAGE_HEX_" + c));
 		if (c !== parseInt(OLD_POINTERS.length - 1)){
 			if (c < MSG_ID){
 				NEXT_POINTER = OLD_POINTERS[c + 1];
 			}
 			if (c === MSG_ID){
-				console.log("Processando MSG nova");
 				var len = parseInt(msg_hex.length / 2);
 				var original = processBIO3Vars(OLD_POINTERS[c]);
 				NEXT_POINTER = parseDecimalToBIO3Var(parseInt(len + original), 0);
 			}
 			if (c > MSG_ID){
 				var anterior = processBIO3Vars(NEXT_POINTER);
-				console.log("Antes: " + anterior + "\n" + NEXT_POINTER);
 				var len = parseInt(sessionStorage.getItem("MESSAGE_HEX_" + c).length / 2);
 				NEXT_POINTER = parseDecimalToBIO3Var(parseInt(anterior + len), 0);
-				console.log("length: " + len);
 			}
 			console.log("Ponteiros: " + NEW_POINTERS + "\nNext: " + NEXT_POINTER);
 			NEW_POINTERS = NEW_POINTERS + NEXT_POINTER;
@@ -613,8 +620,6 @@ function MAKE_NEW_POINTERS(msg_hex){
 			break;
 		}
 	}
-	console.info("Novos Ponteiros:");
-	console.info(NEW_POINTERS + "\n" + NEW_POINTERS.match(/.{1,4}/g));
 	return NEW_POINTERS;
 }
 function MSG_SAVE_ON_RDT(msgHex){
@@ -624,15 +629,11 @@ function MSG_SAVE_ON_RDT(msgHex){
 		var RDT_END = RDT_arquivoBruto.slice(parseInt(MSG_CURRENT_RDT_MESSAGE_END), RDT_arquivoBruto.length);
 		var NEW_RDT_0 = RDT_START + msgHex + RDT_END;
 		var N_PONTEIRO = MAKE_NEW_POINTERS(msgHex);
-
 		var P_START = parseInt(mapfile[5]);
 		var P_END = parseInt(P_START + N_PONTEIRO.length);
-
 		RDT_START = NEW_RDT_0.slice(0, P_START);
 		RDT_END = NEW_RDT_0.slice(P_END, NEW_RDT_0.length);
-
 		var RDT_FINAL = RDT_START + N_PONTEIRO + RDT_END;
-
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');
 			log_separador();
@@ -675,7 +676,7 @@ function MSG_applyMSGCommand(mode){
 		}
 	}
 	var RAW_DATA_ARRAY = newHex.match(/.{1,2}/g);
-	var u = undefined;
+	var u;
 	if (RAW_DATA_ARRAY !== null){
 		u = RAW_DATA_ARRAY.length;
 	} else {
@@ -688,7 +689,7 @@ function MSG_applyMSGCommand(mode){
 		c++;
 	}
 	MSG_LENGTH = newHex.length;
-	var POINTER_HOLD = undefined;
+	var POINTER_HOLD;
 	document.getElementById("text-msg-raw").innerHTML = finalArray;
 	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH + " (Hex: " + parseHex(MSG_LENGTH).toUpperCase() + ")";
 	if (ORIGINAL_FILENAME !== undefined){

@@ -90,6 +90,17 @@
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 			<input type="button" id="RDT-aba-menu-4" class="aba" value="Pos. Edit">
+			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- RDT: Audios -->
+			<div class="menu" id="RDT_menu-5">
+				<div class="menu-general-content" id="RDT-audio-hold">
+					<div id="RDT_BG_5" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Audios - Total: <font id="RDT_lbl_totalAudios">???</font></font></center>
+					<div id="RDT_audio_holder" class="RDT-holder">
+						<!-- Audios vai aqui -->
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Canvas -->
 			<div class="menu" id="RDT_menu-4">
 				<div class="menu-general-content" id="RDT-canvas-hold">
@@ -102,7 +113,7 @@
 					<div class="infoXYLine"></div>
 					<div class="infoXY2Line"></div>
 					<div id="RDT_CANVAS_0" class="divCanvas">
-						<!-- render vai aqui -->
+						<!-- Render vai aqui -->
 					</div>
 					<div class="canvasInfos">
 						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br>
@@ -143,13 +154,14 @@
 					Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
 					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
 					<div class="menu-separador"></div>
-					Number Of Doors: <font class="RDT-menu-geral-text" id="RDT_lbl-internalName">???</font><br>
-					Number Of Cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
-					Number Of Enemies: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
-					Number Of Messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
-					Number Of Itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
-					Number Of Files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
-					Number Of Maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font>
+					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
+					Number of enemies: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
+					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
+					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
+					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
+					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font>
 				</div>
 			</div>
 			<!-- RDT: Mensagens -->
@@ -228,7 +240,9 @@
 				<center>Camera Position and Field</center>
 				<input type="button" value="Change Camera" class="botao-add-comando" onclick="MSG_renderDialog(7);"><br><br>
 				<center>Unknown Function</center>
-				<input type="button" value="Function F5 (September 28th - R101.RDT)" title="DON'T USE THIS!" class="botao-add-comando" onclick="MSG_renderDialog(8);">
+				<input type="button" value="Function F5 (September 28th - R101.RDT)" title="DON'T USE THIS!" class="botao-add-comando" onclick="MSG_renderDialog(8);"><br><br>
+				<center>Misc</center>
+				<input type="button" value="Insert Hex Value (WIP)" title="Use with care!" class="botao-add-comando" onclick="MSG_renderDialog(10);">
 			</div>
 			<div class="msg-events" id="text-msg-events">
 				<h2 class="title-eventos"><font id="RDT_MSG_NUMBER" class="none">??? - </font>Script (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>
@@ -255,8 +269,10 @@
 			</div>
 			<!-- Block Size -->
 			<div class="blockUsage" id="MSG_RDT_BLOCKUSAGE">
-				Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - 
-				Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
+				<center>
+					Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - 
+					Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
+				</center>
 			</div>
 			<!-- Legenda -->
 			<div class="msg-legend">
@@ -562,6 +578,7 @@
 		</div>
 		<!-- File Loader -->
 		<div class="none">
+			<input type="file" value="" onchange="setLoadWAVFile();" id="loadWAVForm" accept=".wav"/>
 			<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>
 			<input type="file" value="" onchange="setLoadMSGFile();" id="loadMSGForm" accept=".msg"/>
 			<input type="file" value="" onchange="setLoadSaveFile();" id="loadSaveForm" accept=".sav"/>
