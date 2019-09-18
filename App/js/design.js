@@ -932,6 +932,11 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	$("#RDT_item_R").css({"display": "block"});
 	$("#RDT-item-list").css({"width": "622px"});
 	$("#RDT-Item-Edit").css({"display": "block"});
+	if (header === "68"){
+		$("#RDT_btnEditPos").css({"display": "none"});
+	} else {
+		$("#RDT_btnEditPos").css({"display": "block"});
+	}
 }
 function RDT_editItemCancel(){
 	main_closeFileList();

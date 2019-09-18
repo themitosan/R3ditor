@@ -106,7 +106,7 @@
 					</div>
 					<div class="canvasInfos">
 						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br>
-						Item Name: <font id="RDT_lbl_canvasItemName">???</font></center>
+						Name: <font id="RDT_lbl_canvasItemName">???</font></center>
 						<div class="canvasInfoOverflow">
 							X BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_x_hex"><font class="padding-left">X BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_x_bio"><br>
 							Y BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" id="RDT_lbl_point_y_hex"><font class="padding-left">Y BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_y_bio"><br>
@@ -197,7 +197,7 @@
 						<div id="RDT-edit-map-select" class="none">
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
-						<input type="button" class="botao-menu RDT_btn_fix1" onclick="RDT_showCanvasTab();" value="Edit Pos.">
+						<input type="button" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
 						<div style="margin-top: 8px;" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
 						<div style="margin-top: -5px;" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
 						<div style="margin-top: -5px;" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>

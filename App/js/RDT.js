@@ -105,7 +105,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	$("#RDT-aba-menu-4").css({'display': 'none'});
 	$("#RDT-aba-menu-2").css({"display": "inline"});
 	$("#RDT-aba-menu-3").css({"display": "inline"});
+	document.getElementById('RDT_slider_D').value = 0;
+	document.getElementById('RDT_slider_D2').value = 0;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
+	document.getElementById('RDT_lbl_pd').innerHTML = "0";
+	document.getElementById('RDT_lbl_pd2').innerHTML = "0";
 	document.getElementById('RDT_CANVAS_0').innerHTML = "";
 	document.getElementById('RDT-aba-menu-2').disabled = "";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
@@ -1234,22 +1238,17 @@ function RDT_hideCanvasTab(){
 	var Y = document.getElementById('RDT_lbl_point_y_hex').value.toLowerCase();
 	var Z = document.getElementById('RDT_lbl_point_z_hex').value.toLowerCase();
 	var R = document.getElementById('RDT_lbl_point_r_hex').value.toLowerCase();
-	
 	var NOVA_POS = offset1 + X + Y + Z + R + offset2;
 	localStorage.setItem('RDT_Item-' + RDT_selectedPoint, NOVA_POS);
-
 	document.getElementById('RDT-item-list').innerHTML = "";
 	document.getElementById('RDT_CANVAS_0').innerHTML = "";
-
 	var tItems = RDT_totalItens;
 	RDT_totalItens = 0;
-
 	while(c < tItems){
 		console.warn(localStorage.getItem("RDT_Item-" + c));
 		RDT_decompileItens(c, false);
 		c++;
 	}
-
 	//
 	$("#RDT-aba-menu-4").css({'display': 'none'});
 	$("#RDT-aba-menu-3").trigger('click');
