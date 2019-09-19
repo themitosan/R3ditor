@@ -225,8 +225,8 @@
 		</div>
 		<!-- FORM: MSG -->
 		<div class="none" id="menu-MSG">
-			<div class="msg-addcomand-menu">
-				<h2 class="title-eventos">Add Function</h2>
+			<div class="msg-addcomand-menu" id="MSG_addcomand-menu">
+				<h2 class="title-eventos">Function List</h2>
 				<center>Header</center>
 				<input type="button" value="Start Message / Text Speed" class="botao-add-comando" onclick="MSG_renderDialog(1);">
 				<input type="button" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
@@ -242,7 +242,8 @@
 				<center>Unknown Function</center>
 				<input type="button" value="Function F5 (September 28th - R101.RDT)" title="DON'T USE THIS!" class="botao-add-comando" onclick="MSG_renderDialog(8);"><br><br>
 				<center>Misc</center>
-				<input type="button" value="Insert Hex Value (WIP)" title="Use with care!" class="botao-add-comando" onclick="MSG_renderDialog(10);">
+				<input type="button" value="Insert / Modify Hex (USE WITH CARE!)" title="Use with care!" class="botao-add-comando" onclick="MSG_renderDialog(10);">
+				<input type="button" value="Hex Translator" id="MSG_optionTranslate" class="botao-add-comando none" onclick="MSG_showTranslateInput();"><br>
 			</div>
 			<div class="msg-events" id="text-msg-events">
 				<h2 class="title-eventos"><font id="RDT_MSG_NUMBER" class="none">??? - </font>Script (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>
@@ -289,6 +290,7 @@
 			<!-- MSG: Hex Input -->
 			<div class="msg-hex" id="text-hex-editor">
 				Hex Input - Translator:
+				<input type="button" onclick="MSG_hideTranslateInput();" class="botao-menu right" value="Hide">
 				<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit txtarea-hex-fix"></textarea>
 				<input type="button" class="botao-menu" class="right" value="Translate!" onclick="MSG_translateHexValues();">
 			</div>

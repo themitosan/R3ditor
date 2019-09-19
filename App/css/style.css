@@ -774,12 +774,16 @@ input[type="range" i]{
     background-color: #000;
     box-shadow: 0 0 5px #383838;
 }
+.btn-editMSGfix{
+    z-index: 4;
+    width: 80px;
+}
 .msg-render{
     margin-bottom: 10px;
 }
 .msg-command-text-fix{
-    width: 68%;
     left: 82px;
+    width: 550px;
     position: sticky;
     margin-top: -18px;
     text-align: -webkit-left;

@@ -646,7 +646,6 @@ var MSG_DICIONARIO = {
 	"9d": [false, "(Unknown Char / Function Nº 70 - Hex: 9d)", true],
 	"9e": [false, "(Unknown Char / Function Nº 71 - Hex: 9e)", true],
 	"9f": [false, "(Unknown Char / Function Nº 72 - Hex: 9f)", true],
-	"a0": [false, "(Unknown Char / Function Nº 73 - Hex: a0)", true],
 	"a1": [false, "(Unknown Char / Function Nº 74 - Hex: a1)", true],
 	"a2": [false, "(Unknown Char / Function Nº 75 - Hex: a2)", true],
 	"a3": [false, "(Unknown Char / Function Nº 76 - Hex: a3)", true],
@@ -729,6 +728,8 @@ var MSG_DICIONARIO = {
 	"f2": [false, "(Unknown Char / Function Nº 155 - Hex: f2)", true],
 	"f6": [false, "(Unknown Char / Function Nº 159 - Hex: f6)", true],
 	"f7": [false, "(Unknown Char / Function Nº 160 - Hex: f7)", true],
+	//
+	"a0": [false, "(Function: Climax)", false],
 	"fb": [false, "(Yes / No)", false],
 	"fc": [false, "(Line Break)<br>", false], // Enter
 	"fd": [false, "(Pause)", false],
@@ -745,9 +746,9 @@ var MSG_DICIONARIO = {
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
 		Isso depende do soundset que foi carregado no mapa
 	*/
-	"f4": [true, "(Function: Change Camera ", 			 7],
-	"f5": [true, "(Unknown Command used on R101.rdt ", 	 8], // Comando usado na cutscene "Septemer, 28".
-	"f9": [true, "(Function: Text Color ", 				 9]	 // Formatação - Cor Verde
+	"f4": [true, "(Function: Change Camera ", 			 7], // Trocar Camera
+	"f5": [true, "(Unknown Command used on R101.RDT ", 	 8], // Comando usado na cutscene "Septemer, 28".
+	"f9": [true, "(Function: Text Color ", 				 9], // Formatação - Cor Verde
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -917,11 +918,13 @@ var MSG_DICIONARIO_REVERSO = {
 	"â": "3d",
 	"ä": "3d",
 	// Funções Especiais
+	"#": "a0", // Climax
+	"~": "fe", // Segunda alternativa de climax
 	"{": "09", // Aspas Duplas Abrindo
 	"}": "0a", // Aspas Duplas Fechando 
-	"*": "fb00", // Pergunta - Yes / No
+	"*": "fb", // Yes / No
 	"@": "fc", // Enter / Break line
-	"|": "fd00"  // Pausa no Texto
+	"|": "fd"  // Pausa no Texto
 }
 // :)
 var special_day = "IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu";

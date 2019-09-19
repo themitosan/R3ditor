@@ -3,16 +3,16 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Isso está indo longe demais!
 */
+var EXEC_rofs;
+var TEMP_APP_PATH;
 var GAME_PATH = "";
+var EXEC_BIO3_MERCE;
 var WZ_lastMenu = 0;
+var EXEC_BIO3_original;
 var enable_mod = false;
 var WZ_EXTRACTLIST = [];
 var WZ_skipRofs = false;
 var WZ_showWizard = true;
-var EXEC_rofs = undefined;
-var TEMP_APP_PATH = undefined;
-var EXEC_BIO3_MERCE = undefined;
-var EXEC_BIO3_original = undefined;
 function WZ_verifyConfigFile(){
 	TEMP_APP_PATH = APP_PATH;
 	if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor") === false){
@@ -33,7 +33,6 @@ function WZ_showWizardDialog(id){
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_0;
 			document.getElementById('WZ_BTN_1').value = "No";
 			document.getElementById('WZ_BTN_2').value = "Yes";
-			// Function
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				WZ_skip();
 			};

@@ -1,14 +1,14 @@
 /*
 	R3ditor - design.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Help me - please!
 */
 var RDT_aba_atual;
 var SAVE_aba_atual;
 var RDT_totalMenus = 5;
 var SAVE_totalMenus = 4;
 var request_render_save;
-var l_separador = "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
+var l_separador = "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 window.onclose = function(){
 	localStorage.clear();
 	sessionStorage.clear();
@@ -31,10 +31,10 @@ function main_renderFileList(id){
 	var c = 0;
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ""){
-		var mFile = undefined;
+		var mFile;
+		var imgPreview;
 		var origName = "Unknown";
 		var origCity = "Unknown";
-		var imgPreview = undefined;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
 		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
 			imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
@@ -51,6 +51,9 @@ function main_renderFileList(id){
 		if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
+		}
+		if (mFile.length > 57){
+			mFile = "..." + mFile.slice(10, mFile.length);
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
@@ -71,10 +74,10 @@ function main_renderFileList(id){
 				listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".rdt"));
 			}
 			while(c < listRDT.length){
-				var mFile = undefined;
+				var mFile;
+				var imgPreview;
 				var origName = "Unknown";
 				var origCity = "Unknown";
-				var imgPreview = undefined;
 				var currentRDT = APP_PATH + "\\Assets\\DATA_E\\RDT\\" + listRDT[c];
 				var RDT_name = getFileName(currentRDT).toUpperCase();
 				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
@@ -92,6 +95,9 @@ function main_renderFileList(id){
 				if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 					origName = RDT_locations[RDT_name][0];
 					origCity = RDT_locations[RDT_name][1];
+				}
+				if (mFile.length > 57){
+					mFile = "..." + mFile.slice(10, mFile.length);
 				}
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 					' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
@@ -565,6 +571,7 @@ function MSG_renderMSGLength(totalMsg){
 	}
 }
 function MSG_renderDialog(id, args, index, isMod){
+	$("#msg-addcomand-confirm").css({"display": "inline"});
 	if (args === undefined){
 		args = "";
 	}
@@ -618,12 +625,12 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Texto
 	if (id === 3){ 
 		var correcao = "";
-		$("#dialog-msg-addcomand").css({"top": "98px"});
+		$("#dialog-msg-addcomand").css({"top": "86px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Show Text";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_ADDTEXT;
 		if (localStorage.getItem('MSG_Mensagem-' + args) !== null){
 			args = localStorage.getItem('MSG_Mensagem-' + args);
-			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("Yes / No", 'gi'), "*").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
+			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("Function: Climax", 'gi'), "#").replace(new RegExp("Yes / No", 'gi'), "*").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
 		}
 		document.getElementById('msg-txt-toTrans').value = correcao;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
@@ -632,7 +639,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Exibir Caracter Especial
 	if (id === 4){ 
-		if (args == ""){
+		if (args === ""){
 			args = "ea10";
 		}
 		$("#dialog-msg-addcomand").css({"top": "200px"});
@@ -646,6 +653,9 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Exibir Nome de Item
 	if (id === 5){ 
+		if (args === ""){
+			args = "00";
+		}
 		$("#dialog-msg-addcomand").css({"top": "200px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Show Item Name";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_NAMEITEM;
@@ -678,7 +688,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Comando desconhecido usado em r101.rdt
+	// Comando desconhecido usado em R101.RDT
 	if (id === 8){ 
 		$("#dialog-msg-addcomand").css({"top": "200px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Unknown Function (F5)";
@@ -707,14 +717,33 @@ function MSG_renderDialog(id, args, index, isMod){
 		}
 	}
 	// Inserir Hex Manual
-	if (id === 10){ 
+	if (id === 10){
+		var msgHex;
+		if (localStorage.getItem('MSG_comando-' + index) !== null){
+			msgHex = localStorage.getItem('MSG_comando-' + index);
+		} else {
+			msgHex = "";
+		}
 		$("#dialog-msg-addcomand").css({"top": "156px"});
-		document.getElementById("msg-addcomand-title").innerHTML = "Insert Hex";
+		$("#msg-addcomand-confirm").css({"display": "none"});
+		document.getElementById("msg-addcomand-title").innerHTML = "Insert / Modify Hex";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_INSERTHEX;
+		document.getElementById('msg-insertHexManual').innerHTML = msgHex;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_INSERTHEXMANUAL(index, isMod);
 		}
+		MSG_checkHexLength();
 	}
+}
+function MSG_hideTranslateInput(){
+	$("#text-hex-editor").css({"display": "none"});
+	$("#MSG_addcomand-menu").css({"height": "563px"});
+	$("#MSG_optionTranslate").css({"display": "inline"});
+}
+function MSG_showTranslateInput(){
+	$("#text-hex-editor").css({"display": "inline"});
+	$("#MSG_addcomand-menu").css({"height": "350px"});
+	$("#MSG_optionTranslate").css({"display": "none"});
 }
 function MSG_renderCamPreview(){
 	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
@@ -825,9 +854,6 @@ function TRANSFER_RDT_TO_MSG(){
 	main_closeFileList();
 	document.title = APP_NAME + " - Transfering message...";
 	$("#menu-RDT").css({"display": "none"});
-	$("#RDT_BG_1").css({"display": "none"});
-	$("#RDT_BG_2").css({"display": "none"});
-	$("#RDT_BG_3").css({"display": "none"});
 	$("#MSG_hexPrev").css({"height": "122px"});
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#menu-topo-RDT").css({"display": "none"});
@@ -841,19 +867,20 @@ function TRANSFER_RDT_TO_MSG(){
 	document.getElementById('RDT_MSG-holder').innerHTML = " ";
 	document.getElementById('MSG_saveAs').value = 'Save as MSG';
 	MSG_showMenu(1);
+	MSG_hideTranslateInput();
 }
 function RDT_BG_display(){
 	if (enable_mod === true){
 		var c = 0;
 		var found = false;
 		while (c < 9){
-			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG")){
+			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG")){
 				found = true;
-				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
-				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
-				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
-				$("#RDT_BG_4").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
-				$("#RDT_BG_5").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME) + "0" + c + ".JPG)", "filter": "blur(2px)"});
+				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+				$("#RDT_BG_4").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+				$("#RDT_BG_5").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
 				$("#RDT_BG_1").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_2").fadeIn({duration: 500, queue: false});
 				$("#RDT_BG_3").fadeIn({duration: 500, queue: false});
@@ -865,11 +892,11 @@ function RDT_BG_display(){
 			}
 		}
 		if (found == false){
-			$("#RDT_BG_1").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
-			$("#RDT_BG_2").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
-			$("#RDT_BG_3").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
-			$("#RDT_BG_4").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
-			$("#RDT_BG_5").css({"background-image": "url(img/404.png)", "filter": "blur(6px)"});
+			$("#RDT_BG_1").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+			$("#RDT_BG_2").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+			$("#RDT_BG_3").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+			$("#RDT_BG_4").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+			$("#RDT_BG_5").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
 		}
 	}
 }

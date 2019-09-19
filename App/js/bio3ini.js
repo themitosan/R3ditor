@@ -29,21 +29,21 @@ var BIO3INI_Rofs15;
 var BIO3INI_v_disableMovie = true;
 var BIO3INI_v_disableAlpha = false;
 var BIO3INI_v_disableLinear = false;
-var BIO3INI_v_disableSpecular = true;
 var BIO3INI_v_textureAdjust = false;
+var BIO3INI_v_disableSpecular = true;
 var BIO3INI_v_mode = "Windowed";
 // Windowed
-var BIO3INI_w_driver = "NULL";
-var BIO3INI_w_device = "0ed36e48aa64fc1118f600000c0251e6";
+var BIO3INI_w_BPP = 32;
 var BIO3INI_w_width = 800;
 var BIO3INI_w_height = 600;
-var BIO3INI_w_BPP = 32;
+var BIO3INI_w_driver = "NULL";
+var BIO3INI_w_device = "0ed36e48aa64fc1118f600000c0251e6";
 // FullScreen
-var BIO3INI_f_driver = "NULL";
-var BIO3INI_f_device = "0ed36e48aa64fc1118f600000c0251e6";
+var BIO3INI_f_BPP = 32;
 var BIO3INI_f_width = 800;
 var BIO3INI_f_height = 600;
-var BIO3INI_f_BPP = 32;
+var BIO3INI_f_driver = "NULL";
+var BIO3INI_f_device = "0ed36e48aa64fc1118f600000c0251e6";
 
 // Keyboard
 // Info - it's very obvious - we are NOT planning to add support to sidewinder!
