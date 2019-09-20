@@ -1357,8 +1357,8 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 		r = "0000";
 	}
 	var HTML_ICONCANVAS_TEMPLATE = '<div class="render-item render-item-color-' + type + '" title="Type: ' + tipo + '\nName: ' + nome + 
-		'\n\nOriginal Info:\nX: ' + processBIO3Vars(x) + ' (' + x.toUpperCase() + ')\nY: ' + processBIO3Vars(y) + ' (' + y.toUpperCase() + ')\nZ: ' + processBIO3Vars(z) + 
-		' (' + z.toUpperCase() + ')\nR: ' + processBIO3Vars(r) + ' (' + r.toUpperCase() + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
+		'\n\nOriginal Info:\nX: ' + x.toUpperCase() + ' (' + processBIO3Vars(x) + ')\nY: ' + y.toUpperCase() + ' (' + processBIO3Vars(y) + ')\nZ: ' + z.toUpperCase() + 
+		' (' + processBIO3Vars(z) + ')\nR: ' + r.toUpperCase() + ' (' + processBIO3Vars(r) + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
 	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
 	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;

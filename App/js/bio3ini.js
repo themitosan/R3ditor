@@ -4,7 +4,6 @@
 	Can you give me a coffee? ~wink~
 */
 var BIO3INI_arquivoBruto;
-
 // General
 var BIO3INI_Save;
 var BIO3INI_Movie;
@@ -23,7 +22,6 @@ var BIO3INI_Rofs12;
 var BIO3INI_Rofs13;
 var BIO3INI_Rofs14;
 var BIO3INI_Rofs15;
-
 // Video Config
 // True == On || False == Off
 var BIO3INI_v_disableMovie = true;
@@ -44,7 +42,6 @@ var BIO3INI_f_width = 800;
 var BIO3INI_f_height = 600;
 var BIO3INI_f_driver = "NULL";
 var BIO3INI_f_device = "0ed36e48aa64fc1118f600000c0251e6";
-
 // Keyboard
 // Info - it's very obvious - we are NOT planning to add support to sidewinder!
 var BIO3INI_kb_key1 = "";
@@ -61,7 +58,6 @@ var BIO3INI_kb_keyB = "";
 var BIO3INI_kb_keyC = "";
 var BIO3INI_kb_keyD = "";
 var BIO3INI_kb_keyE = "";
-
 // Sound
 var BIO3INI_sound_device = "NULL";
 var BIO3INI_sound_seVol = 65534;

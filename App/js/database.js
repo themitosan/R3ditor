@@ -749,6 +749,7 @@ var MSG_DICIONARIO = {
 	"f4": [true, "(Function: Change Camera ", 			 7], // Trocar Camera
 	"f5": [true, "(Unknown Command used on R101.RDT ", 	 8], // Comando usado na cutscene "Septemer, 28".
 	"f9": [true, "(Function: Text Color ", 				 9], // Formatação - Cor Verde
+	"*#": [false, "(Next Option)", 				 	 false]  // Segunda Opção de climax
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -924,7 +925,7 @@ var MSG_DICIONARIO_REVERSO = {
 	"}": "0a", // Aspas Duplas Fechando 
 	"*": "fb", // Yes / No
 	"@": "fc", // Enter / Break line
-	"|": "fd"  // Pausa no Texto
+	"|": "fd", // Pausa no Texto
 }
 // :)
 var special_day = "IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu";

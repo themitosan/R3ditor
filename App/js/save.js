@@ -248,9 +248,9 @@ function save_renderSlot(slotID){
 function save_renderSaveSlots() {
 	var cu = 1;
 	var to = 16;
+	var checker;
+	var tmpSaveSlot;
 	main_closeFileList();
-	var checker = undefined;
-	var tmpSaveSlot = undefined;
 	while(cu < to){
 		tmpSaveSlot = SAVE_arquivoBruto.slice(RANGES["he-indicador-" + cu][0], RANGES["he-indicador-" + cu][1]);
 		checker = tmpSaveSlot.slice(0, 4);
@@ -455,7 +455,7 @@ function save_renderInfos(s_slot){
 		// Mapas Obtidos - [WIP]
 		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
 		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
-		var mapStatus = undefined; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
+		var mapStatus; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
 		document.getElementById("lbl-maps").innerHTML = "[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")";
 	
 		// Room / Event [WIP]
@@ -475,7 +475,7 @@ function save_renderLife(s_slot){
 	veneno = localStorage.getItem('Save_' + s_slot).slice(RANGES["characterPoison"][0], RANGES["characterPoison"][1]);
 	var chkA = life.slice(0, 2);
 	var chkB = life.slice(2, 4);
-	var HP = undefined;
+	var HP;
 	if (POISON[veneno][0] == "Yes"){
 		STATUS = "Poison";
 		co = "txt-poison";
@@ -834,13 +834,13 @@ function addInfo(person, itemId){
 }
 function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	// Infos
+	var cor;
+	var shad;
+	var quanti;
 	var titulo = ITEM[itemHex][0];
 	var pushRequest = parseInt(ITEM[itemHex][7]);
 	var spriteNumber = parseInt(ITEM[itemHex][8]);
 	var percent = false;
-	var cor = undefined;
-	var shad = undefined;
-	var quanti = undefined;
 	if (atrib === "00"){
 		if (itemHex === "00" || quantHex === "00"){
 			quanti = "";
@@ -871,15 +871,13 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var finalA = startA;
 	var finalB = startB;
 	var finalMargin = 0;
-
 	while(s != pushRequest){
 		finalA = finalA - pushOffset;
 		finalB = finalB + pushOffset;
 		finalMargin = finalMargin - marginOffset + fix;
 		s++;
 	}
-
-	var p = undefined;
+	var p;
 	if (person == 0){
 		p = "Jill";
 	} else {
@@ -1023,7 +1021,7 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 		DC = parseInt(DC);
 	}
 	//console.log(DD + " - " + HH + " - " + MM + " - " + SS + " - " + DC + " - " + MS);
-	var restante = undefined;
+	var restante;
 	var minus = 999 - 1;
 	// Milésimos
 	if (MS > minus){

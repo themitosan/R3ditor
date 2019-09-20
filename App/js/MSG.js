@@ -8,6 +8,7 @@ var MSG_Commands;
 var MSG_FILL_PASS;
 var MSG_LENGTH = 0;
 var MSG_arquivoBruto;
+var MSG_useSlice = false;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_useClimaxFix = false;
@@ -107,7 +108,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			}
 			// End message - fix for climax
 			if (RAW_DATA_ARRAY[startPoint] === "fe" && MSG_useClimaxFix === true){
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ")";
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].slice(0, MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].length - 1) + ")";
 				MSG_useClimaxFix = false;
 				startPoint--;
 			}
@@ -146,8 +147,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 }
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
-	document.getElementById("msg-lista-eventos").innerHTML = "";
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
+	document.getElementById("msg-lista-eventos").innerHTML = "";
 	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length + " (Hex: " + parseHex(RAW_DATA.length).toUpperCase() + ")";
 	var t;
 	if (RAW_DATA_ARRAY !== null){
@@ -168,6 +169,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var textoHex = "";
 	var startPoint = 0;
 	var textoTraduzido = "";
+	console.clear();
 	while (startPoint < t){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
@@ -182,13 +184,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 			COMMAND_HEX = RAW_DATA_ARRAY[startPoint];
 			COMMAND_ATTR = RAW_DATA_ARRAY[startPoint + 1];
 			COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][2];
-			if (COMMAND_HEX === "fe" && MSG_useClimaxFix === true){
-				MSG_Commands.push([COMMAND_HEX, "00"]);
-				MSG_useClimaxFix = false;
-				startPoint--;
-			} else {
-				MSG_Commands.push([COMMAND_HEX, COMMAND_ATTR]);
-			}
+			MSG_Commands.push([COMMAND_HEX, COMMAND_ATTR]);
 			localStorage.setItem("MSG_comando-" + cAtual, COMMAND_HEX + COMMAND_ATTR);
 			startPoint = startPoint + 2;
 			cAtual++;
@@ -227,7 +223,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: End Message (<font class="italic">FE</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
-			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(2, ' + args + ', ' + index + ', true);"><br>Final Value: ' + 
+			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(2, \'' + args + ', ' + index + '\', true);"><br>Final Value: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>'
 	}
 	// Exibir Texto
@@ -317,8 +313,8 @@ function MSG_checkHexLength(){
 	}
 }
 function MSG_renderCommands(){
-	var total = MSG_Commands.length;
 	var c = 0;
+	var total = MSG_Commands.length;
 	MSG_renderMSGLength(total);
 	while(c !== total){
 		var COM;
@@ -408,16 +404,17 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-fim-id').value;
-	if (attrFinal === "" || attrFinal > 2){
-		attrFinal = "00";
+	if (attrFinal !== "*#"){
+		if (attrFinal === "" || attrFinal.length > 2){
+			attrFinal = "00";
+		}
+		if (attrFinal.length < 2){
+			attrFinal = "0" + attrFinal;
+		}
+		localStorage.setItem("MSG_comando-" + index, "fe" + attrFinal);
+	} else {
+		localStorage.setItem("MSG_comando-" + index, "fe  ");
 	}
-	if (parseInt(attrFinal) > 10){
-		attrFinal = "10";
-	}
-	if (attrFinal.length < 2){
-		attrFinal = "0" + attrFinal;
-	}
-	localStorage.setItem("MSG_comando-" + index, "fe" + attrFinal);
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
@@ -690,9 +687,12 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 	MSG_applyMSGCommand(0);
 }
 function MSG_applyMSGCommand(mode){
-	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
-	var newHex = "";
+	var u;
 	var c = 0;
+	var newHex = "";
+	var POINTER_HOLD;
+	var finalArray = "";
+	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	while(c !== MSG_totalComandos + 1){
 		if (localStorage.getItem("MSG_comando-" + c) === null){
 			c++;
@@ -702,19 +702,16 @@ function MSG_applyMSGCommand(mode){
 		}
 	}
 	var RAW_DATA_ARRAY = newHex.match(/.{1,2}/g);
-	var u;
 	if (RAW_DATA_ARRAY !== null){
 		u = RAW_DATA_ARRAY.length;
 	} else {
 		u = 0;
 	}
 	c = 0;
-	var finalArray = "";
 	while(c < u){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
 		c++;
 	}
-	var POINTER_HOLD;
 	MSG_LENGTH = newHex.length;
 	document.getElementById("text-msg-raw").innerHTML = finalArray;
 	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH + " (Hex: " + parseHex(MSG_LENGTH).toUpperCase() + ")";
@@ -737,7 +734,6 @@ function MSG_applyMSGCommand(mode){
 					}
 					var newMsgFile = APP_PATH + "\\MSG\\" + ask + ".msg";
 					fs.writeFileSync(newMsgFile, newHex, 'hex');
-					log_separador();
 					addLog("log", "INFO: The file " + ask + " was saved successfully!");
 					addLog("log", "Path: " + newMsgFile);
 					log_separador();
