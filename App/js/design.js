@@ -684,6 +684,7 @@ function MSG_renderDialog(id, args, index, isMod){
 		MSG_seekCameras();
 		document.getElementById('msg-cam-id').value = args;
 		document.getElementById('msg-selectCam-id').value = args;
+		MSG_renderCamPreview();
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_SHOWCAMERA(index, isMod);
 			MSG_renderDialog(0);
