@@ -681,8 +681,9 @@ function MSG_renderDialog(id, args, index, isMod){
 		$("#dialog-msg-addcomand").css({"top": "200px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Change Camera";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_SHOWCAMERA;
-		document.getElementById('msg-cam-id').value = args;
 		MSG_seekCameras();
+		document.getElementById('msg-cam-id').value = args;
+		document.getElementById('msg-selectCam-id').value = args;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){
 			MSG_COMMAND_SHOWCAMERA(index, isMod);
 			MSG_renderDialog(0);

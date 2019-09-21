@@ -48,22 +48,6 @@ function reloadJsFile(src){
     head.appendChild(script);
     scrollLog();
 }
-/// Undo solvehex
-function DEBUG_splitHex(hex, mode){
-	var c = 0;
-	var fina = "";
-	var rw = undefined;
-	if (mode == 0){
-		rw = hex.match(/.{1,2}/g);
-	} else {
-		rw = hex.match(/.{1,4}/g);
-	}
-	while(c < rw.length){
-		fina = fina + rw[c] + " ";
-		c++;
-	}
-	return fina.slice(0, fina.length - 1);
-}
 function DEBUG_RDT_MSG_END_RANGE(value){
 	BETA = true;
 	reloadJsFile('js/database.js');

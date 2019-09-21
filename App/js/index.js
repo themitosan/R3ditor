@@ -406,6 +406,22 @@ function processBIO3Vars(hex){
 		return numerofinal;
 	}
 }
+/// Undo solvehex
+function splitHex(hex, mode){
+	var rw;
+	var c = 0;
+	var fina = "";
+	if (mode == 0){
+		rw = hex.match(/.{1,2}/g);
+	} else {
+		rw = hex.match(/.{1,4}/g);
+	}
+	while(c < rw.length){
+		fina = fina + rw[c] + " ";
+		c++;
+	}
+	return fina.slice(0, fina.length - 1);
+}
 function processBIO3Numbers(number){
 	if (number < -32767){
 		return -32767;
