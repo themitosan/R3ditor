@@ -664,9 +664,9 @@ input[type="range" i]{
     color: #0f0;
     width: 338px;
     padding: 6px;
-    height: 96px;
     resize: none;
     border: none;
+    height: 138px;
     font-size: 16px;
     border-radius: 6px;
     box-shadow: 0 0 2px #000;

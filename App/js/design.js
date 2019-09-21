@@ -625,12 +625,12 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Texto
 	if (id === 3){ 
 		var correcao = "";
-		$("#dialog-msg-addcomand").css({"top": "86px"});
+		$("#dialog-msg-addcomand").css({"top": "48px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Show Text";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_ADDTEXT;
 		if (localStorage.getItem('MSG_Mensagem-' + args) !== null){
 			args = localStorage.getItem('MSG_Mensagem-' + args);
-			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("Function: Climax", 'gi'), "#").replace(new RegExp("Yes / No", 'gi'), "*").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(new RegExp("(Formatação: Cor Verde)", "gi"), "[").replace(/[{()}]/g, '');
+			correcao = args.replace(new RegExp("<br>", 'gi'), "\n").replace(new RegExp("Function: Climax", 'gi'), "#").replace(new RegExp("Yes / No", 'gi'), "*").replace(new RegExp("(Green Color)", 'gi'), "[").replace(new RegExp("(Line Break)", 'gi'), "@").replace(new RegExp("Pause", 'gi'), "|").replace(/[{()}]/g, '').replace(new RegExp("<code><</code>", 'gi'), "<").replace(new RegExp("<code>></code>", 'gi'), ">");
 		}
 		document.getElementById('msg-txt-toTrans').value = correcao;
 		document.getElementById('msg-addcomand-confirm').onclick = function(){

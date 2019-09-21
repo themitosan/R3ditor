@@ -143,7 +143,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		textoTraduzido = "";
 		cAtual++;
 	}
-	return final.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)");
+	return final.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)").replace(new RegExp("<code><</code>", 'gi'), "(").replace(new RegExp("<code>></code>", 'gi'), ")");
 }
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
@@ -227,7 +227,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	}
 	// Exibir Texto
 	if (com === 3){
-		var displayText = localStorage.getItem('MSG_Mensagem-' + index);
+		var displayText = localStorage.getItem('MSG_Mensagem-' + index).replace(new RegExp("<code><</code>", 'gi'), "(").replace(new RegExp("<code>></code>", 'gi'), ")");
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-0" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Show Text <input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', true);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(3, \'' + index + '\', ' + index + ', true);">' + 
