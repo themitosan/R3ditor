@@ -43,7 +43,7 @@ You can view / edit the game's internal messages by loading .msg files or using 
 <i>Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.</i>
 
 ### Room Data Table (.rdt) [WIP]
-You can change messages, which item is in the room, change its position and its animation. [WIP]<br>
+You can edit messages, which item is in the room, change its position and its animation. [WIP]<br>
 Expect compatibility improvements and more features soon!
 
 ### Important
