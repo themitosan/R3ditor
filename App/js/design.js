@@ -870,6 +870,7 @@ function TRANSFER_RDT_TO_MSG(){
 	document.getElementById('MSG_saveAs').value = 'Save as MSG';
 	MSG_showMenu(1);
 	MSG_hideTranslateInput();
+	$("#MSG_optionTranslate").css({"display": "none"});
 }
 function RDT_BG_display(){
 	if (enable_mod === true){
