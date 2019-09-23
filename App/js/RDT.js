@@ -27,6 +27,7 @@ var RDT_loop = 0;
 var block_size_hex;
 var startFirstMessage;
 var RDT_loading = false;
+var RDT_CANCRASH = false;
 var RDT_FILEMAP_MSG = [];
 var RDT_MSG_POINTERS = [];
 var RDT_currentAudio = "";
@@ -56,6 +57,7 @@ function RDT_resetVars(){
 	RDT_totalAudios = 0;
 	RDT_loading = false;
 	RDT_ItensArray = [];
+	RDT_CANCRASH = false;
 	RDT_MSG_RESULT_1 = 0;
 	RDT_MSG_RESULT_2 = 0;
 	RDT_MSG_RESULT_3 = 0;
@@ -88,6 +90,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_doAfterSave();
 	RDT_loading = true;
 	RDT_editItemCancel();
+	RDT_CANCRASH = false;
 	localStorage.clear();
 	RDT_FILEMAP_MSG = [];
 	RDT_MSG_RESULT_1 = 0;
@@ -1042,11 +1045,11 @@ function RDT_lookForRDTConfigFile(){
 		});
 		// Messages (MSG)
 		var soma = 0;
+		var e_offset;
+		var s_offset;
 		var BLOCK_MSGS = "";
 		var firstEndOffset = 5;
 		var firstStartOffset = 6;
-		var e_offset = undefined;
-		var s_offset = undefined;
 		var pointerSplit = "Undefined";
 		var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf("[POINTERS]") + 1)]);
 		if (tMessages !== 0){
@@ -1186,6 +1189,10 @@ function RDT_lookForRDTConfigFile(){
 			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 		}
 		// Final
+		$("#RDT_msgBlock_health").removeClass('red');
+		$("#RDT_msgBlock_health").removeClass('green');
+		document.getElementById('RDT_msgBlock_infos').innerHTML = "";
+		document.getElementById('RDT_msgBlock_health').innerHTML = "";
 		if (RDT_requestReload === false){
 			startFirstMessage = undefined;
 			if (RDT_totalMessages !== 0){
@@ -1206,9 +1213,31 @@ function RDT_lookForRDTConfigFile(){
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
 				document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = block_size_hex.toUpperCase();
 				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
+				if (c_block_size_hex !== block_size_hex){
+					var b = parseInt(block_size_hex, 16);
+					var a = parseInt(c_block_size_hex, 16);
+					if (a > b){
+						document.getElementById('RDT_msgBlock_health').innerHTML = "Bad";
+						$("#RDT_msgBlock_health").addClass('red');
+						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_HIGH;
+					} else {
+						document.getElementById('RDT_msgBlock_health').innerHTML = "Bad";
+						$("#RDT_msgBlock_health").addClass('red');
+						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_LOW;
+					}
+					document.getElementById("RDT_lblError_msgExpected").innerHTML = block_size_hex.toUpperCase();
+					document.getElementById("RDT_lblError_msgAtual").innerHTML = c_block_size_hex.toUpperCase();
+					RDT_CANCRASH = true;
+				} else {
+					document.getElementById('RDT_msgBlock_health').innerHTML = "Good";
+					$("#RDT_msgBlock_health").addClass('green');
+					document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_PERFECT;
+					RDT_CANCRASH = false;
+				}
 			} else {
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Undefined";
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Undefined";
+				RDT_CANCRASH = false;
 			}
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;

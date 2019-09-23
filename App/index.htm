@@ -34,11 +34,11 @@
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD">
-			<input type="button" class="botao-menu none" id="btn_run_bio3" value="Run Resident Evil 3 / Bio 3" onclick="R3DITOR_RUN_RE3(0);">
-			<input type="button" class="botao-menu none" id="btn_run_merce" value="Run Mercenaries" onclick="R3DITOR_RUN_MERCE(0);">
+			<input type="button" class="botao-menu none" id="btn_run_bio3" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
+			<input type="button" class="botao-menu none" id="btn_run_merce" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" value="Run Mercenaries (Mod)" onclick="R3DITOR_RUN_MERCE(1);">
-			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="R3DITOR_RUN_RE3(1);">
+			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
+			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
@@ -169,14 +169,15 @@
 				<div class="menu-general-content" id="RDT-msgs">
 					<div id="RDT_BG_2" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Messages - Total: <font id="RDT_lbl-totMsg">???</font></font></center>
-					<div id="RDT_MSG-holder" class="RDT-holder">
+					<div id="RDT_MSG-holder" class="RDT-holder msg_holder_fix">
 						<!-- The messages will be placed here -->
 					</div>
-					<!-- 404: Não há MSG -->
-					<div id="RDT-msg-404" class="none">
-						<center>
-							Whoops... Looks like <font id="RDT-msg-mapName">???</font> don't have any messages! :(
-						</center>
+					<!-- Block Status -->
+					<div class="save-alterar-menu blockInfo_fix">
+						<center><font class="titulo">Message Block Status</font></center><br>
+						<div id="RDT_msgBlock_health" class="RDT_msg_block_health">???</div><br>
+						<div class="menu-separador"></div>
+						<div id="RDT_msgBlock_infos" class="li_div">???</div>
 					</div>
 				</div>
 			</div>
@@ -187,12 +188,6 @@
 					<center><font class="titulo">Items, Files And Maps - Total: <font id="RDT_lbl-totItens">???</font></font></center>
 					<div id="RDT-item-list" class="RDT-holder">
 						<!-- Os Itens dentro da RDT vão aqui -->
-					</div>
-					<!-- 404: Não há itens -->
-					<div id="RDT-item-404" class="none">
-						<center>
-							Whoops... Looks like <font id="RDT-lbl-mapName">???</font> don't have any item, file or map! :(
-						</center>
 					</div>
 				</div>
 				<!-- RDT: Item - Editar -->
@@ -234,7 +229,8 @@
 				<input type="button" value="Show Text" class="botao-add-comando" onclick="MSG_renderDialog(3);">
 				<input type="button" value="Show Special Char" class="botao-add-comando" onclick="MSG_renderDialog(4);">
 				<input type="button" value="Change Text Color" class="botao-add-comando" onclick="MSG_renderDialog(9);">
-				<input type="button" value="Show Item Name" class="botao-add-comando" onclick="MSG_renderDialog(5);"><br><br>
+				<input type="button" value="Show Item Name" class="botao-add-comando" onclick="MSG_renderDialog(5);">
+				<input type="button" value="Select Option" class="botao-add-comando" onclick="MSG_renderDialog(11);"><br><br>
 				<center>Effects</center>
 				<input type="button" value="Execute SE" class="botao-add-comando" onclick="MSG_renderDialog(6);"><br><br>
 				<center>Camera Position and Field</center>

@@ -239,7 +239,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		var MSG_CHAR = MSG_CHARESPECIAL[localStorage.getItem("MSG_comando-" + index)];
 		var RAW_COM = localStorage.getItem("MSG_comando-" + index);
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-3" id="msg-evento-' + index + '">' + 
-			'(' + parseInt(index + 1) + ') Function: Show Special Char (<font class="italic">EA</font>)<input type="button" value="Remove" class="btn-remover-comando" btn-editMSGfix onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'(' + parseInt(index + 1) + ') Function: Show Special Char (<font class="italic">EA</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" btn-editMSGfix onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + MSG_CHAR + ')</font></div>';
 	}
@@ -286,6 +286,13 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'(' + parseInt(index + 1) + ') Function: Change Text Color (F9)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(9, \'' + argsFilter + '\', ' + index + ', true);"><br>Color: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + cor + '</font></div>';
+	}
+	// Select Option R113.RDT
+	if (com === 11){
+		COM_HTML_TEMPLATE = '<div class="evento evt-type-11" id="msg-evento-' + index + '">' + 
+			'(' + parseInt(index + 1) + ') Function: Select Option (<font class="italic">70</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
+			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(11, \'' + args + '\', ' + index + ', true);"><br>Args: ' + 
+			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
 	}
 	// Final
 	if (MSG_increment === true){
@@ -569,6 +576,26 @@ function MSG_COMMAND_TEXTCOLOR(index, isModify){
 		MSG_totalComandos++;
 	}
 	MSG_applyMSGCommand(0);
+}
+// Select Option
+function MSG_COMMAND_SELECTOPTION(index, isModify){
+	if (isModify === undefined){
+		isModify = false;
+	}
+	MSG_increment = false;
+	var attrFinal = document.getElementById('msg-selectOption-id').value;
+	if (attrFinal === ""){
+		attrFinal = "00";
+	}
+	if (attrFinal.length < 2){
+		attrFinal = "0" + attrFinal;
+	}
+	localStorage.setItem("MSG_comando-" + index, "70" + attrFinal);
+	if (isModify === false){
+		MSG_totalComandos++;
+	}
+	MSG_applyMSGCommand(0);
+	MSG_renderDialog(0);
 }
 // Insert Hex Manual
 function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){

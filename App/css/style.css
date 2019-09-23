@@ -724,6 +724,9 @@ input[type="range" i]{
     margin-left: 30px;
     background-image: linear-gradient(to right, #82af9a, transparent);
 }
+.evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
+    background-image: linear-gradient(to right, #d20606, transparent);
+}
 .evt-type-5{ /* Comando: Mostrar Nome de Item */
     width: 96%;
     margin-left: 30px;
@@ -739,8 +742,10 @@ input[type="range" i]{
     margin-left: 30px;
     background-image: linear-gradient(to right, #00950b, transparent);
 }
-.evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
-    background-image: linear-gradient(to right, #ba0000, transparent);
+.evt-type-11{ /* Comando: Selecionar Opção */
+    width: 96%;
+    margin-left: 30px;
+    background-image: linear-gradient(to right, #a29d00, transparent);
 }
 .camPreview{
     display: none;
@@ -844,7 +849,7 @@ input[type="range" i]{
 }
 .RDT-item-lbl-fix-2{
     position: sticky;
-    left: 218px;
+    left: 208px;
 }
 .RDT_btn_fix1{
     top: 174px;
@@ -852,12 +857,20 @@ input[type="range" i]{
     padding: 16px;
     position: absolute;
 }
+.RDT_msg_block_health{
+    text-align: -webkit-center;
+    font-size: -webkit-xxx-large;
+}
 .RDT-message-content{
-    width: 84%;
+    width: 76%;
     min-height: 18px;
     margin-top: -18px;
     margin-left: 94px;
     text-align: -webkit-left;
+}
+.RDT_msgLblErrorAtualLen{
+    position: sticky;
+    left: 109px;
 }
 .logo-fundo{
     top: 32%;
@@ -869,7 +882,7 @@ input[type="range" i]{
 }
 .RDT-Item-Misc{
     width: 30%;
-    left: 130px;
+    left: 114px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
@@ -1028,6 +1041,13 @@ input[type="range" i]{
 }
 .fileList_item_color_c{
     background-image: linear-gradient(to right, #2a2a6f, transparent);
+}
+.blockInfo_fix{
+    height: 449px;
+    left: 972px;
+}
+.msg_holder_fix{
+    width: 942px;
 }
 /*
     MAD EXPERIMENT

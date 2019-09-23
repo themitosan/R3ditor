@@ -486,6 +486,7 @@ var MAPAS = {
 	"0000": "Undefined"
 }
 var MSG_DICIONARIO = {
+	//
 	"00": [false, " ", false],
 	"01": [false, ".", false],
 	"02": [false, "º", false],
@@ -546,7 +547,6 @@ var MSG_DICIONARIO = {
 	"39": [false, "-", false],
 	"3a": [false, "'", false],
 	"3b": [false, "-", false],
-	"3c": [false, "(SPECIAL CHAR 5)", false],
 	"3d": [false, "a", false],
 	"3e": [false, "b", false],
 	"3f": [false, "c", false],
@@ -576,15 +576,17 @@ var MSG_DICIONARIO = {
 	"57": [false, "(Unknown Char / Function Nº 00 - Hex: 57)", true],
 	"58": [false, "(Unknown Char / Function Nº 01 - Hex: 58)", true],
 	"59": [false, "(Unknown Char / Function Nº 02 - Hex: 59)", true],
-	"5a": [false, "(Unknown Char / Function Nº 03 - Hex: 5a)", true],
-	"5b": [false, "(Unknown Char / Function Nº 04 - Hex: 5b)", true],
-	"5c": [false, "(Unknown Char / Function Nº 05 - Hex: 5c)", true],
-	"5d": [false, "(Unknown Char / Function Nº 06 - Hex: 5d)", true],
-	"5e": [false, "(Unknown Char / Function Nº 07 - Hex: 5e)", true],
-	"5f": [false, "(Unknown Char / Function Nº 08 - Hex: 5f)", true],
-	"60": [false, "(Unknown Char / Function Nº 09 - Hex: 60)", true],
-	"61": [false, "(Unknown Char / Function Nº 10 - Hex: 61)", true],
-	"62": [false, "(Unknown Char / Function Nº 11 - Hex: 62)", true],
+	// Formatação
+	"5a": [false, "á", false],
+	"5b": [false, "à", false],
+	"5c": [false, "â", false],
+	"5d": [false, "ã", false],
+	"5e": [false, "é", false],
+	"5f": [false, "õ", false],
+	"60": [false, "ç", false],
+	"61": [false, "ê", false],
+	"62": [false, "ó", false],
+	//
 	"63": [false, "(Unknown Char / Function Nº 12 - Hex: 63)", true],
 	"64": [false, "(Unknown Char / Function Nº 13 - Hex: 64)", true],
 	"65": [false, "(Unknown Char / Function Nº 14 - Hex: 65)", true],
@@ -598,7 +600,6 @@ var MSG_DICIONARIO = {
 	"6d": [false, "(Unknown Char / Function Nº 22 - Hex: 6d)", true],
 	"6e": [false, "(Unknown Char / Function Nº 23 - Hex: 6e)", true],
 	"6f": [false, "(Unknown Char / Function Nº 24 - Hex: 6f)", true],
-	"70": [false, "(Unknown Char / Function Nº 25 - Hex: 70)", true],
 	"71": [false, "(Unknown Char / Function Nº 26 - Hex: 71)", true],
 	"72": [false, "(Unknown Char / Function Nº 27 - Hex: 72)", true],
 	"73": [false, "(Unknown Char / Function Nº 28 - Hex: 73)", true],
@@ -669,16 +670,12 @@ var MSG_DICIONARIO = {
 	"b5": [false, "(Unknown Char / Function Nº 94 - Hex: b5)", true],
 	"b6": [false, "(Unknown Char / Function Nº 95 - Hex: b6)", true],
 	"b7": [false, "(Unknown Char / Function Nº 96 - Hex: b7)", true],
-	"b8": [false, "(Unknown Char / Function Nº 97 - Hex: b8)", true],
 	"b9": [false, "(Unknown Char / Function Nº 98 - Hex: b9)", true],
 	"ba": [false, "(Unknown Char / Function Nº 99 - Hex: ba)", true],
 	"bb": [false, "(Unknown Char / Function Nº 100 - Hex: bb)", true],
 	"bc": [false, "(Unknown Char / Function Nº 101 - Hex: bc)", true],
 	"bd": [false, "(Unknown Char / Function Nº 102 - Hex: bd)", true],
-	"be": [false, "(Unknown Char / Function Nº 103 - Hex: be)", true],
 	"bf": [false, "(Unknown Char / Function Nº 104 - Hex: bf)", true],
-	"c0": [false, "(Unknown Char / Function Nº 105 - Hex: c0)", true],
-	"c1": [false, "(Unknown Char / Function Nº 106 - Hex: c1)", true],
 	"c2": [false, "(Unknown Char / Function Nº 107 - Hex: c2)", true],
 	"c3": [false, "(Unknown Char / Function Nº 108 - Hex: c3)", true],
 	"c4": [false, "(Unknown Char / Function Nº 109 - Hex: c4)", true],
@@ -687,20 +684,17 @@ var MSG_DICIONARIO = {
 	"c7": [false, "(Unknown Char / Function Nº 112 - Hex: c7)", true],
 	"c8": [false, "(Unknown Char / Function Nº 113 - Hex: c8)", true],
 	"c9": [false, "(Unknown Char / Function Nº 114 - Hex: c9)", true],
-	"ca": [false, "(Unknown Char / Function Nº 115 - Hex: ca)", true],
 	"cb": [false, "(Unknown Char / Function Nº 116 - Hex: cb)", true],
 	"cc": [false, "(Unknown Char / Function Nº 117 - Hex: cc)", true],
 	"cd": [false, "(Unknown Char / Function Nº 118 - Hex: cd)", true],
 	"ce": [false, "(Unknown Char / Function Nº 119 - Hex: ce)", true],
 	"cf": [false, "(Unknown Char / Function Nº 120 - Hex: cf)", true],
 	"d0": [false, "(Unknown Char / Function Nº 121 - Hex: d0)", true],
-	"d1": [false, "(Unknown Char / Function Nº 122 - Hex: d1)", true],
 	"d2": [false, "(Unknown Char / Function Nº 123 - Hex: d2)", true],
 	"d3": [false, "(Unknown Char / Function Nº 124 - Hex: d3)", true],
 	"d4": [false, "(Unknown Char / Function Nº 125 - Hex: d4)", true],
 	"d5": [false, "(Unknown Char / Function Nº 126 - Hex: d5)", true],
 	"d6": [false, "(Unknown Char / Function Nº 127 - Hex: d6)", true],
-	"d7": [false, "(Unknown Char / Function Nº 128 - Hex: d7)", true],
 	"d8": [false, "(Unknown Char / Function Nº 129 - Hex: d8)", true],
 	"d9": [false, "(Unknown Char / Function Nº 130 - Hex: d9)", true],
 	"da": [false, "(Unknown Char / Function Nº 131 - Hex: da)", true],
@@ -734,7 +728,8 @@ var MSG_DICIONARIO = {
 	"fc": [false, "(Line Break)<br>", false], // Enter
 	"fd": [false, "(Pause)", false],
 	"ff": [false, "(Unknown CHAR)", false],
-	// Comandos especiais
+	// Comandos especiais (Funções)
+	"70": [true, "(Function: Select Option ", 			11],
 	"fa": [true, "(Function: Show Message ", 	    	 1],
 	"fe": [true, "(Function: End Message ",				 2],
 	"ea": [true, "(Function: Show Special Char ",		 4], // (Depende do valor inserido)
@@ -744,12 +739,22 @@ var MSG_DICIONARIO = {
 	/* 
 		Info: Se o valor na frente de F3 for 43, O game irá executar o som da arma equipada.
 		Mas, quando esse comando for executado, alguns sons de menu / porta irão deixar de ser reproduzidos.
-		Isso depende do soundset que foi carregado no mapa
+		Isso parece depender do soundset que foi carregado no mapa.
 	*/
 	"f4": [true, "(Function: Change Camera ", 			 7], // Trocar Camera
 	"f5": [true, "(Unknown Command used on R101.RDT ", 	 8], // Comando usado na cutscene "Septemer, 28".
 	"f9": [true, "(Function: Text Color ", 				 9], // Formatação - Cor Verde
-	"*#": [false, "(Next Option)", 				 	 false]  // Segunda Opção de climax
+	"*#": [false,"(Next Option)", 				 	 false], // Segunda Opção de climax
+	// CT-STARS COMPAT
+	"d7": [false, " ", false],
+	"3c": [false, "ã", false],
+	"b8": [false, "á", false],
+	"be": [false, "ç", false],
+	"c0": [false, "é", false],
+	"c1": [false, "ê", false],
+	"ca": [false, "ó", false],
+	"d1": [false, "ú", false]
+
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -810,6 +815,16 @@ var MSG_CHARESPECIAL = {
 	"ea2a": "II",
 	"ea2b": "III",
 	"ea2c": "%",
+	// Extra for CUSTOM R3DITOR TEXE.TIM
+	"ea2d": "á",
+	"ea2e": "à",
+	"ea2f": "â",
+	"ea30": "ã",
+	"ea31": "é",
+	"ea32": "õ",
+	"ea33": "ç",
+	"ea34": "ê",
+	//
 	"ea35": "!?"
 }
 var MSG_DICIONARIO_REVERSO = {
@@ -907,21 +922,23 @@ var MSG_DICIONARIO_REVERSO = {
 	"ú": "51",
 	"ù": "51",
 	"û": "51",
-	"ê": "41",
-	"é": "41",
 	"è": "41",
 	"ë": "41",
-	"ç": "3f",
-	"õ": "4b",
-	"ó": "4b",
 	"ò": "4b",
 	"ô": "4b",
 	"ö": "4b",
 	"ã": "3d",
-	"á": "3d",
-	"à": "3d",
-	"â": "3d",
 	"ä": "3d",
+	// Extra for CUSTOM TEXE.TIM
+	"á": "5a",
+	"à": "5b",
+	"â": "5c",
+	"ã": "5d",
+	"é": "5e",
+	"õ": "5f",
+	"ç": "60",
+	"ê": "61",
+	"ó": "62",
 	// Funções Especiais
 	"#": "a0", // Climax
 	"~": "fe", // Segunda alternativa de climax

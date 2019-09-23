@@ -219,6 +219,25 @@ function R3DITOR_RUN_MERCE(mode){
 	}
 	scrollLog();
 }
+// Verificar por erros
+function checkCanPlay(runArgs, gameId){
+	if (RDT_CANCRASH === true){
+		var ask = confirm("Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?");
+		if (ask === true){
+			if (gameId === "" || gameId === 1 || gameId === undefined){
+				R3DITOR_RUN_RE3(runArgs);
+			} else {
+				R3DITOR_RUN_MERCE(runArgs);
+			}
+		}
+	} else {
+		if (gameId === "" || gameId === 1 || gameId === undefined){
+			R3DITOR_RUN_RE3(runArgs);
+		} else {
+			R3DITOR_RUN_MERCE(runArgs);
+		}
+	}
+}
 // Remover pastas recursivamente
 function deleteFolderRecursive(path){
 	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);

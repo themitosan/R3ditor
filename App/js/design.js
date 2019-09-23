@@ -677,7 +677,10 @@ function MSG_renderDialog(id, args, index, isMod){
 		}
 	}
 	// Trocar Câmera
-	if (id === 7){ 
+	if (id === 7){
+		if (args === ""){
+			args = "00";
+		}
 		$("#dialog-msg-addcomand").css({"top": "200px"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Change Camera";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_SHOWCAMERA;
@@ -735,6 +738,17 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_COMMAND_INSERTHEXMANUAL(index, isMod);
 		}
 		MSG_checkHexLength();
+	}
+	// Selecionar Opção
+	if (id === 11){
+		$("#dialog-msg-addcomand").css({"top": "156px"});
+		console.log(args);
+		document.getElementById("msg-addcomand-title").innerHTML = "Select Option";
+		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_SELECTOPTION;
+		document.getElementById('msg-selectOption-id').value = args;
+		document.getElementById('msg-addcomand-confirm').onclick = function(){
+			MSG_COMMAND_SELECTOPTION(index, isMod);
+		}
 	}
 }
 function MSG_hideTranslateInput(){
@@ -838,8 +852,6 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl_totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
-	document.getElementById("RDT-lbl-mapName").innerHTML = getFileName(ORIGINAL_FILENAME);
-	document.getElementById("RDT-msg-mapName").innerHTML = getFileName(ORIGINAL_FILENAME);
 	document.getElementById("RDT-aba-menu-2").value = "Messages (" + RDT_totalMessages + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
 	document.getElementById("RDT-lbl-FILENAME").innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT";
@@ -905,19 +917,15 @@ function RDT_BG_display(){
 }
 function RDT_Error_404(){
 	if (RDT_totalMessages < 1){
-		$("#RDT-msg-404").css({"display": "block"});
 		$("#RDT_MSG-holder").css({"display": "none"});
 		$("#RDT-aba-menu-2").css({"display": "none"});
 	} else {
-		$("#RDT-msg-404").css({"display": "none"});
 		$("#RDT_MSG-holder").css({"display": "block"});
 	}
 	if (RDT_totalItensGeral < 1){
-		$("#RDT-item-404").css({"display": "block"});
 		$("#RDT-item-list").css({"display": "none"});
 		$("#RDT-aba-menu-3").css({"display": "none"});
 	} else {
-		$("#RDT-item-404").css({"display": "none"});
 		$("#RDT-item-list").css({"display": "block"});
 		$("#RDT-aba-menu-3").css({"display": "inline"});
 	}
