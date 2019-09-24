@@ -59,7 +59,7 @@ input[type="range" i]{
 }
 .blockUsage{
     top: 596px;
-    width: 632px;
+    width: 934px;
     padding: 6px;
     height: auto;
     display: none;
@@ -581,7 +581,7 @@ input[type="range" i]{
 }
 .msg-raw{
     top: 455px;
-    width: 624px;
+    width: 926px;
     height: 152px;
     overflow: auto;
     margin-top: 4px;
@@ -617,20 +617,6 @@ input[type="range" i]{
     padding-right: 10px;
     padding-bottom: 6px;
     background-image: linear-gradient(to bottom, #595959, #323240);
-}
-.msg-legend{
-    top: 459px;
-    left: 656px;
-    width: 280px;
-    height: 152px;
-    overflow: auto;
-    padding-top: 6px;
-    position: absolute;
-    padding-left: 10px;
-    border-radius: 6px;
-    padding-right: 10px;
-    padding-bottom: 6px;
-    background-image: linear-gradient(to bottom, #274048, #15292f);
 }
 .msg-addcomand-menu{
     top: 48px;
@@ -882,7 +868,7 @@ input[type="range" i]{
 }
 .RDT-Item-Misc{
     width: 30%;
-    left: 114px;
+    left: 120px;
     height: 70px;
     position: sticky;
     margin-top: -70px;

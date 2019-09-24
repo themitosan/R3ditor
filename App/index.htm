@@ -33,7 +33,7 @@
 			<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
 		</div>
 		<!-- Menu MOD -->
-		<div class="menu-topo mod_menu none" id="menu-topo-MOD">
+		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
 			<input type="button" class="botao-menu none" id="btn_run_bio3" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
 			<input type="button" class="botao-menu none" id="btn_run_merce" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
 			<!-- Direita -->
@@ -139,7 +139,7 @@
 			</div>
 			<!-- RDT: Menu Geral -->
 			<div class="menu" id="RDT_menu-1">
-				<div class="menu-general-content" id="RDT-geral">
+				<div class="menu-general-content" id="RDT-geral" onclick="main_closeFileList();">
 					<div id="RDT_BG_1" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">General</font></center>
 					File Name: <font class="RDT-menu-geral-text" id="RDT-lbl-FILENAME">???</font><br>
@@ -167,14 +167,14 @@
 			</div>
 			<!-- RDT: Mensagens -->
 			<div class="menu none" id="RDT_menu-2">
-				<div class="menu-general-content" id="RDT-msgs">
+				<div class="menu-general-content" id="RDT-msgs" onclick="main_closeFileList();">
 					<div id="RDT_BG_2" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Messages - Total: <font id="RDT_lbl-totMsg">???</font></font></center>
 					<div id="RDT_MSG-holder" class="RDT-holder msg_holder_fix">
 						<!-- The messages will be placed here -->
 					</div>
 					<!-- Block Status -->
-					<div class="save-alterar-menu blockInfo_fix" id="RDT_MSGBLOCKINFO">
+					<div class="save-alterar-menu blockInfo_fix" id="RDT_MSGBLOCKINFO" onclick="main_closeFileList();">
 						<center><font class="titulo">Message Block Status</font></center><br>
 						<div id="RDT_msgBlock_health" class="RDT_msg_block_health">???</div><br>
 						<div class="menu-separador"></div>
@@ -272,18 +272,6 @@
 					Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
 				</center>
 			</div>
-			<!-- Legenda -->
-			<div class="msg-legend">
-				<center>(Hex) Legend:</center>
-				<div class="menu-separador"></div>
-				FA XX<font class="msg-legenda-sticky">- Start Message (Header)</font><br>
-				FE XX<font class="msg-legenda-sticky">- End Message</font>
-				<div class="menu-separador"></div>
-				F3 XX<font class="msg-legenda-sticky">- Play SE</font><br>
-				F4 XX<font class="msg-legenda-sticky">- Change Camera</font><br>
-				F8 XX<font class="msg-legenda-sticky">- Show Item Name</font><br>
-				F5 XX<font class="msg-legenda-sticky">- Unknown Command (R101.RDT)</font><br>
-			</div>
 			<!-- MSG: Hex Input -->
 			<div class="msg-hex" id="text-hex-editor">
 				Hex Input - Translator:
@@ -300,7 +288,7 @@
 			<!-- Menu Geral -->
 			<div class="menu" id="menu-info">
 				<!-- Menu Geral -->
-				<div class="menu-general-content none" id="save-geral">
+				<div class="menu-general-content none" id="save-geral" onclick="main_closeFileList();">
 					<div id="s-menu-general">
 						<center><font class="titulo">General - Current Slot: <font id="lbl-currentSlot">1</font></font></center>
 						In-Game Time (IGT): <font class="menu-geral-text" id="lbl-time">???</font><br>
@@ -329,7 +317,7 @@
 						<div class="menu-separador"></div>
 						Save slots:<br>
 						<!-- Saves -->
-						<div class="save-grid">
+						<div class="save-grid" onclick="main_closeFileList();">
 							<div class="save-number">01</div><div class="slot-save" onclick="save_renderSlot(1);" id="slt-save-1">N/A</div>
 							<div class="save-number">02</div><div class="slot-save" onclick="save_renderSlot(2);" id="slt-save-2">N/A</div>
 							<div class="save-number">03</div><div class="slot-save" onclick="save_renderSlot(3);" id="slt-save-3">N/A</div>
@@ -348,7 +336,7 @@
 						</div>
 					</div>
 					<!-- Alterar -->
-					<div id="save-alterar" class="save-alterar-menu">
+					<div id="save-alterar" class="save-alterar-menu" onclick="main_closeFileList();">
 						<center><font class="titulo">Modify</font></center><br>
 						Modify Time: 
 						<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Change"><br>
@@ -572,7 +560,7 @@
 		<!-- AppLogo -->
 		<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
 		<!-- Log -->
-		<div class="log-holder" id="log-programa">
+		<div class="log-holder" id="log-programa" onclick="main_closeFileList();">
 			<!-- os logs vão aparecer aqui -->
 		</div>
 		<!-- File Loader -->

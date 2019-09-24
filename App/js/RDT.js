@@ -298,13 +298,13 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 			id = "0" + id;
 		}
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
-		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
+		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
 		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
 		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
 		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: ' + 
-		'<font class="italic RDT-item-lbl-fix">' + r + '</font><br><div class="RDT-Item-Misc">Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>' + 
-		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br>Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br></div></div>';
+		'<font class="italic RDT-item-lbl-fix">' + r + '</font><br><div class="RDT-Item-Misc">Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br>' + 
+		'Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id + " - " + msg;
@@ -1579,6 +1579,7 @@ function RDT_Backup(){
 	}
 }
 function RDT_restoreLastBackup(){
+	main_closeFileList();
 	if (RDT_lastBackup !== ""){
 		var loc = "Unknown";
 		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf("-")).toUpperCase();

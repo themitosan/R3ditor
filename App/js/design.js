@@ -400,8 +400,8 @@ function showModIGT(){
 function showModSidepack(person){
 	adjustDialogSave(40);
 	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_SIDEPACK;
-	var pp = undefined;
-	var st = undefined;
+	var pp;
+	var st;
 	if (person === 1){ // J
 		pp = "Jill Valentine";
 		st = SIDEPACK[jSide][0];
@@ -421,9 +421,9 @@ function showModSidepack(person){
 function showModCurrentArma(person){
 	adjustDialogSave(34);
 	document.getElementById("dialog_render").innerHTML = DIALOG_SELECT_ARMA;
-	var pp = undefined;
-	var st = undefined;
-	var arma = undefined;
+	var pp;
+	var st;
+	var arma;
 	if (person === 1){ // Jill
 		pp = "Jill Valentine";
 		arma = jArmaEquip;
@@ -1034,7 +1034,6 @@ function RDT_showCanvasTab(){
 	RDT_selectPoint(RDT_selectedPoint);
 	RDT_showMenu(4);
 }
-
 // Updater
 function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});

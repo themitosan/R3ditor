@@ -171,11 +171,13 @@ function R3DITOR_RUN_RE3(mode){
 				var msg = " - TESTING Resident Evil 3 / Biohazard 3...";
 				document.title = APP_NAME + msg;
 				addLog('log', "INFO" + msg);
+				log_separador();
 			} else {
 				RE3_RUNNING = true;
 				var msg = " - RUNNING Resident Evil 3 / Biohazard 3...";
 				document.title = APP_NAME + msg;
 				addLog('log', "INFO" + msg);
+				log_separador();
 			}
 			if (mode === 0){
 				process.chdir(GAME_PATH);
