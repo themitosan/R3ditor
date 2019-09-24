@@ -69,6 +69,7 @@
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
+			<input type="button" class="botao-menu right" id="SAv_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
 		</div>
 		<!-- Lista de Arquivos Disponiveis -->
 		<div class="fileList none" id="avaliable_fileList">
@@ -173,7 +174,7 @@
 						<!-- The messages will be placed here -->
 					</div>
 					<!-- Block Status -->
-					<div class="save-alterar-menu blockInfo_fix">
+					<div class="save-alterar-menu blockInfo_fix" id="RDT_MSGBLOCKINFO">
 						<center><font class="titulo">Message Block Status</font></center><br>
 						<div id="RDT_msgBlock_health" class="RDT_msg_block_health">???</div><br>
 						<div class="menu-separador"></div>

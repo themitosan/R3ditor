@@ -926,6 +926,24 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	}
 	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex + quantHex + atrib + nulo + " - Item: " + itemHex + " (" + titulo + ") - Quantity: " + quantHex + " (" + parseInt(quantHex, 16) + ") - Attr.: " + atrib + " (" + ATTR[atrib][0] + ")");
 }
+function SAVE_clearAllSaves(){
+	if (SAVE_arquivoBruto !== undefined){
+		var ask = confirm("Warning: This will unrecoverably format your saves file.\n\nDo you want to continue anyway?");
+		if (ask === true){
+			if(fs.existsSync(ORIGINAL_FILENAME) === true){
+				fs.unlinkSync(ORIGINAL_FILENAME);
+				var newFile = fs.readFileSync(APP_PATH + "\\App\\tools\\format.r3save", 'hex');
+				fs.writeFileSync(ORIGINAL_FILENAME, newFile, 'hex');
+				log_separador();
+				addLog('log',"INFO - Process Complete!");
+				log_separador();
+				scrollLog();
+				alert("Process Complete!");
+				reload();
+			}
+		}
+	}
+}
 /// Time Helpers
 /*  _____________________________________________________________________________________________________
    |																									 \

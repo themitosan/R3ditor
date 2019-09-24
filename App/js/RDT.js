@@ -89,9 +89,9 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	mapfile = [];
 	RDT_doAfterSave();
 	RDT_loading = true;
-	RDT_editItemCancel();
 	RDT_CANCRASH = false;
 	localStorage.clear();
+	RDT_editItemCancel();
 	RDT_FILEMAP_MSG = [];
 	RDT_MSG_RESULT_1 = 0;
 	RDT_MSG_RESULT_2 = 0;

@@ -35,6 +35,7 @@ function main_renderFileList(id){
 		var imgPreview;
 		var origName = "Unknown";
 		var origCity = "Unknown";
+		var pFile = RDT_lastFileOpened;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
 		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
 			imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
@@ -52,15 +53,18 @@ function main_renderFileList(id){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
 		}
-		if (mFile.length > 57){
+		if (mFile.length > 44){
 			mFile = "..." + mFile.slice(10, mFile.length);
 		}
-		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
+		if (pFile.length > 44){
+			pFile = "..." + pFile.slice(10, pFile.length);
+		}
+		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-			'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: ' + mFile + 
+			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: ' + pFile +  '<br>Map File: ' + mFile + 
 			'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$("#RDT_recentFile").append(fileList_HTML_template);
-		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "126px", "width": "630px", "top": "442px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)"});
+		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)"});
 	} else {
 		document.getElementById("fileListHolder").innerHTML = "";
 	}
@@ -729,7 +733,7 @@ function MSG_renderDialog(id, args, index, isMod){
 		} else {
 			msgHex = "";
 		}
-		$("#dialog-msg-addcomand").css({"top": "156px"});
+		$("#dialog-msg-addcomand").css({"top": "126px"});
 		$("#msg-addcomand-confirm").css({"display": "none"});
 		document.getElementById("msg-addcomand-title").innerHTML = "Insert / Modify Hex";
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_INSERTHEX;
@@ -1073,6 +1077,7 @@ function R3DITOR_movePercent(id, percent, status){
 function R3DITOR_RUNGAME(id){
 	if (id === 0){
 		$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+		$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 		$("#RDT_audio_holder").css({"height": "472px"});
 		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
@@ -1100,6 +1105,7 @@ function R3DITOR_RUNGAME(id){
 			$("#btn_run_merce").css({"display": "inline"});
 		}
 		if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+			$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 			$("#RDT_audio_holder").css({"height": "430px"});
 			$("#RDT-canvas-hold").css({"height": "472px"});
 			$("#RDT-audio-hold").css({"height": "472px"});
