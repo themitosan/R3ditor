@@ -298,7 +298,7 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 			id = "0" + id;
 		}
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
-		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + index + ') ' + tipo + ': <font class="italic">' + convert + 
+		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
 		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
 		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
@@ -313,30 +313,45 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	}
 	scrollLog();
 }
-function RDT_ITEM_APPLY(index, type){
-	var novaHex = undefined;
-	var nQuant = undefined;
-	if (type === 1){
-		novaHex = document.getElementById('RDT-item-select').value;
-		nQuant = parseInt(document.getElementById('RDT_item-edit-Quant').value);
-	}
-	if (type === 2){
-		novaHex = document.getElementById('RDT-file-select').value;
-		nQuant = 1;
-	}
-	if (type === 3){
-		novaHex = document.getElementById('RDT-map-select').value;
-		nQuant = 1;
-	}
-	if (nQuant > 255){
-		nQuant = 255;
-	}
-	if (nQuant < 0){
-		nQuant = 0;
-	}
-	var quant = nQuant.toString(16);
-	if (quant.length < 2){
-		quant = "0" + quant;
+function RDT_ITEM_APPLY(index, type, convert){
+	var nQuant;
+	var novaHex;
+	if (convert === false && convert !== undefined && convert !== null){
+		if (type === 1){
+			novaHex = document.getElementById('RDT-item-select').value;
+			nQuant = parseInt(document.getElementById('RDT_item-edit-Quant').value);
+		}
+		if (type === 2){
+			novaHex = document.getElementById('RDT-file-select').value;
+			nQuant = 1;
+		}
+		if (type === 3){
+			novaHex = document.getElementById('RDT-map-select').value;
+			nQuant = 1;
+		}
+		if (nQuant > 255){
+			nQuant = 255;
+		}
+		if (nQuant < 0){
+			nQuant = 0;
+		}
+		var quant = nQuant.toString(16);
+		if (quant.length < 2){
+			quant = "0" + quant;
+		}
+	} else {
+		var newType = parseInt(document.getElementById('RDT_convertItemTo').value);
+		quant = "01";
+		type = newType;
+		if (newType === 1){
+			novaHex = "01";
+		}
+		if (newType === 2){
+			novaHex = "86";
+		}
+		if (newType === 3){
+			novaHex = "a4";
+		}
 	}
 	var novaX = document.getElementById('RDT_lbl_point_x_hex').value.slice(0, 4).toLowerCase();
 	var novaY = document.getElementById('RDT_lbl_point_y_hex').value.slice(0, 4).toLowerCase();
@@ -381,6 +396,7 @@ function RDT_ITEM_APPLY(index, type){
 		error = "The Animation var must be 8 bytes long!";
 	}
 	// Reconstruindo item
+	console.log(novaHex);
 	if (canBuild === true){
 		var RDT_ITEM_COMPILADO = undefined;
 		var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);  

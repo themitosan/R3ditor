@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	me ajuda
 */
-var TESTEVAR = 0;
 function renderRanges(modo, first){
 	if (modo == 0){ // invent
 		var tot = 11;

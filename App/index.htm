@@ -5,11 +5,14 @@
 		<title>Wait...</title>
 		<meta charset="ISO-8859-1"> 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<!-- External API -->
+		<script type="text/javascript" src="js/external_api/jquery.min.js"></script>
+		<!--<script type="text/javascript" src="js/external_api/html2canvas.js"></script>-->
+		<!--<script type="text/javascript" src="js/external_api/canvas2image.js"></script>-->
 		<!-- Database -->
 		<script type="text/javascript" src="js/database.js"></script>
 		<script type="text/javascript" src="js/html_includes.js"></script>
 		<!-- Execs -->
-		<script type="text/javascript" src="js/jquery.min.js"></script>
 		<script type="text/javascript" src="js/design.js"></script>
 		<script type="text/javascript" src="js/wizard.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
@@ -19,14 +22,16 @@
 		<script type="text/javascript" src="js/save.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
+		<script type="text/javascript" src="js/filegen.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
-	<body>
+	<body id="BD">
 		<!-- Menu Principal -->
 		<div class="menu-topo none" id="menu-topo">
-			<input type="button" class="botao-menu" value="Bio 3 Save Editor (.sav)" onclick="main_menu(1);">
-			<input type="button" class="botao-menu" value="Bio 3 MSG Editor (.msg)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="Bio 3 RDT Editor (.rdt)" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="SAV Editor (.sav)" onclick="main_menu(1);">
+			<input type="button" class="botao-menu" value="MSG Editor (.msg)" onclick="main_menu(2);">
+			<input type="button" class="botao-menu" value="RDT Editor (.rdt)" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="File Editor" onclick="main_menu(4);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
@@ -70,6 +75,26 @@
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
 			<input type="button" class="botao-menu right" id="SAv_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
+		</div>
+		<!-- Menu File Gen -->
+		<div class="menu-topo none" id="menu-topo-fileEditor">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+		</div>
+		<!-- FORM: File Generator -->
+		<div class="none" id="menu-FILEGEN">
+			<input type="button" id="FILEGEN-aba-menu" class="aba aba-left-fix aba-select" value="File Generator">
+			<!-- FILEGEN: General -->
+			<div class="menu" id="FILEGEN_menu">
+				<div class="menu-general-content" id="FILEGEN_holder">
+					<center><font class="titulo">File Generator</font></center>
+					<div class="RDT-holder" id="FILEGEN_contents">
+						<textarea placeholder="Insert your text here" class="FG_TEXT" id="FILEGEN_text" oninput="FG_RENDER();"></textarea>
+						<input type="button" value="Toggle Size (Size: Double)" id="BTN_saveImage" class="RDT-btn-apply color-white FG_BTN" onclick="FILEGEN_TOGGLE_RES();">
+						<!-- Canvas de texto -->
+						<div class="FG_CANVAS" id="FILEGEN_CANVAS"></div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- Lista de Arquivos Disponiveis -->
 		<div class="fileList none" id="avaliable_fileList">
@@ -183,7 +208,7 @@
 				</div>
 			</div>
 			<!-- RDT: Itens -->
-			<div class="menu none" id="RDT_menu-3">
+			<div class="menu none" id="RDT_menu-3" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-ifm">
 					<div id="RDT_BG_3" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Items, Files And Maps - Total: <font id="RDT_lbl-totItens">???</font></font></center>
@@ -206,11 +231,18 @@
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
 						<input type="button" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
-						<div style="margin-top: 8px;" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
-						<div style="margin-top: -5px;" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
-						<div style="margin-top: -5px;" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
-						<div style="margin-top: -5px;" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
+						<div class="RDT_coordsHolder_A" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
+						<div class="RDT_coordsHolder_B" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
+						<div class="RDT_coordsHolder_B" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
+						<div class="RDT_coordsHolder_B" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
 						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value=""></div>
+						<div>
+							Convert To: 
+							<select id="RDT_convertItemTo" class="item-select-mod RDT-item-pos" style="width: 120px;">
+								<option value="1">Item</option><option value="2">File</option><option value="3">Map</option>
+							</select>
+							<input type="button" value="Convert!" id="RDT_applyConvertItem" class="botao-menu" style="margin-left: 16px;" onclick="">
+						</div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
@@ -371,7 +403,7 @@
 				<div class="none" id="save-jill">
 					<div class="menu-general-content">
 						<div class="status-menu" id="JILL-STATUS">
-							<img src="img/JILL-ICON.png" draggable="false" class="img-person-icon">
+							<img src="img/JILL-ICON.png" class="img-person-icon">
 							<div class="txt-status">Jill Valentine - Status: <font class="" id="JILL-LIFESTATUS">???</font></div>
 						</div>
 						<!-- Baú -->
@@ -385,7 +417,7 @@
 						<div class="menu-re3-box" id="j_info">
 							<center><font class="title-inv">Info</font><center>
 							<div class="info-icon-holder">
-								<img src="img/details-00.png" draggable="false" class="none" id="icon-info-00">
+								<img src="img/details-00.png" class="none" id="icon-info-00">
 								<div class="info-details" id="text-info-00">
 									<!-- as infos vão aqui -->
 								</div>
@@ -397,34 +429,34 @@
 							<div id="JILL-INVE" class="inventario">
 								<a id="btn-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-1" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-1" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-1" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-2" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-2" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-2" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-3" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-3" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-3" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-4" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-4" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-4" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-5" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-5" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-5" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-6" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-6" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-6" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-7" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-7" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-7" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-8" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-8" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-8" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-9" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-9" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-9" onclick="addInfo(0, '00');">
 								<a id="btn-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-10" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-10" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-10" onclick="addInfo(0, '00');">
 							</div>
 						</div>
 					</div>
@@ -433,7 +465,7 @@
 				<div class="none" id="save-carlos">
 					<div class="menu-general-content">
 						<div class="status-menu" id="CARLOS-STATUS">
-							<img src="img/CARLOS-ICON.png" draggable="false" class="img-person-icon">
+							<img src="img/CARLOS-ICON.png" class="img-person-icon">
 							<div class="txt-status">Carlos Oliveira - Status: <font class="" id="CARLOS-LIFESTATUS">???</font></div>
 						</div>
 						<!-- Baú -->
@@ -446,7 +478,7 @@
 						<div class="menu-re3-box" id="c_info">
 							<center><font class="title-inv">Info</font><center>
 							<div class="info-icon-holder">
-								<img src="img/details-00.png" draggable="false" class="none" id="icon-info-01">
+								<img src="img/details-00.png" class="none" id="icon-info-01">
 								<div class="info-details" id="text-info-01">
 									<!-- as infos vão aqui -->
 								</div>
@@ -458,34 +490,34 @@
 							<div id="CARLOS-INVE" class="inventario">
 								<a id="btn-c-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-1" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-1" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-1" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-2" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-2" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-2" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-3" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-3" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-3" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-4" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-4" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-4" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-5" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-5" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-5" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-6" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-6" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-6" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-7" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-7" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-7" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-8" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-8" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-8" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-9" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-9" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-9" onclick="addInfo(0, '00');">
 								<a id="btn-c-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-10" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" draggable="false" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-10" onclick="addInfo(0, '00');"
+								<img src="img/box-set-0.png" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-10" onclick="addInfo(0, '00');"
 								>
 							</div>
 						</div>
@@ -504,7 +536,7 @@
 		<!-- Sobre -->
 		<div class="about none" id="about-r3ditor">
 			<center>
-				<img src="img/logo.png" draggable="false" alt="R3ditor-Logo" class="appLogo"><br>
+				<img src="img/logo.png" alt="R3ditor-Logo" class="appLogo"><br>
 				<font class="textLOGO">R3ditor</font><br>
 				Version: <font id="app_version">???</font><br>
 				Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
@@ -558,7 +590,7 @@
 			</center>
 		</div>
 		<!-- AppLogo -->
-		<img src="img/logo.png" id="img-logo" draggable="false" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
+		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
 		<!-- Log -->
 		<div class="log-holder" id="log-programa" onclick="main_closeFileList();">
 			<!-- os logs vão aparecer aqui -->

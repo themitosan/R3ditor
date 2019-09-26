@@ -64,7 +64,7 @@ function main_renderFileList(id){
 			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: ' + pFile +  '<br>Map File: ' + mFile + 
 			'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$("#RDT_recentFile").append(fileList_HTML_template);
-		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)"});
+		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)","border-top-left-radius": "0px", "border-bottom-left-radius": "0px"});
 	} else {
 		document.getElementById("fileListHolder").innerHTML = "";
 	}
@@ -110,9 +110,9 @@ function main_renderFileList(id){
 				$("#fileListHolder").append(fileList_HTML_template);
 				c++;
 			}
-			$("#FILELIST_goBackBtn").css({"display": "inline"});
-			$("#avaliable_fileList").css({"display": "block"});
 			$("#fileListHolder").css({"display": "block"});
+			$("#FILELIST_goBackBtn").css({"display": "inline"});
+			$("#avaliable_fileList").css({"display": "block", "border-bottom-right-radius": "2px"});
 		} else {
 			console.warn('WARN - Unable to render FileList!');
 			addLog('warn', 'WARN - Unable to render FileList!');
@@ -200,6 +200,14 @@ function main_menu(anim){
 		if (RDT_lastFileOpened !== ""){
 			main_renderFileList(1);
 		}
+	}
+	if (anim === 4){ // FILEGEN
+		document.title = APP_NAME + " - File Generator";
+		$("#menu-topo-fileEditor").css({"display": "block"});
+		$("#FILEGEN_contents").css({"height": "434px"});
+		$("#menu-FILEGEN").css({"display": "inline"});
+		$("#FILEGEN_holder").css({"height": "474px"});
+		$("#FILEGEN_menu").css({"height": "484px"});
 	}
 }
 function RDT_checkBKP(){
@@ -942,7 +950,7 @@ function RDT_Error_404(){
 function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant, header){
 	main_closeFileList();
 	$("#RDT_openFileList").css({"display": "none"});
-	var nome = undefined;
+	var nome;
 	if (hex.length < 2){
 		hex = "0" + hex;
 	}
@@ -959,6 +967,7 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-item-select").removeClass("none");
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-map-select").addClass("none");
+		$("#RDT_btnEditPos").css({"top": "174px"});
 	}
 	// File
 	if (id === 2){
@@ -967,6 +976,7 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-file-select").removeClass("none");
 		$("#RDT-edit-item-select").addClass("none");
 		$("#RDT-edit-map-select").addClass("none");
+		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
 	// Map
 	if (id === 3){
@@ -975,17 +985,21 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-map-select").removeClass("none");
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-item-select").addClass("none");
+		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
+	document.getElementById("RDT-lbl-edit-index").innerHTML = parseInt(index + 1);
 	document.getElementById('RDT_item-edit-X').innerHTML = posX.toUpperCase();
 	document.getElementById('RDT_item-edit-Y').innerHTML = posY.toUpperCase();
 	document.getElementById('RDT_item-edit-Z').innerHTML = posZ.toUpperCase();
 	document.getElementById('RDT_item-edit-R').innerHTML = posR.toUpperCase();
 	document.getElementById('RDT_item-edit-A').value = anim.toUpperCase();
-	document.getElementById('RDT_item-edit-Quant').value = quant;
 	document.getElementById("RDT-lbl-item-edit").innerHTML = nome;
-	document.getElementById("RDT-lbl-edit-index").innerHTML = index;
+	document.getElementById('RDT_item-edit-Quant').value = quant;
 	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
-		RDT_ITEM_APPLY(index, id);
+		RDT_ITEM_APPLY(index, id, false);
+	}
+	document.getElementById('RDT_applyConvertItem').onclick = function(){
+		RDT_ITEM_APPLY(index, id, true);
 	}
 	document.getElementById('RDT_canvas_btn_apply').onclick = function(){
 		RDT_hideCanvasTab();
@@ -1076,13 +1090,16 @@ function R3DITOR_movePercent(id, percent, status){
 function R3DITOR_RUNGAME(id){
 	if (id === 0){
 		$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+		$("#FILEGEN_contents").css({"height": "474px"});
 		$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 		$("#RDT_audio_holder").css({"height": "472px"});
 		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
+		$("#FILEGEN_holder").css({"height": "516px"});
 		$("#RDT-item-list").css({"height": "472px"});
 		$("#RDT-Item-Edit").css({"height": "458px"});
+		$("#FILEGEN_menu").css({"height": "526px"});
 		$("#RDT_menu-1").css({"height": "528px"});
 		$("#RDT_menu-2").css({"height": "528px"});
 		$("#RDT_menu-3").css({"height": "528px"});
@@ -1104,13 +1121,16 @@ function R3DITOR_RUNGAME(id){
 			$("#btn_run_merce").css({"display": "inline"});
 		}
 		if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+			$("#FILEGEN_contents").css({"height": "434px"});
 			$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 			$("#RDT_audio_holder").css({"height": "430px"});
 			$("#RDT-canvas-hold").css({"height": "472px"});
 			$("#RDT-audio-hold").css({"height": "472px"});
 			$("#RDT_MSG-holder").css({"height": "430px"});
+			$("#FILEGEN_holder").css({"height": "474px"});
 			$("#RDT-item-list").css({"height": "428px"});
 			$("#RDT-Item-Edit").css({"height": "418px"});
+			$("#FILEGEN_menu").css({"height": "484px"});
 			$("#RDT_menu-1").css({"height": "482px"});
 			$("#RDT_menu-2").css({"height": "482px"});
 			$("#RDT_menu-3").css({"height": "482px"});

@@ -205,7 +205,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 		cAtual++;
 	}
 	// Final
-	document.getElementById("text-msg-raw").innerHTML = finalArray;
+	document.getElementById("text-msg-raw").innerHTML = finalArray.toUpperCase();
 	MSG_doTheTitleThing();
 	MSG_renderCommands();
 }
@@ -739,7 +739,7 @@ function MSG_applyMSGCommand(mode){
 		c++;
 	}
 	MSG_LENGTH = newHex.length;
-	document.getElementById("text-msg-raw").innerHTML = finalArray;
+	document.getElementById("text-msg-raw").innerHTML = finalArray.toUpperCase();
 	document.getElementById("lbl-msg-length").innerHTML = MSG_LENGTH + " (Hex: " + parseHex(MSG_LENGTH).toUpperCase() + ")";
 	if (ORIGINAL_FILENAME !== undefined){
 		if (localStorage.getItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase()) !== null){

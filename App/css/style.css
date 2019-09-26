@@ -17,6 +17,9 @@
 html{
     -webkit-user-select: none;
 }
+img{
+    -webkit-user-drag: none;
+}
 body{
     background-image: linear-gradient(to bottom, #000, #0f0c23);
 	color: #fff;
@@ -810,6 +813,12 @@ input[type="range" i]{
     border-radius: 6px;
     margin-bottom: 6px;
 }
+.RDT_coordsHolder_A{
+    margin-top: 8px;
+}
+.RDT_coordsHolder_B{
+    margin-top: -5px;
+}
 .RDT-item-bg{
     background-image: linear-gradient(to bottom, #507499, #273c50);
 }
@@ -1036,7 +1045,7 @@ input[type="range" i]{
     width: 942px;
 }
 /*
-    MAD EXPERIMENT
+    Item Map
 */
 .divCanvas{
     left: 62px;
@@ -1143,4 +1152,36 @@ input[type="range" i]{
     padding-right: 10px;
     overflow: auto;
     height: 324px;
+}
+/*
+    Filegen
+*/
+.FG_CANVAS{
+    zoom: 2;
+    left: 400px;
+    width: 256px;
+    height: 176px;
+    overflow: hidden;
+    position: absolute;
+    background-color: #000;
+    box-shadow: 0 0 10px #616161d9;
+}
+.FG_TEXT{
+    z-index: 9;
+    color: #0f0;
+    border: 2px;
+    resize: none;
+    width: 772px;
+    height: 422px;
+    font-size: medium;
+    position: absolute;
+    border-color: #fff;
+    border-style: solid;
+    background-color: #141414;
+}
+.FG_BTN{
+    top: 422px;
+    left: 808px;
+    width: 492px;
+    position: absolute;
 }
