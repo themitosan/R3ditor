@@ -33,7 +33,7 @@ function FG_RENDER(){
 		while(c < text.length){
 			if (FG_DICIONARIO[text[c]] !== undefined){
 				if (text[c] === "@" || text[c] === "\n"){
-					y_offset = y_offset + 14;
+					y_offset = y_offset + 15;
 					x_offset = 0;
 					c++;
 				} else {

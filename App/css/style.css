@@ -831,6 +831,9 @@ input[type="range" i]{
 .RDT-msg-bg{
     background-image: linear-gradient(to bottom, #7f8470, #2e322a);
 }
+.RDT-itemDANGER-bg{
+    background-image: linear-gradient(to bottom, #ff0000, #9c0000);
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;

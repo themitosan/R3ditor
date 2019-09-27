@@ -523,6 +523,7 @@ function MSG_showMenu(id){
 	scrollLog();
 	main_closeFileList();
 	$("#img-logo").css({"display": "none"});
+	$("#menu-topo-MOD").css({"display": "none"});
 	if (SHOW_EDITONHEX === true && MSG_arquivoBruto !== undefined){
 		$("#MSG_openInHex").css({"display": "inline"});
 	} else {
@@ -765,7 +766,7 @@ function MSG_renderDialog(id, args, index, isMod){
 }
 function MSG_hideTranslateInput(){
 	$("#text-hex-editor").css({"display": "none"});
-	$("#MSG_addcomand-menu").css({"height": "563px"});
+	$("#MSG_addcomand-menu").css({"height": "566px"});
 	$("#MSG_optionTranslate").css({"display": "inline"});
 }
 function MSG_showTranslateInput(){

@@ -216,14 +216,14 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Start Message / Change text speed (<font class="italic">FA</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(1, \'' + args + '\', ' + index + ', true);"><br>Text Speed: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	// Finalizar Mensgagem
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: End Message (<font class="italic">FE</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(2, \'' + args + ', ' + index + '\', true);"><br>Final Value: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>'
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>'
 	}
 	// Exibir Texto
 	if (com === 3){
@@ -241,35 +241,35 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-3" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Show Special Char (<font class="italic">EA</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" btn-editMSGfix onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + MSG_CHAR + ')</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + ' (' + MSG_CHAR + ')</font></div>';
 	}
 	// Exibir o nome de item
 	if (com === 5){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-5" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Show Item Name (<font class="italic">F8</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(5, \'' + args + '\', ' + index + ', true);"><br>Item Hex: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + ' (' + ITEM[args][0] + ')</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + ' (' + ITEM[args][0] + ')</font></div>';
 	}
 	// Reproduzir SE
 	if (com === 6){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-1" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Execute SE (<font class="italic">F3</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(6, \'' + args + '\', ' + index + ', true);"><br>SE Hex: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	// Trocar a Câmera
 	if (com === 7){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-2" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Change Camera (<font class="italic">F4</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(7, \'' + args + '\', ' + index + ', true);"><br>Camera: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	// COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
 	if (com === 8){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-8" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Unknown Function (<font class="italic">F5</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(8, \'' + args + '\', ' + index + ', true);"><br>Args: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	// Trocar a cor do texto
 	if (com === 9){
@@ -292,7 +292,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-11" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Select Option (<font class="italic">70</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(11, \'' + args + '\', ' + index + ', true);"><br>Args: ' + 
-			'<font class="italic" id="msg-comand-args' + index + '">' + args + '</font></div>';
+			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	// Final
 	if (MSG_increment === true){

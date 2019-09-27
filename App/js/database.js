@@ -137,7 +137,34 @@ var ITEM = {
 	"82": ["Reloading tool", 								   "With this item, you can create ammo combining with gunpowder.", 																																	 														 "0px 502px 0px 0px", "-54px",    "13", "5", "16", "0", "13"],
 	"83": ["Game inst. A", 									   "This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180 ° Rotation, Emergency Escape, Emergency Bypass, and more.", 											 						 "0px 446px 0px 57px", "-166px",  "13", "5", "17", "1", "13"],
 	"84": ["Game inst. B", 									   "This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.", 													 												 "0px 392px 0px 112px", "-277px", "13", "5", "18", "2", "13"],
-	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"]
+	"85": ["(BOTU) Recipient with liquid inside",			   "BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.", 													 									 "0px 335px 0px 168px", "-390px", "13", "5", "19", "3", "13"],
+	/*
+		The values below can be added to inventory as an item, but checking them can make the game crash.
+		If you insert these values in RDT as an item, it will recognize as current map.
+	*/
+	"ab": ["no item", 	      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"ac": ["BOTU", 	  	      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"ad": ["BOTU",	  	      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"ae": ["BOTU",    	      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"af": ["BOTU", 		      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // This one does't crash the game when you check.
+	"b0": ["Backdoor Key",    "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // After checking, it change his name to Main Gate Key
+	"b1": ["BOTU",    	      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"b2": ["S.T.A.R.S. Key",  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking make the game crash!
+	"b3": ["Empty Lighter",   "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking make the game crash!
+	"b4": ["Sapphire",        "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking it freezes the game
+	"b5": ["Emerald",         "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // This one does't crash the game when you check.
+	"b6": ["Rust Hex Crank",  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // After checking, it change his name to ". Launcher"
+	"b7": ["BOTU",            "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking will display "ding will cause unexploded mines to disappear. OK to proceed? (Yes / No)"
+	"b8": ["Graveyard Key",   "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking make the game crash! (The graphic displayed is some part of cuurent map)
+	"b9": ["BOTU",			  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking make the game crash!
+	"ba": ["BOTU",			  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking it freezes the game
+	"bb": ["Book Of Wisdom",  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // ***Checking it will GLITCH the game graphics! His graphic will be the same of the last item you checked.
+	"bc": ["Future Compass",  "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"bd": ["Square Crank",    "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // Checking it freezes the game
+	"be": ["Bezel Key",       "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // ***Checking this will show a question. If you choose yes it mess with the graphics and current room. Also, it changes his name.
+	"bf": ["Winder Key",      "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"], // This can show a question, but nothing happens.
+	"c0": ["Main Gate Key",   "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"],
+	"c1": ["Rear Gate Key",   "This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.", "0px 502px 0px 0px", "-54px", "0", "0", "0", "0", "0"]
 }
 // Preciso remover isso depois
 var RDT_mapHack = {
@@ -234,7 +261,8 @@ var FILES = {
 	"9f": ["Photo D"],
 	"a0": ["Clock Tower Poster Card"],
 	// Info: Hex A1 makes the game freeze and crash
-	"a2": ["Classified Photo File"]
+	"a2": ["Classified Photo File"],
+	"a3": ["Jill's Diary"]
 }
 var RDT_MAPAS = {
 	"a4": ["Uptown Map"],
@@ -243,10 +271,13 @@ var RDT_MAPAS = {
 	"a6": ["Clock Tower Map"],
 	"aa": ["Hospital Map"],
 	"a7": ["Park Map"],
-	"a8": ["Dead Factory Map"]
+	"a8": ["Dead Factory Map"],
+	//
+	"a9": ["Police Station Map"],
+	"aa": ["Hospital Map"]
 }
 var ATTR = {
-	"00": ["None",								  "#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
+	"00": ["None",								 "#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
 	"01": ["Remaining ammo in green",		   "#008400", "0 0 2px #004200"],
 	"02": ["% remaining in green", 			   "#008400", "0 0 2px #004200"],
 	"03": ["Inf. ammo in green", 			   "#008400", "0 0 2px #004200"],
@@ -257,7 +288,6 @@ var ATTR = {
 	"0e": ["% remaining in blue", 			   "#9393ff", "0 0 2px #004242"],
 	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
 	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
-	
 	// Atributos Desconhecidos
 	"17": ["Attr. found in Nightmare Mod", 	   "#fff", "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
 	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
@@ -488,10 +518,11 @@ var MAPAS = {
 //
 var FG_DICIONARIO = {
 	".": ["0px 1106px 0px 8px",      "-8", 8],
-	" ": ["0px 1077px 0px 33px",    "-33", 8],
+	" ": ["0px 1077px 0px 33px",    "-33", 7],
 	"@": ["0px 1077px 0px 33px",    "-33", 8],
-	"(": ["0px 1068px 0px 43px",    "-44", 4],
+	"(": ["0px 1068px 0px 43px",    "-44", 6],
 	")": ["0px 1063px 0px 48px",    "-50", 6],
+	"º": ["0px 1055px 0px 58px",    "-58", 6],
 	"{": ["0px 1037px 0px 73px",    "-73", 8],
 	"}": ["0px 1030px 0px 79px",    "-79", 8],
 	"0": ["0px 1013px 0px 96px",    "-97", 8],
@@ -504,7 +535,7 @@ var FG_DICIONARIO = {
 	"7": ["0px 957px 0px 152px",   "-153", 8],
 	"8": ["0px 949px 0px 160px",   "-161", 7],
 	"9": ["0px 940px 0px 168px",   "-168", 8],
-	":": ["0px 934px 0px 178px",   "-178", 8],
+	":": ["0px 934px 0px 178px",   "-178", 10],
 	",": ["0px 917px 0px 193px",   "-193", 8],
 	"!": ["0px 904px 0px 210px",   "-210", 6],
 	"?": ["0px 894px 0px 216px",   "-216", 8],
@@ -517,7 +548,7 @@ var FG_DICIONARIO = {
 	"F": ["0px 837px 0px 272px",   "-272", 9],
 	"G": ["0px 829px 0px 280px",   "-280", 9],
 	"H": ["0px 821px 0px 288px",   "-288", 9],
-	"I": ["0px 816px 0px 296px",   "-296", 6],
+	"I": ["0px 816px 0px 296px",   "-296", 5],
 	"J": ["0px 811px 0px 301px",   "-301", 6],
 	"K": ["0px 801px 0px 309px",   "-309", 8],
 	"L": ["0px 794px 0px 316px",   "-316", 8],
@@ -551,12 +582,12 @@ var FG_DICIONARIO = {
 	"i": ["0px 561px 0px 551px",   "-550", 6],
 	"j": ["0px 555px 0px 558px",   "-558", 6],
 	"k": ["0px 544px 0px 564px",   "-564", 8],
-	"l": ["0px 540px 0px 573px",   "-573", 6],
+	"l": ["0px 540px 0px 573px",   "-573", 5],
 	"m": ["0px 531px 0px 579px",   "-579", 8],
 	"n": ["0px 522px 0px 587px",   "-587", 8],
 	"o": ["0px 514px 0px 595px",   "-595", 8],
 	"p": ["0px 506px 0px 604px",   "-604", 8],
-	"q": ["0px 498px 0px 611px",   "-611", 8],
+	"q": ["0px 498px 0px 611px",   "-611", 7],
 	"r": ["0px 491px 0px 619px",   "-619", 7],
 	"s": ["0px 483px 0px 627px",   "-627", 7],
 	"t": ["0px 474px 0px 635px",   "-635", 7],

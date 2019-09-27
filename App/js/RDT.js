@@ -29,6 +29,7 @@ var startFirstMessage;
 var RDT_loading = false;
 var RDT_CANCRASH = false;
 var RDT_FILEMAP_MSG = [];
+var RDT_ERRORMOTIVE = "";
 var RDT_MSG_POINTERS = [];
 var RDT_currentAudio = "";
 var RDT_requestReload = false;
@@ -90,6 +91,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_doAfterSave();
 	RDT_loading = true;
 	RDT_CANCRASH = false;
+	RDT_ERRORMOTIVE = "";
 	localStorage.clear();
 	RDT_editItemCancel();
 	RDT_FILEMAP_MSG = [];
@@ -226,7 +228,6 @@ function RDT_decompileItens(id, edit){
 	var itemQuant;
 	var espaco3;
 	var itemMP;
-
 	if (header === "67"){
 		itemXX 		  = currentItem.slice(RANGES["RDT_item-0-itemXX"][0], 	   RANGES["RDT_item-0-itemXX"][1]);
 		itemYY 		  = currentItem.slice(RANGES["RDT_item-0-itemYY"][0], 	   RANGES["RDT_item-0-itemYY"][1]);
@@ -273,21 +274,25 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 	var typeId;
 	var convert;
 	try{
-		if (parseInt(id, 16) < 134){
+		if (parseInt(id, 16) < 134 || parseInt(id, 16) > 170){
 			typeId = 1;
 			tipo = "Item";
-			cssFix = "RDT-item-bg";
 			convert = ITEM[id][0];
+			if (parseInt(id, 16) < 170){
+				cssFix = "RDT-item-bg";
+			} else {
+				cssFix = "RDT-itemDANGER-bg";
+			}
 			RDT_totalItens++;
 		}
-		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 163){
+		if (parseInt(id, 16) > 133 && parseInt(id, 16) < 164){
 			typeId = 2;
 			tipo = "File";
 			cssFix = "RDT-file-bg";
 			convert = FILES[id][0];
 			RDT_totalFiles++;
 		}
-		if (parseInt(id, 16) > 162){
+		if (parseInt(id, 16) > 163 && parseInt(id, 16) < 171){
 			typeId = 3;
 			tipo = "Mapa";
 			cssFix = "RDT-map-bg";
@@ -297,14 +302,15 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		if (id.length < 2){
 			id = "0" + id;
 		}
+		console.log(tipo + " - " + id);
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
 		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
 		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
-		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: ' + 
-		'<font class="italic RDT-item-lbl-fix">' + r + '</font><br><div class="RDT-Item-Misc">Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br>' + 
-		'Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br></div></div>';
+		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
+		'<div class="RDT-Item-Misc">Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br>Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>' + 
+		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id + " - " + msg;
@@ -396,9 +402,8 @@ function RDT_ITEM_APPLY(index, type, convert){
 		error = "The Animation var must be 8 bytes long!";
 	}
 	// Reconstruindo item
-	console.log(novaHex);
 	if (canBuild === true){
-		var RDT_ITEM_COMPILADO = undefined;
+		var RDT_ITEM_COMPILADO;
 		var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);  
 		if (header.slice(0, 2) === "67"){
 			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32);
@@ -459,7 +464,7 @@ function RDT_readMessages(){
 	while(c < RDT_messagesArray.length){
 		RDT_MSG_END = getAllIndexes(RDT_arquivoBruto, "fe");
 		// This will elimiate (almost) every wrong guess of end message!
-		var r = undefined;
+		var r;
 		if (RDT_arquivoBruto.length > 14088){
 			// In the most part of the files, the messages is found after 14.5% of the file!
 			r = 7000;
@@ -495,8 +500,8 @@ function RDT_readMessages(){
 			RDT_canAdd_reason = "The message position is very far than usual!";
 			break;
 		}
-		var MESSAGE = undefined;
-		var MESSAGE_RAW = undefined;
+		var MESSAGE;
+		var MESSAGE_RAW;
 		if (parseInt(RDT_MSG_END[c] + 4) < RDT_messagesArray[c]){
 			var subs = c;
 			while(parseInt(RDT_MSG_END[subs] + 4) < RDT_messagesArray[c]){
@@ -1243,17 +1248,16 @@ function RDT_lookForRDTConfigFile(){
 					}
 					document.getElementById("RDT_lblError_msgExpected").innerHTML = block_size_hex.toUpperCase();
 					document.getElementById("RDT_lblError_msgAtual").innerHTML = c_block_size_hex.toUpperCase();
+					RDT_ERRORMOTIVE = "Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?";
 					RDT_CANCRASH = true;
 				} else {
 					document.getElementById('RDT_msgBlock_health').innerHTML = "Good";
 					$("#RDT_msgBlock_health").addClass('green');
 					document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_PERFECT;
-					RDT_CANCRASH = false;
 				}
 			} else {
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Undefined";
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Undefined";
-				RDT_CANCRASH = false;
 			}
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
@@ -1356,13 +1360,13 @@ function RDT_selectPoint(id){
 		document.getElementById('RDT_slider_Y').value = processBIO3Vars(RDT_CURRENT_Y);
 		document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
 		document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
-		if (parseInt(itemName, 16) < 134){
+		if (parseInt(itemName, 16) < 134 || parseInt(itemName, 16) > 170){
 			document.getElementById('RDT_lbl_canvasItemName').innerHTML = ITEM[itemName][0];
 		}
-		if (parseInt(itemName, 16) > 133 && parseInt(itemName, 16) < 163){
+		if (parseInt(itemName, 16) > 133 && parseInt(itemName, 16) < 164){
 			document.getElementById('RDT_lbl_canvasItemName').innerHTML = FILES[itemName][0];
 		}
-		if (parseInt(itemName, 16) > 162){
+		if (parseInt(itemName, 16) > 163 && parseInt(itemName, 16) < 171){
 			document.getElementById('RDT_lbl_canvasItemName').innerHTML = RDT_MAPAS[itemName][0];
 		}
 		while (c < 100){
@@ -1377,15 +1381,15 @@ function RDT_selectPoint(id){
 function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var tipo;
 	var nome;
-	if (parseInt(hex, 16) < 134){
+	if (parseInt(hex, 16) < 134 || parseInt(hex, 16) > 170){
 		tipo = "Item";
 		nome = "(" + hex + ") " + ITEM[hex][0];
 	}
-	if (parseInt(hex, 16) > 133 && parseInt(hex, 16) < 163){
+	if (parseInt(hex, 16) > 133 && parseInt(hex, 16) < 164){
 		tipo = "File";
 		nome = "(" + hex + ") " + FILES[hex][0];
 	}
-	if (parseInt(hex, 16) > 162){
+	if (parseInt(hex, 16) > 163 && parseInt(hex, 16) < 171){
 		tipo = "Map";
 		nome = "(" + hex + ") " + RDT_MAPAS[hex][0];
 	}
