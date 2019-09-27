@@ -3,6 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please!
 */
+var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
 var RDT_totalMenus = 5;
@@ -521,6 +522,7 @@ function showAbout(){
 /// MSG
 function MSG_showMenu(id){
 	scrollLog();
+	onMSG = true;
 	main_closeFileList();
 	$("#img-logo").css({"display": "none"});
 	$("#menu-topo-MOD").css({"display": "none"});
@@ -548,6 +550,7 @@ function MSG_doTheTitleThing(){
 	}
 }
 function TRANSFER_MSG_TO_RDT(){
+	onMSG = false;
 	main_closeFileList();
 	$("#menu-MSG").css({"display": "none"});
 	$("#menu-topo-msg").css({"display": "none"});
@@ -847,6 +850,9 @@ function RDT_showMenu(id){
 		$("#RDT-aba-menu-4").css({'display': 'none'});
 	}
 	$("#RDT_reload").css({"display": "inline"});
+	if (EXTERNAL_APP_RUNNING === false){
+		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
+	}
 	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
@@ -1089,63 +1095,65 @@ function R3DITOR_movePercent(id, percent, status){
 }
 /// Run game
 function R3DITOR_RUNGAME(id){
-	if (id === 0){
-		$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
-		$("#FILEGEN_contents").css({"height": "474px"});
-		$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
-		$("#RDT_audio_holder").css({"height": "472px"});
-		$("#RDT-canvas-hold").css({"height": "516px"});
-		$("#RDT-audio-hold").css({"height": "516px"});
-		$("#RDT_MSG-holder").css({"height": "472px"});
-		$("#FILEGEN_holder").css({"height": "516px"});
-		$("#RDT-item-list").css({"height": "472px"});
-		$("#RDT-Item-Edit").css({"height": "458px"});
-		$("#FILEGEN_menu").css({"height": "526px"});
-		$("#RDT_menu-1").css({"height": "528px"});
-		$("#RDT_menu-2").css({"height": "528px"});
-		$("#RDT_menu-3").css({"height": "528px"});
-		$("#RDT_menu-4").css({"height": "528px"});
-		$("#RDT_menu-5").css({"height": "528px"});
-		$("#RDT-geral").css({"height": "516px"});
-		$("#RDT_BG_1").css({"height": "512px"});
-		$("#RDT_BG_2").css({"height": "512px"});
-		$("#RDT_BG_3").css({"height": "512px"});
-		$("#RDT_BG_4").css({"height": "512px"});
-		$("#RDT_BG_5").css({"height": "512px"});
-		$("#RDT-msgs").css({"height": "516px"});
-		$("#RDT-ifm").css({"height": "516px"});
-	} else {
-		if (EXEC_BIO3_original !== ""){
-			$("#btn_run_bio3").css({"display": "inline"});
-		}
-		if (EXEC_BIO3_MERCE !== ""){
-			$("#btn_run_merce").css({"display": "inline"});
-		}
-		if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
-			$("#FILEGEN_contents").css({"height": "434px"});
-			$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
-			$("#RDT_audio_holder").css({"height": "430px"});
-			$("#RDT-canvas-hold").css({"height": "472px"});
-			$("#RDT-audio-hold").css({"height": "472px"});
-			$("#RDT_MSG-holder").css({"height": "430px"});
-			$("#FILEGEN_holder").css({"height": "474px"});
-			$("#RDT-item-list").css({"height": "428px"});
-			$("#RDT-Item-Edit").css({"height": "418px"});
-			$("#FILEGEN_menu").css({"height": "484px"});
-			$("#RDT_menu-1").css({"height": "482px"});
-			$("#RDT_menu-2").css({"height": "482px"});
-			$("#RDT_menu-3").css({"height": "482px"});
-			$("#RDT_menu-4").css({"height": "482px"});
-			$("#RDT_menu-5").css({"height": "482px"});
-			$("#RDT-geral").css({"height": "472px"});
-			$("#RDT_BG_1").css({"height": "470px"});
-			$("#RDT_BG_2").css({"height": "470px"});
-			$("#RDT_BG_3").css({"height": "470px"});
-			$("#RDT_BG_4").css({"height": "470px"});
-			$("#RDT_BG_5").css({"height": "470px"});
-			$("#RDT-msgs").css({"height": "472px"});
-			$("#RDT-ifm").css({"height": "472px"});
-			$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+	if (onMSG === false){
+		if (id === 0){
+			$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+			$("#FILEGEN_contents").css({"height": "474px"});
+			$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
+			$("#RDT_audio_holder").css({"height": "472px"});
+			$("#RDT-canvas-hold").css({"height": "516px"});
+			$("#RDT-audio-hold").css({"height": "516px"});
+			$("#RDT_MSG-holder").css({"height": "472px"});
+			$("#FILEGEN_holder").css({"height": "516px"});
+			$("#RDT-item-list").css({"height": "472px"});
+			$("#RDT-Item-Edit").css({"height": "458px"});
+			$("#FILEGEN_menu").css({"height": "526px"});
+			$("#RDT_menu-1").css({"height": "528px"});
+			$("#RDT_menu-2").css({"height": "528px"});
+			$("#RDT_menu-3").css({"height": "528px"});
+			$("#RDT_menu-4").css({"height": "528px"});
+			$("#RDT_menu-5").css({"height": "528px"});
+			$("#RDT-geral").css({"height": "516px"});
+			$("#RDT_BG_1").css({"height": "512px"});
+			$("#RDT_BG_2").css({"height": "512px"});
+			$("#RDT_BG_3").css({"height": "512px"});
+			$("#RDT_BG_4").css({"height": "512px"});
+			$("#RDT_BG_5").css({"height": "512px"});
+			$("#RDT-msgs").css({"height": "516px"});
+			$("#RDT-ifm").css({"height": "516px"});
+		} else {
+			if (EXEC_BIO3_original !== ""){
+				$("#btn_run_bio3").css({"display": "inline"});
+			}
+			if (EXEC_BIO3_MERCE !== ""){
+				$("#btn_run_merce").css({"display": "inline"});
+			}
+			if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+				$("#FILEGEN_contents").css({"height": "434px"});
+				$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
+				$("#RDT_audio_holder").css({"height": "430px"});
+				$("#RDT-canvas-hold").css({"height": "472px"});
+				$("#RDT-audio-hold").css({"height": "472px"});
+				$("#RDT_MSG-holder").css({"height": "430px"});
+				$("#FILEGEN_holder").css({"height": "474px"});
+				$("#RDT-item-list").css({"height": "428px"});
+				$("#RDT-Item-Edit").css({"height": "418px"});
+				$("#FILEGEN_menu").css({"height": "484px"});
+				$("#RDT_menu-1").css({"height": "482px"});
+				$("#RDT_menu-2").css({"height": "482px"});
+				$("#RDT_menu-3").css({"height": "482px"});
+				$("#RDT_menu-4").css({"height": "482px"});
+				$("#RDT_menu-5").css({"height": "482px"});
+				$("#RDT-geral").css({"height": "472px"});
+				$("#RDT_BG_1").css({"height": "470px"});
+				$("#RDT_BG_2").css({"height": "470px"});
+				$("#RDT_BG_3").css({"height": "470px"});
+				$("#RDT_BG_4").css({"height": "470px"});
+				$("#RDT_BG_5").css({"height": "470px"});
+				$("#RDT-msgs").css({"height": "472px"});
+				$("#RDT-ifm").css({"height": "472px"});
+				$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+			}
 		}
 	}
 }
