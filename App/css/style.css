@@ -207,7 +207,7 @@ input[type="range" i]{
 	margin-top: 4px;
 	height: 2px;
 	color: #fff;
-	width: 84%;
+	width: 78%;
 }
 .box-fix-lbl{
     margin-top: -22px;
@@ -494,8 +494,8 @@ input[type="range" i]{
     left: 740px;
 }
 .RDT-btn-apply{
-    width: 49%;
     border: 1px;
+    width: 48.5%;
     padding: 16px;
     cursor: pointer;
     margin-left: 4px;
@@ -820,7 +820,7 @@ input[type="range" i]{
     margin-top: -5px;
 }
 .RDT-item-bg{
-    background-image: linear-gradient(to bottom, #507499, #273c50);
+    background-image: linear-gradient(to bottom, #0300b5, #020073);
 }
 .RDT-file-bg{
     background-image: linear-gradient(to bottom, #796293, #433850);
@@ -833,6 +833,9 @@ input[type="range" i]{
 }
 .RDT-itemDANGER-bg{
     background-image: linear-gradient(to bottom, #ff0000, #9c0000);
+}
+.RDT-door-bg{
+    background-image: linear-gradient(to bottom, #507499, #273c50);
 }
 .txtarea-hex-fix{
     height: 128px;
@@ -848,6 +851,57 @@ input[type="range" i]{
 .RDT-item-lbl-fix-2{
     position: sticky;
     left: 208px;
+}
+.RDT-item-lbl-fix-3{
+    position: sticky;
+    left: 242px;
+}
+.RDT-item-lbl-fix-4{
+    position: sticky;
+    left: 428px;
+}
+.RDT-item-lbl-fix-5{
+    position: sticky;
+    left: 576px;
+}
+.RDT_door_textEditFix_0{
+    left: 857px;
+    width: 52px;
+    position: sticky;
+}
+.RDT_door_textEditFix_1{
+    width: 52px;
+    left: 1036px;
+    position: sticky;
+}
+.RDT_door_textEditFix_2{
+    width: 52px;
+    left: 1238px;
+    position: sticky;
+}
+.RDT_door_textEditFix_3{
+    width: 52px;
+    left: 900px;
+    position: sticky;
+}
+.RDT_door_textEditFix_4{
+    left: 900px;
+    width: 398px;
+    position: sticky;
+}
+.RDT_door-edit-posFix{
+    left: 780px !important;
+    width: 520px !important;
+}
+.RDT_doorNextPosFix{
+    top: 61px;
+    left: 148px;
+    position: absolute;
+}
+.RDT_doorOtherFix{
+    top: 61px;
+    left: 325px;
+    position: absolute;
 }
 .RDT_btn_fix1{
     top: 174px;
@@ -881,6 +935,22 @@ input[type="range" i]{
 .RDT-Item-Misc{
     width: 30%;
     left: 120px;
+    height: 70px;
+    position: sticky;
+    margin-top: -70px;
+    padding-left: 10px;
+}
+.RDT-Item-Misc-2{
+    width: 30%;
+    left: 278px;
+    height: 70px;
+    position: sticky;
+    margin-top: -70px;
+    padding-left: 10px;
+}
+.RDT-Item-Misc-3{
+    width: 30%;
+    left: 446px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
@@ -1041,8 +1111,9 @@ input[type="range" i]{
     background-image: linear-gradient(to right, #2a2a6f, transparent);
 }
 .blockInfo_fix{
-    height: 449px;
     left: 972px;
+    height: 449px;
+    box-shadow: 0 0 10px #a2a2a247;
 }
 .msg_holder_fix{
     width: 942px;

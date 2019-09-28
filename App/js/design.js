@@ -6,7 +6,7 @@
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
-var RDT_totalMenus = 5;
+var RDT_totalMenus = 6;
 var SAVE_totalMenus = 4;
 var request_render_save;
 var l_separador = "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
@@ -769,7 +769,7 @@ function MSG_renderDialog(id, args, index, isMod){
 }
 function MSG_hideTranslateInput(){
 	$("#text-hex-editor").css({"display": "none"});
-	$("#MSG_addcomand-menu").css({"height": "566px"});
+	$("#MSG_addcomand-menu").css({"height": "562px"});
 	$("#MSG_optionTranslate").css({"display": "inline"});
 }
 function MSG_showTranslateInput(){
@@ -852,6 +852,9 @@ function RDT_showMenu(id){
 	$("#RDT_reload").css({"display": "inline"});
 	if (EXTERNAL_APP_RUNNING === false){
 		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
+		$("#RDT-door-Edit").css({"height": "417px"});
+		$("#RDT-door-hold").css({"height": "472px"});
+		$("#RDT_door_holder").css({"height": "430px"});
 	}
 	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
@@ -862,14 +865,17 @@ function RDT_showMenu(id){
 	document.getElementById("RDT-file-select").innerHTML = RDT_EDIT_FILE;
 	document.getElementById("RDT-item-select").innerHTML = RDT_EDIT_ITEM;
 	document.getElementById("RDT_lbl-msg_pointer").innerHTML = RDT_MSG_P;
+	document.getElementById("RDT_lbl_totDoors").innerHTML = RDT_totalDoors;
 	document.getElementById("RDT_lbl-totMsg").innerHTML = RDT_totalMessages;
 	document.getElementById("RDT_lbl-totalMaps").innerHTML = RDT_totalMapas;
+	document.getElementById("RDT_lbl-totalDoors").innerHTML = RDT_totalDoors;
 	document.getElementById("RDT_lbl-totalFiles").innerHTML = RDT_totalFiles;
 	document.getElementById("RDT_lbl-totalItens").innerHTML = RDT_totalItens;
 	document.getElementById("RDT_lbl-totalMsg").innerHTML = RDT_totalMessages;
 	document.getElementById("RDT_lbl-totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl_totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
+	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors + ")";
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
 	document.getElementById("RDT-aba-menu-2").value = "Messages (" + RDT_totalMessages + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
@@ -882,6 +888,33 @@ function RDT_showMenu(id){
 	}
 	RDT_Error_404();
 	scrollLog();
+}
+function RDT_showEditDoor(index, id, hex){
+	main_closeFileList();
+	$("#RDT_openFileList").css({"display": "none"});
+	document.getElementById("RDT-lbl-doorEdit-id").innerHTML = id;
+	document.getElementById("RDT-lbl-door-index").innerHTML = index;
+	document.getElementById('RDT_door-edit-LK').innerHTML = RDT_EDIT_ITEM;
+	document.getElementById("RDT_door-edit-LK").value = hex.slice(RANGES["RDT_door-0-doorKey"][0], RANGES["RDT_door-0-doorKey"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-X").value = hex.slice(RANGES["RDT_door-0-doorXpos"][0], RANGES["RDT_door-0-doorXpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-Y").value = hex.slice(RANGES["RDT_door-0-doorYpos"][0], RANGES["RDT_door-0-doorYpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-Z").value = hex.slice(RANGES["RDT_door-0-doorZpos"][0], RANGES["RDT_door-0-doorZpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-R").value = hex.slice(RANGES["RDT_door-0-doorRpos"][0], RANGES["RDT_door-0-doorRpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-DT").value = hex.slice(RANGES["RDT_door-0-doorType"][0], RANGES["RDT_door-0-doorType"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NX").value = hex.slice(RANGES["RDT_door-0-doorNextXpos"][0], RANGES["RDT_door-0-doorNextXpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NY").value = hex.slice(RANGES["RDT_door-0-doorNextYpos"][0], RANGES["RDT_door-0-doorNextYpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NZ").value = hex.slice(RANGES["RDT_door-0-doorNextZpos"][0], RANGES["RDT_door-0-doorNextZpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NR").value = hex.slice(RANGES["RDT_door-0-doorNextRpos"][0], RANGES["RDT_door-0-doorNextRpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NS").value = hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-OO").value = hex.slice(RANGES["RDT_door-0-doorOpenOrient"][0], RANGES["RDT_door-0-doorOpenOrient"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-LF").value = hex.slice(RANGES["RDT_door-0-doorLockedFlag"][0], RANGES["RDT_door-0-doorLockedFlag"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NC").value = hex.slice(RANGES["RDT_door-0-doorNextCamNumber"][0], RANGES["RDT_door-0-doorNextCamNumber"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-NRN").value = hex.slice(RANGES["RDT_door-0-doorNextRoomNumber"][0], RANGES["RDT_door-0-doorNextRoomNumber"][1]).toUpperCase();
+	document.getElementById('RDT-btn-aplicarDoor').onclick = function(){
+		RDT_DOOR_APPLY(index);
+	}
+	$("#RDT-door-Edit").css({"display": "block"});
+	$("#RDT_door_holder").css({"width": "752px"});
 }
 function TRANSFER_RDT_TO_MSG(){
 	main_closeFileList();
@@ -910,27 +943,23 @@ function RDT_BG_display(){
 		while (c < 9){
 			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG")){
 				found = true;
-				$("#RDT_BG_1").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
-				$("#RDT_BG_2").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
-				$("#RDT_BG_3").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
-				$("#RDT_BG_4").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
-				$("#RDT_BG_5").css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
-				$("#RDT_BG_1").fadeIn({duration: 500, queue: false});
-				$("#RDT_BG_2").fadeIn({duration: 500, queue: false});
-				$("#RDT_BG_3").fadeIn({duration: 500, queue: false});
-				$("#RDT_BG_4").fadeIn({duration: 500, queue: false});
-				$("#RDT_BG_5").fadeIn({duration: 500, queue: false});
+				var d = 1;
+				while(d < parseInt(RDT_totalMenus + 1)){
+					$("#RDT_BG_" + d).css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+					$("#RDT_BG_" + d).fadeIn({duration: 500, queue: false});
+					d++;
+				}
 				break;
 			} else {
 				c++;
 			}
 		}
-		if (found == false){
-			$("#RDT_BG_1").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
-			$("#RDT_BG_2").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
-			$("#RDT_BG_3").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
-			$("#RDT_BG_4").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
-			$("#RDT_BG_5").css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+		if (found === false){
+			var e = 1;
+			while(e < parseInt(RDT_totalMenus + 1)){
+				$("#RDT_BG_" + e).css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+				e++;
+			}
 		}
 	}
 }
@@ -1029,14 +1058,31 @@ function RDT_editItemCancel(){
 	if (enable_mod === true){
 		$("#RDT_openFileList").css({"display": "inline"});
 	}
-	$("#RDT-item-list").css({"width": "1288px"});
+	$("#RDT-item-list").css({"width": "auto"});
 	$("#RDT-Item-Edit").css({"display": "none"});
+	$("#RDT-door-Edit").css({"display": "none"});
+	$("#RDT_door_holder").css({"width": "auto"});
 	document.getElementById('RDT_item-edit-A').value = "";
+	document.getElementById('RDT_door-edit-X').value = "";
+	document.getElementById('RDT_door-edit-Y').value = "";
+	document.getElementById('RDT_door-edit-Z').value = "";
+	document.getElementById('RDT_door-edit-R').value = "";
+	document.getElementById('RDT_door-edit-NX').value = "";
+	document.getElementById('RDT_door-edit-NY').value = "";
+	document.getElementById('RDT_door-edit-NZ').value = "";
+	document.getElementById('RDT_door-edit-NR').value = "";
+	document.getElementById('RDT_door-edit-DT').value = "";
+	document.getElementById('RDT_door-edit-NS').value = "";
+	document.getElementById('RDT_door-edit-NC').value = "";
+	document.getElementById('RDT_door-edit-LF').value = "";
+	document.getElementById('RDT_door-edit-OO').value = "";
+	document.getElementById('RDT_door-edit-NRN').value = "";
 	document.getElementById('RDT_item-edit-X').innerHTML = "";
 	document.getElementById('RDT_item-edit-Y').innerHTML = "";
 	document.getElementById('RDT_item-edit-Z').innerHTML = "";
 	document.getElementById('RDT_item-edit-R').innerHTML = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
+	document.getElementById('RDT_door-edit-LK').innerHTML = "";
 	document.getElementById("RDT-lbl-edit-index").innerHTML = "N/A";
 	document.getElementById("RDT-lbl-item-edit").innerHTML = "No item select";
 }
@@ -1095,30 +1141,29 @@ function R3DITOR_movePercent(id, percent, status){
 }
 /// Run game
 function R3DITOR_RUNGAME(id){
+	var c = 0;
 	if (onMSG === false){
 		if (id === 0){
 			$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+			while(c < parseInt(RDT_totalMenus + 1)){
+				$("#RDT_menu-" + c).css({"height": "528px"});
+				$("#RDT_BG_" + c).css({"height": "512px"});
+				c++;
+			}
 			$("#FILEGEN_contents").css({"height": "474px"});
 			$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 			$("#RDT_audio_holder").css({"height": "472px"});
+			$("#RDT_door_holder").css({"height": "482px"});
 			$("#RDT-canvas-hold").css({"height": "516px"});
 			$("#RDT-audio-hold").css({"height": "516px"});
 			$("#RDT_MSG-holder").css({"height": "472px"});
 			$("#FILEGEN_holder").css({"height": "516px"});
+			$("#RDT-door-hold").css({"height": "518px"});
 			$("#RDT-item-list").css({"height": "472px"});
 			$("#RDT-Item-Edit").css({"height": "458px"});
+			$("#RDT-door-Edit").css({"height": "463px"});
 			$("#FILEGEN_menu").css({"height": "526px"});
-			$("#RDT_menu-1").css({"height": "528px"});
-			$("#RDT_menu-2").css({"height": "528px"});
-			$("#RDT_menu-3").css({"height": "528px"});
-			$("#RDT_menu-4").css({"height": "528px"});
-			$("#RDT_menu-5").css({"height": "528px"});
 			$("#RDT-geral").css({"height": "516px"});
-			$("#RDT_BG_1").css({"height": "512px"});
-			$("#RDT_BG_2").css({"height": "512px"});
-			$("#RDT_BG_3").css({"height": "512px"});
-			$("#RDT_BG_4").css({"height": "512px"});
-			$("#RDT_BG_5").css({"height": "512px"});
 			$("#RDT-msgs").css({"height": "516px"});
 			$("#RDT-ifm").css({"height": "516px"});
 		} else {
@@ -1129,27 +1174,25 @@ function R3DITOR_RUNGAME(id){
 				$("#btn_run_merce").css({"display": "inline"});
 			}
 			if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+				while(c < parseInt(RDT_totalMenus + 1)){
+					$("#RDT_menu-" + c).css({"height": "482px"});
+					$("#RDT_BG_" + c).css({"height": "470px"});
+					c++;
+				}
 				$("#FILEGEN_contents").css({"height": "434px"});
 				$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 				$("#RDT_audio_holder").css({"height": "430px"});
+				$("#RDT_door_holder").css({"height": "430px"});
 				$("#RDT-canvas-hold").css({"height": "472px"});
 				$("#RDT-audio-hold").css({"height": "472px"});
 				$("#RDT_MSG-holder").css({"height": "430px"});
 				$("#FILEGEN_holder").css({"height": "474px"});
+				$("#RDT-door-Edit").css({"height": "417px"});
+				$("#RDT-door-hold").css({"height": "472px"});
 				$("#RDT-item-list").css({"height": "428px"});
 				$("#RDT-Item-Edit").css({"height": "418px"});
 				$("#FILEGEN_menu").css({"height": "484px"});
-				$("#RDT_menu-1").css({"height": "482px"});
-				$("#RDT_menu-2").css({"height": "482px"});
-				$("#RDT_menu-3").css({"height": "482px"});
-				$("#RDT_menu-4").css({"height": "482px"});
-				$("#RDT_menu-5").css({"height": "482px"});
 				$("#RDT-geral").css({"height": "472px"});
-				$("#RDT_BG_1").css({"height": "470px"});
-				$("#RDT_BG_2").css({"height": "470px"});
-				$("#RDT_BG_3").css({"height": "470px"});
-				$("#RDT_BG_4").css({"height": "470px"});
-				$("#RDT_BG_5").css({"height": "470px"});
 				$("#RDT-msgs").css({"height": "472px"});
 				$("#RDT-ifm").css({"height": "472px"});
 				$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});

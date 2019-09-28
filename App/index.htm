@@ -31,7 +31,7 @@
 			<input type="button" class="botao-menu" value="SAV Editor (.sav)" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.msg)" onclick="main_menu(2);">
 			<input type="button" class="botao-menu" value="RDT Editor (.rdt)" onclick="main_menu(3);">
-			<input type="button" class="botao-menu" value="File Editor" onclick="main_menu(4);">
+			<input type="button" class="botao-menu" value="File Generator" onclick="main_menu(4);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
@@ -116,9 +116,51 @@
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 			<input type="button" id="RDT-aba-menu-4" class="aba" value="Pos. Edit">
+			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- RDT: Doors -->
+			<div class="menu" id="RDT_menu-6" onclick="main_closeFileList();">
+				<div class="menu-general-content" id="RDT-door-hold">
+					<div id="RDT_BG_6" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Doors - Total: <font id="RDT_lbl_totDoors">???</font></font></center>
+					<div id="RDT_door_holder" class="RDT-holder">
+						<!-- Portas vai aqui -->
+					</div>
+					<!-- RDT: Doors - Editar -->
+					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
+						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font></center>
+						<div id="RDT-door-edit-form">
+							<div class="RDT_coordsHolder_A">X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000"></div>
+							<div class="RDT_doorNextPosFix">
+								<div class="RDT_coordsHolder_A">Next X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000"></div>
+							</div>
+							<div class="RDT_doorOtherFix">
+								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Camera: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NC" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
+							</div>
+							<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu" value="Copy Path" style="margin-top: 6px;"><input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Path">
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_B">Lock Key: <select class="item-select-mod RDT_door_textEditFix_4" id="RDT_door-edit-LK"></select></div>
+							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
+							<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-OO" placeholder="00"></div>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Audios -->
-			<div class="menu" id="RDT_menu-5">
+			<div class="menu" id="RDT_menu-5" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-audio-hold">
 					<div id="RDT_BG_5" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Audios - Total: <font id="RDT_lbl_totalAudios">???</font></font></center>
@@ -128,7 +170,7 @@
 				</div>
 			</div>
 			<!-- RDT: Canvas -->
-			<div class="menu" id="RDT_menu-4">
+			<div class="menu" id="RDT_menu-4" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-canvas-hold">
 					<div id="RDT_BG_4" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Edit Position</font></center>
@@ -180,7 +222,7 @@
 					Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
 					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
 					<div class="menu-separador"></div>
-					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-internalName">???</font><br>
+					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
 					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
 					Number of enemies: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
 					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>

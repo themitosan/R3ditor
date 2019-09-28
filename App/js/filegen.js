@@ -7,7 +7,7 @@ var FILEGEN_TOGGLE = false;
 function FILEGEN_TOGGLE_RES(){
 	if (FILEGEN_TOGGLE === false){
 		$("#FILEGEN_CANVAS").css({"zoom": "1", "left": "926px"});
-		document.getElementById('BTN_saveImage').value = "Toggle Zoom (Size: Original Zoom)";
+		document.getElementById('BTN_saveImage').value = "Toggle Zoom (Size: Original)";
 		FILEGEN_TOGGLE = true;
 	} else {
 		$("#FILEGEN_CANVAS").css({"zoom": "2", "left": "400px"});

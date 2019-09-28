@@ -76,3 +76,6 @@ function DEBUG_TESTER(){
 	console.log(TESTEVAR);
 	RDT_updateCanvasInfos(0);
 }
+function cls(){
+	console.clear();
+}

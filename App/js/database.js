@@ -1263,7 +1263,6 @@ var RANGES = {
 	"RDT_item-header": 			[0, 2], // OK
 	"RDT_item-itemIdetifier": 	[2, 4], // OK
 	"RDT_item-espaco1": 		[4, 12], // OK
-
 	// Se a Header do Item for 67
 	"RDT_item-0-itemXX": 		[12, 16], // OK
 	"RDT_item-0-itemYY": 		[16, 20], // OK
@@ -1279,11 +1278,33 @@ var RANGES = {
 	"RDT_item-1-itemYY": 		[16, 20],
 	"RDT_item-1-itemZZ": 		[20, 24],
 	"RDT_item-1-itemRR": 		[24, 28],
-	
 	"RDT_item-1-itemID": 		[44, 46], // OK
 	"RDT_item-1-espaco2": 		[46, 48], // OK
 	"RDT_item-1-itemQuant":		[48, 50], // OK
-
 	"RDT_item-1-espaco3": 		[34, 42],
-	"RDT_item-1-itemMP": 		[58, 60]
+	"RDT_item-1-itemMP": 		[58, 60],
+	/*
+		Doors
+	*/
+	"RDT_door-0-header":         	 [0, 2],
+	"RDT_door-0-id":                 [2, 4],
+	"RDT_door-0-doorIdentifier":     [4, 12],
+	"RDT_door-0-doorXpos":           [12, 16],
+	"RDT_door-0-doorYpos": 		     [16, 20],
+	"RDT_door-0-doorZpos": 		     [20, 24],
+	"RDT_door-0-doorRpos": 		     [24, 28],
+	"RDT_door-0-doorNextXpos": 	     [28, 32],
+	"RDT_door-0-doorNextYpos": 	     [32, 36],
+	"RDT_door-0-doorNextZpos": 	     [36, 40],
+	"RDT_door-0-doorNextRpos": 	     [40, 44],
+	"RDT_door-0-doorNextStage":      [44, 46],
+	"RDT_door-0-doorNextRoomNumber": [46, 48],
+	"RDT_door-0-doorNextCamNumber":  [48, 50],
+	"RDT_door-0-doorHexOffset0": 	 [50, 52],
+	"RDT_door-0-doorType": 			 [52, 54],
+	"RDT_door-0-doorOpenOrient": 	 [54, 56], // 00: Handle Left, 01: Handle Right
+	"RDT_door-0-doorHexOffset1": 	 [56, 58],
+	"RDT_door-0-doorLockedFlag": 	 [58, 60],
+	"RDT_door-0-doorKey": 		 	 [60, 62],
+	"RDT_door-0-doorHexOffset2": 	 [62, 64],
 }

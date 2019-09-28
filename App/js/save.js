@@ -516,7 +516,11 @@ function save_renderLife(s_slot){
 			co = "txt-fine";
 		}
 		// Status: Hack
-		if (HP > 200){
+		if (HP > 200 && HP < 202){
+			STATUS = "Fine...? (HP: " + HP + ")";
+			co = "txt-fine";
+		}
+		if (HP > 201){
 			STATUS = "Life Hack! (HP: " + HP + ")";
 			co = "txt-fine";
 		}
@@ -532,7 +536,7 @@ function save_renderLife(s_slot){
 	document.getElementById("JILL-LIFESTATUS").innerHTML = STATUS;
 	document.getElementById("CARLOS-LIFESTATUS").innerHTML = STATUS;
 	document.getElementById("lbl-poison").innerHTML = POISON[veneno][0];
-	document.getElementById("lbl-HP").innerHTML = HP + " (Hex: " + chkA + " " + chkB + ")";
+	document.getElementById("lbl-HP").innerHTML = HP + " (Hex: " + chkA.toUpperCase() + " " + chkB.toUpperCase() + ")";
 	save_renderBox(s_slot);
 }
 // Fazer Backup

@@ -268,7 +268,7 @@ function currentTime(){
 	var m = t.getMonth() + 1;
 	if (m === 9 && d === 28 && e_e === 0){
 		e_e++;
-		addLog('log', '<font class="none" id="special_msg"><i>' + atob(special_day) + '</i></font>');
+		addLog('log', '<font class="none" id="special_msg" style="text-shadow: 0 0 15px #fff;"><i>' + atob(special_day) + '</i></font>');
 		$("#special_msg").fadeIn({duration: 2200, queue: false});
 		scrollLog();
 	}
@@ -309,6 +309,7 @@ function solveHEX(hex){
 }
 /// Function  WIP
 function WIP(){
+	log_separador();
 	addLog('warn', "Sorry buddy... #WIP");
 	scrollLog();
 }

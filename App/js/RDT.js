@@ -3,11 +3,19 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var RDT_selectedPoint = 0;
+var RDT_TEMP_NEXTX = "";
+var RDT_TEMP_NEXTY = "";
+var RDT_TEMP_NEXTZ = "";
+var RDT_TEMP_NEXTR = "";
+var RDT_TEMP_NEXT_ROOM = "";
+var RDT_TEMP_NEXT_STAGE = "";
+var RDT_TEMP_NEXT_CAMERA = "";
+
 var RDT_CURRENT_X = "";
 var RDT_CURRENT_Y = "";
 var RDT_CURRENT_Z = "";
 var RDT_CURRENT_R = "";
+var RDT_selectedPoint = 0;
 
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
@@ -37,6 +45,10 @@ var RDT_generateMapFile = false;
 var RDT_requestReloadWithFix0 = false;
 var RDT_requestReloadWithFix1 = false;
 
+var RDT_doorsRaw = [];
+var RDT_doorsArray = [];
+
+var RDT_totalDoors;
 var RDT_totalAudios;
 var RDT_arquivoBruto;
 var RDT_messasgesRaw;
@@ -52,6 +64,7 @@ function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
 	RDT_MSG_END = [];
+	RDT_totalDoors = 0;
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
@@ -89,7 +102,10 @@ function RDT_openFile(file){
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	mapfile = [];
 	RDT_doAfterSave();
+	RDT_doorsRaw = [];
 	RDT_loading = true;
+	RDT_totalDoors = 0;
+	RDT_doorsArray = [];
 	RDT_CANCRASH = false;
 	RDT_ERRORMOTIVE = "";
 	localStorage.clear();
@@ -121,48 +137,217 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_CANVAS_0').innerHTML = "";
 	document.getElementById('RDT-aba-menu-2').disabled = "";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	document.getElementById('RDT_door_holder').innerHTML = "";
 	document.getElementById('RDT_audio_holder').innerHTML = "";
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
+	RDT_readDoors();
 	RDT_readItens();
 	RDT_BG_display();
 	scrollLog();
 }
-function RDT_readItens(){
+// Portas
+function RDT_readDoors(){
 	var c = 0;
-	RDT_totalItens = 0;
-	RDT_totalFiles = 0;
-	RDT_totalMapas = 0;
-	RDT_ItensArray = [];
-	RDT_totalItensGeral = 0;
-	$("#RDT-item-list").empty();
-	RDT_generateItemIndexRaw("02310900");
-	RDT_generateItemIndexRaw("02318000");
-	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000");// Padrão encontrado em (quase) todos os itens
-	RDT_generateItemIndexRaw("02310500");
-	RDT_generateItemIndexRaw("02310100");
-	RDT_generateItemIndexRaw("02310200");
-	RDT_generateItemIndexRaw("02310300");
-	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00");// R503.rdt - Fábrica
-	RDT_totalItensGeral = RDT_ItensArray.length;
-	c = 0;
-	while (c < RDT_totalItensGeral){
-		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
-		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
-		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
-		if (RDT_ITEMRAW.slice(0, 2) === "68"){
-			RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, parseInt(RDT_itemEndRange + 8));
+	RDT_getDoorsArray("012100");
+	RDT_getDoorsArray("012101");
+	RDT_getDoorsArray("012102");
+	RDT_getDoorsArray("012103");
+	RDT_getDoorsArray("012104");
+	RDT_getDoorsArray("012105");
+	RDT_getDoorsArray("012106");
+	RDT_getDoorsArray("012107");
+	RDT_getDoorsArray("012108");
+	RDT_getDoorsArray("012109");
+	RDT_getDoorsArray("012110");
+	if (RDT_doorsArray.length !== 0){
+		while(c < RDT_doorsArray.length){
+			RDT_decompileDoors(c, RDT_doorsArray[c]);
+			c++;
 		}
-		localStorage.setItem("RDT_Item-" + c, RDT_ITEMRAW);
-		RDT_decompileItens(c, false);
+	}
+}
+function RDT_getDoorsArray(str){
+	var c = 0;
+	RDT_doorsRaw = getAllIndexes(RDT_arquivoBruto, str);
+	while (c < RDT_doorsRaw.length){
+		var check = RDT_arquivoBruto.slice(RDT_doorsRaw[c] - 4, RDT_doorsRaw[c] - 2);
+		if (check === "61" || check === "62"){
+			RDT_doorsArray.push(parseInt(RDT_doorsRaw[c] - 4));
+		}
 		c++;
 	}
-	RDT_getAllRelatedAudios();
-	RDT_lookForRDTConfigFile();
 }
+function RDT_decompileDoors(index, location){
+	if (location !== undefined && location !== null){
+		var loc = parseInt(location);
+		var DOOR_RAW = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
+		//
+		var dr_header 	   = DOOR_RAW.slice(RANGES["RDT_door-0-header"][0], 		    RANGES["RDT_door-0-header"][1]);
+		var dr_id 	  	   = DOOR_RAW.slice(RANGES["RDT_door-0-id"][0], 			    RANGES["RDT_door-0-id"][1]);
+		var dr_ident  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorIdentifier"][0],     RANGES["RDT_door-0-doorIdentifier"][1]);
+		var dr_xPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorXpos"][0], 		    RANGES["RDT_door-0-doorXpos"][1]);
+		var dr_yPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorYpos"][0], 		    RANGES["RDT_door-0-doorYpos"][1]);
+		var dr_zPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorZpos"][0], 		    RANGES["RDT_door-0-doorZpos"][1]);
+		var dr_rPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorRpos"][0], 		    RANGES["RDT_door-0-doorRpos"][1]);
+		var dr_nXpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextXpos"][0], 	    RANGES["RDT_door-0-doorNextXpos"][1]);
+		var dr_nYpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextYpos"][0], 	    RANGES["RDT_door-0-doorNextYpos"][1]);
+		var dr_nZpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextZpos"][0], 	    RANGES["RDT_door-0-doorNextZpos"][1]);
+		var dr_nRpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextRpos"][0], 	    RANGES["RDT_door-0-doorNextRpos"][1]);
+		var dr_nStage 	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextStage"][0], 	    RANGES["RDT_door-0-doorNextStage"][1]);
+		var dr_nRoomNumber = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextRoomNumber"][0], RANGES["RDT_door-0-doorNextRoomNumber"][1]);
+		var dr_nCamPos	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextCamNumber"][0],  RANGES["RDT_door-0-doorNextCamNumber"][1]);
+		var dr_offset0	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset0"][0], 	RANGES["RDT_door-0-doorHexOffset0"][1]);
+		var dr_type		   = DOOR_RAW.slice(RANGES["RDT_door-0-doorType"][0], 		    RANGES["RDT_door-0-doorType"][1]);
+		var dr_openOrient  = DOOR_RAW.slice(RANGES["RDT_door-0-doorOpenOrient"][0], 	RANGES["RDT_door-0-doorOpenOrient"][1]);
+		var dr_offset1 	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset1"][0], 	RANGES["RDT_door-0-doorHexOffset1"][1]);
+		var dr_lockFlag	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorLockedFlag"][0], 	RANGES["RDT_door-0-doorLockedFlag"][1]);
+		var dr_key 		   = DOOR_RAW.slice(RANGES["RDT_door-0-doorKey"][0], 		    RANGES["RDT_door-0-doorKey"][1]);
+		var dr_offset2	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset2"][0], 	RANGES["RDT_door-0-doorHexOffset2"][1]);
+		localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
+		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+			'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + dr_xPos + '</font><br>' +
+			'Y Position: <font class="italic RDT-item-lbl-fix">' + dr_yPos + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + dr_zPos + '</font><br>R Position: <font class="italic RDT-item-lbl-fix">' + 
+			dr_rPos + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nXpos + '</font><br>Next Y Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nYpos + '</font><br>' + 
+			'Next Z Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nZpos + '</font><br>Next R Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nRpos + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+			'<font class="italic RDT-item-lbl-fix-4">' + dr_type + '</font><br>Next Stage: <font class="italic RDT-item-lbl-fix-4">' + dr_nStage + '</font><br>Next Camera: <font class="italic RDT-item-lbl-fix-4">' + dr_nCamPos + '</font><br>' + 
+			'Next Room Number: <font class="italic RDT-item-lbl-fix-4">' + dr_nRoomNumber + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="italic RDT-item-lbl-fix-5">' + dr_header + '</font><br>' + 
+			'Lock Flag: <font class="italic RDT-item-lbl-fix-5">' + dr_lockFlag + '</font><br>Key: <font class="italic RDT-item-lbl-fix-5" title="' + ITEM[dr_key][0] + '">' + dr_key + '</font><br>Open Orientation: <font class="italic RDT-item-lbl-fix-5">' + dr_openOrient + 
+			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
+			" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
+			dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
+			dr_key.toUpperCase() + " " + dr_offset2.toUpperCase() + '</font></div>';
+		$("#RDT_door_holder").append(EXTREME_MASSIVE_HTML_TEMPLATE);
+		RDT_totalDoors++;
+	}
+}
+function RDT_copyPastePos(mode){
+	// Copy Next
+	if (mode === 0){
+		RDT_TEMP_NEXTX = document.getElementById('RDT_door-edit-NX').value.toUpperCase();
+		RDT_TEMP_NEXTY = document.getElementById('RDT_door-edit-NY').value.toUpperCase();
+		RDT_TEMP_NEXTZ = document.getElementById('RDT_door-edit-NZ').value.toUpperCase();
+		RDT_TEMP_NEXTR = document.getElementById('RDT_door-edit-NR').value.toUpperCase();
+		RDT_TEMP_NEXT_STAGE = document.getElementById('RDT_door-edit-NS').value.toUpperCase();
+		RDT_TEMP_NEXT_ROOM = document.getElementById('RDT_door-edit-NRN').value.toUpperCase();
+		RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC').value.toUpperCase();
+	}
+	// Paste Next
+	if (mode === 1 && RDT_TEMP_NEXTX !== "" && RDT_TEMP_NEXTY !== "" && RDT_TEMP_NEXTZ !== "" && RDT_TEMP_NEXTR !== "" && RDT_TEMP_NEXT_STAGE !== "" && RDT_TEMP_NEXT_ROOM !== ""){
+		document.getElementById('RDT_door-edit-NX').value = RDT_TEMP_NEXTX;
+		document.getElementById('RDT_door-edit-NY').value = RDT_TEMP_NEXTY;
+		document.getElementById('RDT_door-edit-NZ').value = RDT_TEMP_NEXTZ;
+		document.getElementById('RDT_door-edit-NR').value = RDT_TEMP_NEXTR;
+		document.getElementById('RDT_door-edit-NS').value = RDT_TEMP_NEXT_STAGE;
+		document.getElementById('RDT_door-edit-NRN').value = RDT_TEMP_NEXT_ROOM;
+		document.getElementById('RDT_door-edit-NC').value = RDT_TEMP_NEXT_CAMERA;
+	}
+}
+function RDT_DOOR_APPLY(index){
+	var reason = "";
+	var canCompile = true;
+	var ident = localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
+	var cX = document.getElementById('RDT_door-edit-X').value.toLowerCase();
+	var cY = document.getElementById('RDT_door-edit-Y').value.toLowerCase();
+	var cZ = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
+	var cR = document.getElementById('RDT_door-edit-R').value.toLowerCase();
+	var nX = document.getElementById('RDT_door-edit-NX').value.toLowerCase();
+	var nY = document.getElementById('RDT_door-edit-NY').value.toLowerCase();
+	var nZ = document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
+	var nR = document.getElementById('RDT_door-edit-NR').value.toLowerCase();
+	var nCP = document.getElementById('RDT_door-edit-NC').value.toLowerCase();
+	var nOO = document.getElementById('RDT_door-edit-OO').value.toLowerCase();
+	var nLF = document.getElementById('RDT_door-edit-LF').value.toLowerCase();
+	var nLK = document.getElementById('RDT_door-edit-LK').value.toLowerCase();
+	var nRN = document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
+	var nType = document.getElementById('RDT_door-edit-DT').value.toLowerCase();
+	var nStage = document.getElementById('RDT_door-edit-NS').value.toLowerCase();
+	var header = ident.slice(RANGES["RDT_door-0-header"][0], RANGES["RDT_door-0-doorIdentifier"][1]);
+	var offset0 = ident.slice(RANGES["RDT_door-0-doorHexOffset0"][0], RANGES["RDT_door-0-doorHexOffset0"][1]);
+	var offset1 = ident.slice(RANGES["RDT_door-0-doorHexOffset1"][0], RANGES["RDT_door-0-doorHexOffset1"][1]);
+	var offset2 = ident.slice(RANGES["RDT_door-0-doorHexOffset2"][0], RANGES["RDT_door-0-doorHexOffset2"][1]);
+	if (cX.length !== 4){
+		canCompile = false;
+		reason = "(X Pos) The length is wrong!";
+	}
+	if (cY.length !== 4){
+		canCompile = false;
+		reason = "(Y Pos) The length is wrong!";
+	}
+	if (cZ.length !== 4){
+		canCompile = false;
+		reason = "(Z Pos) The length is wrong!";
+	}
+	if (cR.length !== 4){
+		canCompile = false;
+		reason = "(R Pos) The length is wrong!";
+	}
+	if (nX.length !== 4){
+		canCompile = false;
+		reason = "(Next X Pos) The length is wrong!";
+	}
+	if (nY.length !== 4){
+		canCompile = false;
+		reason = "(Next Y Pos) The length is wrong!";
+	}
+	if (nZ.length !== 4){
+		canCompile = false;
+		reason = "(Next Z Pos) The length is wrong!";
+	}
+	if (nR.length !== 4){
+		canCompile = false;
+		reason = "(Next R Pos) The length is wrong!";
+	}
+	if (nCP.length !== 2){
+		canCompile = false;
+		reason = "(Camera) The length is wrong!";
+	}
+	if (nOO.length !== 2){
+		canCompile = false;
+		reason = "(Open Orientation) The length is wrong!";
+	}
+	if (nLF.length < 2){
+		canCompile = false;
+		reason = "(Lock Flag) The length is wrong!";
+	}
+	if (nLK.length !== 2){
+		canCompile = false;
+		reason = "(Lock Key) The length is wrong!";
+	}
+	if (nRN.length !== 2){
+		canCompile = false;
+		reason = "(Next Room Number) The length is wrong!";
+	}
+	if (nType.length !== 2){
+		canCompile = false;
+		reason = "(Door Type) The length is wrong!";
+	}
+	if (nStage.length !== 2){
+		canCompile = false;
+		reason = "(Stage) The length is wrong!";
+	}
+	//
+	if (canCompile === true){
+		var DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nY + nZ + nR + nStage + nRN + nCP + offset0 + nType + nOO + offset1 + nLF + nLK + offset2;
+		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
+	} else {
+		alert("WARNING: " + reason);
+		addLog('warn', "WARN - " + reason);
+		scrollLog();
+	}
+}
+function RDT_COMPILE_Lv2(oldDoorHex, newDoorHex){
+	if (RDT_arquivoBruto !== undefined){
+		var RDT_MIN = RDT_arquivoBruto.slice(0, RDT_arquivoBruto.indexOf(oldDoorHex))
+		var RDT_MAX = RDT_arquivoBruto.slice(RDT_arquivoBruto.indexOf(oldDoorHex) + 64, RDT_arquivoBruto.length);
+		var NEW_RDT = RDT_MIN + newDoorHex + RDT_MAX;
+		RDT_WRITEFILE(true, NEW_RDT);
+		RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+		$("#RDT-aba-menu-6").trigger('click');
+	}
+}
+// Audios
 function RDT_getAllRelatedAudios(){
 	var c = 0;
 	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
@@ -204,6 +389,41 @@ function RDT_deleteAudio(){
 		addLog('warn', 'WARN - Operation Canceled!');
 	}
 	scrollLog();
+}
+//
+function RDT_readItens(){
+	var c = 0;
+	RDT_totalItens = 0;
+	RDT_totalFiles = 0;
+	RDT_totalMapas = 0;
+	RDT_ItensArray = [];
+	RDT_totalItensGeral = 0;
+	$("#RDT-item-list").empty();
+	RDT_generateItemIndexRaw("02310900");
+	RDT_generateItemIndexRaw("02318000");
+	RDT_generateItemIndexRaw("02310800");
+	RDT_generateItemIndexRaw("02310000");// Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310500");
+	RDT_generateItemIndexRaw("02310100");
+	RDT_generateItemIndexRaw("02310200");
+	RDT_generateItemIndexRaw("02310300");
+	RDT_generateItemIndexRaw("02310400");
+	RDT_generateItemIndexRaw("02310a00");// R503.rdt - Fábrica
+	RDT_totalItensGeral = RDT_ItensArray.length;
+	c = 0;
+	while (c < RDT_totalItensGeral){
+		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
+		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
+		var RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, RDT_itemEndRange);
+		if (RDT_ITEMRAW.slice(0, 2) === "68"){
+			RDT_ITEMRAW = RDT_arquivoBruto.slice(RDT_itemStartRange, parseInt(RDT_itemEndRange + 8));
+		}
+		localStorage.setItem("RDT_Item-" + c, RDT_ITEMRAW);
+		RDT_decompileItens(c, false);
+		c++;
+	}
+	RDT_getAllRelatedAudios();
+	RDT_lookForRDTConfigFile();
 }
 function RDT_generateItemIndexRaw(str){
 	var c = 0;
@@ -1657,12 +1877,7 @@ function RDT_RECOMPILE_Lv1(){
 				c++;
 			}
 			// Generate the final file
-			fs.writeFileSync(ORIGINAL_FILENAME, RDT_CLONE, 'hex');
-			addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
-			addLog("log", "Folder: " + ORIGINAL_FILENAME);
-			log_separador();
-
-			RDT_doAfterSave();
+			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = "";
 			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
@@ -1678,7 +1893,17 @@ function RDT_RECOMPILE_Lv1(){
 	}
 	scrollLog();
 }
+function RDT_WRITEFILE(flag, HEX){
+	if (flag === true){
+		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
+		addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
+		addLog("log", "Folder: " + ORIGINAL_FILENAME);
+		log_separador();
+		RDT_doAfterSave();
+	}
+}
 function RDT_doAfterSave(){
+	document.getElementById('RDT_audio_holder').innerHTML = "";
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;
