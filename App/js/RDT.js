@@ -188,8 +188,8 @@ function RDT_decompileDoors(index, location){
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES["RDT_door-0-id"][0], 			    RANGES["RDT_door-0-id"][1]);
 		var dr_ident  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorIdentifier"][0],     RANGES["RDT_door-0-doorIdentifier"][1]);
 		var dr_xPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorXpos"][0], 		    RANGES["RDT_door-0-doorXpos"][1]);
-		var dr_yPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorYpos"][0], 		    RANGES["RDT_door-0-doorYpos"][1]);
-		var dr_zPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorZpos"][0], 		    RANGES["RDT_door-0-doorZpos"][1]);
+		var dr_zPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorYpos"][0], 		    RANGES["RDT_door-0-doorYpos"][1]);
+		var dr_yPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorZpos"][0], 		    RANGES["RDT_door-0-doorZpos"][1]);
 		var dr_rPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorRpos"][0], 		    RANGES["RDT_door-0-doorRpos"][1]);
 		var dr_nXpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextXpos"][0], 	    RANGES["RDT_door-0-doorNextXpos"][1]);
 		var dr_nYpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextYpos"][0], 	    RANGES["RDT_door-0-doorNextYpos"][1]);
@@ -209,8 +209,8 @@ function RDT_decompileDoors(index, location){
 		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
 			'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + dr_xPos + '</font><br>' +
 			'Y Position: <font class="italic RDT-item-lbl-fix">' + dr_yPos + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + dr_zPos + '</font><br>R Position: <font class="italic RDT-item-lbl-fix">' + 
-			dr_rPos + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nXpos + '</font><br>Next Y Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nYpos + '</font><br>' + 
-			'Next Z Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nZpos + '</font><br>Next R Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nRpos + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+			dr_rPos + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nXpos + '</font><br>Next Y Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nZpos + '</font><br>' + 
+			'Next Z Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nYpos + '</font><br>Next R Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nRpos + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
 			'<font class="italic RDT-item-lbl-fix-4">' + dr_type + '</font><br>Next Stage: <font class="italic RDT-item-lbl-fix-4">' + dr_nStage + '</font><br>Next Camera: <font class="italic RDT-item-lbl-fix-4">' + dr_nCamPos + '</font><br>' + 
 			'Next Room Number: <font class="italic RDT-item-lbl-fix-4">' + dr_nRoomNumber + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="italic RDT-item-lbl-fix-5">' + dr_header + '</font><br>' + 
 			'Lock Flag: <font class="italic RDT-item-lbl-fix-5">' + dr_lockFlag + '</font><br>Key: <font class="italic RDT-item-lbl-fix-5" title="' + ITEM[dr_key][0] + '">' + dr_key + '</font><br>Open Orientation: <font class="italic RDT-item-lbl-fix-5">' + dr_openOrient + 
@@ -307,7 +307,7 @@ function RDT_DOOR_APPLY(index){
 		canCompile = false;
 		reason = "(Open Orientation) The length is wrong!";
 	}
-	if (nLF.length < 2){
+	if (nLF.length !== 2){
 		canCompile = false;
 		reason = "(Lock Flag) The length is wrong!";
 	}

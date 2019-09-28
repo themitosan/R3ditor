@@ -808,8 +808,8 @@ function RDT_showMenu(id){
 		$("#RDT-msgs").css({"height": "472px"});
 		$("#RDT-ifm").css({"height": "472px"});
 	} else {
-		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT_openFileList").css({"display": "none"});
+		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
 		$("#RDT_menu-" + id).css({"height": "528px"});
@@ -891,7 +891,6 @@ function RDT_showMenu(id){
 }
 function RDT_showEditDoor(index, id, hex){
 	main_closeFileList();
-	$("#RDT_openFileList").css({"display": "none"});
 	document.getElementById("RDT-lbl-doorEdit-id").innerHTML = id;
 	document.getElementById("RDT-lbl-door-index").innerHTML = index;
 	document.getElementById('RDT_door-edit-LK').innerHTML = RDT_EDIT_ITEM;

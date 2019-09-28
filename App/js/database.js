@@ -1175,16 +1175,16 @@ var RANGES = {
 		15) Mapas B 			 0x2403 														OK
 		16) Files 				 0x2404 até 0x2409 												OK
 		@) 0x240A-0x240B 																		OK
-		17) Invent.  da Jill     0x240C até 0x2433 (Levando em conta os 32 Bits de cada slot) 	OK
-		18) Baú da Jill 		 0x2434 até 0x2533 (Levando em conta os 32 Bits de cada slot)   OK
+		17) Invent.  da Jill     0x240C até 0x2433 (Levando em conta os 32 Bytes de cada slot) 	OK
+		18) Baú da Jill 		 0x2434 até 0x2533 (Levando em conta os 32 Bytes de cada slot)  OK
 		@) 0x2534-0x2534																		OK
-		19) Arma atual da Jill   0x2535 		   (8 Bits, apenas a ID da arma)				OK
+		19) Arma atual da Jill   0x2535 		   (8 Bytes, apenas a ID da arma)				OK
 		20) Sidepack da Jill     0x2536 														OK
 		@) 0x2537-0x254B 																		OK
-		21) Invent.  do Carlos   0x254C até 0x2573 (Levando em conta os 32 Bits de cada slot)   OK
-		22) Baú do Carlos 		 0x2574 até 0x2673 (Levando em conta os 32 Bits de cada slot)   OK
+		21) Invent.  do Carlos   0x254C até 0x2573 (Levando em conta os 32 Bytes de cada slot)  OK
+		22) Baú do Carlos 		 0x2574 até 0x2673 (Levando em conta os 32 Bytes de cada slot)  OK
 		@) 0x2674-0x2674 																		OK
-		23) Arma atual do Carlos 0x2675			   (8 Bits, apenas a ID da arma)				OK
+		23) Arma atual do Carlos 0x2675			   (8 Bytes, apenas a ID da arma)				OK
 		24) Sidepack do Carlos   0x2676 														OK
 		25) Roupa da Jill 		 0x28D4															OK
 		26) Final do Save 		 0x28D5 até 0x3FFF												OK
