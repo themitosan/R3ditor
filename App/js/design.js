@@ -856,10 +856,12 @@ function RDT_showMenu(id){
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
 	}
+	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
 	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
 	$("#log-programa").css({"height": "86px", "top": "626px"});
+	document.getElementById("RDT_lbl-stage").innerHTML = RDT_stage;
 	document.getElementById("RDT-map-select").innerHTML = RDT_EDIT_MAP;
 	document.getElementById("RDT_mapFileName").innerHTML = RDT_MAPFILE;
 	document.getElementById("RDT-file-select").innerHTML = RDT_EDIT_FILE;
