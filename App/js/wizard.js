@@ -604,9 +604,15 @@ function WZ_loadFiles(file){
 		$("#menu-topo").css({"display": "none"});
 		R3DITOR_applyUpdate();
 	} else {
-		$("#menu-topo").fadeIn({duration: 100, queue: false});
-		$("#menu-utility").fadeIn({duration: 110, queue: false});
-		$("#menu-utility-aba").fadeIn({duration: 120, queue: false});
+		$("#menu-topo").css({"top": "40px"});
+		$("#menu-utility").css({"top": "546px"});
+		$("#menu-utility-aba").css({"top": "472px"});
+		$("#menu-utility-aba-2").css({"top": "-36px"});
+		$("#img-logo").fadeIn({duration: 2000, queue: false});
+		$("#menu-topo").fadeIn({duration: 200, queue: false});
+		$("#menu-utility").fadeIn({duration: 200, queue: false});
+		$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
+		$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
 	}
 	if (R3DITOR_check_for_updates === true){
 		checkForUpdates();

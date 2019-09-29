@@ -178,6 +178,7 @@ function main_menu(anim){
 		$("#menu-topo").css({"display": "none"});
 		$("#menu-utility").css({"display": "none"});
 		$("#menu-utility-aba").css({"display": "none"});
+		$("#menu-utility-aba-2").css({"display": "none"});
 	}
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Save Editor (*.sav)";

@@ -27,6 +27,7 @@
 	</head>
 	<body>
 		<!-- Menu Principal -->
+		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
 		<div class="menu-topo none" id="menu-topo">
 			<input type="button" class="botao-menu" value="SAV Editor (.sav)" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.msg)" onclick="main_menu(2);">
@@ -37,7 +38,7 @@
 			<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
 		</div>
 		<!-- Outras ferramentas -->
-		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix none" value="Other Tools / Commands">
+		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
 			<input type="button" class="botao-menu" value="File Generator" onclick="main_menu(4);">
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
@@ -658,7 +659,7 @@
 			</center>
 		</div>
 		<!-- AppLogo -->
-		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo" onclick="forceUpdate();">
+		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="forceUpdate();">
 		<!-- Log -->
 		<div class="log-holder" id="log-programa" onclick="main_closeFileList();">
 			<!-- os logs vão aparecer aqui -->

@@ -892,12 +892,23 @@ input[type="range" i]{
     width: 520px !important;
 }
 .menu-utility-fix{
-    top: 84px !important;
+    top: 526px;
 }
-.aba-utility-fix{
+.aba-utility-fix-2{
+    top: -20px;
+    display: none;
     position: absolute;
     cursor: unset !important;
     background-image: linear-gradient(to bottom, #737373, #545454);
+    animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
+}
+.aba-utility-fix{
+    top: 484px;
+    display: none;
+    position: absolute;
+    cursor: unset !important;
+    background-image: linear-gradient(to bottom, #737373, #545454);
+    animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
 }
 .RDT_doorNextPosFix{
     top: 61px;
