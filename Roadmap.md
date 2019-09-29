@@ -5,11 +5,11 @@ This file can (and will be) modified several times!
 ## Room Data Table (RDT)
 - Read items, files and maps! [WIP]
 - Read messages of every single RDT file! (FA 02) [WIP]
-- Read all Doors
+- Read all Doors [WIP]
 - Read Enemies on map
 - Edit the messages on MSG editor
 - Edit every type of item, file or maps! (Header 68)
-- Edit all Doors
+- Edit all Doors [WIP]
 - Edit Enemies on map
 - Add suport for itens, files and maps with header 68
 - ~~Add a Screenshot of map in all tabs (BSS)~~
