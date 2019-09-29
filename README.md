@@ -1,7 +1,8 @@
 <img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
 
 # R3ditor
-An editor of files written in JS / Node-Webkit to perform reverse engineering studies on Resident Evil 3.
+An editor of files written in JS / Node-Webkit to perform reverse engineering studies on Resident Evil 3.<br>
+<p align="center"><img src="https://pbs.twimg.com/media/EFoSmX4WsAEqCYu?format=jpg" width="680" height="360"></p>
 
 ## How to install
 - Download the latest version of Node-Webkit and extract it into a folder of your choice<br>(Click <a href="http://nwjs.io" target="_blank">here</a> to download)
