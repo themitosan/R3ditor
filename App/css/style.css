@@ -480,8 +480,8 @@ input[type="range" i]{
 }
 .aba-select{
     outline: none;
-    background-color: #444;
     text-shadow: 0 0 6px #000;
+    background-image: linear-gradient(to bottom, #696969, #444444);
 }
 .RDT-item-select{
     position: sticky;
@@ -897,6 +897,7 @@ input[type="range" i]{
 .aba-utility-fix{
     position: absolute;
     cursor: unset !important;
+    background-image: linear-gradient(to bottom, #737373, #545454);
 }
 .RDT_doorNextPosFix{
     top: 61px;

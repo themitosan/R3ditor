@@ -902,7 +902,6 @@ function RDT_showEditDoor(index, id, hex){
 	var nextCam = hex.slice(RANGES["RDT_door-0-doorNextCamNumber"][0], RANGES["RDT_door-0-doorNextCamNumber"][1]);
 	var roomNumber = hex.slice(RANGES["RDT_door-0-doorNextRoomNumber"][0], RANGES["RDT_door-0-doorNextRoomNumber"][1]).toUpperCase();
 	var realStage = parseInt(parseInt(hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]), 16) + 1).toString();
-	// Resto
 	document.getElementById("RDT-lbl-doorEdit-id").innerHTML = id;
 	document.getElementById("RDT-lbl-door-index").innerHTML = index;
 	document.getElementById('RDT_door-edit-LK').innerHTML = RDT_EDIT_ITEM;
