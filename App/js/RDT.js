@@ -233,7 +233,11 @@ function RDT_copyPastePos(mode){
 		RDT_TEMP_NEXTR = document.getElementById('RDT_door-edit-NR').value.toUpperCase();
 		RDT_TEMP_NEXT_STAGE = document.getElementById('RDT_door-edit-NS').value.toUpperCase();
 		RDT_TEMP_NEXT_ROOM = document.getElementById('RDT_door-edit-NRN').value.toUpperCase();
-		RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC').value.toUpperCase();
+		if (enable_mod === true){
+			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC').value;
+		} else {
+			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value;
+		}
 	}
 	// Paste Next
 	if (mode === 1 && RDT_TEMP_NEXTX !== "" && RDT_TEMP_NEXTY !== "" && RDT_TEMP_NEXTZ !== "" && RDT_TEMP_NEXTR !== "" && RDT_TEMP_NEXT_STAGE !== "" && RDT_TEMP_NEXT_ROOM !== ""){
@@ -244,6 +248,9 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NS').value = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NRN').value = RDT_TEMP_NEXT_ROOM;
 		document.getElementById('RDT_door-edit-NC').value = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_door-edit-NC-TXT').value = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
+		RDT_renderEditDoorCamPreview();
 		RDT_renderNextRDTLbl();
 	}
 }

@@ -841,6 +841,7 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-localName').innerHTML = "Unknown";
 		document.getElementById('RDT_lbl-localCity').innerHTML = "Unknown";
 	}
+	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
 	var RDT_MSG_P = "Undefined - This map don't have any messages!";
 	if (RDT_MSG_POINTERS[0] !== undefined){
 		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
@@ -856,7 +857,6 @@ function RDT_showMenu(id){
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
 	}
-	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
 	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
@@ -960,7 +960,10 @@ function RDT_renderNextRDTLbl(){
 	}
 }
 function RDT_renderEditDoorCamPreview(){
-	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_TMP_NC + document.getElementById('RDT_door-edit-NC').value + ".JPG";
+	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
+	var nrn = document.getElementById("RDT_door-edit-NRN").value;
+	var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
+	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value + ".JPG";
 	document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value;
 	document.getElementById("RDT_doorCamPreviewImg").src = camFile;
 }
