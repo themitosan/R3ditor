@@ -244,6 +244,7 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NS').value = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NRN').value = RDT_TEMP_NEXT_ROOM;
 		document.getElementById('RDT_door-edit-NC').value = RDT_TEMP_NEXT_CAMERA;
+		RDT_renderNextRDTLbl();
 	}
 }
 function RDT_DOOR_APPLY(index){
