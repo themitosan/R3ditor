@@ -582,12 +582,18 @@ function WZ_loadFiles(file){
 	// Visuals
 	if (EXEC_BIO3_original !== ""){
 		$("#btn_run_bio3").css({"display": "inline"});
+		if (HEX_EDITOR !== ""){
+			$("#main_openBio3OnHex").css({"display": "inline"});
+		}
 	}
 	if (EXEC_BIO3_MERCE !== ""){
 		$("#btn_run_merce").css({"display": "inline"});
+		if (HEX_EDITOR !== ""){
+			$("#main_openBio3MerceOnHex").css({"display": "inline"});
+		}
 	}
 	if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
-		$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+		$("#menu-topo-MOD").fadeIn({duration: 115, queue: false});
 	}
 	if (enable_mod === true){
 		$("#btn_run_bio3-mod").css({"display": "inline"});
@@ -599,6 +605,8 @@ function WZ_loadFiles(file){
 		R3DITOR_applyUpdate();
 	} else {
 		$("#menu-topo").fadeIn({duration: 100, queue: false});
+		$("#menu-utility").fadeIn({duration: 110, queue: false});
+		$("#menu-utility-aba").fadeIn({duration: 120, queue: false});
 	}
 	if (R3DITOR_check_for_updates === true){
 		checkForUpdates();

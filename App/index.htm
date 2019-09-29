@@ -31,11 +31,17 @@
 			<input type="button" class="botao-menu" value="SAV Editor (.sav)" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.msg)" onclick="main_menu(2);">
 			<input type="button" class="botao-menu" value="RDT Editor (.rdt)" onclick="main_menu(3);">
-			<input type="button" class="botao-menu" value="File Generator" onclick="main_menu(4);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
 			<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
+		</div>
+		<!-- Outras ferramentas -->
+		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix none" value="Other Tools / Commands">
+		<div class="menu-topo menu-utility-fix none" id="menu-utility">
+			<input type="button" class="botao-menu" value="File Generator" onclick="main_menu(4);">
+			<input type="button" class="botao-menu none" id="main_openBio3OnHex" value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
+			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
@@ -142,9 +148,9 @@
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
 								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
 							</div>
 							<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu" value="Copy Spawn Path" style="margin-top: 6px;">
 							<input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
@@ -609,7 +615,7 @@
 					The Mortican - BIO3GPS - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
 					Rick (aka. The CheatEngine Player!) - <a href="https://www.youtube.com/channel/UCcjNDIi38w9FCvB-Am0OT9A" target="_blank">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
-					The Entire <i>CT-Stars</i> Team! (Special Mention to Flag-King!) - <a target="_blank" href="https://www.ct-stars.com/">More Info</a><br>
+					The Entire <i>CT-Stars</i> Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!) - <a target="_blank" href="https://www.ct-stars.com/">More Info</a><br>
 				</div>
 				Shinji Mikami / Capcom Dev 1 Team - Thanks by creating the game of my life!
 				<br><br>

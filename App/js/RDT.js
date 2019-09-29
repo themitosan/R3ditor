@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var RDT_TMP_NC = "";
 var RDT_TEMP_NEXTX = "";
 var RDT_TEMP_NEXTY = "";
 var RDT_TEMP_NEXTZ = "";
@@ -64,7 +63,6 @@ var RDT_lastFileOpened = "";
 function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
-	RDT_TMP_NC = "";
 	RDT_MSG_END = [];
 	RDT_totalDoors = 0;
 	RDT_totalItens = 0;
@@ -250,8 +248,8 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NC').value = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_door-edit-NC-TXT').value = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
-		RDT_renderEditDoorCamPreview();
 		RDT_renderNextRDTLbl();
+		RDT_renderEditDoorCamPreview();
 	}
 }
 function RDT_DOOR_APPLY(index){

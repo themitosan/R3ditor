@@ -176,6 +176,8 @@ function main_menu(anim){
 		reload();
 	} else {
 		$("#menu-topo").css({"display": "none"});
+		$("#menu-utility").css({"display": "none"});
+		$("#menu-utility-aba").css({"display": "none"});
 	}
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Save Editor (*.sav)";
@@ -516,7 +518,9 @@ function showAbout(){
 	main_closeFileList();
 	$("#menu-topo").css({"display": "none"});
 	$("#log-programa").css({"display": "none"});
+	$("#menu-utility").css({"display": "none"});
 	$("#menu-topo-MOD").css({"display": "none"});
+	$("#menu-utility-aba").css({"display": "none"});
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
 }
 /// MSG
@@ -892,33 +896,12 @@ function RDT_showMenu(id){
 	scrollLog();
 }
 function RDT_showEditDoor(index, id, hex){
-	var c = 0;
 	main_closeFileList();
 	RDT_doorShowCamPreview(1);
 	document.getElementById('RDT_door-edit-NC').innerHTML = "";
 	var nextCam = hex.slice(RANGES["RDT_door-0-doorNextCamNumber"][0], RANGES["RDT_door-0-doorNextCamNumber"][1]);
 	var roomNumber = hex.slice(RANGES["RDT_door-0-doorNextRoomNumber"][0], RANGES["RDT_door-0-doorNextRoomNumber"][1]).toUpperCase();
 	var realStage = parseInt(parseInt(hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]), 16) + 1).toString();
-	RDT_TMP_NC = "R" + realStage.toUpperCase() + roomNumber.toUpperCase();
-
-	// Render Cam
-	if (enable_mod === true){
-		var DOOR_CAMS_ARRAY = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(RDT_TMP_NC).toUpperCase()));
-		if (DOOR_CAMS_ARRAY.length !== 0){
-			while(c < DOOR_CAMS_ARRAY.length){
-				if (DOOR_CAMS_ARRAY[c].indexOf(".SLD") !== -1){
-					DOOR_CAMS_ARRAY.splice(c, 1);
-				} else {
-					var camId = DOOR_CAMS_ARRAY[c].slice(RDT_TMP_NC.length, DOOR_CAMS_ARRAY[c].length).replace(".JPG", "");
-					$("#RDT_door-edit-NC").append('<option value="' + camId.toUpperCase() + '">Cam ' + camId.toUpperCase() + '</option>');
-					c++;
-				}
-			}
-		} else {
-			$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
-		}
-	}
-
 	// Resto
 	document.getElementById("RDT-lbl-doorEdit-id").innerHTML = id;
 	document.getElementById("RDT-lbl-door-index").innerHTML = index;
@@ -951,12 +934,43 @@ function RDT_showEditDoor(index, id, hex){
 	$("#RDT_door_holder").css({"width": "752px"});
 }
 function RDT_renderNextRDTLbl(){
+	var c = 0;
 	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
 	if (nrn.length === 2 && rst.length === 1){
 		var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
 		document.getElementById("RDT_lbl_door_nextRDT").innerHTML = rComp + ".RDT";
-		document.getElementById("RDT_lbl_door_nextRDT").title = RDT_locations[rComp][0] + ", " + RDT_locations[rComp][1];
+		var existsRDT = fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + rComp + ".RDT");
+		if (existsRDT === true){
+			document.getElementById("RDT_lbl_door_nextRDT").title = RDT_locations[rComp][0] + ", " + RDT_locations[rComp][1];
+		} else {
+			document.getElementById("RDT_lbl_door_nextRDT").title = "Unknown Location";
+		}
+		if (enable_mod === true && existsRDT === true){
+			document.getElementById('RDT_door-edit-NC').innerHTML = "";
+			var DOOR_CAMS_ARRAY = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(rComp).toUpperCase()));
+			if (DOOR_CAMS_ARRAY.length !== 0){
+				while(c < DOOR_CAMS_ARRAY.length){
+					if (DOOR_CAMS_ARRAY[c].indexOf(".SLD") !== -1){
+						DOOR_CAMS_ARRAY.splice(c, 1);
+					} else {
+						var camId = DOOR_CAMS_ARRAY[c].slice(rComp.length, DOOR_CAMS_ARRAY[c].length).replace(".JPG", "");
+						$("#RDT_door-edit-NC").append('<option value="' + camId.toUpperCase() + '">Cam ' + camId.toUpperCase() + '</option>');
+						c++;
+					}
+				}
+				if (DOOR_CAMS_ARRAY[document.getElementById('RDT_door-edit-NC').value] !== undefined){
+					document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
+				} else {
+					document.getElementById('RDT_door-edit-NC').value = "00";
+				}
+				$("#RDT_doorCamPreviewImg").css({"display": "inline"});
+			} else {
+				$("#RDT_doorCamPreviewImg").css({"display": "none"});
+				$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
+			}
+			RDT_renderEditDoorCamPreview();
+		}
 	}
 }
 function RDT_renderEditDoorCamPreview(){
@@ -1182,6 +1196,9 @@ function RDT_showCanvasTab(){
 // Updater
 function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});
+	$("#menu-utility").css({"display": "none"});
+	$("#menu-topo-MOD").css({"display": "none"});
+	$("#menu-utility-aba").css({"display": "none"});
 	$("#R3ditor_update").css({"display": "block"});
 }
 function R3DITORcloseUpdate(){

@@ -891,6 +891,13 @@ input[type="range" i]{
     left: 780px !important;
     width: 520px !important;
 }
+.menu-utility-fix{
+    top: 84px !important;
+}
+.aba-utility-fix{
+    position: absolute;
+    cursor: unset !important;
+}
 .RDT_doorNextPosFix{
     top: 61px;
     left: 148px;
