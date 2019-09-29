@@ -128,7 +128,7 @@
 					</div>
 					<!-- RDT: Doors - Editar -->
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
-						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font></center>
+						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form">
 							<div class="RDT_coordsHolder_A">X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000"></div>
 							<div class="RDT_coordsHolder_B">Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000"></div>
@@ -142,17 +142,37 @@
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Next Camera: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NC" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
 							</div>
-							<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu" value="Copy Path" style="margin-top: 6px;"><input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Path">
+							<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu" value="Copy Spawn Path" style="margin-top: 6px;">
+							<input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
+							<div class="menu-separador"></div>
+								Next Cam: <font id="RDT_lbl_door_editCam" class="italic">???</font> 
+								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Lock Key: <select class="item-select-mod RDT_door_textEditFix_4" id="RDT_door-edit-LK"></select></div>
 							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
-							<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-OO" placeholder="00"></div>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<!-- Cam Preview -->
+						<div id="RDT_doorCamPrevewDiv" class="none">
+							<center>Next Camera: 
+								<input type="text" class="item-select-mod none" placeholder="00" id="RDT_door-edit-NC-TXT" value="00">
+									<select class="item-select-mod" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
+										<!-- Cam vai aqui -->			
+									</select><br>
+								<img src="" id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div" id="RDT_applyDoorCamDiv">
+							<center>
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-white" onclick="RDT_cancelDoorCamEdit();" value="Cancel">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-green" onclick="RDT_applyDoorCamSelect();" value="Apply Cam">
+							</center>
+						</div>
+						<!-- APPLY DOOR -->
+						<div class="RDT-applyBtn-div" id="RDT_applyDoorDiv">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
 						</div>

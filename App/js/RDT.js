@@ -3,6 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
+var RDT_TMP_NC = "";
 var RDT_TEMP_NEXTX = "";
 var RDT_TEMP_NEXTY = "";
 var RDT_TEMP_NEXTZ = "";
@@ -63,6 +64,7 @@ var RDT_lastFileOpened = "";
 function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
+	RDT_TMP_NC = "";
 	RDT_MSG_END = [];
 	RDT_totalDoors = 0;
 	RDT_totalItens = 0;

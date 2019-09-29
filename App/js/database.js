@@ -389,7 +389,7 @@ var RDT_locations = {
 	"R106": ["Boutique Street", "Uptown"],
 	"R107": ["Bar Jack", "Uptown"],
 	"R108": ["Alley 5", "Uptown"],
-	"R109": ["Passage to Pharmacy", "Uptown"],
+	"R109": ["Passage to Pharmacy (Day)", "Uptown"],
 	"R10A": ["Main Street", "Uptown"],
 	"R10B": ["Pharmacy Street", "Uptown"],
 	"R10C": ["Alley - Save", "Uptown"],

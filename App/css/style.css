@@ -881,12 +881,10 @@ input[type="range" i]{
 }
 .RDT_door_textEditFix_3{
     width: 52px;
-    left: 900px;
-    position: sticky;
 }
 .RDT_door_textEditFix_4{
-    left: 900px;
-    width: 398px;
+    left: 854px;
+    width: 444px;
     position: sticky;
 }
 .RDT_door-edit-posFix{
@@ -1258,4 +1256,12 @@ input[type="range" i]{
     left: 808px;
     width: 492px;
     position: absolute;
+}
+/*
+    RDT Door Edit Prev
+*/
+.imgPreviewCamSpawn{
+    width: 346px;
+    margin-top: 6px;
+    box-shadow: 0 0 10px #858dbfa3;
 }
