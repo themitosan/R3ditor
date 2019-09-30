@@ -604,7 +604,7 @@ function WZ_loadFiles(file){
 		$("#menu-topo").css({"display": "none"});
 		R3DITOR_applyUpdate();
 	} else {
-		$("#menu-topo").css({"top": "40px"});
+		$("#menu-topo").css({"top": "38px"});
 		$("#menu-utility").css({"top": "546px"});
 		$("#menu-utility-aba").css({"top": "472px"});
 		$("#menu-utility-aba-2").css({"top": "-36px"});

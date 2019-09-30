@@ -165,6 +165,7 @@ function MAKE_SAVE(slot){
 		if (TEMP_SLOT.length === RANGES["slot-offset"][0]){
 			localStorage.setItem("Save_" + slot, TEMP_SLOT);
 			addLog("log", "The Slot " + slot + " was saved successfully!");
+			save_Backup();
 			finalizeSave();
 		} else {
 			var msg = "Unable to save current slot because compilation is divergent size: Size Expected: " + RANGES["slot-offset"][0] + " - Current Size: " + TEMP_SLOT.length;
@@ -181,7 +182,7 @@ function finalizeSave(){
 	var FILE = SAVE_INDICADOR_HEADER + 
 	localStorage.Save_1 + localStorage.Save_2 + localStorage.Save_3 + localStorage.Save_4 + localStorage.Save_5 + 
 	localStorage.Save_6 + localStorage.Save_7 + localStorage.Save_8 + localStorage.Save_9 + localStorage.Save_10 + 
-	localStorage.Save_11 + localStorage.Save_12 + localStorage.Save_13 + localStorage.Save_14 + localStorage.Save_15
+	localStorage.Save_11 + localStorage.Save_12 + localStorage.Save_13 + localStorage.Save_14 + localStorage.Save_15;
 	fs.writeFileSync(ORIGINAL_FILENAME, FILE, 'hex');
 	TEMP_SLOT = "";
 	CARREGAR_SAVE(ORIGINAL_FILENAME);
@@ -231,8 +232,8 @@ function CARREGAR_SAVE(sFile){
 	localStorage.setItem("Save_14", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
 	localStorage.setItem("Save_15", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
 	// Render Infos
+	$("#SAV_clearFile").css({"display": "inline"});
 	save_renderSlot(CURRENT_SAVE_SLOT);
-	save_Backup();
 }
 function save_renderSlot(slotID){
 	if (slotID < 1 || slotID > 15 || slotID === undefined){
