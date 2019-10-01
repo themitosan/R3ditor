@@ -920,9 +920,10 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById("RDT_door-edit-NS").value = hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-OO").value = hex.slice(RANGES["RDT_door-0-doorOpenOrient"][0], RANGES["RDT_door-0-doorOpenOrient"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-LF").value = hex.slice(RANGES["RDT_door-0-doorLockedFlag"][0], RANGES["RDT_door-0-doorLockedFlag"][1]).toUpperCase();
-	document.getElementById("RDT_door-edit-NC").value = nextCam;
 	document.getElementById("RDT_door-edit-NRN").value = roomNumber;
-	document.getElementById("RDT_door-edit-NC-TXT").value = nextCam;
+	RDT_renderNextRDTLbl();
+	document.getElementById("RDT_door-edit-NC").value = nextCam;
+	document.getElementById("RDT_door-edit-NC-TXT").value = nextCam.toUpperCase();
 	document.getElementById("RDT_lbl_door_editCam").innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT-btn-aplicarDoor').onclick = function(){
 		RDT_DOOR_APPLY(index);
@@ -930,7 +931,6 @@ function RDT_showEditDoor(index, id, hex){
 	if (enable_mod === true){
 		RDT_renderEditDoorCamPreview();
 	}
-	RDT_renderNextRDTLbl();
 	$("#RDT-door-Edit").css({"display": "block"});
 	$("#RDT_door_holder").css({"width": "752px"});
 }
