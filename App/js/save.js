@@ -929,7 +929,9 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	if (quanti === ""){
 		quanti = "0";
 	}
-	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex + quantHex + atrib + nulo + " - Item: " + itemHex + " (" + titulo + ") - Quantity: " + quantHex + " (" + parseInt(quantHex, 16) + ") - Attr.: " + atrib + " (" + ATTR[atrib][0] + ")");
+	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
+		" - Item: " + itemHex.toUpperCase() + " (" + titulo + ") - Quantity: " + quantHex.toUpperCase() + " (" + parseInt(quantHex, 16) + ") - Attr.: " + 
+		atrib.toUpperCase() + " (" + ATTR[atrib][0] + ")");
 }
 function SAVE_clearAllSaves(){
 	if (SAVE_arquivoBruto !== undefined){
@@ -1154,7 +1156,7 @@ function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	contadorFinal(0, 0, 0, 0, 0, h_0x2202);
 	contadorFinal(0, 0, 0, 0, 0, h_0x2203);
 	document.getElementById("lbl-time").innerHTML = hora + ":" + minutos + ":" + segundos;
-	document.getElementById("lbl-time").title = "Full Time Format\nDD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
+	document.getElementById("lbl-time").title = "Full Time Format:\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos;
 	//console.log("IGT: " + h_0x2200 + " - " + h_0x2201 + " - " + h_0x2202 + " - " + h_0x2203);
 }
 function resetTimer(){

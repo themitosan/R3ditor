@@ -326,6 +326,10 @@ function runExternalSoftware(exe, args){
 	}
 	const ls = spawn(exe, args);
 	EXTERNAL_APP_PID = ls.pid;
+	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
+		$("#menu-utility").css({"top": "586px"});
+		$("#menu-utility-aba").css({"top": "512px"});
+	}
 	ls.stdout.on('data', (data) => {
 		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
@@ -342,6 +346,10 @@ function runExternalSoftware(exe, args){
 		}
 		if (RE3_RUNNING === true){
 			RE3_RUNNING = false;
+			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
+				$("#menu-utility").css({"top": "546px"});
+				$("#menu-utility-aba").css({"top": "472px"});
+			}
 			R3DITOR_RUNGAME(1);
 		}
 		document.title = APP_NAME;

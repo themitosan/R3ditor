@@ -862,6 +862,7 @@ function RDT_showMenu(id){
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
 	}
+	$("#RDT_backupBtn").css({"display": "inline"});
 	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;

@@ -188,8 +188,8 @@ function RDT_decompileDoors(index, location){
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES["RDT_door-0-id"][0], 			    RANGES["RDT_door-0-id"][1]);
 		var dr_ident  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorIdentifier"][0],     RANGES["RDT_door-0-doorIdentifier"][1]);
 		var dr_xPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorXpos"][0], 		    RANGES["RDT_door-0-doorXpos"][1]);
-		var dr_zPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorYpos"][0], 		    RANGES["RDT_door-0-doorYpos"][1]);
-		var dr_yPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorZpos"][0], 		    RANGES["RDT_door-0-doorZpos"][1]);
+		var dr_yPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorYpos"][0], 		    RANGES["RDT_door-0-doorYpos"][1]);
+		var dr_zPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorZpos"][0], 		    RANGES["RDT_door-0-doorZpos"][1]);
 		var dr_rPos   	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorRpos"][0], 		    RANGES["RDT_door-0-doorRpos"][1]);
 		var dr_nXpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextXpos"][0], 	    RANGES["RDT_door-0-doorNextXpos"][1]);
 		var dr_nYpos  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorNextYpos"][0], 	    RANGES["RDT_door-0-doorNextYpos"][1]);
@@ -207,13 +207,13 @@ function RDT_decompileDoors(index, location){
 		var dr_offset2	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset2"][0], 	RANGES["RDT_door-0-doorHexOffset2"][1]);
 		localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
 		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-			'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + dr_xPos + '</font><br>' +
-			'Y Position: <font class="italic RDT-item-lbl-fix">' + dr_yPos + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + dr_zPos + '</font><br>R Position: <font class="italic RDT-item-lbl-fix">' + 
-			dr_rPos + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nXpos + '</font><br>Next Y Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nZpos + '</font><br>' + 
-			'Next Z Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nYpos + '</font><br>Next R Position: <font class="italic RDT-item-lbl-fix-3">' + dr_nRpos + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
-			'<font class="italic RDT-item-lbl-fix-4">' + dr_type + '</font><br>Next Stage: <font class="italic RDT-item-lbl-fix-4">' + dr_nStage + '</font><br>Next Camera: <font class="italic RDT-item-lbl-fix-4">' + dr_nCamPos + '</font><br>' + 
-			'Next Room Number: <font class="italic RDT-item-lbl-fix-4">' + dr_nRoomNumber + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="italic RDT-item-lbl-fix-5">' + dr_header + '</font><br>' + 
-			'Lock Flag: <font class="italic RDT-item-lbl-fix-5">' + dr_lockFlag + '</font><br>Key: <font class="italic RDT-item-lbl-fix-5" title="' + ITEM[dr_key][0] + '">' + dr_key + '</font><br>Open Orientation: <font class="italic RDT-item-lbl-fix-5">' + dr_openOrient + 
+			'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
+			'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+			dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
+			'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+			'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
+			'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
+			'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + ITEM[dr_key][0] + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
 			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
 			" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
 			dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
@@ -1812,13 +1812,15 @@ function RDT_Backup(){
 	checkFolders();
 	if (RDT_arquivoBruto !== undefined){
 		try{
-			var backup_name = getFileName(ORIGINAL_FILENAME) + "-" + currentTime() + ".rdtbackup";
+			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + "-" + currentTime() + ".rdtbackup";
 			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
 			addLog("log", "INFO - A backup of your RDT file was made successfully! - File: " + backup_name);
 			addLog("log", "Folder - " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
 			RDT_lastBackup = APP_PATH + "\\Backup\\RDT\\" + backup_name;
+			log_separador();
 			WZ_saveConfigs(true);
+			$("#RDT_restoreLastBackup").css({"display": "inline"});
 		} catch (err){
 			addLog("error", "ERROR - Unable to make backup! - " + err);
 		}
@@ -1828,7 +1830,7 @@ function RDT_Backup(){
 }
 function RDT_restoreLastBackup(){
 	main_closeFileList();
-	if (RDT_lastBackup !== ""){
+	if (RDT_lastBackup !== "" && fs.existsSync(RDT_lastBackup) === true){
 		var loc = "Unknown";
 		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf("-")).toUpperCase();
 		if (RDT_locations[mName] !== undefined && RDT_locations[mName] !== null){
@@ -1847,6 +1849,10 @@ function RDT_restoreLastBackup(){
 				addLog('error', err);
 			}
 		}
+	} else {
+		$("#RDT_restoreLastBackup").css({"display": "none"});
+		addLog('warn', "WARN - Unable to find backup!");
+		scrollLog();
 	}
 }
 function RDT_restoreLastBackup_1(name){

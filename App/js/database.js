@@ -296,12 +296,13 @@ var VOID = {
 	"00": "OK!",									   // Condição normal
 	"80": "Condição anormal da versão francesa/Taiwan" // Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
 }
+// AKA. STAGE
 var CIDADE = {
-	"00": ["Uptown (Including RPD)"],
-    "01": ["Downtown"],
-    "02": ["Clock Tower / Park before the Hospital"],
-    "03": ["Clock Tower / Park after the Hospital"],
-    "04": ["Dead Factory"],
+	"00": ["Uptown (Including RPD, Stage 1)"],
+    "01": ["Downtown (Stage 2)"],
+    "02": ["Clock Tower / Park before the Hospital (Stage 3)"],
+    "03": ["Clock Tower / Park after the Hospital (Stage 4)"],
+    "04": ["Dead Factory (Stage 5)"],
     "05": ["Shows first the Mercenaries-minigame ending, then the ending video of the main game (the one without Barry Burton, assuming 0x2250 has been set to 00. If not, then it only crashes)."],
     "06": ["Downtown again. I have no idea what's different here. This may be after the scene where Jill falls trough the parking lot floor."]
 }
@@ -540,7 +541,7 @@ var FG_DICIONARIO = {
 	"!": ["0px 904px 0px 210px",   "-210", 6],
 	"?": ["0px 894px 0px 216px",   "-216", 8],
 	"$": ["0px 885px 0px 223px",   "-223", 8],
-	"A": ["0px 877px 0px 232px",   "-232", 9],
+	"A": ["0px 877px 0px 232px",   "-232", 8],
 	"B": ["0px 869px 0px 240px",   "-240", 8],
 	"C": ["0px 861px 0px 248px",   "-248", 8],
 	"D": ["0px 853px 0px 256px",   "-256", 9],
@@ -590,7 +591,7 @@ var FG_DICIONARIO = {
 	"q": ["0px 498px 0px 611px",   "-611", 7],
 	"r": ["0px 491px 0px 619px",   "-619", 7],
 	"s": ["0px 483px 0px 627px",   "-627", 7],
-	"t": ["0px 474px 0px 635px",   "-635", 7],
+	"t": ["0px 474px 0px 635px",   "-635", 6],
 	"u": ["0px 467px 0px 643px",   "-643", 8],
 	"v": ["0px 458px 0px 652px",   "-652", 8],
 	"w": ["0px 445px 0px 661px",   "-661", 10],
