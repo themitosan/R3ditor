@@ -1552,7 +1552,7 @@ function RDT_hideCanvasTab(){
 	document.getElementById('RDT_CANVAS_0').innerHTML = "";
 	var tItems = RDT_totalItens;
 	RDT_totalItens = 0;
-	while(c < tItems){
+	while(c < parseInt(tItems + 1)){
 		console.warn(localStorage.getItem("RDT_Item-" + c));
 		RDT_decompileItens(c, false);
 		c++;

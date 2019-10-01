@@ -857,13 +857,13 @@ function RDT_showMenu(id){
 	}
 	$("#RDT_reload").css({"display": "inline"});
 	if (EXTERNAL_APP_RUNNING === false){
-		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 		$("#RDT-door-Edit").css({"height": "417px"});
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
+		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
+		$("#RDT_audio_holder").css({"height": "430px"});
 	}
 	$("#RDT_backupBtn").css({"display": "inline"});
-	$("#RDT_audio_holder").css({"height": "430px"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
 	document.getElementById("RDT_MSG-holder").scrollTop = 0;
 	$("#log-programa").css({"height": "86px", "top": "626px"});
