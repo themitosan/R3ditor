@@ -522,6 +522,7 @@ function showAbout(){
 	$("#menu-utility").css({"display": "none"});
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#menu-utility-aba").css({"display": "none"});
+	$("#menu-utility-aba-2").css({"display": "none"});
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
 }
 /// MSG
@@ -1221,8 +1222,13 @@ function R3DITORshowUpdate(){
 	$("#R3ditor_update").css({"display": "block"});
 }
 function R3DITORcloseUpdate(){
-	$("#menu-topo").css({"display": "block"});
 	$("#R3ditor_update").css({"display": "none"});
+	$("#menu-utility-aba").css({"display": "block"});
+	$("#menu-utility").css({"display": "block"});
+	$("#menu-topo").css({"display": "block"});
+	if (EXEC_BIO3_original !== ""){
+		$("#menu-topo-MOD").css({"display": "block"});
+	}
 }
 function R3DITORshowUpdateProgress(){
 	document.title = APP_NAME + " - Updating...";
