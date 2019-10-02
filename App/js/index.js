@@ -268,7 +268,13 @@ function currentTime(){
 	var m = t.getMonth() + 1;
 	if (m === 9 && d === 28 && e_e === 0){
 		e_e++;
-		addLog('log', '<font class="none" id="special_msg" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day) + '</i></font>');
+		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
+		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		scrollLog();
+	}
+	if (m === 10 && d === 1 && e_e === 0){
+		e_e++;
+		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
 		$("#special_msg").fadeIn({duration: 2200, queue: false});
 		scrollLog();
 	}

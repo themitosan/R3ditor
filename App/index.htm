@@ -138,20 +138,20 @@
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form">
-							<div class="RDT_coordsHolder_A">X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_A">X Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Y Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Z Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B">Rotation: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000"></div>
 							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A">Next X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">Next Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">Next Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">Next Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_A">Next X Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Y Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Z Position: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_B">Next Rotation: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000"></div>
 							</div>
 							<div class="RDT_doorOtherFix">
-								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00"></div>
+								<div class="RDT_coordsHolder_A">Door Type: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00"></div>
 								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00"></div>
-								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00"></div>
+								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00"></div>
 								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00"></div>
 							</div>
 							<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu" value="Copy Spawn Path" style="margin-top: 6px;">
@@ -161,7 +161,7 @@
 								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Lock Key: <select class="item-select-mod RDT_door_textEditFix_4" id="RDT_door-edit-LK"></select></div>
-							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
+							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
 						</div>
 						<!-- Cam Preview -->
 						<div id="RDT_doorCamPrevewDiv" class="none">

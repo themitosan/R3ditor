@@ -934,7 +934,25 @@ function RDT_showEditDoor(index, id, hex){
 	$("#RDT-door-Edit").css({"display": "block"});
 	$("#RDT_door_holder").css({"width": "752px"});
 }
+function RDT_doorValidadeInput(){
+	document.getElementById("RDT_door-edit-LK").value = document.getElementById("RDT_door-edit-LK").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-X").value = document.getElementById("RDT_door-edit-X").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-Y").value = document.getElementById("RDT_door-edit-Y").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-Z").value = document.getElementById("RDT_door-edit-Z").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-R").value = document.getElementById("RDT_door-edit-R").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-NX").value = document.getElementById("RDT_door-edit-NX").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-NY").value = document.getElementById("RDT_door-edit-NY").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-NZ").value = document.getElementById("RDT_door-edit-NZ").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-NR").value = document.getElementById("RDT_door-edit-NR").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-DT").value = document.getElementById("RDT_door-edit-DT").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_door-edit-NS").value = document.getElementById("RDT_door-edit-NS").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_door-edit-OO").value = document.getElementById("RDT_door-edit-OO").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_door-edit-LF").value = document.getElementById("RDT_door-edit-LF").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_door-edit-NRN").value = document.getElementById("RDT_door-edit-NRN").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById("RDT_door-edit-NC-TXT").value.slice(0, 2).toUpperCase();
+}
 function RDT_renderNextRDTLbl(){
+	//
 	var c = 0;
 	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
