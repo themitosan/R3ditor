@@ -1091,6 +1091,9 @@ var MSG_DICIONARIO_REVERSO = {
 	"ö": "4b",
 	"ã": "3d",
 	"ä": "3d",
+	"í": "45",
+	"ï": "45",
+	"ì": "45",
 	// Extra for CUSTOM TEXE.TIM
 	"á": "5a",
 	"à": "5b",

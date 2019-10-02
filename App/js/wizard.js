@@ -604,10 +604,10 @@ function WZ_loadFiles(file){
 		$("#menu-topo").css({"display": "none"});
 		R3DITOR_applyUpdate();
 	} else {
-		$("#menu-topo").css({"top": "38px"});
+		$("#menu-topo").css({"top": "32px"});
 		$("#menu-utility").css({"top": "546px"});
 		$("#menu-utility-aba").css({"top": "472px"});
-		$("#menu-utility-aba-2").css({"top": "-36px"});
+		$("#menu-utility-aba-2").css({"top": "-44px"});
 		$("#img-logo").fadeIn({duration: 2000, queue: false});
 		$("#menu-topo").fadeIn({duration: 200, queue: false});
 		$("#menu-utility").fadeIn({duration: 200, queue: false});
