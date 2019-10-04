@@ -539,7 +539,7 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		}
 		if (parseInt(id, 16) > 163 && parseInt(id, 16) < 171){
 			typeId = 3;
-			tipo = "Mapa";
+			tipo = "Map";
 			cssFix = "RDT-map-bg";
 			convert = RDT_MAPAS[id][0];
 			RDT_totalMapas++;
@@ -547,10 +547,9 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		if (id.length < 2){
 			id = "0" + id;
 		}
-		console.log(tipo + " - " + id);
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
-		' (Hex: ' + id + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
+		' (Hex: ' + id.toUpperCase() + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
 		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
 		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
 		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
@@ -558,7 +557,7 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br></div></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
-		var msg = "RDT - ERROR: Unable to render item " + id + " - " + msg;
+		var msg = "RDT - ERROR: Unable to render item " + id.toUpperCase() + " - " + msg;
 		addLog("error", msg);
 		console.error(msg);
 	}
