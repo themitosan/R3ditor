@@ -206,6 +206,21 @@ function RDT_decompileDoors(index, location){
 		var dr_key 		   = DOOR_RAW.slice(RANGES["RDT_door-0-doorKey"][0], 		    RANGES["RDT_door-0-doorKey"][1]);
 		var dr_offset2	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset2"][0], 	RANGES["RDT_door-0-doorHexOffset2"][1]);
 		localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
+
+		var itemTitle = "";
+		if (parseInt(dr_key, 16) < 134){
+			itemTitle = ITEM[dr_key][0];
+		}
+		if (parseInt(dr_key, 16) > 133 && parseInt(dr_key, 16) < 164){
+			itemTitle = FILES[dr_key][0];
+		}
+		if (parseInt(dr_key, 16) > 163 && parseInt(dr_key, 16) < 171){
+			itemTitle = RDT_MAPAS[dr_key][0];
+		}
+		if (parseInt(dr_key, 16) > 171){
+			itemTitle = "Unknown Hex Value! (" + dr_key + ")";
+		}
+
 		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
 			'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
 			'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
@@ -213,7 +228,7 @@ function RDT_decompileDoors(index, location){
 			'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
 			'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 			'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-			'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + ITEM[dr_key][0] + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
+			'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
 			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
 			" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
 			dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 

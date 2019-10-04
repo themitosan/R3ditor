@@ -212,7 +212,9 @@ input[type="range" i]{
 .separador-log-fix{
     background-image: linear-gradient(to right, #0f0, #0000);
     box-shadow: 0 0 10px #00330096;
-    width: 90%;
+    margin-bottom: 8px;
+    margin-top: 8px;
+    width: 88%;
 }
 .box-fix-lbl{
     margin-top: -22px;

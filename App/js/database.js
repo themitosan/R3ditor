@@ -272,7 +272,6 @@ var RDT_MAPAS = {
 	"aa": ["Hospital Map"],
 	"a7": ["Park Map"],
 	"a8": ["Dead Factory Map"],
-	//
 	"a9": ["Police Station Map"],
 	"aa": ["Hospital Map"]
 }
