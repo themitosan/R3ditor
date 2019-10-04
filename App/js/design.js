@@ -952,8 +952,11 @@ function RDT_doorValidadeInput(){
 	document.getElementById("RDT_door-edit-NRN").value = document.getElementById("RDT_door-edit-NRN").value.slice(0, 2).toUpperCase();
 	document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById("RDT_door-edit-NC-TXT").value.slice(0, 2).toUpperCase();
 }
+function RDT_itemValidadeInput(){
+	document.getElementById("RDT_item-edit-A").value = document.getElementById("RDT_item-edit-A").value.slice(0, 2); 
+	document.getElementById("RDT_item-edit-Quant").value = document.getElementById("RDT_item-edit-Quant").value.slice(0, 3);
+}
 function RDT_renderNextRDTLbl(){
-	//
 	var c = 0;
 	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;

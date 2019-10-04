@@ -242,14 +242,12 @@
 					Original Local Name: <font class="RDT-menu-geral-text" id="RDT_lbl-localName">???</font><br>
 					Original City Location: <font class="RDT-menu-geral-text" id="RDT_lbl-localCity">???</font>
 					<div class="menu-separador"></div>
-					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
-					Dimensions: <font class="RDT-menu-geral-text" id="RDT_lbl-xyz">???</font>
-					<div class="menu-separador"></div>
 					Pointers: <div class="RDT_lbl_pointers"><font id="RDT_lbl-msg_pointerSplit">???</font></div>
 					Message First Pointer: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_pointer">???</font><br>
 					Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
 					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
 					<div class="menu-separador"></div>
+					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
 					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
 					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
 					Number of enemies: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
@@ -292,7 +290,7 @@
 					<div id="RDT-item-edit-form">
 						<div id="RDT-edit-item-select" class="none">
 							Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
-							Quantity: <input type="number" min="0" max="255" step="1" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
+							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
 						</div>
 						<div id="RDT-edit-file-select" class="none">
 							File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
@@ -305,7 +303,7 @@
 						<div class="RDT_coordsHolder_B" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
 						<div class="RDT_coordsHolder_B" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
 						<div class="RDT_coordsHolder_B" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
-						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" value=""></div>
+						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-A" placeholder="00" value=""></div>
 						<div>
 							Convert To: 
 							<select id="RDT_convertItemTo" class="item-select-mod RDT-item-pos" style="width: 120px;">
