@@ -9,7 +9,6 @@ var SAVE_aba_atual;
 var RDT_totalMenus = 6;
 var SAVE_totalMenus = 4;
 var request_render_save;
-var l_separador = "------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------";
 window.onclose = function(){
 	localStorage.clear();
 	sessionStorage.clear();
