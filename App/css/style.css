@@ -16,6 +16,7 @@
 }
 html{
     -webkit-user-select: none;
+    scroll-behavior: smooth;
 }
 img{
     -webkit-user-drag: none;

@@ -354,6 +354,7 @@ function RDT_DOOR_APPLY(index){
 	}
 	//
 	if (canCompile === true){
+		RDT_Backup();
 		var DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nY + nZ + nR + nStage + nRN + nCP + offset0 + nType + nOO + offset1 + nLF + nLK + offset2;
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 	} else {
