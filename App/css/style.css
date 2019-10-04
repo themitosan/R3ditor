@@ -209,6 +209,11 @@ input[type="range" i]{
 	color: #fff;
 	width: 78%;
 }
+.separador-log-fix{
+    background-image: linear-gradient(to right, #0f0, #0000);
+    box-shadow: 0 0 10px #00330096;
+    width: 90%;
+}
 .box-fix-lbl{
     margin-top: -22px;
     cursor: pointer;

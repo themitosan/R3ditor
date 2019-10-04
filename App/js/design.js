@@ -9,6 +9,7 @@ var SAVE_aba_atual;
 var RDT_totalMenus = 6;
 var SAVE_totalMenus = 4;
 var request_render_save;
+var l_separador = '<div class="menu-separador separador-log-fix"></div>';
 window.onclose = function(){
 	localStorage.clear();
 	sessionStorage.clear();
