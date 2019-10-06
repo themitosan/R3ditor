@@ -1201,21 +1201,21 @@ var RANGES = {
 		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas através de engenharia reversa.
 		Eles serão preservados para poder reconstruir o arquivo de save inteiro novamente.
     */
-    "0x2204-0x2207": 	[1032, 1040], // Espaço entre IGT e Dificuldade
-    "0x2209-0x220D":    [1042, 1052], // Espaço entre Dificuldade e Posição X
-    "0x2210-0x2211": 	[1056, 1060], // Espaço entre Posição X e Posição Y
-    "0x2217-0x2217": 	[1070, 1072], // Espaço entre Epilogos e Nº de Saves
-    "0x2219-0x2219": 	[1074, 1076], // Espaço entre Nº de Saves e Poison
-    "0x221C-0x224D":    [1080, 1180], // Espaço entre Nome da sala de save e Local da cidade
-    "0x224F-0x224F": 	[1182, 1184], // Espaço entre Local da cidade e Room / Event
-    "0x2251-0x225D":    [1186, 1212], // Espaço entre Room Event e Personagem atual
-    "0x225F-0x23FE":    [1214, 2046], // Espaço entre Personagem Atual e Mapas A
-    "0x2400-0x2402": 	[2048, 2054], // Espaço entre Mapas A e Mapas B
-    "0x240A-0x240B": 	[2068, 2072], // Espaço entre Files e inventário da Jill
-    "0x2534-0x2534": 	[2664, 2666], // Espaço entre Baú da jill e arma atual da jill
-    "0x2537-0x254B":    [2670, 2712], // Espaço entre Sidepack da Jill e Inventário do carlos
-    "0x2674-0x2674": 	[3304, 3306], // Espaço entre o Baú do carlos e a arma atual do carlos
-    "0x2677-0x28D3": 	[3310, 4520], // Espaço entre arma atual do carlos até a roupa atual da Jill
+    "0x2204-0x2207": 	[1032, 1040], // Offset entre IGT e Dificuldade
+    "0x2209-0x220D":    [1042, 1052], // Offset entre Dificuldade e Posição X
+    "0x2210-0x2211": 	[1056, 1060], // Offset entre Posição X e Posição Y
+    "0x2217-0x2217": 	[1070, 1072], // Offset entre Epilogos e Nº de Saves
+    "0x2219-0x2219": 	[1074, 1076], // Offset entre Nº de Saves e Poison
+    "0x221C-0x224D":    [1080, 1180], // Offset entre Nome da sala de save e Local da cidade
+    "0x224F-0x224F": 	[1182, 1184], // Offset entre Local da cidade e Room / Event
+    "0x2251-0x225D":    [1186, 1212], // Offset entre Room Event e Personagem atual
+    "0x225F-0x23FE":    [1214, 2046], // Offset entre Personagem Atual e Mapas A
+    "0x2400-0x2402": 	[2048, 2054], // Offset entre Mapas A e Mapas B
+    "0x240A-0x240B": 	[2068, 2072], // Offset entre Files e inventário da Jill
+    "0x2534-0x2534": 	[2664, 2666], // Offset entre Baú da jill e arma atual da jill
+    "0x2537-0x254B":    [2670, 2712], // Offset entre Sidepack da Jill e Inventário do carlos
+    "0x2674-0x2674": 	[3304, 3306], // Offset entre o Baú do carlos e a arma atual do carlos
+    "0x2677-0x28D3": 	[3310, 4520], // Offset entre arma atual do carlos até a roupa atual da Jill
     // Outras variaveis
 	"jillInvent-1":		[2072, 2080], // Inventário da Jill   - Slot 01  - 0x240C
 	"jillInvent-2":		[2080, 2088], // Inventário da Jill   - Slot 02  - 0x2410
@@ -1264,9 +1264,9 @@ var RANGES = {
 		RDT Ranges
 	*/
 	// Item Ranges
-	"RDT_item-header": 			[0, 2], // OK
-	"RDT_item-itemIdetifier": 	[2, 4], // OK
-	"RDT_item-espaco1": 		[4, 12], // OK
+	"RDT_item-header": 			[0, 2],   // OK
+	"RDT_item-itemIdetifier": 	[2, 4],   // OK
+	"RDT_item-espaco1": 		[4, 12],  // OK
 	// Se a Header do Item for 67
 	"RDT_item-0-itemXX": 		[12, 16], // OK
 	"RDT_item-0-itemYY": 		[16, 20], // OK
@@ -1287,6 +1287,21 @@ var RANGES = {
 	"RDT_item-1-itemQuant":		[48, 50], // OK
 	"RDT_item-1-espaco3": 		[34, 42],
 	"RDT_item-1-itemMP": 		[58, 60],
+	/*
+		MSG codes
+	*/
+	"RDT_msgCode-header": 			  [0, 2], // RE2 = 2C, RE3 = 63
+	"RDT_msgCode-id":  				  [2, 4],
+	"RDT_msgCode-identifier": 		 [4, 12], // 04 31 00 00
+	"RDT_msgCode-xPos": 			[12, 16],
+	"RDT_msgCode-zPos": 			[16, 20],
+	"RDT_msgCode-xWidthTrigger": 	[20, 24],
+	"RDT_msgCode-zWidthTrigger": 	[24, 28],
+	"RDT_msgCode-offset_0": 		[28, 30], 
+	"RDT_msgCode-japChars": 		[30, 32], // (16 [Japanese letters. Game crashes sometimes] and 17 - resevilnemesis30 on RE2 definitive RDT info)
+	"RDT_msgCode-offset_1": 		[32, 34], 
+	"RDT_msgCode-specialProp": 		[34, 36], // (For things like open locked desk with herbs (02) - same as above)
+	"RDT_msgCode-readMode": 		[36, 40],
 	/*
 		Doors
 	*/

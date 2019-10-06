@@ -172,9 +172,9 @@ input[type="range" i]{
     height: 88px;
     overflow: auto;
     margin-top: 4px;
-    position: absolute;
     border-radius: 6px;
-    background-color: #191919;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #151515, #191919);
 }
 .menu-general-content{
     z-index: 1;
@@ -845,6 +845,12 @@ input[type="range" i]{
 .RDT-door-bg{
     background-image: linear-gradient(to bottom, #507499, #273c50);
 }
+.RDT-MSGCODE-bg{
+    background-image: linear-gradient(to bottom, #17504d, #0a2829);
+}
+.RDT-audio-bg{
+    background-image: linear-gradient(to bottom, #354354, #111b33);
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;
@@ -871,6 +877,19 @@ input[type="range" i]{
 .RDT-item-lbl-fix-5{
     position: sticky;
     left: 576px;
+}
+.RDT-item-lbl-fix-6{
+    position: sticky;
+    left: 256px;
+}
+.RDT-item-lbl-fix-7{
+    position: sticky;
+    left: 928px;
+    width: 56px;
+}
+.RDT_editParamMSGCODE{
+    width: 470px !important;
+    left: 830px !important;
 }
 .RDT_door_textEditFix_0{
     left: 857px;

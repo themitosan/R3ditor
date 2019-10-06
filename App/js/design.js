@@ -6,7 +6,7 @@
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
-var RDT_totalMenus = 6;
+var RDT_totalMenus = 7;
 var SAVE_totalMenus = 4;
 var request_render_save;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
@@ -861,8 +861,11 @@ function RDT_showMenu(id){
 		$("#RDT-door-Edit").css({"height": "417px"});
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
+		$("#RDT-MSGCODE-Edit").css({"height": "417px"});
+		$("#RDT-msgCode-hold").css({"height": "472px"});
 		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 		$("#RDT_audio_holder").css({"height": "430px"});
+		$("#RDT_msgCode_holder").css({"height": "430px"});
 	}
 	$("#RDT_backupBtn").css({"display": "inline"});
 	document.getElementById("RDT-item-list").scrollTop = 0;
@@ -886,7 +889,9 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
 	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors + ")";
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
-	document.getElementById("RDT-aba-menu-2").value = "Messages (" + RDT_totalMessages + ")";
+	document.getElementById("RDT_lbl_totalmsgCode").innerHTML = RDT_messageCodesArray.length;
+	document.getElementById("RDT-aba-menu-2").value = "Message Block (" + RDT_totalMessages + ")";
+	document.getElementById("RDT-aba-menu-7").value = "Message Code (" + RDT_messageCodesArray.length + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
 	document.getElementById("RDT-lbl-FILENAME").innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT";
 	$("#RDT_menu-" + id).css({"display": "block"});
@@ -897,6 +902,21 @@ function RDT_showMenu(id){
 	}
 	RDT_Error_404();
 	scrollLog();
+}
+function RDT_showEditMsgCode(index, codeHex){
+	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
+	document.getElementById('RDT_MSGCODE-edit-X').value = codeHex.slice(RANGES["RDT_msgCode-xPos"][0], RANGES["RDT_msgCode-xPos"][1]).toUpperCase();
+	document.getElementById('RDT_MSGCODE-edit-Z').value = codeHex.slice(RANGES["RDT_msgCode-zPos"][0], RANGES["RDT_msgCode-zPos"][1]).toUpperCase();
+	document.getElementById('RDT-lbl-MSGCODE-index').innerHTML = codeHex.slice(RANGES["RDT_msgCode-id"][0],RANGES["RDT_msgCode-id"][1]).toUpperCase();
+	document.getElementById('RDT_MSGCODE-edit-radiusX').value = codeHex.slice(RANGES["RDT_msgCode-xWidthTrigger"][0], RANGES["RDT_msgCode-xWidthTrigger"][1]).toUpperCase();
+	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = codeHex.slice(RANGES["RDT_msgCode-zWidthTrigger"][0], RANGES["RDT_msgCode-zWidthTrigger"][1]).toUpperCase();
+	document.getElementById('RDT_MSGCODE-edit-special').value = codeHex.slice(RANGES["RDT_msgCode-specialProp"][0], RANGES["RDT_msgCode-specialProp"][1]).toUpperCase();
+	document.getElementById('RDT_MSGCODE-edit-display').value = codeHex.slice(RANGES["RDT_msgCode-readMode"][0], RANGES["RDT_msgCode-readMode"][1]).toLowerCase();
+	$("#RDT_msgCode_holder").css({"width": "802px"});
+	$("#RDT-MSGCODE-Edit").css({"display": "inline"});
+	document.getElementById('RDT-btn-aplicarMSGCODE').onclick = function(){
+		RDT_MSGCODE_APPLY(index);
+	}
 }
 function RDT_showEditDoor(index, id, hex){
 	main_closeFileList();
@@ -936,11 +956,11 @@ function RDT_showEditDoor(index, id, hex){
 	$("#RDT_door_holder").css({"width": "752px"});
 }
 function RDT_doorValidadeInput(){
-	document.getElementById("RDT_door-edit-LK").value = document.getElementById("RDT_door-edit-LK").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-X").value = document.getElementById("RDT_door-edit-X").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-Y").value = document.getElementById("RDT_door-edit-Y").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-Z").value = document.getElementById("RDT_door-edit-Z").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-R").value = document.getElementById("RDT_door-edit-R").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_door-edit-LK").value = document.getElementById("RDT_door-edit-LK").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-NX").value = document.getElementById("RDT_door-edit-NX").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-NY").value = document.getElementById("RDT_door-edit-NY").value.slice(0, 4).toUpperCase();
 	document.getElementById("RDT_door-edit-NZ").value = document.getElementById("RDT_door-edit-NZ").value.slice(0, 4).toUpperCase();
@@ -955,6 +975,13 @@ function RDT_doorValidadeInput(){
 function RDT_itemValidadeInput(){
 	document.getElementById("RDT_item-edit-A").value = document.getElementById("RDT_item-edit-A").value.slice(0, 2); 
 	document.getElementById("RDT_item-edit-Quant").value = document.getElementById("RDT_item-edit-Quant").value.slice(0, 3);
+}
+function RDT_MSGBLOCKValidadeInput(){
+	document.getElementById("RDT_MSGCODE-edit-X").value = document.getElementById("RDT_MSGCODE-edit-X").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_MSGCODE-edit-Z").value = document.getElementById("RDT_MSGCODE-edit-Z").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_MSGCODE-edit-radiusX").value = document.getElementById("RDT_MSGCODE-edit-radiusX").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_MSGCODE-edit-radiusZ").value = document.getElementById("RDT_MSGCODE-edit-radiusZ").value.slice(0, 4).toUpperCase();
+	document.getElementById("RDT_MSGCODE-edit-special").value = document.getElementById("RDT_MSGCODE-edit-special").value.slice(0, 2).toUpperCase();
 }
 function RDT_renderNextRDTLbl(){
 	var c = 0;
@@ -1177,6 +1204,8 @@ function RDT_editItemCancel(){
 	$("#RDT-Item-Edit").css({"display": "none"});
 	$("#RDT-door-Edit").css({"display": "none"});
 	$("#RDT_door_holder").css({"width": "auto"});
+	$("#RDT-MSGCODE-Edit").css({"display": "none"});
+	$("#RDT_msgCode_holder").css({"width": "1288px"});
 	document.getElementById('RDT_item-edit-A').value = "";
 	document.getElementById('RDT_door-edit-X').value = "";
 	document.getElementById('RDT_door-edit-Y').value = "";
@@ -1192,13 +1221,19 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_door-edit-LF').value = "";
 	document.getElementById('RDT_door-edit-OO').value = "";
 	document.getElementById('RDT_door-edit-NRN').value = "";
+	document.getElementById('RDT_MSGCODE-edit-X').value = "";
+	document.getElementById('RDT_MSGCODE-edit-Z').value = "";
 	document.getElementById('RDT_item-edit-X').innerHTML = "";
 	document.getElementById('RDT_item-edit-Y').innerHTML = "";
 	document.getElementById('RDT_item-edit-Z').innerHTML = "";
 	document.getElementById('RDT_item-edit-R').innerHTML = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
 	document.getElementById('RDT_door-edit-LK').innerHTML = "";
+	document.getElementById('RDT_MSGCODE-edit-radiusX').value = "";
+	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = "";
+	document.getElementById('RDT_MSGCODE-edit-special').value = "";
 	document.getElementById("RDT-lbl-edit-index").innerHTML = "N/A";
+	document.getElementById('RDT_MSGCODE-edit-display').value = "ffff";
 	document.getElementById("RDT-lbl-item-edit").innerHTML = "No item select";
 }
 function RDT_applyMenuFocus(menuId){
@@ -1273,6 +1308,9 @@ function R3DITOR_RUNGAME(id){
 				$("#RDT_BG_" + c).css({"height": "512px"});
 				c++;
 			}
+			$("#RDT_msgCode_holder").css({"height": "474px"});
+			$("#RDT-MSGCODE-Edit").css({"height": "463px"});
+			$("#RDT-msgCode-hold").css({"height": "516px"});
 			$("#FILEGEN_contents").css({"height": "474px"});
 			$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 			$("#RDT_audio_holder").css({"height": "472px"});
@@ -1302,9 +1340,12 @@ function R3DITOR_RUNGAME(id){
 					$("#RDT_BG_" + c).css({"height": "470px"});
 					c++;
 				}
+				$("#RDT_msgCode_holder").css({"height": "430px"});
+				$("#RDT-msgCode-hold").css({"height": "472px"});
 				$("#FILEGEN_contents").css({"height": "434px"});
 				$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 				$("#RDT_audio_holder").css({"height": "430px"});
+				$("#RDT-MSGCODE-Edit").css({"height": "417px"});
 				$("#RDT_door_holder").css({"height": "430px"});
 				$("#RDT-canvas-hold").css({"height": "472px"});
 				$("#RDT-audio-hold").css({"height": "472px"});

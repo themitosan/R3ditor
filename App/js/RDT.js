@@ -60,6 +60,7 @@ var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
 var RDT_MSG_startLength = 0;
 var RDT_lastFileOpened = "";
+var RDT_messageCodesArray = [];
 function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
@@ -85,6 +86,7 @@ function RDT_resetVars(){
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_requestReload = false;
 	block_size_hex = undefined;
+	RDT_messageCodesArray = [];
 	RDT_generateMapFile = false;
 	RDT_arquivoBruto = undefined;
 	RDT_messasgesRaw = undefined;
@@ -118,6 +120,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MAPFILE = undefined;
 	RDT_MSG_CURRENT_TEST = 0;
 	block_size_hex = undefined;
+	RDT_messageCodesArray = [];
 	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
 	if (RDT_lastFileOpened !== ORIGINAL_FILENAME){
@@ -139,12 +142,119 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	document.getElementById('RDT_door_holder').innerHTML = "";
 	document.getElementById('RDT_audio_holder').innerHTML = "";
+	document.getElementById('RDT_msgCode_holder').innerHTML = "";
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
 	RDT_readDoors();
 	RDT_readItens();
 	RDT_BG_display();
+	scrollLog();
+}
+// Message Code (63 ID 04 31 00 00)
+function RDT_getMessageCodesArray(){
+	var c = 0;
+	RDT_getMessageCodes("043100");
+	RDT_getMessageCodes("043101");
+	RDT_getMessageCodes("043102");
+	RDT_getMessageCodes("043103");
+	RDT_getMessageCodes("043104");
+	RDT_getMessageCodes("043105");
+	RDT_getMessageCodes("043106");
+	RDT_getMessageCodes("043107");
+	RDT_getMessageCodes("043108");
+	RDT_getMessageCodes("043109");
+	RDT_getMessageCodes("043110");
+	if (RDT_messageCodesArray.length !== 0){
+		while(c < RDT_messageCodesArray.length){
+			RDT_decompileMessageCode(c, RDT_messageCodesArray[c]);
+			c++;
+		}
+	}
+}
+function RDT_getMessageCodes(hx){
+	var c = 0;
+	var msgCodeRaw = getAllIndexes(RDT_arquivoBruto, hx);
+	while (c < msgCodeRaw.length){
+		var check_0 = RDT_arquivoBruto.slice(parseInt(msgCodeRaw[c] - 4), parseInt(msgCodeRaw[c] - 2));
+		if (check_0 === "63"){
+			RDT_messageCodesArray.push(RDT_arquivoBruto.slice(parseInt(msgCodeRaw[c] - 4), parseInt(msgCodeRaw[c] + 40)))
+			c++;
+		} else {
+			msgCodeRaw.splice(c, 1);
+		}
+	}
+}
+function RDT_decompileMessageCode(index, hex){
+	if (RDT_arquivoBruto !== undefined && hex !== undefined){
+		var MC_HEADER 		 = hex.slice(RANGES["RDT_msgCode-header"][0],        RANGES["RDT_msgCode-header"][1]);
+		var MC_ID 			 = hex.slice(RANGES["RDT_msgCode-id"][0],            RANGES["RDT_msgCode-id"][1]);
+		var MC_IDENT 		 = hex.slice(RANGES["RDT_msgCode-identifier"][0],    RANGES["RDT_msgCode-identifier"][1]);
+		var MC_XPOS 		 = hex.slice(RANGES["RDT_msgCode-xPos"][0],          RANGES["RDT_msgCode-xPos"][1]);
+		var MC_ZPOS 		 = hex.slice(RANGES["RDT_msgCode-zPos"][0],          RANGES["RDT_msgCode-zPos"][1]);
+		var MC_XWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-xWidthTrigger"][0], RANGES["RDT_msgCode-xWidthTrigger"][1]);
+		var MC_ZWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-zWidthTrigger"][0], RANGES["RDT_msgCode-zWidthTrigger"][1]);
+		var MC_OFFSET0  	 = hex.slice(RANGES["RDT_msgCode-offset_0"][0],      RANGES["RDT_msgCode-offset_0"][1]);
+		var MC_JAPCHARS 	 = hex.slice(RANGES["RDT_msgCode-japChars"][0],      RANGES["RDT_msgCode-japChars"][1]);
+		var MC_OFFSET1  	 = hex.slice(RANGES["RDT_msgCode-offset_1"][0],      RANGES["RDT_msgCode-offset_1"][1]);
+		var MC_SPECIALPROP 	 = hex.slice(RANGES["RDT_msgCode-specialProp"][0],   RANGES["RDT_msgCode-specialProp"][1]);
+		var MC_READMODE 	 = hex.slice(RANGES["RDT_msgCode-readMode"][0],      RANGES["RDT_msgCode-readMode"][1]);
+		var fHex			 = hex.slice(RANGES["RDT_msgCode-header"][0],		 RANGES["RDT_msgCode-readMode"][1]);
+		localStorage.setItem("RDT_MSGBLOCK-" + index, fHex);
+		//console.log(MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
+		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
+			'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditMsgCode(' + index + ', \'' + fHex + '\');">' + 
+			'(' + parseInt(index + 1) + ') Message ID: <font class="italic">' + MC_ID.toUpperCase() + '</font><br><div class="menu-separador"></div>' + 
+			'X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
+			'X Width: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>Z Width: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc">' + 
+			'<br>Header: <font class="RDT-item-lbl-fix-6">' + MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: ' + 
+			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + 
+			MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + 
+			" " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase() + '</div>';
+
+		$("#RDT_msgCode_holder").append(HTML_HUGE_MSGCODE_TEMPLATE);
+	}
+}
+function RDT_MSGCODE_APPLY(id){
+	var reason = "";
+	var canCompile = true;
+	var readMode = document.getElementById('RDT_MSGCODE-edit-display').value;
+	var novaX = document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
+	var novaZ = document.getElementById('RDT_MSGCODE-edit-Z').value.slice(0, 4).toLowerCase();
+	var special = document.getElementById('RDT_MSGCODE-edit-special').value.slice(0, 2).toLowerCase();
+	var novaRadiusX = document.getElementById('RDT_MSGCODE-edit-radiusX').value.slice(0, 4).toLowerCase();
+	var novaRadiusZ = document.getElementById('RDT_MSGCODE-edit-radiusZ').value.slice(0, 4).toLowerCase();
+	var header = localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-identifier"][1]).toLowerCase();
+	var offset = localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-offset_0"][0], RANGES["RDT_msgCode-offset_1"][1]).toLowerCase();
+	if (novaX.length !== 4){
+		canCompile = false;
+		reason = "The X value are wrong!";
+	}
+	if (novaZ.length !== 4){
+		canCompile = false;
+		reason = "The Z value are wrong!";
+	}
+	if (novaRadiusX.length !== 4){
+		canCompile = false;
+		reason = "The X (width) value are wrong!";
+	}
+	if (novaRadiusZ.length !== 4){
+		canCompile = false;
+		reason = "The Z (width) value are wrong!";
+	}
+	if (special.length !== 2){
+		canCompile = false;
+		reason = "The Special value are wrong!";
+	}
+	if (canCompile === true){
+		var NEW_RDT = header + novaX + novaZ + novaRadiusX + novaRadiusZ + offset + special + readMode;
+		RDT_COMPILE_Lv2(localStorage.getItem("RDT_MSGBLOCK-" + id), NEW_RDT.toLowerCase());
+		$("#RDT-aba-menu-7").trigger('click');
+	} else {
+		alert("WARN - " + reason);
+		addLog('warn', "WARN - " + reason);
+		console.warn(reason);
+	}
 	scrollLog();
 }
 // Portas
@@ -184,7 +294,6 @@ function RDT_decompileDoors(index, location){
 		var itemTitle = "";
 		var loc = parseInt(location);
 		var DOOR_RAW = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
-		//
 		var dr_header 	   = DOOR_RAW.slice(RANGES["RDT_door-0-header"][0], 		    RANGES["RDT_door-0-header"][1]);
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES["RDT_door-0-id"][0], 			    RANGES["RDT_door-0-id"][1]);
 		var dr_ident  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorIdentifier"][0],     RANGES["RDT_door-0-doorIdentifier"][1]);
@@ -224,7 +333,7 @@ function RDT_decompileDoors(index, location){
 			itemTitle = "Unknown Hex Value! (" + dr_key + ")";
 		}
 		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-			'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
+			'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
 			'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
 			dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
 			'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
@@ -352,26 +461,15 @@ function RDT_DOOR_APPLY(index){
 		canCompile = false;
 		reason = "(Stage) The length is wrong!";
 	}
-	//
 	if (canCompile === true){
-		RDT_Backup();
 		var DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nY + nZ + nR + nStage + nRN + nCP + offset0 + nType + nOO + offset1 + nLF + nLK + offset2;
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
+		$("#RDT-aba-menu-6").trigger('click');
 	} else {
 		alert("WARNING: " + reason);
 		addLog('warn', "WARN - " + reason);
-		scrollLog();
 	}
-}
-function RDT_COMPILE_Lv2(oldDoorHex, newDoorHex){
-	if (RDT_arquivoBruto !== undefined){
-		var RDT_MIN = RDT_arquivoBruto.slice(0, RDT_arquivoBruto.indexOf(oldDoorHex))
-		var RDT_MAX = RDT_arquivoBruto.slice(RDT_arquivoBruto.indexOf(oldDoorHex) + 64, RDT_arquivoBruto.length);
-		var NEW_RDT = RDT_MIN + newDoorHex + RDT_MAX;
-		RDT_WRITEFILE(true, NEW_RDT);
-		RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
-		$("#RDT-aba-menu-6").trigger('click');
-	}
+	scrollLog();
 }
 // Audios
 function RDT_getAllRelatedAudios(){
@@ -379,7 +477,7 @@ function RDT_getAllRelatedAudios(){
 	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
 	var getAudioArray = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\").filter(fn => fn.startsWith("M" + MAPID));
 	while(c < getAudioArray.length){
-		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-file-bg" id="RDT_audio_details-' + c + '">' +
+		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">' +
 			'(' + parseInt(c + 1) + ') File Name: <font class="italic RDT-item-lbl-fix user-can-select">' + getAudioArray[c] + '</font>' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Remove" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';RDT_deleteAudio();">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoadWav();">' + 
@@ -428,13 +526,13 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310900");
 	RDT_generateItemIndexRaw("02318000");
 	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000");// Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310000"); // Padrão encontrado em (quase) todos os itens
 	RDT_generateItemIndexRaw("02310500");
 	RDT_generateItemIndexRaw("02310100");
 	RDT_generateItemIndexRaw("02310200");
 	RDT_generateItemIndexRaw("02310300");
 	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00");// R503.rdt - Fábrica
+	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - Fábrica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	while (c < RDT_totalItensGeral){
@@ -550,12 +648,12 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		}
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
-		' (Hex: ' + id.toUpperCase() + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
-		'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
-		'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="italic RDT-item-lbl-fix">' + x + '</font><br>' +
-		'Y Position: <font class="italic RDT-item-lbl-fix">' + y + '</font><br>Z Position: <font class="italic RDT-item-lbl-fix">' + z + '</font><br>Rotation: <font class="italic RDT-item-lbl-fix">' + r + '</font><br>' + 
-		'<div class="RDT-Item-Misc">Header: <font class="italic RDT-item-lbl-fix-2">' + header + '</font><br>Identifier: <font class="italic RDT-item-lbl-fix-2">' + ident + '</font><br>' + 
-		'Animation: <font class="italic RDT-item-lbl-fix-2">' + mp + '</font><br></div></div>';
+			' (Hex: ' + id.toUpperCase() + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
+			'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
+			'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
+			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br>Rotation: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
+			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
+			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + localStorage.getItem('RDT_Item-' + index).toUpperCase() + '</div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id.toUpperCase() + " - " + msg;
@@ -1506,6 +1604,7 @@ function RDT_lookForRDTConfigFile(){
 			}
 			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
+			RDT_getMessageCodesArray();
 			RDT_loading = false;
 			RDT_showMenu(1);
 		} else {
@@ -1550,7 +1649,7 @@ function RDT_renderMessages(id, startOffset, endOffset){
 		var SAMPLE = RDT_arquivoBruto.slice(startOffset, endOffset);
 		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
 		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="RDT_transferMessageToMSG(' + id + ');">' + 
-			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST + '</div></div>';
+			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST.toUpperCase() + '</div></div>';
 		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
 	}
 }
@@ -1923,6 +2022,16 @@ function RDT_RECOMPILE_Lv1(){
 		addLog("error", "ERROR - You cannot save an RDT file if you have not opened it!");
 	}
 	scrollLog();
+}
+function RDT_COMPILE_Lv2(oldHex, newReplacementHex){
+	if (RDT_arquivoBruto !== undefined){
+		RDT_Backup();
+		var RDT_MIN = RDT_arquivoBruto.slice(0, RDT_arquivoBruto.indexOf(oldHex))
+		var RDT_MAX = RDT_arquivoBruto.slice(parseInt(RDT_arquivoBruto.indexOf(oldHex) + newReplacementHex.length), RDT_arquivoBruto.length);
+		var NEW_RDT = RDT_MIN + newReplacementHex + RDT_MAX;
+		RDT_WRITEFILE(true, NEW_RDT);
+		RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+	}
 }
 function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){

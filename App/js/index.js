@@ -18,7 +18,7 @@ var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
 var APP_VERSION = "0.3.0 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
-var APP_NAME = "R3ditor V." + APP_VERSION;
+var APP_NAME = "R3ditor V. " + APP_VERSION;
 window.onload = function(){
 	load();
 }
@@ -123,6 +123,7 @@ function openFileOnHex(file){
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
 		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
 			runExternalSoftware(HEX_EDITOR, [file]);
+			EXTERNAL_APP_RUNNING = false;
 		} else {
 			addLog('error', 'ERROR - You can\'t open a file on hex editor if you don\'t specify it!');
 		}

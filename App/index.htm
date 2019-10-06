@@ -121,11 +121,49 @@
 		<!-- FORM: RDT -->
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
-			<input type="button" id="RDT-aba-menu-2" class="aba" value="Messages (???)" onclick="RDT_showMenu(2);">
+			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
+			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 			<input type="button" id="RDT-aba-menu-4" class="aba" value="Pos. Edit">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- RDT: Message Code -->
+			<div class="menu" id="RDT_menu-7" onclick="main_closeFileList();">
+				<div class="menu-general-content" id="RDT-msgCode-hold">
+					<div id="RDT_BG_7" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Message Code - Total: <font id="RDT_lbl_totalmsgCode">???</font></font></center>
+					<div id="RDT_msgCode_holder" class="RDT-holder">
+						<!-- MSG CODE vai aqui -->
+					</div>
+					<!-- RDT: MSG CODE - Editar -->
+					<div class="RDT-Item-Edit RDT_editParamMSGCODE" id="RDT-MSGCODE-Edit">
+						<center><font class="titulo">Edit Parameters</font><br>Message: <font id="RDT-lbl-MSGCODE-edit">???</font> - ID: <font id="RDT-lbl-MSGCODE-index">???</font></center>
+						<div id="RDT-msgCode-edit-form">
+							<div class="RDT_coordsHolder_A">X Position: <input type="text" id="RDT_MSGCODE-edit-X" class="item-select-mod RDT-item-lbl-fix-7" placeholder="0000" oninput="RDT_MSGBLOCKValidadeInput();"></div>
+							<div class="RDT_coordsHolder_B">Z Position: <input type="text" id="RDT_MSGCODE-edit-Z" class="item-select-mod RDT-item-lbl-fix-7" placeholder="0000" oninput="RDT_MSGBLOCKValidadeInput();"></div>
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_B">X Width: <input type="text" id="RDT_MSGCODE-edit-radiusX" class="item-select-mod RDT-item-lbl-fix-7" placeholder="0000" oninput="RDT_MSGBLOCKValidadeInput();"></div>
+							<div class="RDT_coordsHolder_B">Z Width: <input type="text" id="RDT_MSGCODE-edit-radiusZ" class="item-select-mod RDT-item-lbl-fix-7" placeholder="0000" oninput="RDT_MSGBLOCKValidadeInput();"></div>
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_B">Special: <input type="text" id="RDT_MSGCODE-edit-special" class="item-select-mod RDT-item-lbl-fix-7" placeholder="00" oninput="RDT_MSGBLOCKValidadeInput();"></div>
+							<div class="RDT_coordsHolder_B">
+								Display mode: 
+								<select id="RDT_MSGCODE-edit-display" class="item-select-mod">
+									<option value="ffff">(FFFF) Normal</option>
+									<option value="0000">(0000) Can move</option>
+									<option value="0101">(0101) Don't Freeze + Can't move</option>
+									<option value="1020">(1020) Can move and message dissapears after some seconds</option>
+									<option value="2010">(2010) Can move and message dissapears after some seconds</option>
+								</select>
+							</div>
+							<div class="RDT-applyBtn-div">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarMSGCODE" value="APPLY CHANGES!">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Doors -->
 			<div class="menu" id="RDT_menu-6" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-door-hold">
@@ -262,7 +300,7 @@
 			<div class="menu none" id="RDT_menu-2">
 				<div class="menu-general-content" id="RDT-msgs" onclick="main_closeFileList();">
 					<div id="RDT_BG_2" class="RDT_BG_IMAGE"></div>
-					<center><font class="titulo">Messages - Total: <font id="RDT_lbl-totMsg">???</font></font></center>
+					<center><font class="titulo">Message Block - Total: <font id="RDT_lbl-totMsg">???</font></font></center>
 					<div id="RDT_MSG-holder" class="RDT-holder msg_holder_fix">
 						<!-- The messages will be placed here -->
 					</div>
@@ -286,7 +324,7 @@
 				</div>
 				<!-- RDT: Item - Editar -->
 				<div class="RDT-Item-Edit none" id="RDT-Item-Edit">
-					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">Nenhum Item Selecionado</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
+					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
 					<div id="RDT-item-edit-form">
 						<div id="RDT-edit-item-select" class="none">
 							Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
