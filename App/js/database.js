@@ -291,6 +291,7 @@ var ATTR = {
 	"17": ["Attr. found in Nightmare Mod", 	   "#fff", "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
 	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
 }
+// Segunda variavel
 var VOID = {
 	"00": "OK!",									   // Condição normal
 	"80": "Condição anormal da versão francesa/Taiwan" // Condição anormal encontrado na versão francesa. Pode ser um hack que outra pessoa tenha feito antes
@@ -337,7 +338,7 @@ var SIDEPACK = {
 	"08": ["Sidepack Disabled"] 
 }
 var VERSAO = {
-	"000000000000": ["Undefined", 						 	  "Hex 00"],
+	"000000000000": ["Undefined (Bu10.sav?)", 			 	  "Hex 00"],
 	"4241534c5553": ["Russian / Nightmare (Or Darkness) Mod", "BASLUS"],
 	"4245534c4553": ["Mediakite / Xplosiv", 				  "BESLES"],
 	"4249534c5053": ["Chinese / Japanese / Taiwan Version",   "BISLPS"]
@@ -491,7 +492,7 @@ var RDT_locations = {
 	"R413": ["Park Warehouse Save Room", "Park"],
 	"R414": ["Park Secret Room", "Park"],
 	"R415": ["Park Graveyard (Worm)", "Park"],
-	"R416": ["Unknown Room", "Unknown"],
+	"R416": ["Unknown Room", "Unknown"], // this file is VERY weird...
 	"R417": ["Park Street", "Park"],
 	"R500": ["Entrance", "Dead Factory"],
 	"R501": ["Resting Room", "Dead Factory"],
@@ -514,6 +515,78 @@ var RDT_locations = {
 // 	WIP
 var MAPAS = {
 	"0000": "Undefined"
+}
+var RDT_EMDNAME = {
+	"00": ["Undefined"],
+	"10": ["Male zombie 1"],
+	"11": ["Female zombie 1"],
+	"12": ["Male zombie 2"],
+	"13": ["Female zombie 2"],
+	"14": ["Male zombie 3"],
+	"15": ["Male zombie 4"],
+	"16": ["Male zombie 5"],
+	"17": ["Male zombie 6"],
+	"18": ["Male zombie 7"],
+	"19": ["Male zombie 8"],
+	"1a": ["Male zombie 9"],
+	"1b": ["Male zombie 10"],
+	"1c": ["Female zombie 3"],
+	"1d": ["Male zombie 11"],
+	"1e": ["Male zombie 12"],
+	"1f": ["Male zombie 13"],
+	"20": ["Dog"],
+	"21": ["Crow"],
+	"22": ["Hunter"],
+	"23": ["Brain Sucker 1"],
+	"24": ["Frog hunter"],
+	"25": ["Spider"],
+	"26": ["Unknown Enemy 1"],
+	"27": ["Brain Sucker Minion"],
+	"28": ["Brain Sucker 2"],
+	"2c": ["Male zombie 14"],
+	"2d": ["Police Station Window Arm"],
+	"2e": ["Mercenary zombie 1"],
+	"2f": ["Marvin 1"],
+	"30": ["Worm 1"],
+	"32": ["Worm Minion"],
+	"33": ["Worm 2"],
+	"34": ["Nemesis 1"],
+	"35": ["Nemesis 2"],
+	"36": ["Nemesis 3"],
+	"37": ["Nemesis 4"],
+	"38": ["Final Nemesis"],
+	"39": ["Unknown Enemy 2"],
+	"3a": ["Nemesis 5"],
+	"3b": ["Nemesis Part"],
+	"3e": ["Helicopter part 1"],
+	"3f": ["Helicopter part 2"],
+	"40": ["Helicopter part 3"],
+	"50": ["Carlos Oliveira 1"],
+	"51": ["Mikhail Bleeding"],
+	"52": ["Nicholai Zinoviev 1"],
+	"53": ["Brad Vicker\'s"],
+	"54": ["Dario Rosso"],
+	"55": ["Mercenary zombie 2"],
+	"56": ["Mercenary 1"],
+	"57": ["Marvin 2"],
+	"58": ["Brad zombie"],
+	"59": ["Dario zombie"],
+	"5a": ["Umbrella Ad Girl"],
+	"5b": ["Jill Valentine"],
+	"5c": ["Carlos Oliveira 2"],
+	"5d": ["Carlos Oliveira 3"],
+	"5e": ["Nicholai Zinoviev 2"],
+	"5f": ["Jill Valentine with Sidepack"],
+	"60": ["Nicholai zombie"],
+	"61": ["Dario\'s daughter"],
+	"62": ["Jill Biker Outfit"],
+	"63": ["Jill RE1 Outfit"],
+	"64": ["Jill\'s white outfit"],
+	"65": ["Jill with miniskirt cop"],
+	"66": ["Jill as Regina (Dino Crisis)"],
+	"67": ["Brian Irons"],
+	"70": ["Jill alternative outfit"],
+	"71": ["Jill with blue T-shirt"]
 }
 //
 var FG_DICIONARIO = {
@@ -1264,50 +1337,75 @@ var RANGES = {
 		RDT Ranges
 	*/
 	// Item Ranges
-	"RDT_item-header": 			[0, 2],   // OK
-	"RDT_item-itemIdetifier": 	[2, 4],   // OK
-	"RDT_item-espaco1": 		[4, 12],  // OK
+	"RDT_item-header": 			       [0, 2], // RE2 = 4E, RE3 = 67 || 68
+	"RDT_item-itemIdetifier": 	       [2, 4], // OK
+	"RDT_item-espaco1": 		      [4, 12], // OK
 	// Se a Header do Item for 67
-	"RDT_item-0-itemXX": 		[12, 16], // OK
-	"RDT_item-0-itemYY": 		[16, 20], // OK
-	"RDT_item-0-itemZZ": 		[20, 24], // OK
-	"RDT_item-0-itemRR": 		[24, 28], // OK
-	"RDT_item-0-itemID": 		[28, 30], // OK
-	"RDT_item-0-espaco2": 		[30, 32], // OK
-	"RDT_item-0-itemQuant":		[32, 34], // OK
-	"RDT_item-0-espaco3": 		[34, 42], // OK
-	"RDT_item-0-itemMP": 		[42, 44], // OK
+	"RDT_item-0-itemXX": 		     [12, 16], // OK
+	"RDT_item-0-itemYY": 		     [16, 20], // OK
+	"RDT_item-0-itemZZ": 		     [20, 24], // OK
+	"RDT_item-0-itemRR": 		     [24, 28], // OK
+	"RDT_item-0-itemID": 		     [28, 30], // OK
+	"RDT_item-0-espaco2": 		     [30, 32], // OK
+	"RDT_item-0-itemQuant":		     [32, 34], // OK
+	"RDT_item-0-espaco3": 		     [34, 38], // OK
+	"RDT_item-0-itemFlag": 			 [38, 40], // OK
+	"RDT_item-0-modelID": 			 [40, 42], // OK
+	"RDT_item-0-itemMP": 		     [42, 44], // OK
 	// Se a Header do item for 68
-	"RDT_item-1-itemXX": 		[12, 16],
-	"RDT_item-1-itemYY": 		[16, 20],
-	"RDT_item-1-itemZZ": 		[20, 24],
-	"RDT_item-1-itemRR": 		[24, 28],
-	"RDT_item-1-itemID": 		[44, 46], // OK
-	"RDT_item-1-espaco2": 		[46, 48], // OK
-	"RDT_item-1-itemQuant":		[48, 50], // OK
-	"RDT_item-1-espaco3": 		[34, 42],
-	"RDT_item-1-itemMP": 		[58, 60],
+	"RDT_item-1-itemXX": 		     [12, 16],
+	"RDT_item-1-itemYY": 		     [16, 20],
+	"RDT_item-1-itemZZ": 		     [20, 24],
+	"RDT_item-1-itemRR": 		     [24, 28],
+	"RDT_item-1-itemID": 		     [44, 46], // OK
+	"RDT_item-1-espaco2": 		     [46, 48], // OK
+	"RDT_item-1-itemQuant":		     [48, 50], // OK
+	"RDT_item-1-espaco3": 		     [34, 42],
+	"RDT_item-1-itemMP": 		     [58, 60], // OK
+	/*
+		Prop models [WIP]
+	*/
+	"RDT_propModel-header": 		   [0, 2], // RE2 = 2D, RE3 = 7F
+	"RDT_propModel-id": 			   [2, 4],
+	"RDT_propModel-ident": 			  [4, 24],
+	/*
+		Enemy [WIP]
+	*/
+	"RDT_enemy-header": 			   [0, 4], // RE2 = 44, RE3 = 7D
+	"RDT_enemy-enemyNumber": 		   [4, 6], // Enemy number (room) Id (PUT FF IF YOU ARE PUTTING A PARTNER)
+	"RDT_enemy-type": 				   [6, 8],
+	"RDT_enemy-pose": 				  [8, 10],
+	"RDT_enemy-extraFlag": 			 [10, 12],
+	"RDT_enemy-offset-0": 			 [12, 18],
+	"RDT_enemy-soundSet": 			 [18, 20],
+	"RDT_enemy-texture": 			 [20, 22],
+	"RDT_enemy-enemyFlag": 			 [22, 24],
+	"RDT_enemy-xPos": 				 [24, 28],
+	"RDT_enemy-yPos": 				 [28, 32],
+	"RDT_enemy-zPos": 				 [32, 36],
+	"RDT_enemy-rPos": 				 [36, 40],
+	"RDT_enemy-offset-1": 			 [40, 48],
 	/*
 		MSG codes
 	*/
-	"RDT_msgCode-header": 			  [0, 2], // RE2 = 2C, RE3 = 63
-	"RDT_msgCode-id":  				  [2, 4],
-	"RDT_msgCode-identifier": 		 [4, 12], // 04 31 00 00
-	"RDT_msgCode-xPos": 			[12, 16],
-	"RDT_msgCode-zPos": 			[16, 20],
-	"RDT_msgCode-xWidthTrigger": 	[20, 24],
-	"RDT_msgCode-zWidthTrigger": 	[24, 28],
-	"RDT_msgCode-offset_0": 		[28, 30], 
-	"RDT_msgCode-japChars": 		[30, 32], // (16 [Japanese letters. Game crashes sometimes] and 17 - resevilnemesis30 on RE2 definitive RDT info)
-	"RDT_msgCode-offset_1": 		[32, 34], 
-	"RDT_msgCode-specialProp": 		[34, 36], // (For things like open locked desk with herbs (02) - same as above)
-	"RDT_msgCode-readMode": 		[36, 40],
+	"RDT_msgCode-header": 			   [0, 2], // RE2 = 2C, RE3 = 63
+	"RDT_msgCode-id":  				   [2, 4],
+	"RDT_msgCode-identifier": 		  [4, 12], // 04 31 00 00
+	"RDT_msgCode-xPos": 			 [12, 16],
+	"RDT_msgCode-zPos": 			 [16, 20],
+	"RDT_msgCode-xWidthTrigger": 	 [20, 24],
+	"RDT_msgCode-zWidthTrigger": 	 [24, 28],
+	"RDT_msgCode-offset_0": 		 [28, 30], 
+	"RDT_msgCode-japChars": 		 [30, 32], // (16 [Japanese letters. Game crashes sometimes] and 17 - resevilnemesis30 on RE2 definitive RDT info)
+	"RDT_msgCode-offset_1": 		 [32, 34], 
+	"RDT_msgCode-specialProp": 		 [34, 36], // (For things like open locked desk with herbs (02) - same as above)
+	"RDT_msgCode-readMode": 		 [36, 40],
 	/*
 		Doors
 	*/
-	"RDT_door-0-header":         	 [0, 2],
-	"RDT_door-0-id":                 [2, 4],
-	"RDT_door-0-doorIdentifier":     [4, 12],
+	"RDT_door-0-header":         	   [0, 2], // RE2 = 3B, RE3 = 61 || 62
+	"RDT_door-0-id":                   [2, 4],
+	"RDT_door-0-doorIdentifier":      [4, 12],
 	"RDT_door-0-doorXpos":           [12, 16],
 	"RDT_door-0-doorYpos": 		     [16, 20],
 	"RDT_door-0-doorZpos": 		     [20, 24],

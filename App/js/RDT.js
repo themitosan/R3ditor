@@ -56,10 +56,12 @@ var RDT_itemIndexRAW;
 var RDT_totalMessages;
 var RDT_totalItensGeral;
 var RDT_lastBackup = "";
+var RDT_enemiesArray = [];
 var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
 var RDT_MSG_startLength = 0;
 var RDT_lastFileOpened = "";
+var RDT_propModelsArray = [];
 var RDT_messageCodesArray = [];
 function RDT_resetVars(){
 	mapfile = [];
@@ -78,11 +80,13 @@ function RDT_resetVars(){
 	RDT_MSG_RESULT_3 = 0;
 	RDT_MSG_RESULT_4 = 0;
 	RDT_FILEMAP_MSG = [];
+	RDT_enemiesArray = [];
 	RDT_MSG_POINTERS = [];
 	RDT_messagesArray = [];
 	RDT_MSG_finalLenght = 0;
 	RDT_MSG_startLength = 0;
 	RDT_MAPFILE = undefined;
+	RDT_propModelsArray = [];
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_requestReload = false;
 	block_size_hex = undefined;
@@ -117,8 +121,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MSG_RESULT_2 = 0;
 	RDT_MSG_RESULT_3 = 0;
 	RDT_MSG_RESULT_4 = 0;
+	RDT_enemiesArray = [];
+	sessionStorage.clear();
 	RDT_MAPFILE = undefined;
 	RDT_MSG_CURRENT_TEST = 0;
+	RDT_propModelsArray = [];
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
 	RDT_generateMapFile = false;
@@ -142,15 +149,180 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
 	document.getElementById('RDT_door_holder').innerHTML = "";
 	document.getElementById('RDT_audio_holder').innerHTML = "";
+	document.getElementById('RDT_enemy_holder').innerHTML = "";
 	document.getElementById('RDT_msgCode_holder').innerHTML = "";
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
+	RDT_getEnemiesArray();
 	RDT_readDoors();
 	RDT_readItens();
 	RDT_BG_display();
 	scrollLog();
 }
+// Enemies [WIP]
+function RDT_getEnemiesArray(){
+	if (RDT_arquivoBruto !== undefined){
+		var c = 0;
+		RDT_getEnemies("7d00");
+		while (c < RDT_enemiesArray.length){
+			RDT_decompileEnemy(c, RDT_enemiesArray[c]);
+			c++;
+		}
+	}
+}
+function RDT_decompileEnemy(index, enemyHex){
+	var EN_header   = enemyHex.slice(RANGES["RDT_enemy-header"][0], 	 RANGES["RDT_enemy-header"][1]);
+	var EN_numero 	= enemyHex.slice(RANGES["RDT_enemy-enemyNumber"][0], RANGES["RDT_enemy-enemyNumber"][1]);
+	var EN_type   	= enemyHex.slice(RANGES["RDT_enemy-type"][0], 		 RANGES["RDT_enemy-type"][1]);
+	var EN_pose   	= enemyHex.slice(RANGES["RDT_enemy-pose"][0], 		 RANGES["RDT_enemy-pose"][1]);
+	var EN_exFlag 	= enemyHex.slice(RANGES["RDT_enemy-extraFlag"][0], 	 RANGES["RDT_enemy-extraFlag"][1]);
+	var EN_soundSet = enemyHex.slice(RANGES["RDT_enemy-soundSet"][0],	 RANGES["RDT_enemy-soundSet"][1]);
+	var EN_texture  = enemyHex.slice(RANGES["RDT_enemy-texture"][0],	 RANGES["RDT_enemy-texture"][1]);
+	var EN_enFlag   = enemyHex.slice(RANGES["RDT_enemy-enemyFlag"][0],	 RANGES["RDT_enemy-enemyFlag"][1]);
+	var EN_xPos 	= enemyHex.slice(RANGES["RDT_enemy-xPos"][0],		 RANGES["RDT_enemy-xPos"][1]);
+	var EN_yPos 	= enemyHex.slice(RANGES["RDT_enemy-yPos"][0],		 RANGES["RDT_enemy-yPos"][1]);
+	var EN_zPos 	= enemyHex.slice(RANGES["RDT_enemy-zPos"][0],		 RANGES["RDT_enemy-zPos"][1]);
+	var EN_rPos 	= enemyHex.slice(RANGES["RDT_enemy-rPos"][0],		 RANGES["RDT_enemy-rPos"][1]);
+	localStorage.setItem("RDT_enemy-" + index, enemyHex);
+	var ENEMY_HTML_TEMPLATE = '<div class="RDT-Item RDT-enemy-bg"><input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditEnemyNPC(' + index + ', \'' + enemyHex + '\');">' + 
+		'(' + parseInt(index + 1) + ') Enemy / NPC: ' + RDT_EMDNAME[EN_type] + ' (Hex: ' + EN_type.toUpperCase() + ')<div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + EN_xPos.toUpperCase() + '</font><br>' + 
+		'Y Position: <font class="RDT-item-lbl-fix">' + EN_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + EN_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + EN_rPos.toUpperCase() + '</font>' + 
+		'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + EN_header.toUpperCase() + '</font><br>Pose: <font class="RDT-item-lbl-fix-2">' + EN_pose.toUpperCase() + '</font><br><font title="Enemy flag">E. flag</font>: ' + 
+		'<font class="RDT-item-lbl-fix-2">' + EN_enFlag.toUpperCase() + '</font><br><font title="Enemy number">E. number</font>: <font class="RDT-item-lbl-fix-2">' + EN_numero.toUpperCase() + '</font></div><div class="RDT-Item-Misc-4">' + 
+		'<br>Texture: <font class="RDT-item-lbl-fix-8">' + EN_texture.toUpperCase() + '</font><br>Extra flag: <font class="RDT-item-lbl-fix-8">' + EN_exFlag.toUpperCase() + '</font><br>Sound set: <font class="RDT-item-lbl-fix-8">' + EN_soundSet.toUpperCase() + 
+		'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + EN_header.toUpperCase() + ' ' + EN_numero.toUpperCase() + ' ' + EN_type.toUpperCase() + ' ' + EN_pose.toUpperCase() + ' ' + EN_exFlag.toUpperCase() + ' ' + 
+		enemyHex.slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]) + ' ' + EN_soundSet.toUpperCase() + ' ' + EN_texture.toUpperCase() + ' ' + EN_enFlag.toUpperCase() + ' ' + EN_xPos.toUpperCase() + ' ' + EN_yPos.toUpperCase() + ' ' +
+		EN_zPos.toUpperCase() + ' ' + EN_rPos.toUpperCase() + ' ' + enemyHex.slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]).toUpperCase() + '</font></div>';
+	$("#RDT_enemy_holder").append(ENEMY_HTML_TEMPLATE);
+}
+function RDT_ENEMYNPC_APPLY(id){
+	var reason = "";
+	var canCompile = true;
+	var header    = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-header"][0], RANGES["RDT_enemy-header"][1]);
+	var offset_0  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]);
+	var offset_1  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]);
+	var nX		  = document.getElementById('RDT_enemyNPC-edit-X').value.slice(0, 4).toLowerCase();
+	var nY		  = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toLowerCase();
+	var nZ		  = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toLowerCase();
+	var nR		  = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toLowerCase();
+	var nPose	  = document.getElementById('RDT_enemyNPC-edit-PO').value.slice(0, 2).toLowerCase();
+	var nTexture  = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toLowerCase();
+	var nSoundSet = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toLowerCase();
+	var nEnFlag   = document.getElementById('RDT_enemyNPC-edit-EnF').value.slice(0, 2).toLowerCase();
+	var nExFlag   = document.getElementById('RDT_enemyNPC-edit-ExF').value.slice(0, 2).toLowerCase();
+	var nEnNumber = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toLowerCase();
+	var nEnemy    = document.getElementById('RDT_selectEnemyNPC').value;
+	if (nX.length !== 4){
+		canCompile = false;
+		reason = 'The X value are wrong!';
+	}
+	if (nY.length !== 4){
+		canCompile = false;
+		reason = 'The Y value are wrong!';
+	}
+	if (nZ.length !== 4){
+		canCompile = false;
+		reason = 'The Z value are wrong!';
+	}
+	if (nR.length !== 4){
+		canCompile = false;
+		reason = 'The R value are wrong!';
+	}
+	if (nX.value === "0000"){
+		nX.value = "0101";
+		addLog('warn', 'WARN - To avoid detection problem, the X value will be 0101 instead of 0000');
+	}
+	if (nY.value === "0000"){
+		nY.value = "0101";
+		addLog('warn', 'WARN - To avoid detection problem, the Y value will be 0101 instead of 0000');
+	}
+	if (nZ.value === "0000"){
+		nZ.value = "0101";
+		addLog('warn', 'WARN - To avoid detection problem, the Z value will be 0101 instead of 0000');
+	}
+	if (nR.value === "0000"){
+		nR.value = "0101";
+		addLog('warn', 'WARN - To avoid detection problem, the R value will be 0101 instead of 0000');
+	}
+	if (nPose.length !== 2){
+		canCompile = false;
+		reason = 'The Pose value are wrong!';
+	}
+	if (nTexture.length !== 2){
+		canCompile = false;
+		reason = 'The Texture value are wrong!';
+	}
+	if (nSoundSet.length !== 2){
+		canCompile = false;
+		reason = 'The Sound Set value are wrong!';
+	}
+	if (nEnFlag.length !== 2){
+		canCompile = false;
+		reason = 'The Enemy Flag value are wrong!';
+	}
+	if (nExFlag.length !== 2){
+		canCompile = false;
+		reason = 'The Extra Flag value are wrong!';
+	}
+	if (nEnNumber.length !== 2){
+		canCompile = false;
+		reason = 'The Enemy Number value are wrong!';
+	}
+	if (canCompile === true){
+		var NEW_ENEMYNPC = header + nEnNumber + nEnemy + nPose + nExFlag + offset_0 + nSoundSet + nTexture + nEnFlag + nX + nY + nZ + nR + offset_1;
+		RDT_COMPILE_Lv2(localStorage.getItem("RDT_enemy-" + id), NEW_ENEMYNPC);
+		$("#RDT-aba-menu-8").trigger('click');
+	} else {
+		alert('WARN - Unable to compile Enemy / NPC!\n\n' + reason);
+		addLog('warn', 'WARN - Unable to compile Enemy / NPC! - ' + reason);
+	}
+	scrollLog();
+}
+function RDT_getEnemies(hx){
+	if (RDT_arquivoBruto !== undefined){
+		var c = 0;
+		var enemyRaw = getAllIndexes(RDT_arquivoBruto, hx);
+		while (c < enemyRaw.length){
+			var check_0 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48));
+			var check_1 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18));
+			var check_2 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26));
+			if (check_0 === "00000000" && check_1 === "000000" && check_2 !== "00000000"){
+				RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
+				c++;
+			} else {
+				enemyRaw.splice(c, 1);
+			}
+		}
+	}
+}
+// Props [WIP]
+function RDT_getPropModelsArray(){
+	if (RDT_arquivoBruto !== undefined){
+		var c = 0;
+		RDT_getpropModels("000000000000000000");
+		while(c < RDT_propModelsArray.length){
+			console.log(RDT_propModelsArray[c].toUpperCase());
+			c++;
+		}
+	}
+}
+function RDT_getpropModels(hx){
+	var c = 0;
+	var propRaw = getAllIndexes(RDT_arquivoBruto, hx);
+	while (c < propRaw.length){
+		var check_0 = RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] - 2));
+		var check_1 = RDT_arquivoBruto.slice(parseInt(propRaw[c] + 74), parseInt(propRaw[c] + 76));
+		var check_2 = getAllIndexes(RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] + 76)), "0");
+		if (check_0 === "7f" && check_1 === "00" && check_2.length < 74){
+			RDT_propModelsArray.push(RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] + 76)));
+			c++;
+		} else {
+			propRaw.splice(c, 1);
+		}
+	}
+}
+
 // Message Code (63 ID 04 31 00 00)
 function RDT_getMessageCodesArray(){
 	var c = 0;
@@ -558,44 +730,10 @@ function RDT_generateItemIndexRaw(str){
 	}
 }
 function RDT_decompileItens(id, edit){
+	var RDT_motivo;
 	var RDT_CanRender = true;
 	var currentItem   = localStorage.getItem("RDT_Item-" + id);
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
-	var itemIdetifier = currentItem.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
-	var espaco1		  = currentItem.slice(RANGES["RDT_item-espaco1"][0], 	   RANGES["RDT_item-espaco1"][1]);
-	var itemXX;
-	var itemYY;
-	var itemZZ;
-	var itemRR;
-	var itemID;
-	var espaco2;
-	var itemQuant;
-	var espaco3;
-	var itemMP;
-	if (header === "67"){
-		itemXX 		  = currentItem.slice(RANGES["RDT_item-0-itemXX"][0], 	   RANGES["RDT_item-0-itemXX"][1]);
-		itemYY 		  = currentItem.slice(RANGES["RDT_item-0-itemYY"][0], 	   RANGES["RDT_item-0-itemYY"][1]);
-		itemZZ 		  = currentItem.slice(RANGES["RDT_item-0-itemZZ"][0], 	   RANGES["RDT_item-0-itemZZ"][1]);
-		itemRR 		  = currentItem.slice(RANGES["RDT_item-0-itemRR"][0], 	   RANGES["RDT_item-0-itemRR"][1]);
-		itemID 		  = currentItem.slice(RANGES["RDT_item-0-itemID"][0], 	   RANGES["RDT_item-0-itemID"][1]);
-		espaco2 	  = currentItem.slice(RANGES["RDT_item-0-espaco2"][0],	   RANGES["RDT_item-0-espaco2"][1]);
-		itemQuant 	  = currentItem.slice(RANGES["RDT_item-0-itemQuant"][0],   RANGES["RDT_item-0-itemQuant"][1]);
-		espaco3 	  = currentItem.slice(RANGES["RDT_item-0-espaco3"][0], 	   RANGES["RDT_item-0-espaco3"][1]);
-		itemMP 		  = currentItem.slice(RANGES["RDT_item-0-itemMP"][0], 	   RANGES["RDT_item-0-itemMP"][1]);
-	}
-	// WIP
-	if (header === "68"){
-		itemXX 		  = "[WIP]";
-		itemYY 		  = "[WIP]";
-		itemZZ 		  = "[WIP]";
-		itemRR 		  = "[WIP]";
-		itemID 		  = currentItem.slice(RANGES["RDT_item-1-itemID"][0], 	   RANGES["RDT_item-1-itemID"][1]);
-		espaco2 	  = currentItem.slice(RANGES["RDT_item-1-espaco2"][0],	   RANGES["RDT_item-1-espaco2"][1]);
-		itemQuant 	  = currentItem.slice(RANGES["RDT_item-1-itemQuant"][0],   RANGES["RDT_item-1-itemQuant"][1]);
-		espaco3 	  = "[WIP]";
-		itemMP 		  = currentItem.slice(RANGES["RDT_item-1-itemMP"][0], 	   RANGES["RDT_item-1-itemMP"][1]);
-	}
-	var RDT_motivo;
 	//console.log("Header: " + header + "\nHex: " + itemID + "\nHex Completa:\n" + currentItem);
 	if (header === "90" || header === "51" || header === "02" || header === "c0"){
 		RDT_totalItensGeral--;
@@ -606,17 +744,60 @@ function RDT_decompileItens(id, edit){
 	}
 	if (RDT_CanRender === true){
 		if (edit === false){
-			RDT_renderItens(id, itemIdetifier, itemID, itemQuant, itemXX, itemYY, itemZZ, itemRR, itemMP, header);
+			RDT_renderItens(id, currentItem);
 		}
 	} else {
 		console.warn("WARNING: Unable to render item " + id + " - " + RDT_motivo);
+		addLog('warn', "WARN - Unable to render item " + id + " - " + RDT_motivo);
 	}
+	scrollLog();
 }
-function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
+function RDT_renderItens(index, hex){
+	var x;
+	var y;
+	var z;
+	var r;
+	var mp;
+	var id;
 	var tipo;
+	var quant;
+	var iFlag;
 	var cssFix;
 	var typeId;
 	var convert;
+	var modelId;
+	var hexComp;
+	var header  = hex.slice(RANGES["RDT_item-header"][0], RANGES["RDT_item-header"][1]);
+	var ident   = hex.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
+	if (header === "67"){
+		x 		= hex.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
+		y 		= hex.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
+		z 		= hex.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
+		r 		= hex.slice(RANGES["RDT_item-0-itemRR"][0], RANGES["RDT_item-0-itemRR"][1]);
+		id 		= hex.slice(RANGES["RDT_item-0-itemID"][0], RANGES["RDT_item-0-itemID"][1]);
+		quant 	= hex.slice(RANGES["RDT_item-0-itemQuant"][0], RANGES["RDT_item-0-itemQuant"][1]);
+		iFlag  	= hex.slice(RANGES["RDT_item-0-itemFlag"][0], RANGES["RDT_item-0-itemFlag"][1]);
+		modelId = hex.slice(RANGES["RDT_item-0-modelID"][0], RANGES["RDT_item-0-modelID"][1]);
+		mp 		= hex.slice(RANGES["RDT_item-0-itemMP"][0], RANGES["RDT_item-0-itemMP"][1]);
+		hexComp = header.toUpperCase() + " " + ident.toUpperCase() + " " +  localStorage.getItem("RDT_Item-" + index).slice(4, 12).toUpperCase() + " " + 
+				  x.toUpperCase() + " " + y.toUpperCase() + " " + z.toUpperCase() + " " + r.toUpperCase() + " " + id.toUpperCase() + " " + 
+				  localStorage.getItem("RDT_Item-" + index).slice(30, 32).toUpperCase() + " " + quant.toUpperCase() + " " + 
+				  localStorage.getItem("RDT_Item-" + index).slice(34, 38).toUpperCase() + " " + iFlag.toUpperCase() + " " + 
+				  modelId.toUpperCase() + " " + mp.toUpperCase();
+		localStorage.setItem("RDT_Item-" + index, hex.slice(0, 44));
+	}
+	if (header === "68"){
+		x 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
+		y 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
+		z 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
+		r 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
+		id 		= hex.slice(RANGES["RDT_item-1-itemID"][0], RANGES["RDT_item-1-itemID"][1]);
+		quant 	= hex.slice(RANGES["RDT_item-1-itemQuant"][0], RANGES["RDT_item-1-itemQuant"][1]);
+		iFlag  	= "[WIP]";
+		modelId = "[WIP]";
+		mp 		= hex.slice(RANGES["RDT_item-1-itemMP"][0], RANGES["RDT_item-1-itemMP"][1]);
+		hexComp = localStorage.getItem("RDT_Item-" + index) + " [WIP]";
+	}
 	try{
 		if (parseInt(id, 16) < 134 || parseInt(id, 16) > 170){
 			typeId = 1;
@@ -648,12 +829,11 @@ function RDT_renderItens(index, ident, id, quant, x, y, z, r, mp, header){
 		}
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
-			' (Hex: ' + id.toUpperCase() + ')</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit' + 
-			'(' + typeId + ', \'' + id + '\', \'' + x + '\', \'' + y + '\', \'' + z + '\', \'' + r + '\', \'' + mp + '\', ' + index + ', ' + parseInt(quant, 16) + ', \'' + header + '\');"><br>Quantity: ' + 
-			'<font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
+			' (Hex: <font title="' + convert + '">' + id.toUpperCase() + '</font>)</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');' + 
+			'RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>Quantity: <font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
 			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br>Rotation: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
 			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
-			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + localStorage.getItem('RDT_Item-' + index).toUpperCase() + '</div>';
+			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id.toUpperCase() + " - " + msg;
@@ -706,7 +886,9 @@ function RDT_ITEM_APPLY(index, type, convert){
 	var novaY = document.getElementById('RDT_lbl_point_y_hex').value.slice(0, 4).toLowerCase();
 	var novaZ = document.getElementById('RDT_lbl_point_z_hex').value.slice(0, 4).toLowerCase();
 	var novaR = document.getElementById('RDT_lbl_point_r_hex').value.slice(0, 4).toLowerCase();
-	var novaAnim = document.getElementById('RDT_item-edit-A').value.slice(0, 2);
+	var novaAnim = document.getElementById('RDT_item-edit-A').value.slice(0, 2).toLowerCase();
+	var mID = document.getElementById('RDT_item-edit-MI').value.slice(0, 2).toLowerCase();
+	var iF = document.getElementById('RDT_item-edit-IF').value.slice(0, 2).toLowerCase();
 	if (novaX === ""){
 		novaX = "0000";
 	}
@@ -724,42 +906,52 @@ function RDT_ITEM_APPLY(index, type, convert){
 	}
 	var error;
 	var canBuild = true;
-	if (novaX.length < 4){
+	if (novaX.length !== 4){
 		canBuild = false;
-		error = "The X var must be 16 bytes long!";
+		error = "The X  value are wrong!";
 	}
-	if (novaY.length < 4){
+	if (novaY.length !== 4){
 		canBuild = false;
-		error = "The Y var must be 16 bytes long!";
+		error = "The Y value are wrong!";
 	}
-	if (novaZ.length < 4){
+	if (novaZ.length !== 4){
 		canBuild = false;
-		error = "The Z var must be 16 bytes long!";
+		error = "The Z value are wrong!";
 	}
-	if (novaR.length < 4){
+	if (novaR.length !== 4){
 		canBuild = false;
-		error = "The R var must be 16 bytes long!";
+		error = "The R value are wrong!";
 	}
-	if (novaAnim.length < 2){
+	if (novaAnim.length !== 2){
 		canBuild = false;
-		error = "The Animation var must be 8 bytes long!";
+		error = "The Animation value are wrong!";
+	}
+	if (mID.length !== 2){
+		canBuild = false;
+		error = "The Model ID value are wrong!";
+	}
+	if (iF.length !== 2){
+		canBuild = false;
+		error = "The Item Flag value are wrong!";
 	}
 	// Reconstruindo item
 	if (canBuild === true){
 		var RDT_ITEM_COMPILADO;
 		var header = localStorage.getItem("RDT_Item-" + index).slice(0, 12);  
 		if (header.slice(0, 2) === "67"){
+			// Header 67
 			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(30, 32);
-			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 42);
+			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 38);
 			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
-			RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + novaAnim + offset3;
-			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-			RDT_RECOMPILE_Lv1();
+			RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + iF + mID + novaAnim + offset3;
+			console.log(RDT_ITEM_COMPILADO);
+			//localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+			//RDT_RECOMPILE_Lv1();
 		} else {
 			// Header 68
 			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // Até item id
 			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(46, 48); // 00 entre item id e quantidade
-			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // quantidade até anim
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade até anim
 			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
 			RDT_RECOMPILE_Lv1();

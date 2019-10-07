@@ -337,14 +337,14 @@ function save_renderBox(s_slot){
 			var IT = JILL_BAU[current].slice(0, 2); // Nome do Item
 			var QU = JILL_BAU[current].slice(2, 4); // Quantidade
 			var AT = JILL_BAU[current].slice(4, 6); // Atributo
-			var NU = JILL_BAU[current].slice(6, 8); // Sempre deve ser 00
+			var NU = JILL_BAU[current].slice(6, 8); // Segunda var
 			if (ATTR[AT] == undefined){
 				var msg = "(Item Box) Item " + current + " have an unknown attr.: " + AT;
 				console.warn("WARNING: " + msg);
 				addLog("warn", "WARNING: " + msg);
-				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (aka. null): " + NU);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (aka. null): " + NU);
 			} else {
-				addLog("log" , "Adding item to Item Box - Jill - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (aka. null): " + NU);
+				addLog("log" , "Adding item to Item Box - Jill - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (aka. null): " + NU);
 			}
 			ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
 			current++;
@@ -371,14 +371,14 @@ function save_renderBox(s_slot){
 			var IT = CARLOS_BAU[current].slice(0, 2); // Nome do Item
 			var QU = CARLOS_BAU[current].slice(2, 4); // Quantidade
 			var AT = CARLOS_BAU[current].slice(4, 6); // Atributo
-			var NU = CARLOS_BAU[current].slice(6, 8); // Sempre deve ser 00
+			var NU = CARLOS_BAU[current].slice(6, 8); // Segunda var
 			if (ATTR[AT] == undefined){
 				var msg = "(Item Box) Item " + current + " have unknown attr.: " + AT;
 				console.warn("WARN - " + msg);
 				addLog("warn", "WARN - " + msg);
-				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (Aka. Null) " + NU);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (Aka. Null) " + NU);
 			} else {
-				addLog("log" , "Adding item to Item Box - Carlos - HEX: " + IT + QU + AT + NU + " - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (Aka. Null) " + NU);
+				addLog("log" , "Adding item to Item Box - Carlos - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (Aka. Null) " + NU);
 			}
 			ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
 			current++;
@@ -552,10 +552,10 @@ function save_Backup(){
 			addLog("log", "Folder - " + APP_PATH + "\\Backup\\SAV\\" + backup_name);
 			log_separador();
 		} catch (err){
-			addLog("error", "ERROR: Unable to make backup! - " + err);
+			addLog("error", "ERROR - Unable to make backup! - " + err);
 		}
 	} else {
-		addLog("error", "ERROR: You can't make a backup if you haven't opened a save yet!");
+		addLog("error", "ERROR - You can't make a backup if you haven't opened a save yet!");
 	}
 }
 function applyItem(mode, person, pos){
@@ -929,8 +929,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	if (quanti === ""){
 		quanti = "0";
 	}
-	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: " + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
-		" - Item: " + itemHex.toUpperCase() + " (" + titulo + ") - Quantity: " + quantHex.toUpperCase() + " (" + parseInt(quantHex, 16) + ") - Attr.: " + 
+	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: <font class='user-can-select'>" + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
+		"</font> - Item: " + itemHex.toUpperCase() + " (" + titulo + ") - Quantity: " + quantHex.toUpperCase() + " (" + parseInt(quantHex, 16) + ") - Attr.: " + 
 		atrib.toUpperCase() + " (" + ATTR[atrib][0] + ")");
 }
 function SAVE_clearAllSaves(){

@@ -361,11 +361,17 @@ function runExternalSoftware(exe, args){
 		}
 		document.title = APP_NAME;
 		process.chdir(TEMP_APP_PATH);
+		var color;
+		if (code > 1){
+			color = "red";
+		} else {
+			color = "green";
+		}
 		if (exe !== "cmd"){
 			if (exe === EXEC_BIO3_original || exe === EXEC_BIO3_MERCE){
-				addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code ' + code + '.');
+				addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
 			} else {
-				addLog('log', 'External App - The application was finished with exit code ' + code + '.');
+				addLog('log', 'External App - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
 			}
 			scrollLog();
 			return code;

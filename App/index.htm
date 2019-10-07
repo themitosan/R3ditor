@@ -29,28 +29,28 @@
 		<!-- Menu Principal -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
 		<div class="menu-topo none" id="menu-topo">
-			<input type="button" class="botao-menu" value="SAV Editor (.sav)" onclick="main_menu(1);">
-			<input type="button" class="botao-menu" value="MSG Editor (.msg)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.rdt)" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your saves!" onclick="main_menu(1);">
+			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to edit internal messages! (FA02)" onclick="main_menu(2);">
+			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room data table files!" onclick="main_menu(3);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right" value="Reload App" onclick="reload();">
-			<input type="button" class="botao-menu right" value="About" onclick="showAbout();">
-			<input type="button" class="botao-menu right" value="Check for updates" onclick="checkForUpdates();">
+			<input type="button" class="botao-menu right" title="Reload this application!" value="Reload App" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click to see the about page!" value="About" onclick="showAbout();">
+			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor" value="Check for updates" onclick="checkForUpdates();">
 		</div>
 		<!-- Outras ferramentas -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
-			<input type="button" class="botao-menu" value="File Generator" onclick="main_menu(4);">
-			<input type="button" class="botao-menu none" id="main_openBio3OnHex" value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
-			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
+			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
+			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
+			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
-			<input type="button" class="botao-menu none" id="btn_run_bio3" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
-			<input type="button" class="botao-menu none" id="btn_run_merce" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
+			<input type="button" class="botao-menu none" id="btn_run_bio3" title="Runs the original game" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
+			<input type="button" class="botao-menu none" id="btn_run_merce" title="Runs the original Mercenaries minigame" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
-			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
+			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Runs the game in a modified enviroment, with modded maps and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
+			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Runs the mercenaries minigame in a modified enviroment, with modded maps and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
@@ -124,9 +124,53 @@
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
-			<input type="button" id="RDT-aba-menu-4" class="aba" value="Pos. Edit">
+			<input type="button" id="RDT-aba-menu-4" class="aba none" value="Pos. Edit">
+			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- RDT: Enemy / NPC's -->
+			<div class="menu" id="RDT_menu-8" onclick="main_closeFileList();">
+				<div class="menu-general-content" id="RDT-enemy-hold">
+					<div id="RDT_BG_8" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Enemies - Total: <font id="RDT_lbl_totalEnemy">???</font></font></center>
+					<div id="RDT_enemy_holder" class="RDT-holder">
+						<!-- Os inimigos vão aqui -->
+					</div>
+					<!-- RDT: Enemy / NPC - Editar -->
+					<div class="RDT-Item-Edit RDT_enemyNPC_editForm-fix" id="RDT-enemyNPC-Edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Current ID: <font id="RDT_lbl_enemyNPC_ID">???</font><br>
+							Enemy / NPC: <font id="RDT-lbl-enemyNPC-edit">???</font> - EMD / TIM: <font id="RDT_lbl_enemyNPC_edit_EMD">???</font>
+						</center>
+						<div id="RDT-enemyNPC-edit-form">
+							<div class="RDT_coordsHolder_A">
+								Enemy / NPC: 
+								<select class="item-select-mod RDT_editSelectEnemyNPC-fix" id="RDT_selectEnemyNPC" onchange="RDT_enemyNPCValidateInput();">
+									<!-- As opções vão aqui -->
+								</select>
+							</div>
+							<div class="RDT_coordsHolder_B">X Position: <input type="text" id="RDT_enemyNPC-edit-X" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_B">Y Position: <input type="text" id="RDT_enemyNPC-edit-Y" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_B">Z Position: <input type="text" id="RDT_enemyNPC-edit-Z" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_B">R Position: <input type="text" id="RDT_enemyNPC-edit-R" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_B">Pose: <input type="text" id="RDT_enemyNPC-edit-PO" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_B">Texture: <input type="text" id="RDT_enemyNPC-edit-TX" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_B">Sound set: <input type="text" id="RDT_enemyNPC-edit-SS" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_editEnemyNPC-misc">
+								<div class="RDT_coordsHolder_B">Enemy flag: <input type="text" id="RDT_enemyNPC-edit-EnF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+								<div class="RDT_coordsHolder_B">Extra flag: <input type="text" id="RDT_enemyNPC-edit-ExF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+								<div class="RDT_coordsHolder_B">Enemy number: <input type="text" id="RDT_enemyNPC-edit-EN" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" oninput="RDT_enemyNPCValidateInput();"></div>
+							</div>
+							<div class="RDT-applyBtn-div">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarEnemyNPC" value="APPLY CHANGES!">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Message Code -->
 			<div class="menu" id="RDT_menu-7" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-msgCode-hold">
@@ -149,11 +193,7 @@
 							<div class="RDT_coordsHolder_B">
 								Display mode: 
 								<select id="RDT_MSGCODE-edit-display" class="item-select-mod">
-									<option value="ffff">(FFFF) Normal</option>
-									<option value="0000">(0000) Can move</option>
-									<option value="0101">(0101) Don't Freeze + Can't move</option>
-									<option value="1020">(1020) Can move and message dissapears after some seconds</option>
-									<option value="2010">(2010) Can move and message dissapears after some seconds</option>
+									<!-- As opções vão aqui -->
 								</select>
 							</div>
 							<div class="RDT-applyBtn-div">
@@ -198,7 +238,11 @@
 								Next Cam: <font id="RDT_lbl_door_editCam" class="italic">???</font> 
 								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">Lock Key: <select class="item-select-mod RDT_door_textEditFix_4" id="RDT_door-edit-LK"></select></div>
+							<div class="RDT_coordsHolder_B">Lock Key: 
+								<select class="item-select-mod RDT_door_textEditFix_4" id="RDT_door-edit-LK">
+									<!-- Os itens vão aqui -->
+								</select>
+							</div>
 							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" oninput="RDT_doorValidadeInput();" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
 						</div>
 						<!-- Cam Preview -->
@@ -286,14 +330,14 @@
 					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
 					<div class="menu-separador"></div>
 					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
+					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
+					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
 					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
 					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
-					Number of enemies: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font><br>
 					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
-					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
-					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
-					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
-					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font>
+					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
+					Number of enemies / npc's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 				</div>
 			</div>
 			<!-- RDT: Mensagens -->
@@ -324,11 +368,11 @@
 				</div>
 				<!-- RDT: Item - Editar -->
 				<div class="RDT-Item-Edit none" id="RDT-Item-Edit">
-					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - ID: <font id="RDT-lbl-edit-index">N/A</font></center>
+					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - Identfier: <font id="RDT-lbl-edit-index">???</font> - ID: <font id="RDT_lbl_item_id">???</font></center>
 					<div id="RDT-item-edit-form">
 						<div id="RDT-edit-item-select" class="none">
 							Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
-							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15" value="">
+							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-Quant" placeholder="15" value="">
 						</div>
 						<div id="RDT-edit-file-select" class="none">
 							File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
@@ -341,13 +385,16 @@
 						<div class="RDT_coordsHolder_B" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
 						<div class="RDT_coordsHolder_B" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
 						<div class="RDT_coordsHolder_B" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
-						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-A" placeholder="00" value=""></div>
-						<div>
-							Convert To: 
-							<select id="RDT_convertItemTo" class="item-select-mod RDT-item-pos" style="width: 120px;">
+						<div class="menu-separador"></div>
+						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-A" placeholder="00" value=""></div>
+						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-MI" placeholder="00" value=""></div>
+						<div class="RDT-item-editOtherFix">
+							<div>Item flag: <input type="text" class="item-select-mod RDT_itemEditOtherLeftFix RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-IF" placeholder="00" value=""></div>
+							Convert to: 
+							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix" style="width: 60px;">
 								<option value="1">Item</option><option value="2">File</option><option value="3">Map</option>
 							</select>
-							<input type="button" value="Convert!" id="RDT_applyConvertItem" class="botao-menu" style="margin-left: 16px;" onclick="">
+							<input type="button" value="Convert!" id="RDT_applyConvertItem" class="botao-menu" style="margin-left: 8px;" onclick="">
 						</div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">

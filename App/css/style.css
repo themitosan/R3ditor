@@ -67,8 +67,8 @@ input[type="range" i]{
     padding: 6px;
     height: auto;
     display: none;
-    position: absolute;
     border-radius: 4px;
+    position: absolute;
     background-image: linear-gradient(to bottom, #555, #222);
 }
 .feature_title{
@@ -851,9 +851,24 @@ input[type="range" i]{
 .RDT-audio-bg{
     background-image: linear-gradient(to bottom, #354354, #111b33);
 }
+.RDT-enemy-bg{
+    background-image: linear-gradient(to bottom, #516b61, #0f432f);
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;
+}
+.RDT-item-editOtherFix{
+    position: absolute;
+    left: 172px;
+    top: 266px;
+}
+.RDT_itemEditOtherLeftFix{
+    position: sticky;
+    left: 894px !important;
+}
+.RDT-valueEdit-fix{
+    width: 50px !important;
 }
 .user-can-select{
     user-select:all;
@@ -886,6 +901,25 @@ input[type="range" i]{
     position: sticky;
     left: 928px;
     width: 56px;
+}
+.RDT-item-lbl-fix-8{
+    position: sticky;
+    left: 324px;
+}
+.RDT-item-lbl-fix-9{
+    position: sticky;
+    left: 910px;
+    width: 56px;
+}
+.RDT-item-lbl-fix-10{
+    position: sticky;
+    left: 1096px;
+    width: 56px;
+}
+.RDT_editSelectEnemyNPC-fix{
+    width: 380px !important;
+    margin-left: 5px;
+    position: sticky;
 }
 .RDT_editParamMSGCODE{
     width: 470px !important;
@@ -937,10 +971,20 @@ input[type="range" i]{
     background-image: linear-gradient(to bottom, #737373, #545454);
     animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
 }
-.RDT_doorNextPosFix{
-    top: 61px;
-    left: 148px;
+.RDT_editEnemyNPC-misc{
     position: absolute;
+    width: 220px;
+    left: 182px;
+    top: 128px;
+}
+.RDT_doorNextPosFix{
+    position: absolute;
+    left: 148px;
+    top: 61px;
+}
+.RDT_enemyNPC_editForm-fix{
+    width: 490px !important;
+    left: 808px !important;
 }
 .RDT_doorOtherFix{
     top: 61px;
@@ -981,7 +1025,7 @@ input[type="range" i]{
     left: 120px;
     height: 70px;
     position: sticky;
-    margin-top: -70px;
+    margin-top: -73px;
     padding-left: 10px;
 }
 .RDT-Item-Misc-2{
@@ -995,6 +1039,14 @@ input[type="range" i]{
 .RDT-Item-Misc-3{
     width: 30%;
     left: 446px;
+    height: 70px;
+    position: sticky;
+    margin-top: -70px;
+    padding-left: 10px;
+}
+.RDT-Item-Misc-4{
+    width: 30%;
+    left: 242px;
     height: 70px;
     position: sticky;
     margin-top: -70px;

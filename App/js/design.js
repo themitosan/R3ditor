@@ -6,7 +6,7 @@
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
-var RDT_totalMenus = 7;
+var RDT_totalMenus = 8;
 var SAVE_totalMenus = 4;
 var request_render_save;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
@@ -200,6 +200,8 @@ function main_menu(anim){
 		} else {
 			$("#avaliable_fileList").css({"display": "none"});
 		}
+		$("#RDT_selectEnemyNPC").append(RDT_EDIT_ENEMYNP_SELECT);
+		$("#RDT_MSGCODE-edit-display").append(RDT_EDIT_MESSAGECODE_SELECT);
 		RDT_checkBKP();
 		if (RDT_lastFileOpened !== ""){
 			main_renderFileList(1);
@@ -803,6 +805,7 @@ function RDT_showMenu(id){
 	}
 	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
 		$("#RDT_openFileList").css({"display": "inline"});
+		$("#RDT-enemyNPC-Edit").css({"height": "418px"});
 		$("#RDT-canvas-hold").css({"height": "472px"});
 		$("#RDT-audio-hold").css({"height": "472px"});
 		$("#RDT_MSG-holder").css({"height": "430px"});
@@ -814,6 +817,7 @@ function RDT_showMenu(id){
 		$("#RDT-msgs").css({"height": "472px"});
 		$("#RDT-ifm").css({"height": "472px"});
 	} else {
+		$("#RDT-enemyNPC-Edit").css({"height": "458px"});
 		$("#RDT_openFileList").css({"display": "none"});
 		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
@@ -860,11 +864,13 @@ function RDT_showMenu(id){
 	if (EXTERNAL_APP_RUNNING === false){
 		$("#RDT-door-Edit").css({"height": "417px"});
 		$("#RDT-door-hold").css({"height": "472px"});
+		$("#RDT-enemy-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
 		$("#RDT-MSGCODE-Edit").css({"height": "417px"});
 		$("#RDT-msgCode-hold").css({"height": "472px"});
 		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 		$("#RDT_audio_holder").css({"height": "430px"});
+		$("#RDT_enemy_holder").css({"height": "430px"});
 		$("#RDT_msgCode_holder").css({"height": "430px"});
 	}
 	$("#RDT_backupBtn").css({"display": "inline"});
@@ -887,9 +893,12 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl-totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl_totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
+	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors + ")";
+	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
 	document.getElementById("RDT_lbl_totalmsgCode").innerHTML = RDT_messageCodesArray.length;
+	document.getElementById("RDT-aba-menu-8").value = "Enemies / NPC's (" + RDT_enemiesArray.length + ")";
 	document.getElementById("RDT-aba-menu-2").value = "Message Block (" + RDT_totalMessages + ")";
 	document.getElementById("RDT-aba-menu-7").value = "Message Code (" + RDT_messageCodesArray.length + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
@@ -917,6 +926,29 @@ function RDT_showEditMsgCode(index, codeHex){
 	document.getElementById('RDT-btn-aplicarMSGCODE').onclick = function(){
 		RDT_MSGCODE_APPLY(index);
 	}
+}
+function RDT_showEditEnemyNPC(index, codeHex){
+	var emd = codeHex.slice(RANGES["RDT_enemy-type"][0], RANGES["RDT_enemy-type"][1]);
+	var emdName = "EM" + emd.toUpperCase();
+	document.getElementById('RDT_selectEnemyNPC').value = emd;
+	document.getElementById('RDT_lbl_enemyNPC_ID').innerHTML = parseInt(index + 1);
+	document.getElementById('RDT_enemyNPC-edit-X').value = codeHex.slice(RANGES["RDT_enemy-xPos"][0], RANGES["RDT_enemy-xPos"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-Y').value = codeHex.slice(RANGES["RDT_enemy-yPos"][0], RANGES["RDT_enemy-yPos"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-Z').value = codeHex.slice(RANGES["RDT_enemy-zPos"][0], RANGES["RDT_enemy-zPos"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-R').value = codeHex.slice(RANGES["RDT_enemy-rPos"][0], RANGES["RDT_enemy-rPos"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-PO').value = codeHex.slice(RANGES["RDT_enemy-pose"][0], RANGES["RDT_enemy-pose"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-TX').value = codeHex.slice(RANGES["RDT_enemy-texture"][0], RANGES["RDT_enemy-texture"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-SS').value = codeHex.slice(RANGES["RDT_enemy-soundSet"][0], RANGES["RDT_enemy-soundSet"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-EnF').value = codeHex.slice(RANGES["RDT_enemy-enemyFlag"][0], RANGES["RDT_enemy-enemyFlag"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-ExF').value = codeHex.slice(RANGES["RDT_enemy-extraFlag"][0], RANGES["RDT_enemy-extraFlag"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-EN').value = codeHex.slice(RANGES["RDT_enemy-enemyNumber"][0], RANGES["RDT_enemy-enemyNumber"][1]).toUpperCase();
+	document.getElementById('RDT_lbl_enemyNPC_edit_EMD').innerHTML = emdName.toUpperCase();
+	document.getElementById('RDT-lbl-enemyNPC-edit').innerHTML = RDT_EMDNAME[emd][0];
+	document.getElementById('RDT-btn-aplicarEnemyNPC').onclick = function(){
+		RDT_ENEMYNPC_APPLY(index);
+	}
+	$("#RDT-enemyNPC-Edit").css({"display": "inline"});
+	$("#RDT_enemy_holder").css({"width": "780px"});
 }
 function RDT_showEditDoor(index, id, hex){
 	main_closeFileList();
@@ -973,8 +1005,26 @@ function RDT_doorValidadeInput(){
 	document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById("RDT_door-edit-NC-TXT").value.slice(0, 2).toUpperCase();
 }
 function RDT_itemValidadeInput(){
-	document.getElementById("RDT_item-edit-A").value = document.getElementById("RDT_item-edit-A").value.slice(0, 2); 
-	document.getElementById("RDT_item-edit-Quant").value = document.getElementById("RDT_item-edit-Quant").value.slice(0, 3);
+	document.getElementById("RDT_item-edit-A").value = document.getElementById("RDT_item-edit-A").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_item-edit-MI").value = document.getElementById("RDT_item-edit-MI").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_item-edit-IF").value = document.getElementById("RDT_item-edit-IF").value.slice(0, 2).toUpperCase();
+	document.getElementById("RDT_item-edit-Quant").value = document.getElementById("RDT_item-edit-Quant").value.slice(0, 3).toUpperCase();
+}
+function RDT_enemyNPCValidateInput(){
+	var emd = document.getElementById('RDT_selectEnemyNPC').value;
+	document.getElementById('RDT-lbl-enemyNPC-edit').innerHTML = RDT_EMDNAME[emd];
+	document.getElementById('RDT_enemyNPC-edit-X').value = document.getElementById('RDT_enemyNPC-edit-X').value.slice(0, 4).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-Y').value = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-Z').value = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-R').value = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-PO').value = document.getElementById('RDT_enemyNPC-edit-PO').value.slice(0, 2).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-TX').value = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-SS').value = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-EN').value = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-EnF').value = document.getElementById('RDT_enemyNPC-edit-EnF').value.slice(0, 2).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-ExF').value = document.getElementById('RDT_enemyNPC-edit-ExF').value.slice(0, 2).toUpperCase();
+	var emdName = "EM" + emd.toUpperCase();
+	document.getElementById('RDT_lbl_enemyNPC_edit_EMD').innerHTML = emdName;
 }
 function RDT_MSGBLOCKValidadeInput(){
 	document.getElementById("RDT_MSGCODE-edit-X").value = document.getElementById("RDT_MSGCODE-edit-X").value.slice(0, 4).toUpperCase();
@@ -1124,11 +1174,57 @@ function RDT_Error_404(){
 	} else {
 		$("#RDT-aba-menu-5").css({'display': 'inline'});
 	}
+	if (RDT_messageCodesArray.length === 0){
+		$("#RDT-aba-menu-7").css({'display': 'none'});
+	} else {
+		$("#RDT-aba-menu-7").css({'display': 'inline'});
+	}
+	if (RDT_enemiesArray.length === 0){
+		$("#RDT-aba-menu-8").css({'display': 'none'});
+	} else {
+		$("#RDT-aba-menu-8").css({'display': 'inline'});
+	}
 }
-function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant, header){
-	main_closeFileList();
+function RDT_displayItemEdit(id, idx, itemHx){
 	$("#RDT_openFileList").css({"display": "none"});
+	main_closeFileList();
+	//
+	var hex;
 	var nome;
+	var posX;
+	var posY;
+	var posZ;
+	var posR;
+	var anim;
+	var quant;
+	var iFlag;
+	var modelId;
+	//
+	var header  = itemHx.slice(RANGES["RDT_item-header"][0], RANGES["RDT_item-header"][1]);
+	var index   = itemHx.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
+	if (header === "67"){
+		posX    = itemHx.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
+		posY    = itemHx.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
+		posZ    = itemHx.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
+		posR    = itemHx.slice(RANGES["RDT_item-0-itemRR"][0], RANGES["RDT_item-0-itemRR"][1]);
+		hex     = itemHx.slice(RANGES["RDT_item-0-itemID"][0], RANGES["RDT_item-0-itemID"][1]);
+		quant   = parseInt(itemHx.slice(RANGES["RDT_item-0-itemQuant"][0], RANGES["RDT_item-0-itemQuant"][1]), 16);
+		iFlag   = itemHx.slice(RANGES["RDT_item-0-itemFlag"][0], RANGES["RDT_item-0-itemFlag"][1]);
+		modelId = itemHx.slice(RANGES["RDT_item-0-modelID"][0], RANGES["RDT_item-0-modelID"][1]);
+		anim    = itemHx.slice(RANGES["RDT_item-0-itemMP"][0], RANGES["RDT_item-0-itemMP"][1]);
+	}
+	if (header === "68"){
+		posX    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
+		posY    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
+		posZ    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
+		posR    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
+		hex     = itemHx.slice(RANGES["RDT_item-1-itemID"][0], RANGES["RDT_item-1-itemID"][1]);
+		quant   = parseInt(itemHx.slice(RANGES["RDT_item-1-itemQuant"][0], RANGES["RDT_item-1-itemQuant"][1]), 16);
+		iFlag   = "[WIP]";
+		modelId = "[WIP]";
+		anim    = itemHx.slice(RANGES["RDT_item-1-itemMP"][0], RANGES["RDT_item-1-itemMP"][1]);
+	}
+	//
 	if (hex.length < 2){
 		hex = "0" + hex;
 	}
@@ -1142,10 +1238,14 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 	if (id === 1){
 		nome = ITEM[hex][0];
 		document.getElementById('RDT-item-select').value = hex;
+		$("#RDT-item-editOtherFix").css({"top": "266px"});
 		$("#RDT-edit-item-select").removeClass("none");
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-map-select").addClass("none");
 		$("#RDT_btnEditPos").css({"top": "174px"});
+	} else {
+		$("#RDT-item-editOtherFix").css({"top": "228px"});
+		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
 	// File
 	if (id === 2){
@@ -1154,7 +1254,6 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-file-select").removeClass("none");
 		$("#RDT-edit-item-select").addClass("none");
 		$("#RDT-edit-map-select").addClass("none");
-		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
 	// Map
 	if (id === 3){
@@ -1163,21 +1262,23 @@ function RDT_displayItemEdit(id, hex, posX, posY, posZ, posR, anim, index, quant
 		$("#RDT-edit-map-select").removeClass("none");
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-item-select").addClass("none");
-		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
-	document.getElementById("RDT-lbl-edit-index").innerHTML = parseInt(index + 1);
+	document.getElementById('RDT-lbl-edit-index').innerHTML = index.toUpperCase();
 	document.getElementById('RDT_item-edit-X').innerHTML = posX.toUpperCase();
 	document.getElementById('RDT_item-edit-Y').innerHTML = posY.toUpperCase();
 	document.getElementById('RDT_item-edit-Z').innerHTML = posZ.toUpperCase();
 	document.getElementById('RDT_item-edit-R').innerHTML = posR.toUpperCase();
+	document.getElementById('RDT_item-edit-MI').value = modelId.toUpperCase();
+	document.getElementById('RDT_lbl_item_id').innerHTML = parseInt(idx + 1);
+	document.getElementById('RDT_item-edit-IF').value = iFlag.toUpperCase();
 	document.getElementById('RDT_item-edit-A').value = anim.toUpperCase();
-	document.getElementById("RDT-lbl-item-edit").innerHTML = nome;
+	document.getElementById('RDT-lbl-item-edit').innerHTML = nome;
 	document.getElementById('RDT_item-edit-Quant').value = quant;
 	document.getElementById('RDT-btn-aplicarItem').onclick = function(){
-		RDT_ITEM_APPLY(index, id, false);
+		RDT_ITEM_APPLY(idx, id, false);
 	}
 	document.getElementById('RDT_applyConvertItem').onclick = function(){
-		RDT_ITEM_APPLY(index, id, true);
+		RDT_ITEM_APPLY(idx, id, true);
 	}
 	document.getElementById('RDT_canvas_btn_apply').onclick = function(){
 		RDT_hideCanvasTab();
@@ -1205,6 +1306,8 @@ function RDT_editItemCancel(){
 	$("#RDT-door-Edit").css({"display": "none"});
 	$("#RDT_door_holder").css({"width": "auto"});
 	$("#RDT-MSGCODE-Edit").css({"display": "none"});
+	$("#RDT_enemy_holder").css({"width": "1288px"});
+	$("#RDT-enemyNPC-Edit").css({"display": "none"});
 	$("#RDT_msgCode_holder").css({"width": "1288px"});
 	document.getElementById('RDT_item-edit-A').value = "";
 	document.getElementById('RDT_door-edit-X').value = "";
@@ -1220,6 +1323,8 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_door-edit-NC').value = "";
 	document.getElementById('RDT_door-edit-LF').value = "";
 	document.getElementById('RDT_door-edit-OO').value = "";
+	document.getElementById('RDT_item-edit-MI').value = "";
+	document.getElementById('RDT_item-edit-IF').value = "";
 	document.getElementById('RDT_door-edit-NRN').value = "";
 	document.getElementById('RDT_MSGCODE-edit-X').value = "";
 	document.getElementById('RDT_MSGCODE-edit-Z').value = "";
@@ -1228,7 +1333,17 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_item-edit-Z').innerHTML = "";
 	document.getElementById('RDT_item-edit-R').innerHTML = "";
 	document.getElementById('RDT_item-edit-Quant').value = "";
+	document.getElementById('RDT_enemyNPC-edit-X').value = "";
+	document.getElementById('RDT_enemyNPC-edit-Y').value = "";
+	document.getElementById('RDT_enemyNPC-edit-Z').value = "";
+	document.getElementById('RDT_enemyNPC-edit-R').value = "";
 	document.getElementById('RDT_door-edit-LK').innerHTML = "";
+	document.getElementById('RDT_enemyNPC-edit-PO').value = "";
+	document.getElementById('RDT_enemyNPC-edit-TX').value = "";
+	document.getElementById('RDT_enemyNPC-edit-SS').value = "";
+	document.getElementById('RDT_enemyNPC-edit-EN').value = "";
+	document.getElementById('RDT_enemyNPC-edit-EnF').value = "";
+	document.getElementById('RDT_enemyNPC-edit-ExF').value = "";
 	document.getElementById('RDT_MSGCODE-edit-radiusX').value = "";
 	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = "";
 	document.getElementById('RDT_MSGCODE-edit-special').value = "";
@@ -1309,13 +1424,18 @@ function R3DITOR_RUNGAME(id){
 				c++;
 			}
 			$("#RDT_msgCode_holder").css({"height": "474px"});
+			$("#RDT_enemy_holder").css({"height": "474px"});
 			$("#RDT-MSGCODE-Edit").css({"height": "463px"});
 			$("#RDT-msgCode-hold").css({"height": "516px"});
+			
+
+			$("#RDT-enemyNPC-Edit").css({"height": "458px"});
 			$("#FILEGEN_contents").css({"height": "474px"});
 			$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 			$("#RDT_audio_holder").css({"height": "472px"});
 			$("#RDT_door_holder").css({"height": "482px"});
 			$("#RDT-canvas-hold").css({"height": "516px"});
+			$("#RDT-enemy-hold").css({"height": "516px"});
 			$("#RDT-audio-hold").css({"height": "516px"});
 			$("#RDT_MSG-holder").css({"height": "472px"});
 			$("#FILEGEN_holder").css({"height": "516px"});
@@ -1341,6 +1461,8 @@ function R3DITOR_RUNGAME(id){
 					c++;
 				}
 				$("#RDT_msgCode_holder").css({"height": "430px"});
+				$("#RDT-enemyNPC-Edit").css({"height": "418px"});
+				$("#RDT_enemy_holder").css({"height": "430px"});
 				$("#RDT-msgCode-hold").css({"height": "472px"});
 				$("#FILEGEN_contents").css({"height": "434px"});
 				$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
@@ -1348,6 +1470,7 @@ function R3DITOR_RUNGAME(id){
 				$("#RDT-MSGCODE-Edit").css({"height": "417px"});
 				$("#RDT_door_holder").css({"height": "430px"});
 				$("#RDT-canvas-hold").css({"height": "472px"});
+				$("#RDT-enemy-hold").css({"height": "472px"});
 				$("#RDT-audio-hold").css({"height": "472px"});
 				$("#RDT_MSG-holder").css({"height": "430px"});
 				$("#FILEGEN_holder").css({"height": "474px"});
