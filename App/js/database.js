@@ -276,7 +276,7 @@ var RDT_MAPAS = {
 	"aa": ["Hospital Map"]
 }
 var ATTR = {
-	"00": ["None",								 "#fff0", "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
+	"00": ["None",								 "#fff0",  "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
 	"01": ["Remaining ammo in green",		   "#008400", "0 0 2px #004200"],
 	"02": ["% remaining in green", 			   "#008400", "0 0 2px #004200"],
 	"03": ["Inf. ammo in green", 			   "#008400", "0 0 2px #004200"],
@@ -288,8 +288,8 @@ var ATTR = {
 	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
 	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
 	// Atributos Desconhecidos
-	"17": ["Attr. found in Nightmare Mod", 	   "#fff", "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
-	"0b": ["Attr. found in some versions", 	   "#fff", "0 0 2px #0f0"]
+	"17": ["Attr. found in Nightmare Mod", 	   	  "#fff",    "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
+	"0b": ["Attr. found in some versions", 	   	  "#fff",    "0 0 2px #0f0"]
 }
 // Segunda variavel
 var VOID = {
@@ -587,6 +587,32 @@ var RDT_EMDNAME = {
 	"67": ["Brian Irons"],
 	"70": ["Jill alternative outfit"],
 	"71": ["Jill with blue T-shirt"]
+}
+var RDT_EMDPOS = {
+	"00": ["Normal"],
+	"01": ["Lying down"],
+	"02": ["Getting up 1"],
+	"03": ["Crawling"],
+	"04": ["Getting up 2"],
+	"05": ["Lying down 2 (No anim?)"],
+	"06": ["Following you"],
+	"07": ["Lying down 3 (No anim?)"],
+	"08": ["Getting up 3"],
+	"09": ["Crawl"],
+	"0b": ["Crawling 2"],
+	"0c": ["Normal 2"],
+	"0d": ["Crawling 3"],
+	"0e": ["Normal 3"],
+	"0f": ["Crawling 4"],
+	"10": ["Frozen (Until you deal damage)"],
+	"a0": ["On Fire"],
+	"af": ["Crawling on fire"],
+	"b2": ["Getting up on fire"],
+	"c0": ["On Fire 2"],
+	"c1": ["Lying down on fire"],
+	"c9": ["Crawling on fire 2"],
+	"60": ["Normal 4"],
+	"87": ["Lying down on fire"]
 }
 //
 var FG_DICIONARIO = {

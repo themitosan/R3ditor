@@ -201,6 +201,7 @@ function main_menu(anim){
 			$("#avaliable_fileList").css({"display": "none"});
 		}
 		$("#RDT_selectEnemyNPC").append(RDT_EDIT_ENEMYNP_SELECT);
+		$("#RDT_enemyNPC-edit-PO").append(RDT_EDIT_ENEMYNP_EMDPOS);
 		$("#RDT_MSGCODE-edit-display").append(RDT_EDIT_MESSAGECODE_SELECT);
 		RDT_checkBKP();
 		if (RDT_lastFileOpened !== ""){
@@ -936,7 +937,7 @@ function RDT_showEditEnemyNPC(index, codeHex){
 	document.getElementById('RDT_enemyNPC-edit-Y').value = codeHex.slice(RANGES["RDT_enemy-yPos"][0], RANGES["RDT_enemy-yPos"][1]).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-Z').value = codeHex.slice(RANGES["RDT_enemy-zPos"][0], RANGES["RDT_enemy-zPos"][1]).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-R').value = codeHex.slice(RANGES["RDT_enemy-rPos"][0], RANGES["RDT_enemy-rPos"][1]).toUpperCase();
-	document.getElementById('RDT_enemyNPC-edit-PO').value = codeHex.slice(RANGES["RDT_enemy-pose"][0], RANGES["RDT_enemy-pose"][1]).toUpperCase();
+	document.getElementById('RDT_enemyNPC-edit-PO').value = codeHex.slice(RANGES["RDT_enemy-pose"][0], RANGES["RDT_enemy-pose"][1]).toLowerCase();
 	document.getElementById('RDT_enemyNPC-edit-TX').value = codeHex.slice(RANGES["RDT_enemy-texture"][0], RANGES["RDT_enemy-texture"][1]).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-SS').value = codeHex.slice(RANGES["RDT_enemy-soundSet"][0], RANGES["RDT_enemy-soundSet"][1]).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-EnF').value = codeHex.slice(RANGES["RDT_enemy-enemyFlag"][0], RANGES["RDT_enemy-enemyFlag"][1]).toUpperCase();
@@ -1017,7 +1018,6 @@ function RDT_enemyNPCValidateInput(){
 	document.getElementById('RDT_enemyNPC-edit-Y').value = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-Z').value = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-R').value = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toUpperCase();
-	document.getElementById('RDT_enemyNPC-edit-PO').value = document.getElementById('RDT_enemyNPC-edit-PO').value.slice(0, 2).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-TX').value = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-SS').value = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toUpperCase();
 	document.getElementById('RDT_enemyNPC-edit-EN').value = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toUpperCase();

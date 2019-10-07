@@ -188,12 +188,13 @@ function RDT_decompileEnemy(index, enemyHex){
 	var ENEMY_HTML_TEMPLATE = '<div class="RDT-Item RDT-enemy-bg"><input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditEnemyNPC(' + index + ', \'' + enemyHex + '\');">' + 
 		'(' + parseInt(index + 1) + ') Enemy / NPC: ' + RDT_EMDNAME[EN_type] + ' (Hex: ' + EN_type.toUpperCase() + ')<div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + EN_xPos.toUpperCase() + '</font><br>' + 
 		'Y Position: <font class="RDT-item-lbl-fix">' + EN_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + EN_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + EN_rPos.toUpperCase() + '</font>' + 
-		'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + EN_header.toUpperCase() + '</font><br>Pose: <font class="RDT-item-lbl-fix-2">' + EN_pose.toUpperCase() + '</font><br><font title="Enemy flag">E. flag</font>: ' + 
+		'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + EN_header.toUpperCase() + '</font><br>Pose: <font class="RDT-item-lbl-fix-2" title="' + RDT_EMDPOS[EN_pose] + '">' + EN_pose.toUpperCase() + '</font><br><font title="Enemy flag">E. flag</font>: ' + 
 		'<font class="RDT-item-lbl-fix-2">' + EN_enFlag.toUpperCase() + '</font><br><font title="Enemy number">E. number</font>: <font class="RDT-item-lbl-fix-2">' + EN_numero.toUpperCase() + '</font></div><div class="RDT-Item-Misc-4">' + 
 		'<br>Texture: <font class="RDT-item-lbl-fix-8">' + EN_texture.toUpperCase() + '</font><br>Extra flag: <font class="RDT-item-lbl-fix-8">' + EN_exFlag.toUpperCase() + '</font><br>Sound set: <font class="RDT-item-lbl-fix-8">' + EN_soundSet.toUpperCase() + 
-		'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + EN_header.toUpperCase() + ' ' + EN_numero.toUpperCase() + ' ' + EN_type.toUpperCase() + ' ' + EN_pose.toUpperCase() + ' ' + EN_exFlag.toUpperCase() + ' ' + 
-		enemyHex.slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]) + ' ' + EN_soundSet.toUpperCase() + ' ' + EN_texture.toUpperCase() + ' ' + EN_enFlag.toUpperCase() + ' ' + EN_xPos.toUpperCase() + ' ' + EN_yPos.toUpperCase() + ' ' +
-		EN_zPos.toUpperCase() + ' ' + EN_rPos.toUpperCase() + ' ' + enemyHex.slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]).toUpperCase() + '</font></div>';
+		'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + EN_header.toUpperCase() + '</font> <font title="Number">' + EN_numero.toUpperCase() + '</font> <font title="Type">' + EN_type.toUpperCase() + '</font> <font title="Pose">' + 
+		EN_pose.toUpperCase() + '</font> <font title="Extra Flag">' + EN_exFlag.toUpperCase() + '</font> ' + enemyHex.slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]) + ' <font title="Sound Set">' + EN_soundSet.toUpperCase() + '</font> <font title="Texture">' + EN_texture.toUpperCase() + 
+		'</font> <font title="E. Flag">' + EN_enFlag.toUpperCase() + '</font> <font title="X pos.">' + EN_xPos.toUpperCase() + '</font> <font title="Z pos.">' + EN_yPos.toUpperCase() + '</font> <font title="Y pos.">' + EN_zPos.toUpperCase() + '</font> <font title="R pos.">' + EN_rPos.toUpperCase() + '</font> ' + 
+		enemyHex.slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]).toUpperCase() + '</font></div>';
 	$("#RDT_enemy_holder").append(ENEMY_HTML_TEMPLATE);
 }
 function RDT_ENEMYNPC_APPLY(id){
@@ -206,12 +207,12 @@ function RDT_ENEMYNPC_APPLY(id){
 	var nY		  = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toLowerCase();
 	var nZ		  = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toLowerCase();
 	var nR		  = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toLowerCase();
-	var nPose	  = document.getElementById('RDT_enemyNPC-edit-PO').value.slice(0, 2).toLowerCase();
 	var nTexture  = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toLowerCase();
 	var nSoundSet = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toLowerCase();
 	var nEnFlag   = document.getElementById('RDT_enemyNPC-edit-EnF').value.slice(0, 2).toLowerCase();
 	var nExFlag   = document.getElementById('RDT_enemyNPC-edit-ExF').value.slice(0, 2).toLowerCase();
 	var nEnNumber = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toLowerCase();
+	var nPose	  = document.getElementById('RDT_enemyNPC-edit-PO').value.toLowerCase();
 	var nEnemy    = document.getElementById('RDT_selectEnemyNPC').value;
 	if (nX.length !== 4){
 		canCompile = false;
@@ -244,10 +245,6 @@ function RDT_ENEMYNPC_APPLY(id){
 	if (nR.value === "0000"){
 		nR.value = "0101";
 		addLog('warn', 'WARN - To avoid detection problem, the R value will be 0101 instead of 0000');
-	}
-	if (nPose.length !== 2){
-		canCompile = false;
-		reason = 'The Pose value are wrong!';
 	}
 	if (nTexture.length !== 2){
 		canCompile = false;
@@ -284,14 +281,20 @@ function RDT_getEnemies(hx){
 		var c = 0;
 		var enemyRaw = getAllIndexes(RDT_arquivoBruto, hx);
 		while (c < enemyRaw.length){
-			var check_0 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48));
-			var check_1 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18));
-			var check_2 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26));
-			if (check_0 === "00000000" && check_1 === "000000" && check_2 !== "00000000"){
+			var check_0 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48)) === "00000000";
+			var check_1 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === "000000";
+			var check_2 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26)) === "00000000";
+			//console.log("Teste " + c + "\nCheck 0: " + check_0 + " (true) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48)) + "\nCheck 1: " + check_1 + " (true) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) + "\nCheck 2: " + check_2 + " (false) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26))  + "\n\nHex:\n" + RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
+			if (check_0 === true && check_1 === true && check_2 === false){
 				RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
 				c++;
 			} else {
-				enemyRaw.splice(c, 1);
+				if (RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + RANGES["RDT_enemy-type"][0]), parseInt(enemyRaw[c] + RANGES["RDT_enemy-type"][1])) === "34" && RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === "000003"){
+					RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
+					c++;
+				} else {
+					enemyRaw.splice(c, 1);
+				}
 			}
 		}
 	}
@@ -380,10 +383,10 @@ function RDT_decompileMessageCode(index, hex){
 			'X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
 			'X Width: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>Z Width: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc">' + 
 			'<br>Header: <font class="RDT-item-lbl-fix-6">' + MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: ' + 
-			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + 
-			MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + 
-			" " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase() + '</div>';
-
+			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + 
+			'</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Z pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="X Width">' + MC_XWIDTHTRIGGER.toUpperCase() + 
+			'</font> <font title="Z Width">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + 
+			' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></div>';
 		$("#RDT_msgCode_holder").append(HTML_HUGE_MSGCODE_TEMPLATE);
 	}
 }
@@ -784,7 +787,6 @@ function RDT_renderItens(index, hex){
 				  localStorage.getItem("RDT_Item-" + index).slice(30, 32).toUpperCase() + " " + quant.toUpperCase() + " " + 
 				  localStorage.getItem("RDT_Item-" + index).slice(34, 38).toUpperCase() + " " + iFlag.toUpperCase() + " " + 
 				  modelId.toUpperCase() + " " + mp.toUpperCase();
-		localStorage.setItem("RDT_Item-" + index, hex.slice(0, 44));
 	}
 	if (header === "68"){
 		x 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
@@ -843,8 +845,10 @@ function RDT_renderItens(index, hex){
 	scrollLog();
 }
 function RDT_ITEM_APPLY(index, type, convert){
+	var error;
 	var nQuant;
 	var novaHex;
+	var canBuild = true;
 	if (convert === false && convert !== undefined && convert !== null){
 		if (type === 1){
 			novaHex = document.getElementById('RDT-item-select').value;
@@ -904,11 +908,9 @@ function RDT_ITEM_APPLY(index, type, convert){
 	if (novaAnim === ""){
 		novaAnim = "00";
 	}
-	var error;
-	var canBuild = true;
 	if (novaX.length !== 4){
 		canBuild = false;
-		error = "The X  value are wrong!";
+		error = "The X value are wrong!";
 	}
 	if (novaY.length !== 4){
 		canBuild = false;
@@ -944,9 +946,8 @@ function RDT_ITEM_APPLY(index, type, convert){
 			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(34, 38);
 			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
 			RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + iF + mID + novaAnim + offset3;
-			console.log(RDT_ITEM_COMPILADO);
-			//localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-			//RDT_RECOMPILE_Lv1();
+			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
+			RDT_RECOMPILE_Lv1();
 		} else {
 			// Header 68
 			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // Até item id
