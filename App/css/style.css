@@ -73,8 +73,8 @@ input[type="range" i]{
 }
 .feature_title{
     font-size: x-large;
-    text-shadow: 0 0 10px #555;
     text-decoration: underline;
+    text-shadow: 0 0 10px #555;
 }
 .about{
     background-image: linear-gradient(to bottom, #442d59, #0e0b22);

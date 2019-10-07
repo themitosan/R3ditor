@@ -1381,8 +1381,8 @@ var RANGES = {
 	"RDT_enemy-texture": 			 [20, 22],
 	"RDT_enemy-enemyFlag": 			 [22, 24],
 	"RDT_enemy-xPos": 				 [24, 28],
-	"RDT_enemy-yPos": 				 [28, 32],
-	"RDT_enemy-zPos": 				 [32, 36],
+	"RDT_enemy-yPos": 				 [32, 36],
+	"RDT_enemy-zPos": 				 [28, 32],
 	"RDT_enemy-rPos": 				 [36, 40],
 	"RDT_enemy-offset-1": 			 [40, 48],
 	/*

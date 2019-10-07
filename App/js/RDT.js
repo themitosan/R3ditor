@@ -270,7 +270,7 @@ function RDT_ENEMYNPC_APPLY(id){
 		reason = 'The Enemy Number value are wrong!';
 	}
 	if (canCompile === true){
-		var NEW_ENEMYNPC = header + nEnNumber + nEnemy + nPose + nExFlag + offset_0 + nSoundSet + nTexture + nEnFlag + nX + nY + nZ + nR + offset_1;
+		var NEW_ENEMYNPC = header + nEnNumber + nEnemy + nPose + nExFlag + offset_0 + nSoundSet + nTexture + nEnFlag + nX + nZ + nY + nR + offset_1;
 		RDT_COMPILE_Lv2(localStorage.getItem("RDT_enemy-" + id), NEW_ENEMYNPC);
 		$("#RDT-aba-menu-8").trigger('click');
 	} else {
