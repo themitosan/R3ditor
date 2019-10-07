@@ -460,15 +460,19 @@ function RDT_getDoorsArray(str){
 		var check = RDT_arquivoBruto.slice(RDT_doorsRaw[c] - 4, RDT_doorsRaw[c] - 2);
 		if (check === "61" || check === "62"){
 			RDT_doorsArray.push(parseInt(RDT_doorsRaw[c] - 4));
+		} else {
+			RDT_doorsRaw.splice(c, 1);
 		}
 		c++;
 	}
 }
 function RDT_decompileDoors(index, location){
 	if (location !== undefined && location !== null){
+		var reason = "";
+		var canAdd = true;
 		var itemTitle = "";
 		var loc = parseInt(location);
-		var DOOR_RAW = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
+		var DOOR_RAW 	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
 		var dr_header 	   = DOOR_RAW.slice(RANGES["RDT_door-0-header"][0], 		    RANGES["RDT_door-0-header"][1]);
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES["RDT_door-0-id"][0], 			    RANGES["RDT_door-0-id"][1]);
 		var dr_ident  	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorIdentifier"][0],     RANGES["RDT_door-0-doorIdentifier"][1]);
@@ -490,37 +494,48 @@ function RDT_decompileDoors(index, location){
 		var dr_lockFlag	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorLockedFlag"][0], 	RANGES["RDT_door-0-doorLockedFlag"][1]);
 		var dr_key 		   = DOOR_RAW.slice(RANGES["RDT_door-0-doorKey"][0], 		    RANGES["RDT_door-0-doorKey"][1]);
 		var dr_offset2	   = DOOR_RAW.slice(RANGES["RDT_door-0-doorHexOffset2"][0], 	RANGES["RDT_door-0-doorHexOffset2"][1]);
-		localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
-		if (parseInt(dr_key, 16) < 134){
-			if (dr_key === "00"){
-				itemTitle = "Door unlocked!";
-			} else {
-				itemTitle = ITEM[dr_key][0];
+		// Que coisa feia...
+		if (dr_key === "53" && dr_openOrient === "53" && dr_key === "53" && dr_type === "53" && dr_xPos === "b1b1" && dr_yPos === "b1b1" && dr_zPos === "31b1"){
+			canAdd = false;
+			reason = "Pattern is out of range!";
+		}
+		//
+		if (canAdd === true){
+			localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
+			if (parseInt(dr_key, 16) < 134){
+				if (dr_key === "00"){
+					itemTitle = "Door unlocked!";
+				} else {
+					itemTitle = ITEM[dr_key][0];
+				}
 			}
+			if (parseInt(dr_key, 16) > 133 && parseInt(dr_key, 16) < 164){
+				itemTitle = FILES[dr_key][0];
+			}
+			if (parseInt(dr_key, 16) > 163 && parseInt(dr_key, 16) < 171){
+				itemTitle = RDT_MAPAS[dr_key][0];
+			}
+			if (parseInt(dr_key, 16) > 171){
+				itemTitle = "Unknown Hex Value! (" + dr_key + ")";
+			}
+			var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+				'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
+				'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+				dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
+				'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+				'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
+				'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
+				'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
+				'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
+				" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
+				dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
+				dr_key.toUpperCase() + " " + dr_offset2.toUpperCase() + '</font></div>';
+			$("#RDT_door_holder").append(EXTREME_MASSIVE_HTML_TEMPLATE);
+			RDT_totalDoors++;
+		} else {
+			addLog('warn', 'WARN - Unable to add door! - ' + reason);
+			scrollLog();
 		}
-		if (parseInt(dr_key, 16) > 133 && parseInt(dr_key, 16) < 164){
-			itemTitle = FILES[dr_key][0];
-		}
-		if (parseInt(dr_key, 16) > 163 && parseInt(dr_key, 16) < 171){
-			itemTitle = RDT_MAPAS[dr_key][0];
-		}
-		if (parseInt(dr_key, 16) > 171){
-			itemTitle = "Unknown Hex Value! (" + dr_key + ")";
-		}
-		var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-			'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
-			'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
-			dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
-			'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
-			'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
-			'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-			'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
-			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
-			" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
-			dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
-			dr_key.toUpperCase() + " " + dr_offset2.toUpperCase() + '</font></div>';
-		$("#RDT_door_holder").append(EXTREME_MASSIVE_HTML_TEMPLATE);
-		RDT_totalDoors++;
 	}
 }
 function RDT_copyPastePos(mode){
@@ -782,11 +797,12 @@ function RDT_renderItens(index, hex){
 		iFlag  	= hex.slice(RANGES["RDT_item-0-itemFlag"][0], RANGES["RDT_item-0-itemFlag"][1]);
 		modelId = hex.slice(RANGES["RDT_item-0-modelID"][0], RANGES["RDT_item-0-modelID"][1]);
 		mp 		= hex.slice(RANGES["RDT_item-0-itemMP"][0], RANGES["RDT_item-0-itemMP"][1]);
-		hexComp = header.toUpperCase() + " " + ident.toUpperCase() + " " +  localStorage.getItem("RDT_Item-" + index).slice(4, 12).toUpperCase() + " " + 
-				  x.toUpperCase() + " " + y.toUpperCase() + " " + z.toUpperCase() + " " + r.toUpperCase() + " " + id.toUpperCase() + " " + 
-				  localStorage.getItem("RDT_Item-" + index).slice(30, 32).toUpperCase() + " " + quant.toUpperCase() + " " + 
-				  localStorage.getItem("RDT_Item-" + index).slice(34, 38).toUpperCase() + " " + iFlag.toUpperCase() + " " + 
-				  modelId.toUpperCase() + " " + mp.toUpperCase();
+		hexComp = '<font title="Header">' + header.toUpperCase() + '</font> <font title="Identifier">' + ident.toUpperCase() + '</font> ' + 
+				  localStorage.getItem("RDT_Item-" + index).slice(4, 12).toUpperCase() + ' <font title="X pos.">' +  x.toUpperCase() + '</font> <font title="Y pos.">' 
+				  + y.toUpperCase() + '</font> <font title="Z pos.">' + z.toUpperCase() + '</font> <font title="R pos.">' + r.toUpperCase() + '</font> <font title="Item Hex">' + id.toUpperCase() + 
+				  '</font> ' + localStorage.getItem("RDT_Item-" + index).slice(30, 32).toUpperCase() + ' <font title="Quantity">' + quant.toUpperCase() + '</font> ' + 
+				  localStorage.getItem("RDT_Item-" + index).slice(34, 38).toUpperCase() + ' <font title="Item flag">' + iFlag.toUpperCase() + '</font> <font title="Model ID">' + 
+				  modelId.toUpperCase() + '</font> <font title="Animation">' + mp.toUpperCase() + '</font>';
 	}
 	if (header === "68"){
 		x 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
@@ -1866,7 +1882,6 @@ function RDT_hideCanvasTab(){
 		RDT_decompileItens(c, false);
 		c++;
 	}
-	//
 	$("#RDT-aba-menu-4").css({'display': 'none'});
 	$("#RDT-aba-menu-3").trigger('click');
 }

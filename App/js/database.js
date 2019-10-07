@@ -605,14 +605,20 @@ var RDT_EMDPOS = {
 	"0e": ["Normal 3"],
 	"0f": ["Crawling 4"],
 	"10": ["Frozen (Until you deal damage)"],
+	"20": ["Normal 4"],
+	"26": ["Walking"],
+	"40": ["Normal 5"],
+	"51": ["Lying down moving head"],
+	"60": ["Normal 6"],
+	"84": ["Getting Up 4"],
+	"86": ["Slow on fire"],
+	"87": ["Lying down on fire"],
 	"a0": ["On Fire"],
 	"af": ["Crawling on fire"],
 	"b2": ["Getting up on fire"],
 	"c0": ["On Fire 2"],
 	"c1": ["Lying down on fire"],
-	"c9": ["Crawling on fire 2"],
-	"60": ["Normal 4"],
-	"87": ["Lying down on fire"]
+	"c9": ["Crawling on fire 2"]
 }
 //
 var FG_DICIONARIO = {
