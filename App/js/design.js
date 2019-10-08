@@ -790,8 +790,14 @@ function MSG_renderCamPreview(){
 	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
 		var currentFile = getFileName(ORIGINAL_FILENAME).toUpperCase().slice(0, 4);
 		var currentCam = document.getElementById('msg-selectCam-id').value.toUpperCase();
-		document.getElementById('MSG_camPreview').src = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + ".JPG";
-		document.getElementById('MSG_camPreview').title = "Cam: " + currentCam + "\nFile: " + currentFile + currentCam + ".JPG";
+		var camImg = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + ".JPG";
+		if (fs.existsSync(camImg) === true){
+			document.getElementById('MSG_camPreview').src = camImg;
+			document.getElementById('MSG_camPreview').title = "Cam: " + currentCam + "\nFile: " + currentFile + currentCam + ".JPG";
+		} else {
+			addLog('warn', 'WARN - Unable to find cam preview: The img file was not found! (404)');
+			scrollLog();
+		}
 	}
 }
 /// RDT
@@ -1078,8 +1084,13 @@ function RDT_renderEditDoorCamPreview(){
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
 	var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
 	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value + ".JPG";
-	document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value;
-	document.getElementById("RDT_doorCamPreviewImg").src = camFile;
+	if (fs.existsSync(camFile) === true){
+		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value;
+		document.getElementById("RDT_doorCamPreviewImg").src = camFile;
+	} else {
+		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (404)");
+		scrollLog();
+	}
 }
 function RDT_cancelDoorCamEdit(){
 	var pCam = document.getElementById('RDT_lbl_door_editCam').innerHTML;

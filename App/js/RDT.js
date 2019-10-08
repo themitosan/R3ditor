@@ -525,7 +525,7 @@ function RDT_decompileDoors(index, location){
 				'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
 				'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 				'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-				'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient + 
+				'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
 				'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
 				" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
 				dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
@@ -533,7 +533,7 @@ function RDT_decompileDoors(index, location){
 			$("#RDT_door_holder").append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
 		} else {
-			addLog('warn', 'WARN - Unable to add door! - ' + reason);
+			addLog('warn', 'WARN - Unable to add Door! - ' + reason);
 			scrollLog();
 		}
 	}

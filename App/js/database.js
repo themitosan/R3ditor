@@ -1020,7 +1020,6 @@ var MSG_DICIONARIO = {
 	"c1": [false, "ê", false],
 	"ca": [false, "ó", false],
 	"d1": [false, "ú", false]
-
 }
 var MSG_TEXTCOLOR = {
 	/* 
