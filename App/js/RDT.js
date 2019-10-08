@@ -814,7 +814,7 @@ function RDT_renderItens(index, hex){
 		iFlag  	= "[WIP]";
 		modelId = "[WIP]";
 		mp 		= hex.slice(RANGES["RDT_item-1-itemMP"][0], RANGES["RDT_item-1-itemMP"][1]);
-		hexComp = localStorage.getItem("RDT_Item-" + index) + " [WIP]";
+		hexComp = localStorage.getItem("RDT_Item-" + index).toUpperCase() + " [WIP]";
 	}
 	try{
 		if (parseInt(id, 16) < 134 || parseInt(id, 16) > 170){

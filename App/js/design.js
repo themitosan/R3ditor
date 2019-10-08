@@ -1074,7 +1074,7 @@ function RDT_renderNextRDTLbl(){
 	}
 }
 function RDT_renderEditDoorCamPreview(){
-	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
+	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value, 16) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
 	var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
 	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + ".JPG";

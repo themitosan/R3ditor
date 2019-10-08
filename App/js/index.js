@@ -466,11 +466,16 @@ function splitHex(hex, mode){
 	return fina.slice(0, fina.length - 1);
 }
 function processBIO3Numbers(number){
-	if (number < -32767){
-		return -32767;
-	}
-	if (number > 32767){
-		return 32767;
+	if (number !== undefined){
+		var numTemp = number;
+		if (numTemp < -32767){
+			numTemp = -32767;
+		}
+		if (numTemp > 32767){
+			numTemp = 32767;
+		}
+		var pos = number + 32767;
+		return parseDecimalToBIO3Var(pos, 0);
 	}
 }
 function parsePercentage(current, maximum){
