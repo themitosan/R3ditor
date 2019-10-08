@@ -980,11 +980,9 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById("RDT_door-edit-NS").value = hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-OO").value = hex.slice(RANGES["RDT_door-0-doorOpenOrient"][0], RANGES["RDT_door-0-doorOpenOrient"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-LF").value = hex.slice(RANGES["RDT_door-0-doorLockedFlag"][0], RANGES["RDT_door-0-doorLockedFlag"][1]).toUpperCase();
+	document.getElementById("RDT_lbl_door_editCam").innerHTML = nextCam.toUpperCase();
 	document.getElementById("RDT_door-edit-NRN").value = roomNumber;
 	RDT_renderNextRDTLbl();
-	document.getElementById("RDT_door-edit-NC").value = nextCam;
-	document.getElementById("RDT_door-edit-NC-TXT").value = nextCam.toUpperCase();
-	document.getElementById("RDT_lbl_door_editCam").innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT-btn-aplicarDoor').onclick = function(){
 		RDT_DOOR_APPLY(index);
 	}
@@ -1065,15 +1063,11 @@ function RDT_renderNextRDTLbl(){
 						c++;
 					}
 				}
-				if (DOOR_CAMS_ARRAY[document.getElementById('RDT_door-edit-NC').value] !== undefined){
-					document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
-				} else {
-					document.getElementById('RDT_door-edit-NC').value = "00";
-				}
+				document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
 				$("#RDT_doorCamPreviewImg").css({"display": "inline"});
 			} else {
-				$("#RDT_doorCamPreviewImg").css({"display": "none"});
 				$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
+				$("#RDT_doorCamPreviewImg").css({"display": "none"});
 			}
 			RDT_renderEditDoorCamPreview();
 		}
@@ -1083,12 +1077,12 @@ function RDT_renderEditDoorCamPreview(){
 	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
 	var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
-	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value + ".JPG";
+	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + ".JPG";
 	if (fs.existsSync(camFile) === true){
-		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value;
+		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value.toString();
 		document.getElementById("RDT_doorCamPreviewImg").src = camFile;
 	} else {
-		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (404)");
+		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (ERROR 404, File: " + camFile + ")");
 		scrollLog();
 	}
 }
