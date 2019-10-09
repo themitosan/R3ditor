@@ -14,15 +14,21 @@
     background: #fafafa; 
     border-radius: 4px;
 }
+@font-face{
+    font-family: 'timesNR';
+    src: url('times.ttf');
+}
 html{
     -webkit-user-select: none;
     scroll-behavior: smooth;
+    color: #fff;
 }
 img{
     -webkit-user-drag: none;
 }
 body{
-    background-image: linear-gradient(to bottom, #000, #0f0c23);
+    background-image: linear-gradient(to bottom, #010101, #0f0c23);
+    font-family: 'timesNR', Fallback, times;
 	color: #fff;
 }
 u{
