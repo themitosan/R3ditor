@@ -465,9 +465,9 @@ function splitHex(hex, mode){
 	}
 	return fina.slice(0, fina.length - 1);
 }
-function processBIO3Numbers(number){
+function processBIO3PosNumbers(number){
 	if (number !== undefined){
-		var numTemp = number;
+		var numTemp = parseInt(number);
 		if (numTemp < -32767){
 			numTemp = -32767;
 		}

@@ -1021,6 +1021,14 @@ var MSG_DICIONARIO = {
 	"ca": [false, "ó", false],
 	"d1": [false, "ú", false]
 }
+var RDT_camHeaderType = {
+	"b280": [true],
+	"b773": [true],
+	"2d91": [true],
+	"347b": [true],
+	"3676": [true],
+	"3c68": [true] // RE2?
+}
 var MSG_TEXTCOLOR = {
 	/* 
 		Text Colors:
@@ -1431,6 +1439,23 @@ var RANGES = {
 	"RDT_msgCode-offset_1": 		 [32, 34], 
 	"RDT_msgCode-specialProp": 		 [34, 36], // (For things like open locked desk with herbs (02) - same as above)
 	"RDT_msgCode-readMode": 		 [36, 40],
+	/*
+		Cameras
+	*/
+	"RDT_cam-0-Header": 			   [0, 4], // RE2 = 3C 68 || B7 73, RE3 = B7 73 || B2 80 || 2D 91
+	"RDT_cam-0-cX-1": 			   	   [4, 6],
+	"RDT_cam-0-cX-2": 			   	  [6, 10], // Look like it is ALWAYS FF FF
+	"RDT_cam-0-cY-1": 			   	 [10, 14],
+	"RDT_cam-0-cY-2": 			   	 [14, 18], // Look like it is ALWAYS FF FF
+	"RDT_cam-0-cZ-1": 			   	 [18, 22],
+	"RDT_cam-0-cZ-2": 			   	 [22, 26],
+	"RDT_cam-0-nX-1": 			   	 [26, 30],
+	"RDT_cam-0-nX-2": 			   	 [30, 34],
+	"RDT_cam-0-nY-1": 			   	 [34, 38],
+	"RDT_cam-0-nY-2": 			   	 [38, 42],
+	"RDT_cam-0-nZ-1": 			   	 [42, 46],
+	"RDT_cam-0-nZ-2": 			   	 [46, 50],
+	"RDT_cam-0-misc": 				 [50, 62], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
 	/*
 		Doors
 	*/

@@ -29,6 +29,9 @@ var RDT_MSG_RESULT_3 = 0;
 var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
+var RDT_totalCameras = 0;
+var RDT_cameraArray = [];
+
 var RDT_MAPFILE;
 var mapfile = [];
 var RDT_loop = 0;
@@ -79,7 +82,9 @@ function RDT_resetVars(){
 	RDT_MSG_RESULT_2 = 0;
 	RDT_MSG_RESULT_3 = 0;
 	RDT_MSG_RESULT_4 = 0;
+	RDT_totalCameras = 0;
 	RDT_FILEMAP_MSG = [];
+	RDT_cameraArray = [];
 	RDT_enemiesArray = [];
 	RDT_MSG_POINTERS = [];
 	RDT_messagesArray = [];
@@ -121,6 +126,8 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MSG_RESULT_2 = 0;
 	RDT_MSG_RESULT_3 = 0;
 	RDT_MSG_RESULT_4 = 0;
+	RDT_totalCameras = 0;
+	RDT_cameraArray = [];
 	RDT_enemiesArray = [];
 	sessionStorage.clear();
 	RDT_MAPFILE = undefined;
@@ -154,13 +161,35 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
+	//
 	RDT_getEnemiesArray();
 	RDT_readDoors();
 	RDT_readItens();
 	RDT_BG_display();
 	scrollLog();
 }
-// Enemies [WIP]
+// this will have a different way to retrive the infos
+function RDT_getCameras(){
+	var c = 0;
+	if (RDT_arquivoBruto !== undefined){
+		var start = 196;
+		var offset = 64;
+		var extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
+		while(RDT_camHeaderType[extract.slice(RANGES["RDT_cam-0-Header"][0], RANGES["RDT_cam-0-Header"][1])] !== undefined){
+			RDT_cameraArray.push(extract);
+			RDT_totalCameras++;
+			//
+			start = parseInt(start + offset);
+			extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
+		}
+		while(c < RDT_cameraArray.length){
+			localStorage.setItem("RDT_Camera-" + c, RDT_cameraArray[c]);
+			
+			c++;
+		}
+	}
+}
+// Enemies & NPC's
 function RDT_getEnemiesArray(){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 0;

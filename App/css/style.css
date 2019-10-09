@@ -1363,3 +1363,29 @@ input[type="range" i]{
     margin-top: 6px;
     box-shadow: 0 0 10px #858dbfa3;
 }
+.RDT_cam_holderInfos{
+    margin-left: 226px;
+    position: sticky;
+}
+.RDT_editCam_direction{
+    width: 30%;
+    left: 130px;
+    height: 70px;
+    position: fixed;
+    margin-top: -108px;
+    padding-left: 260px;
+}
+.RDT_camImgItem{
+    width: 218px;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 4px #222;
+}
+.RDT_camShowMisc{
+    width: 30%;
+    left: 152px;
+    height: 70px;
+    position: fixed;
+    margin-top: -36px;
+    padding-left: 390px;
+}

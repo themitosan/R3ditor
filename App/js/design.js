@@ -6,7 +6,7 @@
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
-var RDT_totalMenus = 8;
+var RDT_totalMenus = 9;
 var SAVE_totalMenus = 4;
 var request_render_save;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
@@ -54,16 +54,20 @@ function main_renderFileList(id){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
 		}
+		var originalMFile;
+		var originalPFile;
 		if (mFile.length > 44){
+			originalMFile = mFile;
 			mFile = "..." + mFile.slice(10, mFile.length);
 		}
 		if (pFile.length > 44){
+			originalPFile = pFile;
 			pFile = "..." + pFile.slice(10, pFile.length);
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: ' + pFile +  '<br>Map File: ' + mFile + 
-			'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
+			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: <font title="' + originalPFile + '">' + pFile +  '</font><br>Map File: <font title="' + originalMFile + '">' + mFile + 
+			'</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$("#RDT_recentFile").append(fileList_HTML_template);
 		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)","border-top-left-radius": "0px", "border-bottom-left-radius": "0px"});
 	} else {
@@ -101,13 +105,15 @@ function main_renderFileList(id){
 					origName = RDT_locations[RDT_name][0];
 					origCity = RDT_locations[RDT_name][1];
 				}
+				var nOriginal;
 				if (mFile.length > 57){
 					mFile = "..." + mFile.slice(10, mFile.length);
+					nOriginal = mFile;
 				}
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 					' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: ' + mFile + 
-					'<br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
+					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: <font title="' + nOriginal + '">' + mFile + 
+					'</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 				$("#fileListHolder").append(fileList_HTML_template);
 				c++;
 			}
@@ -813,6 +819,7 @@ function RDT_showMenu(id){
 	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
 		$("#RDT_openFileList").css({"display": "inline"});
 		$("#RDT-enemyNPC-Edit").css({"height": "418px"});
+		$("#RDT-camera-Edit").css({"height": "418px"});
 		$("#RDT-canvas-hold").css({"height": "472px"});
 		$("#RDT-audio-hold").css({"height": "472px"});
 		$("#RDT_MSG-holder").css({"height": "430px"});
@@ -826,6 +833,7 @@ function RDT_showMenu(id){
 	} else {
 		$("#RDT-enemyNPC-Edit").css({"height": "458px"});
 		$("#RDT_openFileList").css({"display": "none"});
+		$("#RDT-camera-Edit").css({"height": "458px"});
 		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
@@ -872,12 +880,14 @@ function RDT_showMenu(id){
 		$("#RDT-door-Edit").css({"height": "417px"});
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT-enemy-hold").css({"height": "472px"});
+		$("#RDT-camera-hold").css({"height": "472px"});
 		$("#RDT_door_holder").css({"height": "430px"});
 		$("#RDT-MSGCODE-Edit").css({"height": "417px"});
 		$("#RDT-msgCode-hold").css({"height": "472px"});
 		$("#RDT_MSGBLOCKINFO").css({"height": "449px"});
 		$("#RDT_audio_holder").css({"height": "430px"});
 		$("#RDT_enemy_holder").css({"height": "430px"});
+		$("#RDT_camera_holder").css({"height": "430px"});
 		$("#RDT_msgCode_holder").css({"height": "430px"});
 	}
 	$("#RDT_backupBtn").css({"display": "inline"});
@@ -1066,8 +1076,8 @@ function RDT_renderNextRDTLbl(){
 				document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
 				$("#RDT_doorCamPreviewImg").css({"display": "inline"});
 			} else {
+				document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + "/App/img/404.png";
 				$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
-				$("#RDT_doorCamPreviewImg").css({"display": "none"});
 			}
 			RDT_renderEditDoorCamPreview();
 		}
@@ -1082,7 +1092,9 @@ function RDT_renderEditDoorCamPreview(){
 		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value.toString();
 		document.getElementById("RDT_doorCamPreviewImg").src = camFile;
 	} else {
-		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (ERROR 404, File: " + camFile + ")");
+		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: " + camFile + ")");
+		document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + "/App/img/404.png";
+		$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
 		scrollLog();
 	}
 }
@@ -1310,8 +1322,10 @@ function RDT_editItemCancel(){
 	$("#RDT-Item-Edit").css({"display": "none"});
 	$("#RDT-door-Edit").css({"display": "none"});
 	$("#RDT_door_holder").css({"width": "auto"});
+	$("#RDT-camera-Edit").css({"display": "none"});
 	$("#RDT-MSGCODE-Edit").css({"display": "none"});
 	$("#RDT_enemy_holder").css({"width": "1288px"});
+	$("#RDT_camera_holder").css({"width": "1288px"});
 	$("#RDT-enemyNPC-Edit").css({"display": "none"});
 	$("#RDT_msgCode_holder").css({"width": "1288px"});
 	document.getElementById('RDT_item-edit-A').value = "";
@@ -1429,17 +1443,18 @@ function R3DITOR_RUNGAME(id){
 				c++;
 			}
 			$("#RDT_msgCode_holder").css({"height": "474px"});
+			$("#RDT-enemyNPC-Edit").css({"height": "458px"});
+			$("#RDT_camera_holder").css({"height": "474px"});
 			$("#RDT_enemy_holder").css({"height": "474px"});
 			$("#RDT-MSGCODE-Edit").css({"height": "463px"});
 			$("#RDT-msgCode-hold").css({"height": "516px"});
-			
-
-			$("#RDT-enemyNPC-Edit").css({"height": "458px"});
+			$("#RRDT-camera-Edit").css({"height": "458px"});
 			$("#FILEGEN_contents").css({"height": "474px"});
 			$("#RDT_MSGBLOCKINFO").css({"height": "493px"});
 			$("#RDT_audio_holder").css({"height": "472px"});
 			$("#RDT_door_holder").css({"height": "482px"});
 			$("#RDT-canvas-hold").css({"height": "516px"});
+			$("#RDT-camera-hold").css({"height": "516px"});
 			$("#RDT-enemy-hold").css({"height": "516px"});
 			$("#RDT-audio-hold").css({"height": "516px"});
 			$("#RDT_MSG-holder").css({"height": "472px"});
@@ -1467,6 +1482,8 @@ function R3DITOR_RUNGAME(id){
 				}
 				$("#RDT_msgCode_holder").css({"height": "430px"});
 				$("#RDT-enemyNPC-Edit").css({"height": "418px"});
+				$("#RDT_camera_holder").css({"height": "430px"});
+				$("#RRDT-camera-Edit").css({"height": "418px"});
 				$("#RDT_enemy_holder").css({"height": "430px"});
 				$("#RDT-msgCode-hold").css({"height": "472px"});
 				$("#FILEGEN_contents").css({"height": "434px"});
@@ -1475,6 +1492,7 @@ function R3DITOR_RUNGAME(id){
 				$("#RDT-MSGCODE-Edit").css({"height": "417px"});
 				$("#RDT_door_holder").css({"height": "430px"});
 				$("#RDT-canvas-hold").css({"height": "472px"});
+				$("#RDT-camera-hold").css({"height": "472px"});
 				$("#RDT-enemy-hold").css({"height": "472px"});
 				$("#RDT-audio-hold").css({"height": "472px"});
 				$("#RDT_MSG-holder").css({"height": "430px"});

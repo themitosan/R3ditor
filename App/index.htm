@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Wait...</title>
+		<title>Loading, Please wait...</title>
 		<meta charset="ISO-8859-1"> 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<!-- External API -->
@@ -121,6 +121,7 @@
 		<!-- FORM: RDT -->
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
+			<input type="button" id="RDT-aba-menu-9" class="aba none" value="Cameras (???)" onclick="RDT_showMenu(9);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
@@ -128,6 +129,57 @@
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- RDT: Cameras -->
+			<div class="menu" id="RDT_menu-9" onclick="main_closeFileList();">
+				<div class="menu-general-content" id="RDT-camera-hold">
+					<div id="RDT_BG_9" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">Cameras - Total: <font id="RDT_lbl_totalCameras">???</font></font></center>
+					<div id="RDT_camera_holder" class="RDT-holder">
+						
+						<div class="RDT-Item RDT-door-bg">
+							<img src="F:\htdocs\PORTLAND\Backup\R3ditor\Assets\DATA_A\BSS\R10001.JPG" class="RDT_camImgItem">
+							<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="">
+							<div class="RDT_cam_holderInfos">
+								(0) Cam 00
+								<div class="menu-separador"></div>
+								(1) X Origin: <font class="RDT-item-lbl-fix">0000</font><br>
+								(2) X Origin: <font class="RDT-item-lbl-fix">FFFF</font><br>
+								(1) Y Origin: <font class="RDT-item-lbl-fix">0000</font><br>
+								(2) Y Origin: <font class="RDT-item-lbl-fix">FFFF</font><br>
+								(1) Z Origin: <font class="RDT-item-lbl-fix">0000</font><br>
+								(2) Z Origin: <font class="RDT-item-lbl-fix">FFFF</font>
+								<div class="RDT_editCam_direction">
+									(1) X Direction: <font>0000</font><br>
+									(2) X Direction: <font>FFFF</font><br>
+									(1) Y Direction: <font>0000</font><br>
+									(2) Y Direction: <font>FFFF</font><br>
+									(1) Z Direction: <font>0000</font><br>
+									(2) Z Direction: <font>FFFF</font>
+								</div>
+								<div class="RDT_camShowMisc">
+									Header: <font class="">0000</font><br>
+									Future: <font class="">0000</font>
+								</div>
+								<div class="menu-separador"></div>
+								Hex: <font class="user-can-select">000000000000000000000000000000000000000000000000000</font>
+							</div>
+
+						</div>
+						<!-- CAMERA vai aqui -->
+					</div>
+					<!-- RDT: CAMERA - edit -->
+					<div class="RDT-Item-Edit none" id="RDT-camera-Edit">
+						<center><font class="titulo">Edit Parameters</font><br>Camera: <font id="RDT-lbl-CAMERA-edit">???</font> - ID: <font id="RDT-lbl-CAMERA-index">???</font></center>
+						<div id="RDT-camera-edit-form">
+							<!-- wip -->
+							<div class="RDT-applyBtn-div">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+								<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarCAMERA" value="APPLY CHANGES!">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- RDT: Enemy / NPC's -->
 			<div class="menu" id="RDT_menu-8" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-enemy-hold">
