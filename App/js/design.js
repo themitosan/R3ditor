@@ -906,7 +906,6 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl-totalDoors").innerHTML = RDT_totalDoors;
 	document.getElementById("RDT_lbl-totalFiles").innerHTML = RDT_totalFiles;
 	document.getElementById("RDT_lbl-totalItens").innerHTML = RDT_totalItens;
-	document.getElementById("RDT_lbl-tCameras").innerHTML = RDT_totalCameras;
 	document.getElementById("RDT_lbl-totalMsg").innerHTML = RDT_totalMessages;
 	document.getElementById("RDT_lbl-totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl_totalAudios").innerHTML = RDT_totalAudios;
@@ -915,6 +914,7 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors + ")";
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
+	document.getElementById("RDT_lbl-tCameras").innerHTML = RDT_totalCameras + " [WIP]";
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
 	document.getElementById("RDT-aba-menu-9").value = "Cameras (" + RDT_totalCameras + ")";
 	document.getElementById("RDT_lbl_totalmsgCode").innerHTML = RDT_messageCodesArray.length;
@@ -923,6 +923,7 @@ function RDT_showMenu(id){
 	document.getElementById("RDT-aba-menu-7").value = "Message Code (" + RDT_messageCodesArray.length + ")";
 	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ")";
 	document.getElementById("RDT-lbl-FILENAME").innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT";
+	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + " KB (" + getFileSize(ORIGINAL_FILENAME, 0) + " Bytes)";
 	$("#RDT_menu-" + id).css({"display": "block"});
 	$("#menu-RDT").css({"display": "block"});
 	RDT_applyMenuFocus(id);

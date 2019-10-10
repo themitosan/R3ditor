@@ -245,75 +245,6 @@ function checkCanPlay(runArgs, gameId){
 function deleteFolderRecursive(path){
 	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);
 };
-/// Obter nome do arquivo
-function getFileName(file){
-	var fileName = file.toLowerCase();
-	var removePath = fileName.split(/(\\|\/)/g).pop();
-	var filterA = removePath.replace(".rdt", "");
-	var filterB = filterA.replace(".txt", "");
-	var filterC = filterB.replace(".msg", "");
-	var filterD = filterC.replace(".sav", "");
-	var filterE = filterD.replace(".exe", "");
-	var filterF = filterE.replace(".ini", "");
-	var filterG = filterF.replace(".r3ditor", "");
-	return filterG;
-}
-/// Obter Dia, Data e Hora
-function currentTime(){
-	var t = new Date;
-	var d = t.getDate();
-	var h = t.getHours();
-	var s = t.getSeconds();
-	var y = t.getFullYear();
-	var mi = t.getMinutes();
-	var m = t.getMonth() + 1;
-	if (m === 9 && d === 28 && e_e === 0){
-		e_e++;
-		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
-		$("#special_msg").fadeIn({duration: 2200, queue: false});
-		scrollLog();
-	}
-	if (m === 10 && d === 1 && e_e === 0){
-		e_e++;
-		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
-		$("#special_msg").fadeIn({duration: 2200, queue: false});
-		scrollLog();
-	}
-	if (d.toString().length < 2){
-		d = "0" + t.getDate();
-	}
-	if (m.toString().length < 2){
-		m = "0" + parseInt(t.getMonth() + 1);
-	}
-	if (h.toString().length < 2){
-		h = "0" + t.getHours(); 
-	}
-	if (mi.toString().length < 2){
-		mi = "0" + t.getMinutes(); 
-	}
-	if (s.toString().length < 2){
-		s = "0" + t.getSeconds();
-	}
-	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
-}
-/// IndexOf com multiplas ocorrêcias
-function getAllIndexes(arr, val){
-	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
-    	var indexes = [], i = -1;
-    	while ((i = arr.indexOf(val, i+1)) != -1){
-    	    indexes.push(i);
-    	}
-    	return indexes;
-	} else {
-		console.error("ERROR - Invalid arguments on getAllIndexes!");
-	}
-}
-/// Formata valores hex para leitura interna
-function solveHEX(hex){
-	var res = hex.replace(new RegExp(" ", 'g'), "");
-	var fin = res.toLowerCase();
-	return fin;
-}
 /// Function  WIP
 function WIP(){
 	log_separador();
@@ -396,6 +327,96 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 			}
     	});
 	});
+}
+/* 
+	Utils
+*/
+/// Obter nome do arquivo
+function getFileName(file){
+	var fileName = file.toLowerCase();
+	var removePath = fileName.split(/(\\|\/)/g).pop();
+	var filterA = removePath.replace(".rdt", "");
+	var filterB = filterA.replace(".txt", "");
+	var filterC = filterB.replace(".msg", "");
+	var filterD = filterC.replace(".sav", "");
+	var filterE = filterD.replace(".exe", "");
+	var filterF = filterE.replace(".ini", "");
+	var filterG = filterF.replace(".r3ditor", "");
+	return filterG;
+}
+/// Formata valores hex para leitura interna
+function solveHEX(hex){
+	var res = hex.replace(new RegExp(" ", 'g'), "");
+	var fin = res.toLowerCase();
+	return fin;
+}
+/// Obter Dia, Data e Hora
+function currentTime(){
+	var t = new Date;
+	var d = t.getDate();
+	var h = t.getHours();
+	var s = t.getSeconds();
+	var y = t.getFullYear();
+	var mi = t.getMinutes();
+	var m = t.getMonth() + 1;
+	if (m === 9 && d === 28 && e_e === 0){
+		e_e++;
+		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
+		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		scrollLog();
+	}
+	if (m === 10 && d === 1 && e_e === 0){
+		e_e++;
+		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
+		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		scrollLog();
+	}
+	if (d.toString().length < 2){
+		d = "0" + t.getDate();
+	}
+	if (m.toString().length < 2){
+		m = "0" + parseInt(t.getMonth() + 1);
+	}
+	if (h.toString().length < 2){
+		h = "0" + t.getHours(); 
+	}
+	if (mi.toString().length < 2){
+		mi = "0" + t.getMinutes(); 
+	}
+	if (s.toString().length < 2){
+		s = "0" + t.getSeconds();
+	}
+	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
+}
+/// IndexOf com multiplas ocorrêcias
+function getAllIndexes(arr, val){
+	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
+    	var indexes = [], i = -1;
+    	while ((i = arr.indexOf(val, i+1)) != -1){
+    	    indexes.push(i);
+    	}
+    	return indexes;
+	} else {
+		console.error("ERROR - Invalid arguments on getAllIndexes!");
+	}
+}
+function getFileSize(filePath, mode){
+	if (filePath !== undefined && filePath !== ""){
+		var read = fs.statSync(filePath);
+		var fsize = read.size;
+		// Bytes
+		if (mode === 0 || mode === undefined){
+			return read.size;
+		}
+		// In KB
+		if (mode === 1){
+			return parseInt(read.size / 1024);
+		}
+		// In MB
+		if (mode === 2){
+			return read.size / 1000000.0;
+		}
+	}
 }
 function parsePositive(value){
 	return value - value - value;
