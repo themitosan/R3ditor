@@ -805,7 +805,9 @@ function RDT_readItens(){
 		RDT_decompileItens(c, false);
 		c++;
 	}
-	RDT_getAllRelatedAudios();
+	if (enable_mod === true){
+		RDT_getAllRelatedAudios();
+	}
 	RDT_lookForRDTConfigFile();
 }
 function RDT_generateItemIndexRaw(str){

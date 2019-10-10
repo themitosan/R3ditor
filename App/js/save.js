@@ -393,7 +393,7 @@ function save_renderInfos(s_slot){
 		IGTExtract = localStorage.getItem("Save_" + s_slot).slice(RANGES["IGT"][0], RANGES["IGT"][1]);
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
 		addLog("log", "IGT (In-Game Time): " + hora + ":" + minutos + ":" + segundos);
-		addLog("log", "IGT Complete (Format: DD:HH:MM:SS:DC:MS): " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
+		addLog("log", "IGT Complete: " + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 		log_separador();
 		// Dificuldade
 		dificuldade = localStorage.getItem("Save_" + s_slot).slice(RANGES["leveldificuldade"][0], RANGES["leveldificuldade"][1]);
@@ -441,8 +441,8 @@ function save_renderInfos(s_slot){
 		document.getElementById("j-sidePack").innerHTML = jSpack;
 		document.getElementById("c-sidePack").innerHTML = cSpack;
 		// Posição X e Y
-		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]);
-		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]);
+		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]).toUpperCase();
+		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]).toUpperCase();
 		document.getElementById("lbl-x-pos").innerHTML = xPos;
 		document.getElementById("lbl-y-pos").innerHTML = yPos;
 		// Epilogos
@@ -457,12 +457,12 @@ function save_renderInfos(s_slot){
 		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
 		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
 		var mapStatus; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
-		document.getElementById("lbl-maps").innerHTML = "[WIP] - " + "BETA" + " (HEX: " + mapExtractA + mapExtractB + ")";
+		document.getElementById("lbl-maps").innerHTML = "[WIP] - " + "BETA" + " (HEX: " + mapExtractA.toUpperCase() + mapExtractB.toUpperCase() + ")";
 	
 		// Room / Event [WIP]
-		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]);
+		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]).toUpperCase();
 		// Files
-		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]);
+		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]).toUpperCase();
 	} catch (err){
 		var msg = "ERROR: There is something wrong here... - " + err;
 		addLog("error", msg);

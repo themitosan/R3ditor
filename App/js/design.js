@@ -58,11 +58,11 @@ function main_renderFileList(id){
 		var originalPFile;
 		if (mFile.length > 44){
 			originalMFile = mFile;
-			mFile = "..." + mFile.slice(10, mFile.length);
+			mFile = "..." + mFile.slice(parseInt(mFile.length / 2), mFile.length);
 		}
 		if (pFile.length > 44){
 			originalPFile = pFile;
-			pFile = "..." + pFile.slice(10, pFile.length);
+			pFile = "..." + pFile.slice(parseInt(pFile.length / 2), pFile.length);
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
@@ -107,7 +107,7 @@ function main_renderFileList(id){
 				}
 				var nOriginal;
 				if (mFile.length > 57){
-					mFile = "..." + mFile.slice(10, mFile.length);
+					mFile = "..." + mFile.slice(parseInt(mFile.length / 2), mFile.length);
 					nOriginal = mFile;
 				}
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
@@ -123,7 +123,6 @@ function main_renderFileList(id){
 		} else {
 			console.warn('WARN - Unable to render FileList!');
 			addLog('warn', 'WARN - Unable to render FileList!');
-			scrollLog();
 		}
 	}
 	// Save
@@ -161,11 +160,13 @@ function main_renderFileList(id){
 			$("#avaliable_fileList").css({"display": "block", "height": "428px"});
 			$("#fileListHolder").css({"display": "block", "height": "378px"});
 		} else {
-			console.warn('WARN - Unable to render FileList!');
-			addLog('warn', 'WARN - Unable to render FileList!');
-			scrollLog();
+			if (enable_mod === true){
+				console.warn('WARN - Unable to render FileList!');
+				addLog('warn', 'WARN - Unable to render FileList!');
+			}
 		}
 	}
+	scrollLog();
 }
 function main_openFileList(){
 	$("#avaliable_fileList").css({"display": "block"});
@@ -837,7 +838,7 @@ function RDT_showMenu(id){
 		$("#RDT-canvas-hold").css({"height": "516px"});
 		$("#RDT-audio-hold").css({"height": "516px"});
 		$("#RDT_MSG-holder").css({"height": "472px"});
-		$("#RDT_menu-" + id).css({"height": "528px"});
+		$("#RDT_menu-" + id).css({"height": "530px"});
 		$("#menu-topo-MOD").css({"display": "none"});
 		$("#RDT-item-list").css({"height": "472px"});
 		$("#RDT-Item-Edit").css({"height": "458px"});
@@ -876,7 +877,7 @@ function RDT_showMenu(id){
 		$("#RDT-aba-menu-4").css({'display': 'none'});
 	}
 	$("#RDT_reload").css({"display": "inline"});
-	if (EXTERNAL_APP_RUNNING === false){
+	if (EXTERNAL_APP_RUNNING === false && enable_mod === true){
 		$("#RDT-door-Edit").css({"height": "417px"});
 		$("#RDT-door-hold").css({"height": "472px"});
 		$("#RDT-enemy-hold").css({"height": "472px"});
@@ -1190,7 +1191,7 @@ function RDT_Error_404(){
 		$("#RDT-item-list").css({"display": "block"});
 		$("#RDT-aba-menu-3").css({"display": "inline"});
 	}
-	if (RDT_totalAudios < 1){
+	if (RDT_totalAudios === undefined || RDT_totalAudios < 1){
 		$("#RDT-aba-menu-5").css({'display': 'none'});
 	} else {
 		$("#RDT-aba-menu-5").css({'display': 'inline'});
@@ -1443,7 +1444,7 @@ function R3DITOR_RUNGAME(id){
 		if (id === 0){
 			$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
 			while(c < parseInt(RDT_totalMenus + 1)){
-				$("#RDT_menu-" + c).css({"height": "528px"});
+				$("#RDT_menu-" + c).css({"height": "530px"});
 				$("#RDT_BG_" + c).css({"height": "512px"});
 				c++;
 			}
