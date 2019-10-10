@@ -20,7 +20,7 @@ Detail: It does not show what has already been done, only things that are in pro
 
 ## Supported File Formats
 
-### Bu00.sav (Saves) [WIP]
+### Bu00.sav (Saves)
 You can change various aspects of your save, such as:
 
 - HP
@@ -36,15 +36,11 @@ You can change various aspects of your save, such as:
 - Quantity of Saves
 - Unlocked Epilogues
 
-Soon:
-
-- Maps and files
-
-### Message Files (.msg) [WIP]
+### Message Files (.MSG)
 You can view / edit the game's internal messages by loading .msg files or using the "Hex Input" field.<br>
 <i>Note that you need to use a hex editor or extract the files using <a href="https://www.romhacking.net/utilities/1019/" target="_blank">BioFAT</a> to extract the messages.</i>
 
-### Room Data Table (.rdt) [WIP]
+### Room Data Table (.RDT)
 You can edit messages, doors, which item is in the room, change its position and its animation. [WIP]<br>
 Expect compatibility improvements and more features soon!
 
