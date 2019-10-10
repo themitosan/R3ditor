@@ -39,5 +39,6 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - Add the option to extract all the Rofs files [WIP 50%]
+- Add a file generator! [WIP]
 - ~~Add restore backup function on RDT~~
 - Misc: Add support for saves from RE2! ~~(They are very similar! - Also, don't expect this sooner!)~~
