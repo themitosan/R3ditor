@@ -1027,6 +1027,8 @@ var RDT_camHeaderType = {
 	"2d91": [true],
 	"347b": [true],
 	"3676": [true],
+	"3087": [true],
+	"38f2": [true],
 	"3c68": [true] // RE2?
 }
 var MSG_TEXTCOLOR = {
@@ -1443,19 +1445,19 @@ var RANGES = {
 		Cameras
 	*/
 	"RDT_cam-0-Header": 			   [0, 4], // RE2 = 3C 68 || B7 73, RE3 = B7 73 || B2 80 || 2D 91
-	"RDT_cam-0-cX-1": 			   	   [4, 6],
-	"RDT_cam-0-cX-2": 			   	  [6, 10], // Look like it is ALWAYS FF FF
-	"RDT_cam-0-cY-1": 			   	 [10, 14],
-	"RDT_cam-0-cY-2": 			   	 [14, 18], // Look like it is ALWAYS FF FF
-	"RDT_cam-0-cZ-1": 			   	 [18, 22],
-	"RDT_cam-0-cZ-2": 			   	 [22, 26],
-	"RDT_cam-0-nX-1": 			   	 [26, 30],
-	"RDT_cam-0-nX-2": 			   	 [30, 34],
-	"RDT_cam-0-nY-1": 			   	 [34, 38],
-	"RDT_cam-0-nY-2": 			   	 [38, 42],
-	"RDT_cam-0-nZ-1": 			   	 [42, 46],
-	"RDT_cam-0-nZ-2": 			   	 [46, 50],
-	"RDT_cam-0-misc": 				 [50, 62], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
+	"RDT_cam-0-cX-1": 			   	   [4, 8],
+	"RDT_cam-0-cX-2": 			   	  [8, 12], // Look like it is ALWAYS FF FF
+	"RDT_cam-0-cY-1": 			   	 [12, 16],
+	"RDT_cam-0-cY-2": 			   	 [16, 20], // Look like it is ALWAYS FF FF
+	"RDT_cam-0-cZ-1": 			   	 [20, 24],
+	"RDT_cam-0-cZ-2": 			   	 [24, 28],
+	"RDT_cam-0-nX-1": 			   	 [28, 32],
+	"RDT_cam-0-nX-2": 			   	 [32, 36],
+	"RDT_cam-0-nY-1": 			   	 [36, 40],
+	"RDT_cam-0-nY-2": 			   	 [40, 44],
+	"RDT_cam-0-nZ-1": 			   	 [44, 48],
+	"RDT_cam-0-nZ-2": 			   	 [48, 52],
+	"RDT_cam-0-misc": 				 [52, 62], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
 	/*
 		Doors
 	*/

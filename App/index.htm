@@ -134,37 +134,7 @@
 				<div class="menu-general-content" id="RDT-camera-hold">
 					<div id="RDT_BG_9" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Cameras - Total: <font id="RDT_lbl_totalCameras">???</font></font></center>
-					<div id="RDT_camera_holder" class="RDT-holder">
-						
-						<div class="RDT-Item RDT-door-bg">
-							<img src="F:\htdocs\PORTLAND\Backup\R3ditor\Assets\DATA_A\BSS\R10001.JPG" class="RDT_camImgItem">
-							<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="">
-							<div class="RDT_cam_holderInfos">
-								(0) Cam 00
-								<div class="menu-separador"></div>
-								(1) X Origin: <font class="RDT-item-lbl-fix">0000</font><br>
-								(2) X Origin: <font class="RDT-item-lbl-fix">FFFF</font><br>
-								(1) Y Origin: <font class="RDT-item-lbl-fix">0000</font><br>
-								(2) Y Origin: <font class="RDT-item-lbl-fix">FFFF</font><br>
-								(1) Z Origin: <font class="RDT-item-lbl-fix">0000</font><br>
-								(2) Z Origin: <font class="RDT-item-lbl-fix">FFFF</font>
-								<div class="RDT_editCam_direction">
-									(1) X Direction: <font>0000</font><br>
-									(2) X Direction: <font>FFFF</font><br>
-									(1) Y Direction: <font>0000</font><br>
-									(2) Y Direction: <font>FFFF</font><br>
-									(1) Z Direction: <font>0000</font><br>
-									(2) Z Direction: <font>FFFF</font>
-								</div>
-								<div class="RDT_camShowMisc">
-									Header: <font class="">0000</font><br>
-									Future: <font class="">0000</font>
-								</div>
-								<div class="menu-separador"></div>
-								Hex: <font class="user-can-select">000000000000000000000000000000000000000000000000000</font>
-							</div>
-
-						</div>
+					<div id="RDT_camera_holder" class="RDT-holder">						
 						<!-- CAMERA vai aqui -->
 					</div>
 					<!-- RDT: CAMERA - edit -->
@@ -390,7 +360,7 @@
 					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
 					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
 					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
-					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-totalCameras">???</font><br>
+					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-tCameras">???</font><br>
 					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
 					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
 					Number of enemies / npc's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
@@ -444,7 +414,7 @@
 						<div class="menu-separador"></div>
 						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-A" placeholder="00" value=""></div>
 						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-MI" placeholder="00" value=""></div>
-						<div class="RDT-item-editOtherFix">
+						<div class="RDT-item-editOtherFix"l id="RDT-iEditOther">
 							<div>Item flag: <input type="text" class="item-select-mod RDT_itemEditOtherLeftFix RDT-valueEdit-fix" oninput="RDT_itemValidadeInput();" id="RDT_item-edit-IF" placeholder="00" value=""></div>
 							Convert to: 
 							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix" style="width: 60px;">

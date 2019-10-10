@@ -860,6 +860,9 @@ input[type="range" i]{
 .RDT-enemy-bg{
     background-image: linear-gradient(to bottom, #516b61, #0f432f);
 }
+.RDT-camera-bg{
+    background-image: linear-gradient(to bottom, #5a6282, #323544);
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;
@@ -1372,26 +1375,24 @@ input[type="range" i]{
 .RDT_cam_holderInfos{
     margin-left: 226px;
     position: sticky;
+    width: 72%;
 }
 .RDT_editCam_direction{
+    top: -3px;
     width: 30%;
-    left: 130px;
+    left: 134px;
     height: 70px;
-    position: fixed;
-    margin-top: -108px;
-    padding-left: 260px;
+    position: relative;
+    margin-top: -106px;
 }
 .RDT_camImgItem{
     width: 218px;
     border-radius: 6px;
-    position: absolute;
     box-shadow: 0 0 4px #222;
 }
 .RDT_camShowMisc{
+    top: -1px;
     width: 30%;
-    left: 152px;
-    height: 70px;
-    position: fixed;
-    margin-top: -36px;
-    padding-left: 390px;
+    left: 292px;
+    position: relative;
 }

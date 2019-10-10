@@ -906,14 +906,17 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl-totalDoors").innerHTML = RDT_totalDoors;
 	document.getElementById("RDT_lbl-totalFiles").innerHTML = RDT_totalFiles;
 	document.getElementById("RDT_lbl-totalItens").innerHTML = RDT_totalItens;
+	document.getElementById("RDT_lbl-tCameras").innerHTML = RDT_totalCameras;
 	document.getElementById("RDT_lbl-totalMsg").innerHTML = RDT_totalMessages;
 	document.getElementById("RDT_lbl-totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl_totalAudios").innerHTML = RDT_totalAudios;
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
+	document.getElementById("RDT_lbl_totalCameras").innerHTML = RDT_totalCameras;
 	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors + ")";
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios + ")";
+	document.getElementById("RDT-aba-menu-9").value = "Cameras (" + RDT_totalCameras + ")";
 	document.getElementById("RDT_lbl_totalmsgCode").innerHTML = RDT_messageCodesArray.length;
 	document.getElementById("RDT-aba-menu-8").value = "Enemies / NPC's (" + RDT_enemiesArray.length + ")";
 	document.getElementById("RDT-aba-menu-2").value = "Message Block (" + RDT_totalMessages + ")";
@@ -1260,8 +1263,9 @@ function RDT_displayItemEdit(id, idx, itemHx){
 		$("#RDT-edit-file-select").addClass("none");
 		$("#RDT-edit-map-select").addClass("none");
 		$("#RDT_btnEditPos").css({"top": "174px"});
+		$("#RDT-iEditOther").css({"top": "266px"});
 	} else {
-		$("#RDT-item-editOtherFix").css({"top": "228px"});
+		$("#RDT-iEditOther").css({"top": "228px"});
 		$("#RDT_btnEditPos").css({"top": "140px"});
 	}
 	// File

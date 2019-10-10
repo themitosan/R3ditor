@@ -157,12 +157,14 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_door_holder').innerHTML = "";
 	document.getElementById('RDT_audio_holder').innerHTML = "";
 	document.getElementById('RDT_enemy_holder').innerHTML = "";
+	document.getElementById('RDT_camera_holder').innerHTML = "";
 	document.getElementById('RDT_msgCode_holder').innerHTML = "";
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
 	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
 	log_separador();
 	//
 	RDT_getEnemiesArray();
+	RDT_getCameras();
 	RDT_readDoors();
 	RDT_readItens();
 	RDT_BG_display();
@@ -184,11 +186,49 @@ function RDT_getCameras(){
 		}
 		while(c < RDT_cameraArray.length){
 			localStorage.setItem("RDT_Camera-" + c, RDT_cameraArray[c]);
-			
+			RDT_decompileCameras(c);
 			c++;
 		}
 	}
 }
+
+function RDT_decompileCameras(id){
+	var CAMERA_RAW = localStorage.getItem('RDT_Camera-' + id);
+
+	var CAM_header		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-Header"][0], RANGES["RDT_cam-0-Header"][1]);
+	var CAM_originX_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-1"][0], RANGES["RDT_cam-0-cX-1"][1]);
+	var CAM_originX_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-2"][0], RANGES["RDT_cam-0-cX-2"][1]);
+	var CAM_originY_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-1"][0], RANGES["RDT_cam-0-cY-1"][1]);
+	var CAM_originY_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-2"][0], RANGES["RDT_cam-0-cY-2"][1]);
+	var CAM_originZ_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-1"][0], RANGES["RDT_cam-0-cZ-1"][1]);
+	var CAM_originZ_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-2"][0], RANGES["RDT_cam-0-cZ-2"][1]);
+	var CAM_directionX_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-1"][0], RANGES["RDT_cam-0-nX-1"][1]);
+	var CAM_directionX_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-2"][0], RANGES["RDT_cam-0-nX-2"][1]);
+	var CAM_directionY_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-1"][0], RANGES["RDT_cam-0-nY-1"][1]);
+	var CAM_directionY_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-2"][0], RANGES["RDT_cam-0-nY-2"][1]);
+	var CAM_directionZ_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-1"][0], RANGES["RDT_cam-0-nZ-1"][1]);
+	var CAM_directionZ_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-2"][0], RANGES["RDT_cam-0-nZ-2"][1]);
+	var CAM_future		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-misc"][0], RANGES["RDT_cam-0-misc"][1]);
+
+	var CAM_IMG = APP_PATH + "/App/Img/404.png";
+
+	var HTML_RDTCAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" class="RDT_camImgItem"></div>' + 
+		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="WIP();">' + 
+		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam 00<div class="menu-separador"></div>' + 
+		'(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + '</font><br>' + 
+		'(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>' + 
+		'(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font><br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + '</font><div class="RDT_editCam_direction">' + 
+		'(1) X Direction: <font class="">' + CAM_directionX_1.toUpperCase() + '</font><br>(2) X Direction: <font class="">' + CAM_directionX_2.toUpperCase() + '</font><br>' + 
+		'(1) Y Direction: <font class="">' + CAM_directionY_1.toUpperCase() + '</font><br>(2) Y Direction: <font class="">' + CAM_directionY_2.toUpperCase() + '</font><br>' + 
+		'(1) Z Direction: <font class="">' + CAM_directionZ_1.toUpperCase() + '</font><br>(2) Z Direction: <font class="">' + CAM_directionZ_2.toUpperCase() + '</font></div>' + 
+		'<div class="RDT_camShowMisc">Header: <font class="">' + CAM_header.toUpperCase() + '</font><br>Future: <font class="">' + CAM_future.toUpperCase() + '</font></div><div class="menu-separador"></div>' + 
+		'Hex: <font class="user-can-select">' + CAM_header.toUpperCase() + ' ' + CAM_originX_1.toUpperCase() + ' ' + CAM_originX_2.toUpperCase() + ' ' + CAM_originY_1.toUpperCase() + ' ' + CAM_originY_2.toUpperCase() + ' ' + 
+		CAM_originZ_1.toUpperCase() + ' ' + CAM_originZ_2.toUpperCase() + ' ' + CAM_directionX_1.toUpperCase() + ' ' + CAM_directionX_2.toUpperCase() + ' ' + CAM_directionY_1.toUpperCase() + ' ' + CAM_directionY_2.toUpperCase() + ' ' + 
+		CAM_directionZ_1.toUpperCase() + ' ' + CAM_directionZ_2.toUpperCase() + ' ' + CAM_future.toUpperCase() + '</font></div></div>';
+
+	$("#RDT_camera_holder").append(HTML_RDTCAMERA_TEMPLATE);
+}
+
 // Enemies & NPC's
 function RDT_getEnemiesArray(){
 	if (RDT_arquivoBruto !== undefined){
@@ -880,7 +920,8 @@ function RDT_renderItens(index, hex){
 			'RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>Quantity: <font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
 			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br>Rotation: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
 			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
-			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
+			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc" style="left: 220px;margin-top: -70px;"><br><br><br>Item flag: ' + iFlag.toUpperCase() +  '</div><div class="menu-separador">' + 
+			'</div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
 		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = "RDT - ERROR: Unable to render item " + id.toUpperCase() + " - " + msg;
