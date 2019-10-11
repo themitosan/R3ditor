@@ -425,25 +425,57 @@ function RDT_getMessageCodes(hx){
 			RDT_messageCodesArray.push(RDT_arquivoBruto.slice(parseInt(msgCodeRaw[c] - 4), parseInt(msgCodeRaw[c] + 40)))
 			c++;
 		} else {
-			msgCodeRaw.splice(c, 1);
+			if (check_0 === "64"){
+				RDT_messageCodesArray.push(RDT_arquivoBruto.slice(parseInt(msgCodeRaw[c] - 4), parseInt(msgCodeRaw[c] + 56)))
+				c++;
+			} else {
+				msgCodeRaw.splice(c, 1);
+			}
 		}
 	}
 }
 function RDT_decompileMessageCode(index, hex){
 	if (RDT_arquivoBruto !== undefined && hex !== undefined){
-		var MC_HEADER 		 = hex.slice(RANGES["RDT_msgCode-header"][0],        RANGES["RDT_msgCode-header"][1]);
-		var MC_ID 			 = hex.slice(RANGES["RDT_msgCode-id"][0],            RANGES["RDT_msgCode-id"][1]);
-		var MC_IDENT 		 = hex.slice(RANGES["RDT_msgCode-identifier"][0],    RANGES["RDT_msgCode-identifier"][1]);
-		var MC_XPOS 		 = hex.slice(RANGES["RDT_msgCode-xPos"][0],          RANGES["RDT_msgCode-xPos"][1]);
-		var MC_ZPOS 		 = hex.slice(RANGES["RDT_msgCode-zPos"][0],          RANGES["RDT_msgCode-zPos"][1]);
-		var MC_XWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-xWidthTrigger"][0], RANGES["RDT_msgCode-xWidthTrigger"][1]);
-		var MC_ZWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-zWidthTrigger"][0], RANGES["RDT_msgCode-zWidthTrigger"][1]);
-		var MC_OFFSET0  	 = hex.slice(RANGES["RDT_msgCode-offset_0"][0],      RANGES["RDT_msgCode-offset_0"][1]);
-		var MC_JAPCHARS 	 = hex.slice(RANGES["RDT_msgCode-japChars"][0],      RANGES["RDT_msgCode-japChars"][1]);
-		var MC_OFFSET1  	 = hex.slice(RANGES["RDT_msgCode-offset_1"][0],      RANGES["RDT_msgCode-offset_1"][1]);
-		var MC_SPECIALPROP 	 = hex.slice(RANGES["RDT_msgCode-specialProp"][0],   RANGES["RDT_msgCode-specialProp"][1]);
-		var MC_READMODE 	 = hex.slice(RANGES["RDT_msgCode-readMode"][0],      RANGES["RDT_msgCode-readMode"][1]);
-		var fHex			 = hex.slice(RANGES["RDT_msgCode-header"][0],		 RANGES["RDT_msgCode-readMode"][1]);
+		var fHex;
+		var MC_XPOS;
+		var MC_ZPOS;
+		var MC_OFFSET0;
+		var MC_OFFSET1;
+		var MC_JAPCHARS;
+		var MC_READMODE;
+		var MC_SPECIALPROP;
+		var MC_XWIDTHTRIGGER;
+		var MC_ZWIDTHTRIGGER;
+
+		var MC_ID 			 = hex.slice(RANGES["RDT_msgCode-id"][0],              RANGES["RDT_msgCode-id"][1]);
+		var MC_HEADER 		 = hex.slice(RANGES["RDT_msgCode-header"][0],          RANGES["RDT_msgCode-header"][1]);
+		var MC_IDENT 		 = hex.slice(RANGES["RDT_msgCode-identifier"][0],      RANGES["RDT_msgCode-identifier"][1]);
+		
+		if (MC_HEADER === "63"){
+			MC_XPOS 		 = hex.slice(RANGES["RDT_msgCode-0-xPos"][0],          RANGES["RDT_msgCode-0-xPos"][1]);
+			MC_ZPOS 		 = hex.slice(RANGES["RDT_msgCode-0-zPos"][0],          RANGES["RDT_msgCode-0-zPos"][1]);
+			MC_XWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-0-xWidthTrigger"][0], RANGES["RDT_msgCode-0-xWidthTrigger"][1]);
+			MC_ZWIDTHTRIGGER = hex.slice(RANGES["RDT_msgCode-0-zWidthTrigger"][0], RANGES["RDT_msgCode-0-zWidthTrigger"][1]);
+			MC_OFFSET0  	 = hex.slice(RANGES["RDT_msgCode-0-offset_0"][0],      RANGES["RDT_msgCode-0-offset_0"][1]);
+			MC_JAPCHARS 	 = hex.slice(RANGES["RDT_msgCode-0-japChars"][0],      RANGES["RDT_msgCode-0-japChars"][1]);
+			MC_OFFSET1  	 = hex.slice(RANGES["RDT_msgCode-0-offset_1"][0],      RANGES["RDT_msgCode-0-offset_1"][1]);
+			MC_SPECIALPROP 	 = hex.slice(RANGES["RDT_msgCode-0-specialProp"][0],   RANGES["RDT_msgCode-0-specialProp"][1]);
+			MC_READMODE 	 = hex.slice(RANGES["RDT_msgCode-0-readMode"][0],      RANGES["RDT_msgCode-0-readMode"][1]);
+			fHex			 = hex.slice(RANGES["RDT_msgCode-header"][0],		   RANGES["RDT_msgCode-0-readMode"][1]);
+		}
+		if (MC_HEADER === "64"){
+			MC_XPOS 		 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-xPos"][0],          RANGES["RDT_msgCode-1-xPos"][1]);
+			MC_ZPOS 		 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-zPos"][0],          RANGES["RDT_msgCode-1-zPos"][1]);
+			MC_XWIDTHTRIGGER = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-xWidthTrigger"][0], RANGES["RDT_msgCode-1-xWidthTrigger"][1]);
+			MC_ZWIDTHTRIGGER = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-zWidthTrigger"][0], RANGES["RDT_msgCode-1-zWidthTrigger"][1]);
+			MC_OFFSET0  	 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-offset_0"][0],      RANGES["RDT_msgCode-1-offset_0"][1]);
+			MC_JAPCHARS 	 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-japChars"][0],      RANGES["RDT_msgCode-1-japChars"][1]);
+			MC_OFFSET1  	 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-offset_1"][0],      RANGES["RDT_msgCode-1-offset_1"][1]);
+			MC_SPECIALPROP 	 = "[WIP]"; //hex.slice(RANGES["RDT_msgCode-1-specialProp"][0],   RANGES["RDT_msgCode-1-specialProp"][1]);
+			MC_READMODE 	 = hex.slice(RANGES["RDT_msgCode-1-readMode"][0],      RANGES["RDT_msgCode-1-readMode"][1]);
+			fHex			 = hex.slice(RANGES["RDT_msgCode-header"][0],		   RANGES["RDT_msgCode-1-readMode"][1]);
+		}
+
 		localStorage.setItem("RDT_MSGBLOCK-" + index, fHex);
 		//console.log(MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
@@ -452,10 +484,10 @@ function RDT_decompileMessageCode(index, hex){
 			'X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
 			'X Width: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>Z Width: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc">' + 
 			'<br>Header: <font class="RDT-item-lbl-fix-6">' + MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: ' + 
-			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + 
+			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + 
 			'</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Z pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="X Width">' + MC_XWIDTHTRIGGER.toUpperCase() + 
 			'</font> <font title="Z Width">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + 
-			' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></div>';
+			' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></font></div>';
 		$("#RDT_msgCode_holder").append(HTML_HUGE_MSGCODE_TEMPLATE);
 	}
 }
@@ -489,6 +521,10 @@ function RDT_MSGCODE_APPLY(id){
 	if (special.length !== 2){
 		canCompile = false;
 		reason = "The Special value are wrong!";
+	}
+	if (header === "64"){
+		canCompile = false;
+		reason = "This content can't be recompiled for now (WIP)";
 	}
 	if (canCompile === true){
 		var NEW_RDT = header + novaX + novaZ + novaRadiusX + novaRadiusZ + offset + special + readMode;
@@ -785,13 +821,13 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310900");
 	RDT_generateItemIndexRaw("02318000");
 	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000"); // Padr„o encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310000"); // Padr√£o encontrado em (quase) todos os itens
 	RDT_generateItemIndexRaw("02310500");
 	RDT_generateItemIndexRaw("02310100");
 	RDT_generateItemIndexRaw("02310200");
 	RDT_generateItemIndexRaw("02310300");
 	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - F·brica
+	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - F√°brica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	while (c < RDT_totalItensGeral){
@@ -1038,9 +1074,9 @@ function RDT_ITEM_APPLY(index, type, convert){
 			RDT_RECOMPILE_Lv1();
 		} else {
 			// Header 68
-			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // AtÈ item id
+			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // At√© item id
 			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(46, 48); // 00 entre item id e quantidade
-			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade atÈ anim
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade at√© anim
 			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
 			RDT_RECOMPILE_Lv1();
@@ -1651,7 +1687,7 @@ function RDT_finishMessageAnalysis(){
 		RDT_MSG_CURRENT_TEST = 4;
 	}
 	RDT_generateMapFile = true;
-	console.info("\nMelhor OpÁ„o: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
+	console.info("\nMelhor Op√ß√£o: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
 	RDT_readMessages();
 	addLog('log', 'RDT - Analysis Complete!');
 	scrollLog();
@@ -2035,7 +2071,7 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
 	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
-	//var posR = processBIO3Vars(r) / 16; // <-- isso n„o est· correto ainda
+	//var posR = processBIO3Vars(r) / 16; // <-- isso n√£o est√° correto ainda
 
 	// Final
 	$("#RDT_CANVAS_0").append(HTML_ICONCANVAS_TEMPLATE);

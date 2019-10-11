@@ -283,13 +283,15 @@ var ATTR = {
 	"05": ["Remaining ammo in red",			   "#840000", "0 0 2px #310000"],
 	"06": ["% remaining in red", 			   "#840000", "0 0 2px #310000"],
 	"07": ["Inf. ammo in red", 				   "#840000", "0 0 2px #310000"],
+	"09": ["Remaining ammo in yellow", 		   "#fff0a3", "0 0 2px #b4b194"],
+	"0a": ["%. remaining in yellow",		   "#fff0a3", "0 0 2px #b4b194"],
+	"0b": ["Inf. ammo in yellow", 			   "#fff0a3", "0 0 2px #b4b194"],
 	"0d": ["Remaining ammo in blue", 		   "#9393ff", "0 0 2px #004242"],
 	"0e": ["% remaining in blue", 			   "#9393ff", "0 0 2px #004242"],
 	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
 	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
 	// Atributos Desconhecidos
-	"17": ["Attr. found in Nightmare Mod", 	   	  "#fff",    "0 0 2px #0f0"], // Atributo encontrado na shotgun do Carlos
-	"0b": ["Attr. found in some versions", 	   	  "#fff",    "0 0 2px #0f0"]
+	"17": ["Attr. found in Nightmare Mod", 	   	 "#fff0",    "0 0 2px #0f0"] // Atributo encontrado na shotgun do Carlos
 }
 // Segunda variavel
 var VOID = {
@@ -1011,7 +1013,7 @@ var MSG_DICIONARIO = {
 	"f5": [true, "(Unknown Command used on R101.RDT ", 	 8], // Comando usado na cutscene "Septemer, 28".
 	"f9": [true, "(Function: Text Color ", 				 9], // Formatação - Cor Verde
 	"*#": [false,"(Next Option)", 				 	 false], // Segunda Opção de climax
-	// CT-STARS COMPAT
+	// CT-STARS PATCH COMPAT
 	"d7": [false, " ", false],
 	"3c": [false, "ã", false],
 	"b8": [false, "á", false],
@@ -1429,18 +1431,29 @@ var RANGES = {
 	/*
 		MSG codes
 	*/
-	"RDT_msgCode-header": 			   [0, 2], // RE2 = 2C, RE3 = 63
+	"RDT_msgCode-header": 			   [0, 2], // RE2 = 2C, RE3 = 63 || 64
 	"RDT_msgCode-id":  				   [2, 4],
 	"RDT_msgCode-identifier": 		  [4, 12], // 04 31 00 00
-	"RDT_msgCode-xPos": 			 [12, 16],
-	"RDT_msgCode-zPos": 			 [16, 20],
-	"RDT_msgCode-xWidthTrigger": 	 [20, 24],
-	"RDT_msgCode-zWidthTrigger": 	 [24, 28],
-	"RDT_msgCode-offset_0": 		 [28, 30], 
-	"RDT_msgCode-japChars": 		 [30, 32], // (16 [Japanese letters. Game crashes sometimes] and 17 - resevilnemesis30 on RE2 definitive RDT info)
-	"RDT_msgCode-offset_1": 		 [32, 34], 
-	"RDT_msgCode-specialProp": 		 [34, 36], // (For things like open locked desk with herbs (02) - same as above)
-	"RDT_msgCode-readMode": 		 [36, 40],
+	// Header 63
+	"RDT_msgCode-0-xPos": 			 [12, 16],
+	"RDT_msgCode-0-zPos": 			 [16, 20],
+	"RDT_msgCode-0-xWidthTrigger": 	 [20, 24],
+	"RDT_msgCode-0-zWidthTrigger": 	 [24, 28],
+	"RDT_msgCode-0-offset_0": 		 [28, 30], 
+	"RDT_msgCode-0-japChars": 		 [30, 32], // (16 [Japanese letters. Game crashes sometimes] and 17 - resevilnemesis30 on RE2 definitive RDT info)
+	"RDT_msgCode-0-offset_1": 		 [32, 34], 
+	"RDT_msgCode-0-specialProp":	 [34, 36], // (For things like open locked desk with herbs (02) - same as above)
+	"RDT_msgCode-0-readMode": 		 [36, 40],
+	// Header 64
+	"RDT_msgCode-1-xPos": 			 ["WIP", "WIP"],
+	"RDT_msgCode-1-zPos": 			 ["WIP", "WIP"],
+	"RDT_msgCode-1-xWidthTrigger": 	 ["WIP", "WIP"],
+	"RDT_msgCode-1-zWidthTrigger": 	 ["WIP", "WIP"],
+	"RDT_msgCode-1-offset_0": 		 ["WIP", "WIP"], 
+	"RDT_msgCode-1-japChars": 		 ["WIP", "WIP"], 
+	"RDT_msgCode-1-offset_1": 		 ["WIP", "WIP"], 
+	"RDT_msgCode-1-specialProp": 	 ["WIP", "WIP"], 
+	"RDT_msgCode-1-readMode": 		 [52, 56], // OK
 	/*
 		Cameras
 	*/

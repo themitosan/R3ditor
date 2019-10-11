@@ -935,19 +935,28 @@ function RDT_showMenu(id){
 	scrollLog();
 }
 function RDT_showEditMsgCode(index, codeHex){
-	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
-	document.getElementById('RDT_MSGCODE-edit-X').value = codeHex.slice(RANGES["RDT_msgCode-xPos"][0], RANGES["RDT_msgCode-xPos"][1]).toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-Z').value = codeHex.slice(RANGES["RDT_msgCode-zPos"][0], RANGES["RDT_msgCode-zPos"][1]).toUpperCase();
-	document.getElementById('RDT-lbl-MSGCODE-index').innerHTML = codeHex.slice(RANGES["RDT_msgCode-id"][0],RANGES["RDT_msgCode-id"][1]).toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-radiusX').value = codeHex.slice(RANGES["RDT_msgCode-xWidthTrigger"][0], RANGES["RDT_msgCode-xWidthTrigger"][1]).toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = codeHex.slice(RANGES["RDT_msgCode-zWidthTrigger"][0], RANGES["RDT_msgCode-zWidthTrigger"][1]).toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-special').value = codeHex.slice(RANGES["RDT_msgCode-specialProp"][0], RANGES["RDT_msgCode-specialProp"][1]).toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-display').value = codeHex.slice(RANGES["RDT_msgCode-readMode"][0], RANGES["RDT_msgCode-readMode"][1]).toLowerCase();
-	$("#RDT_msgCode_holder").css({"width": "802px"});
-	$("#RDT-MSGCODE-Edit").css({"display": "inline"});
-	document.getElementById('RDT-btn-aplicarMSGCODE').onclick = function(){
-		RDT_MSGCODE_APPLY(index);
+	var header = codeHex.slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-header"][1]);
+	if (header !== "64"){
+		document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
+		document.getElementById('RDT-lbl-MSGCODE-index').innerHTML = codeHex.slice(RANGES["RDT_msgCode-id"][0],RANGES["RDT_msgCode-id"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-X').value = codeHex.slice(RANGES["RDT_msgCode-0-xPos"][0], RANGES["RDT_msgCode-0-xPos"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-Z').value = codeHex.slice(RANGES["RDT_msgCode-0-zPos"][0], RANGES["RDT_msgCode-0-zPos"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-radiusX').value = codeHex.slice(RANGES["RDT_msgCode-0-xWidthTrigger"][0], RANGES["RDT_msgCode-0-xWidthTrigger"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-radiusZ').value = codeHex.slice(RANGES["RDT_msgCode-0-zWidthTrigger"][0], RANGES["RDT_msgCode-0-zWidthTrigger"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-special').value = codeHex.slice(RANGES["RDT_msgCode-0-specialProp"][0], RANGES["RDT_msgCode-0-specialProp"][1]).toUpperCase();
+		document.getElementById('RDT_MSGCODE-edit-display').value = codeHex.slice(RANGES["RDT_msgCode-0-readMode"][0], RANGES["RDT_msgCode-0-readMode"][1]).toLowerCase();
+		$("#RDT_msgCode_holder").css({"width": "802px"});
+		$("#RDT-MSGCODE-Edit").css({"display": "inline"});
+		document.getElementById('RDT-btn-aplicarMSGCODE').onclick = function(){
+			RDT_MSGCODE_APPLY(index);
+		}
+	} else {
+		RDT_editItemCancel();
+		var warnMSG = "This message code contains a WIP header (64)";
+		alert("INFO: Unable to edit this message code! (For now!)\n\n" + warnMSG);
+		addLog('warn', 'WARN - ' + warnMSG);
 	}
+	scrollLog();
 }
 function RDT_showEditEnemyNPC(index, codeHex){
 	var emd = codeHex.slice(RANGES["RDT_enemy-type"][0], RANGES["RDT_enemy-type"][1]);
@@ -1210,7 +1219,6 @@ function RDT_Error_404(){
 function RDT_displayItemEdit(id, idx, itemHx){
 	$("#RDT_openFileList").css({"display": "none"});
 	main_closeFileList();
-	//
 	var hex;
 	var nome;
 	var posX;
