@@ -533,6 +533,7 @@ function showAbout(){
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#menu-utility-aba").css({"display": "none"});
 	$("#menu-utility-aba-2").css({"display": "none"});
+	$("#img-logo").fadeOut({duration: 120, queue: false});
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
 }
 /// MSG
@@ -935,9 +936,9 @@ function RDT_showMenu(id){
 	scrollLog();
 }
 function RDT_showEditMsgCode(index, codeHex){
+	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
 	var header = codeHex.slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-header"][1]);
 	if (header !== "64"){
-		document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
 		document.getElementById('RDT-lbl-MSGCODE-index').innerHTML = codeHex.slice(RANGES["RDT_msgCode-id"][0],RANGES["RDT_msgCode-id"][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-X').value = codeHex.slice(RANGES["RDT_msgCode-0-xPos"][0], RANGES["RDT_msgCode-0-xPos"][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-Z').value = codeHex.slice(RANGES["RDT_msgCode-0-zPos"][0], RANGES["RDT_msgCode-0-zPos"][1]).toUpperCase();

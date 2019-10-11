@@ -83,8 +83,12 @@ input[type="range" i]{
     text-shadow: 0 0 10px #555;
 }
 .about{
-    background-image: linear-gradient(to bottom, #442d59, #0e0b22);
-    border-radius: 230px;
+    background-image: linear-gradient(to bottom, #5f4774, #1b163f);
+    border-bottom-right-radius: 160px;
+    border-bottom-left-radius: 70px;
+    box-shadow: 0 0 30px #5d46727a;
+    border-top-left-radius: 160px;
+    border-top-right-radius: 70px;
     position: absolute;
     padding: 34px;
     left: 110px;
@@ -102,8 +106,8 @@ input[type="range" i]{
 }
 .textLOGO{
     color: #fff;
-    text-shadow: 0 0 10px #f00;
     font-size: xx-large;
+    text-shadow: 0 0 30px #f00;
 }
 .msg-legenda-sticky{
     position: sticky;
