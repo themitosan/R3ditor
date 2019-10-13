@@ -10,6 +10,9 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "nw.exe".
 
+## Requirements
+- To use the wizard, you will need the visual studio 2005 installed (rofs.exe need this to unpack "rofsxx.dat" files)
+
 ## How to update
 - Just click on "Check for updates" and follow the instructions!
 
