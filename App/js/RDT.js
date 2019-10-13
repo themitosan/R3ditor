@@ -196,25 +196,25 @@ function RDT_decompileCameras(id){
 	var CAMERA_RAW = localStorage.getItem('RDT_Camera-' + id);
 
 	var CAM_header		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-Header"][0], RANGES["RDT_cam-0-Header"][1]);
-	var CAM_originX_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-1"][0], RANGES["RDT_cam-0-cX-1"][1]);
-	var CAM_originX_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-2"][0], RANGES["RDT_cam-0-cX-2"][1]);
-	var CAM_originY_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-1"][0], RANGES["RDT_cam-0-cY-1"][1]);
-	var CAM_originY_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-2"][0], RANGES["RDT_cam-0-cY-2"][1]);
-	var CAM_originZ_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-1"][0], RANGES["RDT_cam-0-cZ-1"][1]);
-	var CAM_originZ_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-2"][0], RANGES["RDT_cam-0-cZ-2"][1]);
-	var CAM_directionX_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-1"][0], RANGES["RDT_cam-0-nX-1"][1]);
-	var CAM_directionX_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-2"][0], RANGES["RDT_cam-0-nX-2"][1]);
-	var CAM_directionY_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-1"][0], RANGES["RDT_cam-0-nY-1"][1]);
-	var CAM_directionY_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-2"][0], RANGES["RDT_cam-0-nY-2"][1]);
-	var CAM_directionZ_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-1"][0], RANGES["RDT_cam-0-nZ-1"][1]);
-	var CAM_directionZ_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-2"][0], RANGES["RDT_cam-0-nZ-2"][1]);
-	var CAM_future		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-misc"][0], RANGES["RDT_cam-0-misc"][1]);
+	var CAM_originX_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-1"][0],   RANGES["RDT_cam-0-cX-1"][1]);
+	var CAM_originX_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-2"][0],   RANGES["RDT_cam-0-cX-2"][1]);
+	var CAM_originY_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-1"][0],   RANGES["RDT_cam-0-cY-1"][1]);
+	var CAM_originY_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cY-2"][0],   RANGES["RDT_cam-0-cY-2"][1]);
+	var CAM_originZ_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-1"][0],   RANGES["RDT_cam-0-cZ-1"][1]);
+	var CAM_originZ_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cZ-2"][0],   RANGES["RDT_cam-0-cZ-2"][1]);
+	var CAM_directionX_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-1"][0],   RANGES["RDT_cam-0-nX-1"][1]);
+	var CAM_directionX_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nX-2"][0],   RANGES["RDT_cam-0-nX-2"][1]);
+	var CAM_directionY_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-1"][0],   RANGES["RDT_cam-0-nY-1"][1]);
+	var CAM_directionY_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nY-2"][0],   RANGES["RDT_cam-0-nY-2"][1]);
+	var CAM_directionZ_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-1"][0],   RANGES["RDT_cam-0-nZ-1"][1]);
+	var CAM_directionZ_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-2"][0],   RANGES["RDT_cam-0-nZ-2"][1]);
+	var CAM_future		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-misc"][0],   RANGES["RDT_cam-0-misc"][1]);
 
 	var CAM_IMG = APP_PATH + "/App/Img/404.png";
 
 	var HTML_RDTCAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" class="RDT_camImgItem"></div>' + 
 		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="WIP();">' + 
-		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam 00<div class="menu-separador"></div>' + 
+		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam ??<div class="menu-separador"></div>' + 
 		'(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + '</font><br>' + 
 		'(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>' + 
 		'(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font><br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + '</font><div class="RDT_editCam_direction">' + 
@@ -235,12 +235,12 @@ function RDT_getEnemiesArray(){
 		var c = 0;
 		RDT_getEnemies("7d00");
 		while (c < RDT_enemiesArray.length){
-			RDT_decompileEnemy(c, RDT_enemiesArray[c]);
+			RDT_decompileEnemyNPC(c, RDT_enemiesArray[c]);
 			c++;
 		}
 	}
 }
-function RDT_decompileEnemy(index, enemyHex){
+function RDT_decompileEnemyNPC(index, enemyHex){
 	var EN_header   = enemyHex.slice(RANGES["RDT_enemy-header"][0], 	 RANGES["RDT_enemy-header"][1]);
 	var EN_numero 	= enemyHex.slice(RANGES["RDT_enemy-enemyNumber"][0], RANGES["RDT_enemy-enemyNumber"][1]);
 	var EN_type   	= enemyHex.slice(RANGES["RDT_enemy-type"][0], 		 RANGES["RDT_enemy-type"][1]);
@@ -1622,8 +1622,8 @@ function RDT_makeRDTConfigFile(){
 	// Final
 	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
 	try{
-		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
-		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');
+		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", FILE_COMPILED, 'utf-8');
+		addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
 		log_separador();
 		RDT_generateMapFile = false;
 	} catch (err){
@@ -1637,8 +1637,8 @@ function RDT_makeRDTConfigFile(){
 function RDT_generateDummyMapFile(){
 	var FILE_COMPILED = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n0";
 	try{
-		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", FILE_COMPILED, 'utf-8');
-		addLog('log', 'INFO - RDT Map was saved successfully! (' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ')');
+		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", FILE_COMPILED, 'utf-8');
+		addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
 		log_separador();
 		RDT_generateMapFile = false;
 	} catch (err){
@@ -1658,8 +1658,8 @@ function RDT_requestFix(fix){
 	RDT_MAPFILE = undefined;
 	RDT_generateMapFile = false;
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
-	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
-		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap");
+	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true){
+		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap");
 	}
 	if (fix === 0){
 		RDT_requestReloadWithFix0 = true;
@@ -1687,7 +1687,7 @@ function RDT_finishMessageAnalysis(){
 		RDT_MSG_CURRENT_TEST = 4;
 	}
 	RDT_generateMapFile = true;
-	console.info("\nMelhor Opção: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
+	console.info("\nBest option: " + RDT_MSG_CURRENT_TEST + "\nResultado do Teste 1: " + RDT_MSG_RESULT_1 + "\nResultado do Teste 2: " + RDT_MSG_RESULT_2 + "\nResultado do Teste 3: " + RDT_MSG_RESULT_3 + "\nResultado do Teste 4: " + RDT_MSG_RESULT_4 + "\n\n");
 	RDT_readMessages();
 	addLog('log', 'RDT - Analysis Complete!');
 	scrollLog();
@@ -1705,6 +1705,19 @@ function RDT_startMessageAnalysis(){
 	RDT_readMessages();
 	RDT_finishMessageAnalysis();
 }
+function RDT_getGameMode(){
+	var cfgFile;
+	if (ORIGINAL_FILENAME.indexOf("DATA_E") !== -1){
+		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase() + "_E";
+	}
+	if (ORIGINAL_FILENAME.indexOf("DATA_AJ") !== -1){
+		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase() + "_AJ";
+	}
+	if (ORIGINAL_FILENAME.indexOf("DATA_AJ") === -1 && ORIGINAL_FILENAME.indexOf("DATA_E") === -1){
+		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase();
+	}
+	return cfgFile;
+}
 function RDT_lookForRDTConfigFile(){
 	var c = 0;
 	if (getFileName(ORIGINAL_FILENAME) === "r216" || getFileName(ORIGINAL_FILENAME) === "r50b" || getFileName(ORIGINAL_FILENAME) === "r212"){
@@ -1716,12 +1729,12 @@ function RDT_lookForRDTConfigFile(){
 	startFirstMessage = undefined;
 	document.title = APP_NAME + " - Please wait...";
 	document.getElementById('RDT_MSG-holder').innerHTML = "";
-	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true && RDT_loop < 4){
-		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap)");
+	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true && RDT_loop < 4){
+		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap)");
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
-		RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8').toString().split('\n').forEach(function(line){ 
+		RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", 'utf-8').toString().split('\n').forEach(function(line){ 
 			mapfile.push(line); 
 		});
 		// Messages (MSG)
@@ -1919,16 +1932,16 @@ function RDT_lookForRDTConfigFile(){
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Undefined";
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Undefined";
 			}
-			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
+			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap";
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
 			RDT_getMessageCodesArray();
 			RDT_loading = false;
 			RDT_showMenu(1);
 		} else {
-			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", 'utf-8');
+			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", 'utf-8');
 			var BLOCK_SECTOR = newMapFile + "\n[MSGBLOCK]\n" + BLOCK_MSGS.length.toString(16) + "\n";
 			try{
-				fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap", BLOCK_SECTOR, 'utf-8');
+				fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", BLOCK_SECTOR, 'utf-8');
 			}catch(err){
 				console.error(err);
 				addLog('error', 'ERROR - Something went wrong while saving mapfile!');
@@ -1952,8 +1965,8 @@ function RDT_lookForRDTConfigFile(){
 			RDT_requestReloadWithFix1 = false;
 			$("#RDT_lbl-msg_c_blockHex").removeClass('red');
 			$("#RDT_lbl-msg_c_blockHex").removeClass('green');
-			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap") === true){
-				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdtmap";
+			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true){
+				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap";
 			} else {
 				RDT_MAPFILE = "The map was not generated due an error";
 			}

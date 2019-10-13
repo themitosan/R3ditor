@@ -475,6 +475,7 @@ input[type="range" i]{
 	float: right;
 }
 .aba{
+    zoom: 0.9;
     color: #fff;
     border: none;
     outline: none;
@@ -485,9 +486,9 @@ input[type="range" i]{
     padding-left: 16px;
     padding-bottom: 6px;
     padding-right: 16px;
-	background-color: #272727;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    background-image: linear-gradient(to bottom, #272727, #121212);
 }
 .aba:focus{
     outline: none;
@@ -497,13 +498,20 @@ input[type="range" i]{
 	margin-left: 12px;
 }
 .aba-select{
+    zoom: 1;
     outline: none;
     text-shadow: 0 0 6px #000;
-    background-image: linear-gradient(to bottom, #696969, #444444);
+    background-image: linear-gradient(to bottom, #696969, #444);
+}
+.aba-select-2{
+    zoom: 1;
+    outline: none;
+    text-shadow: 0 0 6px #000;
+    background-image: linear-gradient(to bottom, #9e9e9e, #626262);
 }
 .RDT-item-select{
-    position: sticky;
     width: 550px !important;
+    position: sticky;
     left: 740px;
 }
 .RDT-item-pos{
@@ -1015,10 +1023,10 @@ input[type="range" i]{
     font-size: -webkit-xxx-large;
 }
 .RDT-message-content{
-    width: 76%;
+    width: 78%;
     min-height: 18px;
     margin-top: -18px;
-    margin-left: 94px;
+    margin-left: 88px;
     text-align: -webkit-left;
 }
 .RDT_msgLblErrorAtualLen{
@@ -1149,6 +1157,7 @@ input[type="range" i]{
     top: 10px;
     left: 620px;
     position: absolute;
+    box-shadow: 0 0 6px #2b2b2b;
 }
 .wizard{
     top: 28%;
@@ -1183,32 +1192,33 @@ input[type="range" i]{
     height: 514px;
     border-radius: 6px;
     position: absolute;
-    background-image: linear-gradient(to bottom, #545454, #505050);
+    background-image: linear-gradient(to bottom, #3f3f3f, #505050);
 }
 .fileList_files{
-    width: auto;
+    top: 70px;
+    width: 658px;
     padding: 6px;
     height: auto;
     overflow: auto;
+    position: absolute;
     border-radius: 4px;
-    background-color: #222;
-    box-shadow: 0 0 10px #3c3c3c;
+    background-image: linear-gradient(to bottom, #626262, #151515);
 }
 .fileList_img{
-    width: 110px;
+    width: 134px;
     border-radius: 4px;
 }
 .fileList_item{
     padding: 4px;
-    height: 82.5px;
+    height: 100px;
     cursor: pointer;
     margin-bottom: 4px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
 .fileList_details{
-    margin-top: -86px;
-    margin-left: 116px;
+    margin-top: -104px;
+    margin-left: 138px;
 }
 .fileList_item_color_a{
     background-image: linear-gradient(to right, #7a7a92, transparent);
@@ -1399,4 +1409,11 @@ input[type="range" i]{
     width: 30%;
     left: 292px;
     position: relative;
+}
+/*
+    File list
+*/
+.fileList_aba_holder{
+    position: absolute;
+    top: -6px;
 }

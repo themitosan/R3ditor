@@ -43,6 +43,9 @@
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
+			<!-- Direita WIP -->
+			<input type="button" class="botao-menu right none none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
+			<input type="button" class="botao-menu right none none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
@@ -59,7 +62,7 @@
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
-			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3);">
+			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 1);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
 		</div>
@@ -88,6 +91,27 @@
 		<div class="menu-topo none" id="menu-topo-fileEditor">
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
 		</div>
+		<!-- Lista de Arquivos Disponiveis -->
+		<div class="fileList none" id="avaliable_fileList">
+			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
+			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right">
+			<div class="fileList_aba_holder" id="fileList_aba_list">
+				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
+				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">
+			</div>
+			<div id="fileListHolder" class="fileList_files none">
+				<!-- A lista de arquivos vai aqui -->
+			</div>
+			<div id="fileListHolder_AJ" class="fileList_files none">
+				<!-- A lista de arquivos (easy) vai aqui -->
+			</div>
+		</div>
+		<!-- Last RDT -->
+		<div class="fileList none" id="RDT_recentFile">
+			<center><font class="titulo">Recently opened</font></center>
+				<!-- O ultimo RDT vai aqui -->
+			</div>
+		</div>
 		<!-- FORM: File Generator -->
 		<div class="none" id="menu-FILEGEN">
 			<input type="button" id="FILEGEN-aba-menu" class="aba aba-left-fix aba-select" value="File Generator">
@@ -104,24 +128,10 @@
 				</div>
 			</div>
 		</div>
-		<!-- Lista de Arquivos Disponiveis -->
-		<div class="fileList none" id="avaliable_fileList">
-			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
-			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right">
-			<div id="fileListHolder" class="fileList_files none">
-				<!-- A lista de arquivos vai aqui -->
-			</div>
-		</div>
-		<!-- Last RDT -->
-		<div class="fileList none" id="RDT_recentFile">
-			<center><font class="titulo">Recently opened</font></center>
-				<!-- O ultimo RDT vai aqui -->
-			</div>
-		</div>
 		<!-- FORM: RDT -->
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
-			<input type="button" id="RDT-aba-menu-9" class="aba none" value="Cameras (???)" onclick="RDT_showMenu(9);">
+			<input type="button" id="RDT-aba-menu-9" class="aba" value="Cameras (???)" onclick="RDT_showMenu(9);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
@@ -346,8 +356,8 @@
 					<div id="RDT_BG_1" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">General</font></center>
 					File Name: <font class="RDT-menu-geral-text" id="RDT-lbl-FILENAME">???</font><br>
+					File Size: <font class="RDT-menu-geral-text" id="RDT_lbl_fSize">???</font><br>
 					Map File: <font class="RDT-menu-geral-text" id="RDT_mapFileName">???</font><br>
-					Size: <font class="RDT-menu-geral-text" id="RDT_lbl_fSize">???</font><br>
 					Original Local Name: <font class="RDT-menu-geral-text" id="RDT_lbl-localName">???</font><br>
 					Original City Location: <font class="RDT-menu-geral-text" id="RDT_lbl-localCity">???</font>
 					<div class="menu-separador"></div>

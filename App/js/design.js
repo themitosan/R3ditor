@@ -28,7 +28,7 @@ function scrollLog(){
 	document.getElementById("log-programa").scrollTop = document.getElementById("log-programa").scrollHeight;
 }
 /// General
-function main_renderFileList(id){
+function main_renderFileList(id, mode){
 	var c = 0;
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ""){
@@ -72,22 +72,38 @@ function main_renderFileList(id){
 		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)","border-top-left-radius": "0px", "border-bottom-left-radius": "0px"});
 	} else {
 		document.getElementById("fileListHolder").innerHTML = "";
+		document.getElementById("fileListHolder_AJ").innerHTML = "";
 	}
 	// RDT
 	if (id === 3){
+		var gameModePath;
+		$("#fileListHolder").css({"height": "440px"});
+		$("#fileListHolder_AJ").css({"height": "440px"});
+		$("#fileList_aba_list").css({"display": "inline"});
 		document.getElementById('fileList_title').innerHTML = "File List";
-		$("#fileListHolder").css({"height": "466px"});
-		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\") === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
-			var listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".RDT"));
+		if (mode === undefined || mode === null){
+			gameModePath = "DATA_E";
+		} else {
+			if (mode === 1){
+				gameModePath = "DATA_AJ";
+			}
+			if (mode === 2){
+				gameModePath = "DATA_E";
+			}
+		}
+		if (fs.existsSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\") === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
+			var listRDT = fs.readdirSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\").filter(fn => fn.endsWith(".RDT"));
 			if (listRDT.length < 1){
-				listRDT = fs.readdirSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\").filter(fn => fn.endsWith(".rdt"));
+				listRDT = fs.readdirSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\").filter(fn => fn.endsWith(".rdt"));
 			}
 			while(c < listRDT.length){
 				var mFile;
+				var gMODE;
 				var imgPreview;
+				var nOriginal = "";
 				var origName = "Unknown";
 				var origCity = "Unknown";
-				var currentRDT = APP_PATH + "\\Assets\\DATA_E\\RDT\\" + listRDT[c];
+				var currentRDT = APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\" + listRDT[c];
 				var RDT_name = getFileName(currentRDT).toUpperCase();
 				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
 					imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
@@ -105,19 +121,38 @@ function main_renderFileList(id){
 					origName = RDT_locations[RDT_name][0];
 					origCity = RDT_locations[RDT_name][1];
 				}
-				var nOriginal;
 				if (mFile.length > 57){
 					mFile = "..." + mFile.slice(parseInt(mFile.length / 2), mFile.length);
 					nOriginal = mFile;
 				}
+				if (gameModePath === "DATA_E"){
+					gMODE = "Hard";
+				} else {
+					gMODE = "Easy";
+				}
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 					' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Map File: <font title="' + nOriginal + '">' + mFile + 
+					'draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Game Mode: ' + gMODE + '<br>Map File: <font title="' + nOriginal + '">' + mFile + 
 					'</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
-				$("#fileListHolder").append(fileList_HTML_template);
+				if (gameModePath === "DATA_E"){
+					$("#fileListHolder").append(fileList_HTML_template);
+				}
+				if (gameModePath === "DATA_AJ"){
+					$("#fileListHolder_AJ").append(fileList_HTML_template);
+				}
 				c++;
 			}
-			$("#fileListHolder").css({"display": "block"});
+			if (gameModePath === "DATA_E"){
+				$("#fileListHolder").css({"display": "block"});
+				$("#fileListHolder_AJ").css({"display": "none"});
+				$("#fileList_aba_hard").addClass('aba-select-2');
+				$("#fileList_aba_easy").removeClass('aba-select-2');
+			} else {
+				$("#fileListHolder").css({"display": "none"});
+				$("#fileListHolder_AJ").css({"display": "block"});
+				$("#fileList_aba_easy").addClass('aba-select-2');
+				$("#fileList_aba_hard").removeClass('aba-select-2');
+			}
 			$("#FILELIST_goBackBtn").css({"display": "inline"});
 			$("#avaliable_fileList").css({"display": "block", "border-bottom-right-radius": "2px"});
 		} else {
@@ -127,7 +162,8 @@ function main_renderFileList(id){
 	}
 	// Save
 	if (id === 2){
-		$("#fileListHolder").css({"height": "466px"});
+		$("#fileList_aba_list").css({"display": "none"});
+		$("#fileListHolder").css({"height": "466px", "top": "46px"});
 		document.getElementById('fileList_title').innerHTML = "Saves";
 		if (fs.existsSync(APP_PATH + "\\Assets\\Save\\") === true){
 			var SAV_list = fs.readdirSync(APP_PATH + "\\Assets\\Save\\").filter(fn => fn.endsWith(".SAV"));
@@ -157,8 +193,9 @@ function main_renderFileList(id){
 				$("#fileListHolder").append(fileList_HTML_template);
 				c++;
 			}
-			$("#avaliable_fileList").css({"display": "block", "height": "428px"});
-			$("#fileListHolder").css({"display": "block", "height": "378px"});
+			$("#fileListHolder_AJ").css({"display": "none"});
+			$("#avaliable_fileList").css({"display": "block", "height": "502px"});
+			$("#fileListHolder").css({"display": "block", "height": "450px", "background-image": "linear-gradient(to bottom, #292929, #151515)", "box-shadow": "0 0 12px #222"});
 		} else {
 			if (enable_mod === true){
 				console.warn('WARN - Unable to render FileList!');
@@ -188,22 +225,22 @@ function main_menu(anim){
 		$("#menu-utility-aba-2").css({"display": "none"});
 	}
 	if (anim === 1){ // Save
-		document.title = APP_NAME + " - Save Editor (*.sav)";
+		document.title = APP_NAME + " - Save Editor (*.SAV)";
 		$("#menu-topo-save").css({"display": "block"});
 		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG
-		document.title = APP_NAME + " - Message Editor (*.msg)";
+		document.title = APP_NAME + " - Message Editor (*.MSG)";
 		$("#msg-lbl-totalCommands").html(MSG_totalComandos);
 		$("#menu-topo-msg").css({"display": "block"});
 		$("#menu-topo-MOD").css({"display": "none"});
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + " - Map Editor (*.rdt)";
+		document.title = APP_NAME + " - Map Editor (*.RDT)";
 		$("#menu-topo-RDT").css({"display": "block"});
 		if (enable_mod === true){
-			main_renderFileList(3);
+			main_renderFileList(3, 1);
 		} else {
 			$("#avaliable_fileList").css({"display": "none"});
 		}
@@ -812,7 +849,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + " - Map Editor (*.rdt) - File: " + ORIGINAL_FILENAME;
+	document.title = APP_NAME + " - Map Editor (*.RDT) - File: " + ORIGINAL_FILENAME;
 	$("#img-logo").css({"display": "none"});
 	$("#avaliable_fileList").css({"display": "none"});
 	if (RDT_lastFileOpened !== ""){
