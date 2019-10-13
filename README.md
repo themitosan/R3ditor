@@ -19,7 +19,6 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 ## Roadmap
 As you can see, this software still WIP - Expect changes in the next versions!
 You can see what will be implemented in the future in our <a href="https://github.com/themitosan/R3ditor/blob/master/Roadmap.md">Roadmap</a>.<br>
-Detail: It does not show what has already been done, only things that are in progress or have already been implemented.
 
 ## Supported File Formats
 
