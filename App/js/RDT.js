@@ -228,7 +228,6 @@ function RDT_decompileCameras(id){
 
 	$("#RDT_camera_holder").append(HTML_RDTCAMERA_TEMPLATE);
 }
-
 // Enemies & NPC's
 function RDT_getEnemiesArray(){
 	if (RDT_arquivoBruto !== undefined){
@@ -269,7 +268,7 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 function RDT_ENEMYNPC_APPLY(id){
 	var reason = "";
 	var canCompile = true;
-	var header    = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-header"][0], RANGES["RDT_enemy-header"][1]);
+	var header    = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-header"][0],   RANGES["RDT_enemy-header"][1]);
 	var offset_0  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]);
 	var offset_1  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]);
 	var nX		  = document.getElementById('RDT_enemyNPC-edit-X').value.slice(0, 4).toLowerCase();
@@ -892,18 +891,18 @@ function RDT_renderItens(index, hex){
 	var convert;
 	var modelId;
 	var hexComp;
-	var header  = hex.slice(RANGES["RDT_item-header"][0], RANGES["RDT_item-header"][1]);
+	var header  = hex.slice(RANGES["RDT_item-header"][0],        RANGES["RDT_item-header"][1]);
 	var ident   = hex.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
 	if (header === "67"){
-		x 		= hex.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
-		y 		= hex.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
-		z 		= hex.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
-		r 		= hex.slice(RANGES["RDT_item-0-itemRR"][0], RANGES["RDT_item-0-itemRR"][1]);
-		id 		= hex.slice(RANGES["RDT_item-0-itemID"][0], RANGES["RDT_item-0-itemID"][1]);
-		quant 	= hex.slice(RANGES["RDT_item-0-itemQuant"][0], RANGES["RDT_item-0-itemQuant"][1]);
-		iFlag  	= hex.slice(RANGES["RDT_item-0-itemFlag"][0], RANGES["RDT_item-0-itemFlag"][1]);
-		modelId = hex.slice(RANGES["RDT_item-0-modelID"][0], RANGES["RDT_item-0-modelID"][1]);
-		mp 		= hex.slice(RANGES["RDT_item-0-itemMP"][0], RANGES["RDT_item-0-itemMP"][1]);
+		x 		= hex.slice(RANGES["RDT_item-0-itemXX"][0],      RANGES["RDT_item-0-itemXX"][1]);
+		y 		= hex.slice(RANGES["RDT_item-0-itemYY"][0],      RANGES["RDT_item-0-itemYY"][1]);
+		z 		= hex.slice(RANGES["RDT_item-0-itemZZ"][0],      RANGES["RDT_item-0-itemZZ"][1]);
+		r 		= hex.slice(RANGES["RDT_item-0-itemRR"][0],      RANGES["RDT_item-0-itemRR"][1]);
+		id 		= hex.slice(RANGES["RDT_item-0-itemID"][0],      RANGES["RDT_item-0-itemID"][1]);
+		quant 	= hex.slice(RANGES["RDT_item-0-itemQuant"][0],   RANGES["RDT_item-0-itemQuant"][1]);
+		iFlag  	= hex.slice(RANGES["RDT_item-0-itemFlag"][0],    RANGES["RDT_item-0-itemFlag"][1]);
+		modelId = hex.slice(RANGES["RDT_item-0-modelID"][0],     RANGES["RDT_item-0-modelID"][1]);
+		mp 		= hex.slice(RANGES["RDT_item-0-itemMP"][0],      RANGES["RDT_item-0-itemMP"][1]);
 		hexComp = '<font title="Header">' + header.toUpperCase() + '</font> <font title="Identifier">' + ident.toUpperCase() + '</font> ' + 
 				  localStorage.getItem("RDT_Item-" + index).slice(4, 12).toUpperCase() + ' <font title="X pos.">' +  x.toUpperCase() + '</font> <font title="Y pos.">' 
 				  + y.toUpperCase() + '</font> <font title="Z pos.">' + z.toUpperCase() + '</font> <font title="R pos.">' + r.toUpperCase() + '</font> <font title="Item Hex">' + id.toUpperCase() + 
@@ -916,11 +915,11 @@ function RDT_renderItens(index, hex){
 		y 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
 		z 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
 		r 		= "[WIP]"; //hex.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
-		id 		= hex.slice(RANGES["RDT_item-1-itemID"][0], RANGES["RDT_item-1-itemID"][1]);
-		quant 	= hex.slice(RANGES["RDT_item-1-itemQuant"][0], RANGES["RDT_item-1-itemQuant"][1]);
+		id 		= hex.slice(RANGES["RDT_item-1-itemID"][0],     RANGES["RDT_item-1-itemID"][1]);
+		quant 	= hex.slice(RANGES["RDT_item-1-itemQuant"][0],  RANGES["RDT_item-1-itemQuant"][1]);
 		iFlag  	= "[WIP]";
 		modelId = "[WIP]";
-		mp 		= hex.slice(RANGES["RDT_item-1-itemMP"][0], RANGES["RDT_item-1-itemMP"][1]);
+		mp 		= hex.slice(RANGES["RDT_item-1-itemMP"][0],     RANGES["RDT_item-1-itemMP"][1]);
 		hexComp = localStorage.getItem("RDT_Item-" + index).toUpperCase() + " [WIP]";
 	}
 	try{
@@ -1082,7 +1081,7 @@ function RDT_ITEM_APPLY(index, type, convert){
 			RDT_RECOMPILE_Lv1();
 		}
 	} else {
-		addLog("warn", "WARNING: There was an error while processing: " + error);
+		addLog("warn", "WARNING - There was an error while processing: " + error);
 		scrollLog();
 	}
 }

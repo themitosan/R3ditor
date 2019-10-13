@@ -62,7 +62,7 @@
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
-			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 1);">
+			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
 		</div>
@@ -782,7 +782,7 @@
 		<!-- AppLogo -->
 		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="forceUpdate();">
 		<!-- Log -->
-		<div class="log-holder" id="log-programa" onclick="main_closeFileList();">
+		<div class="log-holder" id="log-programa">
 			<!-- os logs vão aparecer aqui -->
 		</div>
 		<!-- File Loader -->

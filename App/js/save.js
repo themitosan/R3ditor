@@ -1,7 +1,7 @@
 /*
 	R3ditor - save.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Help me - please!
 */
 var SAVE_arquivoBruto;
 var CURRENT_SAVE_SLOT = 1;

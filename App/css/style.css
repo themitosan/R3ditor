@@ -1,9 +1,9 @@
 ::-webkit-scrollbar{
-    width: 8px;
     border-radius: 4px;
+    width: 8px;
 }
 ::-webkit-scrollbar-track{
-    background: #292929;
+    background-image: linear-gradient(to bottom, #292929, #212121);
     border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb{
@@ -1155,7 +1155,7 @@ input[type="range" i]{
 }
 .btn-goBack-fix{
     top: 10px;
-    left: 620px;
+    left: 616px;
     position: absolute;
     box-shadow: 0 0 6px #2b2b2b;
 }

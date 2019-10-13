@@ -58,11 +58,11 @@ function main_renderFileList(id, mode){
 		var originalPFile;
 		if (mFile.length > 44){
 			originalMFile = mFile;
-			mFile = "..." + mFile.slice(parseInt(mFile.length / 2), mFile.length);
+			mFile = "..." + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 		}
 		if (pFile.length > 44){
 			originalPFile = pFile;
-			pFile = "..." + pFile.slice(parseInt(pFile.length / 2), pFile.length);
+			pFile = "..." + pFile.slice(parseInt(pFile.length / 3), pFile.length);
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
@@ -112,17 +112,21 @@ function main_renderFileList(id, mode){
 				} else {
 					imgPreview = APP_PATH + "\\App\\img\\404.png";
 				}
-				if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap") === true){
-					mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap";
+				if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_E.rdtmap") === true){
+					mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_E.rdtmap";
 				} else {
-					mFile = "There is no map file for this RDT. Open it to generate!";
+					if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_AJ.rdtmap") === true){
+						mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_AJ.rdtmap";
+					} else {
+						mFile = "There is no map file for this RDT. Open it to generate!";
+					}
 				}
 				if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 					origName = RDT_locations[RDT_name][0];
 					origCity = RDT_locations[RDT_name][1];
 				}
-				if (mFile.length > 57){
-					mFile = "..." + mFile.slice(parseInt(mFile.length / 2), mFile.length);
+				if (mFile.length > 58){
+					mFile = "..." + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 					nOriginal = mFile;
 				}
 				if (gameModePath === "DATA_E"){
@@ -149,11 +153,13 @@ function main_renderFileList(id, mode){
 				$("#fileList_aba_easy").removeClass('aba-select-2');
 			} else {
 				$("#fileListHolder").css({"display": "none"});
-				$("#fileListHolder_AJ").css({"display": "block"});
 				$("#fileList_aba_easy").addClass('aba-select-2');
+				$("#fileListHolder_AJ").css({"display": "block"});
 				$("#fileList_aba_hard").removeClass('aba-select-2');
 			}
-			$("#FILELIST_goBackBtn").css({"display": "inline"});
+			if (RDT_arquivoBruto !== undefined){
+				$("#FILELIST_goBackBtn").css({"display": "inline"});
+			}
 			$("#avaliable_fileList").css({"display": "block", "border-bottom-right-radius": "2px"});
 		} else {
 			console.warn('WARN - Unable to render FileList!');
@@ -240,7 +246,7 @@ function main_menu(anim){
 		document.title = APP_NAME + " - Map Editor (*.RDT)";
 		$("#menu-topo-RDT").css({"display": "block"});
 		if (enable_mod === true){
-			main_renderFileList(3, 1);
+			main_renderFileList(3, 2);
 		} else {
 			$("#avaliable_fileList").css({"display": "none"});
 		}

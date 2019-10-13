@@ -1029,7 +1029,7 @@ var MSG_DICIONARIO = {
 	"f1": [false, "(Unknown Char / Function Nº 154 - Hex: f1)", true],
 	"f2": [false, "(Unknown Char / Function Nº 155 - Hex: f2)", true],
 	"f6": [false, "(Unknown Char / Function Nº 159 - Hex: f6)", true],
-	"f7": [false, "(Unknown Char / Function Nº 160 - Hex: f7)", true],
+	"f7": [false, "(Item Separator)",						   false],
 	//
 	"a0": [false, "(Function: Climax)", false],
 	"fb": [false, "(Yes / No)", false],
