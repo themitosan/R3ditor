@@ -90,6 +90,7 @@ input[type="range" i]{
     border-top-left-radius: 160px;
     border-top-right-radius: 70px;
     position: absolute;
+    overflow: hidden;
     padding: 34px;
     left: 110px;
     width: 80%;
@@ -97,6 +98,7 @@ input[type="range" i]{
 }
 .appLogo{
     width: 200px;
+    filter: blur(200px);
 }
 .about-tks{
     border-radius: 6px;

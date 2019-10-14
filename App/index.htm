@@ -724,9 +724,9 @@
 			</div>
 		</div>
 		<!-- Sobre -->
-		<div class="about none" id="about-r3ditor">
+		<div class="about none" id="about-r3ditor" onclick="main_closeFileList();">
 			<center>
-				<img src="img/logo.png" alt="R3ditor-Logo" class="appLogo"><br>
+				<img src="img/logo.png" alt="R3ditor-Logo" class="appLogo none" id="r_logo"><br>
 				<font class="textLOGO">R3ditor</font><br>
 				Version: <font id="app_version">???</font><br>
 				Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
@@ -739,14 +739,14 @@
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
 					The Entire <i>CT-Stars</i> Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!) - <a target="_blank" href="https://www.ct-stars.com/">More Info</a><br>
 				</div>
-				Shinji Mikami / Capcom Dev 1 Team - Thanks by creating the game of my life!
+				<u>Shinji Mikami / Capcom Dev 1 Team - Thanks by creating the game of my life!</u>
 				<br><br>
 				Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
 				<input type="button" class="botao-menu" value="Go Back" onclick="reload();">
 			</center>
 		</div>
 		<!-- Update Info -->
-		<div id="R3ditor_update" class="new_update none">
+		<div id="R3ditor_update" class="new_update none" onclick="main_closeFileList();">
 			<center>
 				<font class="titulo">There is a new update!</font><br>
 				New version: <font id="new_version">???</font>
@@ -780,7 +780,7 @@
 			</center>
 		</div>
 		<!-- AppLogo -->
-		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="forceUpdate();">
+		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="main_closeFileList();forceUpdate();">
 		<!-- Log -->
 		<div class="log-holder" id="log-programa">
 			<!-- os logs vão aparecer aqui -->

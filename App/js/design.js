@@ -578,8 +578,22 @@ function showAbout(){
 	$("#menu-topo-MOD").css({"display": "none"});
 	$("#menu-utility-aba").css({"display": "none"});
 	$("#menu-utility-aba-2").css({"display": "none"});
+	$("#r_logo").fadeIn({duration: 1500, queue: false});
 	$("#img-logo").fadeOut({duration: 120, queue: false});
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
+	MISC_unblurImg();
+}
+// eu preciso parar de pensar em animações assim...
+function MISC_unblurImg(){
+	var c = 10;
+	var imgTimer = setInterval(function(){
+		if (c > 0){
+			c--;
+			$("#r_logo").css({"filter": "blur(" + c + "px)"});
+		} else {
+			clearInterval(imgTimer);
+		}
+	}, 100);
 }
 /// MSG
 function MSG_showMenu(id){
