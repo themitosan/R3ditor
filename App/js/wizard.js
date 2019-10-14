@@ -8,6 +8,8 @@ var TEMP_APP_PATH;
 var GAME_PATH = "";
 var EXEC_BIO3_MERCE;
 var WZ_lastMenu = 0;
+var progressbar_0 = 0;
+var progressbar_1 = 65;
 var EXEC_BIO3_original;
 var enable_mod = false;
 var WZ_EXTRACTLIST = [];
@@ -43,6 +45,7 @@ function WZ_showWizardDialog(id){
 		// Set the game folder location
 		if (id === 1){
 			R3DITOR_movePercent(1, 25);
+			$("#WZ_dialog").css({"top": "29%"});
 			$("#WZ_BTN_2").css({"display": "none"});
 			$("#WZ_progressbar").fadeIn({duration: 500, queue: false});
 			document.getElementById('WZ_title').innerHTML = "First Step";
@@ -59,6 +62,7 @@ function WZ_showWizardDialog(id){
 		// Wrong file
 		if (id === 2){
 			R3DITOR_movePercent(1, 0);
+			$("#WZ_dialog").css({"top": "34%"});
 			$("#WZ_BTN_2").css({"display": "none"});
 			$("#WZ_progressbar").fadeOut({duration: 100, queue: false});
 			document.getElementById('WZ_title').innerHTML = "Whoops...";
@@ -76,7 +80,7 @@ function WZ_showWizardDialog(id){
 		// Confirm
 		if (id === 3){
 			R3DITOR_movePercent(1, 40);
-			console.log(GAME_PATH + "\n" + EXEC_BIO3_original);
+			$("#WZ_dialog").css({"top": "24%"});
 			GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "");
 			$("#WZ_BTN_2").css({"display": "inline"});
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_3;
@@ -130,6 +134,7 @@ function WZ_showWizardDialog(id){
 		if (id === 6){
 			killExternalSoftware();
 			R3DITOR_movePercent(1, 60);
+			$("#WZ_dialog").css({"top": "80px"});
 			$("#WZ_BTN_1").css({"display": "inline"});
 			$("#WZ_BTN_2").css({"display": "inline"});
 			EXEC_rofs = TEMP_APP_PATH + "\\App\\tools\\rofs.exe";
@@ -148,6 +153,7 @@ function WZ_showWizardDialog(id){
 		// Extracting Game Assets
 		if (id === 7){
 			enable_mod = true;
+			$("#WZ_dialog").css({"top": "28%"});
 			document.getElementById('WZ_title').innerHTML = "Extracting Game Assets...";
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_7;
 			WZ_STARTFINALPROCESS();
@@ -155,6 +161,7 @@ function WZ_showWizardDialog(id){
 		// Show Hex Editor
 		if (id === 8){
 			R3DITOR_movePercent(1, 50);
+			$("#WZ_dialog").css({"top": "28%"});
 			$("#WZ_BTN_2").css({"display": "none"});
 			$("#WZ_BTN_1").css({"display": "inline"});
 			document.getElementById('WZ_title').innerHTML = "Open in Hex Editor";
@@ -168,6 +175,7 @@ function WZ_showWizardDialog(id){
 		// Test Hex Editor
 		if (id === 9){
 			R3DITOR_movePercent(1, 50);
+			$("#WZ_dialog").css({"top": "24%"});
 			$("#WZ_BTN_1").css({"display": "inline"});
 			$("#WZ_BTN_2").css({"display": "inline"});
 			document.getElementById('WZ_title').innerHTML = "Test Hex Editor";
@@ -198,257 +206,39 @@ function WZ_STARTFINALPROCESS(){
 	R3DITORshowUpdateProgress();
 	R3DITOR_movePercent(1, 62);
 	R3DITOR_movePercent(0, 2, "Preparing \"Assets\" Folder...");
-	if (fs.existsSync(APP_PATH + "\\Assets") === true){
-		deleteFolderRecursive(APP_PATH + "\\Assets");
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_0();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_0();
-	}
+	WZ_EXTRACT_ROFS();
 }
-function WZ_EXTRACT_ROFS_0(){
-	fs.mkdirSync(APP_PATH + "\\Assets");
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs1.dat") === true){
-		R3DITOR_movePercent(1, 66);
-		R3DITOR_movePercent(0, 5, "Extracting Rofs1...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs1.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_1();
+function WZ_EXTRACT_ROFS(){
+	var current_rofs = 0;
+	var timer = setInterval(function(){
+		if (current_rofs !== 16){
+			if (EXTERNAL_APP_RUNNING === false && current_rofs < 16){
+				if (EXTERNAL_APP_EXITCODE === 0){
+					current_rofs++;
+					log_separador();
+					WZ_EXTRACT(current_rofs);
+				} else {
+					addLog('error', 'ERROR - Something went wrong while extracting Rofs' + id + '!');
+					clearInterval(timer);
+				}
+			} else {
+				console.log("Waiting Rofs " + current_rofs);
 			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_1();
-	}
+		} else {
+			WZ_finishExtract();
+			clearInterval(timer);
+		}
+	}, 50);
+	scrollLog();
 }
-function WZ_EXTRACT_ROFS_1(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs2.dat") === true){
-		R3DITOR_movePercent(1, 70);
-		R3DITOR_movePercent(0, 10, "Extracting Rofs2...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs2.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_2();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_2();
-	}
-}
-function WZ_EXTRACT_ROFS_2(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs3.dat") === true){
-		R3DITOR_movePercent(1, 72);
-		R3DITOR_movePercent(0, 15, "Extracting Rofs3...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs3.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_3();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_3();
-	}
-}
-function WZ_EXTRACT_ROFS_3(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs4.dat") === true){
-		R3DITOR_movePercent(1, 74);
-		R3DITOR_movePercent(0, 20, "Extracting Rofs4...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs4.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_4();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_4();
-	}
-}
-function WZ_EXTRACT_ROFS_4(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs5.dat") === true){
-		R3DITOR_movePercent(1, 76);
-		R3DITOR_movePercent(0, 25, "Extracting Rofs5...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs5.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_5();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_5();
-	}
-}
-function WZ_EXTRACT_ROFS_5(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs6.dat") === true){
-		R3DITOR_movePercent(1, 78);
-		R3DITOR_movePercent(0, 30, "Extracting Rofs6...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs6.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_6();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_6();
-	}
-}
-function WZ_EXTRACT_ROFS_6(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs7.dat") === true){
-		R3DITOR_movePercent(1, 80);
-		R3DITOR_movePercent(0, 30, "Extracting Rofs7...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs7.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_7();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_7();
-	}
-}
-function WZ_EXTRACT_ROFS_7(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs8.dat") === true){
-		R3DITOR_movePercent(1, 82);
-		R3DITOR_movePercent(0, 30, "Extracting Rofs8...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs8.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_8();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_8();
-	}
-}
-function WZ_EXTRACT_ROFS_8(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs9.dat") === true){
-		R3DITOR_movePercent(1, 84);
-		R3DITOR_movePercent(0, 35, "Extracting Rofs9...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs9.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_9();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_9();
-	}
-}
-function WZ_EXTRACT_ROFS_9(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs10.dat") === true){
-		R3DITOR_movePercent(1, 86);
-		R3DITOR_movePercent(0, 40, "Extracting Rofs10...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs10.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_10();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_10();
-	}
-}
-function WZ_EXTRACT_ROFS_10(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs11.dat") === true){
-		R3DITOR_movePercent(1, 88);
-		R3DITOR_movePercent(0, 45, "Extracting Rofs11...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs11.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_11();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_11();
-	}
-}
-function WZ_EXTRACT_ROFS_11(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs12.dat") === true){
-		R3DITOR_movePercent(1, 90);
-		R3DITOR_movePercent(0, 50, "Extracting Rofs12...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs12.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_12();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_12();
-	}
-}
-function WZ_EXTRACT_ROFS_12(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs13.dat") === true){
-		R3DITOR_movePercent(1, 92);
-		R3DITOR_movePercent(0, 55, "Extracting Rofs13...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs13.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_13();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_13();
-	}
-}
-function WZ_EXTRACT_ROFS_13(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs14.dat") === true){
-		R3DITOR_movePercent(1, 94);
-		R3DITOR_movePercent(0, 60, "Extracting Rofs14...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs14.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_EXTRACT_ROFS_14();
-			}
-		}, 50);
-	} else {
-		WZ_EXTRACT_ROFS_14();
-	}
-}
-function WZ_EXTRACT_ROFS_14(){
-	process.chdir(APP_PATH + "\\Assets");
-	if (fs.existsSync(GAME_PATH + "Rofs15.dat") === true){
-		R3DITOR_movePercent(1, 96);
-		R3DITOR_movePercent(0, 65, "Extracting Rofs15...");
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs15.dat"]);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				WZ_finishExtract();
-			}
-		}, 50);
-	} else {
-		WZ_finishExtract();
+function WZ_EXTRACT(id){
+	if (fs.existsSync(GAME_PATH + "Rofs" + id + ".dat") === true){
+		process.chdir(APP_PATH + "/Assets");
+		progressbar_1 = parseInt(progressbar_1 + 2);
+		progressbar_0 = parseInt(progressbar_0 + 6.6);
+		R3DITOR_movePercent(1, progressbar_1);
+		R3DITOR_movePercent(0, progressbar_0, "Extracting Rofs" + id + " - " + ROFS_STATUS[id][0]);
+		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs" + id + ".dat"]);
 	}
 }
 function WZ_finishExtract(){

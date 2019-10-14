@@ -16,6 +16,7 @@ var STATUS = "Undefined";
 var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
+var EXTERNAL_APP_EXITCODE = 0;
 var APP_VERSION = "0.3.0 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var APP_NAME = "R3ditor V. " + APP_VERSION;
@@ -257,6 +258,7 @@ function killExternalSoftware(){
 	}
 }
 function runExternalSoftware(exe, args){
+	EXTERNAL_APP_EXITCODE = 0;
 	EXTERNAL_APP_RUNNING = true;
 	const { spawn } = require('child_process');
 	if (args === undefined || args === null){
@@ -277,22 +279,23 @@ function runExternalSoftware(exe, args){
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
-		EXTERNAL_APP_RUNNING = false;
 		EXTERNAL_APP_PID = 0;
+		EXTERNAL_APP_RUNNING = false;
+		EXTERNAL_APP_EXITCODE = code;
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
 			$("#WZ_BTN_2").css({"display": "inline"});
 		}
 		if (RE3_RUNNING === true){
 			RE3_RUNNING = false;
 			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
-				$("#menu-utility").css({"top": "546px"});
 				$("#menu-utility-aba").css({"top": "472px"});
+				$("#menu-utility").css({"top": "546px"});
 			}
 			R3DITOR_RUNGAME(1);
 		}
+		var color;
 		document.title = APP_NAME;
 		process.chdir(TEMP_APP_PATH);
-		var color;
 		if (code > 1){
 			color = "red";
 		} else {

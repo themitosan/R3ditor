@@ -1120,6 +1120,7 @@ input[type="range" i]{
     border-radius: 4px;
     font-family: monospace;
     background-color: #010101;
+    box-shadow: 0 0 10px #bfffc12b;
 }
 .update_subtitle{
     font-size: x-large;

@@ -216,8 +216,10 @@ function main_openFileList(){
 	$("#FILELIST_goBackBtn").css({"display": "inline"});
 }
 function main_closeFileList(){
-	$("#avaliable_fileList").css({"display": "none"});
-	$("#FILELIST_goBackBtn").css({"display": "none"});
+	if (RDT_arquivoBruto !== undefined){
+		$("#avaliable_fileList").css({"display": "none"});
+		$("#FILELIST_goBackBtn").css({"display": "none"});
+	}
 }
 function main_menu(anim){
 	localStorage.clear();
