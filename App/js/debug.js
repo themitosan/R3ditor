@@ -3,31 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	me ajuda
 */
-function renderRanges(modo, first){
-	if (modo == 0){ // invent
-		var tot = 11;
-		var c = 1;
-		var a = undefined;
-		var anterior = first;
-		while (c !== tot){
-			console.log(anterior + ", " + parseInt(anterior + 8));
-			anterior = anterior + 8;
-			c++;
-		}
-		console.log("Pronto - OK!");
-	} else { 		// Baú
-		var tot = 65;
-		var c = 1;
-		var a = undefined;
-		var anterior = first;
-		while (c !== tot){
-			console.log(anterior + ", " + parseInt(anterior + 8));
-			anterior = anterior + 8;
-			c++;
-		}
-		console.log("Pronto - OK!");
-	}
-}
 function copyToClipboard(text){
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);

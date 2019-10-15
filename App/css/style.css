@@ -94,7 +94,7 @@ input[type="range" i]{
     padding: 34px;
     left: 110px;
     width: 80%;
-    top: 72px;
+    top: 48px;
 }
 .appLogo{
     width: 200px;
@@ -512,9 +512,13 @@ input[type="range" i]{
     background-image: linear-gradient(to bottom, #9e9e9e, #626262);
 }
 .RDT-item-select{
+    text-transform: none !important;
     width: 550px !important;
     position: sticky;
     left: 740px;
+}
+.no-transform-text{
+    text-transform: none !important;
 }
 .RDT-item-pos{
     position: sticky;
@@ -570,6 +574,7 @@ input[type="range" i]{
     border-radius: 4px;
     padding-bottom: 6px;
     background-color: #000;
+    text-transform: uppercase;
     box-shadow: 0 0 10px #00285087;
     text-shadow: 0 0 10px #ffffff2e;
 }
@@ -846,6 +851,9 @@ input[type="range" i]{
 }
 .RDT_coordsHolder_B{
     margin-top: -5px;
+}
+.RDT_coordsHolder_C{
+    margin-top: 5px;
 }
 .RDT-item-bg{
     background-image: linear-gradient(to bottom, #5755bd, #3a397d);
@@ -1392,7 +1400,7 @@ input[type="range" i]{
 .RDT_cam_holderInfos{
     margin-left: 226px;
     position: sticky;
-    width: 72%;
+    width: 63.2%;
 }
 .RDT_editCam_direction{
     top: -3px;
@@ -1409,9 +1417,25 @@ input[type="range" i]{
 }
 .RDT_camShowMisc{
     top: -1px;
-    width: 30%;
+    width: 34%;
     left: 292px;
     position: relative;
+}
+.RDT_camFutureFix{
+    position: sticky;
+    left: 600px;
+}
+.RDT_camEditXYZOrigin{
+    width: 56px;
+}
+.RDT_camEditXYZDirection{
+    position: absolute;
+    left: 168px;
+    top: 61px;
+}
+.RDT_camEditFixForm{
+    width: 340px;
+    left: 960px;
 }
 /*
     File list

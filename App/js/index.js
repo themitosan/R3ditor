@@ -38,9 +38,10 @@ function load(){
 		APP_PATH = process.cwd();
 		checkFolders();
 		WZ_verifyConfigFile();
+		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + " (" + process.arch + ")";
 	} catch(err){
 		console.error(err);
-		$("#img-logo").fadeOut({duration: 5000, queue: false});
+		$("#img-logo").fadeOut({duration: 5600, queue: false});
 		document.title = "Whoops...";
 		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');

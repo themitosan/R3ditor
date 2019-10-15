@@ -1,4 +1,4 @@
-/*
+﻿/*
 	R3ditor - Database.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please!
@@ -1531,7 +1531,7 @@ var RANGES = {
 	"RDT_cam-0-nY-2": 			   	 [40, 44],
 	"RDT_cam-0-nZ-1": 			   	 [44, 48],
 	"RDT_cam-0-nZ-2": 			   	 [48, 52],
-	"RDT_cam-0-misc": 				 [52, 62], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
+	"RDT_cam-0-misc": 				 [52, 64], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
 	/*
 		Doors
 	*/

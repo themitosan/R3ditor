@@ -176,11 +176,11 @@ function RDT_getCameras(){
 	if (RDT_arquivoBruto !== undefined){
 		var start = 196;
 		var offset = 64;
+		var extractTotCams = parseInt(RDT_arquivoBruto.slice(2, 4), 16);
 		var extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
-		while(RDT_camHeaderType[extract.slice(RANGES["RDT_cam-0-Header"][0], RANGES["RDT_cam-0-Header"][1])] !== undefined){
+		while(RDT_totalCameras < extractTotCams){
 			RDT_cameraArray.push(extract);
 			RDT_totalCameras++;
-			//
 			start = parseInt(start + offset);
 			extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
 		}
@@ -193,8 +193,9 @@ function RDT_getCameras(){
 }
 
 function RDT_decompileCameras(id){
-	var CAMERA_RAW = localStorage.getItem('RDT_Camera-' + id);
-
+	var CAM_IMG;
+	var titleFileName;
+	var CAMERA_RAW 		 = localStorage.getItem('RDT_Camera-' + id);
 	var CAM_header		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-Header"][0], RANGES["RDT_cam-0-Header"][1]);
 	var CAM_originX_1	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-1"][0],   RANGES["RDT_cam-0-cX-1"][1]);
 	var CAM_originX_2	 = CAMERA_RAW.slice(RANGES["RDT_cam-0-cX-2"][0],   RANGES["RDT_cam-0-cX-2"][1]);
@@ -209,24 +210,105 @@ function RDT_decompileCameras(id){
 	var CAM_directionZ_1 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-1"][0],   RANGES["RDT_cam-0-nZ-1"][1]);
 	var CAM_directionZ_2 = CAMERA_RAW.slice(RANGES["RDT_cam-0-nZ-2"][0],   RANGES["RDT_cam-0-nZ-2"][1]);
 	var CAM_future		 = CAMERA_RAW.slice(RANGES["RDT_cam-0-misc"][0],   RANGES["RDT_cam-0-misc"][1]);
-
-	var CAM_IMG = APP_PATH + "/App/Img/404.png";
-
-	var HTML_RDTCAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" class="RDT_camImgItem"></div>' + 
-		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="WIP();">' + 
-		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam ??<div class="menu-separador"></div>' + 
-		'(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + '</font><br>' + 
-		'(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>' + 
-		'(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font><br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + '</font><div class="RDT_editCam_direction">' + 
-		'(1) X Direction: <font class="">' + CAM_directionX_1.toUpperCase() + '</font><br>(2) X Direction: <font class="">' + CAM_directionX_2.toUpperCase() + '</font><br>' + 
-		'(1) Y Direction: <font class="">' + CAM_directionY_1.toUpperCase() + '</font><br>(2) Y Direction: <font class="">' + CAM_directionY_2.toUpperCase() + '</font><br>' + 
-		'(1) Z Direction: <font class="">' + CAM_directionZ_1.toUpperCase() + '</font><br>(2) Z Direction: <font class="">' + CAM_directionZ_2.toUpperCase() + '</font></div>' + 
-		'<div class="RDT_camShowMisc">Header: <font class="">' + CAM_header.toUpperCase() + '</font><br>Future: <font class="">' + CAM_future.toUpperCase() + '</font></div><div class="menu-separador"></div>' + 
-		'Hex: <font class="user-can-select">' + CAM_header.toUpperCase() + ' ' + CAM_originX_1.toUpperCase() + ' ' + CAM_originX_2.toUpperCase() + ' ' + CAM_originY_1.toUpperCase() + ' ' + CAM_originY_2.toUpperCase() + ' ' + 
-		CAM_originZ_1.toUpperCase() + ' ' + CAM_originZ_2.toUpperCase() + ' ' + CAM_directionX_1.toUpperCase() + ' ' + CAM_directionX_2.toUpperCase() + ' ' + CAM_directionY_1.toUpperCase() + ' ' + CAM_directionY_2.toUpperCase() + ' ' + 
-		CAM_directionZ_1.toUpperCase() + ' ' + CAM_directionZ_2.toUpperCase() + ' ' + CAM_future.toUpperCase() + '</font></div></div>';
-
-	$("#RDT_camera_holder").append(HTML_RDTCAMERA_TEMPLATE);
+	var CAM_ID = id.toString(16).toUpperCase();
+	if (CAM_ID.length < 2){
+		CAM_ID = "0" + CAM_ID;
+	}
+	if (fs.existsSync(APP_PATH + "/Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + ".JPG") === true){
+		CAM_IMG = APP_PATH + "/Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + ".JPG";
+		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + ".JPG";
+	} else {
+		CAM_IMG = APP_PATH + "/App/Img/404.png";
+		titleFileName = '';
+	}
+	var MASSIVE_HTML_RDTCAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
+		'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + 
+		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + '<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + 
+		'</font><br>(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font>' + 
+		'<br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + '</font><div class="RDT_editCam_direction">(1) X Direction: ' + CAM_directionX_1.toUpperCase() + '<br>(2) X Direction: ' + CAM_directionX_2.toUpperCase() + '<br>(1) Y Direction: ' + CAM_directionY_1.toUpperCase() + 
+		'<br>(2) Y Direction: ' + CAM_directionY_2.toUpperCase() + '<br>(1) Z Direction: ' + CAM_directionZ_1.toUpperCase() + '<br>(2) Z Direction: ' + CAM_directionZ_2.toUpperCase() + '</div><div class="RDT_camShowMisc">Header: <font class="RDT_camFutureFix">' + CAM_header.toUpperCase() + 
+		'</font><br>Other info: <font class="RDT_camFutureFix">' + CAM_future.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + CAM_header.toUpperCase() + '</font> <font title="(1) X Origin">' + CAM_originX_1.toUpperCase() + '</font> ' + 
+		'<font title="(2) X Origin">' + CAM_originX_2.toUpperCase() + '</font> <font title="(1) Y Origin">' + CAM_originY_1.toUpperCase() + '</font> <font title="(2) Y Origin">' + CAM_originY_2.toUpperCase() + '</font> <font title="(1) Z Origin">' + CAM_originZ_1.toUpperCase() + '</font> <font title="(2) Z Origin">' + 
+		CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + '</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + 
+		CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> <font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
+	$("#RDT_camera_holder").append(MASSIVE_HTML_RDTCAMERA_TEMPLATE);
+}
+function RDT_CAMERA_APPLY(id){
+	var reason;
+	var canCompile = true;
+	var ORIGINAL_CM 		 = localStorage.getItem("RDT_Camera-" + id);
+	var header 				 = ORIGINAL_CM.slice(0, 4);
+	var CM_NEW_Origin_X_1 	 = document.getElementById('RDT_X1_Origin-edit').value.toLowerCase();
+	var CM_NEW_Origin_X_2 	 = document.getElementById('RDT_X2_Origin-edit').value.toLowerCase();
+	var CM_NEW_Origin_Y_1 	 = document.getElementById('RDT_Y1_Origin-edit').value.toLowerCase();
+	var CM_NEW_Origin_Y_2 	 = document.getElementById('RDT_Y2_Origin-edit').value.toLowerCase();
+	var CM_NEW_Origin_Z_1 	 = document.getElementById('RDT_Z1_Origin-edit').value.toLowerCase();
+	var CM_NEW_Origin_Z_2 	 = document.getElementById('RDT_Z2_Origin-edit').value.toLowerCase();
+	var CM_NEW_Direction_X_1 = document.getElementById('RDT_X1_Direction-edit').value.toLowerCase();
+	var CM_NEW_Direction_X_2 = document.getElementById('RDT_X2_Direction-edit').value.toLowerCase();
+	var CM_NEW_Direction_Y_1 = document.getElementById('RDT_Y1_Direction-edit').value.toLowerCase();
+	var CM_NEW_Direction_Y_2 = document.getElementById('RDT_Y2_Direction-edit').value.toLowerCase();
+	var CM_NEW_Direction_Z_1 = document.getElementById('RDT_Z1_Direction-edit').value.toLowerCase();
+	var CM_NEW_Direction_Z_2 = document.getElementById('RDT_Z2_Direction-edit').value.toLowerCase();
+	var future 				 = ORIGINAL_CM.slice(RANGES["RDT_cam-0-misc"][0], RANGES["RDT_cam-0-misc"][0]);
+	if (CM_NEW_Origin_X_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) X Origin value are wrong!';
+	}
+	if (CM_NEW_Origin_X_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) X Origin value are wrong!';
+	}
+	if (CM_NEW_Origin_Y_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) Y Origin value are wrong!';
+	}
+	if (CM_NEW_Origin_Y_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) Y Origin value are wrong!';
+	}
+	if (CM_NEW_Origin_Z_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) Z Origin value are wrong!';
+	}
+	if (CM_NEW_Origin_Z_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) Z Origin value are wrong!';
+	}
+	if (CM_NEW_Direction_X_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) X Direction value are wrong!';
+	}
+	if (CM_NEW_Direction_X_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) X Direction value are wrong!';
+	}
+	if (CM_NEW_Direction_Y_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) Y Direction value are wrong!';
+	}
+	if (CM_NEW_Direction_Y_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) Y Direction value are wrong!';
+	}
+	if (CM_NEW_Direction_Z_1.length !== 4){
+		canCompile = false;
+		reason = 'The (1) Z Direction value are wrong!';
+	}
+	if (CM_NEW_Direction_Z_2.length !== 4){
+		canCompile = false;
+		reason = 'The (2) Z Direction value are wrong!';
+	}
+	if (canCompile === true){
+		var NEW_CAMERA_HEX = header + CM_NEW_Origin_X_1 + CM_NEW_Origin_X_2 + CM_NEW_Origin_Y_1 + CM_NEW_Origin_Y_2 + CM_NEW_Origin_Z_1 + CM_NEW_Origin_Z_2 + 
+		CM_NEW_Direction_X_1 + CM_NEW_Direction_X_2 + CM_NEW_Direction_Y_1 + CM_NEW_Direction_Y_2 + CM_NEW_Direction_Z_1 + CM_NEW_Direction_Z_2 + future;
+		RDT_COMPILE_Lv2(ORIGINAL_CM, NEW_CAMERA_HEX);
+		$("#RDT-aba-menu-9").trigger('click');
+	} else {
+		alert('WARNING - Unable to recompile camera ' + id + ":\n\n" + reason);
+		addLog('warn', 'WARNING - Unable to recompile camera ' + id + ": " + reason);
+	}
+	scrollLog();
 }
 // Enemies & NPC's
 function RDT_getEnemiesArray(){
@@ -266,22 +348,22 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 	$("#RDT_enemy_holder").append(ENEMY_HTML_TEMPLATE);
 }
 function RDT_ENEMYNPC_APPLY(id){
-	var reason = "";
+	var reason;
 	var canCompile = true;
-	var header    = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-header"][0],   RANGES["RDT_enemy-header"][1]);
-	var offset_0  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]);
-	var offset_1  = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]);
-	var nX		  = document.getElementById('RDT_enemyNPC-edit-X').value.slice(0, 4).toLowerCase();
-	var nY		  = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toLowerCase();
-	var nZ		  = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toLowerCase();
-	var nR		  = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toLowerCase();
-	var nTexture  = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toLowerCase();
-	var nSoundSet = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toLowerCase();
-	var nEnFlag   = document.getElementById('RDT_enemyNPC-edit-EnF').value.slice(0, 2).toLowerCase();
-	var nExFlag   = document.getElementById('RDT_enemyNPC-edit-ExF').value.slice(0, 2).toLowerCase();
-	var nEnNumber = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toLowerCase();
-	var nPose	  = document.getElementById('RDT_enemyNPC-edit-PO').value.toLowerCase();
-	var nEnemy    = document.getElementById('RDT_selectEnemyNPC').value;
+	var header     = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-header"][0],   RANGES["RDT_enemy-header"][1]);
+	var offset_0   = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]);
+	var offset_1   = localStorage.getItem("RDT_enemy-" + id).slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]);
+	var nX		   = document.getElementById('RDT_enemyNPC-edit-X').value.slice(0, 4).toLowerCase();
+	var nY		   = document.getElementById('RDT_enemyNPC-edit-Y').value.slice(0, 4).toLowerCase();
+	var nZ		   = document.getElementById('RDT_enemyNPC-edit-Z').value.slice(0, 4).toLowerCase();
+	var nR		   = document.getElementById('RDT_enemyNPC-edit-R').value.slice(0, 4).toLowerCase();
+	var nTexture   = document.getElementById('RDT_enemyNPC-edit-TX').value.slice(0, 2).toLowerCase();
+	var nSoundSet  = document.getElementById('RDT_enemyNPC-edit-SS').value.slice(0, 2).toLowerCase();
+	var nEnFlag    = document.getElementById('RDT_enemyNPC-edit-EnF').value.slice(0, 2).toLowerCase();
+	var nExFlag    = document.getElementById('RDT_enemyNPC-edit-ExF').value.slice(0, 2).toLowerCase();
+	var nEnNumber  = document.getElementById('RDT_enemyNPC-edit-EN').value.slice(0, 2).toLowerCase();
+	var nPose	   = document.getElementById('RDT_enemyNPC-edit-PO').value.toLowerCase();
+	var nEnemy     = document.getElementById('RDT_selectEnemyNPC').value;
 	if (nX.length !== 4){
 		canCompile = false;
 		reason = 'The X value are wrong!';
@@ -393,7 +475,6 @@ function RDT_getpropModels(hx){
 		}
 	}
 }
-
 // Message Code (63 ID 04 31 00 00)
 function RDT_getMessageCodesArray(){
 	var c = 0;
@@ -491,16 +572,16 @@ function RDT_decompileMessageCode(index, hex){
 	}
 }
 function RDT_MSGCODE_APPLY(id){
-	var reason = "";
-	var canCompile = true;
-	var readMode = document.getElementById('RDT_MSGCODE-edit-display').value;
-	var novaX = document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
-	var novaZ = document.getElementById('RDT_MSGCODE-edit-Z').value.slice(0, 4).toLowerCase();
-	var special = document.getElementById('RDT_MSGCODE-edit-special').value.slice(0, 2).toLowerCase();
+	var reason;
+	var canCompile  = true;
+	var readMode 	= document.getElementById('RDT_MSGCODE-edit-display').value;
+	var novaX		= document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
+	var novaZ		= document.getElementById('RDT_MSGCODE-edit-Z').value.slice(0, 4).toLowerCase();
+	var special 	= document.getElementById('RDT_MSGCODE-edit-special').value.slice(0, 2).toLowerCase();
 	var novaRadiusX = document.getElementById('RDT_MSGCODE-edit-radiusX').value.slice(0, 4).toLowerCase();
 	var novaRadiusZ = document.getElementById('RDT_MSGCODE-edit-radiusZ').value.slice(0, 4).toLowerCase();
-	var header = localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-identifier"][1]).toLowerCase();
-	var offset = localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-offset_0"][0], RANGES["RDT_msgCode-offset_1"][1]).toLowerCase();
+	var header 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-identifier"][1]).toLowerCase();
+	var offset 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-offset_0"][0], RANGES["RDT_msgCode-offset_1"][1]).toLowerCase();
 	if (novaX.length !== 4){
 		canCompile = false;
 		reason = "The X value are wrong!";
@@ -659,14 +740,14 @@ function RDT_copyPastePos(mode){
 	}
 	// Paste Next
 	if (mode === 1 && RDT_TEMP_NEXTX !== "" && RDT_TEMP_NEXTY !== "" && RDT_TEMP_NEXTZ !== "" && RDT_TEMP_NEXTR !== "" && RDT_TEMP_NEXT_STAGE !== "" && RDT_TEMP_NEXT_ROOM !== ""){
-		document.getElementById('RDT_door-edit-NX').value = RDT_TEMP_NEXTX;
-		document.getElementById('RDT_door-edit-NY').value = RDT_TEMP_NEXTY;
-		document.getElementById('RDT_door-edit-NZ').value = RDT_TEMP_NEXTZ;
-		document.getElementById('RDT_door-edit-NR').value = RDT_TEMP_NEXTR;
-		document.getElementById('RDT_door-edit-NS').value = RDT_TEMP_NEXT_STAGE;
-		document.getElementById('RDT_door-edit-NRN').value = RDT_TEMP_NEXT_ROOM;
-		document.getElementById('RDT_door-edit-NC').value = RDT_TEMP_NEXT_CAMERA;
-		document.getElementById('RDT_door-edit-NC-TXT').value = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_door-edit-NX').value 		  = RDT_TEMP_NEXTX;
+		document.getElementById('RDT_door-edit-NY').value 		  = RDT_TEMP_NEXTY;
+		document.getElementById('RDT_door-edit-NZ').value 		  = RDT_TEMP_NEXTZ;
+		document.getElementById('RDT_door-edit-NR').value 		  = RDT_TEMP_NEXTR;
+		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
+		document.getElementById('RDT_door-edit-NRN').value 		  = RDT_TEMP_NEXT_ROOM;
+		document.getElementById('RDT_door-edit-NC').value 	  	  = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_door-edit-NC-TXT').value 	  = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
 		RDT_renderNextRDTLbl();
 		RDT_renderEditDoorCamPreview();
@@ -675,23 +756,23 @@ function RDT_copyPastePos(mode){
 function RDT_DOOR_APPLY(index){
 	var reason = "";
 	var canCompile = true;
-	var ident = localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
-	var cX = document.getElementById('RDT_door-edit-X').value.toLowerCase();
-	var cY = document.getElementById('RDT_door-edit-Y').value.toLowerCase();
-	var cZ = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
-	var cR = document.getElementById('RDT_door-edit-R').value.toLowerCase();
-	var nX = document.getElementById('RDT_door-edit-NX').value.toLowerCase();
-	var nY = document.getElementById('RDT_door-edit-NY').value.toLowerCase();
-	var nZ = document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
-	var nR = document.getElementById('RDT_door-edit-NR').value.toLowerCase();
-	var nCP = document.getElementById('RDT_door-edit-NC').value.toLowerCase();
-	var nOO = document.getElementById('RDT_door-edit-OO').value.toLowerCase();
-	var nLF = document.getElementById('RDT_door-edit-LF').value.toLowerCase();
-	var nLK = document.getElementById('RDT_door-edit-LK').value.toLowerCase();
-	var nRN = document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
-	var nType = document.getElementById('RDT_door-edit-DT').value.toLowerCase();
-	var nStage = document.getElementById('RDT_door-edit-NS').value.toLowerCase();
-	var header = ident.slice(RANGES["RDT_door-0-header"][0], RANGES["RDT_door-0-doorIdentifier"][1]);
+	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
+	var cX 		= document.getElementById('RDT_door-edit-X').value.toLowerCase();
+	var cY 		= document.getElementById('RDT_door-edit-Y').value.toLowerCase();
+	var cZ 		= document.getElementById('RDT_door-edit-Z').value.toLowerCase();
+	var cR 		= document.getElementById('RDT_door-edit-R').value.toLowerCase();
+	var nX 		= document.getElementById('RDT_door-edit-NX').value.toLowerCase();
+	var nY 		= document.getElementById('RDT_door-edit-NY').value.toLowerCase();
+	var nZ 		= document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
+	var nR 		= document.getElementById('RDT_door-edit-NR').value.toLowerCase();
+	var nCP 	= document.getElementById('RDT_door-edit-NC').value.toLowerCase();
+	var nOO 	= document.getElementById('RDT_door-edit-OO').value.toLowerCase();
+	var nLF 	= document.getElementById('RDT_door-edit-LF').value.toLowerCase();
+	var nLK 	= document.getElementById('RDT_door-edit-LK').value.toLowerCase();
+	var nRN 	= document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
+	var nType	= document.getElementById('RDT_door-edit-DT').value.toLowerCase();
+	var nStage 	= document.getElementById('RDT_door-edit-NS').value.toLowerCase();
+	var header 	= ident.slice(RANGES["RDT_door-0-header"][0], RANGES["RDT_door-0-doorIdentifier"][1]);
 	var offset0 = ident.slice(RANGES["RDT_door-0-doorHexOffset0"][0], RANGES["RDT_door-0-doorHexOffset0"][1]);
 	var offset1 = ident.slice(RANGES["RDT_door-0-doorHexOffset1"][0], RANGES["RDT_door-0-doorHexOffset1"][1]);
 	var offset2 = ident.slice(RANGES["RDT_door-0-doorHexOffset2"][0], RANGES["RDT_door-0-doorHexOffset2"][1]);
@@ -820,13 +901,13 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310900");
 	RDT_generateItemIndexRaw("02318000");
 	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000"); // Padr√£o encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310000"); // Padr o encontrado em (quase) todos os itens
 	RDT_generateItemIndexRaw("02310500");
 	RDT_generateItemIndexRaw("02310100");
 	RDT_generateItemIndexRaw("02310200");
 	RDT_generateItemIndexRaw("02310300");
 	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - F√°brica
+	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - F·brica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	while (c < RDT_totalItensGeral){
@@ -1070,16 +1151,15 @@ function RDT_ITEM_APPLY(index, type, convert){
 			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(44, localStorage.getItem("RDT_Item-" + index).length);
 			RDT_ITEM_COMPILADO = header + novaX + novaY + novaZ + novaR + novaHex + offset1 + quant + offset2 + iF + mID + novaAnim + offset3;
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-			RDT_RECOMPILE_Lv1();
 		} else {
 			// Header 68
-			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // At√© item id
+			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // AtÈ item id
 			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(46, 48); // 00 entre item id e quantidade
-			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade at√© anim
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade atÈ anim
 			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
-			RDT_RECOMPILE_Lv1();
 		}
+		RDT_COMPILE_Lv1();
 	} else {
 		addLog("warn", "WARNING - There was an error while processing: " + error);
 		scrollLog();
@@ -2083,7 +2163,7 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
 	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
-	//var posR = processBIO3Vars(r) / 16; // <-- isso n√£o est√° correto ainda
+	//var posR = processBIO3Vars(r) / 16; // <-- isso n o est· correto ainda
 
 	// Final
 	$("#RDT_CANVAS_0").append(HTML_ICONCANVAS_TEMPLATE);
@@ -2313,7 +2393,7 @@ function RDT_restoreLastBackup_1(name){
 		addLog('error', err);
 	}
 }
-function RDT_RECOMPILE_Lv1(){
+function RDT_COMPILE_Lv1(){
 	var c = 0;
 	if (ORIGINAL_FILENAME !== undefined){
 		RDT_Backup();
