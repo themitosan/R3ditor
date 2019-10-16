@@ -3,19 +3,33 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
 */
-var RDT_TEMP_NEXTX = "";
-var RDT_TEMP_NEXTY = "";
-var RDT_TEMP_NEXTZ = "";
-var RDT_TEMP_NEXTR = "";
-var RDT_TEMP_NEXT_ROOM = "";
-var RDT_TEMP_NEXT_STAGE = "";
-var RDT_TEMP_NEXT_CAMERA = "";
-
+// Copy-Paste Door
 var RDT_CURRENT_X = "";
 var RDT_CURRENT_Y = "";
 var RDT_CURRENT_Z = "";
 var RDT_CURRENT_R = "";
+var RDT_TEMP_NEXTX = "";
+var RDT_TEMP_NEXTY = "";
+var RDT_TEMP_NEXTZ = "";
+var RDT_TEMP_NEXTR = "";
 var RDT_selectedPoint = 0;
+var RDT_TEMP_NEXT_ROOM = "";
+var RDT_TEMP_NEXT_STAGE = "";
+var RDT_TEMP_NEXT_CAMERA = "";
+
+// Copy-Paste Camera
+var RDT_TEMP_CAMERA_ORIG_X_1 = "";
+var RDT_TEMP_CAMERA_ORIG_X_2 = "";
+var RDT_TEMP_CAMERA_ORIG_Y_1 = "";
+var RDT_TEMP_CAMERA_ORIG_Y_2 = "";
+var RDT_TEMP_CAMERA_ORIG_Z_1 = "";
+var RDT_TEMP_CAMERA_ORIG_Z_2 = "";
+var RDT_TEMP_CAMERA_DIREC_X_1 = "";
+var RDT_TEMP_CAMERA_DIREC_X_2 = "";
+var RDT_TEMP_CAMERA_DIREC_Y_1 = "";
+var RDT_TEMP_CAMERA_DIREC_Y_2 = "";
+var RDT_TEMP_CAMERA_DIREC_Z_1 = "";
+var RDT_TEMP_CAMERA_DIREC_Z_2 = "";
 
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
@@ -191,7 +205,6 @@ function RDT_getCameras(){
 		}
 	}
 }
-
 function RDT_decompileCameras(id){
 	var CAM_IMG;
 	var titleFileName;
@@ -232,6 +245,38 @@ function RDT_decompileCameras(id){
 		CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + '</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + 
 		CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> <font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
 	$("#RDT_camera_holder").append(MASSIVE_HTML_RDTCAMERA_TEMPLATE);
+}
+function RDT_copyPasteCameraInfo(mode){
+	// Copy
+	if (mode === 1){
+		RDT_TEMP_CAMERA_ORIG_X_1 = document.getElementById('RDT_X1_Origin-edit').value;
+		RDT_TEMP_CAMERA_ORIG_X_2 = document.getElementById('RDT_X2_Origin-edit').value;
+		RDT_TEMP_CAMERA_ORIG_Y_1 = document.getElementById('RDT_Y1_Origin-edit').value;
+		RDT_TEMP_CAMERA_ORIG_Y_2 = document.getElementById('RDT_Y2_Origin-edit').value;
+		RDT_TEMP_CAMERA_ORIG_Z_1 = document.getElementById('RDT_Z1_Origin-edit').value;
+		RDT_TEMP_CAMERA_ORIG_Z_2 = document.getElementById('RDT_Z2_Origin-edit').value;
+		RDT_TEMP_CAMERA_DIREC_X_1 = document.getElementById('RDT_X1_Direction-edit').value;
+		RDT_TEMP_CAMERA_DIREC_X_2 = document.getElementById('RDT_X2_Direction-edit').value;
+		RDT_TEMP_CAMERA_DIREC_Y_1 = document.getElementById('RDT_Y1_Direction-edit').value;
+		RDT_TEMP_CAMERA_DIREC_Y_2 = document.getElementById('RDT_Y2_Direction-edit').value;
+		RDT_TEMP_CAMERA_DIREC_Z_1 = document.getElementById('RDT_Z1_Direction-edit').value;
+		RDT_TEMP_CAMERA_DIREC_Z_2 = document.getElementById('RDT_Z2_Direction-edit').value;
+	}
+	// Paste
+	if (mode === 2 && RDT_TEMP_CAMERA_ORIG_X_1 !== "" && RDT_TEMP_CAMERA_ORIG_X_2 !== "" && RDT_TEMP_CAMERA_ORIG_Y_1 !== "" && RDT_TEMP_CAMERA_ORIG_Y_2 !== "" && RDT_TEMP_CAMERA_ORIG_Z_1 !== "" && RDT_TEMP_CAMERA_ORIG_Z_2 !== "" && RDT_TEMP_CAMERA_DIREC_X_1 !== "" && RDT_TEMP_CAMERA_DIREC_X_2 !== "" && RDT_TEMP_CAMERA_DIREC_Y_1 !== "" && RDT_TEMP_CAMERA_DIREC_Y_2 !== "" && RDT_TEMP_CAMERA_DIREC_Z_1 !== "" && RDT_TEMP_CAMERA_DIREC_Z_2 !== ""){
+		document.getElementById('RDT_X1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_X_1.toUpperCase();
+		document.getElementById('RDT_X2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_X_2.toUpperCase();
+		document.getElementById('RDT_Y1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Y_1.toUpperCase();
+		document.getElementById('RDT_Y2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Y_2.toUpperCase();
+		document.getElementById('RDT_Z1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Z_1.toUpperCase();
+		document.getElementById('RDT_Z2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Z_2.toUpperCase();
+		document.getElementById('RDT_X1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_X_1.toUpperCase();
+		document.getElementById('RDT_X2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_X_2.toUpperCase();
+		document.getElementById('RDT_Y1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Y_1.toUpperCase();
+		document.getElementById('RDT_Y2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Y_2.toUpperCase();
+		document.getElementById('RDT_Z1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Z_1.toUpperCase();
+		document.getElementById('RDT_Z2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Z_2.toUpperCase();
+	}
 }
 function RDT_CAMERA_APPLY(id){
 	var reason;
