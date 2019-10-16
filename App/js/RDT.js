@@ -618,6 +618,7 @@ function RDT_decompileMessageCode(index, hex){
 }
 function RDT_MSGCODE_APPLY(id){
 	var reason;
+	var offset;
 	var canCompile  = true;
 	var readMode 	= document.getElementById('RDT_MSGCODE-edit-display').value;
 	var novaX		= document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
@@ -626,7 +627,12 @@ function RDT_MSGCODE_APPLY(id){
 	var novaRadiusX = document.getElementById('RDT_MSGCODE-edit-radiusX').value.slice(0, 4).toLowerCase();
 	var novaRadiusZ = document.getElementById('RDT_MSGCODE-edit-radiusZ').value.slice(0, 4).toLowerCase();
 	var header 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-identifier"][1]).toLowerCase();
-	var offset 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-offset_0"][0], RANGES["RDT_msgCode-offset_1"][1]).toLowerCase();
+	if (header === "63"){
+		offset 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-0-offset_0"][0], RANGES["RDT_msgCode-0-offset_1"][1]).toLowerCase();
+	}
+	if (header === "64"){
+		offset 		= localStorage.getItem("RDT_MSGBLOCK-" + id).slice(RANGES["RDT_msgCode-1-offset_0"][0], RANGES["RDT_msgCode-1-offset_1"][1]).toLowerCase();
+	}
 	if (novaX.length !== 4){
 		canCompile = false;
 		reason = "The X value are wrong!";
