@@ -31,6 +31,14 @@ var RDT_TEMP_CAMERA_DIREC_Y_2 = "";
 var RDT_TEMP_CAMERA_DIREC_Z_1 = "";
 var RDT_TEMP_CAMERA_DIREC_Z_2 = "";
 
+// Copy-Paste Enemy & NPC
+var RDT_TEMP_ENEMYNPC_TYPE = "";
+var RDT_TEMP_ENEMYNPC_POSE = "";
+var RDT_TEMP_ENEMYNPC_TEXTURE = "";
+var RDT_TEMP_ENEMYNPC_SOUNDSET = "";
+var RDT_TEMP_ENEMYNPC_EXTRAFLAG = "";
+var RDT_TEMP_ENEMYNPC_ENEMYFLAG = "";
+
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
 var RDT_totalFiles = 0;
@@ -391,6 +399,24 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 		'</font> <font title="E. Flag">' + EN_enFlag.toUpperCase() + '</font> <font title="X pos.">' + EN_xPos.toUpperCase() + '</font> <font title="Z pos.">' + EN_yPos.toUpperCase() + '</font> <font title="Y pos.">' + EN_zPos.toUpperCase() + '</font> <font title="R pos.">' + EN_rPos.toUpperCase() + '</font> ' + 
 		enemyHex.slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]).toUpperCase() + '</font></div>';
 	$("#RDT_enemy_holder").append(ENEMY_HTML_TEMPLATE);
+}
+function RDT_copyPasteEnemyNpcInfo(mode){
+	if (mode === 1){
+		RDT_TEMP_ENEMYNPC_TYPE = document.getElementById('RDT_selectEnemyNPC').value.toUpperCase();
+		RDT_TEMP_ENEMYNPC_POSE = document.getElementById('RDT_enemyNPC-edit-PO').value.toUpperCase();
+		RDT_TEMP_ENEMYNPC_TEXTURE = document.getElementById('RDT_enemyNPC-edit-TX').value.toUpperCase();
+		RDT_TEMP_ENEMYNPC_SOUNDSET = document.getElementById('RDT_enemyNPC-edit-SS').value.toUpperCase();
+		RDT_TEMP_ENEMYNPC_EXTRAFLAG = document.getElementById('RDT_enemyNPC-edit-ExF').value.toUpperCase();
+		RDT_TEMP_ENEMYNPC_ENEMYFLAG = document.getElementById('RDT_enemyNPC-edit-EnF').value.toUpperCase();
+	}
+	if (mode === 2 && RDT_TEMP_ENEMYNPC_TYPE !== "" && RDT_TEMP_ENEMYNPC_POSE !== "" && RDT_TEMP_ENEMYNPC_TEXTURE !== "" && RDT_TEMP_ENEMYNPC_SOUNDSET !== "" && RDT_TEMP_ENEMYNPC_EXTRAFLAG !== "" && RDT_TEMP_ENEMYNPC_ENEMYFLAG !== ""){
+		document.getElementById('RDT_selectEnemyNPC').value = RDT_TEMP_ENEMYNPC_TYPE.toUpperCase();
+		document.getElementById('RDT_enemyNPC-edit-PO').value = RDT_TEMP_ENEMYNPC_POSE.toUpperCase();
+		document.getElementById('RDT_enemyNPC-edit-TX').value = RDT_TEMP_ENEMYNPC_TEXTURE.toUpperCase();
+		document.getElementById('RDT_enemyNPC-edit-SS').value = RDT_TEMP_ENEMYNPC_SOUNDSET.toUpperCase();
+		document.getElementById('RDT_enemyNPC-edit-ExF').value = RDT_TEMP_ENEMYNPC_EXTRAFLAG.toUpperCase();
+		document.getElementById('RDT_enemyNPC-edit-EnF').value = RDT_TEMP_ENEMYNPC_ENEMYFLAG.toUpperCase();
+	}
 }
 function RDT_ENEMYNPC_APPLY(id){
 	var reason;
