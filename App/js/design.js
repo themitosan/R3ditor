@@ -235,6 +235,7 @@ function main_menu(anim){
 	if (anim === 1){ // Save
 		document.title = APP_NAME + " - Save Editor (*.SAV)";
 		$("#menu-topo-save").css({"display": "block"});
+		$("#SAV_slots").append(SAV_SLOT_LIST);
 		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG

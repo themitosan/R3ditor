@@ -241,7 +241,7 @@ function save_renderSlot(slotID){
 	}
 	resetTimer();
 	cleanForSaveLoad();
-	document.title = APP_NAME + " - Save Editor (*.sav) - Slot " + slotID + " - File: " + ORIGINAL_FILENAME;
+	document.title = APP_NAME + " - Save Editor (*.SAV) - Slot " + slotID + " - File: " + ORIGINAL_FILENAME;
 	document.getElementById("lbl-currentSlot").innerHTML = slotID;
 	CURRENT_SAVE_SLOT = slotID;
 	save_renderInvent(slotID);

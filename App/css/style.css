@@ -407,6 +407,7 @@ input[type="range" i]{
     margin-top: 4px;
     padding-top: 4px;
     margin-left: 0px;
+    margin-right: 2px;
     padding-bottom: 2px;
     text-align: -webkit-center;
     display: -webkit-inline-box;
