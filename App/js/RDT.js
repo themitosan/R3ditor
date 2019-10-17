@@ -1,4 +1,4 @@
-/*
+Ôªø/*
 	R3ditor - RDT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please
@@ -847,9 +847,9 @@ function RDT_DOOR_APPLY(index){
 	var nOO 	= document.getElementById('RDT_door-edit-OO').value.toLowerCase();
 	var nLF 	= document.getElementById('RDT_door-edit-LF').value.toLowerCase();
 	var nLK 	= document.getElementById('RDT_door-edit-LK').value.toLowerCase();
-	var nRN 	= document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
 	var nType	= document.getElementById('RDT_door-edit-DT').value.toLowerCase();
 	var nStage 	= document.getElementById('RDT_door-edit-NS').value.toLowerCase();
+	var nRN 	= document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
 	var header 	= ident.slice(RANGES["RDT_door-0-header"][0], RANGES["RDT_door-0-doorIdentifier"][1]);
 	var offset0 = ident.slice(RANGES["RDT_door-0-doorHexOffset0"][0], RANGES["RDT_door-0-doorHexOffset0"][1]);
 	var offset1 = ident.slice(RANGES["RDT_door-0-doorHexOffset1"][0], RANGES["RDT_door-0-doorHexOffset1"][1]);
@@ -979,13 +979,13 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw("02310900");
 	RDT_generateItemIndexRaw("02318000");
 	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000"); // Padr o encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw("02310000"); // Padr√£o encontrado em (quase) todos os itens
 	RDT_generateItemIndexRaw("02310500");
 	RDT_generateItemIndexRaw("02310100");
 	RDT_generateItemIndexRaw("02310200");
 	RDT_generateItemIndexRaw("02310300");
 	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00"); // R503.rdt - F·brica
+	RDT_generateItemIndexRaw("02310a00"); // R503.RDT - F√°brica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	while (c < RDT_totalItensGeral){
@@ -1231,9 +1231,9 @@ function RDT_ITEM_APPLY(index, type, convert){
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
 		} else {
 			// Header 68
-			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // AtÈ item id
+			var offset1 = localStorage.getItem("RDT_Item-" + index).slice(12, 44); // At√© item id
 			var offset2 = localStorage.getItem("RDT_Item-" + index).slice(46, 48); // 00 entre item id e quantidade
-			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade atÈ anim
+			var offset3 = localStorage.getItem("RDT_Item-" + index).slice(50, 58); // Quantidade at√© anim
 			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
 			localStorage.setItem("RDT_Item-" + index, RDT_ITEM_COMPILADO);
 		}
@@ -2015,8 +2015,8 @@ function RDT_lookForRDTConfigFile(){
 					sessionStorage.setItem("MESSAGE_END_" + parseInt(soma + 1), end_offset);
 					RDT_renderMessages(parseInt(soma + 1), sta_offset, end_offset);
 				} else {
-					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
-					addLog('warn', 'Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (Maybe is R203.RDT?)');
+					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
+					addLog('warn', 'Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
 					scrollLog();
 				}
 				c = c + 2;
@@ -2241,7 +2241,7 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
 	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
 	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
-	//var posR = processBIO3Vars(r) / 16; // <-- isso n o est· correto ainda
+	//var posR = processBIO3Vars(r) / 16; // <-- isso n√£o est√° correto ainda
 
 	// Final
 	$("#RDT_CANVAS_0").append(HTML_ICONCANVAS_TEMPLATE);

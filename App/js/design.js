@@ -1289,6 +1289,11 @@ function RDT_Error_404(){
 	} else {
 		$("#RDT-aba-menu-8").css({'display': 'inline'});
 	}
+	if (RDT_totalDoors === 0){
+		$("#RDT-aba-menu-6").css({'display': 'none'});
+	} else {
+		$("#RDT-aba-menu-6").css({'display': 'inline'});
+	}
 }
 function RDT_displayItemEdit(id, idx, itemHx){
 	$("#RDT_openFileList").css({"display": "none"});
