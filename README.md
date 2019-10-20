@@ -5,7 +5,7 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 <p align="center"><img src="https://pbs.twimg.com/media/EFoSmX4WsAEqCYu?format=jpg" width="680" height="360"></p>
 
 ## How to install
-- Download the latest version of Node-Webkit and extract it into a folder of your choice!<br>(Click <a href="http://nwjs.io" target="_blank">here</a> to download)
+- Download the latest version of NW.js (Node-Webkit) and extract it into a folder of your choice!<br>(Click <a href="http://nwjs.io" target="_blank">here</a> to download)
 
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "nw.exe".
