@@ -11,6 +11,7 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 - Open "nw.exe".
 
 ## Requirements
+- OS: Windows 7 or higher
 - To run the inicial setup you will need the visual studio 2005 installed (rofs.exe need this to unpack "rofsxx.dat" files)
 
 ## How to update
