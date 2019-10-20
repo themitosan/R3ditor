@@ -68,17 +68,20 @@ function TIM_seekPattern(){
 				if (cases > TIM_seekPattern_MIN){
 					start_record = true;
 					if (start_position === undefined && end_position === undefined){
-						start_position = currentPos_A;
+						currentPos_A = parseInt(currentPos_A - parseInt(TIM_seekPattern_MIN * 4));
+						currentPos_B = parseInt(currentPos_B - parseInt(TIM_seekPattern_MIN * 4));
+						start_position = parseInt(currentPos_A - 8);
 					}
 				} else {
+					console.log(current_sample);
 					cases++;
 				}
 			} else {
 				cases = 0;
 				if (start_record === true){
-					end_position = currentPos_A;
+					end_position = parseInt(currentPos_B - 4);
 					var REAL_OFFSET = TIM_arquivoBruto.slice(start_position, end_position);
-					console.log(REAL_OFFSET + "\n" + start_position + "\n" + end_position + '\n' + REAL_OFFSET.length);
+					console.log(REAL_OFFSET + "\n\nStart: " + start_position + "\nEnd: " + end_position + '\nLength: ' + REAL_OFFSET.length);
 					localStorage.setItem('TIMPATCHER_Patch-' + TOT_PATCHS, start_position + "-END_POS-" + end_position + "-PATCH-" + REAL_OFFSET);
 					TOT_PATCHS++;
 					//
@@ -88,8 +91,8 @@ function TIM_seekPattern(){
 				}
 			}
 			previous_sample = current_sample;
-			currentPos_A = currentPos_A + 4;
-			currentPos_B = currentPos_B + 4;
+			currentPos_A = parseInt(currentPos_A + 4);
+			currentPos_B = parseInt(currentPos_B + 4);
 		}
 	}
 	addLog('log', 'INFO - Process Complete!');
@@ -172,8 +175,8 @@ function TIM_APPLY_PATCH(){
 	var reason;
 	var SUCESS = true;
 	var startLine = 16; // Linha Inicial dos patches
+	var TEMP_FILE = TIM_arquivoBruto.toLowerCase();
 	var MAP_TOTAL_PATCHES = parseInt(TIM_mapFile[4]);
-	var TEMP_FILE = TIM_arquivoBruto;
 
 	var C_PATCH;
 	var SLICE_POS_END;
@@ -183,13 +186,13 @@ function TIM_APPLY_PATCH(){
 		addLog('log', 'INFO - TIM Patcher: Applyng Patch - ' + parseInt(c + 1) + ' / ' + MAP_TOTAL_PATCHES + '...');
 		//
 		SLICE_POS_START = parseInt(TIM_mapFile[startLine].replace('Start=', ''));
-		SLICE_POS_END = parseInt(TIM_mapFile[parseInt(startLine + 1)].replace('Start=', ''));
-		C_PATCH = TIM_mapFile[parseInt(startLine + 2)].replace('Data=', '').toLowerCase();
+		C_PATCH = TIM_mapFile[parseInt(startLine + 2)].replace('Data=', '').toLowerCase();	
+		SLICE_POS_END = parseInt(TIM_mapFile[parseInt(startLine + 1)].replace('End=', ''));
 		
+		console.log(SLICE_POS_START + ' - ' + SLICE_POS_END);
+
 		var SLICE_MIN = TEMP_FILE.slice(0, SLICE_POS_START);
 		var SLICE_END = TEMP_FILE.slice(SLICE_POS_END, TEMP_FILE.length);
-
-		console.log(c + '\n' + C_PATCH);
 
 		TEMP_FILE = SLICE_MIN + C_PATCH + SLICE_END;
 
@@ -203,8 +206,10 @@ function TIM_APPLY_PATCH(){
 	}
 
 	//
+	log_separador();
 	if (SUCESS === true){
 		fs.writeFileSync(TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM', TEMP_FILE, 'hex');
+		addLog('log', 'INFO - Tim Patcher - Patched File: ' + TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM');
 	} else {
 		addLog('error', 'ERROR - Error while saving TIM!');
 		addLog('error', reason);

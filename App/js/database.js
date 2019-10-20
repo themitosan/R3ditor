@@ -1295,7 +1295,7 @@ var special_day_01 = "T2N0b2JlciAxc3QsIG5pZ2h0LiBJIHdva2UgdXAgdG8gdGhlIHNvdW5kIG
 var TIM_BPP = {
 	//  HEX     TYPE       BPP          POS (String)
 	"08000000": [1,			   "4 BPP", 0],    // WIP
-	"09000000": [2,			   "8 BPP", 1086], // WIP
+	"09000000": [2,			   "8 BPP", 1084], // WIP
 	"02000000": [3,			  "16 BPP", 0],    // Esse tipo não contém CLUT [WIP]
 	"03000000": [4,			  "24 BPP", 0],    // Esse tipo não contém CLUT [WIP]
 	"00000000": [5,  "4 BPP (No CLUT)", 0],    // WIP
