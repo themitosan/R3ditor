@@ -1,4 +1,4 @@
-/*
+ï»¿/*
 	R3ditor - save.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - please!
@@ -24,12 +24,12 @@ var INDICADOR_15;
 /*
 	Ranges
 */
-var SAVE_INDICADOR_HEADER;			 // Header completa
-var SAVE_INDICADOR_HEADER_START;	 // 0x0000 até 0x2000
+var SAVE_INDICADOR_HEADER;		  // Header completa
+var SAVE_INDICADOR_HEADER_START;  // 0x0000 atÃ© 0x2000
 var SAVE_INDICADOR_HEADER_MIDDLE;						
 var SAVE_INDICADOR_HEADER_END;
-var S_HEADER;						 // Cabeçalho de cada slot de save
-var S_END;							 // Final de cada slot de save
+var S_HEADER;					  // CabeÃ§alho de cada slot de save
+var S_END;						  // Final de cada slot de save
 var range_0x2204_0x2207;							
 var range_0x2209_0x220D;							
 var range_0x2210_0x2211;							
@@ -48,10 +48,10 @@ var range_0x2677_0x28D3;
 /*
 	Variaveis de Save
 */
-// Baú
+// BaÃº
 var JILL_BAU = [];
 var CARLOS_BAU = [];
-// Inventários
+// InventÃ¡rios
 var JILL_INVENT = [];
 var CARLOS_INVENT = [];
 // Dificuldade
@@ -73,7 +73,7 @@ var cArmaEquip;
 // Jill e Carlos - Sidepack
 var jSide;
 var cSide;
-// Posição X e Y
+// PosiÃ§Ã£o X e Y
 var xPos;
 var yPos;
 // Room / Event
@@ -82,7 +82,7 @@ var rEvent
 var epil;
 // Files
 var j_files;
-// Versão do game
+// VersÃ£o do game
 var gVersion;
 var gDetails;
 // Mapas Obtidos - wip
@@ -110,36 +110,36 @@ var hora      = 0;
 var dia       = 0;
 function MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
-		S_HEADER = localStorage.getItem("Save_" + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); 					// 0x2000 - 0x21FF
-		// Gerando Inventário da Jill
+		S_HEADER = localStorage.getItem("Save_" + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); // 0x2000 - 0x21FF
+		// Gerando InventÃ¡rio da Jill
 		var J_INV_TEMP = "";
 		var c = 0;
 		while(c < JILL_INVENT.length){
 			J_INV_TEMP = J_INV_TEMP + JILL_INVENT[c];
 			c++;
 		}
-		// Gerando Baú da Jill
+		// Gerando BaÃº da Jill
 		var J_BOX_TEMP = "";
 		c = 0;
 		while(c < JILL_BAU.length){
 			J_BOX_TEMP = J_BOX_TEMP + JILL_BAU[c];
 			c++;
 		}
-		// Gerando Inventário do Carlos
+		// Gerando InventÃ¡rio do Carlos
 		var C_INV_TEMP = "";
 		var c = 0;
 		while(c < CARLOS_INVENT.length){
 			C_INV_TEMP = C_INV_TEMP + CARLOS_INVENT[c];
 			c++;
 		}
-		// Gerando Baú do Carlos
+		// Gerando BaÃº do Carlos
 		var C_BOX_TEMP = "";
 		c = 0;
 		while(c < CARLOS_BAU.length){
 			C_BOX_TEMP = C_BOX_TEMP + CARLOS_BAU[c];
 			c++;
 		}
-		// Ranges não mapeadas
+		// Ranges nÃ£o mapeadas
 		range_0x2204_0x2207 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2204-0x2207"][0], RANGES["0x2204-0x2207"][1]); // 0x2204 - 0x2207
 		range_0x2209_0x220D = localStorage.getItem("Save_" + slot).slice(RANGES["0x2209-0x220D"][0], RANGES["0x2209-0x220D"][1]); // 0x2209 - 0x220D
 		range_0x2210_0x2211 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2210-0x2211"][0], RANGES["0x2210-0x2211"][1]); // 0x2209 - 0x220D
@@ -196,7 +196,7 @@ function CARREGAR_SAVE(sFile){
 	log_separador();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente
-	// Essa parte do processo será feita aqui pois essas informações não serão modificadas pelo usuário
+	// Essa parte do processo serÃ¡ feita aqui pois essas informaÃ§Ãµes nÃ£o serÃ£o modificadas pelo usuÃ¡rio
 	INDICADOR_01 = SAVE_arquivoBruto.slice(RANGES["he-indicador-1"][0],   RANGES["he-indicador-1"][1]);
 	INDICADOR_02 = SAVE_arquivoBruto.slice(RANGES["he-indicador-2"][0],   RANGES["he-indicador-2"][1]);
 	INDICADOR_03 = SAVE_arquivoBruto.slice(RANGES["he-indicador-3"][0],   RANGES["he-indicador-3"][1]);
@@ -215,7 +215,14 @@ function CARREGAR_SAVE(sFile){
 	SAVE_INDICADOR_HEADER_START  = SAVE_arquivoBruto.slice(RANGES["he-esp-incial"][0], RANGES["he-esp-incial"][1]);
 	SAVE_INDICADOR_HEADER_MIDDLE = SAVE_arquivoBruto.slice(RANGES["he-esp-meio"][0],   RANGES["he-esp-meio"][1]);
 	SAVE_INDICADOR_HEADER_END 	 = SAVE_arquivoBruto.slice(RANGES["he-esp-final"][0],  RANGES["he-esp-final"][1]);
-	SAVE_INDICADOR_HEADER 		 = SAVE_INDICADOR_HEADER_START + INDICADOR_01 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_02 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_03 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_04 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_05 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_06 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_07 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_08 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_09 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_10 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_11 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_12 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + SAVE_INDICADOR_HEADER_END;
+	
+	SAVE_INDICADOR_HEADER 		 = SAVE_INDICADOR_HEADER_START + INDICADOR_01 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_02 + SAVE_INDICADOR_HEADER_MIDDLE + 
+	INDICADOR_03 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_04 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_05 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_06 + 
+	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_07 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_08 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_09 + 
+	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_10 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_11 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_12 + 
+	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + 
+	SAVE_INDICADOR_HEADER_END;
+
 	localStorage.setItem("Save_1", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	  RANGES["slot-offset"][0] * 2));
 	localStorage.setItem("Save_2", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 2,  RANGES["slot-offset"][0] * 3));
 	localStorage.setItem("Save_3", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 3,  RANGES["slot-offset"][0] * 4));
@@ -275,7 +282,7 @@ function save_renderSaveSlots() {
 function save_renderInvent(s_slot, mode){
 	JILL_INVENT = [];
 	CARLOS_INVENT = [];
-	// Inventário da Jill
+	// InventÃ¡rio da Jill
 	var itens = 11;
 	var atual = 1;
 	while(atual !== itens){
@@ -292,7 +299,7 @@ function save_renderInvent(s_slot, mode){
 		document.getElementById('btn-exchange-item-' + atual).href = "javascript:showModItem(" + 1 + ", " + 0 + ", " + atual + ", '" + ite + "');";
 		atual++;
 	}
-	// Inventário do Carlos
+	// InventÃ¡rio do Carlos
 	log_separador();
 	itens = 11;
 	atual = 1;
@@ -317,9 +324,9 @@ function save_renderBox(s_slot){
 	CARLOS_BAU = [];
 	document.getElementById("JILL-BOX").innerHTML = "<!-- Hey, can you give me a cookie? ~wink~ -->";
 	document.getElementById("CARLOS-BOX").innerHTML = "<!-- Hey, can you give me a cookie? ~wink~ -->";
-	// Baú Jill
+	// BaÃº Jill
 	addLog("log", "Loading Jill Item Box...");
-	var totalItens = 63; // 63 = Total de slots no baú
+	var totalItens = 63; // 63 = Total de slots no baÃº
 	var current = 0;
 	var position = RANGES["j-box"][0];
 	var plus = 8;
@@ -350,7 +357,7 @@ function save_renderBox(s_slot){
 			current++;
 		}
 	}
-	// Baú Carlos
+	// BaÃº Carlos
 	log_separador();
 	addLog("log", "Loading Carlos Item Box...");
 	log_separador();
@@ -440,7 +447,7 @@ function save_renderInfos(s_slot){
 		var cSpack = SIDEPACK[cSide][0];
 		document.getElementById("j-sidePack").innerHTML = jSpack;
 		document.getElementById("c-sidePack").innerHTML = cSpack;
-		// Posição X e Y
+		// Pos X Y
 		xPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-X"][0], RANGES["pos-X"][1]).toUpperCase();
 		yPos = localStorage.getItem("Save_" + s_slot).slice(RANGES["pos-Y"][0], RANGES["pos-Y"][1]).toUpperCase();
 		document.getElementById("lbl-x-pos").innerHTML = xPos;
@@ -449,22 +456,22 @@ function save_renderInfos(s_slot){
 		epil = localStorage.getItem("Save_" + s_slot).slice(RANGES["epilogos"][0], RANGES["epilogos"][1]);
 		var ep = EPILOGOS[epil][0];
 		document.getElementById("lbl-epilogos").innerHTML = ep;
-		// Versão do game
+		// Version
 		gVersion = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][0];
 		gDetails = VERSAO[SAVE_arquivoBruto.slice(RANGES["gameEdition"][0], RANGES["gameEdition"][1])][1];
 		document.getElementById("lbl-gameVersion").innerHTML = gVersion + " (" + gDetails + ")";
+		
 		// Mapas Obtidos - [WIP]
 		mapExtractA = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-a"][0], RANGES["mapas-a"][1]);
 		mapExtractB = localStorage.getItem("Save_" + s_slot).slice(RANGES["mapas-b"][0], RANGES["mapas-b"][1]);
 		var mapStatus; //MAPAS[mapExtractA.slice(0, 2) + mapExtractB.slice(0, 2)];
 		document.getElementById("lbl-maps").innerHTML = "[WIP] - " + "BETA" + " (HEX: " + mapExtractA.toUpperCase() + mapExtractB.toUpperCase() + ")";
-	
 		// Room / Event [WIP]
 		rEvent = localStorage.getItem("Save_" + s_slot).slice(RANGES["room_event"][0], RANGES["room_event"][1]).toUpperCase();
 		// Files
 		j_files = localStorage.getItem("Save_" + s_slot).slice(RANGES["jill_files"][0], RANGES["jill_files"][1]).toUpperCase();
 	} catch (err){
-		var msg = "ERROR: There is something wrong here... - " + err;
+		var msg = "ERROR: There is something wrong here... - \n" + err;
 		addLog("error", msg);
 		console.error(msg);
 	}
@@ -582,7 +589,7 @@ function applyItem(mode, person, pos){
 		} else {
 			CARLOS_INVENT[pos - 1] = item;
 		}
-	} else { // Baú
+	} else { // BaÃº
 		if (person == 0){
 			JILL_BAU[pos] = item;
 		} else {
@@ -785,9 +792,9 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	'<font class="b-quant-lbl" id="b-' + PERSON + '-q-lbl-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');" style="color: ' + colo + ';text-shadow: ' + cfundo + ';">' + quan + '</font>' + 
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
 	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Modify"></div>';
-	if (PERSON === 0){ // Adicionar item ao baú da jill
+	if (PERSON === 0){ // Adicionar item ao baÃº da jill
 		$("#JILL-BOX").append(HTMLTEMPLATE);
-	} else {		  // Adicionar item ao baú do carlos
+	} else {		  // Adicionar item ao baÃº do carlos
 		$("#CARLOS-BOX").append(HTMLTEMPLATE);
 	}
 	// Fix para porcentagem
@@ -896,7 +903,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		addLog("warn", "WARN: " + msg);
 		console.warn("WARN: " + msg);
 	}
-	if (person == 0){ // Inventário da Jill
+	if (person == 0){ // InventÃ¡rio da Jill
 		document.getElementById("J-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
 		document.getElementById("J-icon-" + block).onclick = function(){
 			addInfo(person, itemHex);
@@ -914,7 +921,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		document.getElementById("J-LBL-" + block).innerHTML = quanti;
 		$("#J-LBL-" + block).css({color: cor, "text-shadow": shad});
 		$("#J-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px" });
-	} else { // Inventário do Carlos
+	} else { // InventÃ¡rio do Carlos
 		document.getElementById("C-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
 		document.getElementById("C-icon-" + block).onclick = function(){
 			addInfo(person, itemHex);
@@ -954,15 +961,15 @@ function SAVE_clearAllSaves(){
 /// Time Helpers
 /*  _____________________________________________________________________________________________________
    |																									 \
-   |   Tempo - 0x2200 até 0x2203 - Valor 32 bytes (00 00 00 00)											  |
+   |   Tempo - 0x2200 atÃ© 0x2203 - Valor 32 bytes (00 00 00 00)											  |
    |______________________________________________________________________________________________________|
    |																									  |
    |	    Formato: DD:HH:MM:SS:DS 																	  |
    |    																								  |
-   |   Quando o primeiro chega ao seu valor máximo (255 / FF), ele aumenta o próximo endeereço em 1.      |
-   |   Exemplo: se o tempo for 00:00:00:04:75 (Quatro Segundos e 75 Milésimos) Em HEX estará              |
-   |   ff 00 00 00. Quando mais um milésimo se passar, será quatro segundos e 76 milésimos, 		 	  |
-   |   e em HEX estará: 00 01 00 00.																	  |
+   |   Quando o primeiro chega ao seu valor mÃ¡ximo (255 / FF), ele aumenta o prÃ³ximo endeereÃ§o em 1.      |
+   |   Exemplo: se o tempo for 00:00:00:04:75 (Quatro Segundos e 75 MilÃ©simos) Em HEX estarÃ¡              |
+   |   ff 00 00 00. Quando mais um milÃ©simo se passar, serÃ¡ quatro segundos e 76 milÃ©simos, 		 	  |
+   |   e em HEX estarÃ¡: 00 01 00 00.																	  |
    |   																								      |
    |   Veja abaixo o exemplo acima de forma mais simplificada: 									    	  |
    |   																									  |
@@ -988,7 +995,7 @@ function SAVE_clearAllSaves(){
    \______________________________________________________________________________________________________|
 */
 function contador0x2200(hex0x2200){
-	// Formula: 0x2200 * Milésimos
+	// Formula: 0x2200 * MilÃ©simos
 	var timeOffset = parseInt(hex0x2200, 16) * 1000;
 	return timeOffset;
 }
@@ -1048,7 +1055,7 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 	//console.log(DD + " - " + HH + " - " + MM + " - " + SS + " - " + DC + " - " + MS);
 	var restante;
 	var minus = 999 - 1;
-	// Milésimos
+	// MilÃ©simos
 	if (MS > minus){
 		while (MS > minus){
 			restante = MS - 1000;
@@ -1065,7 +1072,7 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 			decimos++;
 		}
 	}
-	// Décimos 
+	// DÃ©cimos 
 	if (DC > 59){
 		while(DC > 59){
 			restante = DC - 60;

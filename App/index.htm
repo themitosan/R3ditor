@@ -1,6 +1,6 @@
 ﻿<!-- Hällò -->
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 	<head>
 		<title>Loading, Please wait...</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -19,6 +19,7 @@
 		<!-- Modulos -->
 		<script type="text/javascript" src="js/bio3ini.js"></script>
 		<script type="text/javascript" src="js/save.js"></script>
+		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
 		<script type="text/javascript" src="js/filegen.js"></script>
@@ -40,9 +41,10 @@
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
+			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
-			<!-- Direita WIP -->
+			<!-- Direita (SET FOR FUTURE) WIP -->
 			<input type="button" class="botao-menu right none none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
 			<input type="button" class="botao-menu right none none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
 		</div>
@@ -56,39 +58,70 @@
 		</div>
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
-			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoadRDT();">
+			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoad(6);">
 			<input type="button" class="botao-menu none" id="RDT_reload" value="Reload RDT" onclick="RDT_openFile(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
-			<input type="button" class="botao-menu" value="Open MSG" onclick="triggerLoadMSG();">
+			<input type="button" class="botao-menu" value="Open MSG" onclick="triggerLoad(5);">
 			<input type="button" class="botao-menu none" id="MSG_reload" value="Reload MSG" onclick="MSG_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
 			<input type="button" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON RDT" onclick="MSG_applyMSGCommand(2);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
 		</div>
 		<!-- Menu Saves -->
 		<div class="menu-topo none" id="menu-topo-save">
-			<input type="button" class="botao-menu" value="Open Save" onclick="triggerLoadSAVE();">
+			<input type="button" class="botao-menu" value="Open Save" onclick="triggerLoad(4);">
 			<input type="button" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
 			<input type="button" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
 		</div>
 		<!-- Menu File Gen -->
 		<div class="menu-topo none" id="menu-topo-fileEditor">
-			<input type="button" class="botao-menu right" value="Go Back" onclick="main_menu(0);">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+		</div>
+		<!-- Menu Tim Patcher -->
+		<div class="menu-topo none" id="menu-topo-TIMPATCHER">
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+		</div>
+		
+		<!-- CONTENT -->
+
+		<!-- Tim Patcher -->
+		<div class="timPatcher_holder" id="TIMPATCHER" onclick="main_closeFileList();">
+			<center><font class="titulo timPatcher_titulo">TIM Patcher [WIP]</font></center>
+			<!-- Status -->
+			<div class="none" id="tim_patcher_status">
+				File: <font class="timPatcher_infos" id="TIMPATCHER_patchName">???</font><br>
+				Total Patches: <font class="timPatcher_infos" id="TIMPATCHER_totalPatches">???</font>
+				<div class="menu-separador"></div>
+				TIM Required: <font class="timPatcher_infos" id="TIMPATCHER_timName">???</font><br>
+				Tim Size: <font class="timPatcher_infos" id="TIMPATCHER_Size">???</font><br>
+				TIM BPP: <font class="timPatcher_infos" id="TIMPATCHER_BPP">???</font><br><br>
+				<center>Do you want to apply this patch?</center><br>
+				<div class="none" id="TIMPATCHER_applyBtns">
+					<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="NO" onclick="TIM_cancelPatch();">
+					<input type="button" class="RDT-btn-apply btn-apply-fix color-green" value="YES" onclick="triggerLoad(9);">
+				</div>
+			</div>
+			<!-- Menu Inicial -->
+			<div class="timPatcher_menu" id="tim_patcher_inicialMenu">
+				<center><i>A simple tool to fix TIM files extracted with RE3SLDE!</i></center><br>
+				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Create Patch" onclick="triggerLoad(7);">
+				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Apply Patch" onclick="triggerLoad(8);">
+			</div>
 		</div>
 		<!-- Lista de Arquivos Disponiveis -->
 		<div class="fileList none" id="avaliable_fileList">
@@ -105,7 +138,7 @@
 				<!-- A lista de arquivos (data_aj) vai aqui -->
 			</div>
 		</div>
-		<!-- Last RDT -->
+		<!-- Last RDT File -->
 		<div class="fileList none" id="RDT_recentFile">
 			<center><font class="titulo">Recently opened</font></center>
 				<!-- O ultimo RDT vai aqui -->
@@ -741,13 +774,15 @@
 				Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
 				Many Thanks to:<br><br>
 				<div class="about-tks">
-					MarkGrass - BioFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
-					pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
-					The Mortican - BIO3GPS - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
-					Rick (aka. The CheatEngine Player!) - <a href="https://www.youtube.com/channel/UCcjNDIi38w9FCvB-Am0OT9A" target="_blank">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
-					The Entire <i>CT-Stars</i> Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!) - <a target="_blank" href="https://www.ct-stars.com/">More Info</a><br>
+					Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
+					Rick (aka. The CheatEngine Player!) - <a href="https://www.youtube.com/channel/UCcjNDIi38w9FCvB-Am0OT9A" target="_blank">More Info</a><br>
+					The Mortican - BIO3GPS - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
+					pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
+					MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
 				</div><br>
+				Special Thanks To:<br><br>
+				<a target="_blank" href="https://www.ct-stars.com/"><u>The Entire CT-Stars Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!)</u></a><br>
 				<u>Kazuhiro Aoyama, Shinji Mikami and Capcom Dev 1 Team - Thanks by creating the game of my life!</u>
 				<br><br>
 				Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
@@ -796,12 +831,16 @@
 		</div>
 		<!-- File Loader -->
 		<div class="none">
-			<input type="file" value="" onchange="setLoadWAVFile();" id="loadWAVForm" accept=".wav"/>
-			<input type="file" value="" onchange="setLoadRDTFile();" id="loadRDTForm" accept=".rdt"/>
-			<input type="file" value="" onchange="setLoadMSGFile();" id="loadMSGForm" accept=".msg"/>
-			<input type="file" value="" onchange="setLoadSaveFile();" id="loadSaveForm" accept=".sav"/>
-			<input type="file" value="" onchange="setLoadWIZARDFile();" id="loadWZForm" accept=".exe"/>
-			<input type="file" value="" onchange="setLoadHexEditorFile();" id="loadWZHexForm" accept=".exe"/>
+			<input type="file" value="" onchange="setLoadFile(1);" id="loadWAVForm" accept=".wav"/>
+			<input type="file" value="" onchange="setLoadFile(2);" id="loadWZForm" accept=".exe"/>
+			<input type="file" value="" onchange="setLoadFile(3);" id="loadWZHexForm" accept=".exe"/>
+			<input type="file" value="" onchange="setLoadFile(4);" id="loadSaveForm" accept=".sav"/>
+			<input type="file" value="" onchange="setLoadFile(5);" id="loadMSGForm" accept=".msg"/>
+			<input type="file" value="" onchange="setLoadFile(6);" id="loadRDTForm" accept=".rdt"/>
+			<!-- Tim Patcher -->
+			<input type="file" value="" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
+			<input type="file" value="" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
+			<input type="file" value="" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
 		</div>
 	</body>
 </html>

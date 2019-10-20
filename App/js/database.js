@@ -1291,11 +1291,30 @@ var MSG_DICIONARIO_REVERSO = {
 // :)
 var special_day_00 = "IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu";
 var special_day_01 = "T2N0b2JlciAxc3QsIG5pZ2h0LiBJIHdva2UgdXAgdG8gdGhlIHNvdW5kIG9mIGZhbGxpbmcgcmFpbi4gSSBjYW4ndCBiZWxpZXZlIEknbSBzdGlsbCBhbGl2ZS4uLiAtIEppbGwgVmFsZW50aW5lLCBSZXNpZGVudCBFdmlsIDMgLSBOZW1lc2lz";
+//
+var TIM_BPP = {
+	//  HEX     TYPE       BPP          POS (String)
+	"08000000": [1,			   "4 BPP", 0],    // WIP
+	"09000000": [2,			   "8 BPP", 1086], // WIP
+	"02000000": [3,			  "16 BPP", 0],    // Esse tipo não contém CLUT [WIP]
+	"03000000": [4,			  "24 BPP", 0],    // Esse tipo não contém CLUT [WIP]
+	"00000000": [5,  "4 BPP (No CLUT)", 0],    // WIP
+	"01000000": [6,  "8 BPP (No CLUT)", 0]     // WIP
+}
+var TIM_EXCLUDEPATTERN = {
+	"0000": [true]
+}
 var RANGES = {
-	// Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
+	/*
+		Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
+
+		Devido a essa parte ser semelhante ao código ID de games de PS1 (como "BESLES"), eu acredito que esse seja
+		o indicador da versão do game.
+	*/
 	"gameEdition":  	  [276, 288],
 	/*
 		Header (Cabeçalho)
+
 		O Inicio do arquivo de save contém um pequeno espaço nulo "00" até o primeiro indicador de save na posição
 		0x80 (51 00 00 00 00 20 00 00 FF FF + Versão do game).
 		Entre cada indicador, existe um espaço de 68 espaços nulos até a posição do save de Nº 15.
@@ -1305,15 +1324,15 @@ var RANGES = {
 	"he-esp-incial": 	    [0, 256], // Espaço inicial até o 1º indicador
 	"he-esp-meio":   	  [304, 512], // Espaço entre cada indicador
 	"he-esp-final":    [3888, 16384], // Espaço final até o 1º slot de save
-	"he-indicador-1":     [256, 304], //  Indicador do 1º Slot
-	"he-indicador-2":     [512, 560], //  Indicador do 2º Slot
-	"he-indicador-3":     [768, 816], //  Indicador do 3º Slot
-	"he-indicador-4":   [1024, 1072], //  Indicador do 4º Slot
-	"he-indicador-5":   [1280, 1328], //  Indicador do 5º Slot
-	"he-indicador-6":   [1536, 1584], //  Indicador do 6º Slot
-	"he-indicador-7":   [1792, 1840], //  Indicador do 7º Slot
-	"he-indicador-8":   [2048, 2096], //  Indicador do 8º Slot
-	"he-indicador-9":   [2304, 2352], //  Indicador do 9º Slot
+	"he-indicador-1":     [256, 304], // Indicador do 1º Slot
+	"he-indicador-2":     [512, 560], // Indicador do 2º Slot
+	"he-indicador-3":     [768, 816], // Indicador do 3º Slot
+	"he-indicador-4":   [1024, 1072], // Indicador do 4º Slot
+	"he-indicador-5":   [1280, 1328], // Indicador do 5º Slot
+	"he-indicador-6":   [1536, 1584], // Indicador do 6º Slot
+	"he-indicador-7":   [1792, 1840], // Indicador do 7º Slot
+	"he-indicador-8":   [2048, 2096], // Indicador do 8º Slot
+	"he-indicador-9":   [2304, 2352], // Indicador do 9º Slot
 	"he-indicador-10":  [2560, 2608], // Indicador do 10º Slot
 	"he-indicador-11":  [2816, 2864], // Indicador do 11º Slot
 	"he-indicador-12":  [3072, 3120], // Indicador do 12º Slot
@@ -1374,6 +1393,7 @@ var RANGES = {
 	"save_END": 	   [4522, 16384], // Final do save
     /*
 		Espaços não mapeados:
+
 		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas através de engenharia reversa.
 		Eles serão preservados para poder reconstruir o arquivo de save inteiro novamente.
     */
@@ -1436,6 +1456,11 @@ var RANGES = {
 	"j-box": 			[2152, 2656], // Baú da Jill 					 - 0x2535 to 0x2530
 	"c-box": 			[2792, 3296], // Baú do Carlos 					 - 0x2574 to 0x2580
 	///////////////////////////////////////////////////////////////////////////////////////
+	/*
+		TIM Ranges [WIP]
+	*/
+	"TIM_header": 					   [0, 8], // Header
+	"TIM_BPP": 						  [8, 16], // Bit Per Pixel
 	/*
 		RDT Ranges
 	*/

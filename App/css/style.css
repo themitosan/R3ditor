@@ -94,7 +94,7 @@ input[type="range" i]{
     padding: 34px;
     left: 110px;
     width: 80%;
-    top: 48px;
+    top: 20px;
 }
 .appLogo{
     width: 200px;
@@ -1448,4 +1448,28 @@ input[type="range" i]{
 .fileList_aba_holder{
     position: absolute;
     top: -6px;
+}
+/*
+    Tim Patcher
+*/
+.timPatcher_titulo{
+    text-shadow: 0 0 10px #9d40a9;
+}
+.timPatcher_infos{
+    position: sticky;
+    left: 482px;
+}
+.timPatcher_menu{
+    margin-top: 10px;
+}
+.timPatcher_holder{
+    top: 254px;
+    left: 370px;
+    color: #fff;
+    width: 560px;
+    padding: 10px;
+    display: none;
+    position: absolute;
+    border-radius: 6px;
+    background-image: linear-gradient(to bottom, #666, #222);
 }

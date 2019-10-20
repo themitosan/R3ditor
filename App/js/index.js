@@ -38,7 +38,6 @@ function load(){
 		APP_PATH = process.cwd();
 		checkFolders();
 		WZ_verifyConfigFile();
-		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + " (" + process.arch + ")";
 	} catch(err){
 		console.error(err);
 		$("#img-logo").fadeOut({duration: 5600, queue: false});
@@ -56,9 +55,6 @@ function load(){
 	scrollLog();
 }
 function checkFolders(){
-	if (fs.existsSync(APP_PATH + "\\MSG") == false){
-		fs.mkdirSync(APP_PATH + "\\MSG");
-	}
 	if (fs.existsSync(APP_PATH + "\\Update") == false){
 		fs.mkdirSync(APP_PATH + "\\Update");
 	}
@@ -227,7 +223,7 @@ function R3DITOR_RUN_MERCE(mode){
 // Verificar por erros
 function checkCanPlay(runArgs, gameId){
 	if (RDT_CANCRASH === true){
-		var ask = confirm("Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?");
+		var ask = confirm("BEWARE: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?");
 		if (ask === true){
 			if (gameId === "" || gameId === 1 || gameId === undefined){
 				R3DITOR_RUN_RE3(runArgs);
@@ -313,6 +309,16 @@ function runExternalSoftware(exe, args){
 		}
 	});
 }
+// Save Files
+function R3DITOR_SAVE(filename, content, mode){
+	var elementTAG = document.createElement('a');
+	elementTAG.setAttribute('href', 'data:text/plain;charset=' + mode + ',' + encodeURIComponent(content));
+	elementTAG.setAttribute('download', filename);
+	elementTAG.style.display = 'none';
+	document.body.appendChild(elementTAG);
+	elementTAG.click();
+	document.body.removeChild(elementTAG);
+}
 /// Download Files
 function R3DITOR_downloadFile(url, nomedoarquivo){
 	if (fs.existsSync(nomedoarquivo) === true){
@@ -339,14 +345,18 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 function getFileName(file){
 	var fileName = file.toLowerCase();
 	var removePath = fileName.split(/(\\|\/)/g).pop();
-	var filterA = removePath.replace(".rdt", "");
-	var filterB = filterA.replace(".txt", "");
-	var filterC = filterB.replace(".msg", "");
-	var filterD = filterC.replace(".sav", "");
-	var filterE = filterD.replace(".exe", "");
-	var filterF = filterE.replace(".ini", "");
-	var filterG = filterF.replace(".r3ditor", "");
-	return filterG;
+	var filterA = removePath.replace('.rdt', '');
+	var filterB = filterA.replace('.txt', '');
+	var filterC = filterB.replace('.msg', '');
+	var filterD = filterC.replace('.sav', '');
+	var filterE = filterD.replace('.exe', '');
+	var filterF = filterE.replace('.ini', '');
+	var filterG = filterF.replace('.r3ditor', '');
+	var filterH = filterG.replace('.rdtmap', '');
+	var filterI = filterH.replace('.tim', '');
+	var filterJ = filterI.replace('.r3timmap', '');
+	var filterK = filterJ.replace('.sld', '');
+	return filterK;
 }
 /// Formata valores hex para leitura interna
 function solveHEX(hex){
@@ -509,94 +519,161 @@ function parsePercentage(current, maximum){
 /*
 	Triggers
 */
-/// RDT_audio
-function triggerLoadWav(){
-	$("#loadWAVForm").trigger('click');
-}
-function setLoadWAVFile(){
-	var cFile = document.getElementById('loadWAVForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "WAV - Load Canceled!");
-		scrollLog();
-	} else {
-		RDT_replaceWavFile(cFile.path);
-		document.getElementById('loadWAVForm').value = "";
+function triggerLoad(loadForm){
+	// RDT Audio
+	if (loadForm === 1){
+		$("#loadWAVForm").trigger('click');
+	}
+	// Wizard - ResidentEvil3.exe
+	if (loadForm === 2){
+		$("#loadWZForm").trigger('click');
+	}
+	// Wizard - Hex Editor
+	if (loadForm === 3){
+		$("#loadWZHexForm").trigger('click');
+	}
+	// Save
+	if (loadForm === 4){
+		$("#loadSaveForm").trigger('click');
+	}
+	// MSG
+	if (loadForm === 5){
+		$("#loadMSGForm").trigger('click');
+	}
+	// RDT
+	if (loadForm === 6){
+		$("#loadRDTForm").trigger('click');
+	}
+	// Tim - Seek Pattern
+	if (loadForm === 7){
+		$("#loadTIMForm").trigger('click');
+	}
+	// Tim - Tim Map
+	if (loadForm === 8){
+		$("#loadTimMapForm").trigger('click');
+	}
+	// Tim - Tim To Patch
+	if (loadForm === 9){
+		$("#loadTimForPatchForm").trigger('click');
 	}
 }
-/// Wizard
-function triggerLoadWZ(){
-	$("#loadWZForm").trigger('click');
-}
-function triggerLoadWZHex(){
-	$("#loadWZHexForm").trigger('click');
-}
-function setLoadWIZARDFile(){
-	var cFile = document.getElementById('loadWZForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "Wizard - Load Canceled!");
-		scrollLog();
-	} else {
-		BIO3_original = undefined;
-		WZ_LOADRE3(cFile.path);
-		document.getElementById('loadWZForm').value = "";
-	}
-}
-function setLoadHexEditorFile(){
-	var cFile = document.getElementById('loadWZHexForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "Wizard (HEX) - Load Canceled!");
-		scrollLog();
-	} else {
-		HEX_EDITOR = undefined;
-		WZ_LOADHEX(cFile.path);
-		document.getElementById('loadWZHexForm').value = "";
-	}
-}
-/// Save
-function triggerLoadSAVE(){
-	$("#loadSaveForm").trigger('click');
-}
-function setLoadSaveFile(){
-	var cFile = document.getElementById('loadSaveForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "Save - Load Canceled!");
-		scrollLog();
-	} else {
-		SAVE_arquivoBruto = undefined;
-		CARREGAR_SAVE(cFile.path);
-		document.getElementById('loadSaveForm').value = "";
-	}
-}
-/// MSG
-function triggerLoadMSG(){
-	$("#loadMSGForm").trigger('click');
-}
-function setLoadMSGFile(){
-	var cFile = document.getElementById('loadMSGForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "MSG - Load Canceled!");
-		scrollLog();
-	} else {
-		MSG_arquivoBruto = undefined;
-		MSG_CARREGAR_ARQUIVO(cFile.path);
-		document.getElementById('loadMSGForm').value = "";
-	}
-}
-/// RDT
-function triggerLoadRDT(){
-	$("#loadRDTForm").trigger('click');
-}
-function setLoadRDTFile(){
-	var cFile = document.getElementById('loadRDTForm').files[0];
-	if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
-		addLog("log", "RDT - Load Canceled!");
-		scrollLog();
-	} else {
-		if (BETA === true){
-			BETA = false;
+
+function setLoadFile(input){
+	var cFile;
+	var loadType = '';
+	var loadCancel = false;
+	// Audio
+	if (input === 1){
+		cFile = document.getElementById('loadWAVForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'WAV';
+		} else {
+			RDT_replaceWavFile(cFile.path);
+			document.getElementById('loadWAVForm').value = "";
 		}
-		RDT_arquivoBruto = undefined;
-		RDT_openFile(cFile.path);
-		document.getElementById('loadRDTForm').value = "";
 	}
+	// Wizard - ResidentEvil3.exe
+	if (input === 2){
+		cFile = document.getElementById('loadWZForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'Wizard - ResidentEvil3.exe';
+		} else {
+			BIO3_original = undefined;
+			WZ_LOADRE3(cFile.path);
+			document.getElementById('loadWZForm').value = "";
+		}
+	}
+	// Wizard - Hex editor
+	if (input === 3){
+		cFile = document.getElementById('loadWZHexForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'Wizard - Hex editor';
+		} else {
+			HEX_EDITOR = undefined;
+			WZ_LOADHEX(cFile.path);
+			document.getElementById('loadWZHexForm').value = "";
+		}
+	}
+	// SAV
+	if (input === 4){
+		cFile = document.getElementById('loadSaveForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'Save';
+		} else {
+			SAVE_arquivoBruto = undefined;
+			CARREGAR_SAVE(cFile.path);
+			document.getElementById('loadSaveForm').value = "";
+		}
+	}
+	// MSG
+	if (input === 5){
+		cFile = document.getElementById('loadMSGForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'MSG';
+		} else {
+			MSG_arquivoBruto = undefined;
+			MSG_CARREGAR_ARQUIVO(cFile.path);
+			document.getElementById('loadMSGForm').value = "";
+		}
+	}
+	// RDT
+	if (input === 6){
+		cFile = document.getElementById('loadRDTForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'RDT';
+		} else {
+			RDT_arquivoBruto = undefined;
+			RDT_openFile(cFile.path);
+			document.getElementById('loadRDTForm').value = "";
+		}
+	}
+	// TIM - Seek for Patch
+	if (input === 7){
+		cFile = document.getElementById('loadTIMForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'TIM - Seek For Patch';
+		} else {
+			TIM_arquivoBruto = undefined;
+			TIM_loadTimToSeekPattern(cFile.path);
+			document.getElementById('loadTIMForm').value = "";
+		}
+	}
+	// TIM - Map File
+	if (input === 8){
+		cFile = document.getElementById('loadTimMapForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'TIM - Map File';
+		} else {
+			TIM_mapFile = [];
+			TIM_openPatchFile(cFile.path);
+			document.getElementById('loadTimMapForm').value = "";
+		}
+	}
+	// TIM - File to be patched
+	if (input === 9){
+		cFile = document.getElementById('loadTimForPatchForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+			loadCancel = true;
+			loadType = 'TIM - File To Patch';
+		} else {
+			TIM_arquivoBruto = undefined;
+			TIM_verifyToPatchFile(cFile.path);
+			document.getElementById('loadTimForPatchForm').value = "";
+		}
+	}
+	if (BETA === true){
+		BETA = false;
+	}
+	if (loadCancel === true){
+		addLog('warn', 'WARN - Load ' + loadType + ' - Load Cancelled');
+	}
+	scrollLog();
 }

@@ -400,6 +400,7 @@ function WZ_loadFiles(file){
 		$("#menu-utility").fadeIn({duration: 200, queue: false});
 		$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
 		$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
+		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + " (" + process.arch + ")";
 	}
 	if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
 		$("#menu-topo-MOD").fadeIn({duration: 115, queue: false});

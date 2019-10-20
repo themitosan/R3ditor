@@ -223,6 +223,7 @@ function main_closeFileList(){
 }
 function main_menu(anim){
 	localStorage.clear();
+	sessionStorage.clear();
 	$("#avaliable_fileList").css({"display": "none"});
 	if (anim === 0){ // Voltar
 		reload();
@@ -268,6 +269,15 @@ function main_menu(anim){
 		$("#menu-FILEGEN").css({"display": "inline"});
 		$("#FILEGEN_holder").css({"height": "474px"});
 		$("#FILEGEN_menu").css({"height": "484px"});
+	}
+	if (anim === 5){ // Tim Patcher
+		document.title = APP_NAME + " - Tim Patcher";
+		if (enable_mod === true){
+			$("#menu-topo-MOD").css({"display": "none"});
+		}
+		$("#menu-topo-TIMPATCHER").css({"display": 'inline'});
+		$('#img-logo').fadeOut({duration: 100, queue: false});
+		$("#TIMPATCHER").fadeIn({duration: 200, queue: false});
 	}
 }
 function RDT_checkBKP(){
