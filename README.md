@@ -53,7 +53,10 @@ If you want to recover your save, open the "backup" folder and select the file y
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
-- <a href="https://www.7-zip.org/" target="_blank">7zip</a>
-- <a href="https://github.com/pmandin/reevengi-tools" target="_blank">Reevengi-tools - Rofs Unpacker (Compiled)</a>
+These files can be found in "App/tools/":
+
+- <a href="https://www.7-zip.org/" target="_blank">7za.dll, 7zxa.dll and 7za.exe (7zip)</a>
+- <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
+- <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 
 <i>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i>
