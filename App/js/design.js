@@ -271,7 +271,7 @@ function main_menu(anim){
 		$("#FILEGEN_menu").css({"height": "484px"});
 	}
 	if (anim === 5){ // Tim Patcher
-		document.title = APP_NAME + " - Tim Patcher";
+		document.title = APP_NAME + " - TIM Patcher";
 		if (enable_mod === true){
 			$("#menu-topo-MOD").css({"display": "none"});
 		}

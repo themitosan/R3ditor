@@ -8,8 +8,8 @@ var TIM_SIZE;
 var TIM_required;
 var TIM_mapFile = [];
 var TIM_arquivoBruto;
+var TIM_seekPattern_MIN;
 var TIM_ORIGINAL_FILENAME;
-var TIM_seekPattern_MIN = 7;
 
 function TIM_LOAD(timFile){
 	var ret = false;
@@ -32,6 +32,7 @@ function TIM_LOAD(timFile){
 		console.error('ERROR - Something went wrong while loading TIM!\n' + err);
 		addLog('error', 'ERROR - Something went wrong while loading TIM: ' + err);
 	}
+	scrollLog();
 	return ret;
 }
 // TIM PATCHER TOOL
@@ -45,18 +46,26 @@ function TIM_loadTimToSeekPattern(timF){
 function TIM_seekPattern(){
 	if (TIM_arquivoBruto !== undefined){
 		cls();
+		var cases = 0;
 		localStorage.clear();
 		sessionStorage.clear();
-		var cases = 0;
 
 		var end_position;
 		var TOT_PATCHS = 0;
 		var start_position;
-		var current_record = "";
+		var current_record = '';
 		var start_record = false;
 		//
-		var current_sample = "";
-		var previous_sample = "";
+		var current_sample = '';
+		var previous_sample = '';
+		//
+		TIM_seekPattern_MIN = parseInt(document.getElementById('TIMPATCHER_minLength').value);
+		if (TIM_seekPattern_MIN === NaN || TIM_seekPattern < 2 || TIM_seekPattern === undefined){
+			TIM_seekPattern = 2;
+		}
+		if (TIM_seekPattern > 20){
+			TIM_seekPattern = 20;
+		}
 		//
 		var current_BPP = TIM_arquivoBruto.slice(RANGES["TIM_BPP"][0], RANGES["TIM_BPP"][1]);
 		var currentPos_A = TIM_BPP[current_BPP][2];
@@ -65,12 +74,12 @@ function TIM_seekPattern(){
 		while(currentPos_B < TIM_arquivoBruto.length){
 			current_sample = TIM_arquivoBruto.slice(currentPos_A, currentPos_B);
 			if (current_sample === previous_sample && TIM_EXCLUDEPATTERN[current_sample] === undefined){
-				if (cases > TIM_seekPattern_MIN){
+				if (cases > parseInt(TIM_seekPattern_MIN - 1)){
 					start_record = true;
 					if (start_position === undefined && end_position === undefined){
 						currentPos_A = parseInt(currentPos_A - parseInt(TIM_seekPattern_MIN * 4));
 						currentPos_B = parseInt(currentPos_B - parseInt(TIM_seekPattern_MIN * 4));
-						start_position = parseInt(currentPos_A - 8);
+						start_position = parseInt(currentPos_A - 4);
 					}
 				} else {
 					console.log(current_sample);
@@ -111,7 +120,7 @@ function TIM_generateMapForPatterns(totalPatches, bpp){
 		var patches = '';
 		var fileHeader = 'Patch for ' + getFileName(TIM_ORIGINAL_FILENAME).toUpperCase() + '.TIM\nGenerated With ' + APP_NAME + '\n\n[TOTAL]\n' + totalPatches + 
 			'\n\n[TIM]\nName=' + getFileName(TIM_ORIGINAL_FILENAME).toUpperCase() + '\n\n' + '[BPP]\n' + bpp.toUpperCase() + '\n\n[SIZE]\n' + 
-			getFileSize(TIM_ORIGINAL_FILENAME, 0) + '\n\n';
+			getFileSize(TIM_ORIGINAL_FILENAME, 0) + '\n\n[PATTERN MIN]\n' + TIM_seekPattern_MIN + '\n\n';
 
 		while (c < totalPatches){
 			var extract = localStorage.getItem("TIMPATCHER_Patch-" + c);
@@ -135,38 +144,50 @@ function TIM_openPatchFile(fileMap){
 		document.getElementById('TIMPATCHER_patchName').title = 'Path: ' + fileMap;
 		document.getElementById('TIMPATCHER_totalPatches').innerHTML = TIM_mapFile[4];
 		document.getElementById('TIMPATCHER_timName').innerHTML = TIM_required + '.TIM';
+		document.getElementById('TIMPATCHER_lbl_patternMin').innerHTML = TIM_mapFile[16];
 		document.getElementById('TIMPATCHER_BPP').innerHTML = TIM_BPP[TIM_mapFile[10]][1];
 		document.getElementById('TIMPATCHER_patchName').innerHTML = getFileName(fileMap).toUpperCase() + '.r3timmap';
 		document.getElementById('TIMPATCHER_Size').innerHTML = parseInt(TIM_mapFile[13] / 1024) + " KB (" + parseInt(TIM_mapFile[13]) + " Bytes)";
 		$('#tim_patcher_inicialMenu').css({'display': 'none'});
 		$('#TIMPATCHER_applyBtns').css({'display': 'inline'});
 		$('#tim_patcher_status').css({'display': 'inline'});
-		$('#TIMPATCHER').css({'top': '220px'});
+		$('#TIMPATCHER').css({'top': '194px'});
 	} catch (err){
-		addLog('error', 'ERROR - something went wrong while loading the map file!');
+		addLog('error', 'ERROR - Something went wrong while loading the map file!');
 	}
 	scrollLog();
 }
 function TIM_verifyToPatchFile(tFile){
+	var reason;
+	var cFileName;
+	var canApply = true;
 	var STATUS = TIM_LOAD(tFile);
 	if (STATUS === true && TIM_mapFile !== []){
-		var cFileName = getFileName(tFile).replace(' ', '_').toUpperCase() + ".TIM";
-		if (cFileName === TIM_required + '.TIM'){
-			if (TIM_SIZE === getFileSize(TIM_ORIGINAL_FILENAME, 0)){
-				addLog('log', 'INFO - File: ' + cFileName + ' - Starting Process...');
-				document.title = APP_NAME + ' - Tim Patcher - Please wait...';
-				$('#TIMPATCHER').css({'display': 'none'});
-				TIM_APPLY_PATCH();
-			} else {
-				alert('ERROR - This is the wrong file!\n\nExpected Size (Bytes): ' + TIM_SIZE + '\nCurrent Size (Bytes): ' + getFileSize(TIM_ORIGINAL_FILENAME, 0));
-				addLog('error', 'ERROR - This is the wrong file! - Expected Size (Bytes): ' + TIM_SIZE + ' - Current Size (Bytes): ' + getFileSize(TIM_ORIGINAL_FILENAME, 0));
-				TIM_cancelPatch();
-			}
-		} else {
-			alert('ERROR - This is the wrong file!\n\nExpected File: ' + TIM_required + '.TIM\nCurrent File: ' + cFileName);
-			addLog('error', 'ERROR - This is the wrong file! - Expected File: ' + TIM_required + '.TIM - Current File: ' + cFileName);
-			TIM_cancelPatch();
-		}
+		cFileName = getFileName(tFile).replace(' ', '_').toUpperCase() + ".TIM";
+	} else {
+		canApply = false;
+		reason = 'The patcher can\'t recognize the map file or the TIM file are broken.';
+	}
+	if (cFileName !== TIM_required + '.TIM'){
+		canApply = false;
+		reason = 'Expected File: ' + TIM_required + '.TIM\nCurrent File: ' + cFileName;
+	}
+	if (TIM_SIZE !== getFileSize(TIM_ORIGINAL_FILENAME, 0)){
+		canApply = false;
+		reason = 'Expected Size (Bytes): ' + TIM_SIZE + '\nCurrent Size (Bytes): ' + getFileSize(TIM_ORIGINAL_FILENAME, 0);
+	}
+	//
+	if (canApply === true){
+		addLog('log', 'INFO - TIM Patcher - File: ' + cFileName + ' - Starting Process...');
+		document.title = APP_NAME + ' - TIM Patcher - Please wait...';
+		$('#TIMPATCHER').css({'display': 'none'});
+		TIM_APPLY_PATCH();
+	} else {
+		document.title = APP_NAME + ' - TIM Patcher - ERROR!';
+		alert('ERROR - Something went wrong!\n\n' + reason);
+		addLog('error', 'ERROR - Something went wrong!');
+		addLog('error', reason);
+		TIM_cancelPatch();
 	}
 	scrollLog();
 }
@@ -174,28 +195,27 @@ function TIM_APPLY_PATCH(){
 	var c = 0;
 	var reason;
 	var SUCESS = true;
-	var startLine = 16; // Linha Inicial dos patches
+	var startLine = 19; // Linha Inicial dos patches
 	var TEMP_FILE = TIM_arquivoBruto.toLowerCase();
 	var MAP_TOTAL_PATCHES = parseInt(TIM_mapFile[4]);
 
 	var C_PATCH;
+	var SLICE_MIN;
+	var SLICE_END;
 	var SLICE_POS_END;
 	var SLICE_POS_START;
 
 	while (c < MAP_TOTAL_PATCHES){
-		addLog('log', 'INFO - TIM Patcher: Applyng Patch - ' + parseInt(c + 1) + ' / ' + MAP_TOTAL_PATCHES + '...');
-		//
+		addLog('log', 'INFO - TIM Patcher - Applyng Patch - ' + parseInt(c + 1) + ' / ' + MAP_TOTAL_PATCHES + '...');
+		
 		SLICE_POS_START = parseInt(TIM_mapFile[startLine].replace('Start=', ''));
 		C_PATCH = TIM_mapFile[parseInt(startLine + 2)].replace('Data=', '').toLowerCase();	
 		SLICE_POS_END = parseInt(TIM_mapFile[parseInt(startLine + 1)].replace('End=', ''));
 		
 		console.log(SLICE_POS_START + ' - ' + SLICE_POS_END);
-
-		var SLICE_MIN = TEMP_FILE.slice(0, SLICE_POS_START);
-		var SLICE_END = TEMP_FILE.slice(SLICE_POS_END, TEMP_FILE.length);
-
+		SLICE_MIN = TEMP_FILE.slice(0, SLICE_POS_START);
+		SLICE_END = TEMP_FILE.slice(SLICE_POS_END, TEMP_FILE.length);
 		TEMP_FILE = SLICE_MIN + C_PATCH + SLICE_END;
-
 		startLine = startLine + 5;
 		c++;
 	}
@@ -211,13 +231,15 @@ function TIM_APPLY_PATCH(){
 		fs.writeFileSync(TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM', TEMP_FILE, 'hex');
 		addLog('log', 'INFO - Tim Patcher - Patched File: ' + TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM');
 	} else {
-		addLog('error', 'ERROR - Error while saving TIM!');
+		document.title = APP_NAME + ' - TIM Patcher - ERROR!';
+		alert('ERROR - Something went wrong on TIM Patcher Process!\n\n' + reason);
+		addLog('error', 'ERROR - Something went wrong on TIM Patcher Process!');
 		addLog('error', reason);
 	}
 	log_separador();
+	TIM_cancelPatch();
 	addLog('log', 'INFO - Process complete!');
 	$('#TIMPATCHER').css({'display': 'block'});
-	TIM_cancelPatch();
 	scrollLog();
 }
 function TIM_cancelPatch(){
@@ -225,8 +247,9 @@ function TIM_cancelPatch(){
 	TIM_SIZE = undefined;
 	TIM_required = undefined;
 	TIM_arquivoBruto = undefined;
+	TIM_seekPattern_MIN = undefined;
 	TIM_ORIGINAL_FILENAME = undefined;
-	document.title = APP_NAME + " - Tim Patcher";
+	document.title = APP_NAME + " - TIM Patcher";
 	$('#tim_patcher_inicialMenu').css({'display': 'block'});
 	$('#TIMPATCHER_applyBtns').css({'display': 'none'});
 	$('#tim_patcher_status').css({'display': 'none'});

@@ -886,6 +886,13 @@ input[type="range" i]{
 .RDT-camera-bg{
     background-image: linear-gradient(to bottom, #5a6282, #323544);
 }
+.R3DITOR_CP_CSS{
+    z-index: -99999999999999999999;
+    position: absolute;
+    height: 2px;
+    width: 2px;
+    opacity: 0;
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;
@@ -1452,6 +1459,9 @@ input[type="range" i]{
 /*
     Tim Patcher
 */
+.timPatcher_length{
+    width: 34px;
+}
 .timPatcher_titulo{
     text-shadow: 0 0 10px #9d40a9;
 }

@@ -452,20 +452,20 @@ function RDT_ENEMYNPC_APPLY(id){
 		reason = 'The R value are wrong!';
 	}
 	if (nX.value === "0000"){
-		nX.value = "0101";
 		addLog('warn', 'WARN - To avoid detection problem, the X value will be 0101 instead of 0000');
+		nX.value = "0101";
 	}
 	if (nY.value === "0000"){
-		nY.value = "0101";
 		addLog('warn', 'WARN - To avoid detection problem, the Y value will be 0101 instead of 0000');
+		nY.value = "0101";
 	}
 	if (nZ.value === "0000"){
-		nZ.value = "0101";
 		addLog('warn', 'WARN - To avoid detection problem, the Z value will be 0101 instead of 0000');
+		nZ.value = "0101";
 	}
 	if (nR.value === "0000"){
-		nR.value = "0101";
 		addLog('warn', 'WARN - To avoid detection problem, the R value will be 0101 instead of 0000');
+		nR.value = "0101";
 	}
 	if (nTexture.length !== 2){
 		canCompile = false;
@@ -815,6 +815,8 @@ function RDT_copyPastePos(mode){
 		} else {
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value;
 		}
+		var TEXT_FOR_CP = 'X Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next
 	if (mode === 1 && RDT_TEMP_NEXTX !== "" && RDT_TEMP_NEXTY !== "" && RDT_TEMP_NEXTZ !== "" && RDT_TEMP_NEXTR !== "" && RDT_TEMP_NEXT_STAGE !== "" && RDT_TEMP_NEXT_ROOM !== ""){
@@ -832,7 +834,7 @@ function RDT_copyPastePos(mode){
 	}
 }
 function RDT_DOOR_APPLY(index){
-	var reason = "";
+	var reason = '';
 	var canCompile = true;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
 	var cX 		= document.getElementById('RDT_door-edit-X').value.toLowerCase();

@@ -105,10 +105,11 @@
 			<!-- Status -->
 			<div class="none" id="tim_patcher_status">
 				File: <font class="timPatcher_infos" id="TIMPATCHER_patchName">???</font><br>
+				Pattern min: <font class="timPatcher_infos" id="TIMPATCHER_lbl_patternMin">???</font><br>
 				Total Patches: <font class="timPatcher_infos" id="TIMPATCHER_totalPatches">???</font>
 				<div class="menu-separador"></div>
 				TIM Required: <font class="timPatcher_infos" id="TIMPATCHER_timName">???</font><br>
-				Tim Size: <font class="timPatcher_infos" id="TIMPATCHER_Size">???</font><br>
+				TIM Size: <font class="timPatcher_infos" id="TIMPATCHER_Size">???</font><br>
 				TIM BPP: <font class="timPatcher_infos" id="TIMPATCHER_BPP">???</font><br><br>
 				<center>Do you want to apply this patch?</center><br>
 				<div class="none" id="TIMPATCHER_applyBtns">
@@ -116,9 +117,12 @@
 					<input type="button" class="RDT-btn-apply btn-apply-fix color-green" value="YES" onclick="triggerLoad(9);">
 				</div>
 			</div>
-			<!-- Menu Inicial -->
+			<!-- Ponto inicial -->
 			<div class="timPatcher_menu" id="tim_patcher_inicialMenu">
-				<center><i>A simple tool to fix TIM files extracted with RE3SLDE!</i></center><br>
+				<center>
+					<i>A simple tool to fix TIM files extracted with <font title="RE3SLDE - by Leo2236">RE3SLDE</font>!</i><br>
+					Pattern min: <input type="number" min="2" max="20" step="1" maxlength="2" placeholder="2" id="TIMPATCHER_minLength" value="6" class="item-select-mod timPatcher_length">
+				</center><br>
 				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Create Patch" onclick="triggerLoad(7);">
 				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Apply Patch" onclick="triggerLoad(8);">
 			</div>
@@ -323,7 +327,7 @@
 								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
 							</div>
 							<center>
-								<input type="button" onclick="RDT_copyPastePos(0);" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
+								<input type="button" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
 								<input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
 							</center>
 							<div class="menu-separador"></div>
@@ -785,8 +789,7 @@
 				Special Thanks To:<br><br>
 				<a target="_blank" href="https://www.ct-stars.com/"><u>The Entire CT-Stars Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!)</u></a><br>
 				<u>Kazuhiro Aoyama, Shinji Mikami and Capcom Dev 1 Team - Thanks by creating the game of my life!</u>
-				<br><br>
-				Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
+				<br><br>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
 				<input type="button" class="botao-menu" value="Go Back" onclick="reload();">
 			</center>
 		</div>
@@ -816,7 +819,7 @@
 		<div class="wizard none" id="WZ_dialog">
 			<center><font class="titulo" id="WZ_title">???</font></center><br>
 			<div id="WZ_content" class="WZ_info">
-				<!-- os dialogos aparecerão aqui -->
+				<!-- Os dialogos aparecerão aqui -->
 			</div>
 			<div class="progressBar none" id="WZ_progressbar"></div>
 			<center>
@@ -828,9 +831,9 @@
 		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="main_closeFileList();forceUpdate();">
 		<!-- Log -->
 		<div class="log-holder" id="log-programa">
-			<!-- os logs vão aparecer aqui -->
+			<!-- Os logs vão aparecer aqui -->
 		</div>
-		<!-- File Loader -->
+		<!-- File Loader and things - the user don't need to see this -->
 		<div class="none">
 			<input type="file" value="" onchange="setLoadFile(1);" id="loadWAVForm" accept=".wav"/>
 			<input type="file" value="" onchange="setLoadFile(2);" id="loadWZForm" accept=".exe"/>
@@ -838,10 +841,12 @@
 			<input type="file" value="" onchange="setLoadFile(4);" id="loadSaveForm" accept=".sav"/>
 			<input type="file" value="" onchange="setLoadFile(5);" id="loadMSGForm" accept=".msg"/>
 			<input type="file" value="" onchange="setLoadFile(6);" id="loadRDTForm" accept=".rdt"/>
-			<!-- Tim Patcher -->
+			<!-- TIM Patcher -->
 			<input type="file" value="" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
 			<input type="file" value="" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
 			<input type="file" value="" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
 		</div>
+		<!-- Textarea for copypaste -->
+		<textarea class="R3DITOR_CP_CSS" id="R3DITOR_COPYPASTE_TEXTAREA"></textarea>
 	</body>
 </html>

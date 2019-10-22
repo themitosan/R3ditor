@@ -220,6 +220,14 @@ function R3DITOR_RUN_MERCE(mode){
 	}
 	scrollLog();
 }
+// Copiar e Colar
+function R3DITOR_COPY(cpText){
+	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').value = '';
+	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').value = cpText;
+	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').select();
+	document.execCommand('copy');
+	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').blur();
+}
 // Verificar por erros
 function checkCanPlay(runArgs, gameId){
 	if (RDT_CANCRASH === true){
@@ -243,7 +251,7 @@ function checkCanPlay(runArgs, gameId){
 function deleteFolderRecursive(path){
 	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);
 };
-/// Function  WIP
+/// Function WIP
 function WIP(){
 	log_separador();
 	addLog('warn', "Sorry buddy... #WIP");

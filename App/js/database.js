@@ -1082,7 +1082,7 @@ var ROFS_STATUS = {
 	5:  ["Models (.PLD and .PLW)"],
 	6:  ["DATA_A (.PLD and .TIM)"],
 	7:  ["Sounds (.VB, .VH and BGM's)"],
-	8:  ["Backgrounds (BSS - .JPG and .SDL)"],
+	8:  ["Backgrounds (BSS - .JPG and .SLD)"],
 	9:  ["ROOM (.EMD and .TIM)"],
 	10: ["ROOM - EMD08 (.EMD and .TIM)"],
 	11: ["ROOM (.RBJ)"],
