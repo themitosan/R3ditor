@@ -534,7 +534,7 @@ var RDT_locations = {
 	"R50C": ["Corridor to Incinerator Room 2", "Dead Factory", 	 'C. to Incinerat. 2'],
 	"R50D": ["Incinerator Room", 			   "Dead Factory", 	 'Incinerator 1'],
 	"R50E": ["Extraction Point", 			   "Dead Factory", 	 'Extraction Point'],
-	"R50F": ["Elevator to Extraction Point",   "Dead Factory", 	 'Elevator to Exract.'],
+	"R50F": ["Elevator to Extraction Point",   "Dead Factory", 	 'Elevator to Extract. P.'],
 	"R510": ["Bridge to Dead Factory", 		   "Park", 			 'Bridge to D.F.'],
 	"R600": ["Unknown Location", 			   "Unknown", 		 'Unk. Place'],
 	"R601": ["Unknown Location", 			   "Unknown", 		 'Unk. Place'],
