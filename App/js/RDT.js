@@ -1,7 +1,7 @@
 ﻿/*
 	R3ditor - RDT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Já chegou o disco voadoooor!
 */
 // Copy-Paste Door
 var RDT_CURRENT_X = "";
@@ -139,6 +139,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_loading = true;
 	RDT_totalDoors = 0;
 	RDT_doorsArray = [];
+	RE3_LIVE_closeForm();
 	RDT_CANCRASH = false;
 	RDT_ERRORMOTIVE = "";
 	localStorage.clear();
@@ -192,7 +193,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_BG_display();
 	scrollLog();
 }
-// this will have a different way to retrive the infos
+// This will have a different way to retrive the infos
 function RDT_getCameras(){
 	var c = 0;
 	if (RDT_arquivoBruto !== undefined){
@@ -815,7 +816,7 @@ function RDT_copyPastePos(mode){
 		} else {
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value;
 		}
-		var TEXT_FOR_CP = 'X Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+		var TEXT_FOR_CP = 'Current Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next

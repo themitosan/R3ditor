@@ -1,7 +1,7 @@
 /*
 	debug.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	me ajuda
+	Me ajuda ae véi!
 */
 function copyToClipboard(text){
     var dummy = document.createElement("textarea");

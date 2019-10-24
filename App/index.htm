@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="js/RDT.js"></script>
 		<script type="text/javascript" src="js/filegen.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
+		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
 	</head>
 	<body>
 		<!-- Menu Principal -->
@@ -44,9 +45,11 @@
 			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
-			<!-- Direita (SET FOR FUTURE) WIP -->
-			<input type="button" class="botao-menu right none none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
-			<input type="button" class="botao-menu right none none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
+			<!-- Direita -->
+			<input type="button" class="botao-menu botao-aplicar right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<!-- (SET FOR FUTURE) WIP -->
+			<input type="button" class="botao-menu right none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
+			<input type="button" class="botao-menu right none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
@@ -66,6 +69,7 @@
 			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
+			<input type="button" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
@@ -77,6 +81,7 @@
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
+			<input type="button" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Saves -->
 		<div class="menu-topo none" id="menu-topo-save">
@@ -87,19 +92,22 @@
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
 			<input type="button" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
+			<input type="button" class="botao-menu botao-aplicar right none" id="SAV_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu File Gen -->
 		<div class="menu-topo none" id="menu-topo-fileEditor">
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu botao-aplicar right none" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Tim Patcher -->
 		<div class="menu-topo none" id="menu-topo-TIMPATCHER">
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu botao-aplicar right none" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		
 		<!-- CONTENT -->
 
-		<!-- Tim Patcher -->
+		<!-- TIM Patcher -->
 		<div class="timPatcher_holder" id="TIMPATCHER" onclick="main_closeFileList();">
 			<center><font class="titulo timPatcher_titulo">TIM Patcher [WIP]</font></center>
 			<!-- Status -->
@@ -127,7 +135,87 @@
 				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Apply Patch" onclick="triggerLoad(8);">
 			</div>
 		</div>
-		<!-- Lista de Arquivos Disponiveis -->
+
+		<!-- RE3 Live Status -->
+		<div class="RE3_LIVESTATUS none" id="R3DITOR_RE3_LIVESTATUS" onclick="main_closeFileList();">
+			<center><font class="titulo">RE3 Live Status</font></center>
+			<input type="button" value="Close" class="botao-menu RE3_LIVESTATUS_CLOSEBTN" onclick="RE3_LIVE_closeForm();">
+			<!-- Abas -->
+			<div>
+				<input type="button" value="General" class="aba aba-select-2 aba-left-fix RE3_LIVESTATUS_abaFix" id="RE3_LIVESTATUS_aba-1">
+				<input type="button" value="Inventory [WIP]" class="aba RE3_LIVESTATUS_abaFix none" id="RE3_LIVESTATUS_aba-2">
+			</div>
+			<!-- Menus -->
+			<div class="RE3_LIVESTATUS_MENU" id="LIVESTATUS_menu-1">
+				<div class="RE3_LIVESTATUS_ABACONTENT">
+					<!-- Process -->
+					<input type="button" value="Process" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-1">
+					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-1">
+						Game status: <font class="green">Running</font>
+						<input type="button" class="botao-menu RE3_LIVESTATUS_closeGameBtnFix" value="Close" id="RE3_LIVESTATUS_closeGameBtn">
+						<div class="menu-separador"></div>
+						Parent Process ID: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_parentProcessID">???</font><br>
+						Process ID: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processID">???</font><br>
+						Threads: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processThreads">???</font><br>
+						Handle: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processHandle">???</font><br>
+					</div>
+
+					<!-- Status -->
+					<input type="button" value="Status" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-2">
+					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-2">
+						Current Player: <font id="RE3_LIVESTATUS_lbl_pCurrentPlayer">[WIP]</font>
+						<div class="menu-separador"></div>
+						Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
+						HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
+						<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
+						<div class="menu-separador"></div>
+						Current Weapon: <font id="RE3_LIVESTATUS_lbl_pCurrentWeapon">???</font>
+					</div>
+
+					<!-- Location -->
+					<input type="button" value="Location" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-3">
+					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-3">
+						<center>
+							Current RDT: <font id="RE3_LIVESTATUS_lbl_CurrentRDT">???</font><br>
+							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnR3Ditor" style="margin-top: 2px;" value="Open on R3ditor">
+							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnHex" value="Open on Hex Editor">
+						</center>
+						<div class="menu-separador"></div>
+						Current Stage: <font id="RE3_LIVESTATUS_lbl_CurrentStage">???</font><br>
+						Room Number: <font id="RE3_LIVESTATUS_lbl_CurrentRoomNumber">???</font><br>
+						<font title="Original Local Name">O. Local Name</font>: <font id="RE3_LIVESTATUS_lbl_OriginalLocalName">???</font><br>
+						Original City Location: <font class="RE3_LIVESTATUS_lbl_window-4-fix" id="RE3_LIVESTATUS_lbl_OriginalCityLocation">???</font>
+						<div class="menu-separador"></div>
+						<font class="RE3_LIVESTATUS_X_color">X Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_X_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_X_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_Y_color">Y Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Y_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_Z_color">Z Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Z_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_R_color">R Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_R_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_R_PositionDecimal" class="user-can-select">?????</font>)</font></font>
+						<div class="menu-separador"></div>
+						<center>Current Camera: <font id="RE3_LIVESTATUS_lbl_CurrentCamera">???</font></center>
+						<img src="" class="RE3_LIVESTATUS_CAM_IMG" alt="Current Cam" id="RE3_LIVESTATUS_currentCam_img">
+					</div>
+
+					<!-- Map View -->
+					<input type="button" value="Map View [WIP]" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-4">
+					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-4">
+						<div class="RE3_LIVESTATUS_CANVAS_CSS" id="RE3_LIVESTATUS_CANVAS">
+							
+							<div id="RE3_LIVESTATUS_CANVAS_POINTER" class="RE3_LIVECANVAS_TESTICON_CSS"></div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Invent -->
+			<div class="RE3_LIVESTATUS_MENU none" id="LIVESTATUS_menu-2">
+				<div class="RE3_LIVESTATUS_ABACONTENT">
+					<center><font class="titulo">Inventory</font></center>
+					<!-- for now, WIP -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Lista de Arquivos Disponiveis - FileList -->
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
 			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right">
@@ -139,7 +227,7 @@
 				<!-- A lista de arquivos vai aqui -->
 			</div>
 			<div id="fileListHolder_AJ" class="fileList_files none">
-				<!-- A lista de arquivos (data_aj) vai aqui -->
+				<!-- A lista de arquivos (Data_AJ) vai aqui -->
 			</div>
 		</div>
 		<!-- Last RDT File -->
@@ -563,7 +651,7 @@
 			</div>
 		</div>
 		<!-- FORM: Save -->
-		<div class="none" id="menu-SAVE">
+		<div class="none" id="menu-SAVE" onclick="RE3_LIVE_closeForm();">
 			<input type="button" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
 			<input type="button" id="menu-2" class="aba" value="Jill Valentine" onclick="SAVE_showMenu(1);">
 			<input type="button" id="menu-3" class="aba" value="Carlos Oliveira" onclick="SAVE_showMenu(2);">
@@ -778,6 +866,7 @@
 				Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br><br>
 				Many Thanks to:<br><br>
 				<div class="about-tks">
+					Rob-- - memoryjs - <a target="_blank" href="https://github.com/Rob--/memoryjs">More Info</a><br>
 					MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
 					pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
 					The Mortican - BIO3GPS - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
@@ -846,7 +935,5 @@
 			<input type="file" value="" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
 			<input type="file" value="" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
 		</div>
-		<!-- Textarea for copypaste -->
-		<textarea class="R3DITOR_CP_CSS" id="R3DITOR_COPYPASTE_TEXTAREA"></textarea>
 	</body>
 </html>

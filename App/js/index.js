@@ -1,14 +1,14 @@
 /*
 	R3ditor - index.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Help me - Por favorzu!
 */
 var fs;
-var memjs;
+var MEM_JS;
 var e_e = 0;
 var APP_PATH;
 var HEX_EDITOR;
-var BIO3Process;
+var PROCESS_OBJ;
 var BETA = false;
 var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
@@ -17,7 +17,7 @@ var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
-var APP_VERSION = "0.3.0 [BETA]";
+var APP_VERSION = "0.3.1 [BETA]";
 var EXTERNAL_APP_RUNNING = false;
 var APP_NAME = "R3ditor V. " + APP_VERSION;
 window.onload = function(){
@@ -26,16 +26,18 @@ window.onload = function(){
 function load(){
 	localStorage.clear();
 	sessionStorage.clear();
-	addLog("log", APP_NAME);
-	log_separador();
 	console.info(APP_NAME);
+	addLog("log", APP_NAME);
 	document.title = APP_NAME;
 	$("#app_version").html(APP_VERSION);
+	log_separador();
+	//
 	request_render_save = false;
 	currentTime();
 	try{
 		fs = require('fs');
 		APP_PATH = process.cwd();
+		MEM_JS = require('memoryjs');
 		checkFolders();
 		WZ_verifyConfigFile();
 	} catch(err){
@@ -50,6 +52,8 @@ function load(){
 	}
 	if (BETA === true){
 		console.error("ERROR - BETA is true!");
+		addLog('error', 'BETA is true!');
+		addLog('error', 'BETA is true!');
 		addLog('error', 'BETA is true!');
 	}
 	scrollLog();
@@ -132,10 +136,10 @@ function openFileOnHex(file){
 }
 // Notifications Desktop
 function showNotify(titulo, texto, tempo){
-	if (titulo == ""){
+	if (titulo == ''){
 		titulo = "R3ditor - Notification";
 	}
-	if (texto == "") {
+	if (texto == ''){
 		texto = "Message";
 	}
 	if (tempo === null || tempo === undefined || tempo === ""){
@@ -167,13 +171,13 @@ function R3DITOR_RUN_RE3(mode){
 			R3DITOR_RUNGAME(0);
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({"display": "none"});
-				var msg = " - TESTING Resident Evil 3 / Biohazard 3...";
+				var msg = " - Testing Resident Evil 3...";
 				document.title = APP_NAME + msg;
 				addLog('log', "INFO" + msg);
 				log_separador();
 			} else {
 				RE3_RUNNING = true;
-				var msg = " - RUNNING Resident Evil 3 / Biohazard 3...";
+				var msg = " - Running Resident Evil 3...";
 				document.title = APP_NAME + msg;
 				addLog('log', "INFO" + msg);
 				log_separador();
@@ -184,6 +188,9 @@ function R3DITOR_RUN_RE3(mode){
 				process.chdir(APP_PATH + "\\Assets");
 			}
 			runExternalSoftware(EXEC_BIO3_original);
+			setTimeout(function(){
+				MEMORY_JS_initMemoryJs();
+			}, 20);
 		} catch (err) {
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({"display": "inline"});
@@ -208,7 +215,7 @@ function R3DITOR_RUN_MERCE(mode){
 			} else {
 				process.chdir(APP_PATH + "\\Assets");
 			}
-			document.title = APP_NAME + " - RUNNING Mercenaries...";
+			document.title = APP_NAME + " - Running Mercenaries...";
 			runExternalSoftware(EXEC_BIO3_MERCE);
 		}catch(err){
 			if (WZ_showWizard === true){
@@ -222,11 +229,12 @@ function R3DITOR_RUN_MERCE(mode){
 }
 // Copiar e Colar
 function R3DITOR_COPY(cpText){
-	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').value = '';
-	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').value = cpText;
-	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').select();
-	document.execCommand('copy');
-	document.getElementById('R3DITOR_COPYPASTE_TEXTAREA').blur();
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = cpText;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
 }
 // Verificar por erros
 function checkCanPlay(runArgs, gameId){
@@ -254,15 +262,22 @@ function deleteFolderRecursive(path){
 /// Function WIP
 function WIP(){
 	log_separador();
-	addLog('warn', "Sorry buddy... #WIP");
+	addLog('warn', "Sorry buddy... This function / option still #WIP");
 	scrollLog();
 }
-function killExternalSoftware(){
-	if (EXTERNAL_APP_PID !== 0){
-		process.kill(EXTERNAL_APP_PID);
+function killExternalSoftware(processID){
+	var PID;
+	if (processID !== '' && processID !== undefined && processID !== null){
+		PID = parseInt(processID);
+		process.kill(PID);
+	} else {
+		if (EXTERNAL_APP_PID !== 0 && EXTERNAL_APP_PID !== undefined){
+			process.kill(EXTERNAL_APP_PID);
+		}
 	}
 }
 function runExternalSoftware(exe, args){
+	var color;
 	EXTERNAL_APP_EXITCODE = 0;
 	EXTERNAL_APP_RUNNING = true;
 	const { spawn } = require('child_process');
@@ -272,19 +287,20 @@ function runExternalSoftware(exe, args){
 	const ls = spawn(exe, args);
 	EXTERNAL_APP_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
-		$("#menu-utility").css({"top": "586px"});
 		$("#menu-utility-aba").css({"top": "512px"});
+		$("#menu-utility").css({"top": "586px"});
 	}
 	ls.stdout.on('data', (data) => {
 		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
 	});
 	ls.stderr.on('data', (data) => {
-		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
+		addLog('warn', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
 		EXTERNAL_APP_PID = 0;
+		MEM_JS_canRender = false;
 		EXTERNAL_APP_RUNNING = false;
 		EXTERNAL_APP_EXITCODE = code;
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
@@ -292,19 +308,26 @@ function runExternalSoftware(exe, args){
 		}
 		if (RE3_RUNNING === true){
 			RE3_RUNNING = false;
+			RE3_LIVE_closeForm();
+			R3ditor_disableLiveStatusButton();
+			if (PROCESS_OBJ !== undefined){
+				MEM_JS.closeProcess(PROCESS_OBJ.handle);
+				log_separador();
+				addLog('log', 'INFO - MemoryJS - Process closed!');
+				log_separador();
+			}
 			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
 				$("#menu-utility-aba").css({"top": "472px"});
 				$("#menu-utility").css({"top": "546px"});
 			}
 			R3DITOR_RUNGAME(1);
 		}
-		var color;
 		document.title = APP_NAME;
 		process.chdir(TEMP_APP_PATH);
 		if (code > 1){
-			color = "red";
+			color = 'red';
 		} else {
-			color = "green";
+			color = 'green';
 		}
 		if (exe !== "cmd"){
 			if (exe === EXEC_BIO3_original || exe === EXEC_BIO3_MERCE){
@@ -368,7 +391,7 @@ function getFileName(file){
 }
 /// Formata valores hex para leitura interna
 function solveHEX(hex){
-	var res = hex.replace(new RegExp(" ", 'g'), "");
+	var res = hex.replace(new RegExp(' ', 'g'), '');
 	var fin = res.toLowerCase();
 	return fin;
 }
@@ -492,6 +515,54 @@ function processBIO3Vars(hex){
 		return numerofinal;
 	}
 }
+function processBIO3HP(hex){
+	if (hex !== '' && hex.length === 4){
+		var stat;
+		var color;
+		var vital = processBIO3Vars(hex);
+		/*
+			O correto seria 32767 mas estou deixando uma margem de erro para
+			que o R3ditor não pense que o player esteja vivo.
+		*/
+		if (vital > 30100){
+			stat = 'Dead';
+			color = 'txt-danger';
+		}
+		if (vital === 0){
+			stat = 'Almost dead!';
+			color = 'txt-danger';
+		}
+		if (vital > 0 && vital < 11){
+			stat = 'Danger';
+			color = 'txt-danger';
+		}
+		if (vital > 10 && vital < 31){
+			stat = 'Caution';
+			color = 'txt-caution-red';
+		}
+		if (vital > 30 && vital < 101){
+			stat = 'Caution';
+			color = 'txt-caution';
+		}
+		if (vital > 101 && vital < 201){
+			stat = 'Fine';
+			color = 'txt-fine';
+		}
+		if (vital > 200 && vital < 202){
+			stat = 'Fine...?';
+			color = 'txt-fine';
+		}
+		if (vital > 201 && vital < 29999){
+			stat = 'Life Hack!';
+			color = 'txt-fine';
+		}
+		if (vital > 29999 && vital < 30099){
+			stat = 'CHEATER!!!';
+			color = 'txt-fine';
+		}
+		return [vital, stat, hex, color];
+	}
+}
 /// Undo solvehex
 function splitHex(hex, mode){
 	var rw;
@@ -503,7 +574,7 @@ function splitHex(hex, mode){
 		rw = hex.match(/.{1,4}/g);
 	}
 	while(c < rw.length){
-		fina = fina + rw[c] + " ";
+		fina = fina + rw[c] + ' ';
 		c++;
 	}
 	return fina.slice(0, fina.length - 1);
@@ -511,21 +582,17 @@ function splitHex(hex, mode){
 function processBIO3PosNumbers(number){
 	if (number !== undefined){
 		var numTemp = parseInt(number);
-		if (numTemp < -32767){
-			numTemp = -32767;
-		}
 		if (numTemp > 32767){
-			numTemp = 32767;
+			numTemp = numTemp - 65536;
 		}
-		var pos = number + 32767;
-		return parseDecimalToBIO3Var(pos, 0);
+		return numTemp;
 	}
 }
 function parsePercentage(current, maximum){
 	return Math.floor((current / maximum) * 100);
 }
 /*
-	Triggers
+	Triggers & Load Files
 */
 function triggerLoad(loadForm){
 	// RDT Audio
@@ -565,7 +632,6 @@ function triggerLoad(loadForm){
 		$("#loadTimForPatchForm").trigger('click');
 	}
 }
-
 function setLoadFile(input){
 	var cFile;
 	var loadType = '';

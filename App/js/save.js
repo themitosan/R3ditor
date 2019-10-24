@@ -500,11 +500,16 @@ function save_renderLife(s_slot){
 		}
 		// Status: MORTO! (Ou Hex FFFF FFFF FFFF FFFF)
 		if (HP < 0){
-			STATUS = "Undefined";
+			STATUS = "Dead";
 			co = "txt-fine";
 		}
 		// Status: Danger
-		if (HP < 11){
+		if (HP === 0){
+			STATUS = "Between the life and death! (HP: " + HP + ")";
+			co = "txt-danger";
+		}
+		// Status: Danger
+		if (HP < 11 || HP > 0){
 			STATUS = "Danger";
 			co = "txt-danger";
 		}
@@ -528,7 +533,7 @@ function save_renderLife(s_slot){
 			STATUS = "Fine...? (HP: " + HP + ")";
 			co = "txt-fine";
 		}
-		if (HP > 201){
+		if (HP > 201 && HP < 29999){
 			STATUS = "Life Hack! (HP: " + HP + ")";
 			co = "txt-fine";
 		}

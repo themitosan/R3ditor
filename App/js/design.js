@@ -1,14 +1,18 @@
 ﻿/*
 	R3ditor - design.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please!
+	Help me - Please!
 */
+var RE3_LIVE_POS;
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
+var main_currentMenu;
 var RDT_totalMenus = 9;
 var SAVE_totalMenus = 4;
 var request_render_save;
+var RE3_LIVE_RENDERTIMER;
+var RE3_LIVE_prevCam = '';
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
 window.onclose = function(){
 	localStorage.clear();
@@ -20,6 +24,9 @@ window.onresize = function(){
 }
 function reload(){
 	process.chdir(TEMP_APP_PATH);
+	if (RE3_RUNNING === true){
+		killExternalSoftware();
+	}
 	sessionStorage.clear();
 	localStorage.clear();
 	location.reload();
@@ -31,7 +38,7 @@ function scrollLog(){
 function main_renderFileList(id, mode){
 	var c = 0;
 	// RDT Recent
-	if (id === 1 && RDT_lastFileOpened !== ""){
+	if (id === 1 && RDT_lastFileOpened !== ''){
 		var mFile;
 		var imgPreview;
 		var origName = "Unknown";
@@ -216,30 +223,34 @@ function main_openFileList(){
 	$("#FILELIST_goBackBtn").css({"display": "inline"});
 }
 function main_closeFileList(){
-	if (RDT_arquivoBruto !== undefined || SAVE_arquivoBruto !== undefined || MSG_arquivoBruto !== undefined){
+	if (RDT_arquivoBruto !== undefined || SAVE_arquivoBruto !== undefined || MSG_arquivoBruto !== undefined || TIM_arquivoBruto !== undefined){
 		$("#avaliable_fileList").css({"display": "none"});
 		$("#FILELIST_goBackBtn").css({"display": "none"});
 	}
 }
 function main_menu(anim){
+	main_closeFileList();
 	localStorage.clear();
 	sessionStorage.clear();
-	$("#avaliable_fileList").css({"display": "none"});
+	main_currentMenu = anim;
+	RE3_LIVE_closeForm();
 	if (anim === 0){ // Voltar
 		reload();
 	} else {
-		$("#menu-topo").css({"display": "none"});
-		$("#menu-utility").css({"display": "none"});
-		$("#menu-utility-aba").css({"display": "none"});
 		$("#menu-utility-aba-2").css({"display": "none"});
+		$("#menu-utility-aba").css({"display": "none"});
+		$("#menu-utility").css({"display": "none"});
+		$("#menu-topo").css({"display": "none"});
 	}
 	if (anim === 1){ // Save
+		$("#RE3_LIVESTATUS_openOnR3Ditor").css({'display': 'none'});
 		document.title = APP_NAME + " - Save Editor (*.SAV)";
 		$("#menu-topo-save").css({"display": "block"});
 		$("#SAV_slots").append(SAV_SLOT_LIST);
 		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG
+		$("#RE3_LIVESTATUS_openOnR3Ditor").css({'display': 'none'});
 		document.title = APP_NAME + " - Message Editor (*.MSG)";
 		$("#msg-lbl-totalCommands").html(MSG_totalComandos);
 		$("#menu-topo-msg").css({"display": "block"});
@@ -250,6 +261,7 @@ function main_menu(anim){
 		document.title = APP_NAME + " - Map Editor (*.RDT)";
 		$("#menu-topo-RDT").css({"display": "block"});
 		if (enable_mod === true){
+			$("#RE3_LIVESTATUS_openOnR3Ditor").css({'display': 'inline'});
 			main_renderFileList(3, 2);
 		} else {
 			$("#avaliable_fileList").css({"display": "none"});
@@ -1432,44 +1444,44 @@ function RDT_editItemCancel(){
 	$("#RDT_camera_holder").css({"width": "1288px"});
 	$("#RDT-enemyNPC-Edit").css({"display": "none"});
 	$("#RDT_msgCode_holder").css({"width": "1288px"});
-	document.getElementById('RDT_item-edit-A').value = "";
-	document.getElementById('RDT_door-edit-X').value = "";
-	document.getElementById('RDT_door-edit-Y').value = "";
-	document.getElementById('RDT_door-edit-Z').value = "";
-	document.getElementById('RDT_door-edit-R').value = "";
-	document.getElementById('RDT_door-edit-NX').value = "";
-	document.getElementById('RDT_door-edit-NY').value = "";
-	document.getElementById('RDT_door-edit-NZ').value = "";
-	document.getElementById('RDT_door-edit-NR').value = "";
-	document.getElementById('RDT_door-edit-DT').value = "";
-	document.getElementById('RDT_door-edit-NS').value = "";
-	document.getElementById('RDT_door-edit-NC').value = "";
-	document.getElementById('RDT_door-edit-LF').value = "";
-	document.getElementById('RDT_door-edit-OO').value = "";
-	document.getElementById('RDT_item-edit-MI').value = "";
-	document.getElementById('RDT_item-edit-IF').value = "";
-	document.getElementById('RDT_door-edit-NRN').value = "";
-	document.getElementById('RDT_MSGCODE-edit-X').value = "";
-	document.getElementById('RDT_MSGCODE-edit-Z').value = "";
-	document.getElementById('RDT_item-edit-X').innerHTML = "";
-	document.getElementById('RDT_item-edit-Y').innerHTML = "";
-	document.getElementById('RDT_item-edit-Z').innerHTML = "";
-	document.getElementById('RDT_item-edit-R').innerHTML = "";
-	document.getElementById('RDT_item-edit-Quant').value = "";
-	document.getElementById('RDT_enemyNPC-edit-X').value = "";
-	document.getElementById('RDT_enemyNPC-edit-Y').value = "";
-	document.getElementById('RDT_enemyNPC-edit-Z').value = "";
-	document.getElementById('RDT_enemyNPC-edit-R').value = "";
-	document.getElementById('RDT_door-edit-LK').innerHTML = "";
-	document.getElementById('RDT_enemyNPC-edit-PO').value = "";
-	document.getElementById('RDT_enemyNPC-edit-TX').value = "";
-	document.getElementById('RDT_enemyNPC-edit-SS').value = "";
-	document.getElementById('RDT_enemyNPC-edit-EN').value = "";
-	document.getElementById('RDT_enemyNPC-edit-EnF').value = "";
-	document.getElementById('RDT_enemyNPC-edit-ExF').value = "";
-	document.getElementById('RDT_MSGCODE-edit-radiusX').value = "";
-	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = "";
-	document.getElementById('RDT_MSGCODE-edit-special').value = "";
+	document.getElementById('RDT_item-edit-A').value = '';
+	document.getElementById('RDT_door-edit-X').value = '';
+	document.getElementById('RDT_door-edit-Y').value = '';
+	document.getElementById('RDT_door-edit-Z').value = '';
+	document.getElementById('RDT_door-edit-R').value = '';
+	document.getElementById('RDT_door-edit-NX').value = '';
+	document.getElementById('RDT_door-edit-NY').value = '';
+	document.getElementById('RDT_door-edit-NZ').value = '';
+	document.getElementById('RDT_door-edit-NR').value = '';
+	document.getElementById('RDT_door-edit-DT').value = '';
+	document.getElementById('RDT_door-edit-NS').value = '';
+	document.getElementById('RDT_door-edit-NC').value = '';
+	document.getElementById('RDT_door-edit-LF').value = '';
+	document.getElementById('RDT_door-edit-OO').value = '';
+	document.getElementById('RDT_item-edit-MI').value = '';
+	document.getElementById('RDT_item-edit-IF').value = '';
+	document.getElementById('RDT_door-edit-NRN').value = '';
+	document.getElementById('RDT_MSGCODE-edit-X').value = '';
+	document.getElementById('RDT_MSGCODE-edit-Z').value = '';
+	document.getElementById('RDT_item-edit-X').innerHTML = '';
+	document.getElementById('RDT_item-edit-Y').innerHTML = '';
+	document.getElementById('RDT_item-edit-Z').innerHTML = '';
+	document.getElementById('RDT_item-edit-R').innerHTML = '';
+	document.getElementById('RDT_item-edit-Quant').value = '';
+	document.getElementById('RDT_enemyNPC-edit-X').value = '';
+	document.getElementById('RDT_enemyNPC-edit-Y').value = '';
+	document.getElementById('RDT_enemyNPC-edit-Z').value = '';
+	document.getElementById('RDT_enemyNPC-edit-R').value = '';
+	document.getElementById('RDT_door-edit-LK').innerHTML = '';
+	document.getElementById('RDT_enemyNPC-edit-PO').value = '';
+	document.getElementById('RDT_enemyNPC-edit-TX').value = '';
+	document.getElementById('RDT_enemyNPC-edit-SS').value = '';
+	document.getElementById('RDT_enemyNPC-edit-EN').value = '';
+	document.getElementById('RDT_enemyNPC-edit-EnF').value = '';
+	document.getElementById('RDT_enemyNPC-edit-ExF').value = '';
+	document.getElementById('RDT_MSGCODE-edit-radiusX').value = '';
+	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = '';
+	document.getElementById('RDT_MSGCODE-edit-special').value = '';
 	document.getElementById("RDT-lbl-edit-index").innerHTML = "N/A";
 	document.getElementById('RDT_MSGCODE-edit-display').value = "ffff";
 	document.getElementById("RDT-lbl-item-edit").innerHTML = "No item select";
@@ -1489,7 +1501,105 @@ function RDT_showCanvasTab(){
 	RDT_selectPoint(RDT_selectedPoint);
 	RDT_showMenu(4);
 }
-// Updater
+/*
+	RE3 LIVE STATUS
+*/
+function R3ditor_enableLiveStatusButton(){
+	$("#TIMPatcher_LIVESTATUS").css({"display": 'inline'});
+	$("#fileGen_LIVESTATUS").css({"display": 'inline'});
+	$("#main_LIVESTATUS").css({"display": 'inline'});
+	$("#RDT_LIVESTATUS").css({"display": 'inline'});
+	$("#MSG_LIVESTATUS").css({"display": 'inline'});
+	$("#SAV_LIVESTATUS").css({"display": 'inline'});
+}
+function R3ditor_disableLiveStatusButton(){
+	$("#TIMPatcher_LIVESTATUS").css({"display": 'none'});
+	$("#fileGen_LIVESTATUS").css({"display": 'none'});
+	$("#main_LIVESTATUS").css({"display": 'none'});
+	$("#RDT_LIVESTATUS").css({"display": 'none'});
+	$("#MSG_LIVESTATUS").css({"display": 'none'});
+	$("#SAV_LIVESTATUS").css({"display": 'none'});
+}
+function RE3_LIVE_RENDER(){
+	if (MEM_JS_canRender === true){
+		$('#RE3_LIVESTATUS_lbl_pStatus').removeClass('txt-fine');
+		$('#RE3_LIVESTATUS_lbl_pStatus').removeClass('txt-poison');
+		$('#RE3_LIVESTATUS_lbl_pStatus').removeClass('txt-danger');
+		$('#RE3_LIVESTATUS_lbl_pStatus').removeClass('txt-caution');
+		$('#RE3_LIVESTATUS_lbl_pStatus').removeClass('txt-caution-red');
+		$('#RE3_LIVESTATUS_lbl_pStatus').addClass(processBIO3HP(REALTIME_CurrentHP)[3]);
+		var jpgCam = APP_PATH + '/Assets/DATA_A/BSS/' + REALTIME_CurrentRDT + REALTIME_CurrentCam + '.JPG';
+		if (jpgCam !== RE3_LIVE_prevCam){
+			var newTitle;
+			if (fs.existsSync(jpgCam.toUpperCase()) === true){
+				newTitle = 'Cam: ' + REALTIME_CurrentCam + '\nPath: ' + jpgCam;
+				document.getElementById('RE3_LIVESTATUS_currentCam_img').src = jpgCam;
+				document.getElementById('RE3_LIVESTATUS_currentCam_img').title = newTitle;
+			} else {
+				newTitle = 'Cam not found!';
+				document.getElementById('RE3_LIVESTATUS_currentCam_img').title = newTitle;
+				document.getElementById('RE3_LIVESTATUS_currentCam_img').src = APP_PATH + "/App/img/404.png";
+			}
+			// Por enquanto vai ser apenas para o modo hard
+			var RDT_LIVEFILE = APP_PATH + '\\Assets\\DATA_E\\RDT\\' + REALTIME_CurrentRDT + '.RDT';
+			var RDT_avaliable = fs.existsSync(RDT_LIVEFILE);
+			if (RDT_avaliable === true){
+				document.getElementById('RE3_LIVESTATUS_openOnR3Ditor').onclick = function(){
+					if (main_currentMenu === undefined){
+						main_menu(3);
+					}
+					RDT_CARREGAR_ARQUIVO(RDT_LIVEFILE);
+				}
+				if (SHOW_EDITONHEX === true){
+					$("#RE3_LIVESTATUS_openOnHex").css({'display': 'inline'});
+					document.getElementById('RE3_LIVESTATUS_openOnHex').onclick = function(){
+						openFileOnHex(RDT_LIVEFILE);
+					}
+				}
+			} else {
+				$("#RE3_LIVESTATUS_openOnHex").css({'display': 'none'});
+				$("#RE3_LIVESTATUS_openOnR3Ditor").css({'display': 'none'});
+			}
+			RE3_LIVE_prevCam = jpgCam;
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentCamera').innerHTML = REALTIME_CurrentCam;
+		}
+		var NEWPOS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
+		if (NEWPOS !== RE3_LIVE_POS){
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionHex').innerHTML = REALTIME_X_Pos;
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionHex').innerHTML = REALTIME_Y_Pos;
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionHex').innerHTML = REALTIME_Z_Pos;
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionHex').innerHTML = REALTIME_R_Pos;
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos));
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos));
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
+			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
+			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
+		}
+		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
+		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
+		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
+		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
+		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][2];
+		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
+		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
+	
+		RE3_LIVE_CANVAS_RENDER();
+	}
+}
+// WIP
+var FATORDEGIRO = 11.1;
+function RE3_LIVE_CANVAS_RENDER(){
+	var X = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos)) + 32767), 65535);
+	var Y = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos)) + 32767), 65535);
+	//var Z = parsePercentage(parseInt(processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos)) + 32767), 65535);
+	var R = parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos)) + 32767) / FATORDEGIRO;
+
+	$('#RE3_LIVESTATUS_CANVAS_POINTER').css({'top': X + '%', 'left': Y + '%', 'transform': 'rotate(' + R + 'deg)'});
+}
+/*
+	Updater
+*/ 
 function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});
 	$("#menu-utility").css({"display": "none"});
@@ -1502,7 +1612,7 @@ function R3DITORcloseUpdate(){
 	$("#menu-utility-aba").css({"display": "block"});
 	$("#menu-utility").css({"display": "block"});
 	$("#menu-topo").css({"display": "block"});
-	if (EXEC_BIO3_original !== ""){
+	if (EXEC_BIO3_original !== ''){
 		$("#menu-topo-MOD").css({"display": "block"});
 	}
 }

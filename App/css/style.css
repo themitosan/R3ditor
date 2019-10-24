@@ -27,7 +27,7 @@ img{
     -webkit-user-drag: none;
 }
 body{
-    background-image: linear-gradient(to bottom, #010101, #0f0c23);
+    background-image: linear-gradient(to bottom, #020202, #0f0c23);
     font-family: 'timesNR', Fallback, times;
 	color: #fff;
 }
@@ -141,6 +141,7 @@ input[type="range" i]{
 }
 .botao-aplicar{
     color: #fff;
+    margin-right: 2px;
     box-shadow: 0 0 4px #002808;
     text-shadow: 0 0 10px #1cff00;
     background-image: linear-gradient(to bottom, #009a3a, #003f18);
@@ -451,8 +452,8 @@ input[type="range" i]{
     text-shadow: 0 0 10px #fff;
 }
 .txt-danger{
-	color: #f00;
-    text-shadow: 0 0 10px #fff;
+    color: #ff7373;
+    text-shadow: 0 0 10px #ffb5b5;
 }
 .txt-poison{
 	color: #c29aff;
@@ -885,13 +886,6 @@ input[type="range" i]{
 }
 .RDT-camera-bg{
     background-image: linear-gradient(to bottom, #5a6282, #323544);
-}
-.R3DITOR_CP_CSS{
-    z-index: -99999999999999999999;
-    position: absolute;
-    height: 2px;
-    width: 2px;
-    opacity: 0;
 }
 .txtarea-hex-fix{
     height: 128px;
@@ -1457,7 +1451,7 @@ input[type="range" i]{
     top: -6px;
 }
 /*
-    Tim Patcher
+    TIM Patcher
 */
 .timPatcher_length{
     width: 34px;
@@ -1482,4 +1476,172 @@ input[type="range" i]{
     position: absolute;
     border-radius: 6px;
     background-image: linear-gradient(to bottom, #666, #222);
+}
+/*
+    RE3 LIVE STATUS
+*/
+.RE3_LIVESTATUS{
+    top: 48px;
+    z-index: 10;
+    padding: 6px;
+    width: 1313px;
+    height: 564px;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 10px #222;
+    background-image: linear-gradient(to bottom, #424242, #333);
+}
+.RE3_LIVESTATUS_CLOSEBTN{
+    position: absolute;
+    left: 1256px;
+    top: 14px;
+}
+.RE3_LIVESTATUS_MENU{
+    background-image: linear-gradient(to bottom, #636363, #181818);
+    border-radius: 6px;
+    height: 484px;
+    padding: 6px;
+}
+.RE3_LIVESTATUS_ABACONTENT{
+    background-image: linear-gradient(170deg, #222, #03001ee3);
+    border-radius: 6px;
+    height: 472px;
+    padding: 6px;
+}
+.RE3_LIVESTATUS_abaFix{
+    margin-top: 4px !important;
+}
+.RE3_LIVESTATUS_MINIWINDOW{
+    background-image: linear-gradient(to bottom, #454545, #333);
+    position: absolute;
+    border-radius: 6px;
+    padding: 6px;
+}
+.RE3_LIVESTATUS_inernalTab{
+    color: #fff;
+    border: none;
+    padding-top: 4px;
+    position: absolute;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 4px;
+    background-color: #454545;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-shadow: 0 0 10px #010101;
+}
+.RE3_LIVESTATUS_CAM_IMG{
+    box-shadow: 0 0 10px #222222a6;
+    border-radius: 6px;
+    margin-top: 8px;
+    width: 268px;
+}
+.RE3_LIVESTATUS_CANVAS_CSS{
+    background-image: linear-gradient(to bottom, #111, #000);
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 2px;
+    height: 438px;
+    width: 438px;
+}
+.RE3_LIVECANVAS_TESTICON_CSS{
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    background-image: url("../Img/arrow.png");
+}
+.RE3_LIVESTATUS_closeGameBtnFix{
+    margin-left: 38px;
+}
+
+.RE3_LIVESTATUS_lbl_window-1-fix{
+    position: sticky;
+    left: 158px;
+}
+.RE3_LIVESTATUS_lbl_window-2-fix{
+    position: sticky;
+    left: 146px;
+}
+.RE3_LIVESTATUS_lbl_window-3-fix{
+    position: sticky;
+    left: 158px;
+}
+/* Original location */
+.RE3_LIVESTATUS_lbl_window-4-fix{
+    position: sticky;
+    left: 444px;
+}
+/* XYZR */
+.RE3_LIVESTATUS_lbl_window-5-fix{
+    position: sticky;
+    left: 368px;
+}
+/* HP & IGT */
+.RE3_LIVESTATUS_lbl_window-6-fix{
+    position: sticky;
+    left: 68px;
+}
+/* XYZR in decimal */
+.RE3_LIVESTATUS_lbl_window-7-fix{
+    position: sticky;
+    left: 412px;
+}
+
+.RE3_LIVESTATUS_WINDOW-1{
+    height: 104px;
+    width: 240px;
+    top: 106px;
+}
+.RE3_LIVESTATUS_WINDOW-2{
+    height: 108px;
+    width: 240px;
+    top: 248px;
+}
+.RE3_LIVESTATUS_WINDOW-3{
+    height: 442px;
+    width: 268px;
+    left: 276px;
+    top: 106px;
+}
+.RE3_LIVESTATUS_WINDOW-4{
+    height: 442px;
+    width: 442px;
+    left: 562px;
+    top: 106px;
+}
+
+.RE3_LIVESTATUS_tabPos-1{
+    left: 28px;
+    top: 86px;
+}
+.RE3_LIVESTATUS_tabPos-2{
+    left: 28px;
+    top: 228px;
+}
+.RE3_LIVESTATUS_tabPos-3{
+    left: 286px;
+    top: 86px;
+}
+.RE3_LIVESTATUS_tabPos-4{
+    left: 574px;
+    top: 86px;
+}
+
+.RE3_LIVESTATUS_X_color{
+    color: #ffe6e6;
+    text-shadow: 0 0 10px #4d0000;
+}
+.RE3_LIVESTATUS_Y_color{
+    color: #cdffc2;
+    text-shadow: 0 0 10px #cef6bd94;
+}
+.RE3_LIVESTATUS_Z_color{
+    color: #e0e1ff;
+    text-shadow: 0 0 10px #a5a5ff;
+}
+.RE3_LIVESTATUS_R_color{
+    color: #e9b0ef;
+    text-shadow: 0 0 10px #b74fc3c7;
 }

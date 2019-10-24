@@ -1,7 +1,7 @@
 /*
 	FileGen.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	me ajuda
+	Me ajuda? Pliiiiz!
 */
 var FILEGEN_TOGGLE = false;
 function FILEGEN_TOGGLE_RES(){

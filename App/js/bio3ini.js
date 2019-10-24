@@ -1,7 +1,7 @@
 /*
 	R3ditor - Bio3.ini.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Can you give me a coffee? ~wink~
+	Can you give me a coffee? Pleeeeeease! ~wink~
 */
 var BIO3INI_arquivoBruto;
 // General

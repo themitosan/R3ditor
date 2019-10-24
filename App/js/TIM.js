@@ -1,9 +1,8 @@
 /*
 	R3ditor - TIM.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please
+	Help the manolo brow!
 */
-
 var TIM_SIZE;
 var TIM_required;
 var TIM_mapFile = [];
@@ -13,6 +12,7 @@ var TIM_ORIGINAL_FILENAME;
 
 function TIM_LOAD(timFile){
 	var ret = false;
+	RE3_LIVE_closeForm();
 	try{
 		TIM_arquivoBruto = fs.readFileSync(timFile, 'hex');
 		var tim_status = TIM_verify_integrity();

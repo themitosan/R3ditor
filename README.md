@@ -5,14 +5,14 @@ An editor of files written in JS / Node-Webkit to perform reverse engineering st
 <p align="center"><img src="https://pbs.twimg.com/media/EFoSmX4WsAEqCYu?format=jpg" width="680" height="360"></p>
 
 ## How to install
-- Download the latest version of NW.js (Node-Webkit) and extract it into a folder of your choice!<br>(Click <a href="http://nwjs.io" target="_blank">here</a> to download)
+- Download NW.js (Node-Webkit) V. 0.37.0 and extract it into a folder of your choice!<br>(Click <a href="https://dl.nwjs.io/v0.37.0/nwjs-sdk-v0.37.0-win-x64.zip" target="_blank">here</a> to download)
 
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "nw.exe".
 
 ## Requirements
 - OS: Windows 7 or higher
-- To run the inicial setup you will need the visual studio 2005 installed (rofs.exe need this to unpack "rofsxx.dat" files)
+- To run the inicial setup you will need the visual studio 2005 installed (rofs.exe need this to unpack "Rofsxx.dat" files)
 
 ## How to update
 - Just click on "Check for updates" and follow the instructions!
@@ -53,8 +53,10 @@ If you want to recover your save, open the "backup" folder and select the file y
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
-These files can be found in "App/tools/":
+Node-Webkit Plugins:
+- <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> <a href="https://github.com/Rob--" target="_blank">By Rob--</a>
 
+These files can be found in "App/tools/":
 - <a href="https://www.7-zip.org/" target="_blank">7za.dll, 7zxa.dll and 7za.exe (7zip)</a>
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
 - <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
