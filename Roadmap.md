@@ -38,6 +38,7 @@ This file can (and will be) modified several times!
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
+- Add RE3 live status [WIP 50%]
 - Add the option to extract all the Rofs files [WIP 50%]
 - Add a file generator! [WIP]
 - ~~Add restore backup function on RDT~~
