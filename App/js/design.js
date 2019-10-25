@@ -1575,6 +1575,7 @@ function RE3_LIVE_RENDER(){
 			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
 			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
 			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
+			RE3_LIVE_CANVAS_RENDER();
 		}
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
@@ -1583,19 +1584,17 @@ function RE3_LIVE_RENDER(){
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][2];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
-	
-		RE3_LIVE_CANVAS_RENDER();
 	}
 }
 // WIP
+var ACRESIMO = 10;
 var FATORDEGIRO = 11.1;
 function RE3_LIVE_CANVAS_RENDER(){
 	var X = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos)) + 32767), 65535);
 	var Y = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos)) + 32767), 65535);
 	//var Z = parsePercentage(parseInt(processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos)) + 32767), 65535);
 	var R = parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos)) + 32767) / FATORDEGIRO;
-
-	$('#RE3_LIVESTATUS_CANVAS_POINTER').css({'top': X + '%', 'left': Y + '%', 'transform': 'rotate(' + R + 'deg)'});
+	$('#RE3_LIVESTATUS_CANVAS_POINTER').css({'top': X + '%', 'left': Y + '%', 'transform': 'rotate(' + parseInt(R + ACRESIMO) + 'deg)'});
 }
 /*
 	Updater
