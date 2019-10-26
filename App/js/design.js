@@ -1577,6 +1577,10 @@ function RE3_LIVE_RENDER(){
 			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
 			RE3_LIVE_CANVAS_RENDER();
 		}
+		var enableInfiniteLife = document.getElementById('RE3_LIVESTATUS_CHEAT_INFHP').checked;
+		if (enableInfiniteLife === true){
+			RE3_LIVE_cheatInfiniteLife();
+		}
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
@@ -1586,6 +1590,9 @@ function RE3_LIVE_RENDER(){
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
 		RE3_LIVE_RENDER_INVENT();
 	}
+}
+function RE3_LIVE_cheatInfiniteLifeTrigger(){
+	$('#RE3_LIVESTATUS_CHEAT_INFHP').trigger('click');
 }
 // Inventario
 function RE3_LIVE_RENDER_INVENT(){

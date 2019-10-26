@@ -532,11 +532,11 @@ function processBIO3HP(hex){
 			stat = 'Almost dead!';
 			color = 'txt-danger';
 		}
-		if (vital > 0 && vital < 11){
+		if (vital > 0 && vital < 15){
 			stat = 'Danger';
 			color = 'txt-danger';
 		}
-		if (vital > 10 && vital < 31){
+		if (vital > 14 && vital < 31){
 			stat = 'Caution';
 			color = 'txt-caution-red';
 		}

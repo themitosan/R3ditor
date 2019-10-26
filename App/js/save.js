@@ -510,12 +510,12 @@ function save_renderLife(s_slot){
 			co = "txt-danger";
 		}
 		// Status: Danger
-		if (HP < 11 || HP > 0){
+		if (HP < 15 || HP > 0){
 			STATUS = "Danger";
 			co = "txt-danger";
 		}
 		// Status: Caution Laranja
-		if (HP > 10 && HP < 31){
+		if (HP > 14 && HP < 31){
 			STATUS = "Caution";
 			co = "txt-caution-red";
 		}
@@ -699,13 +699,13 @@ function makeHexTime(){
 	var HH = document.getElementById('ex-IGT-HH').value;
 	var MM = document.getElementById('ex-IGT-MM').value;
 	var SS = document.getElementById('ex-IGT-SS').value;
-	if (HH === ""){
+	if (HH === ''){
 		HH = 0;
 	}
-	if (MM === ""){
+	if (MM === ''){
 		MM = 0;
 	}
-	if (SS === ""){
+	if (SS === ''){
 		SS = 0;
 	}
 	if (HH > 23){

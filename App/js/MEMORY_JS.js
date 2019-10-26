@@ -148,6 +148,14 @@ function MEMORY_JS_renderInfo(){
 		RE3_LIVE_closeForm();
 	}
 }
+function RE3_LIVE_cheatInfiniteLife(){
+	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
+		if (REALTIME_CurrentHP.toLowerCase() !== 'c800'){
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, 0xA5CE00, 200, MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, 0xA5CE01, 0, MEM_JS.BYTE);
+		}
+	}
+}
 function RE3_LIVE_closeForm(){
 	MEM_JS_canRender = false;
 	clearInterval(RE3_LIVE_RENDERTIMER);
