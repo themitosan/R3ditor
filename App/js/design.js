@@ -1634,7 +1634,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 			} else {
 				var cor;
 				var shad;
-				var remaining;
+				var remaining = parseInt(quan, 16);
 				if (ATTR[attr] !== undefined){
 					cor = ATTR[attr][1];
  					shad = ATTR[attr][2];
