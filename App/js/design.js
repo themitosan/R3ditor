@@ -1,7 +1,7 @@
 ﻿/*
 	R3ditor - design.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - Please!
+	Helpa eu!
 */
 var RE3_LIVE_POS;
 var onMSG = false;
@@ -1595,6 +1595,23 @@ function RE3_LIVE_cheatInfiniteLifeTrigger(){
 	$('#RE3_LIVESTATUS_CHEAT_INFHP').trigger('click');
 }
 // Inventario
+function RE3_LIVE_EDITINVENTSLOT(slotID){
+	if (slotID > 10){
+		slotID = 10;
+	}
+	if (slotID < 1){
+		slotID = 1;
+	}
+	document.getElementById('RE3_LIVESTATUS_inernalTab_editSlot').value = 'Edit Slot ' + slotID;
+	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_HEX').value =  localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(0, 2).toLowerCase();
+	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_ATTR').value = localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(4, 6).toLowerCase();
+	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_QNT').value =  parseInt(localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(2, 4).toLowerCase());
+	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_APPLY').onclick = function(){
+		RE3_LIVE_APPLYITEM(slotID);
+	}
+	$("#RE3_LIVESTATUS_inernalTab_editSlot").css({'display': 'inline'});
+	$("#RE3_LIVESTATUS_editItemSlot_window").css({'display': 'inline'});
+}
 function RE3_LIVE_RENDER_INVENT(){
 	var c = 1;
 	var current_inent = '';

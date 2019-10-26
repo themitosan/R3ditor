@@ -1568,7 +1568,18 @@ input[type="range" i]{
     border-radius: 2px;
     background-color: #000041;
 }
-
+.RE3_LIVESTATUS_INPUTNUM{
+    width: 44px;
+}
+.RE3_LIVESTATUS_SELECT{
+    width: 274px;
+}
+.RE3_LIVESTATUS_APPLYBTNFIX{
+    float: right;
+    margin-top: 12px;
+    padding-left: 26px;
+    padding-right: 26px;
+}
 .RE3_LIVESTATUS_lbl_window-1-fix{
     position: sticky;
     left: 158px;
@@ -1630,6 +1641,12 @@ input[type="range" i]{
     left: 276px;
     top: 106px;
 }
+.RE3_LIVESTATUS_WINDOW-6{
+    height: 80px;
+    width: 434px;
+    left: 18px;
+    top: 468px;
+}
 .RE3_LIVESTATUS_tabPos-1{
     left: 28px;
     top: 86px;
@@ -1650,6 +1667,10 @@ input[type="range" i]{
     left: 286px;
     top: 86px;
 }
+.RE3_LIVESTATUS_tabPos-6{
+    left: 28px;
+    top: 446px;
+}
 
 .RE3_LIVESTATUS_X_color{
     color: #ffe6e6;
@@ -1669,6 +1690,7 @@ input[type="range" i]{
 }
 .RE3_LIVESTATUS_INVENT_ICON_BASE{
     zoom: 2;
+    cursor: pointer;
     position: fixed;
     margin-top: -2px;
 }
@@ -1695,6 +1717,7 @@ input[type="range" i]{
 .RE3_LIVESTATUS_LBL_ITEM{
     z-index: 1;
     font-size: 24px;
+    cursor: pointer;
     position: absolute;
     display: -webkit-box;
 }

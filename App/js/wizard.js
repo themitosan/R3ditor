@@ -401,6 +401,9 @@ function WZ_loadFiles(file){
 		$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
 		$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + " (" + process.arch + ")";
+		$("#RE3_LIVESTATUS_CHANGE_ITEM_HEX").append(RDT_EDIT_ITEM);
+		$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
+		// Init memjs
 		MEMORY_JS_initMemoryJs();
 	}
 	if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){

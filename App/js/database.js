@@ -1,7 +1,7 @@
 ﻿/*
 	R3ditor - Database.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - please!
+	Em terra de quem tem nemmy jill's sofrem!
 */
 var ITEM = {
 	"00": ["Empty Slot", 									   '', 																																																									   						 "0px 502px 0px 0px",     "-54px", "0", "0", "0", "0", "0",    '0px 380px 0px 0px',    '145', '0', false], // px
@@ -1327,6 +1327,39 @@ var TIM_BPP = {
 }
 var TIM_EXCLUDEPATTERN = {
 	"0000": [true]
+}
+var MEMJS_HEXPOS = {
+	/*
+		Pos. hex para fazer leitura in game.
+		Todas as leituras são feitas em MEM_JS.BYTE e depois convertido para Hex.
+
+		Mode 1 = RE3 Eidos
+	*/
+	// Inventory
+	'RE3_mode_1_invent_item-1':  	[0xA622A4, 0xA622A5, 0xA622A6, 0xA622A7],
+	'RE3_mode_1_invent_item-2':  	[0xA622A8, 0xA622A9, 0xA622AA, 0xA622AB],
+	'RE3_mode_1_invent_item-3':  	[0xA622AC, 0xA622AD, 0xA622AE, 0xA622AF],
+	'RE3_mode_1_invent_item-4':  	[0xA622B0, 0xA622B1, 0xA622B2, 0xA622B3],
+	'RE3_mode_1_invent_item-5':  	[0xA622B4, 0xA622B5, 0xA622B6, 0xA622B7],
+	'RE3_mode_1_invent_item-6':  	[0xA622B8, 0xA622B9, 0xA622BA, 0xA622BB],
+	'RE3_mode_1_invent_item-7':  	[0xA622BC, 0xA622BD, 0xA622BE, 0xA622BF],
+	'RE3_mode_1_invent_item-8':  	[0xA622C0, 0xA622C1, 0xA622C2, 0xA622C3],
+	'RE3_mode_1_invent_item-9':  	[0xA622C4, 0xA622C5, 0xA622C6, 0xA622C7],
+	'RE3_mode_1_invent_item-10': 	[0xA622C8, 0xA622C9, 0xA622CA, 0xA622CB],
+	// JIll's Hex Pos.
+	'RE3_mode_1_xPosition': 	    [0xA5CD68, 0xA5CD69],
+	'RE3_mode_1_yPosition': 	    [0xA5CD70, 0xA5CD71],
+	'RE3_mode_1_zPosition': 	    [0xA5CD6C, 0xA5CD6D],
+	'RE3_mode_1_rPosition': 	    [0xA5CDA2, 0xA5CDA3],
+	// Current Stage, Room number & Cam
+	'RE3_mode_1_Stage': 			[0xA620E6],
+	'RE3_mode_1_currentRoomNumber': [0xA620E8],
+	'RE3_mode_1_currentCam': 		[0xA5CD2E],
+	// HP
+	'RE3_mode_1_HP': 				[0xA5CE00, 0xA5CE01],
+	// Current Weapon
+	'RE3_mode_1_currentWeapon': 	[0xA623CD]
+
 }
 var RANGES = {
 	/*
