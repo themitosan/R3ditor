@@ -43,6 +43,7 @@ function R3DITOR_readUpdate(file){
 		});
 		if (parseInt(update_info[0]) > internal_version || TEST_RELEASE == true){
 			if (TEST_RELEASE === true){
+			RE3_LIVE_closeForm();
 				$("#aplicarUpdate").css({"display": "none"});
 			} else {
 				$("#aplicarUpdate").css({"display": "inline"});
@@ -50,7 +51,7 @@ function R3DITOR_readUpdate(file){
 			document.getElementById('new_version').innerHTML = update_info[1];
 			document.getElementById('new_version_title').innerHTML = update_info[2];
 			if (update_info.length > 3){
-				var newHTML = "";
+				var newHTML = '';
 				while (c < update_info.length){
 					if (update_info[c] === undefined){
 						break;

@@ -595,6 +595,7 @@ function log_separador() {
 /// About
 function showAbout(){
 	main_closeFileList();
+	RE3_LIVE_closeForm();
 	$("#menu-topo").css({"display": "none"});
 	$("#log-programa").css({"display": "none"});
 	$("#menu-utility").css({"display": "none"});
@@ -606,7 +607,7 @@ function showAbout(){
 	$("#about-r3ditor").fadeIn({duration: 500, queue: false});
 	MISC_unblurImg();
 }
-// eu preciso parar de pensar em anima § µes assim...
+// Eu preciso parar de pensar em animações assim...
 function MISC_unblurImg(){
 	var c = 10;
 	var imgTimer = setInterval(function(){
@@ -1585,7 +1586,7 @@ function RE3_LIVE_RENDER(){
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
-		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][2];
+		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
 		RE3_LIVE_RENDER_INVENT();
