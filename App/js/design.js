@@ -1584,9 +1584,81 @@ function RE3_LIVE_RENDER(){
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][2];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
+		RE3_LIVE_RENDER_INVENT();
 	}
 }
-// WIP
+// Inventario
+function RE3_LIVE_RENDER_INVENT(){
+	var c = 1;
+	var current_inent = '';
+	while(c < 11){
+		current_inent = current_inent + localStorage.getItem('REALTIME_INVENT_SLOT_' + c);
+		c++;
+	}
+	if (current_inent !== PREV_INVENT){
+		c = 1;
+		while(c < 11){
+			var item = localStorage.getItem('REALTIME_INVENT_SLOT_' + c).slice(0, 2);
+			var quan = localStorage.getItem('REALTIME_INVENT_SLOT_' + c).slice(2, 4);
+			var attr = localStorage.getItem('REALTIME_INVENT_SLOT_' + c).slice(4, 6);
+			RE3_LIVE_RENDER_SLOT(c, item, quan, attr);
+			c++;
+		}
+		PREV_INVENT = current_inent;
+	}
+}
+function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
+	var itemHex = itemHx.toLowerCase();
+	var attr = atribu.toLowerCase();
+	var slotID = parseInt(n);
+	if (slotID > 10){
+		slotID = 10;
+	}
+	if (slotID < 1){
+		slotID = 1;
+	}
+	if (ITEM[itemHex] !== undefined){
+		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'display': 'none'});
+		var itemTitle  = ITEM[itemHex][0];
+		var clipPath   = ITEM[itemHex][9];
+		var leftoffset = ITEM[itemHex][10];
+		var spriteId   = ITEM[itemHex][11];
+		if (n === 2 || n === 4 || n === 6 || n === 8 || n === 10){
+			leftoffset = parseInt(leftoffset) + 42;
+		}
+		if (itemHex === "00" && quan === "00" && attr === "00"){
+			$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': 'none'});
+		} else {
+			if (ITEM[itemHex][12] === false){
+				$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': 'none'});
+			} else {
+				var cor;
+				var shad;
+				var remaining;
+				if (ATTR[attr] !== undefined){
+					cor = ATTR[attr][1];
+ 					shad = ATTR[attr][2];
+				} else {
+					var msg = "Inventory - The item on slot " + n + " have an unknown Attr! (Attr: " + attr + ")";
+					addLog("warn", "WARN - " + msg);
+				}
+				if (attr === '02' || attr === '06' || attr === '0a' || attr === '0e'){
+					remaining = parseInt(quan, 16) + '%';
+				}
+				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f'){
+					remaining = 'Inf.';
+				}
+				document.getElementById('RE3_LIVESTATUS_LBL_ITEM-' + n).innerHTML = remaining;
+				$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': 'inline', 'color': cor, 'text-shadow': shad});
+			}
+		}
+		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).title = itemTitle;
+		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).src = APP_PATH + '\\App\\Img\\box-set-' + spriteId + '.png';
+		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'clip-path': 'inset(' + clipPath + ')', 'left': leftoffset + 'px', 'display': 'inline'});
+	}
+	scrollLog();
+}
+// MINI_MAP
 var ACRESIMO = 10;
 var FATORDEGIRO = 11.1;
 function RE3_LIVE_CANVAS_RENDER(){

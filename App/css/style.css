@@ -23,6 +23,7 @@ html{
     scroll-behavior: smooth;
     color: #fff;
 }
+
 img{
     -webkit-user-drag: none;
 }
@@ -46,6 +47,12 @@ input[type="range" i]{
     margin-top: 4px;
     width: 82%;
     top: 6px;
+}
+.chkbox{
+    position: absolute;
+}
+.font-chkbox-fix{
+    margin-left: 22px;
 }
 .updater_title_holder, li{
     margin-top: 6px;
@@ -366,13 +373,13 @@ input[type="range" i]{
 }
 .item-counter-invent-1{
     z-index: 1;
-    position: relative;
-    margin-left: -172px;
-    margin-top: 54px;
-    font-size: x-large;
-    display: -webkit-box;
-    cursor: pointer;
     width: 40px;
+    cursor: pointer;
+    margin-top: 54px;
+    position: relative;
+    font-size: x-large;
+    margin-left: -172px;
+    display: -webkit-box;
 }
 .item-counter-invent-2{
     z-index: 1;
@@ -1555,6 +1562,12 @@ input[type="range" i]{
 .RE3_LIVESTATUS_closeGameBtnFix{
     margin-left: 38px;
 }
+.RE3_LIVESTATUS_INVENT_BG{
+    color: #fff;
+    height: 326px;
+    border-radius: 2px;
+    background-color: #000041;
+}
 
 .RE3_LIVESTATUS_lbl_window-1-fix{
     position: sticky;
@@ -1586,7 +1599,7 @@ input[type="range" i]{
 /* XYZR in decimal */
 .RE3_LIVESTATUS_lbl_window-7-fix{
     position: sticky;
-    left: 416px;
+    left: 616px;
 }
 
 .RE3_LIVESTATUS_WINDOW-1{
@@ -1595,23 +1608,28 @@ input[type="range" i]{
     top: 106px;
 }
 .RE3_LIVESTATUS_WINDOW-2{
-    height: 108px;
+    height: 138px;
     width: 240px;
     top: 248px;
 }
 .RE3_LIVESTATUS_WINDOW-3{
     height: 442px;
-    width: 268px;
-    left: 276px;
+    width: 368px;
+    left: 468px;
     top: 106px;
 }
 .RE3_LIVESTATUS_WINDOW-4{
     height: 442px;
     width: 442px;
-    left: 562px;
+    left: 854px;
     top: 106px;
 }
-
+.RE3_LIVESTATUS_WINDOW-5{
+    height: 326px;
+    width: 174px;
+    left: 276px;
+    top: 106px;
+}
 .RE3_LIVESTATUS_tabPos-1{
     left: 28px;
     top: 86px;
@@ -1621,11 +1639,15 @@ input[type="range" i]{
     top: 228px;
 }
 .RE3_LIVESTATUS_tabPos-3{
-    left: 286px;
+    left: 478px;
     top: 86px;
 }
 .RE3_LIVESTATUS_tabPos-4{
-    left: 574px;
+    left: 864px;
+    top: 86px;
+}
+.RE3_LIVESTATUS_tabPos-5{
+    left: 286px;
     top: 86px;
 }
 
@@ -1644,4 +1666,83 @@ input[type="range" i]{
 .RE3_LIVESTATUS_R_color{
     color: #e9b0ef;
     text-shadow: 0 0 10px #b74fc3c7;
+}
+.RE3_LIVESTATUS_INVENT_ICON_BASE{
+    zoom: 2;
+    position: fixed;
+    margin-top: -2px;
+}
+.RE3_LIVESTATUS_INVENT_ROW_1{
+    top: 80px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_ROW_2{
+    top: 112px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_ROW_3{
+    top: 144px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_ROW_4{
+    top: 176px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_ROW_5{
+    top: 208px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_LBL_ITEM{
+    z-index: 1;
+    font-size: 24px;
+    position: absolute;
+    display: -webkit-box;
+}
+.RE3_LIVESTATUS_LBL_ITEM_A{
+    left: 8px;
+    width: 40px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_B{
+    left: 94px;
+    width: 40px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-1{
+    top: 44px;
+    left: 14px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-2{
+    top: 44px;
+    left: 102px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-3{
+    top: 108px;
+    left: 14px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-4{
+    top: 108px;
+    left: 102px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-5{
+    top: 174px;
+    left: 14px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-6{
+    top: 174px;
+    left: 102px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-7{
+    top: 240px;
+    left: 14px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-8{
+    top: 240px;
+    left: 102px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-9{
+    top: 304px;
+    left: 14px;
+}
+.RE3_LIVESTATUS_LBL_ITEM_ADJUST-10{
+    top: 304px;
+    left: 102px;
 }

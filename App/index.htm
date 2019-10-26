@@ -167,9 +167,41 @@
 						<div class="menu-separador"></div>
 						Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
 						HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
+						
+						<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
+						<font class="font-chkbox-fix">- Infinite HP [WIP]</font>
+
+						<div class="menu-separador"></div>
 						<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
 						<div class="menu-separador"></div>
 						Current Weapon: <font id="RE3_LIVESTATUS_lbl_pCurrentWeapon">???</font>
+					</div>
+
+					<!-- Inventory Preview -->
+					<input type="button" value="Inventory" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-5">
+					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-5">
+						<div class="RE3_LIVESTATUS_INVENT_BG">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-1" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_A RE3_LIVESTATUS_LBL_ITEM_ADJUST-1 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_1"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_1">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-2" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_B RE3_LIVESTATUS_LBL_ITEM_ADJUST-2 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_2"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_1">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-3" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_A RE3_LIVESTATUS_LBL_ITEM_ADJUST-3 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_3"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_2">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-4" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_B RE3_LIVESTATUS_LBL_ITEM_ADJUST-4 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_4"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_2">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-5" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_A RE3_LIVESTATUS_LBL_ITEM_ADJUST-5 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_5"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_3">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-6" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_B RE3_LIVESTATUS_LBL_ITEM_ADJUST-6 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_6"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_3">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-7" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_A RE3_LIVESTATUS_LBL_ITEM_ADJUST-7 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_7"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_4">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-8" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_B RE3_LIVESTATUS_LBL_ITEM_ADJUST-8 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_8"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_4">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-9" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_A RE3_LIVESTATUS_LBL_ITEM_ADJUST-9 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_9"  class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_5">
+							<font id="RE3_LIVESTATUS_LBL_ITEM-10" class="RE3_LIVESTATUS_LBL_ITEM RE3_LIVESTATUS_LBL_ITEM_B RE3_LIVESTATUS_LBL_ITEM_ADJUST-10 none">0</font>
+							<img id="RE3_LIVESTATUS_INVENT_SLOT_10" class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_5">
+						</div>
 					</div>
 
 					<!-- Location -->
@@ -183,25 +215,28 @@
 						<div class="menu-separador"></div>
 						Current Stage: <font id="RE3_LIVESTATUS_lbl_CurrentStage">???</font><br>
 						Room Number: <font id="RE3_LIVESTATUS_lbl_CurrentRoomNumber">???</font><br>
-						<font title="Original Local Name">O. Local Name</font>: <font id="RE3_LIVESTATUS_lbl_OriginalLocalName">???</font><br>
+						Original Local Name: <font id="RE3_LIVESTATUS_lbl_OriginalLocalName">???</font><br>
 						Original City Location: <font class="RE3_LIVESTATUS_lbl_window-4-fix" id="RE3_LIVESTATUS_lbl_OriginalCityLocation">???</font>
 						<div class="menu-separador"></div>
-						<font class="RE3_LIVESTATUS_X_color">X Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_X_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_X_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
-						<font class="RE3_LIVESTATUS_Y_color">Y Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Y_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
-						<font class="RE3_LIVESTATUS_Z_color">Z Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Z_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
-						<font class="RE3_LIVESTATUS_R_color">R Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_R_PositionHex">????</font> <font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_R_PositionDecimal" class="user-can-select">?????</font>)</font></font>
+						<font class="RE3_LIVESTATUS_X_color">X Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_X_PositionHex">????</font> 
+						<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_X_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_Y_color">Y Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Y_PositionHex">????</font> 
+						<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_Z_color">Z Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Z_PositionHex">????</font> 
+						<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+						<font class="RE3_LIVESTATUS_R_color">R Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_R_PositionHex">????</font> 
+						<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_R_PositionDecimal" class="user-can-select">?????</font>)</font></font>
 						<div class="menu-separador"></div>
-						<center>Current Camera: <font id="RE3_LIVESTATUS_lbl_CurrentCamera">???</font></center>
-						<img src="" class="RE3_LIVESTATUS_CAM_IMG" alt="Current Cam" id="RE3_LIVESTATUS_currentCam_img">
+						<center>Current Camera: <font id="RE3_LIVESTATUS_lbl_CurrentCamera">???</font><br>
+						<img class="RE3_LIVESTATUS_CAM_IMG" alt="Current Cam" id="RE3_LIVESTATUS_currentCam_img"></center>
 					</div>
 
 					<!-- Map View -->
 					<input type="button" value="Map View [WIP]" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-4">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-4">
 						<div class="RE3_LIVESTATUS_CANVAS_CSS" id="RE3_LIVESTATUS_CANVAS">
-							
+							<!-- WIP -->
 							<div id="RE3_LIVESTATUS_CANVAS_POINTER" class="RE3_LIVECANVAS_TESTICON_CSS"></div>
-
 						</div>
 					</div>
 				</div>

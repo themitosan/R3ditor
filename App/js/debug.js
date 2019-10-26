@@ -3,6 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Me ajuda ae véi!
 */
+var DEBUG_LOCKRENDER = false;
 function copyToClipboard(text){
     var dummy = document.createElement("textarea");
     document.body.appendChild(dummy);

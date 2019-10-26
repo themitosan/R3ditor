@@ -4,40 +4,40 @@
 	Já chegou o disco voadoooor!
 */
 // Copy-Paste Door
-var RDT_CURRENT_X = "";
-var RDT_CURRENT_Y = "";
-var RDT_CURRENT_Z = "";
-var RDT_CURRENT_R = "";
-var RDT_TEMP_NEXTX = "";
-var RDT_TEMP_NEXTY = "";
-var RDT_TEMP_NEXTZ = "";
-var RDT_TEMP_NEXTR = "";
+var RDT_CURRENT_X = '';
+var RDT_CURRENT_Y = '';
+var RDT_CURRENT_Z = '';
+var RDT_CURRENT_R = '';
+var RDT_TEMP_NEXTX = '';
+var RDT_TEMP_NEXTY = '';
+var RDT_TEMP_NEXTZ = '';
+var RDT_TEMP_NEXTR = '';
 var RDT_selectedPoint = 0;
-var RDT_TEMP_NEXT_ROOM = "";
-var RDT_TEMP_NEXT_STAGE = "";
-var RDT_TEMP_NEXT_CAMERA = "";
+var RDT_TEMP_NEXT_ROOM = '';
+var RDT_TEMP_NEXT_STAGE = '';
+var RDT_TEMP_NEXT_CAMERA = '';
 
 // Copy-Paste Camera
-var RDT_TEMP_CAMERA_ORIG_X_1 = "";
-var RDT_TEMP_CAMERA_ORIG_X_2 = "";
-var RDT_TEMP_CAMERA_ORIG_Y_1 = "";
-var RDT_TEMP_CAMERA_ORIG_Y_2 = "";
-var RDT_TEMP_CAMERA_ORIG_Z_1 = "";
-var RDT_TEMP_CAMERA_ORIG_Z_2 = "";
-var RDT_TEMP_CAMERA_DIREC_X_1 = "";
-var RDT_TEMP_CAMERA_DIREC_X_2 = "";
-var RDT_TEMP_CAMERA_DIREC_Y_1 = "";
-var RDT_TEMP_CAMERA_DIREC_Y_2 = "";
-var RDT_TEMP_CAMERA_DIREC_Z_1 = "";
-var RDT_TEMP_CAMERA_DIREC_Z_2 = "";
+var RDT_TEMP_CAMERA_ORIG_X_1 = '';
+var RDT_TEMP_CAMERA_ORIG_X_2 = '';
+var RDT_TEMP_CAMERA_ORIG_Y_1 = '';
+var RDT_TEMP_CAMERA_ORIG_Y_2 = '';
+var RDT_TEMP_CAMERA_ORIG_Z_1 = '';
+var RDT_TEMP_CAMERA_ORIG_Z_2 = '';
+var RDT_TEMP_CAMERA_DIREC_X_1 = '';
+var RDT_TEMP_CAMERA_DIREC_X_2 = '';
+var RDT_TEMP_CAMERA_DIREC_Y_1 = '';
+var RDT_TEMP_CAMERA_DIREC_Y_2 = '';
+var RDT_TEMP_CAMERA_DIREC_Z_1 = '';
+var RDT_TEMP_CAMERA_DIREC_Z_2 = '';
 
 // Copy-Paste Enemy & NPC
-var RDT_TEMP_ENEMYNPC_TYPE = "";
-var RDT_TEMP_ENEMYNPC_POSE = "";
-var RDT_TEMP_ENEMYNPC_TEXTURE = "";
-var RDT_TEMP_ENEMYNPC_SOUNDSET = "";
-var RDT_TEMP_ENEMYNPC_EXTRAFLAG = "";
-var RDT_TEMP_ENEMYNPC_ENEMYFLAG = "";
+var RDT_TEMP_ENEMYNPC_TYPE = '';
+var RDT_TEMP_ENEMYNPC_POSE = '';
+var RDT_TEMP_ENEMYNPC_TEXTURE = '';
+var RDT_TEMP_ENEMYNPC_SOUNDSET = '';
+var RDT_TEMP_ENEMYNPC_EXTRAFLAG = '';
+var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
 
 var RDT_MSG_END = [];
 var RDT_totalItens = 0;
@@ -80,12 +80,12 @@ var RDT_messasgesRaw;
 var RDT_itemIndexRAW;
 var RDT_totalMessages;
 var RDT_totalItensGeral;
-var RDT_lastBackup = "";
+var RDT_lastBackup = '';
 var RDT_enemiesArray = [];
 var RDT_messagesArray = [];
 var RDT_MSG_finalLenght = 0;
 var RDT_MSG_startLength = 0;
-var RDT_lastFileOpened = "";
+var RDT_lastFileOpened = '';
 var RDT_propModelsArray = [];
 var RDT_messageCodesArray = [];
 function RDT_resetVars(){

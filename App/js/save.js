@@ -5,6 +5,7 @@
 */
 var SAVE_arquivoBruto;
 var CURRENT_SAVE_SLOT = 1;
+
 // Mapa dos Saves
 var INDICADOR_01;
 var INDICADOR_02;
@@ -564,18 +565,18 @@ function save_Backup(){
 			addLog("log", "Folder - " + APP_PATH + "\\Backup\\SAV\\" + backup_name);
 			log_separador();
 		} catch (err){
-			addLog("error", "ERROR - Unable to make backup! - " + err);
+			addLog('error', "ERROR - Unable to make backup! - " + err);
 		}
 	} else {
-		addLog("error", "ERROR - You can't make a backup if you haven't opened a save yet!");
+		addLog('error', "ERROR - You can't make a backup if you haven't opened a save yet!");
 	}
 }
 function applyItem(mode, person, pos){
 	var itemId = document.getElementById("ex-item-id").value;
 	var attr = document.getElementById("ex-item-attr").value;
 	var quant = document.getElementById("ex-item-quant").value;
-	if (quant == ""){
-		quant = "0";
+	if (quant == ''){
+		quant = '0';
 	}
 	if (quant < 0){
 		quant = 0;
@@ -895,7 +896,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		s++;
 	}
 	var p;
-	if (person == 0){
+	if (person === 0){
 		p = "Jill";
 	} else {
 		p = "Carlos";
@@ -904,9 +905,9 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		cor = ATTR[atrib][1];
  		shad = ATTR[atrib][2];
 	} else {
-		var msg = "(" + p + ") Inventory - The item on slot " + block + " have an unknown Attr! Attr: " + atrib;
-		addLog("warn", "WARN: " + msg);
-		console.warn("WARN: " + msg);
+		var msg = "(" + p + ") Inventory - The item on slot " + block + " have an unknown Attr! (Attr: " + atrib + ")";
+		addLog("warn", "WARN - " + msg);
+		console.warn("WARN - " + msg);
 	}
 	if (person == 0){ // Inventário da Jill
 		document.getElementById("J-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
@@ -996,7 +997,7 @@ function SAVE_clearAllSaves(){
    |					   06 01 00 00   - 00:00:00:04:83		   \||/									  |
    |					   07 01 00 00   - 00:00:00:04:84           \/ 									  |
    |																									  |
-   |	Oh, come on! I have to translate this too? Throw this at translate.google.com! 					  |
+   |	     Oh, come on! I have to translate this too? Throw this at translate.google.com! 			  |
    \______________________________________________________________________________________________________|
 */
 function contador0x2200(hex0x2200){
@@ -1057,9 +1058,8 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 	} else {
 		DC = parseInt(DC);
 	}
-	//console.log(DD + " - " + HH + " - " + MM + " - " + SS + " - " + DC + " - " + MS);
 	var restante;
-	var minus = 999 - 1;
+	var minus = 998;
 	// Milésimos
 	if (MS > minus){
 		while (MS > minus){

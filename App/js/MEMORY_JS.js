@@ -10,16 +10,19 @@
 var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 50;
 
-var REALTIME_X_Pos = '????';
-var REALTIME_Y_Pos = '????';
-var REALTIME_Z_Pos = '????';
-var REALTIME_R_Pos = '????';
-var REALTIME_CurrentCam = '??';
-var REALTIME_CurrentHP = '????';
-var REALTIME_CurrentStage = '??';
-var REALTIME_CurrentRDT = '????';
-var REALTIME_CurrentWeapon = '??';
-var REALTIME_CurrentRoomNumber = '??';
+var REALTIME_X_Pos = '0000';
+var REALTIME_Y_Pos = '0000';
+var REALTIME_Z_Pos = '0000';
+var REALTIME_R_Pos = '0000';
+var REALTIME_CurrentCam = '00';
+var REALTIME_CurrentHP = '0000';
+var REALTIME_CurrentStage = '00';
+var REALTIME_CurrentRDT = '0000';
+var REALTIME_CurrentWeapon = '00';
+var REALTIME_CurrentRoomNumber = '00';
+//
+var PREV_INVENT = '';
+//
 
 function MEMORY_JS_initMemoryJs(){
 	var c = 0;
@@ -63,6 +66,57 @@ function MEMORY_JS_fixVars(input, v){
 function MEMORY_JS_renderInfo(){
 	// Running
 	if (PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
+		// Inventory
+		var SLOT_1_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A4, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_1_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A5, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_1_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A6, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_1_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A7, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_2_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A8, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_2_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622A9, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_2_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AA, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_2_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AB, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_3_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AC, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_3_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AD, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_3_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AE, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_3_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622AF, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_4_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B0, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_4_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B1, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_4_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B2, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_4_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B3, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_5_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B4, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_5_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B5, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_5_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B6, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_5_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B7, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_6_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B8, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_6_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622B9, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_6_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BA, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_6_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BB, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_7_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BC, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_7_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BD, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_7_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BE, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_7_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622BF, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_8_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C0, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_8_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C1, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_8_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C2, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_8_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C3, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_9_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C4, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_9_ITEM_QNT  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C5, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_9_ITEM_ATR  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C6, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_9_ITEM_NUL  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C7, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_10_ITEM_HEX = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C8, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_10_ITEM_QNT = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622C9, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_10_ITEM_ATR = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622CA, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var SLOT_10_ITEM_NUL = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA622CB, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		localStorage.setItem('REALTIME_INVENT_SLOT_1', SLOT_1_ITEM_HEX  + SLOT_1_ITEM_QNT  + SLOT_1_ITEM_ATR  + SLOT_1_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_2', SLOT_2_ITEM_HEX  + SLOT_2_ITEM_QNT  + SLOT_2_ITEM_ATR  + SLOT_2_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_3', SLOT_3_ITEM_HEX  + SLOT_3_ITEM_QNT  + SLOT_3_ITEM_ATR  + SLOT_3_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_4', SLOT_4_ITEM_HEX  + SLOT_4_ITEM_QNT  + SLOT_4_ITEM_ATR  + SLOT_4_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_5', SLOT_5_ITEM_HEX  + SLOT_5_ITEM_QNT  + SLOT_5_ITEM_ATR  + SLOT_5_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_6', SLOT_6_ITEM_HEX  + SLOT_6_ITEM_QNT  + SLOT_6_ITEM_ATR  + SLOT_6_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_7', SLOT_7_ITEM_HEX  + SLOT_7_ITEM_QNT  + SLOT_7_ITEM_ATR  + SLOT_7_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_8', SLOT_8_ITEM_HEX  + SLOT_8_ITEM_QNT  + SLOT_8_ITEM_ATR  + SLOT_8_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_9', SLOT_9_ITEM_HEX  + SLOT_9_ITEM_QNT  + SLOT_9_ITEM_ATR  + SLOT_9_ITEM_NUL);
+		localStorage.setItem('REALTIME_INVENT_SLOT_10', SLOT_10_ITEM_HEX + SLOT_10_ITEM_QNT + SLOT_10_ITEM_ATR + SLOT_10_ITEM_NUL);
 		// Coordenates
 		var X1 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA5CD68, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		var X2 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA5CD69, MEM_JS.BYTE).toString(16).toUpperCase(), 2);
@@ -87,7 +141,9 @@ function MEMORY_JS_renderInfo(){
 		REALTIME_CurrentWeapon 	   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, 0xA623CD, MEM_JS.BYTE).toString(16), 2);
 		REALTIME_CurrentHP 		   = HPC8 + HP00;
 		// Render all info
-		RE3_LIVE_RENDER();
+		if (DEBUG_LOCKRENDER === false){
+			RE3_LIVE_RENDER();
+		}
 	} else {
 		RE3_LIVE_closeForm();
 	}
