@@ -44,19 +44,21 @@ function main_renderFileList(id, mode){
 	if (id === 1 && RDT_lastFileOpened !== ''){
 		var mFile;
 		var imgPreview;
-		var origName = "Unknown";
-		var origCity = "Unknown";
+		var originalMFile;
+		var originalPFile;
+		var origName = 'Unknown';
+		var origCity = 'Unknown';
 		var pFile = RDT_lastFileOpened;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
-		if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
-			imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
-		} else if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG") === true){
-			imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG";
+		if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
+			imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
+		} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
+			imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG';
 		} else {
-			imgPreview = APP_PATH + "\\App\\img\\404.png";
+			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap") === true){
-			mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + ".rdtmap";
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap';
 		} else {
 			mFile = 'There is no map file for this RDT. Open it to generate!';
 		}
@@ -64,8 +66,6 @@ function main_renderFileList(id, mode){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
 		}
-		var originalMFile;
-		var originalPFile;
 		if (mFile.length > 44 && mFile !== 'There is no map file for this RDT. Open it to generate!'){
 			originalMFile = mFile;
 			mFile = "..." + mFile.slice(parseInt(mFile.length / 3), mFile.length);
@@ -79,7 +79,7 @@ function main_renderFileList(id, mode){
 			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: <font title="' + originalPFile + '">' + pFile +  '</font><br>Map File: <font title="' + originalMFile + '">' + mFile + 
 			'</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$("#RDT_recentFile").append(fileList_HTML_template);
-		$("#RDT_recentFile").css({"display": "block", "left": "690px", "height": "144px", "width": "630px", "top": "424px", "background-image": "linear-gradient(to bottom, #2d2d2d, #232323)","border-top-left-radius": "0px", "border-bottom-left-radius": "0px"});
+		$("#RDT_recentFile").css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to bottom, #2d2d2d, #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
 		document.getElementById("fileListHolder").innerHTML = '';
 		document.getElementById("fileListHolder_AJ").innerHTML = '';
@@ -101,10 +101,10 @@ function main_renderFileList(id, mode){
 				gameModePath = 'DATA_E';
 			}
 		}
-		if (fs.existsSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\") === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
-			var listRDT = fs.readdirSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\").filter(fn => fn.endsWith('.RDT'));
+		if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
+			var listRDT = fs.readdirSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\').filter(fn => fn.endsWith('.RDT'));
 			if (listRDT.length < 1){
-				listRDT = fs.readdirSync(APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\").filter(fn => fn.endsWith('.rdt'));
+				listRDT = fs.readdirSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\').filter(fn => fn.endsWith('.rdt'));
 			}
 			while(c < listRDT.length){
 				var mFile;
@@ -113,20 +113,20 @@ function main_renderFileList(id, mode){
 				var nOriginal = '';
 				var origName = 'Unknown';
 				var origCity = 'Unknown';
-				var currentRDT = APP_PATH + "\\Assets\\" + gameModePath + "\\RDT\\" + listRDT[c];
+				var currentRDT = APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\' + listRDT[c];
 				var RDT_name = getFileName(currentRDT).toUpperCase();
-				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG") === true){
-					imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "00.JPG";
-				} else if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG") === true){
-					imgPreview = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + RDT_name.toUpperCase() + "01.JPG";
+				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
+					imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
+				} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
+					imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG';
 				} else {
-					imgPreview = APP_PATH + "\\App\\img\\404.png";
+					imgPreview = APP_PATH + '\\App\\img\\404.png';
 				}
-				if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_E.rdtmap") === true){
-					mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_E.rdtmap";
+				if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
+					mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
 				} else {
-					if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_AJ.rdtmap") === true){
-						mFile = APP_PATH + "\\Configs\\RDT\\" + RDT_name.toUpperCase() + "_AJ.rdtmap";
+					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
+						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
 					} else {
 						mFile = 'There is no map file for this RDT. Open it to generate!';
 					}
@@ -442,7 +442,7 @@ function showModItem(modo, person, pos, itemId){
 		applyItem(modo, person, pos);
 		cancelShowModItem(0);
 	}
-	$('#menu-mod-item').fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModPerson(person){
 	adjustDialogSave(40);
@@ -453,7 +453,7 @@ function showModPerson(person){
 		applyPerson();
 		cancelShowModItem(1);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModDificuldade(diff){
 	adjustDialogSave(40);
@@ -464,7 +464,7 @@ function showModDificuldade(diff){
 		applyDificuldade();
 		cancelShowModItem(2);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModRoupa(roupa){
 	adjustDialogSave(40);
@@ -475,7 +475,7 @@ function showModRoupa(roupa){
 		applyRoupa();
 		cancelShowModItem(3);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModSaveCount(nSaves){
 	adjustDialogSave(40);
@@ -486,7 +486,7 @@ function showModSaveCount(nSaves){
 		applySaveCount();
 		cancelShowModItem(4);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModHP(showLife){
 	adjustDialogSave(40);
@@ -497,7 +497,7 @@ function showModHP(showLife){
 		applyHP();
 		cancelShowModItem(5);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModEpilogos(eps){
 	adjustDialogSave(37);
@@ -508,7 +508,7 @@ function showModEpilogos(eps){
 		applyEpil();
 		cancelShowModItem(6);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModIGT(){
 	adjustDialogSave(40);
@@ -519,7 +519,7 @@ function showModIGT(){
 		makeHexTime();
 		cancelShowModItem(7);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModSidepack(person){
 	adjustDialogSave(40);
@@ -540,7 +540,7 @@ function showModSidepack(person){
 		applySidepack(person);
 		cancelShowModItem(8);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModCurrentArma(person){
 	adjustDialogSave(34);
@@ -567,7 +567,7 @@ function showModCurrentArma(person){
 		applyArma(person);
 		cancelShowModItem(9);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
 }
 function showModPoison(){
 	adjustDialogSave(40);
@@ -581,19 +581,26 @@ function showModPoison(){
 	document.getElementById("btn-item-cancel").onclick = function(){
 		cancelShowModItem(10);
 	}
-	$("#menu-mod-item").fadeIn({duration: 100, queue: false});
+	SAV_showModItem();
+}
+function SAV_showModItem(){
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#menu-mod-item').fadeIn({duration: 100, queue: false});
+	} else {
+		$('#menu-mod-item').css({'display': 'block'});
+	}
 }
 function cancelShowModItem(){
 	main_closeFileList();
 	if (GAME_PATH !== "" && GAME_PATH !== undefined){
-		$("#SAV_openFileList").css({"display": "inline"});
+		$("#SAV_openFileList").css({'display': 'inline'});
 	}
-	$("#menu-mod-item").css({"display": "none"});
+	$("#menu-mod-item").css({'display': 'none'});
 	if (SAVE_aba_atual === 1){
-		$("#s-menu-general").css({"display": "block"});
+		$("#s-menu-general").css({'display': 'block'});
 	}
 	if (SAVE_aba_atual === 4){
-		$("#o-menu-general").css({"display": "block"});
+		$("#o-menu-general").css({'display': 'block'});
 	}
 	$("#j_box").css({'display': 'block'});
 	$("#c_box").css({'display': 'block'});
@@ -624,7 +631,7 @@ function adjustDialogSave(percent){
 	$("#menu-mod-item").css({'top': percent + '%'});
 }
 function log_separador() {
-	addLog("log", l_separador);
+	addLog('log', l_separador);
 }
 /// About
 function showAbout(){
@@ -702,7 +709,7 @@ function TRANSFER_MSG_TO_RDT(){
 	$("#menu-topo-RDT").css({'display': 'block'});
 	$("#btn-goback-rdt").css({'display': 'none'});
 	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
-		$("#menu-topo-MOD").css({"display": "inline"});
+		$("#menu-topo-MOD").css({'display': 'inline'});
 	}
 }
 function cleanMSGFields(){
@@ -855,7 +862,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Comando desconhecido usado em R101.RDT
 	if (id === 8){ 
-		$("#dialog-msg-addcomand").css({"top": '200px'});
+		$("#dialog-msg-addcomand").css({'top': '200px'});
 		document.getElementById("msg-addcomand-title").innerHTML = 'Unknown Function (F5)';
 		document.getElementById("dialog-msg-render").innerHTML = DIALOG_MSG_FUNCTIONF5;
 		document.getElementById('msg-f5-id').value = args;
@@ -922,13 +929,13 @@ function MSG_showTranslateInput(){
 	$("#MSG_optionTranslate").css({'display': 'none'});
 }
 function MSG_renderCamPreview(){
-	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
+	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
 		var currentFile = getFileName(ORIGINAL_FILENAME).toUpperCase().slice(0, 4);
 		var currentCam = document.getElementById('msg-selectCam-id').value.toUpperCase();
 		var camImg = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + ".JPG";
 		if (fs.existsSync(camImg) === true){
 			document.getElementById('MSG_camPreview').src = camImg;
-			document.getElementById('MSG_camPreview').title = "Cam: " + currentCam + "\nFile: " + currentFile + currentCam + ".JPG";
+			document.getElementById('MSG_camPreview').title = 'Cam: ' + currentCam + '\nFile: ' + currentFile + currentCam + '.JPG';
 		} else {
 			addLog('warn', 'WARN - Unable to find cam preview: The img file was not found! (404)');
 			scrollLog();
@@ -939,7 +946,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + " - Map Editor (*.RDT) - File: " + ORIGINAL_FILENAME;
+	document.title = APP_NAME + ' - Map Editor (*.RDT) - File: ' + ORIGINAL_FILENAME;
 	$("#img-logo").css({'display': 'none'});
 	$("#avaliable_fileList").css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1044,17 +1051,17 @@ function RDT_showMenu(id){
 	document.getElementById("RDT_lbl-totItens").innerHTML = RDT_totalItensGeral;
 	document.getElementById("RDT_lbl_totalCameras").innerHTML = RDT_totalCameras;
 	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
-	document.getElementById("RDT-aba-menu-6").value = "Doors (" + RDT_totalDoors +')';
+	document.getElementById("RDT-aba-menu-6").value = 'Doors (' + RDT_totalDoors +')';
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
-	document.getElementById("RDT-aba-menu-5").value = "Audios (" + RDT_totalAudios +')';
-	document.getElementById("RDT-aba-menu-9").value = "Cameras (" + RDT_totalCameras +')';
+	document.getElementById("RDT-aba-menu-5").value = 'Audios (' + RDT_totalAudios +')';
+	document.getElementById("RDT-aba-menu-9").value = 'Cameras (' + RDT_totalCameras +')';
 	document.getElementById("RDT_lbl_totalmsgCode").innerHTML = RDT_messageCodesArray.length;
-	document.getElementById("RDT-aba-menu-2").value = "Message Block (" + RDT_totalMessages + ')';
-	document.getElementById("RDT-aba-menu-8").value = "Enemies / NPC's (" + RDT_enemiesArray.length + ')';
-	document.getElementById("RDT-aba-menu-7").value = "Message Code (" + RDT_messageCodesArray.length + ')';
-	document.getElementById("RDT-aba-menu-3").value = "Items, Files and Maps (" + RDT_totalItensGeral + ')';
-	document.getElementById("RDT-lbl-FILENAME").innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT";
-	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + " KB (" + getFileSize(ORIGINAL_FILENAME, 0) + " Bytes)";
+	document.getElementById("RDT-aba-menu-2").value = 'Message Block (' + RDT_totalMessages + ')';
+	document.getElementById("RDT-aba-menu-8").value = 'Enemies / NPC\'s (' + RDT_enemiesArray.length + ')';
+	document.getElementById("RDT-aba-menu-7").value = 'Message Code (' + RDT_messageCodesArray.length + ')';
+	document.getElementById("RDT-aba-menu-3").value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
+	document.getElementById("RDT-lbl-FILENAME").innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
 	$("#RDT_menu-" + id).css({'display': 'block'});
 	$("#menu-RDT").css({'display': 'block'});
 	RDT_applyMenuFocus(id);
@@ -1082,13 +1089,13 @@ function RDT_showEditCamera(index, camEdit, codeHex){
 	document.getElementById('RDT-btn-aplicarCAMERA').onclick = function(){
 		RDT_CAMERA_APPLY(index);
 	}
-	$("#RDT-camera-Edit").css({"display": "inline"});
-	$("#RDT_camera_holder").css({"width": "932px"});
+	$("#RDT-camera-Edit").css({'display': 'inline'});
+	$("#RDT_camera_holder").css({'width': '932px'});
 }
 function RDT_showEditMsgCode(index, codeHex){
 	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
 	var header = codeHex.slice(RANGES["RDT_msgCode-header"][0], RANGES["RDT_msgCode-header"][1]);
-	if (header !== "64"){
+	if (header !== '64'){
 		document.getElementById('RDT-lbl-MSGCODE-index').innerHTML = codeHex.slice(RANGES["RDT_msgCode-id"][0],RANGES["RDT_msgCode-id"][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-X').value 	   = codeHex.slice(RANGES["RDT_msgCode-0-xPos"][0], RANGES["RDT_msgCode-0-xPos"][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-Z').value 	   = codeHex.slice(RANGES["RDT_msgCode-0-zPos"][0], RANGES["RDT_msgCode-0-zPos"][1]).toUpperCase();
@@ -1103,15 +1110,15 @@ function RDT_showEditMsgCode(index, codeHex){
 		}
 	} else {
 		RDT_editItemCancel();
-		var warnMSG = "This message code contains a WIP header (64)";
-		alert("INFO: Unable to edit this message code! (For now!)\n\n" + warnMSG);
+		var warnMSG = 'This message code contains a WIP header (64)';
+		alert('INFO: Unable to edit this message code! (For now!)\n\n' + warnMSG);
 		addLog('warn', 'WARN - ' + warnMSG);
 	}
 	scrollLog();
 }
 function RDT_showEditEnemyNPC(index, codeHex){
 	var emd = codeHex.slice(RANGES["RDT_enemy-type"][0], RANGES["RDT_enemy-type"][1]);
-	var emdName = "EM" + emd.toUpperCase();
+	var emdName = 'EM' + emd.toUpperCase();
 	document.getElementById('RDT_selectEnemyNPC').value 	 	   = emd;
 	document.getElementById('RDT_lbl_enemyNPC_ID').innerHTML 	   = parseInt(index + 1);
 	document.getElementById('RDT_enemyNPC-edit-X').value     	   = codeHex.slice(RANGES["RDT_enemy-xPos"][0], RANGES["RDT_enemy-xPos"][1]).toUpperCase();
@@ -1129,13 +1136,13 @@ function RDT_showEditEnemyNPC(index, codeHex){
 	document.getElementById('RDT-btn-aplicarEnemyNPC').onclick = function(){
 		RDT_ENEMYNPC_APPLY(index);
 	}
-	$("#RDT-enemyNPC-Edit").css({"display": "inline"});
-	$("#RDT_enemy_holder").css({"width": "780px"});
+	$("#RDT-enemyNPC-Edit").css({'display': 'inline'});
+	$("#RDT_enemy_holder").css({'width': '780px'});
 }
 function RDT_showEditDoor(index, id, hex){
 	main_closeFileList();
 	RDT_doorShowCamPreview(1);
-	document.getElementById('RDT_door-edit-NC').innerHTML = "";
+	document.getElementById('RDT_door-edit-NC').innerHTML = '';
 	var nextCam = hex.slice(RANGES["RDT_door-0-doorNextCamNumber"][0], RANGES["RDT_door-0-doorNextCamNumber"][1]);
 	var roomNumber = hex.slice(RANGES["RDT_door-0-doorNextRoomNumber"][0], RANGES["RDT_door-0-doorNextRoomNumber"][1]).toUpperCase();
 	var realStage = parseInt(parseInt(hex.slice(RANGES["RDT_door-0-doorNextStage"][0], RANGES["RDT_door-0-doorNextStage"][1]), 16) + 1).toString();
@@ -1164,8 +1171,8 @@ function RDT_showEditDoor(index, id, hex){
 	if (enable_mod === true){
 		RDT_renderEditDoorCamPreview();
 	}
-	$("#RDT-door-Edit").css({"display": "block"});
-	$("#RDT_door_holder").css({"width": "752px"});
+	$("#RDT-door-Edit").css({'display': 'block'});
+	$("#RDT_door_holder").css({'width': '752px'});
 }
 function RDT_doorValidadeInput(){
 	document.getElementById("RDT_door-edit-X").value      = document.getElementById("RDT_door-edit-X").value.toUpperCase();
@@ -1209,15 +1216,15 @@ function RDT_renderNextRDTLbl(){
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
 	if (nrn.length === 2 && rst.length === 1){
 		var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
-		document.getElementById("RDT_lbl_door_nextRDT").innerHTML = rComp + ".RDT";
-		var existsRDT = fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + rComp + ".RDT");
+		document.getElementById("RDT_lbl_door_nextRDT").innerHTML = rComp + '.RDT';
+		var existsRDT = fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + rComp + '.RDT');
 		if (existsRDT === true){
 			document.getElementById("RDT_lbl_door_nextRDT").title = RDT_locations[rComp][0] + ", " + RDT_locations[rComp][1];
 		} else {
-			document.getElementById("RDT_lbl_door_nextRDT").title = "Unknown Location";
+			document.getElementById("RDT_lbl_door_nextRDT").title = 'Unknown Location';
 		}
 		if (enable_mod === true && existsRDT === true){
-			document.getElementById('RDT_door-edit-NC').innerHTML = "";
+			document.getElementById('RDT_door-edit-NC').innerHTML = '';
 			var DOOR_CAMS_ARRAY = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(rComp).toUpperCase()));
 			if (DOOR_CAMS_ARRAY.length !== 0){
 				while(c < DOOR_CAMS_ARRAY.length){
@@ -1230,7 +1237,7 @@ function RDT_renderNextRDTLbl(){
 					}
 				}
 				document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
-				$("#RDT_doorCamPreviewImg").css({"display": "inline"});
+				$("#RDT_doorCamPreviewImg").css({"display": 'inline'});
 			} else {
 				document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + '/App/img/404.png';
 				$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
@@ -1248,8 +1255,8 @@ function RDT_renderEditDoorCamPreview(){
 		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value.toString();
 		document.getElementById("RDT_doorCamPreviewImg").src = camFile;
 	} else {
-		addLog('warn', "WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: " + camFile + ")");
-		document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + "/App/img/404.png";
+		addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
+		document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + '/App/img/404.png';
 		$("#RDT_door-edit-NC").append('<option disabled>No Cam Avaliable</option>');
 		scrollLog();
 	}
@@ -1283,7 +1290,7 @@ function RDT_doorShowCamPreview(mode){
 }
 function TRANSFER_RDT_TO_MSG(){
 	main_closeFileList();
-	document.title = APP_NAME + " - Transfering message...";
+	document.title = APP_NAME + ' - Transfering message...';
 	$("#menu-RDT").css({'display': 'none'});
 	$("#MSG_hexPrev").css({'height': '122px'});
 	$("#menu-topo-MOD").css({'display': 'none'});
@@ -1306,11 +1313,11 @@ function RDT_BG_display(){
 		var c = 0;
 		var found = false;
 		while (c < 9){
-			if (fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG")){
+			if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '0' + c + '.JPG')){
 				found = true;
 				var d = 1;
 				while(d < parseInt(RDT_totalMenus + 1)){
-					$("#RDT_BG_" + d).css({"background-image": "url(../Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + "0" + c + ".JPG)", "filter": "blur(2px)", "opacity": "1"});
+					$("#RDT_BG_" + d).css({'background-image': 'url(../Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '0' + c + '.JPG)', 'filter': 'blur(2px)', 'opacity': '1'});
 					if (DESIGN_ENABLE_ANIMS === true){
 						$("#RDT_BG_" + d).fadeIn({duration: 500, queue: false});
 					} else {
@@ -1326,7 +1333,7 @@ function RDT_BG_display(){
 		if (found === false){
 			var e = 1;
 			while(e < parseInt(RDT_totalMenus + 1)){
-				$("#RDT_BG_" + e).css({"background-image": "url(img/404.png)", "filter": "blur(6px)", "opacity": "1"});
+				$("#RDT_BG_" + e).css({'background-image': 'url(img/404.png)', 'filter': 'blur(6px)', 'opacity': '1'});
 				e++;
 			}
 		}
@@ -1334,17 +1341,17 @@ function RDT_BG_display(){
 }
 function RDT_Error_404(){
 	if (RDT_totalMessages < 1){
-		$("#RDT_MSG-holder").css({"display": "none"});
-		$("#RDT-aba-menu-2").css({"display": "none"});
+		$("#RDT_MSG-holder").css({'display': 'none'});
+		$("#RDT-aba-menu-2").css({'display': 'none'});
 	} else {
-		$("#RDT_MSG-holder").css({"display": "block"});
+		$("#RDT_MSG-holder").css({'display': 'block'});
 	}
 	if (RDT_totalItensGeral < 1){
-		$("#RDT-item-list").css({"display": "none"});
-		$("#RDT-aba-menu-3").css({"display": "none"});
+		$("#RDT-item-list").css({'display': 'none'});
+		$("#RDT-aba-menu-3").css({'display': 'none'});
 	} else {
-		$("#RDT-item-list").css({"display": "block"});
-		$("#RDT-aba-menu-3").css({"display": "inline"});
+		$("#RDT-item-list").css({'display': 'block'});
+		$("#RDT-aba-menu-3").css({'display': 'inline'});
 	}
 	if (RDT_totalAudios === undefined || RDT_totalAudios < 1){
 		$("#RDT-aba-menu-5").css({'display': 'none'});
@@ -1368,7 +1375,7 @@ function RDT_Error_404(){
 	}
 }
 function RDT_displayItemEdit(id, idx, itemHx){
-	$("#RDT_openFileList").css({"display": "none"});
+	$("#RDT_openFileList").css({'display': 'none'});
 	main_closeFileList();
 	var hex;
 	var nome;
@@ -1481,18 +1488,18 @@ function RDT_displayItemEdit(id, idx, itemHx){
 function RDT_editItemCancel(){
 	main_closeFileList();
 	if (enable_mod === true){
-		$("#RDT_openFileList").css({"display": "inline"});
+		$("#RDT_openFileList").css({'display': 'inline'});
 	}
-	$("#RDT-item-list").css({"width": "auto"});
-	$("#RDT-Item-Edit").css({"display": "none"});
-	$("#RDT-door-Edit").css({"display": "none"});
-	$("#RDT_door_holder").css({"width": "auto"});
-	$("#RDT-camera-Edit").css({"display": "none"});
-	$("#RDT-MSGCODE-Edit").css({"display": "none"});
-	$("#RDT_enemy_holder").css({"width": "1288px"});
-	$("#RDT_camera_holder").css({"width": "1288px"});
-	$("#RDT-enemyNPC-Edit").css({"display": "none"});
-	$("#RDT_msgCode_holder").css({"width": "1288px"});
+	$("#RDT-item-list").css({'width': 'auto'});
+	$("#RDT-Item-Edit").css({'display': 'none'});
+	$("#RDT-door-Edit").css({'display': 'none'});
+	$("#RDT_door_holder").css({'width': 'auto'});
+	$("#RDT-camera-Edit").css({'display': 'none'});
+	$("#RDT-MSGCODE-Edit").css({'display': 'none'});
+	$("#RDT_enemy_holder").css({'width': '1288px'});
+	$("#RDT_camera_holder").css({'width': '1288px'});
+	$("#RDT-enemyNPC-Edit").css({'display': 'none'});
+	$("#RDT_msgCode_holder").css({'width': '1288px'});
 	document.getElementById('RDT_item-edit-A').value = '';
 	document.getElementById('RDT_door-edit-X').value = '';
 	document.getElementById('RDT_door-edit-Y').value = '';
