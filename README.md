@@ -48,7 +48,7 @@ You can edit messages, doors, which item is in the room, change its position and
 Expect compatibility improvements and more features in the future!
 
 ### Configuration File (.INI)
-You can edit your screen resoluction, use an experimental res. scaler and more. [WIP]<br>
+You can edit your screen resolution, use an experimental resolution scaler and more. [WIP] <br>
 Expect compatibility improvements and more features in the future!
 
 ### Important
