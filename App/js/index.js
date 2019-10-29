@@ -89,6 +89,9 @@ function checkFolders(){
 	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
 		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
 	}
+	if (fs.existsSync(APP_PATH + "\\CONTRIBUTING.md") == true){
+		fs.unlinkSync(APP_PATH + "\\CONTRIBUTING.md");
+	};
 	if (fs.existsSync(APP_PATH + "\\Update\\master.zip") === true){
 		fs.unlinkSync(APP_PATH + "\\Update\\master.zip");
 	}
