@@ -313,8 +313,7 @@ var ATTR = {
 	"0e": ["% remaining in blue", 			   "#9393ff", "0 0 2px #004242"],
 	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
 	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
-	// Atributos Desconhecidos
-	"17": ["Attr. found in Nightmare Mod", 	   	 "#fff0",    "0 0 2px #0f0"] // Atributo encontrado na shotgun do Carlos
+	"17": ["Inf. ammo in red (Purchased)", 	   "#840000", "0 0 2px #310000"] // Atributo encontrado na shotgun do Carlos
 }
 // Segunda variavel
 var VOID = {

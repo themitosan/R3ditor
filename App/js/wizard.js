@@ -301,7 +301,7 @@ function WZ_makeConfigs(){
 }
 function WZ_saveConfigs(justSave){
 	try{
-		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR + "\n" + RDT_lastFileOpened + "\n" + RDT_lastBackup;
+		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR + "\n" + RDT_lastFileOpened + "\n" + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME;
 		fs.writeFileSync(APP_PATH + "\\Configs\\configs.r3ditor", CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor" && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -332,17 +332,17 @@ function WZ_loadFiles(file){
 	if (cfgs[1] !== undefined){
 		EXEC_BIO3_original = cfgs[1];
 	} else {
-		EXEC_BIO3_original = "";
+		EXEC_BIO3_original = '';
 	}
 	if (cfgs[2] !== undefined){
 		EXEC_BIO3_MERCE = cfgs[2];
 	} else {
-		EXEC_BIO3_MERCE = "";
+		EXEC_BIO3_MERCE = '';
 	}
 	if (cfgs[3] !== undefined){
 		GAME_PATH = cfgs[3];
 	} else {
-		GAME_PATH = "";
+		GAME_PATH = '';
 	}
 	if (cfgs[4] !== undefined){
 		enable_mod = JSON.parse(cfgs[4]);
@@ -357,26 +357,31 @@ function WZ_loadFiles(file){
 	if (cfgs[6] !== undefined){
 		HEX_EDITOR = cfgs[6];
 	} else {
-		HEX_EDITOR = "";
+		HEX_EDITOR = '';
 	}
 	if (cfgs[7] !== undefined){
 		RDT_lastFileOpened = cfgs[7];
 	} else {
-		RDT_lastFileOpened = "";
+		RDT_lastFileOpened = '';
 	}
 	if (cfgs[8] !== undefined){
 		RDT_lastBackup = cfgs[8];
 	} else {
-		RDT_lastBackup = "";
+		RDT_lastBackup = '';
+	}
+	if (cfgs[9] !== undefined){
+		RE3_LIVE_RENDER_TIME = parseInt(cfgs[9]);
+	} else {
+		RE3_LIVE_RENDER_TIME = 80;
 	}
 	// Visuals
-	if (EXEC_BIO3_original !== ""){
+	if (EXEC_BIO3_original !== ''){
 		$("#btn_run_bio3").css({"display": "inline"});
 		if (HEX_EDITOR !== ""){
 			$("#main_openBio3OnHex").css({"display": "inline"});
 		}
 	}
-	if (EXEC_BIO3_MERCE !== ""){
+	if (EXEC_BIO3_MERCE !== ''){
 		$("#btn_run_merce").css({"display": "inline"});
 		if (HEX_EDITOR !== ""){
 			$("#main_openBio3MerceOnHex").css({"display": "inline"});

@@ -32,7 +32,8 @@
 		<div class="menu-topo none" id="menu-topo">
 			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your saves!" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to edit internal messages! (FA02FC...)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room data table files!" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room Data Table files!" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" title="Reload this application!" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" title="Click to see the about page!" value="About" onclick="showAbout();">
@@ -56,8 +57,8 @@
 			<input type="button" class="botao-menu none" id="btn_run_bio3" title="Runs the original game" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
 			<input type="button" class="botao-menu none" id="btn_run_merce" title="Runs the original Mercenaries minigame" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
 			<!-- Direita -->
-			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Runs the game in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
-			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Runs the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
+			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Runs the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
+			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Runs the original game in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
@@ -99,13 +100,191 @@
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
-		<!-- Menu Tim Patcher -->
+		<!-- Menu TIM Patcher -->
 		<div class="menu-topo none" id="menu-topo-TIMPATCHER">
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
-		
+		<!-- Menu INI Editor -->
+		<div class="menu-topo none" id="menu-topo-INI">
+			<input type="button" class="botao-menu" value="Open INI" onclick="triggerLoad(10);">
+			<input type="button" class="botao-menu none" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
+			<input type="button" class="botao-menu none" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
+			<!-- Direita -->
+			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
+			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
+		</div>
 		<!-- CONTENT -->
+
+		<!-- FORM: INI -->
+		<div class="none" id="menu-INI">
+			<input type="button" id="INI-aba-menu-1" onclick="INI_showMenu(1);" class="aba aba-left-fix aba-select" value="General">
+			<input type="button" id="INI-aba-menu-2" onclick="INI_showMenu(2);" class="aba" value="Audio, Video & Assets">
+			<input type="button" id="INI-aba-menu-3" onclick="INI_showMenu(3);" class="aba" value="Input Configs & Data">
+			<!-- General -->
+			<div class="menu none" id="INI_menu_1">
+				<div class="menu-general-content" id="INI_content_1">
+					<center><font class="titulo">General</font></center>
+					Path: <font id="INI_lbl_filePath" class="INI_general_adjust">???</font><br>
+					File Size: <font id="INI_lbl_fileSize" class="INI_general_adjust">???</font>
+					<div class="menu-separador"></div>
+					Selected Mode: <font id="INI_lbl_videoMode" class="INI_general_adjust">???</font><br>
+					Driver: <font id="INI_lbl_videoDriver" class="INI_general_adjust">???</font><br>
+					Graphics Card: <font id="INI_lbl_videoCard" class="INI_general_adjust">???</font><br>
+					Windowed Res: <font id="INI_lbl_windowRes"  class="INI_general_adjust">???x???</font><br>
+					Fullscreen Res: <font id="INI_lbl_fullScreenRes" class="INI_general_adjust">???x??? (??BPP)</font>
+					<div class="menu-separador"></div>
+					Audio Device: <font id="INI_lbl_audioDevice" class="INI_general_adjust">???</font><br>
+					BGM Vol: <font id="INI_lbl_audioBGMVol" class="INI_general_adjust">????</font><br>
+					SE Vol: <font id="INI_lbl_audioSEVol" class="INI_general_adjust">????</font>
+					<div class="menu-separador"></div>
+					Disable Movie: <font id="INI_lbl_miscPlayMovies" class="INI_general_adjust">???</font><br>
+					Disable Alpha: <font id="INI_lbl_miscDisableAlpha" class="INI_general_adjust">???</font><br>
+					Texture Correction: <font id="INI_lbl_miscTextureCorrection" class="INI_general_adjust">???</font><br>
+					Texture Completion: <font id="INI_lbl_miscTextureCompletion" class="INI_general_adjust">???</font><br>
+					Voodoo 2: <font id="INI_lbl_miscVoodoo2" class="INI_general_adjust">???</font>
+				</div>
+			</div>
+			<!-- Audio, Video & Game Path -->
+			<div class="menu none" id="INI_menu_2">
+				<div class="menu-general-content" id="INI_content_2">
+					<center><font class="titulo">Audio, Video & Assets</font></center>
+					<!-- Audio -->
+					<input type="button" value="Audio" class="INI_inernalTab INI_tabPos-1">
+					<div class="INI_MINIWINDOW INI_WINDOW-1">
+						BGM Volume: <input type="number" id="INI_editNewBGMVol" onchange="INI_updateRangeAudioVolume(0, 1);" oninput="INI_updateRangeAudioVolume(0, 1);" value="32767" min="0" max="65534" step="1" maxlength="5" class="item-select-mod no-transform-text INI_insertVal INI_fixAudioNumberInput"> 
+						<input type="range" value="32767" min="0" max="65534" oninput="INI_updateRangeAudioVolume(0, 0);" step="1" id="INI_editAudioBGMVolRange" class="INI_rangeAudio"> - 
+						<font id="INI_LBL_editBGM_percent">??</font>%<br>
+						SE Volume: <input type="number" id="INI_editNewSEVol" onchange="INI_updateRangeAudioVolume(1, 1);" oninput="INI_updateRangeAudioVolume(1, 1);" value="32767" min="0" max="65534" step="1" maxlength="5" class="item-select-mod no-transform-text INI_insertVal INI_fixAudioNumberInput"> 
+						<input type="range" value="32767" min="0" max="65534" oninput="INI_updateRangeAudioVolume(1, 0);" step="1" id="INI_editAudioSEVolRange" class="INI_rangeAudio INI_rangeAudio_fix"> - 
+						<font id="INI_LBL_editSE_percent">??</font>%<br>
+					</div>
+					<!-- Video Windowed -->
+					<input type="button" value="Video - Windowed" class="INI_inernalTab INI_tabPos-2">
+					<div class="INI_MINIWINDOW INI_WINDOW-2">
+						<center>
+							New Res: <font id="INI_lbl_newWindowRes">????x????</font><br>
+							Width: <input type="number" min="140" max="7680" step="1" maxlength="4" value="640" id="INI_editNewWindowWidth" class="item-select-mod no-transform-text INI_insertVal" oninput="BIO3INI_changeRes(0, true);"> 
+							Height: <input type="number" min="105" max="5760" step="1" maxlength="4" value="480" id="INI_editNewWindowHeigth" class="item-select-mod no-transform-text INI_insertVal" oninput="BIO3INI_changeRes(0, false);"><br>
+							Scaler: Low Res. <input type="range" min="140" max="7680" step="1" value="640" oninput="BIO3INI_runVideoScaler(0);" class="INI_rangeAudio" id="INI_rangeScaleWindow"> - 8K Res.
+						</center>
+					</div>
+					<!-- Video FullScreen -->
+					<input type="button" value="Video - Fullscreen" class="INI_inernalTab INI_tabPos-3">
+					<div class="INI_MINIWINDOW INI_WINDOW-3">
+						<center>
+							New Res: <font id="INI_lbl_newFullScreenRes">????x????x??</font><br>
+							Width: <input type="number" min="140" max="7680" step="1" maxlength="4" value="640" id="INI_editNewFullScreenWidth" class="item-select-mod no-transform-text INI_insertVal" oninput="BIO3INI_changeRes(1, true);"> 
+							Height: <input type="number" min="105" max="5760" step="1" maxlength="4" value="480" id="INI_editNewFullScreenHeigth" class="item-select-mod no-transform-text INI_insertVal" oninput="BIO3INI_changeRes(1, false);"> 
+							BPP: 
+							<select class="item-select-mod INI_selectBPP" id="INI_editSelectFullScreenBPP">
+								<option value="8">8 BPP</option>
+								<option value="16">16 BPP</option>	
+								<option value="32">32 BPP</option>
+							</select><br>
+							Scaler: Low Res. <input type="range" min="140" max="7680" step="1" value="640" oninput="BIO3INI_runVideoScaler(1);" class="INI_rangeAudio" id="INI_rangeScaleFullScreen"> - 8K Res.
+						</center>
+					</div>
+					<!-- Video Options -->
+					<input type="button" value="Video Options" class="INI_inernalTab INI_tabPos-4">
+					<div class="INI_MINIWINDOW INI_WINDOW-4">
+						<input type="checkbox" id="INI_edit_checkbox_playMovie" oninput="BIO3INI_videoOptionCheckbox();"> - <font title="Disable the intro and in-game movies">Disable Movies</font><br>
+						<input type="checkbox" id="INI_edit_checkbox_disableAlpha" oninput="BIO3INI_videoOptionCheckbox();"> - Disable Alpha<br>
+						<input type="checkbox" id="INI_edit_checkbox_textureCorrection" oninput="BIO3INI_videoOptionCheckbox();"> - 
+						<font title="This is the same thing of Disable Linear">Texture Correction</font>
+						<div class="INI_videoOptionsFix">
+							<input type="checkbox" id="INI_edit_checkbox_textureCompletion" oninput="BIO3INI_videoOptionCheckbox();"> - Texture Completion<br>
+							<input type="checkbox" id="INI_edit_checkbox_voodoo2" oninput="BIO3INI_videoOptionCheckbox();"> - 
+							<font title="Enable the compatibility with Voodoo 2 Cards">Voodoo 2</font><br>
+							<div class="INI_displayDivFix">
+								Display mode: 
+								<select class="item-select-mod no-transform-text INI_displaySelectFix" id="INI_edit_displayMode">
+									<option value="Windowed">Windowed</option><option value="Fullscreen">Fullscreen</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<!-- Assets Paths -->
+					<input type="button" value="Assets Path" class="INI_inernalTab INI_tabPos-5">
+					<div class="INI_MINIWINDOW INI_WINDOW-5">
+						Save: <input type="text" id="INI_edit_savePath" placeholder="Path to Save..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos1"><br>
+						Regist: <input type="text" id="INI_edit_registPath" placeholder="Path to Regist..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos1"><br>
+						Movies: <input type="text" id="INI_edit_moviesPath" placeholder="Path to Movies..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos1">
+						<div class="menu-separador INI_fixMenuSeparador"></div>
+						Rofs1: <input type="text" id="INI_edit_rofsPath_1" placeholder="Path to Rofs1..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs2: <input type="text" id="INI_edit_rofsPath_2" placeholder="Path to Rofs2..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs3: <input type="text" id="INI_edit_rofsPath_3" placeholder="Path to Rofs3..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs4: <input type="text" id="INI_edit_rofsPath_4" placeholder="Path to Rofs4..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs5: <input type="text" id="INI_edit_rofsPath_5" placeholder="Path to Rofs5..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs6: <input type="text" id="INI_edit_rofsPath_6" placeholder="Path to Rofs6..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs7: <input type="text" id="INI_edit_rofsPath_7" placeholder="Path to Rofs7..." class="item-select-mod no-transform-text INI_pathTextFix"><br>
+						Rofs8: <input type="text" id="INI_edit_rofsPath_8" placeholder="Path to Rofs8..." class="item-select-mod no-transform-text INI_pathTextFix">
+						<div class="INI_pathRofsFix">
+							Rofs9:  <input type="text" id="INI_edit_rofsPath_9"  placeholder="Path to Rofs9..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs10: <input type="text" id="INI_edit_rofsPath_10" placeholder="Path to Rofs10..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs11: <input type="text" id="INI_edit_rofsPath_11" placeholder="Path to Rofs11..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs12: <input type="text" id="INI_edit_rofsPath_12" placeholder="Path to Rofs12..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs13: <input type="text" id="INI_edit_rofsPath_13" placeholder="Path to Rofs13..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs14: <input type="text" id="INI_edit_rofsPath_14" placeholder="Path to Rofs14..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2"><br>
+							Rofs15: <input type="text" id="INI_edit_rofsPath_15" placeholder="Path to Rofs15..." class="item-select-mod no-transform-text INI_pathTextFix INI_adjustPos2">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="menu none" id="INI_menu_3">
+				<div class="menu-general-content" id="INI_content_3">
+					<center><font class="titulo">Input Configs & Data</font></center>
+					<!-- Keyboard -->
+					<input type="button" value="Keyboard" class="INI_inernalTab INI_tabPos-6">
+					<div class="INI_MINIWINDOW INI_WINDOW-6">
+						<center><font class="title_mini">Directions</font></center>
+						<input type="button" class="botao-menu INI_clearBtnFix" value="Clear Keyboard" onclick="INI_clearKeyboardFields();">
+						Up: <input type="text" id="INI_edit_input_keyboard_up" class="item-select-mod no-transform-text INI_direct_fixInputKB" placeholder="Insert up values here..."><br>
+						Down: <input type="text" id="INI_edit_input_keyboard_down" class="item-select-mod no-transform-text INI_direct_fixInputKB" placeholder="Insert down values here..."><br>
+						Left: <input type="text" id="INI_edit_input_keyboard_left" class="item-select-mod no-transform-text INI_direct_fixInputKB" placeholder="Insert left values here..."><br>
+						Right: <input type="text" id="INI_edit_input_keyboard_right" class="item-select-mod no-transform-text INI_direct_fixInputKB" placeholder="Insert right values here...">
+						<div class="menu-separador INI_fixMenuSeparador"></div>
+						<center><font class="title_mini">Action</font></center>
+						Status Screen: <input type="text" id="INI_edit_input_keyboard_status" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert status values here..."><br>
+						View Map: <input type="text" id="INI_edit_input_keyboard_map" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert map values here..."><br>
+						Select / Action: <input type="text" id="INI_edit_input_keyboard_action" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert action values here..."><br>
+						Cancel / Run: <input type="text" id="INI_edit_input_keyboard_cancel" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert cancel values here..."><br>
+						Draw Weapon (Towars enemies): <input type="text" id="INI_edit_input_keyboard_drawEnemy" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert (enemies) values here..."><br>
+						Draw Weapon (Objects): <input type="text" id="INI_edit_input_keyboard_drawObject" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert (objects) values here..."><br>
+						Change target: <input type="text" id="INI_edit_input_keyboard_changeTarget" class="item-select-mod no-transform-text INI_fixInputKB" placeholder="Insert change target here...">
+					</div>
+					<!-- Data -->
+					<input type="button" value="[Data]" class="INI_inernalTab INI_tabPos-7">
+					<div class="INI_MINIWINDOW INI_WINDOW-7">
+						<center><font class="title_mini">Game [DATA] Values</font></center>
+						<font title="Complete Var">Complete</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Complete var here" id="INI_edit_dataComplete"><br>
+						<font title="Data 00">Mercenaries Money</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Data 00 var here" id="INI_edit_data00"><br>
+						<font title="Data 01">A. Rifle</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Data 01 var here" id="INI_edit_data01"><br>
+						<font title="Data 02">Gatling Gun</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Data 02 var here" id="INI_edit_data02"><br>
+						<font title="Data 03">R. Launcher</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Data 03 var here" id="INI_edit_data03"><br>
+						<font title="Data 10">Epilogues</font>: 
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert the Data 10 var here" id="INI_edit_dataEpilogues">
+					</div>
+					<!-- Misc Keyboard -->
+					<input type="button" value="Misc Keyboard" class="INI_inernalTab INI_tabPos-8">
+					<div class="INI_MINIWINDOW INI_WINDOW-8">
+						<center><font class="title_mini">Misc Keyboard</font></center>
+						Key 5:
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert Key5 here" id="INI_edit_Key5"><br>
+						Key B:
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert KeyB here" id="INI_edit_KeyB"><br>
+						Key E:
+						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert KeyE here" id="INI_edit_KeyE">
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<!-- TIM Patcher -->
 		<div class="timPatcher_holder" id="TIMPATCHER" onclick="main_closeFileList();">
@@ -143,7 +322,7 @@
 			<!-- Abas -->
 			<div>
 				<input type="button" value="General" class="aba aba-select-2 aba-left-fix RE3_LIVESTATUS_abaFix" id="RE3_LIVESTATUS_aba-1">
-				<input type="button" value="Inventory [WIP]" class="aba RE3_LIVESTATUS_abaFix none" id="RE3_LIVESTATUS_aba-2">
+				<input type="button" value="Item Box [WIP]" class="aba RE3_LIVESTATUS_abaFix none" id="RE3_LIVESTATUS_aba-2">
 			</div>
 			<!-- Menus -->
 			<div class="RE3_LIVESTATUS_MENU" id="LIVESTATUS_menu-1">
@@ -159,7 +338,6 @@
 						Threads: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processThreads">???</font><br>
 						Handle: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processHandle">???</font><br>
 					</div>
-
 					<!-- Status -->
 					<input type="button" value="Status" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-2">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-2">
@@ -167,10 +345,9 @@
 						<div class="menu-separador"></div>
 						Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
 						HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
-						
 						<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
-						<font class="font-chkbox-fix" onclick="RE3_LIVE_cheatInfiniteLifeTrigger();">- Infinite HP</font>
-
+						<font class="font-chkbox-fix" onclick="RE3_LIVE_cheatInfiniteLifeTrigger();">- Enable Infinite HP</font><br>
+						<center><input type="button" class="botao-menu" value="Add 30K Health (God Mode)" onclick="RE3_LIVE_ADDGODHP();"></center>
 						<div class="menu-separador"></div>
 						<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
 						<div class="menu-separador"></div>
@@ -203,7 +380,6 @@
 							<img id="RE3_LIVESTATUS_INVENT_SLOT_10" class="RE3_LIVESTATUS_INVENT_ICON_BASE RE3_LIVESTATUS_INVENT_ROW_5" onclick="RE3_LIVE_EDITINVENTSLOT(10);">
 						</div>
 					</div>
-					
 					<!-- Inventory Edit -->
 					<input type="button" value="Edit Slot" id="RE3_LIVESTATUS_inernalTab_editSlot" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-6 none">
 					<div id="RE3_LIVESTATUS_editItemSlot_window" class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-6 none">
@@ -219,7 +395,6 @@
 						</select>
 						<input type="button" id="RE3_LIVESTATUS_CHANGE_ITEM_APPLY" class="botao-menu botao-aplicar RE3_LIVESTATUS_APPLYBTNFIX" value="Apply Item">
 					</div>
-
 					<!-- Location -->
 					<input type="button" value="Location" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-3">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-3">
@@ -975,16 +1150,17 @@
 		</div>
 		<!-- File Loader and things - the user don't need to see this -->
 		<div class="none">
-			<input type="file" value="" onchange="setLoadFile(1);" id="loadWAVForm" accept=".wav"/>
-			<input type="file" value="" onchange="setLoadFile(2);" id="loadWZForm" accept=".exe"/>
-			<input type="file" value="" onchange="setLoadFile(3);" id="loadWZHexForm" accept=".exe"/>
-			<input type="file" value="" onchange="setLoadFile(4);" id="loadSaveForm" accept=".sav"/>
-			<input type="file" value="" onchange="setLoadFile(5);" id="loadMSGForm" accept=".msg"/>
-			<input type="file" value="" onchange="setLoadFile(6);" id="loadRDTForm" accept=".rdt"/>
+			<input type="file" onchange="setLoadFile(1);"  id="loadWAVForm" accept=".wav"/>
+			<input type="file" onchange="setLoadFile(2);"  id="loadWZForm" accept=".exe"/>
+			<input type="file" onchange="setLoadFile(3);"  id="loadWZHexForm" accept=".exe"/>
+			<input type="file" onchange="setLoadFile(4);"  id="loadSaveForm" accept=".sav"/>
+			<input type="file" onchange="setLoadFile(5);"  id="loadMSGForm" accept=".msg"/>
+			<input type="file" onchange="setLoadFile(6);"  id="loadRDTForm" accept=".rdt"/>
+			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
 			<!-- TIM Patcher -->
-			<input type="file" value="" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
-			<input type="file" value="" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
-			<input type="file" value="" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
+			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
+			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>
+			<input type="file" onchange="setLoadFile(9);"  id="loadTimForPatchForm" accept=".tim"/>
 		</div>
 	</body>
 </html>

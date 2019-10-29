@@ -9,6 +9,7 @@ var RDT_aba_atual;
 var SAVE_aba_atual;
 var main_currentMenu;
 var RDT_totalMenus = 9;
+var INI_totalMenus = 3;
 var SAVE_totalMenus = 4;
 var request_render_save;
 var RE3_LIVE_RENDERTIMER;
@@ -282,7 +283,7 @@ function main_menu(anim){
 		$("#FILEGEN_holder").css({"height": "474px"});
 		$("#FILEGEN_menu").css({"height": "484px"});
 	}
-	if (anim === 5){ // Tim Patcher
+	if (anim === 5){ // TIM Patcher
 		document.title = APP_NAME + " - TIM Patcher";
 		if (enable_mod === true){
 			$("#menu-topo-MOD").css({"display": "none"});
@@ -291,9 +292,19 @@ function main_menu(anim){
 		$('#img-logo').fadeOut({duration: 100, queue: false});
 		$("#TIMPATCHER").fadeIn({duration: 200, queue: false});
 	}
+	if (anim === 6){ // INI Editor
+		document.title = APP_NAME + " - INI Editor (*.INI)";
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ["th32ProcessID"]);
+		}
+		if (enable_mod === true){
+			$("#menu-topo-MOD").css({"display": "none"});
+		}
+		$("#menu-topo-INI").css({"display": 'inline'});
+	}
 }
 function RDT_checkBKP(){
-	if (RDT_lastBackup !== "" && fs.existsSync(RDT_lastBackup) === true){
+	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
 		$("#RDT_restoreLastBackup").css({"display": "inline"});
 	} else {
 		$("#RDT_restoreLastBackup").css({"display": "none"});
@@ -304,7 +315,7 @@ function SAVE_applyMenuFocus(menuId){
 	var i = 0; // i? why not c?
 	main_closeFileList();
 	SAVE_aba_atual = menuId;
-	if (GAME_PATH !== "" && GAME_PATH !== undefined){
+	if (GAME_PATH !== '' && GAME_PATH !== undefined){
 		$("#SAV_openFileList").css({"display": "inline"});
 	}
 	while(i < SAVE_totalMenus){
@@ -330,8 +341,8 @@ function SAVE_showMenu(menuId){
 	cancelShowModItem();
 	if (menuId === 0){ // Menu Geral
 		if (request_render_save == false){
-			addInfo(0, "00");
-			addInfo(1, "00");
+			addInfo(0, '00');
+			addInfo(1, '00');
 			$("#log-programa").css({"height": "54px", "top": "656px"});
 			SAVE_applyMenuFocus(1);
 			$("#s-menu-general").css({"display": "block", "width": "74%"});
@@ -1606,7 +1617,7 @@ function RE3_LIVE_EDITINVENTSLOT(slotID){
 	document.getElementById('RE3_LIVESTATUS_inernalTab_editSlot').value = 'Edit Slot ' + slotID;
 	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_HEX').value =  localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(0, 2).toLowerCase();
 	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_ATTR').value = localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(4, 6).toLowerCase();
-	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_QNT').value =  parseInt(localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(2, 4).toLowerCase());
+	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_QNT').value =  parseInt(localStorage.getItem('REALTIME_INVENT_SLOT_' + slotID).slice(2, 4).toLowerCase(), 16);
 	document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_APPLY').onclick = function(){
 		RE3_LIVE_APPLYITEM(slotID);
 	}
@@ -1670,7 +1681,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 				if (attr === '02' || attr === '06' || attr === '0a' || attr === '0e'){
 					remaining = parseInt(quan, 16) + '%';
 				}
-				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f'){
+				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f' || attr === '17'){
 					remaining = 'Inf.';
 				}
 				document.getElementById('RE3_LIVESTATUS_LBL_ITEM-' + n).innerHTML = remaining;
@@ -1694,8 +1705,30 @@ function RE3_LIVE_CANVAS_RENDER(){
 	$('#RE3_LIVESTATUS_CANVAS_POINTER').css({'top': X + '%', 'left': Y + '%', 'transform': 'rotate(' + parseInt(R + ACRESIMO) + 'deg)'});
 }
 /*
+	INI Editor
+*/
+function INI_showMenu(menuId){
+	// Fix CSS and show Form
+	var c = 0;
+	document.title = APP_NAME + " - INI Editor (*.INI) - File: " + ORIGINAL_FILENAME;
+	while (c < parseInt(INI_totalMenus + 1)){
+		$("#INI-aba-menu-" + c).removeClass('aba-select');
+		$('#INI_menu_' + c).css({'display': 'none'});
+		c++;
+	}
+	$("#INI_applyBtn").css({'display': 'inline'});
+	$("#INI_reloadFile").css({'display': 'inline'});
+	$("#INI_applyBtn_ask").css({'display': 'inline'});
+	$("#INI_openOnNotepad").css({'display': 'inline'});
+	$("#INI-aba-menu-" + menuId).addClass('aba-select');
+	$('#INI_content_' + menuId).css({'height': '514px'});
+	$('#INI_menu_' + menuId).css({'display': 'block', 'height': '524px'});
+	//
+	$("#menu-INI").css({'display': 'inline'});
+}
+/*
 	Updater
-*/ 
+*/
 function R3DITORshowUpdate(){
 	$("#menu-topo").css({"display": "none"});
 	$("#menu-utility").css({"display": "none"});
@@ -1779,13 +1812,13 @@ function R3DITOR_RUNGAME(id){
 			$("#RDT-msgs").css({"height": "516px"});
 			$("#RDT-ifm").css({"height": "516px"});
 		} else {
-			if (EXEC_BIO3_original !== ""){
+			if (EXEC_BIO3_original !== ''){
 				$("#btn_run_bio3").css({"display": "inline"});
 			}
-			if (EXEC_BIO3_MERCE !== ""){
+			if (EXEC_BIO3_MERCE !== ''){
 				$("#btn_run_merce").css({"display": "inline"});
 			}
-			if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+			if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
 				while(c < parseInt(RDT_totalMenus + 1)){
 					$("#RDT_menu-" + c).css({"height": "482px"});
 					$("#RDT_BG_" + c).css({"height": "470px"});
@@ -1817,7 +1850,9 @@ function R3DITOR_RUNGAME(id){
 				$("#RDT-geral").css({"height": "472px"});
 				$("#RDT-msgs").css({"height": "472px"});
 				$("#RDT-ifm").css({"height": "472px"});
-				$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+				if (main_currentMenu !== 6){
+					$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+				}
 			}
 		}
 	}

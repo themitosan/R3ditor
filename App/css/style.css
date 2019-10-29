@@ -1,3 +1,8 @@
+/*
+    R3ditor - style.css
+    Por mitosan/mscore/misto_quente/mscorehdr
+    Boa sorte!
+*/
 ::-webkit-scrollbar{
     border-radius: 4px;
     width: 8px;
@@ -1619,7 +1624,7 @@ input[type="range" i]{
     top: 106px;
 }
 .RE3_LIVESTATUS_WINDOW-2{
-    height: 138px;
+    height: 160px;
     width: 240px;
     top: 248px;
 }
@@ -1768,4 +1773,199 @@ input[type="range" i]{
 .RE3_LIVESTATUS_LBL_ITEM_ADJUST-10{
     top: 304px;
     left: 102px;
+}
+/*
+    INI Editor
+*/
+.INI_general_adjust{
+    position: sticky;
+    left: 146px;
+}
+.INI_MINIWINDOW{
+    background-image: linear-gradient(to bottom, #454545, #333);
+    position: absolute;
+    border-radius: 6px;
+    padding: 6px;
+}
+.INI_inernalTab{
+    color: #fff;
+    border: none;
+    padding-top: 4px;
+    position: absolute;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 4px;
+    background-color: #454545;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    text-shadow: 0 0 10px #010101;
+}
+.INI_insertVal{
+    width: 68px !important;
+}
+.INI_rangeAudio{
+    width: 190px !important;
+    margin-left: 10px;
+}
+.INI_rangeAudio_fix{
+    margin-left: 26px;
+}
+.INI_fixAudioNumberInput{
+    position: sticky;
+    left: 120px;
+}
+.INI_selectBPP{
+    width: 78px !important;
+}
+.INI_videoOptionsFix{
+    position: absolute;
+    left: 166px;
+    top: 6px;
+}
+.INI_pathTextFix{
+    width: 338px;
+    margin-top: 8px;
+}
+.INI_fixMenuSeparador{
+    margin-top: 14px;
+}
+.INI_adjustPos1{
+    position: sticky;
+    width: 740px;
+    left: 540px;
+}
+.INI_adjustPos2{
+    position: sticky;
+    left: 942px;
+}
+.INI_pathRofsFix{
+    position: absolute;
+    left: 406px;
+    top: 150px;
+}
+.INI_fixInputKB{
+    position: sticky;
+    margin-top: 6px;
+    width: 206px;
+    left: 450px;
+}
+.INI_direct_fixInputKB{
+    position: sticky;
+    margin-top: 6px;
+    width: 366px;
+    left: 276px;
+}
+.INI_fixInputKB_2{
+    position: sticky;
+    margin-top: 6px;
+    left: 900px;
+}
+.INI_direct_fixInputKB_2{
+    position: sticky;
+    margin-top: 6px;
+    width: 366px;
+    left: 724px;
+}
+.title_mini{
+    font-size: x-large;
+    text-shadow: 0 0 10px #818181;
+}
+.INI_clearBtnFix{
+    position: absolute;
+    left: 322px;
+    top: 8px;
+}
+.INI_dataVars{
+    position: sticky;
+    margin-top: 6px;
+    width: 200px;
+    left: 830px;
+}
+.INI_displayDivFix{
+    margin-left: 4px;
+}
+.INI_displaySelectFix{
+    margin-top: 0px;
+    padding: 2px;
+    width: 110px;
+}
+.INI_tabPos-1{
+    left: 28px;
+    top: 46px;
+}
+.INI_tabPos-2{
+    left: 28px;
+    top: 168px;
+}
+.INI_tabPos-3{
+    left: 28px;
+    top: 298px;
+}
+.INI_tabPos-4{
+    left: 28px;
+    top: 428px;
+}
+.INI_tabPos-5{
+    left: 494px;
+    top: 72px;
+}
+.INI_tabPos-6{
+    left: 228px;
+    top: 56px;
+}
+.INI_tabPos-7{
+    left: 682px;
+    top: 224px;
+}
+.INI_tabPos-8{
+    left: 682px;
+    top: 56px;
+}
+.INI_WINDOW-1{
+    height: 80px;
+    width: 442px;
+    left: 18px;
+    top: 68px;
+}
+.INI_WINDOW-2{
+    height: 88px;
+    width: 442px;
+    left: 18px;
+    top: 190px;
+}
+.INI_WINDOW-3{
+    height: 88px;
+    width: 442px;
+    left: 18px;
+    top: 320px;
+}
+.INI_WINDOW-4{
+    height: 60px;
+    width: 442px;
+    left: 18px;
+    top: 450px;
+}
+.INI_WINDOW-5{
+    height: 410px;
+    width: 812px;
+    left: 482px;
+    top: 94px;
+}
+.INI_WINDOW-6{
+    height: 436px;
+    width: 432px;
+    left: 216px;
+    top: 78px;
+}
+.INI_WINDOW-7{
+    height: 228px;
+    width: 354px;
+    left: 670px;
+    top: 246px;
+}
+.INI_WINDOW-8{
+    height: 128px;
+    width: 354px;
+    left: 670px;
+    top: 78px;
 }

@@ -161,7 +161,13 @@ function RE3_LIVE_cheatInfiniteLife(){
 		}
 	}
 }
-
+function RE3_LIVE_ADDGODHP(){
+	document.getElementById('RE3_LIVESTATUS_CHEAT_INFHP').checked = false;
+	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
+		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][0], 48, MEM_JS.BYTE);
+		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][1], 117, MEM_JS.BYTE);
+	}
+}
 function RE3_LIVE_APPLYITEM(slotID){
 	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
 		var quantidade = parseInt(document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_QNT').value);

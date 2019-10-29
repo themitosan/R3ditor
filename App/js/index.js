@@ -115,14 +115,14 @@ function addLog(type, texto){
 	$("#log-programa").append(logTemplate);
 }
 function clearInternalLog(){
-	document.getElementById("log-programa").innerHTML = "";
+	document.getElementById("log-programa").innerHTML = '';
 	addLog("log", APP_NAME);
 	scrollLog();
 }
 /// Open in Hex Editor
 function openFileOnHex(file){
 	main_closeFileList();
-	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ""){
+	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ''){
 		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
 			runExternalSoftware(HEX_EDITOR, [file]);
 			EXTERNAL_APP_RUNNING = false;
@@ -142,7 +142,7 @@ function showNotify(titulo, texto, tempo){
 	if (texto == ''){
 		texto = "Message";
 	}
-	if (tempo === null || tempo === undefined || tempo === ""){
+	if (tempo === null || tempo === undefined || tempo === ''){
 		tempo = 4000;
 	}
 	try{	
@@ -163,7 +163,7 @@ function showNotify(titulo, texto, tempo){
 /// RUN RE3
 function R3DITOR_RUN_RE3(mode){
 	main_closeFileList();
-	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === "" || GAME_PATH === "" || GAME_PATH === undefined){
+	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === '' || GAME_PATH === '' || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
 		console.error("ERROR - The game path is not defined!");
 	} else {
@@ -203,7 +203,7 @@ function R3DITOR_RUN_RE3(mode){
 }
 function R3DITOR_RUN_MERCE(mode){
 	main_closeFileList();
-	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === "" || GAME_PATH === "" || GAME_PATH === undefined){
+	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === '' || GAME_PATH === '' || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
 		console.error("ERROR - The game path is not defined!");
 	} else {
@@ -241,14 +241,14 @@ function checkCanPlay(runArgs, gameId){
 	if (RDT_CANCRASH === true){
 		var ask = confirm("BEWARE: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?");
 		if (ask === true){
-			if (gameId === "" || gameId === 1 || gameId === undefined){
+			if (gameId === '' || gameId === 1 || gameId === undefined){
 				R3DITOR_RUN_RE3(runArgs);
 			} else {
 				R3DITOR_RUN_MERCE(runArgs);
 			}
 		}
 	} else {
-		if (gameId === "" || gameId === 1 || gameId === undefined){
+		if (gameId === '' || gameId === 1 || gameId === undefined){
 			R3DITOR_RUN_RE3(runArgs);
 		} else {
 			R3DITOR_RUN_MERCE(runArgs);
@@ -316,7 +316,7 @@ function runExternalSoftware(exe, args){
 				addLog('log', 'INFO - MemoryJS - Process closed!');
 				log_separador();
 			}
-			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
+			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
 				$("#menu-utility-aba").css({"top": "472px"});
 				$("#menu-utility").css({"top": "546px"});
 			}
@@ -342,6 +342,7 @@ function runExternalSoftware(exe, args){
 }
 // Save Files
 function R3DITOR_SAVE(filename, content, mode){
+	// Mode: utf-8, hex...
 	var elementTAG = document.createElement('a');
 	elementTAG.setAttribute('href', 'data:text/plain;charset=' + mode + ',' + encodeURIComponent(content));
 	elementTAG.setAttribute('download', filename);
@@ -631,6 +632,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 9){
 		$("#loadTimForPatchForm").trigger('click');
 	}
+	// INI Load
+	if (loadForm === 10){
+		$("#loadINIForm").trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -639,108 +644,120 @@ function setLoadFile(input){
 	// Audio
 	if (input === 1){
 		cFile = document.getElementById('loadWAVForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'WAV';
 		} else {
 			RDT_replaceWavFile(cFile.path);
-			document.getElementById('loadWAVForm').value = "";
+			document.getElementById('loadWAVForm').value = '';
 		}
 	}
 	// Wizard - ResidentEvil3.exe
 	if (input === 2){
 		cFile = document.getElementById('loadWZForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'Wizard - ResidentEvil3.exe';
 		} else {
 			BIO3_original = undefined;
 			WZ_LOADRE3(cFile.path);
-			document.getElementById('loadWZForm').value = "";
+			document.getElementById('loadWZForm').value = '';
 		}
 	}
 	// Wizard - Hex editor
 	if (input === 3){
 		cFile = document.getElementById('loadWZHexForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'Wizard - Hex editor';
 		} else {
 			HEX_EDITOR = undefined;
 			WZ_LOADHEX(cFile.path);
-			document.getElementById('loadWZHexForm').value = "";
+			document.getElementById('loadWZHexForm').value = '';
 		}
 	}
 	// SAV
 	if (input === 4){
 		cFile = document.getElementById('loadSaveForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'Save';
 		} else {
 			SAVE_arquivoBruto = undefined;
 			CARREGAR_SAVE(cFile.path);
-			document.getElementById('loadSaveForm').value = "";
+			document.getElementById('loadSaveForm').value = '';
 		}
 	}
 	// MSG
 	if (input === 5){
 		cFile = document.getElementById('loadMSGForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'MSG';
 		} else {
 			MSG_arquivoBruto = undefined;
 			MSG_CARREGAR_ARQUIVO(cFile.path);
-			document.getElementById('loadMSGForm').value = "";
+			document.getElementById('loadMSGForm').value = '';
 		}
 	}
 	// RDT
 	if (input === 6){
 		cFile = document.getElementById('loadRDTForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'RDT';
 		} else {
 			RDT_arquivoBruto = undefined;
 			RDT_openFile(cFile.path);
-			document.getElementById('loadRDTForm').value = "";
+			document.getElementById('loadRDTForm').value = '';
 		}
 	}
 	// TIM - Seek for Patch
 	if (input === 7){
 		cFile = document.getElementById('loadTIMForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'TIM - Seek For Patch';
 		} else {
 			TIM_arquivoBruto = undefined;
 			TIM_loadTimToSeekPattern(cFile.path);
-			document.getElementById('loadTIMForm').value = "";
+			document.getElementById('loadTIMForm').value = '';
 		}
 	}
 	// TIM - Map File
 	if (input === 8){
 		cFile = document.getElementById('loadTimMapForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'TIM - Map File';
 		} else {
 			TIM_mapFile = [];
 			TIM_openPatchFile(cFile.path);
-			document.getElementById('loadTimMapForm').value = "";
+			document.getElementById('loadTimMapForm').value = '';
 		}
 	}
 	// TIM - File to be patched
 	if (input === 9){
 		cFile = document.getElementById('loadTimForPatchForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ""){
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
 			loadType = 'TIM - File To Patch';
 		} else {
 			TIM_arquivoBruto = undefined;
 			TIM_verifyToPatchFile(cFile.path);
-			document.getElementById('loadTimForPatchForm').value = "";
+			document.getElementById('loadTimForPatchForm').value = '';
+		}
+	}
+	// INI - INI Editor
+	if (input === 10){
+		cFile = document.getElementById('loadINIForm').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'INI - INI Editor';
+		} else {
+			BIO3INI_arquivoBruto = undefined;
+			INI_CARREGAR_ARQUIVO(cFile.path);
+			document.getElementById('loadINIForm').value = '';
 		}
 	}
 	if (BETA === true){
