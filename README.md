@@ -45,7 +45,11 @@ You can view / edit the game's internal messages by loading .msg files or using 
 
 ### Room Data Table (.RDT)
 You can edit messages, doors, which item is in the room, change its position and its animation. [WIP]<br>
-Expect compatibility improvements and more features soon!
+Expect compatibility improvements and more features in the future!
+
+### Configuration File (.INI)
+You can edit your screen resoluction, use an experimental res. scaler and more. [WIP]<br>
+Expect compatibility improvements and more features in the future!
 
 ### Important
 Any changes you make will automatically apply to your files.
