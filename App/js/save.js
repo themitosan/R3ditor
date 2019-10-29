@@ -952,13 +952,13 @@ function SAVE_clearAllSaves(){
 		if (ask === true){
 			if(fs.existsSync(ORIGINAL_FILENAME) === true){
 				fs.unlinkSync(ORIGINAL_FILENAME);
-				var newFile = fs.readFileSync(APP_PATH + "\\App\\tools\\format.r3save", 'hex');
+				var newFile = fs.readFileSync(APP_PATH + '\\App\\tools\\format.r3save', 'hex');
 				fs.writeFileSync(ORIGINAL_FILENAME, newFile, 'hex');
 				log_separador();
-				addLog('log',"INFO - Process Complete!");
+				addLog('log', 'INFO - Process Complete!');
 				log_separador();
 				scrollLog();
-				alert("Process Complete!");
+				alert('INFO - Process Complete!');
 				reload();
 			}
 		}
