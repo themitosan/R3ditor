@@ -55,7 +55,7 @@ function load(){
 		addLog('error', err);
 	}
 	if (BETA === true){
-		console.error("ERROR - BETA is true!");
+		console.error('ERROR - BETA is true!');
 		addLog('error', 'BETA is true!');
 		addLog('error', 'BETA is true!');
 		addLog('error', 'BETA is true!');
@@ -63,60 +63,60 @@ function load(){
 	scrollLog();
 }
 function checkFolders(){
-	if (fs.existsSync(APP_PATH + "\\Update") == false){
-		fs.mkdirSync(APP_PATH + "\\Update");
+	if (fs.existsSync(APP_PATH + '\\Update') == false){
+		fs.mkdirSync(APP_PATH + '\\Update');
 	}
 	if (fs.existsSync(APP_PATH + "\\Backup") == false){
 		fs.mkdirSync(APP_PATH + "\\Backup");
 	}
-	if (fs.existsSync(APP_PATH + "\\Assets") == false){
-		fs.mkdirSync(APP_PATH + "\\Assets");
+	if (fs.existsSync(APP_PATH + '\\Assets') == false){
+		fs.mkdirSync(APP_PATH + '\\Assets');
 	}
-	if (fs.existsSync(APP_PATH + "\\Configs") == false){
-		fs.mkdirSync(APP_PATH + "\\Configs");
+	if (fs.existsSync(APP_PATH + '\\Configs') == false){
+		fs.mkdirSync(APP_PATH + '\\Configs');
 	}
-	if (fs.existsSync(APP_PATH + "\\README.md") == true){
-		fs.unlinkSync(APP_PATH + "\\README.md");
+	if (fs.existsSync(APP_PATH + '\\README.md') == true){
+		fs.unlinkSync(APP_PATH + '\\README.md');
 	};
-	if (fs.existsSync(APP_PATH + "\\Roadmap.md") == true){
-		fs.unlinkSync(APP_PATH + "\\Roadmap.md");
+	if (fs.existsSync(APP_PATH + '\\Roadmap.md') == true){
+		fs.unlinkSync(APP_PATH + '\\Roadmap.md');
 	};
-	if (fs.existsSync(APP_PATH + "\\Backup\\SAV") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup\\SAV");
+	if (fs.existsSync(APP_PATH + '\\Backup\\SAV') == false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\SAV');
 	}
-	if (fs.existsSync(APP_PATH + "\\Backup\\RDT") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup\\RDT");
+	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') == false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\RDT');
 	}
-	if (fs.existsSync(APP_PATH + "\\Configs\\RDT") == false){
-		fs.mkdirSync(APP_PATH + "\\Configs\\RDT");
+	if (fs.existsSync(APP_PATH + '\\Configs\\RDT') == false){
+		fs.mkdirSync(APP_PATH + '\\Configs\\RDT');
 	}
-	if (fs.existsSync(APP_PATH + "\\Update\\Extract") == true){
-		deleteFolderRecursive(APP_PATH + "\\Update\\Extract");
+	if (fs.existsSync(APP_PATH + '\\Update\\Extract') == true){
+		deleteFolderRecursive(APP_PATH + '\\Update\\Extract');
 	}
-	if (fs.existsSync(APP_PATH + "\\CONTRIBUTING.md") == true){
-		fs.unlinkSync(APP_PATH + "\\CONTRIBUTING.md");
+	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') == true){
+		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
 	};
-	if (fs.existsSync(APP_PATH + "\\Update\\master.zip") === true){
-		fs.unlinkSync(APP_PATH + "\\Update\\master.zip");
+	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
+		fs.unlinkSync(APP_PATH + '\\Update\\master.zip');
 	}
-	if (fs.existsSync(APP_PATH + "\\App\\Update\\check.r3ditor") === true){
-		fs.unlinkSync(APP_PATH + "\\App\\Update\\check.r3ditor");
+	if (fs.existsSync(APP_PATH + '\\App\\Update\\check.r3ditor') === true){
+		fs.unlinkSync(APP_PATH + '\\App\\Update\\check.r3ditor');
 	}
-	if (fs.existsSync(APP_PATH + "\\version.r3ditor") == true && BETA === false){
-		fs.unlinkSync(APP_PATH + "\\version.r3ditor");
+	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true && BETA === false){
+		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	};
 }
 /// Log
 function addLog(type, texto){
 	var classe = undefined;
-	if (type.toLowerCase() == "log" || type == undefined || type == null){
-		classe = "log-text";
+	if (type.toLowerCase() === 'log' || type === undefined || type === null){
+		classe = 'log-text';
 	}
-	if (type.toLowerCase() == "warn"){
-		classe = "log-warn";
+	if (type.toLowerCase() === 'warn'){
+		classe = 'log-warn';
 	}
-	if (type.toLowerCase() == "error"){
-		classe = "log-error";
+	if (type.toLowerCase() === 'error'){
+		classe = 'log-error';
 	}
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$("#log-programa").append(logTemplate);
@@ -130,7 +130,7 @@ function clearInternalLog(){
 function openFileOnHex(file){
 	main_closeFileList();
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ''){
-		if (file !== undefined || file !== "" || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
+		if (file !== undefined || file !== '' || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
 			runExternalSoftware(HEX_EDITOR, [file]);
 			EXTERNAL_APP_RUNNING = false;
 		} else {
@@ -222,13 +222,13 @@ function R3DITOR_RUN_MERCE(mode){
 			} else {
 				process.chdir(APP_PATH + '\\Assets');
 			}
-			document.title = APP_NAME + " - Running Mercenaries...";
+			document.title = APP_NAME + ' - Running Mercenaries...';
 			runExternalSoftware(EXEC_BIO3_MERCE);
 		}catch(err){
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({'display': 'inline'});
 			}
-			console.error("ERROR - Something went wrong! - " + err);
+			console.error('ERROR - Something went wrong! - ' + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
@@ -294,15 +294,15 @@ function runExternalSoftware(exe, args){
 	const ls = spawn(exe, args);
 	EXTERNAL_APP_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
-		$("#menu-utility-aba").css({"top": "512px"});
-		$("#menu-utility").css({"top": "586px"});
+		$("#menu-utility-aba").css({'top': '512px'});
+		$("#menu-utility").css({'top': '586px'});
 	}
 	ls.stdout.on('data', (data) => {
-		addLog('log', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
+		addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
 	});
 	ls.stderr.on('data', (data) => {
-		addLog('warn', "External App: " + data.replace(new RegExp('\n', 'g'), '<br>'));
+		addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
@@ -311,7 +311,7 @@ function runExternalSoftware(exe, args){
 		EXTERNAL_APP_RUNNING = false;
 		EXTERNAL_APP_EXITCODE = code;
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
-			$("#WZ_BTN_2").css({"display": "inline"});
+			$("#WZ_BTN_2").css({'display': 'inline'});
 		}
 		if (RE3_RUNNING === true){
 			RE3_RUNNING = false;
@@ -336,7 +336,7 @@ function runExternalSoftware(exe, args){
 		} else {
 			color = 'green';
 		}
-		if (exe !== "cmd"){
+		if (exe !== 'cmd'){
 			if (exe === EXEC_BIO3_original || exe === EXEC_BIO3_MERCE){
 				addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
 			} else {
@@ -370,7 +370,7 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 		response.pipe(file);
 		file.on('finish', function(){
 			DOWNLOAD_COMPLETE = true;
-			if (nomedoarquivo !== APP_PATH + "\\App\\check.r3ditor"){
+			if (nomedoarquivo !== APP_PATH + '\\App\\check.r3ditor'){
 		  		addLog('log', 'INFO - Download Complete! - ' + nomedoarquivo);
 		  		scrollLog();
 			}
@@ -447,7 +447,7 @@ function currentTime(){
 	if (s.toString().length < 2){
 		s = "0" + t.getSeconds();
 	}
-	return d + "-" + m + "-" + y + "_" + h + "." + mi + "." + s;
+	return d + '-' + m + '-' + y + '_' + h + '.' + mi + '.' + s;
 }
 /// IndexOf com multiplas ocorrêcias
 function getAllIndexes(arr, val){
@@ -458,11 +458,11 @@ function getAllIndexes(arr, val){
     	}
     	return indexes;
 	} else {
-		console.error("ERROR - Invalid arguments on getAllIndexes!");
+		console.error('ERROR - Invalid arguments on getAllIndexes!');
 	}
 }
 function getFileSize(filePath, mode){
-	if (filePath !== undefined && filePath !== ""){
+	if (filePath !== undefined && filePath !== ''){
 		var read = fs.statSync(filePath);
 		var fsize = read.size;
 		// Bytes
@@ -506,10 +506,10 @@ function parseDecimalToBIO3Var(value, mode){
 		primeiraCasa = number.toString(16);
 		segundaCasa = segundaCasa.toString(16);
 		if (primeiraCasa.length < 2){
-			primeiraCasa = "0" + primeiraCasa;
+			primeiraCasa = '0' + primeiraCasa;
 		}
 		if (segundaCasa.length < 2){
-			segundaCasa = "0" + segundaCasa;
+			segundaCasa = '0' + segundaCasa;
 		}
 		return primeiraCasa + segundaCasa;
 	}

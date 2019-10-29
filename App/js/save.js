@@ -588,7 +588,7 @@ function applyItem(mode, person, pos){
 	if (qu.length < 2){
 		qu = "0" + qu;
 	}
-	var item = itemId + qu + attr + "00";
+	var item = itemId + qu + attr + '00';
 	if (mode === 1){ // Invent
 		if (person == 0){ // J. Valentine
 			JILL_INVENT[pos - 1] = item;
@@ -663,7 +663,7 @@ function applySaveCount(){
 		totalVezesSaves = totvezes.toString(16);
 	}
 	if (totalVezesSaves.length < 2){
-		totalVezesSaves = "0" + totalVezesSaves;
+		totalVezesSaves = '0' + totalVezesSaves;
 	}
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
@@ -681,10 +681,10 @@ function applyHP(){
 		newHPPlus = "0" + newHPPlus;
 	}
 	if (SAV_godMode === false){
-		life = newHPPlus + "00";
+		life = newHPPlus + '00';
 	} else {
 		SAV_godMode = false;
-		life = "3075";
+		life = '3075';
 	}
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
@@ -771,7 +771,7 @@ function makeHexTime(){
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
-	var quan = parseInt("0x" + QUANTIDADE);	
+	var quan = parseInt('0x' + QUANTIDADE);	
 	var atri = ATTR[ATRIBUTO][0];
 	var colo = ATTR[ATRIBUTO][1];
 	var cfundo = ATTR[ATRIBUTO][2];
@@ -784,8 +784,8 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	if (parseInt(quan) === 0){
 		quan = '';
 	} else {
-		cssfix = "box-fix-lbl";
-		cssfixbtn = "btn-box-fix";
+		cssfix = 'box-fix-lbl';
+		cssfixbtn = 'btn-box-fix';
 	}
 	if (ATRIBUTO === "03" || ATRIBUTO === "07" || ATRIBUTO === "0f"){
 		atri = 'Inf.';
@@ -804,11 +804,11 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 		$("#CARLOS-BOX").append(HTMLTEMPLATE);
 	}
 	// Fix para porcentagem
-	if (ATRIBUTO === "0e" || ATRIBUTO === "06" || ATRIBUTO === "02" || ATRIBUTO === "16"){
+	if (ATRIBUTO === '0e' || ATRIBUTO === '06' || ATRIBUTO === '02' || ATRIBUTO === '16'){
 		var vq = document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML;
-		if (vq !== ""){
-			$("#b-" + PERSON + "-q-lbl-" + INDEX).css({"margin-left": "-562px"});
-			document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML = vq + "%";
+		if (vq !== ''){
+			$("#b-" + PERSON + "-q-lbl-" + INDEX).css({'margin-left': '-562px'});
+			document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML = vq + '%';
 		}
 	}
 }
@@ -843,9 +843,9 @@ function addInfo(person, itemId){
 		s++;
 	}
 	if (itemId !== '00'){
-		document.getElementById('text-info-0' + person).innerHTML = "<center>" + ITEM[itemId][0] + "</center><br>" + ITEM[itemId][1];
+		document.getElementById('text-info-0' + person).innerHTML = '<center>' + ITEM[itemId][0] + '</center><br>' + ITEM[itemId][1];
 	} else {
-		document.getElementById('text-info-0' + person).innerHTML = "<!-- Empty Slot -->";
+		document.getElementById('text-info-0' + person).innerHTML = '<!-- Empty Slot -->';
 	}
 	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
 	$('#icon-info-0' + person).css({display: "inline", "clip-path": "inset(0px " + finalA + "px 0px " + finalB + "px)", "margin-left": finalMargin + "px"});
@@ -859,16 +859,16 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var pushRequest = parseInt(ITEM[itemHex][7]);
 	var spriteNumber = parseInt(ITEM[itemHex][8]);
 	var percent = false;
-	if (atrib === "00"){
-		if (itemHex === "00" || quantHex === "00"){
+	if (atrib === '00'){
+		if (itemHex === '00' || quantHex === '00'){
 			quanti = '';
 		} else {
-			quanti = parseInt("0x" + quantHex);
+			quanti = parseInt('0x' + quantHex);
 		}
 	}
 	// Caso seja em porcentagem
 	var classN = document.getElementById('J-LBL-' + block).className;
-	if (atrib === "0e" || atrib === "06" || atrib === "02" || atrib === "16"){
+	if (atrib === '0e' || atrib === '06' || atrib === '02' || atrib === '16'){
 		quanti = parseInt("0x" + quantHex) + "%";
 		percent = true;
 	} else {
@@ -889,7 +889,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var finalA = startA;
 	var finalB = startB;
 	var finalMargin = 0;
-	while(s != pushRequest){
+	while(s !== pushRequest){
 		finalA = finalA - pushOffset;
 		finalB = finalB + pushOffset;
 		finalMargin = finalMargin - marginOffset + fix;
@@ -948,7 +948,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 }
 function SAVE_clearAllSaves(){
 	if (SAVE_arquivoBruto !== undefined){
-		var ask = confirm("Warning: This will unrecoverably format your saves file.\n\nDo you want to continue anyway?");
+		var ask = confirm("WARNING: This will unrecoverably format your saves file.\n\nDo you want to continue anyway?");
 		if (ask === true){
 			if(fs.existsSync(ORIGINAL_FILENAME) === true){
 				fs.unlinkSync(ORIGINAL_FILENAME);
