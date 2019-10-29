@@ -5,7 +5,7 @@
 */
 var EXEC_rofs;
 var TEMP_APP_PATH;
-var GAME_PATH = "";
+var GAME_PATH = '';
 var EXEC_BIO3_MERCE;
 var WZ_lastMenu = 0;
 var progressbar_0 = 0;
@@ -30,11 +30,11 @@ function WZ_showWizardDialog(id){
 	if (WZ_showWizard === true){
 		$("#WZ_dialog").css({"display": "block"});
 		if (id === 0){
-			$("#img-logo").css({"display": "none"});
-			document.getElementById('WZ_title').innerHTML = "Welcome to R3ditor!";
+			$("#img-logo").css({'display': 'none'});
+			document.getElementById('WZ_title').innerHTML = 'Welcome to R3ditor!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_0;
-			document.getElementById('WZ_BTN_1').value = "No";
-			document.getElementById('WZ_BTN_2').value = "Yes";
+			document.getElementById('WZ_BTN_1').value = 'No';
+			document.getElementById('WZ_BTN_2').value = 'Yes';
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				WZ_skip();
 			};
@@ -45,8 +45,8 @@ function WZ_showWizardDialog(id){
 		// Set the game folder location
 		if (id === 1){
 			R3DITOR_movePercent(1, 25);
-			$("#WZ_dialog").css({"top": "29%"});
-			$("#WZ_BTN_2").css({"display": "none"});
+			$("#WZ_dialog").css({'top': '29%'});
+			$("#WZ_BTN_2").css({'display': 'none'});
 			$("#WZ_progressbar").fadeIn({duration: 500, queue: false});
 			document.getElementById('WZ_title').innerHTML = "First Step";
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_1;
@@ -62,17 +62,17 @@ function WZ_showWizardDialog(id){
 		// Wrong file
 		if (id === 2){
 			R3DITOR_movePercent(1, 0);
-			$("#WZ_dialog").css({"top": "34%"});
-			$("#WZ_BTN_2").css({"display": "none"});
+			$("#WZ_dialog").css({'top': '34%'});
+			$("#WZ_BTN_2").css({'display': 'none'});
 			$("#WZ_progressbar").fadeOut({duration: 100, queue: false});
-			document.getElementById('WZ_title').innerHTML = "Whoops...";
+			document.getElementById('WZ_title').innerHTML = 'Whoops...';
 			if (EXEC_BIO3_original === "Bio3_PC"){
 				document.getElementById('WZ_content').innerHTML = WZ_DIALOG_10;
 			} else {
 				document.getElementById('WZ_content').innerHTML = WZ_DIALOG_2;
 			}
-			EXEC_BIO3_original = "";
-			document.getElementById('WZ_BTN_1').value = "Go Back";
+			EXEC_BIO3_original = '';
+			document.getElementById('WZ_BTN_1').value = 'Go Back';
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				WZ_showWizardDialog(1);
 			};
@@ -81,12 +81,12 @@ function WZ_showWizardDialog(id){
 		if (id === 3){
 			R3DITOR_movePercent(1, 40);
 			$("#WZ_dialog").css({"top": "24%"});
-			GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "");
+			GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", '');
 			$("#WZ_BTN_2").css({"display": "inline"});
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_3;
-			document.getElementById('WZ_title').innerHTML = "Great!";
-			document.getElementById('WZ_BTN_2').value = "Yes!";
-			document.getElementById('WZ_BTN_1').value = "No!";
+			document.getElementById('WZ_title').innerHTML = 'Great!';
+			document.getElementById('WZ_BTN_2').value = 'Yes!';
+			document.getElementById('WZ_BTN_1').value = 'No!';
 			document.getElementById('wz_lbl_path').innerHTML = GAME_PATH;
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				EXEC_BIO3_original = "";
@@ -100,12 +100,12 @@ function WZ_showWizardDialog(id){
 		// Finish Line
 		if (id === 4){
 			R3DITOR_movePercent(1, 100);
-			R3DITOR_movePercent(0, 100, "Done!");
-			$("#WZ_BTN_2").css({"display": "none"});
-			$("#WZ_BTN_1").css({"display": "inline"});
-			$("#progress_window").css({"display": "none"});
-			document.getElementById('WZ_BTN_1').value = "Close";
-			document.getElementById('WZ_title').innerHTML = "Finish Line!";
+			R3DITOR_movePercent(0, 100, 'Done!');
+			$("#WZ_BTN_2").css({'display': 'none'});
+			$("#WZ_BTN_1").css({'display': 'inline'});
+			$("#progress_window").css({'display': 'none'});
+			document.getElementById('WZ_BTN_1').value = 'Close';
+			document.getElementById('WZ_title').innerHTML = 'Finish Line!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_4;
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				reload();
@@ -117,16 +117,16 @@ function WZ_showWizardDialog(id){
 		// Find Game - File failed
 		if (id === 5){
 			R3DITOR_movePercent(1, 0);
-			$("#WZ_BTN_2").css({"display": "inline"});
+			$("#WZ_BTN_2").css({'display': 'inline'});
 			$("#WZ_progressbar").fadeOut({duration: 100, queue: false});
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_5;
-			document.getElementById('WZ_title').innerHTML = "Ouch!";
-			document.getElementById('WZ_BTN_1').value = "No...";
-			document.getElementById('WZ_BTN_2').value = "Try Again";
+			document.getElementById('WZ_title').innerHTML = 'Ouch!';
+			document.getElementById('WZ_BTN_1').value = 'No...';
+			document.getElementById('WZ_BTN_2').value = 'Try Again';
 			document.getElementById('WZ_BTN_2').onclick = function(){
-				EXEC_BIO3_original = "";
-				EXEC_BIO3_MERCE = "";
-				GAME_PATH = "";
+				EXEC_BIO3_original = '';
+				EXEC_BIO3_MERCE = '';
+				GAME_PATH = '';
 				WZ_showWizardDialog(1);
 			};
 		}
@@ -135,13 +135,13 @@ function WZ_showWizardDialog(id){
 			killExternalSoftware();
 			R3DITOR_movePercent(1, 60);
 			$("#WZ_dialog").css({"top": "80px"});
-			$("#WZ_BTN_1").css({"display": "inline"});
-			$("#WZ_BTN_2").css({"display": "inline"});
+			$("#WZ_BTN_1").css({'display': 'inline'});
+			$("#WZ_BTN_2").css({'display': 'inline'});
 			EXEC_rofs = TEMP_APP_PATH + "\\App\\tools\\rofs.exe";
 			document.getElementById('WZ_title').innerHTML = "Extract Game Assets";
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_6;
-			document.getElementById('WZ_BTN_1').value = "No";
-			document.getElementById('WZ_BTN_2').value = "Yes";
+			document.getElementById('WZ_BTN_1').value = 'No';
+			document.getElementById('WZ_BTN_2').value = 'Yes';
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				WZ_skipRofs = true;
 				WZ_makeConfigs();
@@ -154,20 +154,20 @@ function WZ_showWizardDialog(id){
 		if (id === 7){
 			enable_mod = true;
 			$("#WZ_dialog").css({"top": "28%"});
-			document.getElementById('WZ_title').innerHTML = "Extracting Game Assets...";
+			document.getElementById('WZ_title').innerHTML = 'Extracting Game Assets...';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_7;
 			WZ_STARTFINALPROCESS();
 		}
 		// Show Hex Editor
 		if (id === 8){
 			R3DITOR_movePercent(1, 50);
-			$("#WZ_dialog").css({"top": "28%"});
-			$("#WZ_BTN_2").css({"display": "none"});
-			$("#WZ_BTN_1").css({"display": "inline"});
-			document.getElementById('WZ_title').innerHTML = "Open in Hex Editor";
+			$("#WZ_dialog").css({'top': '28%'});
+			$("#WZ_BTN_2").css({'display': 'none'});
+			$("#WZ_BTN_1").css({'display': 'inline'});
+			document.getElementById('WZ_title').innerHTML = 'Open in Hex Editor';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_8;
-			document.getElementById('WZ_BTN_1').value = "Skip";
-			document.getElementById('WZ_BTN_2').value = "Yes";
+			document.getElementById('WZ_BTN_1').value = 'Skip';
+			document.getElementById('WZ_BTN_2').value = 'Yes';
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				WZ_showWizardDialog(6);
 			};
@@ -176,12 +176,12 @@ function WZ_showWizardDialog(id){
 		if (id === 9){
 			R3DITOR_movePercent(1, 50);
 			$("#WZ_dialog").css({"top": "24%"});
-			$("#WZ_BTN_1").css({"display": "inline"});
-			$("#WZ_BTN_2").css({"display": "inline"});
-			document.getElementById('WZ_title').innerHTML = "Test Hex Editor";
+			$("#WZ_BTN_1").css({'display': 'inline'});
+			$("#WZ_BTN_2").css({'display': 'inline'});
+			document.getElementById('WZ_title').innerHTML = 'Test Hex Editor';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_9;
-			document.getElementById('WZ_BTN_1').value = "Cancel";
-			document.getElementById('WZ_BTN_2').value = "Next";
+			document.getElementById('WZ_BTN_1').value = 'Cancel';
+			document.getElementById('WZ_BTN_2').value = 'Next';
 			document.getElementById('wz_lbl_path_hex').innerHTML = HEX_EDITOR;
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				SHOW_EDITONHEX = false;
@@ -194,18 +194,18 @@ function WZ_showWizardDialog(id){
 			};
 		}
 	} else {
-		$("#WZ_dialog").css({"display": "none"});
+		$('#WZ_dialog').css({'display': 'none'});
 		addLog('log', 'WIZARD - Skipping...');
 		scrollLog();
 	}
 }
 // Extract game assets process
 function WZ_STARTFINALPROCESS(){
-	$("#WZ_BTN_1").css({"display": "none"});
-	$("#WZ_BTN_2").css({"display": "none"});
+	$('#WZ_BTN_1').css({'display': 'none'});
+	$('#WZ_BTN_2').css({'display': 'none'});
 	R3DITORshowUpdateProgress();
 	R3DITOR_movePercent(1, 62);
-	R3DITOR_movePercent(0, 2, "Preparing \"Assets\" Folder...");
+	R3DITOR_movePercent(0, 2, 'Preparing \"Assets\" Folder...');
 	WZ_EXTRACT_ROFS();
 }
 function WZ_EXTRACT_ROFS(){
@@ -222,7 +222,7 @@ function WZ_EXTRACT_ROFS(){
 					clearInterval(timer);
 				}
 			} else {
-				console.log("Waiting Rofs " + current_rofs);
+				console.log('Waiting Rofs ' + current_rofs);
 			}
 		} else {
 			WZ_finishExtract();
@@ -232,47 +232,47 @@ function WZ_EXTRACT_ROFS(){
 	scrollLog();
 }
 function WZ_EXTRACT(id){
-	if (fs.existsSync(GAME_PATH + "Rofs" + id + ".dat") === true){
+	if (fs.existsSync(GAME_PATH + 'Rofs' + id + '.dat') === true){
 		process.chdir(APP_PATH + "/Assets");
 		progressbar_1 = parseInt(progressbar_1 + 2);
 		progressbar_0 = parseInt(progressbar_0 + 6.6);
 		R3DITOR_movePercent(1, progressbar_1);
-		R3DITOR_movePercent(0, progressbar_0, "Extracting Rofs" + id + " - " + ROFS_STATUS[id][0]);
-		runExternalSoftware(EXEC_rofs, [GAME_PATH + "Rofs" + id + ".dat"]);
+		R3DITOR_movePercent(0, progressbar_0, 'Extracting Rofs' + id + ' - ' + ROFS_STATUS[id][0]);
+		runExternalSoftware(EXEC_rofs, [GAME_PATH + 'Rofs' + id + '.dat']);
 	}
 }
 function WZ_finishExtract(){
 	R3DITOR_movePercent(1, 97);
 	process.chdir(TEMP_APP_PATH);
-	R3DITOR_movePercent(0, 75, "Making Configuration File (Bio3.ini) for the extracted version...");
-	if (fs.existsSync(GAME_PATH + "Rofs11.dat") === true){
+	R3DITOR_movePercent(0, 75, 'Making Configuration File (Bio3.ini) for the extracted version...');
+	if (fs.existsSync(GAME_PATH + 'Rofs11.dat') === true){
 		R3DITOR_movePercent(1, 98);
-		R3DITOR_movePercent(0, 80, "Copying Rofs11.dat to Assets folder...");
-		runExternalSoftware('cmd', ['/C', 'copy', GAME_PATH + "Rofs11.dat", APP_PATH + "\\Assets"]);
+		R3DITOR_movePercent(0, 80, 'Copying Rofs11.dat to Assets folder...');
+		runExternalSoftware('cmd', ['/C', 'copy', GAME_PATH + 'Rofs11.dat', APP_PATH + '\\Assets']);
 		BIO3INI_MAKE_WZINI(1);
 	} else {
 		R3DITOR_movePercent(1, 98);
-		R3DITOR_movePercent(0, 80, "Creating Configuration File (Bio3.ini)...");
+		R3DITOR_movePercent(0, 80, 'Creating Configuration File (Bio3.ini)...');
 		BIO3INI_MAKE_WZINI(0);
 	}
-	if (fs.existsSync(APP_PATH + "\\Assets\\Save") === false){
-		fs.mkdirSync(APP_PATH + "\\Assets\\Save");
+	if (fs.existsSync(APP_PATH + '\\Assets\\Save') === false){
+		fs.mkdirSync(APP_PATH + '\\Assets\\Save');
 	}
 	WZ_makeConfigs();
 }
 function WZ_skip(){
-	EXEC_BIO3_original = "";
+	EXEC_BIO3_original = '';
 	SHOW_EDITONHEX = false;
 	WZ_showWizard = false;
-	EXEC_BIO3_MERCE = "";
+	EXEC_BIO3_MERCE = '';
 	enable_mod = false;
-	HEX_EDITOR = "";
+	HEX_EDITOR = '';
 	WZ_saveConfigs();
-	WZ_loadFiles(APP_PATH + "\\configs.r3ditor");
+	WZ_loadFiles(APP_PATH + '\\configs.r3ditor');
 }
 function WZ_LOADRE3(refile){
 	var file = getFileName(refile);
-	if (file === "residentevil3"){
+	if (file === 'residentevil3'){
 		EXEC_BIO3_original = refile;
 		WZ_showWizardDialog(3);
 	} else {
@@ -280,28 +280,30 @@ function WZ_LOADRE3(refile){
 	}
 }
 function WZ_LOADHEX(hexExe){
-	if (hexExe !== "" || hexExe !== undefined || hexExe !== null){
+	if (hexExe !== '' || hexExe !== undefined || hexExe !== null){
 		HEX_EDITOR = hexExe;
 		SHOW_EDITONHEX = true;
 		WZ_showWizardDialog(9);
 	}
 }
 function WZ_makeConfigs(){
-	EXEC_BIO3_MERCE = "";
+	EXEC_BIO3_MERCE = '';
 	R3DITOR_movePercent(1, 99);
-	R3DITOR_movePercent(0, 95, "Creating Configs File...");
-	GAME_PATH = EXEC_BIO3_original.replace("ResidentEvil3.exe", "");
+	R3DITOR_movePercent(0, 95, 'Creating Configs File...');
+	GAME_PATH = EXEC_BIO3_original.replace('ResidentEvil3.exe', '');
 	if (fs.existsSync(GAME_PATH + "RE3_MERCE.exe") === true){
 		EXEC_BIO3_MERCE = GAME_PATH + "RE3_MERCE.exe";
 	}
 	if (SHOW_EDITONHEX === false || HEX_EDITOR === undefined){
-		HEX_EDITOR = "";
+		HEX_EDITOR = '';
 	}
 	WZ_saveConfigs();
 }
 function WZ_saveConfigs(justSave){
 	try{
-		var CONFIGS = "false\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + "\n" + HEX_EDITOR + "\n" + RDT_lastFileOpened + "\n" + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME;
+		var CONFIGS = R3DITOR_check_for_updates + "\n" + EXEC_BIO3_original + "\n" + EXEC_BIO3_MERCE + "\n" + GAME_PATH + "\n" + enable_mod + "\n" + SHOW_EDITONHEX + 
+			"\n" + HEX_EDITOR + "\n" + RDT_lastFileOpened + "\n" + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS;
+
 		fs.writeFileSync(APP_PATH + "\\Configs\\configs.r3ditor", CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + "\\Configs\\configs.r3ditor" && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -328,7 +330,13 @@ function WZ_loadFiles(file){
 	fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 		cfgs.push(line); 
 	});
-	R3DITOR_check_for_updates = JSON.parse(cfgs[0]);
+	// Update
+	if (cfgs[0] !== undefined){
+		R3DITOR_check_for_updates = JSON.parse(cfgs[0]);
+	} else {
+		R3DITOR_check_for_updates = false;
+	}
+	document.getElementById('SETTINGS_edit_enableUpdates').checked = R3DITOR_check_for_updates;
 	if (cfgs[1] !== undefined){
 		EXEC_BIO3_original = cfgs[1];
 	} else {
@@ -369,55 +377,100 @@ function WZ_loadFiles(file){
 	} else {
 		RDT_lastBackup = '';
 	}
+	// RE3 Live Update time
 	if (cfgs[9] !== undefined){
 		RE3_LIVE_RENDER_TIME = parseInt(cfgs[9]);
 	} else {
 		RE3_LIVE_RENDER_TIME = 80;
 	}
-	// Visuals
+	document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value = RE3_LIVE_RENDER_TIME;
+	document.getElementById('SETTINGS_lbl_RE3_liveSpeed').innerHTML = RE3_LIVE_RENDER_TIME;
+	// Animations
+	if (cfgs[10] !== undefined){
+		DESIGN_ENABLE_ANIMS = JSON.parse(cfgs[10]);
+	} else {
+		DESIGN_ENABLE_ANIMS = false;
+	}
+	document.getElementById('SETTINGS_edit_enableAnimations').checked = DESIGN_ENABLE_ANIMS;
+	/*
+		Visuals
+	*/
 	if (EXEC_BIO3_original !== ''){
-		$("#btn_run_bio3").css({"display": "inline"});
-		if (HEX_EDITOR !== ""){
+		$("#btn_run_bio3").css({'display': 'inline'});
+		if (HEX_EDITOR !== ''){
 			$("#main_openBio3OnHex").css({"display": "inline"});
 		}
 	}
 	if (EXEC_BIO3_MERCE !== ''){
-		$("#btn_run_merce").css({"display": "inline"});
-		if (HEX_EDITOR !== ""){
-			$("#main_openBio3MerceOnHex").css({"display": "inline"});
+		$("#btn_run_merce").css({'display': 'inline'});
+		if (HEX_EDITOR !== ''){
+			$("#main_openBio3MerceOnHex").css({'display': 'inline'});
 		}
 	}
 	if (enable_mod === true){
-		$("#btn_run_bio3-mod").css({"display": "inline"});
-		$("#btn_run_merce-mod").css({"display": "inline"});
+		$("#btn_run_bio3-mod").css({'display': 'inline'});
+		$("#btn_run_merce-mod").css({'display': 'inline'});
 	}
-	if (fs.existsSync(APP_PATH + "\\forceupdate.txt") == true){
-		fs.unlinkSync(APP_PATH + "\\forceupdate.txt");
-		$("#menu-topo").css({"display": "none"});
+	if (fs.existsSync(APP_PATH + '\\forceupdate.txt') == true){
+		fs.unlinkSync(APP_PATH + '\\forceupdate.txt');
+		$("#menu-topo").css({'display': 'none'});
 		R3DITOR_applyUpdate();
 	} else {
-		$("#menu-topo").css({"top": "32px"});
-		$("#menu-utility").css({"top": "546px"});
-		$("#menu-utility-aba").css({"top": "472px"});
+		WZ_APPEND();
+		$("#menu-topo").css({'top': '32px'});
+		$("#menu-utility").css({'top': '546px'});
+		$("#menu-utility-aba").css({'top': '472px'});
 		$("#menu-utility-aba-2").css({"top": "-44px"});
-		$("#img-logo").fadeIn({duration: 2000, queue: false});
-		$("#menu-topo").fadeIn({duration: 200, queue: false});
-		$("#menu-utility").fadeIn({duration: 200, queue: false});
-		$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
-		$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#img-logo").fadeIn({duration: 2000, queue: false});
+			$("#menu-topo").fadeIn({duration: 200, queue: false});
+			$("#menu-utility").fadeIn({duration: 200, queue: false});
+			$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
+			$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
+		} else {
+			$("#img-logo").css({'display': 'inline'});
+			$("#menu-topo").css({'display': 'inline'});
+			$("#menu-utility").css({'display': 'inline'});
+			$("#menu-utility-aba").css({'display': 'inline'});
+			$("#menu-utility-aba-2").css({'display': 'inline'});
+		}
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + " (" + process.arch + ")";
-		$("#RE3_LIVESTATUS_CHANGE_ITEM_HEX").append(RDT_EDIT_ITEM);
-		$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 		// Init memjs
 		MEMORY_JS_initMemoryJs();
 	}
-	if (EXEC_BIO3_MERCE !== "" || EXEC_BIO3_original !== ""){
+	if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
 		$("#menu-topo-MOD").fadeIn({duration: 115, queue: false});
 	} else {
-		$("#menu-utility").css({'top': "586px"});
+		$("#menu-utility").css({'top': '586px'});
 		$("#menu-utility-aba").css({'top': '510px'});
 	}
 	if (R3DITOR_check_for_updates === true){
 		checkForUpdates();
+	}
+}
+function WZ_APPEND(){
+	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
+	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
+}
+function WZ_APPLY_R3DITOR_SETTINGS(){
+	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
+	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
+	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
+	//
+	WZ_saveConfigs(true);
+	reload();
+}
+function WZ_FORCE_UPDATE(){
+	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be buggy or incomplete.\n\nDo you want to continue anyway?');
+	if (ask === true){
+		var c = 0;
+		while (c < parseInt(SETTINGS_totalMenus + 1)){
+			$('#SETTINGS-aba-menu-' + c).css({'display': 'none'});
+			c++;
+		}
+		$('#menu-topo-settings').css({'display': 'none'});
+		$('#menu-SETTINGS').css({'display': 'none'});
+		$('#menu-topo').css({'display': 'none'});
+		R3DITOR_applyUpdate();
 	}
 }

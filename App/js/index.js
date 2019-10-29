@@ -42,7 +42,11 @@ function load(){
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
-		$("#img-logo").fadeOut({duration: 5600, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#img-logo").fadeOut({duration: 5600, queue: false});
+		} else {
+			$("#img-logo").css({'display': 'none'});
+		}
 		document.title = "Whoops...";
 		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
@@ -140,16 +144,16 @@ function openFileOnHex(file){
 // Notifications Desktop
 function showNotify(titulo, texto, tempo){
 	if (titulo == ''){
-		titulo = "R3ditor - Notification";
+		titulo = 'R3ditor - Notification';
 	}
 	if (texto == ''){
-		texto = "Message";
+		texto = 'Message';
 	}
 	if (tempo === null || tempo === undefined || tempo === ''){
 		tempo = 4000;
 	}
 	try{	
-		var iconPath = APP_PATH + "\\App\\img\\logo.png";
+		var iconPath = APP_PATH + '\\App\\img\\logo.png';
 		var NOTIFY = new Notification(titulo, {
 			icon: iconPath,
 			body: texto,
@@ -173,22 +177,22 @@ function R3DITOR_RUN_RE3(mode){
 		try{
 			R3DITOR_RUNGAME(0);
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({"display": "none"});
-				var msg = " - Testing Resident Evil 3...";
+				$("#WZ_BTN_2").css({'display': 'none'});
+				var msg = 'Testing Resident Evil 3...';
 				document.title = APP_NAME + msg;
-				addLog('log', "INFO" + msg);
+				addLog('log', 'INFO - ' + msg);
 				log_separador();
 			} else {
 				RE3_RUNNING = true;
-				var msg = " - Running Resident Evil 3...";
+				var msg = ' - Running Resident Evil 3...';
 				document.title = APP_NAME + msg;
-				addLog('log', "INFO" + msg);
+				addLog('log', 'INFO - ' + msg);
 				log_separador();
 			}
 			if (mode === 0){
 				process.chdir(GAME_PATH);
 			} else {
-				process.chdir(APP_PATH + "\\Assets");
+				process.chdir(APP_PATH + '\\Assets');
 			}
 			runExternalSoftware(EXEC_BIO3_original);
 			setTimeout(function(){
@@ -196,7 +200,7 @@ function R3DITOR_RUN_RE3(mode){
 			}, 20);
 		} catch (err) {
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({"display": "inline"});
+				$("#WZ_BTN_2").css({'display': 'inline'});
 			}
 			console.error("ERROR - Something went wrong! - " + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
@@ -216,13 +220,13 @@ function R3DITOR_RUN_MERCE(mode){
 			if (mode === 0){
 				process.chdir(GAME_PATH);
 			} else {
-				process.chdir(APP_PATH + "\\Assets");
+				process.chdir(APP_PATH + '\\Assets');
 			}
 			document.title = APP_NAME + " - Running Mercenaries...";
 			runExternalSoftware(EXEC_BIO3_MERCE);
 		}catch(err){
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({"display": "inline"});
+				$("#WZ_BTN_2").css({'display': 'inline'});
 			}
 			console.error("ERROR - Something went wrong! - " + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
@@ -232,11 +236,11 @@ function R3DITOR_RUN_MERCE(mode){
 }
 // Copiar e Colar
 function R3DITOR_COPY(cpText){
-    var dummy = document.createElement("textarea");
+    var dummy = document.createElement('textarea');
     document.body.appendChild(dummy);
     dummy.value = cpText;
     dummy.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(dummy);
 }
 // Verificar por erros
@@ -265,7 +269,7 @@ function deleteFolderRecursive(path){
 /// Function WIP
 function WIP(){
 	log_separador();
-	addLog('warn', "Sorry buddy... This function / option still #WIP");
+	addLog('warn', 'Sorry buddy... This function / option still #WIP');
 	scrollLog();
 }
 function killExternalSoftware(processID){
@@ -411,13 +415,21 @@ function currentTime(){
 	if (m === 9 && d === 28 && e_e === 0){
 		e_e++;
 		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
-		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#special_msg").fadeIn({duration: 2200, queue: false});
+		} else {
+			$("#special_msg").css({'display': 'inline'});
+		}
 		scrollLog();
 	}
 	if (m === 10 && d === 1 && e_e === 0){
 		e_e++;
 		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
-		$("#special_msg").fadeIn({duration: 2200, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#special_msg").fadeIn({duration: 2200, queue: false});
+		} else {
+			$("#special_msg").css({'display': 'inline'});
+		}
 		scrollLog();
 	}
 	if (d.toString().length < 2){
@@ -556,12 +568,16 @@ function processBIO3HP(hex){
 			stat = 'Fine...?';
 			color = 'txt-fine';
 		}
-		if (vital > 201 && vital < 29999){
+		if (vital > 201 && vital < 999){
 			stat = 'Life Hack!';
 			color = 'txt-fine';
 		}
-		if (vital > 29999 && vital < 30099){
-			stat = 'CHEATER!!!';
+		if (vital > 999 && vital < 19999){
+			stat = 'Extreme Unfair!';
+			color = 'txt-fine';
+		}
+		if (vital > 19999 && vital < 30099){
+			stat = 'CHEATER!';
 			color = 'txt-fine';
 		}
 		return [vital, stat, hex, color];
@@ -571,7 +587,7 @@ function processBIO3HP(hex){
 function splitHex(hex, mode){
 	var rw;
 	var c = 0;
-	var fina = "";
+	var fina = '';
 	if (mode == 0){
 		rw = hex.match(/.{1,2}/g);
 	} else {

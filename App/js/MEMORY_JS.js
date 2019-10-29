@@ -8,7 +8,7 @@
 */
 
 var MEM_JS_canRender = false;
-var RE3_LIVE_RENDER_TIME = 50;
+var RE3_LIVE_RENDER_TIME = 80;
 
 var REALTIME_X_Pos = '0000';
 var REALTIME_Y_Pos = '0000';

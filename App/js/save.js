@@ -170,12 +170,12 @@ function MAKE_SAVE(slot){
 			finalizeSave();
 		} else {
 			var msg = "Unable to save current slot because compilation is divergent size: Size Expected: " + RANGES["slot-offset"][0] + " - Current Size: " + TEMP_SLOT.length;
-			console.error("ERROR: " + msg);
+			console.error("ERROR - " + msg);
 			addLog("error", msg);
 		}
 	} else {
-		var msg = "Unable to save the game save if you haven't opened it yet! (File: " + ORIGINAL_FILENAME + ")"
-		addLog("error", "ERRO: " + msg);
+		var msg = "Unable to save the game save if you haven't opened it yet! (File: " + ORIGINAL_FILENAME + ")";
+		addLog("error", "ERROR - " + msg);
 		console.error(msg);
 	}
 }
@@ -224,23 +224,23 @@ function CARREGAR_SAVE(sFile){
 	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + 
 	SAVE_INDICADOR_HEADER_END;
 
-	localStorage.setItem("Save_1", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	  RANGES["slot-offset"][0] * 2));
-	localStorage.setItem("Save_2", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 2,  RANGES["slot-offset"][0] * 3));
-	localStorage.setItem("Save_3", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 3,  RANGES["slot-offset"][0] * 4));
-	localStorage.setItem("Save_4", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 4,  RANGES["slot-offset"][0] * 5));
-	localStorage.setItem("Save_5", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 5,  RANGES["slot-offset"][0] * 6));
-	localStorage.setItem("Save_6", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 6,  RANGES["slot-offset"][0] * 7));
-	localStorage.setItem("Save_7", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 7,  RANGES["slot-offset"][0] * 8));
-	localStorage.setItem("Save_8", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 8,  RANGES["slot-offset"][0] * 9));
-	localStorage.setItem("Save_9", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 9,  RANGES["slot-offset"][0] * 10));
-	localStorage.setItem("Save_10", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 10, RANGES["slot-offset"][0] * 11));
-	localStorage.setItem("Save_11", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 11, RANGES["slot-offset"][0] * 12));
-	localStorage.setItem("Save_12", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 12, RANGES["slot-offset"][0] * 13));
-	localStorage.setItem("Save_13", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 13, RANGES["slot-offset"][0] * 14));
-	localStorage.setItem("Save_14", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
-	localStorage.setItem("Save_15", SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
+	localStorage.setItem('Save_1', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	   RANGES["slot-offset"][0] * 2));
+	localStorage.setItem('Save_2', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 2,  RANGES["slot-offset"][0] * 3));
+	localStorage.setItem('Save_3', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 3,  RANGES["slot-offset"][0] * 4));
+	localStorage.setItem('Save_4', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 4,  RANGES["slot-offset"][0] * 5));
+	localStorage.setItem('Save_5', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 5,  RANGES["slot-offset"][0] * 6));
+	localStorage.setItem('Save_6', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 6,  RANGES["slot-offset"][0] * 7));
+	localStorage.setItem('Save_7', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 7,  RANGES["slot-offset"][0] * 8));
+	localStorage.setItem('Save_8', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 8,  RANGES["slot-offset"][0] * 9));
+	localStorage.setItem('Save_9', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 9,  RANGES["slot-offset"][0] * 10));
+	localStorage.setItem('Save_10', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 10, RANGES["slot-offset"][0] * 11));
+	localStorage.setItem('Save_11', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 11, RANGES["slot-offset"][0] * 12));
+	localStorage.setItem('Save_12', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 12, RANGES["slot-offset"][0] * 13));
+	localStorage.setItem('Save_13', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 13, RANGES["slot-offset"][0] * 14));
+	localStorage.setItem('Save_14', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
+	localStorage.setItem('Save_15', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
 	// Render Infos
-	$("#SAV_clearFile").css({"display": "inline"});
+	$("#SAV_clearFile").css({'display': 'inline'});
 	save_renderSlot(CURRENT_SAVE_SLOT);
 }
 function save_renderSlot(slotID){
@@ -271,7 +271,7 @@ function save_renderSaveSlots() {
 			$("#slt-save-" + cu).addClass("slot-presente");
 		} else {
 			// Save Vazio
-			document.getElementById("slt-save-" + cu).innerHTML = "Empty";
+			document.getElementById("slt-save-" + cu).innerHTML = 'Empty';
 			$("#slt-save-" + cu).addClass("slot-ausente");
 		}
 		cu++;
@@ -348,8 +348,8 @@ function save_renderBox(s_slot){
 			var NU = JILL_BAU[current].slice(6, 8); // Segunda var
 			if (ATTR[AT] == undefined){
 				var msg = "(Item Box) Item " + current + " have an unknown attr.: " + AT;
-				console.warn("WARNING: " + msg);
-				addLog("warn", "WARNING: " + msg);
+				console.warn("WARNING - " + msg);
+				addLog("warn", "WARNING - " + msg);
 				addLog("log" , "Adding item to Item Box - Jill - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + AT + ", Second Var (aka. null): " + NU);
 			} else {
 				addLog("log" , "Adding item to Item Box - Jill - HEX: <font class='user-can-select'>" + IT + QU + AT + NU + "</font> - Index: " + current + " - Item: " + ITEM[IT][0] + ", Quantity: " + parseInt("0x" + QU) + ", Attr.: " + ATTR[AT][0] + ", Second Var (aka. null): " + NU);
@@ -430,14 +430,14 @@ function save_renderInfos(s_slot){
 		// Jill - Arma equipada
 		jArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["jillArma"][0], RANGES["jillArma"][1]);
 		var jcw = ITEM[jArmaEquip][0];
-		if (jcw == "Empty Slot"){
+		if (jcw === "Empty Slot"){
 			jcw = "No Weapon Equiped";
 		}
 		document.getElementById("lbl-jArma").innerHTML = jcw;
 		// Carlos - Arma equipada
 		cArmaEquip = localStorage.getItem("Save_" + s_slot).slice(RANGES["carlosArma"][0], RANGES["carlosArma"][1]);
 		var ccw = ITEM[cArmaEquip][0];
-		if (ccw == "Empty Slot"){
+		if (ccw === "Empty Slot"){
 			ccw = "No Weapon Equiped";
 		}
 		document.getElementById("lbl-cArma").innerHTML = ccw;
@@ -485,7 +485,7 @@ function save_renderLife(s_slot){
 	var chkA = life.slice(0, 2);
 	var chkB = life.slice(2, 4);
 	var HP;
-	if (POISON[veneno][0] == "Yes"){
+	if (POISON[veneno][0] === "Yes"){
 		STATUS = "Poison";
 		co = "txt-poison";
 	} else {
@@ -651,8 +651,8 @@ function applyPoison() {
 }
 function applySaveCount(){
 	var totvezes = document.getElementById('ex-savecount-id').value;
-	if (totvezes == ""){
-		totalVezesSaves = "00";
+	if (totvezes === ''){
+		totalVezesSaves = '00';
 	} else {
 		if (totvezes < 0){
 			totvezes = 0;
@@ -755,16 +755,16 @@ function makeHexTime(){
 	var hex03 = parseInt(Math.round(tempHex03)).toString(16);
 	var hex04 = parseInt(Math.round(tempHex04)).toString(16);
 	if (hex01.length < 2){
-		hex01 = "0" + hex01;
+		hex01 = '0' + hex01;
 	}
 	if (hex02.length < 2){
-		hex02 = "0" + hex02;
+		hex02 = '0' + hex02;
 	}
 	if (hex03.length < 2){
-		hex03 = "0" + hex03;
+		hex03 = '0' + hex03;
 	}
 	if (hex04.length < 2){
-		hex04 = "0" + hex04;
+		hex04 = '0' + hex04;
 	}
 	IGTExtract = hex01 + hex02 + hex03 + hex04;
 	request_render_save = true;
@@ -779,16 +779,16 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	var clip = ITEM[ITEMHEX][2];
 	var marg = ITEM[ITEMHEX][3];
 	var imse = ITEM[ITEMHEX][4];
-	var cssfix = "";
-	var cssfixbtn = "";
-	if (quan == 0 || quan == "0"){
-		quan = "";
+	var cssfixbtn = '';
+	var cssfix = '';
+	if (parseInt(quan) === 0){
+		quan = '';
 	} else {
 		cssfix = "box-fix-lbl";
 		cssfixbtn = "btn-box-fix";
 	}
 	if (ATRIBUTO === "03" || ATRIBUTO === "07" || ATRIBUTO === "0f"){
-		atri = "Inf.";
+		atri = 'Inf.';
 	}
 	if (ITEMHEX.length < 2){
 		ITEMHEX = "0" + ITEMHEX;
@@ -804,7 +804,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 		$("#CARLOS-BOX").append(HTMLTEMPLATE);
 	}
 	// Fix para porcentagem
-	if (ATRIBUTO === "0e" || ATRIBUTO === "06" || ATRIBUTO === "02" || ATRIBUTO === "16" || ATRIBUTO === "17"){
+	if (ATRIBUTO === "0e" || ATRIBUTO === "06" || ATRIBUTO === "02" || ATRIBUTO === "16"){
 		var vq = document.getElementById("b-" + PERSON + "-q-lbl-" + INDEX).innerHTML;
 		if (vq !== ""){
 			$("#b-" + PERSON + "-q-lbl-" + INDEX).css({"margin-left": "-562px"});
@@ -815,7 +815,7 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 // Render Info
 function addInfo(person, itemId){
 	main_closeFileList();
-	$('#icon-info-0' + person).css({display: "none"});
+	$('#icon-info-0' + person).css({'display': 'none'});
 	var imgSet = ITEM[itemId][5];
 	var offsetRequest = ITEM[itemId][6];
 	var offsetPx = 279;
@@ -842,7 +842,7 @@ function addInfo(person, itemId){
 		}
 		s++;
 	}
-	if (itemId !== "00"){
+	if (itemId !== '00'){
 		document.getElementById('text-info-0' + person).innerHTML = "<center>" + ITEM[itemId][0] + "</center><br>" + ITEM[itemId][1];
 	} else {
 		document.getElementById('text-info-0' + person).innerHTML = "<!-- Empty Slot -->";
@@ -861,26 +861,26 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var percent = false;
 	if (atrib === "00"){
 		if (itemHex === "00" || quantHex === "00"){
-			quanti = "";
+			quanti = '';
 		} else {
 			quanti = parseInt("0x" + quantHex);
 		}
 	}
 	// Caso seja em porcentagem
 	var classN = document.getElementById('J-LBL-' + block).className;
-	if (atrib === "0e" || atrib === "06" || atrib === "02" || atrib === "16" || atrib === "17"){
+	if (atrib === "0e" || atrib === "06" || atrib === "02" || atrib === "16"){
 		quanti = parseInt("0x" + quantHex) + "%";
 		percent = true;
 	} else {
 		quanti = parseInt("0x" + quantHex);
 	}
 	// Caso seja ammo infinita
-	if (atrib === "03" || atrib === "07" || atrib === "0f"){
-		quanti = "Inf.";
+	if (atrib === '03' || atrib === '07' || atrib === '0f' || atrib === '17'){
+		quanti = 'Inf.';
 	}
 	// Pixels
-	var startA = 956;
 	var startB = 0;
+	var startA = 956;
 	var pushOffset = 106;
 	var marginOffset = 110;
 	var fix = 4;
@@ -926,7 +926,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		}
 		document.getElementById("J-LBL-" + block).innerHTML = quanti;
 		$("#J-LBL-" + block).css({color: cor, "text-shadow": shad});
-		$("#J-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px" });
+		$("#J-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px"});
 	} else { // Inventário do Carlos
 		document.getElementById("C-icon-" + block).src = "img/box-set-" + spriteNumber + ".png";
 		document.getElementById("C-icon-" + block).onclick = function(){
@@ -939,8 +939,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		$("#C-LBL-" + block).css({color: cor, "text-shadow": shad});
 		$("#C-icon-" + block).css({"clip-path": "inset(0px " + finalA + "px 4px " + finalB + "px)", "margin-left": finalMargin + "px" });
 	}
-	if (quanti === ""){
-		quanti = "0";
+	if (quanti === ''){
+		quanti = '0';
 	}
 	addLog("log", "Inventory: " + p + " Slot: " + block + " - HEX: <font class='user-can-select'>" + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
 		"</font> - Item: " + itemHex.toUpperCase() + " (" + titulo + ") - Quantity: " + quantHex.toUpperCase() + " (" + parseInt(quantHex, 16) + ") - Attr.: " + 
@@ -1138,22 +1138,22 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 		}
 	}
 	if (milesimos.toString().length < 2){
-		milesimos = "0" + milesimos;
+		milesimos = '0' + milesimos;
 	}
 	if (decimos.toString().length < 2){
-		decimos = "0" + decimos;
+		decimos = '0' + decimos;
 	}
 	if (segundos.toString().length < 2){
-		segundos = "0" + segundos;
+		segundos = '0' + segundos;
 	}
 	if (minutos.toString().length < 2){
-		minutos = "0" + minutos;
+		minutos = '0' + minutos;
 	}
 	if (hora.toString().length < 2){
-		hora = "0" + hora;
+		hora = '0' + hora;
 	}
 	if (dia.toString().length < 2){
-		dia = "0" + dia;
+		dia = '0' + dia;
 	}
 	//console.log("DD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 }
@@ -1181,7 +1181,7 @@ function resetTimer(){
 	document.getElementById("lbl-time").innerHTML = "00:00:00";
 }
 function resetIGT(){
-	IGTExtract = "00000000";
+	IGTExtract = '00000000';
 	request_render_save = true;
 	MAKE_SAVE(CURRENT_SAVE_SLOT);
 }

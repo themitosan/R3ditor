@@ -38,6 +38,7 @@
 			<input type="button" class="botao-menu right" title="Reload this application!" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" title="Click to see the about page!" value="About" onclick="showAbout();">
 			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor" value="Check for updates" onclick="checkForUpdates();">
+			<input type="button" class="botao-menu right" title="Edit R3ditor Settings" value="Settings" onclick="main_menu(7);">
 		</div>
 		<!-- Outras ferramentas -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
@@ -105,6 +106,11 @@
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
+		<!-- Menu Settings -->
+		<div class="menu-topo none" id="menu-topo-settings">
+			<input type="button" class="botao-menu right" value="Cancel" onclick="reload();">
+			<input type="button" class="botao-menu right botao-aplicar" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
+		</div>
 		<!-- Menu INI Editor -->
 		<div class="menu-topo none" id="menu-topo-INI">
 			<input type="button" class="botao-menu" value="Open INI" onclick="triggerLoad(10);">
@@ -116,10 +122,53 @@
 			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
 		</div>
+
 		<!-- CONTENT -->
 
+		<!-- FORM: Settings -->
+		<div class="none" id="menu-SETTINGS" onclick="main_closeFileList();">
+			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="General">
+			<input type="button" id="SETTINGS-aba-menu-2" class="aba none" value="[WIP]">
+			<input type="button" id="SETTINGS-aba-menu-3" class="aba none" value="[WIP]">
+			<!-- General -->
+			<div class="menu none" id="SETTINGS_menu_1">
+				<div class="menu-general-content" id="SETTINGS_content_1">
+					<center><font class="titulo">Settings</font></center>
+
+					<!-- Update -->
+					<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-1">
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - Check for updates on Startup / Go Back</font><br>
+						<center><input type="button" class="botao-menu updater_title_holder" onclick="WZ_FORCE_UPDATE();" value="Download the last changes on GitHub"></center>
+					</div>
+
+					<!-- Performance -->
+					<input type="button" value="Performance" class="INI_inernalTab SETTINGS_ABA-2">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-2">
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - Enable Menu Animations</font>
+						<div class="menu-separador"></div>
+						<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
+						Fast (50) - <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="10" value="80" class="SETTINGS_slider"> - Slow (120)</center><br>
+						Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>
+						Fast causes information to be updated in real time, but may decrease overall performance due to <i>JS Heap</i>.
+					</div>
+
+					<!-- Note -->
+					<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-3">
+						<div class="SETTINGS_FUTURE">
+							I know that for now this menu is very empty and with few options...<br><br>
+							But do not worry! Wait for more options here in the future!<br><br><br>
+							- TheMitoSan.
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>	
+
 		<!-- FORM: INI -->
-		<div class="none" id="menu-INI">
+		<div class="none" id="menu-INI" onclick="main_closeFileList();">
 			<input type="button" id="INI-aba-menu-1" onclick="INI_showMenu(1);" class="aba aba-left-fix aba-select" value="General">
 			<input type="button" id="INI-aba-menu-2" onclick="INI_showMenu(2);" class="aba" value="Audio, Video & Assets">
 			<input type="button" id="INI-aba-menu-3" onclick="INI_showMenu(3);" class="aba" value="Input Configs & Data">

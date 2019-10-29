@@ -13,8 +13,13 @@ function forceUpdate(){
 	if (forceUpdat > 9){
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
-		$("#img-logo").fadeOut({duration: 2200, queue: false});
-		$("#hidden_msg").fadeIn({duration: 2200, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#img-logo").fadeOut({duration: 2200, queue: false});
+			$("#hidden_msg").fadeIn({duration: 2200, queue: false});
+		} else {
+			$("#img-logo").css({'display': 'none'});
+			$("#hidden_msg").css({'display': 'inline'});
+		}
 		scrollLog();
 	}
 }
@@ -93,7 +98,11 @@ function R3DITOR_applyUpdate(){
 		addLog('error', 'ERROR - You are offline!');
 		R3DITOR_movePercent(0, 100, "ERROR - You are offline!");
 		addLog('error', 'Check your internet status, Reload R3ditor and try again!');
-		$("#btn_update_ok").fadeIn({duration: 200, queue: false});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$("#btn_update_ok").fadeIn({duration: 200, queue: false});
+		} else {
+			$("#btn_update_ok").css({'display': 'inline'});
+		}
 		$("#progress_window").css({"top": "528px", "height": "74px"});
 		scrollLog();
 	}
@@ -159,8 +168,13 @@ function R3DITOR_update_3(){
 function R3DITOR_update_4(){
 	R3DITOR_movePercent(0, 100, "Update Ok!");
 	document.title = APP_NAME + " - Update Ok!";
-	$("#img-logo").fadeOut({duration: 2000, queue: false});
-	$("#btn_update_ok").fadeIn({duration: 500, queue: false});
+	if (DESIGN_ENABLE_ANIMS === true){
+		$("#img-logo").fadeOut({duration: 2000, queue: false});
+		$("#btn_update_ok").fadeIn({duration: 500, queue: false});
+	} else {
+		$("#img-logo").css({'display': 'none'});
+		$("#btn_update_ok").css({'display': 'inline'});
+	}
 	$("#progress_window").css({"top": "528px", "height": "74px"});
 	addLog('log', 'INFO - Click on Reload App to apply changes!');
 	scrollLog();

@@ -1969,3 +1969,45 @@ input[type="range" i]{
     left: 670px;
     top: 78px;
 }
+/*
+    Settings
+*/
+.SETTINGS_slider{
+    width: 200px !important;
+}
+.SETTINGS_ABA-1{
+    left: 24px;
+    top: 56px;
+}
+.SETTINGS_ABA-2{
+    left: 24px;
+    top: 148px;
+}
+.SETTINGS_ABA-3{
+    left: 424px;
+    top: 56px;
+}
+.SETTINGS_WINDOW-1{
+    height: 48px;
+    width: 374px;
+    left: 14px;
+    top: 78px;
+}
+.SETTINGS_WINDOW-2{
+    height: 186px;
+    width: 374px;
+    left: 14px;
+    top: 170px;
+}
+.SETTINGS_WINDOW-3{
+    height: 278px;
+    width: 374px;
+    left: 408px;
+    top: 78px;
+}
+.SETTINGS_FUTURE{
+    position: absolute;
+    width: 300px;
+    left: 40px;
+    top: 70px;
+}
