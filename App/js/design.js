@@ -300,6 +300,7 @@ function main_menu(anim){
 		if (enable_mod === true){
 			$("#menu-topo-MOD").css({"display": "none"});
 		}
+		$("#INI_makeNewIni").css({'display': 'inline'});
 		$("#menu-topo-INI").css({"display": 'inline'});
 	}
 }
@@ -1717,6 +1718,7 @@ function INI_showMenu(menuId){
 		c++;
 	}
 	$("#INI_applyBtn").css({'display': 'inline'});
+	$("#INI_makeNewIni").css({'display': 'none'});
 	$("#INI_reloadFile").css({'display': 'inline'});
 	$("#INI_applyBtn_ask").css({'display': 'inline'});
 	$("#INI_openOnNotepad").css({'display': 'inline'});

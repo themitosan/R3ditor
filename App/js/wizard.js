@@ -247,12 +247,12 @@ function WZ_finishExtract(){
 	R3DITOR_movePercent(0, 75, "Making Configuration File (Bio3.ini) for the extracted version...");
 	if (fs.existsSync(GAME_PATH + "Rofs11.dat") === true){
 		R3DITOR_movePercent(1, 98);
-		R3DITOR_movePercent(0, 80, "Copying Rofs11.dat to Assets folder to enchance compatibility...");
+		R3DITOR_movePercent(0, 80, "Copying Rofs11.dat to Assets folder...");
 		runExternalSoftware('cmd', ['/C', 'copy', GAME_PATH + "Rofs11.dat", APP_PATH + "\\Assets"]);
 		BIO3INI_MAKE_WZINI(1);
 	} else {
 		R3DITOR_movePercent(1, 98);
-		R3DITOR_movePercent(0, 80, "Creating Bio3.ini File...");
+		R3DITOR_movePercent(0, 80, "Creating Configuration File (Bio3.ini)...");
 		BIO3INI_MAKE_WZINI(0);
 	}
 	if (fs.existsSync(APP_PATH + "\\Assets\\Save") === false){

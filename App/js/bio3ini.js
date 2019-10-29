@@ -749,6 +749,7 @@ function BIO3INI_SAVE(askSave){
 	BIO3INI_MAKEFILE(ORIGINAL_FILENAME, parseInt(askSave));
 }
 function BIO3INI_MAKE_WZINI(mode){
+	mode = parseInt(mode);
 	BIO3INI_Save = ".\\Save";
 	BIO3INI_Movie = ".\\zmovie";
 	BIO3INI_Regist = ".\\regist.txt";
@@ -763,6 +764,7 @@ function BIO3INI_MAKE_WZINI(mode){
 		BIO3INI_Rofs8 = ".\\DATA_A\\BSS";
 		BIO3INI_Rofs9 = ".\\ROOM\\EMD";
 		BIO3INI_Rofs10 = ".\\ROOM\\EMD08";
+		// Rofs fix
 		if (mode === 0){
 			BIO3INI_Rofs11 = ".\\ROOM\\RBJ";
 		} else if (mode === 1){
@@ -772,6 +774,7 @@ function BIO3INI_MAKE_WZINI(mode){
 		BIO3INI_Rofs13 = ".\\DATA_E\\RDT";
 		BIO3INI_Rofs14 = ".\\DATA_A\\VOICE";
 		BIO3INI_Rofs15 = ".\\DATA_A\\SOUND";
+		BIO3INI_MAKEFILE(APP_PATH + "\\Assets\\Bio3.ini", 0);
 	} else {
 		BIO3INI_Rofs1 = ".\\Rofs1.dat";
 		BIO3INI_Rofs2 = ".\\Rofs2.dat";
@@ -788,8 +791,8 @@ function BIO3INI_MAKE_WZINI(mode){
 		BIO3INI_Rofs13 = ".\\Rofs13.dat";
 		BIO3INI_Rofs14 = ".\\Rofs14.dat";
 		BIO3INI_Rofs15 = ".\\Rofs15.dat";
+		BIO3INI_MAKEFILE(APP_PATH + "\\Assets\\Bio3.ini", 1);
 	}
-	BIO3INI_MAKEFILE(APP_PATH + "\\Assets\\Bio3.ini", 0);
 }
 function BIO3INI_MAKEFILE(path, mode){
 	// Mode 0: replace the original file, 1: ask to save
@@ -851,7 +854,6 @@ function BIO3INI_MAKEFILE(path, mode){
 		'Data02=' + BIO3INI_data_02 + '\n' +
 		'Data03=' + BIO3INI_data_03 + '\n' +
 		'Data10=' + BIO3INI_data_10 + '\n\n';
-	log_separador();
 	addLog('log', "INFO - Bio3INI: The file was generated sucessfully!");
 	log_separador();
 	// Saving the file!
