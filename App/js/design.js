@@ -1725,7 +1725,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 				if (attr === '02' || attr === '06' || attr === '0a' || attr === '0e'){
 					remaining = parseInt(quan, 16) + '%';
 				}
-				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f' || attr === '17'){
+				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f' || attr === "13" || attr === '17'){
 					remaining = 'Inf.';
 				}
 				document.getElementById('RE3_LIVESTATUS_LBL_ITEM-' + n).innerHTML = remaining;
@@ -1846,7 +1846,7 @@ function R3DITOR_RUNGAME(id){
 	if (onMSG === false){
 		if (id === 0){
 			if (DESIGN_ENABLE_ANIMS === true){
-				$("#menu-topo-MOD").fadeOut({duration: 100, queue: false});
+				$("#menu-topo-MOD").fadeOut({duration: 120, queue: false});
 			} else {
 				$("#menu-topo-MOD").css({'display': 'none'});
 			}
@@ -1865,7 +1865,7 @@ function R3DITOR_RUNGAME(id){
 			$("#FILEGEN_contents").css({'height': '474px'});
 			$("#RDT_MSGBLOCKINFO").css({'height': '493px'});
 			$("#RDT_audio_holder").css({'height': '472px'});
-			$("#RDT_door_holder").css({'height': '482px'});
+			$("#RDT_door_holder").css({'height': '474px'});
 			$("#RDT-canvas-hold").css({'height': '516px'});
 			$("#RDT-camera-hold").css({'height': '516px'});
 			$("#RDT-camera-Edit").css({'height': '458px'});
@@ -1922,7 +1922,7 @@ function R3DITOR_RUNGAME(id){
 				$("#RDT-ifm").css({'height': '472px'});
 				if (main_currentMenu !== 6){
 					if (DESIGN_ENABLE_ANIMS === true){
-						$("#menu-topo-MOD").fadeIn({duration: 100, queue: false});
+						$("#menu-topo-MOD").fadeIn({duration: 120, queue: false});
 					} else {
 						$("#menu-topo-MOD").css({'display': 'inline'});
 					}

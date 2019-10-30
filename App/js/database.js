@@ -299,21 +299,22 @@ var RDT_MAPAS = {
 	"aa": ["Hospital Map"]
 }
 var ATTR = {
-	"00": ["None",								 "#fff0",  "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
-	"01": ["Remaining ammo in green",		   "#008400", "0 0 2px #004200"],
-	"02": ["% remaining in green", 			   "#008400", "0 0 2px #004200"],
-	"03": ["Inf. ammo in green", 			   "#008400", "0 0 2px #004200"],
-	"05": ["Remaining ammo in red",			   "#840000", "0 0 2px #310000"],
-	"06": ["% remaining in red", 			   "#840000", "0 0 2px #310000"],
-	"07": ["Inf. ammo in red", 				   "#840000", "0 0 2px #310000"],
-	"09": ["Remaining ammo in yellow", 		   "#fff0a3", "0 0 2px #b4b194"],
-	"0a": ["%. remaining in yellow",		   "#fff0a3", "0 0 2px #b4b194"],
-	"0b": ["Inf. ammo in yellow", 			   "#fff0a3", "0 0 2px #b4b194"],
-	"0d": ["Remaining ammo in blue", 		   "#9393ff", "0 0 2px #004242"],
-	"0e": ["% remaining in blue", 			   "#9393ff", "0 0 2px #004242"],
-	"0f": ["Inf. ammo in blue", 	 		   "#9393ff", "0 0 2px #004242"],
-	"16": ["Attr. used by M4A1 Assault Rifle", "#840000", "0 0 2px #310000"],
-	"17": ["Inf. ammo in red (Purchased)", 	   "#840000", "0 0 2px #310000"] // Atributo encontrado na shotgun do Carlos
+	"00": ["None",								 		  "#fff0",  "0 0 10px #fff0"], // Use this for puzzle items that don't have the ammo display.
+	"01": ["Remaining ammo in green",		            "#008400", "0 0 2px #004200"],
+	"02": ["% remaining in green", 			            "#008400", "0 0 2px #004200"],
+	"03": ["Inf. ammo in green", 			            "#008400", "0 0 2px #004200"],
+	"05": ["Remaining ammo in red",			            "#840000", "0 0 2px #310000"],
+	"06": ["% remaining in red", 			            "#840000", "0 0 2px #310000"],
+	"07": ["Inf. ammo in red", 				            "#840000", "0 0 2px #310000"],
+	"09": ["Remaining ammo in yellow", 		            "#fff0a3", "0 0 2px #b4b194"],
+	"0a": ["%. remaining in yellow",		            "#fff0a3", "0 0 2px #b4b194"],
+	"0b": ["Inf. ammo in yellow", 			            "#fff0a3", "0 0 2px #b4b194"],
+	"0d": ["Remaining ammo in blue", 		            "#9393ff", "0 0 2px #004242"],
+	"0e": ["% remaining in blue", 			            "#9393ff", "0 0 2px #004242"],
+	"0f": ["Inf. ammo in blue", 	 		   			"#9393ff", "0 0 2px #004242"],
+	"13": ["Attr. used by M4A1 Assault Rifle (Manual)", "#008400", "0 0 2px #004200"],
+	"16": ["Attr. used by M4A1 Assault Rifle",   		"#840000", "0 0 2px #310000"],
+	"17": ["Attr. used by M4A1 Assault Rifle (Auto)", 	"#840000", "0 0 2px #310000"]  // Atributo encontrado na shotgun do Carlos?
 }
 // Segunda variavel
 var VOID = {

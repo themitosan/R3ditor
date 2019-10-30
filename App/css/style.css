@@ -1537,6 +1537,7 @@ input[type="range" i]{
     padding-left: 14px;
     padding-right: 14px;
     padding-bottom: 4px;
+    cursor: unset !important;
     background-color: #454545;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
@@ -1795,6 +1796,7 @@ input[type="range" i]{
     padding-left: 14px;
     padding-right: 14px;
     padding-bottom: 4px;
+    cursor: unset !important;
     background-color: #454545;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;

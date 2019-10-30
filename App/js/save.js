@@ -875,7 +875,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		quanti = parseInt("0x" + quantHex);
 	}
 	// Caso seja ammo infinita
-	if (atrib === '03' || atrib === '07' || atrib === '0f' || atrib === '17'){
+	if (atrib === '03' || atrib === '07' || atrib === '0f' || atrib === '13' || atrib === '17'){
 		quanti = 'Inf.';
 	}
 	// Pixels
