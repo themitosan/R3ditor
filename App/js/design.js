@@ -1151,8 +1151,8 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-LK').innerHTML     = RDT_EDIT_ITEM;
 	document.getElementById("RDT_door-edit-LK").value 	      = hex.slice(RANGES["RDT_door-0-doorKey"][0], 		  RANGES["RDT_door-0-doorKey"][1]);
 	document.getElementById("RDT_door-edit-X").value  	      = hex.slice(RANGES["RDT_door-0-doorXpos"][0],		  RANGES["RDT_door-0-doorXpos"][1]).toUpperCase();
-	document.getElementById("RDT_door-edit-Y").value  	      = hex.slice(RANGES["RDT_door-0-doorYpos"][0],		  RANGES["RDT_door-0-doorYpos"][1]).toUpperCase();
-	document.getElementById("RDT_door-edit-Z").value  	      = hex.slice(RANGES["RDT_door-0-doorZpos"][0],		  RANGES["RDT_door-0-doorZpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-Y").value  	      = hex.slice(RANGES["RDT_door-0-doorZpos"][0],		  RANGES["RDT_door-0-doorZpos"][1]).toUpperCase();
+	document.getElementById("RDT_door-edit-Z").value  	      = hex.slice(RANGES["RDT_door-0-doorYpos"][0],		  RANGES["RDT_door-0-doorYpos"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-R").value  	      = hex.slice(RANGES["RDT_door-0-doorRpos"][0],		  RANGES["RDT_door-0-doorRpos"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-DT").value 	      = hex.slice(RANGES["RDT_door-0-doorType"][0],		  RANGES["RDT_door-0-doorType"][1]).toUpperCase();
 	document.getElementById("RDT_door-edit-NX").value 	      = hex.slice(RANGES["RDT_door-0-doorNextXpos"][0],   RANGES["RDT_door-0-doorNextXpos"][1]).toUpperCase();

@@ -3,6 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Já chegou o disco voadoooor!
 */
+
 // Copy-Paste Door
 var RDT_CURRENT_X = '';
 var RDT_CURRENT_Y = '';
@@ -732,9 +733,9 @@ function RDT_getDoorsArray(str){
 }
 function RDT_decompileDoors(index, location){
 	if (location !== undefined && location !== null){
-		var reason = "";
+		var reason = '';
 		var canAdd = true;
-		var itemTitle = "";
+		var itemTitle = '';
 		var loc = parseInt(location);
 		var DOOR_RAW 	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
 		var dr_header 	   = DOOR_RAW.slice(RANGES["RDT_door-0-header"][0], 		    RANGES["RDT_door-0-header"][1]);
@@ -767,7 +768,7 @@ function RDT_decompileDoors(index, location){
 		if (canAdd === true){
 			localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
 			if (parseInt(dr_key, 16) < 134){
-				if (dr_key === "00"){
+				if (dr_key === '00'){
 					itemTitle = "Door unlocked!";
 				} else {
 					itemTitle = ITEM[dr_key][0];
@@ -790,10 +791,10 @@ function RDT_decompileDoors(index, location){
 				'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 				'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
 				'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-				'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + " " + dr_id.toUpperCase() + " " + dr_ident.toUpperCase() + " " + dr_xPos.toUpperCase() + " " + dr_yPos.toUpperCase() + 
-				" " + dr_zPos.toUpperCase() + " " + dr_rPos.toUpperCase() + " " + dr_nXpos.toUpperCase() + " " + dr_nYpos.toUpperCase() + " " + dr_nZpos.toUpperCase() + " " + dr_nRpos.toUpperCase() + " " + dr_nStage.toUpperCase() + " " + 
-				dr_nRoomNumber.toUpperCase() + " " + dr_nCamPos.toUpperCase() + " " + dr_offset0.toUpperCase() + " " + dr_type.toUpperCase() + " " + dr_openOrient.toUpperCase() + " " + dr_offset1.toUpperCase() + " " + dr_lockFlag.toUpperCase() + " " + 
-				dr_key.toUpperCase() + " " + dr_offset2.toUpperCase() + '</font></div>';
+				'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + ' ' + dr_id.toUpperCase() + ' ' + dr_ident.toUpperCase() + ' ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
+				" " + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
+				dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_type.toUpperCase() + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' ' + dr_lockFlag.toUpperCase() + ' ' + 
+				dr_key.toUpperCase() + ' ' + dr_offset2.toUpperCase() + '</font></div>';
 			$("#RDT_door_holder").append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
 		} else {

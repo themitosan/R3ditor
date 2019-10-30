@@ -12,12 +12,12 @@ var MSG_useSlice = false;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_useClimaxFix = false;
-var MSG_DECRYPT_LV1_LAST = "";
+var MSG_DECRYPT_LV1_LAST = '';
 var MSG_useSeekCameras = false;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
 function MSG_goBackToRDT(){
-	document.title = APP_NAME + " - Please wait...";
+	document.title = APP_NAME + ' - Please wait...';
 	localStorage.clear();
 	sessionStorage.clear();
 	MSG_LENGTH = 0;
@@ -27,7 +27,7 @@ function MSG_goBackToRDT(){
 	MSG_totalComandos = 0;
 	MSG_Commands = undefined;
 	MSG_FILL_PASS = undefined;
-	MSG_DECRYPT_LV1_LAST = "";
+	MSG_DECRYPT_LV1_LAST = '';
 	MSG_useSeekCameras = false;
 	MSG_arquivoBruto = undefined;
 	MSG_CURRENT_RDT_MESSAGE_END = 0;
@@ -39,7 +39,7 @@ function MSG_goBackToRDT(){
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	MSG_LENGTH = 0;
 	MSG_Commands = [];
-	MSG_FILL_PASS = "";
+	MSG_FILL_PASS = '';
 	RE3_LIVE_closeForm();
 	localStorage.clear();
 	MSG_increment = true;
@@ -49,24 +49,24 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	ORIGINAL_FILENAME = msgFile;
 	addLog("log", "MSG - Loading MSG File: " + msgFile);
 	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
-	$("#MSG_openInHex").css({"display": "inline"});
+	$("#MSG_openInHex").css({'display': 'inline'});
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 	MSG_hideTranslateInput();
 	scrollLog();
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	var c = 0; // The great c = 0!
-	MSG_DECRYPT_LV1_LAST = "";
-	$("#RDT-aba-menu-2").css({"display": "inline"});
+	MSG_DECRYPT_LV1_LAST = '';
+	$("#RDT-aba-menu-2").css({'display': 'inline'});
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	var formatHex = RAW_DATA.match(/.{2,2}/g);
 	try{
 		while(c < formatHex.length){
-			MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + " ";
+			MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + ' ';
 			c++; 
 		}
 	} catch(err){
-		$("#RDT-aba-menu-2").css({"display": "none"});
+		$("#RDT-aba-menu-2").css({'display': 'none'});
 		addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
 		addLog('error', err);
 		console.error(err);
@@ -82,9 +82,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	}
 	var COMMAND;
 	var cAtual = 0;
-	var final = "";
+	var final = '';
 	var startPoint = 0;
-	var textoTraduzido = "";
+	var textoTraduzido = '';
 	while (startPoint < t){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
@@ -94,8 +94,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				cAtual++;
 			}
 			// Show Item Name
-			if (RAW_DATA_ARRAY[startPoint] === "f8"){
-				console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1] + " (F8 " + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ")");
+			if (RAW_DATA_ARRAY[startPoint] === 'f8'){
+				//console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1] + " (F8 " + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ")");
 				var checkItem = parseInt(RAW_DATA_ARRAY[startPoint + 1], 16);
 				if (checkItem < 134){
 					COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
@@ -105,43 +105,43 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 					break;
 				}
 			} else {
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + RAW_DATA_ARRAY[startPoint + 1] + ")";
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + RAW_DATA_ARRAY[startPoint + 1] + ')';
 			}
 			// End message - fix for climax
-			if (RAW_DATA_ARRAY[startPoint] === "fe" && MSG_useClimaxFix === true){
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].slice(0, MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].length - 1) + ")";
+			if (RAW_DATA_ARRAY[startPoint] === 'fe' && MSG_useClimaxFix === true){
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].slice(0, MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].length - 1) + ')';
 				MSG_useClimaxFix = false;
 				startPoint--;
 			}
 			// Special char
-			if (RAW_DATA_ARRAY[startPoint] === "ea"){
+			if (RAW_DATA_ARRAY[startPoint] === 'ea'){
 				COMMAND = MSG_CHARESPECIAL[RAW_DATA_ARRAY[startPoint] + RAW_DATA_ARRAY[startPoint + 1]];
 			}
 			// Text Color
-			if (RAW_DATA_ARRAY[startPoint] === "f9"){
-				if (RAW_DATA_ARRAY[startPoint + 1] === "00"){
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ")";
+			if (RAW_DATA_ARRAY[startPoint] === 'f9'){
+				if (RAW_DATA_ARRAY[startPoint + 1] === '00'){
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ')';
 				} else {
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ")";
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ')';
 				}
 			}
-			if (RAW_DATA_ARRAY[startPoint] === "f3" || RAW_DATA_ARRAY[startPoint] === "f5"){
-				COMMAND = "";
+			if (RAW_DATA_ARRAY[startPoint] === 'f3' || RAW_DATA_ARRAY[startPoint] === 'f5'){
+				COMMAND = '';
 			}
-			final = final + " " + COMMAND;
+			final = final + ' ' + COMMAND;
 			startPoint = startPoint + 2;
 			cAtual++;
 		} else {
-			if (RAW_DATA_ARRAY[startPoint] === "a0"){
+			if (RAW_DATA_ARRAY[startPoint] === 'a0'){
 				MSG_useClimaxFix = true;
 			}
 			textoTraduzido = textoTraduzido + MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1];
 			startPoint++;
 		}
 	}
-	if (textoTraduzido !== ""){
-		final = final + " " + textoTraduzido.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)");
-		textoTraduzido = "";
+	if (textoTraduzido !== ''){
+		final = final + ' ' + textoTraduzido.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)");
+		textoTraduzido = '';
 		cAtual++;
 	}
 	return final.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)").replace(new RegExp("<code><</code>", 'gi'), "(").replace(new RegExp("<code>></code>", 'gi'), ")");
@@ -149,31 +149,31 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	MSG_Commands = [];
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
-	document.getElementById("msg-lista-eventos").innerHTML = "";
-	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length + " (Hex: " + parseHex(RAW_DATA.length).toUpperCase() + ")";
+	document.getElementById("msg-lista-eventos").innerHTML = '';
+	document.getElementById("lbl-msg-length").innerHTML = RAW_DATA.length + " (Hex: " + parseHex(RAW_DATA.length).toUpperCase() + ')';
 	var t;
 	if (RAW_DATA_ARRAY !== null){
 		t = RAW_DATA_ARRAY.length;
 	} else {
 		t = 0;
 	}
-	var finalArray = "";
+	var finalArray = '';
 	var c = 0;
 	while(c < t){
-		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
+		finalArray = finalArray + RAW_DATA_ARRAY[c] + ' ';
 		c++;
 	}
 	var COMMAND;
 	var cAtual = 0;
 	var COMMAND_HEX;
 	var COMMAND_ATTR;
-	var textoHex = "";
+	var textoHex = '';
 	var startPoint = 0;
-	var textoTraduzido = "";
+	var textoTraduzido = '';
 	while (startPoint < t){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
-			if (textoTraduzido !== ""){
+			if (textoTraduzido !== ''){
 				localStorage.setItem("MSG_comando-" + cAtual, textoHex);
 				localStorage.setItem("MSG_Mensagem-" + cAtual, textoTraduzido.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)"));
 				MSG_Commands.push([3, textoHex]);
@@ -189,7 +189,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 			startPoint = startPoint + 2;
 			cAtual++;
 		} else {
-			if (RAW_DATA_ARRAY[startPoint] === "a0"){
+			if (RAW_DATA_ARRAY[startPoint] === 'a0'){
 				MSG_useClimaxFix = true;
 			}
 			textoHex = textoHex + RAW_DATA_ARRAY[startPoint];
@@ -197,7 +197,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 			startPoint++;
 		}
 	}
-	if (textoTraduzido !== ""){
+	if (textoTraduzido !== ''){
 		localStorage.setItem("MSG_comando-" + cAtual, textoHex);
 		localStorage.setItem("MSG_Mensagem-" + cAtual, textoTraduzido.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)"));
 		MSG_Commands.push([3, textoHex]);
@@ -276,7 +276,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	if (com === 9){
 		var cor;
 		var argsFilter;
-		if (args === "00"){
+		if (args === '00'){
 			cor = MSG_TEXTCOLOR[args];
 			argsFilter = args;
 		} else {
@@ -304,19 +304,19 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 }
 function MSG_checkHexLength(){
 	var c = 0;
-	$("#msg-addcomand-confirm").css({"display": "inline"});
+	$("#msg-addcomand-confirm").css({'display': 'inline'});
 	document.getElementById('MSG_lbl_hexLength').innerHTML = parseInt(document.getElementById('msg-insertHexManual').value.length / 2);
 	var hex = document.getElementById('msg-insertHexManual').value;
 	if (hex !== ""){
 		var check = hex.match(/.{1,2}/g);
 		while(c < check.length){
 			if (check[c].length < 2){
-				$("#msg-addcomand-confirm").css({"display": "none"});
+				$("#msg-addcomand-confirm").css({'display': 'none'});
 			}
 			c++;
 		}
 	} else {
-		$("#msg-addcomand-confirm").css({"display": "none"});
+		$("#msg-addcomand-confirm").css({'display': 'none'});
 	}
 }
 function MSG_renderCommands(){
@@ -341,11 +341,11 @@ function MSG_translateHexValues(){
 	MSG_increment = true;
 	MSG_totalComandos = 0;
 	MSG_renderDialog(0);
-	document.getElementById("msg-lista-eventos").innerHTML = "";
+	document.getElementById("msg-lista-eventos").innerHTML = '';
 	document.title = APP_NAME + " - Message Editor / Translator";
 	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	var hValues = document.getElementById('msg-hex-toTrans').value;
-	if (hValues !== ""){
+	if (hValues !== ''){
 		var solved = solveHEX(hValues);
 		if (BETA === true){
 			console.log(solved);
@@ -359,7 +359,7 @@ function MSG_seekCameras(){
 	if (RDT_arquivoBruto !== undefined && enable_mod === true && fs.existsSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\") === true){
 		var c = 0; // Here we go!
 		MSG_useSeekCameras = true;
-		$("#msg-cam-id").css({"display": "none"});
+		$("#msg-cam-id").css({'display': 'none'});
 		var listCameras = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(ORIGINAL_FILENAME).toUpperCase()));
 		while(c < listCameras.length){
 			if (listCameras[c].indexOf(".SLD") !== -1 || listCameras[c].length !== 10){
@@ -373,8 +373,8 @@ function MSG_seekCameras(){
 			$("#msg-selectCam-id").append('<option value="' + camId + '">Camera ' + camId.toUpperCase() + '</option>');
 			c++;
 		}
-		$("#MSG_camPreview").css({"display": "inline"});
-		$("#msg-selectCam-id").css({"display": "inline"});
+		$("#MSG_camPreview").css({'display': 'inline'});
+		$("#msg-selectCam-id").css({'display': 'inline'});
 		$("#dialog-msg-addcomand").css({"top": "54px", "height": "382px"});
 		MSG_renderCamPreview();
 	}
@@ -386,19 +386,19 @@ function MSG_COMMAND_STARTMSG(index, isModify){
 	}
 	MSG_increment = false;
 	var txtSpeed = document.getElementById('msg-comeco-id').value;
-	if (txtSpeed === ""){
-		txtSpeed = "02";
+	if (txtSpeed === ''){
+		txtSpeed = '02';
 	}
 	if (parseInt(txtSpeed) < 0){
-		txtSpeed = "00";
+		txtSpeed = '00';
 	}
 	if (parseInt(txtSpeed) > 10){
-		txtSpeed = "10";
+		txtSpeed = '10';
 	}
 	if (txtSpeed.length < 2){
-		txtSpeed = "0" + txtSpeed;
+		txtSpeed = '0' + txtSpeed;
 	}
-	localStorage.setItem("MSG_comando-" + index, "fa" + txtSpeed);
+	localStorage.setItem("MSG_comando-" + index, 'fa' + txtSpeed);
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
@@ -411,15 +411,15 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-fim-id').value;
 	if (attrFinal !== "*#"){
-		if (attrFinal === "" || attrFinal.length > 2){
-			attrFinal = "00";
+		if (attrFinal === '' || attrFinal.length > 2){
+			attrFinal = '00';
 		}
 		if (attrFinal.length < 2){
-			attrFinal = "0" + attrFinal;
+			attrFinal = '0' + attrFinal;
 		}
-		localStorage.setItem("MSG_comando-" + index, "fe" + attrFinal);
+		localStorage.setItem("MSG_comando-" + index, 'fe' + attrFinal);
 	} else {
-		localStorage.setItem("MSG_comando-" + index, "fe  ");
+		localStorage.setItem("MSG_comando-" + index, 'fe  ');
 	}
 	if (isModify === false){
 		MSG_totalComandos++;
@@ -432,7 +432,7 @@ function MSG_COMMAND_SHOWITEMNAME(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-lblitem-id').value;
-	localStorage.setItem("MSG_comando-" + index, "f8" + attrFinal);
+	localStorage.setItem("MSG_comando-" + index, 'f8' + attrFinal);
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
@@ -444,19 +444,19 @@ function MSG_COMMAND_EXECSE(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-execse-id').value;
-	if (attrFinal === ""){
-		attrFinal = "00";
+	if (attrFinal === ''){
+		attrFinal = '00';
 	}
 	if (parseInt(attrFinal, 16) < 0){
-		attrFinal = "01";
+		attrFinal = '01';
 	}
 	if (parseInt(attrFinal, 16) > 255){
-		attrFinal = "ff";
+		attrFinal = 'ff';
 	}
 	if (attrFinal.length < 2){
-		attrFinal = "0" + attrFinal;
+		attrFinal = '0' + attrFinal;
 	}
-	localStorage.setItem("MSG_comando-" + index, "f3" + attrFinal);
+	localStorage.setItem("MSG_comando-" + index, 'f3' + attrFinal);
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
@@ -485,19 +485,19 @@ function MSG_COMMAND_SHOWCAMERA(index, isModify){
 	} else {
 		attrFinal = document.getElementById('msg-cam-id').value;
 	}
-	if (attrFinal === ""){
-		attrFinal = "00";
+	if (attrFinal === ''){
+		attrFinal = '00';
 	}
 	if (parseInt(attrFinal, 16) < 0){
-		attrFinal = "01";
+		attrFinal = '01';
 	}
 	if (parseInt(attrFinal, 16) > 255){
-		attrFinal = "ff";
+		attrFinal = 'ff';
 	}
 	if (attrFinal.length < 2){
-		attrFinal = "0" + attrFinal;
+		attrFinal = '0' + attrFinal;
 	}
-	localStorage.setItem("MSG_comando-" + index, "f4" + attrFinal);
+	localStorage.setItem("MSG_comando-" + index, 'f4' + attrFinal);
 	if (isModify === false){
 		MSG_totalComandos++;
 	}
@@ -518,7 +518,7 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 		} else {
 			t = 0;
 		}
-		var txtFinal = "";
+		var txtFinal = '';
 		var startPoint = 0;
 		while (startPoint < t){
 			txtFinal = txtFinal + MSG_DICIONARIO_REVERSO[RAW_DATA_ARRAY[startPoint]];
@@ -542,14 +542,14 @@ function MSG_COMMAND_F5(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-f5-id').value;
-	if (attrFinal === ""){
-		attrFinal = "00";
+	if (attrFinal === ''){
+		attrFinal = '00';
 	}
 	if (parseInt(attrFinal, 16) < 0){
-		attrFinal = "01";
+		attrFinal = '01';
 	}
 	if (parseInt(attrFinal, 16) > 255){
-		attrFinal = "ff";
+		attrFinal = 'ff';
 	}
 	if (attrFinal.length < 2){
 		attrFinal = "0" + attrFinal;
@@ -566,7 +566,7 @@ function MSG_COMMAND_TEXTCOLOR(index, isModify){
 		isModify = false;
 	}
 	MSG_increment = false;
-	var newCommand = "f9";
+	var newCommand = 'f9';
 	var attrFinal = document.getElementById('msg-selectColor-id').value;
 	if (attrFinal.length < 2){
 		newCommand = "f90";
@@ -584,11 +584,11 @@ function MSG_COMMAND_SELECTOPTION(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-selectOption-id').value;
-	if (attrFinal === ""){
-		attrFinal = "00";
+	if (attrFinal === ''){
+		attrFinal = '00';
 	}
 	if (attrFinal.length < 2){
-		attrFinal = "0" + attrFinal;
+		attrFinal = '0' + attrFinal;
 	}
 	localStorage.setItem("MSG_comando-" + index, "70" + attrFinal);
 	if (isModify === false){
@@ -612,7 +612,7 @@ function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
 		MSG_applyMSGCommand(0);
 		MSG_renderDialog(0);
 	} else {
-		alert("ERROR: The textbox is empty!");
+		alert("WARN: The textbox is empty!");
 		addLog('warn', 'WARNING - The textbox is empty!');
 		scrollLog();
 	}
@@ -622,7 +622,7 @@ function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
 function MSG_renderPreviewBlock(c_msg_hex){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 1;
-		var msgs = "";
+		var msgs = '';
 		var t = parseInt(RDT_totalMessages + 1);
 		while(c < t){
 			if (c === MSG_ID){
@@ -715,9 +715,9 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 function MSG_applyMSGCommand(mode){
 	var u;
 	var c = 0;
-	var newHex = "";
+	var newHex = '';
 	var POINTER_HOLD;
-	var finalArray = "";
+	var finalArray = '';
 	document.getElementById("msg-lbl-totalCommands").innerHTML = MSG_totalComandos;
 	while(c !== MSG_totalComandos + 1){
 		if (localStorage.getItem("MSG_comando-" + c) === null){
@@ -735,7 +735,7 @@ function MSG_applyMSGCommand(mode){
 	}
 	c = 0;
 	while(c < u){
-		finalArray = finalArray + RAW_DATA_ARRAY[c] + " ";
+		finalArray = finalArray + RAW_DATA_ARRAY[c] + ' ';
 		c++;
 	}
 	MSG_LENGTH = newHex.length;
@@ -766,7 +766,7 @@ function MSG_applyMSGCommand(mode){
 		MSG_goBackToRDT();
 	} else {
 		MSG_Commands = [];
-		MSG_FILL_PASS = "";
+		MSG_FILL_PASS = '';
 		localStorage.clear();
 		if (POINTER_HOLD !== undefined){
 			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);

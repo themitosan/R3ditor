@@ -207,6 +207,9 @@ function RE3_LIVE_closeForm(){
 function RE3_LIVE_openForm(){
 	if (RE3_RUNNING === true){
 		main_closeFileList();
+		if (main_currentMenu === 3){
+			RDT_editItemCancel();
+		}
 		MEM_JS_canRender = true;
 		if (main_currentMenu === undefined){
 			$("#menu-topo").css({'top': '8px'});
