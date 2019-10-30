@@ -923,8 +923,8 @@ function RDT_DOOR_APPLY(index){
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 		$("#RDT-aba-menu-6").trigger('click');
 	} else {
-		alert("WARNING: " + reason);
-		addLog('warn', "WARN - " + reason);
+		alert('WARNING: ' + reason);
+		addLog('warn', 'WARN - ' + reason);
 	}
 	scrollLog();
 }
@@ -932,7 +932,7 @@ function RDT_DOOR_APPLY(index){
 function RDT_getAllRelatedAudios(){
 	var c = 0;
 	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
-	var getAudioArray = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\").filter(fn => fn.startsWith("M" + MAPID));
+	var getAudioArray = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\").filter(fn => fn.startsWith('M' + MAPID));
 	while(c < getAudioArray.length){
 		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">' +
 			'(' + parseInt(c + 1) + ') File Name: <font class="italic RDT-item-lbl-fix user-can-select">' + getAudioArray[c] + '</font>' + 
@@ -980,16 +980,16 @@ function RDT_readItens(){
 	RDT_ItensArray = [];
 	RDT_totalItensGeral = 0;
 	$("#RDT-item-list").empty();
-	RDT_generateItemIndexRaw("02310900");
-	RDT_generateItemIndexRaw("02318000");
-	RDT_generateItemIndexRaw("02310800");
-	RDT_generateItemIndexRaw("02310000"); // Padrão encontrado em (quase) todos os itens
-	RDT_generateItemIndexRaw("02310500");
-	RDT_generateItemIndexRaw("02310100");
-	RDT_generateItemIndexRaw("02310200");
-	RDT_generateItemIndexRaw("02310300");
-	RDT_generateItemIndexRaw("02310400");
-	RDT_generateItemIndexRaw("02310a00"); // R503.RDT - Fábrica
+	RDT_generateItemIndexRaw('02310900');
+	RDT_generateItemIndexRaw('02318000');
+	RDT_generateItemIndexRaw('02310800');
+	RDT_generateItemIndexRaw('02310000'); // Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw('02310500');
+	RDT_generateItemIndexRaw('02310100');
+	RDT_generateItemIndexRaw('02310200');
+	RDT_generateItemIndexRaw('02310300');
+	RDT_generateItemIndexRaw('02310400');
+	RDT_generateItemIndexRaw('02310a00'); // R503.RDT - Fábrica
 	RDT_totalItensGeral = RDT_ItensArray.length;
 	c = 0;
 	while (c < RDT_totalItensGeral){
@@ -1022,7 +1022,7 @@ function RDT_decompileItens(id, edit){
 	var currentItem   = localStorage.getItem("RDT_Item-" + id);
 	var header		  = currentItem.slice(RANGES["RDT_item-header"][0], 	   RANGES["RDT_item-header"][1]);
 	//console.log("Header: " + header + "\nHex: " + itemID + "\nHex Completa:\n" + currentItem);
-	if (header === "90" || header === "51" || header === "02" || header === "c0"){
+	if (header === '90' || header === '51' || header === '02' || header === 'c0'){
 		RDT_totalItensGeral--;
 		RDT_CanRender = false;
 		RDT_ItensArray.splice(id, 1);
@@ -1179,19 +1179,19 @@ function RDT_ITEM_APPLY(index, type, convert){
 	var novaAnim = document.getElementById('RDT_item-edit-A').value.slice(0, 2).toLowerCase();
 	var mID = document.getElementById('RDT_item-edit-MI').value.slice(0, 2).toLowerCase();
 	var iF = document.getElementById('RDT_item-edit-IF').value.slice(0, 2).toLowerCase();
-	if (novaX === ""){
+	if (novaX === ''){
 		novaX = "0000";
 	}
-	if (novaY === ""){
+	if (novaY === ''){
 		novaY = "0000";
 	}
-	if (novaZ === ""){
+	if (novaZ === ''){
 		novaZ = "0000";
 	}
-	if (novaR === ""){
+	if (novaR === ''){
 		novaR = "0000";
 	}
-	if (novaAnim === ""){
+	if (novaAnim === ''){
 		novaAnim = "00";
 	}
 	if (novaX.length !== 4){
@@ -1528,13 +1528,13 @@ function RDT_readMessages(){
 			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
 			RDT_totalMessages++;
 		} else {
-			var msg = "Something went wrong in message analysis - Message: " + c + " - Reason: ";
-			if (RDT_canAdd_lvl === 1){
-				//console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-			}
-			if (RDT_canAdd_lvl === 2){
-				//console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-			}
+			//var msg = "Something went wrong in message analysis - Message: " + c + " - Reason: ";
+			//if (RDT_canAdd_lvl === 1){
+			//	//console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+			//}
+			//if (RDT_canAdd_lvl === 2){
+			//	//console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
+			//}
 		}
 		c++;
 	}
@@ -1602,7 +1602,7 @@ function RDT_findPointers(){
 		}
 		if (startFirstMessage === undefined){
 			var askPrompt = prompt("File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"");
-			if (askPrompt !== "" && askPrompt !== null && RDT_arquivoBruto.indexOf(solveHEX(askPrompt)) !== -1){
+			if (askPrompt !== '' && askPrompt !== null && RDT_arquivoBruto.indexOf(solveHEX(askPrompt)) !== -1){
 				startFirstMessage = RDT_arquivoBruto.indexOf(solveHEX(askPrompt));
 			} else {
 				RDT_findPointers();
@@ -1734,7 +1734,7 @@ function RDT_MSG_pointerTest(fPointer){
 function RDT_makeRDTConfigFile(){
 	var c = 0;
 	var fatorMinus = 0;
-	var foundMessages = "";
+	var foundMessages = '';
 	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n";
 	console.log(RDT_FILEMAP_MSG);
 	while(c < RDT_FILEMAP_MSG.length){
@@ -1747,11 +1747,11 @@ function RDT_makeRDTConfigFile(){
 		}
 		c++;
 	}
-	var PONTEIRO = "";
-	foundMessages = "";
+	var PONTEIRO = '';
+	foundMessages = '';
 	var totalMessages = 0;
 	RDT_requestReload = true;
-	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (RDT_FILEMAP_MSG.length !== 0){
 		if (RDT_requestReloadWithFix0 === true){
 			var CASE1 = RDT_arquivoBruto.indexOf("fa00fc");
@@ -1818,9 +1818,9 @@ function RDT_requestFix(fix){
 	RDT_messagesArray = [];
 	RDT_MAPFILE = undefined;
 	RDT_generateMapFile = false;
-	document.getElementById('RDT_MSG-holder').innerHTML = "";
-	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true){
-		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap");
+	document.getElementById('RDT_MSG-holder').innerHTML = '';
+	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap') === true){
+		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap');
 	}
 	if (fix === 0){
 		RDT_requestReloadWithFix0 = true;
@@ -1889,7 +1889,7 @@ function RDT_lookForRDTConfigFile(){
 	RDT_generateMapFile = false;
 	startFirstMessage = undefined;
 	document.title = APP_NAME + " - Please wait...";
-	document.getElementById('RDT_MSG-holder').innerHTML = "";
+	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true && RDT_loop < 4){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap)");
 		RDT_FILEMAP_MSG = [];
@@ -1902,7 +1902,7 @@ function RDT_lookForRDTConfigFile(){
 		var soma = 0;
 		var e_offset;
 		var s_offset;
-		var BLOCK_MSGS = "";
+		var BLOCK_MSGS = '';
 		var firstEndOffset = 5;
 		var firstStartOffset = 6;
 		var pointerSplit = "Undefined";
@@ -1916,11 +1916,11 @@ function RDT_lookForRDTConfigFile(){
 				c++;
 			}
 			c = 0;
-			pointerSplit = "";
-			var pointerCompiled = "";
+			pointerSplit = '';
+			var pointerCompiled = '';
 			while (c < RDT_MSG_POINTERS.length){
 				pointerCompiled = pointerCompiled + RDT_MSG_POINTERS[c];
-				pointerSplit = pointerSplit + RDT_MSG_POINTERS[c].toUpperCase() + " ";
+				pointerSplit = pointerSplit + RDT_MSG_POINTERS[c].toUpperCase() + ' ';
 				c++;
 			}
 			c = 1;
@@ -2046,8 +2046,8 @@ function RDT_lookForRDTConfigFile(){
 		// Final
 		$("#RDT_msgBlock_health").removeClass('red');
 		$("#RDT_msgBlock_health").removeClass('green');
-		document.getElementById('RDT_msgBlock_infos').innerHTML = "";
-		document.getElementById('RDT_msgBlock_health').innerHTML = "";
+		document.getElementById('RDT_msgBlock_infos').innerHTML = '';
+		document.getElementById('RDT_msgBlock_health').innerHTML = '';
 		if (RDT_requestReload === false){
 			startFirstMessage = undefined;
 			if (RDT_totalMessages !== 0){
@@ -2072,11 +2072,11 @@ function RDT_lookForRDTConfigFile(){
 					var b = parseInt(block_size_hex, 16);
 					var a = parseInt(c_block_size_hex, 16);
 					if (a > b){
-						document.getElementById('RDT_msgBlock_health').innerHTML = "Bad";
+						document.getElementById('RDT_msgBlock_health').innerHTML = 'Bad';
 						$("#RDT_msgBlock_health").addClass('red');
 						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_HIGH;
 					} else {
-						document.getElementById('RDT_msgBlock_health').innerHTML = "Bad";
+						document.getElementById('RDT_msgBlock_health').innerHTML = 'Bad';
 						$("#RDT_msgBlock_health").addClass('red');
 						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_LOW;
 					}
@@ -2085,15 +2085,15 @@ function RDT_lookForRDTConfigFile(){
 					RDT_ERRORMOTIVE = "Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?";
 					RDT_CANCRASH = true;
 				} else {
-					document.getElementById('RDT_msgBlock_health').innerHTML = "Good";
+					document.getElementById('RDT_msgBlock_health').innerHTML = 'Good';
 					$("#RDT_msgBlock_health").addClass('green');
 					document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_PERFECT;
 				}
 			} else {
-				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Undefined";
-				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Undefined";
+				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = 'Undefined';
+				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = 'Undefined';
 			}
-			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap";
+			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap';
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
 			RDT_getMessageCodesArray();
 			RDT_loading = false;
@@ -2126,8 +2126,8 @@ function RDT_lookForRDTConfigFile(){
 			RDT_requestReloadWithFix1 = false;
 			$("#RDT_lbl-msg_c_blockHex").removeClass('red');
 			$("#RDT_lbl-msg_c_blockHex").removeClass('green');
-			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true){
-				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap";
+			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap') === true){
+				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap';
 			} else {
 				RDT_MAPFILE = "The map was not generated due an error";
 			}
@@ -2155,8 +2155,8 @@ function RDT_hideCanvasTab(){
 	var R = document.getElementById('RDT_lbl_point_r_hex').value.toLowerCase();
 	var NOVA_POS = offset1 + X + Y + Z + R + offset2;
 	localStorage.setItem('RDT_Item-' + RDT_selectedPoint, NOVA_POS);
-	document.getElementById('RDT-item-list').innerHTML = "";
-	document.getElementById('RDT_CANVAS_0').innerHTML = "";
+	document.getElementById('RDT-item-list').innerHTML = '';
+	document.getElementById('RDT_CANVAS_0').innerHTML = '';
 	var tItems = RDT_totalItens;
 	RDT_totalItens = 0;
 	while(c < parseInt(tItems + 1)){
@@ -2209,14 +2209,14 @@ function RDT_selectPoint(id){
 		}
 		$("#RDT_ICONCANVAS_" + RDT_selectedPoint).addClass('render-item-select');
 	} else {
-		document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
+		document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 	}
 }
 function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var tipo;
 	var nome;
 	if (parseInt(hex, 16) < 134 || parseInt(hex, 16) > 170){
-		tipo = "Item";
+		tipo = 'Item';
 		nome = "(" + hex + ") " + ITEM[hex][0];
 	}
 	if (parseInt(hex, 16) > 133 && parseInt(hex, 16) < 164){
@@ -2227,17 +2227,17 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 		tipo = "Map";
 		nome = "(" + hex + ") " + RDT_MAPAS[hex][0];
 	}
-	if (x === "" || x === undefined){
+	if (x === '' || x === undefined){
 		x = "0000";
 	}
-	if (y === "" || y === undefined){
-		y = "0000";
+	if (y === '' || y === undefined){
+		y = '0000';
 	}
-	if (z === "" || z === undefined){
-		z = "0000";
+	if (z === '' || z === undefined){
+		z = '0000';
 	}
-	if (r === "" || r === undefined){
-		r = "0000";
+	if (r === '' || r === undefined){
+		r = '0000';
 	}
 	var HTML_ICONCANVAS_TEMPLATE = '<div class="render-item render-item-color-' + type + '" title="Type: ' + tipo + '\nName: ' + nome + 
 		'\n\nOriginal Info:\nX: ' + x.toUpperCase() + ' (' + processBIO3Vars(x) + ')\nY: ' + y.toUpperCase() + ' (' + processBIO3Vars(y) + ')\nZ: ' + z.toUpperCase() + 
@@ -2304,17 +2304,17 @@ function RDT_updateCanvasInfos(mode){
 		if (parseInt(document.getElementById('RDT_lbl_point_r_hex').value, 16) > 65535){
 			document.getElementById('RDT_lbl_point_r_hex').value = "FFFF";
 		}
-		if (document.getElementById('RDT_lbl_point_x_hex').value === "" || document.getElementById('RDT_lbl_point_x_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_x_hex').value = "0000";
+		if (document.getElementById('RDT_lbl_point_x_hex').value === '' || document.getElementById('RDT_lbl_point_x_hex').value.length > 4){
+			document.getElementById('RDT_lbl_point_x_hex').value = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_y_hex').value === "" || document.getElementById('RDT_lbl_point_y_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_y_hex').value = "0000";
+		if (document.getElementById('RDT_lbl_point_y_hex').value === '' || document.getElementById('RDT_lbl_point_y_hex').value.length > 4){
+			document.getElementById('RDT_lbl_point_y_hex').value = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_z_hex').value === "" || document.getElementById('RDT_lbl_point_z_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_z_hex').value = "0000";
+		if (document.getElementById('RDT_lbl_point_z_hex').value === '' || document.getElementById('RDT_lbl_point_z_hex').value.length > 4){
+			document.getElementById('RDT_lbl_point_z_hex').value = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_r_hex').value === "" || document.getElementById('RDT_lbl_point_r_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_r_hex').value = "0000";
+		if (document.getElementById('RDT_lbl_point_r_hex').value === '' || document.getElementById('RDT_lbl_point_r_hex').value.length > 4){
+			document.getElementById('RDT_lbl_point_r_hex').value = '0000';
 		}
 		if (document.getElementById('RDT_lbl_point_x_hex').value.length > 3 && document.getElementById('RDT_lbl_point_x_hex').value.length < 5){
 			RDT_CURRENT_X = document.getElementById('RDT_lbl_point_x_hex').value;
@@ -2456,7 +2456,7 @@ function RDT_restoreLastBackup(){
 			}
 		}
 	} else {
-		$("#RDT_restoreLastBackup").css({"display": "none"});
+		$("#RDT_restoreLastBackup").css({'display': 'none'});
 		addLog('warn', "WARN - Unable to find backup!");
 		scrollLog();
 	}
@@ -2533,7 +2533,7 @@ function RDT_WRITEFILE(flag, HEX){
 	}
 }
 function RDT_doAfterSave(){
-	document.getElementById('RDT_audio_holder').innerHTML = "";
+	document.getElementById('RDT_audio_holder').innerHTML = '';
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;

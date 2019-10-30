@@ -12,14 +12,14 @@ var PROCESS_OBJ;
 var BETA = false;
 var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
-var STATUS = "Undefined";
+var STATUS = 'Undefined';
 var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
-var APP_VERSION = "0.3.1 [BETA]";
+var APP_VERSION = '0.3.1 [BETA]';
 var EXTERNAL_APP_RUNNING = false;
-var APP_NAME = "R3ditor V. " + APP_VERSION;
+var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 window.onload = function(){
 	load();
 }
@@ -27,7 +27,7 @@ function load(){
 	localStorage.clear();
 	sessionStorage.clear();
 	console.info(APP_NAME);
-	addLog("log", APP_NAME);
+	addLog('log', APP_NAME);
 	document.title = APP_NAME;
 	$("#app_version").html(APP_VERSION);
 	log_separador();
@@ -184,7 +184,7 @@ function R3DITOR_RUN_RE3(mode){
 				log_separador();
 			} else {
 				RE3_RUNNING = true;
-				var msg = ' - Running Resident Evil 3...';
+				var msg = 'Running Resident Evil 3...';
 				document.title = APP_NAME + msg;
 				addLog('log', 'INFO - ' + msg);
 				log_separador();
@@ -202,7 +202,7 @@ function R3DITOR_RUN_RE3(mode){
 			if (WZ_showWizard === true){
 				$("#WZ_BTN_2").css({'display': 'inline'});
 			}
-			console.error("ERROR - Something went wrong! - " + err);
+			console.error('ERROR - Something went wrong! - ' + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
