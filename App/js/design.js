@@ -807,7 +807,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Caracter Especial
 	if (id === 4){ 
 		if (args === ''){
-			args = "ea10";
+			args = 'ea10';
 		}
 		$("#dialog-msg-addcomand").css({'top': '200px'});
 		document.getElementById("msg-addcomand-title").innerHTML = 'Show Special Char';
@@ -820,7 +820,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Exibir Nome de Item
 	if (id === 5){ 
-		if (args === ""){
+		if (args === ''){
 			args = "00";
 		}
 		$("#dialog-msg-addcomand").css({'top': '200px'});
@@ -845,8 +845,8 @@ function MSG_renderDialog(id, args, index, isMod){
 	}
 	// Trocar Camera
 	if (id === 7){
-		if (args === ""){
-			args = "00";
+		if (args === ''){
+			args = '00';
 		}
 		$("#dialog-msg-addcomand").css({'top': '200px'});
 		document.getElementById("msg-addcomand-title").innerHTML = 'Change Camera';
@@ -932,7 +932,7 @@ function MSG_renderCamPreview(){
 	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
 		var currentFile = getFileName(ORIGINAL_FILENAME).toUpperCase().slice(0, 4);
 		var currentCam = document.getElementById('msg-selectCam-id').value.toUpperCase();
-		var camImg = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + ".JPG";
+		var camImg = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + currentFile + currentCam + '.JPG';
 		if (fs.existsSync(camImg) === true){
 			document.getElementById('MSG_camPreview').src = camImg;
 			document.getElementById('MSG_camPreview').title = 'Cam: ' + currentCam + '\nFile: ' + currentFile + currentCam + '.JPG';
@@ -1065,8 +1065,8 @@ function RDT_showMenu(id){
 	$("#RDT_menu-" + id).css({'display': 'block'});
 	$("#menu-RDT").css({'display': 'block'});
 	RDT_applyMenuFocus(id);
-	if (getFileName(ORIGINAL_FILENAME) === "r212" || getFileName(ORIGINAL_FILENAME) === "r20b" || getFileName(ORIGINAL_FILENAME) === "r216"){
-		$("#RDT-aba-menu-2").css({"display": "none"});
+	if (getFileName(ORIGINAL_FILENAME) === 'r212' || getFileName(ORIGINAL_FILENAME) === 'r20b' || getFileName(ORIGINAL_FILENAME) === 'r216'){
+		$("#RDT-aba-menu-2").css({'display': 'none'});
 	}
 	RDT_Error_404();
 	scrollLog();
@@ -1225,13 +1225,13 @@ function RDT_renderNextRDTLbl(){
 		}
 		if (enable_mod === true && existsRDT === true){
 			document.getElementById('RDT_door-edit-NC').innerHTML = '';
-			var DOOR_CAMS_ARRAY = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(rComp).toUpperCase()));
+			var DOOR_CAMS_ARRAY = fs.readdirSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\').filter(fn => fn.startsWith(getFileName(rComp).toUpperCase()));
 			if (DOOR_CAMS_ARRAY.length !== 0){
 				while(c < DOOR_CAMS_ARRAY.length){
-					if (DOOR_CAMS_ARRAY[c].indexOf(".SLD") !== -1){
+					if (DOOR_CAMS_ARRAY[c].indexOf('.SLD') !== -1){
 						DOOR_CAMS_ARRAY.splice(c, 1);
 					} else {
-						var camId = DOOR_CAMS_ARRAY[c].slice(rComp.length, DOOR_CAMS_ARRAY[c].length).replace(".JPG", '');
+						var camId = DOOR_CAMS_ARRAY[c].slice(rComp.length, DOOR_CAMS_ARRAY[c].length).replace('.JPG', '');
 						$("#RDT_door-edit-NC").append('<option value="' + camId.toUpperCase() + '">Cam ' + camId.toUpperCase() + '</option>');
 						c++;
 					}
@@ -1249,8 +1249,8 @@ function RDT_renderNextRDTLbl(){
 function RDT_renderEditDoorCamPreview(){
 	var rst = parseInt(parseInt(document.getElementById("RDT_door-edit-NS").value, 16) + 1).toString();
 	var nrn = document.getElementById("RDT_door-edit-NRN").value;
-	var rComp = "R" + rst.toUpperCase() + nrn.toUpperCase();
-	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + ".JPG";
+	var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
+	var camFile = APP_PATH + "\\Assets\\DATA_A\\BSS\\" + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + '.JPG';
 	if (fs.existsSync(camFile) === true){
 		document.getElementById("RDT_door-edit-NC-TXT").value = document.getElementById('RDT_door-edit-NC').value.toString();
 		document.getElementById("RDT_doorCamPreviewImg").src = camFile;
@@ -1269,9 +1269,9 @@ function RDT_cancelDoorCamEdit(){
 }
 function RDT_applyDoorCamSelect(){
 	if (enable_mod === true){
-		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById("RDT_door-edit-NC").value;
+		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC').value;
 	} else {
-		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById("RDT_door-edit-NC-TXT").value;
+		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC-TXT').value;
 	}
 	RDT_doorShowCamPreview(1);
 }
@@ -1390,7 +1390,7 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	//
 	var header  = itemHx.slice(RANGES["RDT_item-header"][0], RANGES["RDT_item-header"][1]);
 	var index   = itemHx.slice(RANGES["RDT_item-itemIdetifier"][0], RANGES["RDT_item-itemIdetifier"][1]);
-	if (header === "67"){
+	if (header === '67'){
 		posX    = itemHx.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
 		posY    = itemHx.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
 		posZ    = itemHx.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
@@ -1401,20 +1401,20 @@ function RDT_displayItemEdit(id, idx, itemHx){
 		modelId = itemHx.slice(RANGES["RDT_item-0-modelID"][0], RANGES["RDT_item-0-modelID"][1]);
 		anim    = itemHx.slice(RANGES["RDT_item-0-itemMP"][0], RANGES["RDT_item-0-itemMP"][1]);
 	}
-	if (header === "68"){
-		posX    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
-		posY    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
-		posZ    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
-		posR    = "[WIP]"; //itemHx.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
+	if (header === '68'){
+		posX    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
+		posY    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
+		posZ    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
+		posR    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
 		hex     = itemHx.slice(RANGES["RDT_item-1-itemID"][0], RANGES["RDT_item-1-itemID"][1]);
 		quant   = parseInt(itemHx.slice(RANGES["RDT_item-1-itemQuant"][0], RANGES["RDT_item-1-itemQuant"][1]), 16);
-		iFlag   = "[WIP]";
-		modelId = "[WIP]";
+		iFlag   = '[WIP]';
+		modelId = '[WIP]';
 		anim    = itemHx.slice(RANGES["RDT_item-1-itemMP"][0], RANGES["RDT_item-1-itemMP"][1]);
 	}
 	//
 	if (hex.length < 2){
-		hex = "0" + hex;
+		hex = '0' + hex;
 	}
 	if (quant > 255){
 		quant = 255;
@@ -1561,12 +1561,14 @@ function RDT_showCanvasTab(){
 	RE3 LIVE STATUS
 */
 function R3ditor_enableLiveStatusButton(){
-	$("#TIMPatcher_LIVESTATUS").css({'display': 'inline'});
-	$("#fileGen_LIVESTATUS").css({'display': 'inline'});
-	$("#main_LIVESTATUS").css({'display': 'inline'});
-	$("#RDT_LIVESTATUS").css({'display': 'inline'});
-	$("#MSG_LIVESTATUS").css({'display': 'inline'});
-	$("#SAV_LIVESTATUS").css({'display': 'inline'});
+	if (MEM_JS_requreSucess === true){
+		$("#TIMPatcher_LIVESTATUS").css({'display': 'inline'});
+		$("#fileGen_LIVESTATUS").css({'display': 'inline'});
+		$("#main_LIVESTATUS").css({'display': 'inline'});
+		$("#RDT_LIVESTATUS").css({'display': 'inline'});
+		$("#MSG_LIVESTATUS").css({'display': 'inline'});
+		$("#SAV_LIVESTATUS").css({'display': 'inline'});
+	}
 }
 function R3ditor_disableLiveStatusButton(){
 	$("#TIMPatcher_LIVESTATUS").css({'display': 'none'});

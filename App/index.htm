@@ -127,8 +127,8 @@
 
 		<!-- FORM: Settings -->
 		<div class="none" id="menu-SETTINGS" onclick="main_closeFileList();">
-			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="General">
-			<input type="button" id="SETTINGS-aba-menu-2" class="aba none" value="[WIP]">
+			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="Settings">
+			<input type="button" id="SETTINGS-aba-menu-2" class="aba none" value="Status [WIP]">
 			<input type="button" id="SETTINGS-aba-menu-3" class="aba none" value="[WIP]">
 			<!-- General -->
 			<div class="menu none" id="SETTINGS_menu_1">
@@ -151,6 +151,17 @@
 						Fast (50) - <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> - Slow (120)</center><br>
 						Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>
 						Fast causes information to be updated in real time, but may decrease overall performance due to <i>JS Heap</i>.
+					</div>
+
+					<!-- Remove Options -->
+					<input type="button" value="Remove Options" class="INI_inernalTab SETTINGS_ABA-4">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-4">
+						<center>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All RDT Backups" onclick="SETTINGS_removeFiles(0);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All SAV Backups" onclick="SETTINGS_removeFiles(1);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All RDT Generated Maps" onclick="SETTINGS_removeFiles(2);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
+						</center>
 					</div>
 
 					<!-- Note -->

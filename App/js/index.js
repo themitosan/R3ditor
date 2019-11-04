@@ -1,7 +1,7 @@
 /*
 	R3ditor - index.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - Por favorzu!
+	Help me - Por favorzu! UwU
 */
 var fs;
 var MEM_JS;
@@ -17,8 +17,8 @@ var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
-var APP_VERSION = '0.3.1 [BETA]';
 var EXTERNAL_APP_RUNNING = false;
+var APP_VERSION = '0.3.1 [BETA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 window.onload = function(){
 	load();
@@ -29,26 +29,26 @@ function load(){
 	console.info(APP_NAME);
 	addLog('log', APP_NAME);
 	document.title = APP_NAME;
-	$("#app_version").html(APP_VERSION);
+	$('#app_version').html(APP_VERSION);
 	log_separador();
 	//
 	request_render_save = false;
 	currentTime();
+	MEMORY_JS_verifyNodeJsVer();
 	try{
 		fs = require('fs');
 		APP_PATH = process.cwd();
-		MEM_JS = require('memoryjs');
 		checkFolders();
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#img-logo").fadeOut({duration: 5600, queue: false});
+			$('#img-logo').fadeOut({duration: 5600, queue: false});
 		} else {
-			$("#img-logo").css({'display': 'none'});
+			$('#img-logo').css({'display': 'none'});
 		}
-		document.title = "Whoops...";
-		addLog('warn', 'WARN - Unable to use "require" or "process"... Wait... This is Chrome or Firefox?');
+		document.title = 'Whoops...';
+		addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
 		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		log_separador();
@@ -63,37 +63,37 @@ function load(){
 	scrollLog();
 }
 function checkFolders(){
-	if (fs.existsSync(APP_PATH + '\\Update') == false){
+	if (fs.existsSync(APP_PATH + '\\Update') === false){
 		fs.mkdirSync(APP_PATH + '\\Update');
 	}
-	if (fs.existsSync(APP_PATH + "\\Backup") == false){
-		fs.mkdirSync(APP_PATH + "\\Backup");
+	if (fs.existsSync(APP_PATH + '\\Backup') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup');
 	}
-	if (fs.existsSync(APP_PATH + '\\Assets') == false){
+	if (fs.existsSync(APP_PATH + '\\Assets') === false){
 		fs.mkdirSync(APP_PATH + '\\Assets');
 	}
-	if (fs.existsSync(APP_PATH + '\\Configs') == false){
+	if (fs.existsSync(APP_PATH + '\\Configs') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs');
 	}
-	if (fs.existsSync(APP_PATH + '\\README.md') == true){
+	if (fs.existsSync(APP_PATH + '\\README.md') === true){
 		fs.unlinkSync(APP_PATH + '\\README.md');
 	};
-	if (fs.existsSync(APP_PATH + '\\Roadmap.md') == true){
+	if (fs.existsSync(APP_PATH + '\\Roadmap.md') === true){
 		fs.unlinkSync(APP_PATH + '\\Roadmap.md');
 	};
-	if (fs.existsSync(APP_PATH + '\\Backup\\SAV') == false){
+	if (fs.existsSync(APP_PATH + '\\Backup\\SAV') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\SAV');
 	}
-	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') == false){
+	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDT');
 	}
-	if (fs.existsSync(APP_PATH + '\\Configs\\RDT') == false){
+	if (fs.existsSync(APP_PATH + '\\Configs\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\RDT');
 	}
-	if (fs.existsSync(APP_PATH + '\\Update\\Extract') == true){
+	if (fs.existsSync(APP_PATH + '\\Update\\Extract') === true){
 		deleteFolderRecursive(APP_PATH + '\\Update\\Extract');
 	}
-	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') == true){
+	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
 		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
 	};
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
@@ -122,7 +122,7 @@ function addLog(type, texto){
 	$("#log-programa").append(logTemplate);
 }
 function clearInternalLog(){
-	document.getElementById("log-programa").innerHTML = '';
+	document.getElementById('log-programa').innerHTML = '';
 	addLog("log", APP_NAME);
 	scrollLog();
 }
@@ -246,7 +246,7 @@ function R3DITOR_COPY(cpText){
 // Verificar por erros
 function checkCanPlay(runArgs, gameId){
 	if (RDT_CANCRASH === true){
-		var ask = confirm("BEWARE: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?");
+		var ask = confirm('BEWARE: The current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?');
 		if (ask === true){
 			if (gameId === '' || gameId === 1 || gameId === undefined){
 				R3DITOR_RUN_RE3(runArgs);

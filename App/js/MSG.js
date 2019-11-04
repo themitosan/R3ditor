@@ -88,9 +88,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	while (startPoint < t){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
-			if (textoTraduzido !== ""){
-				final = final + " " + textoTraduzido.replace("(Yes / No)(Function: Climax)", "*(Function: Climax)");
-				textoTraduzido = "";
+			if (textoTraduzido !== ''){
+				final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)');
+				textoTraduzido = '';
 				cAtual++;
 			}
 			// Show Item Name
@@ -120,9 +120,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			// Text Color
 			if (RAW_DATA_ARRAY[startPoint] === 'f9'){
 				if (RAW_DATA_ARRAY[startPoint + 1] === '00'){
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ')';
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ')';
 				} else {
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + " - Attr: " + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ')';
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ')';
 				}
 			}
 			if (RAW_DATA_ARRAY[startPoint] === 'f3' || RAW_DATA_ARRAY[startPoint] === 'f5'){
@@ -307,7 +307,7 @@ function MSG_checkHexLength(){
 	$("#msg-addcomand-confirm").css({'display': 'inline'});
 	document.getElementById('MSG_lbl_hexLength').innerHTML = parseInt(document.getElementById('msg-insertHexManual').value.length / 2);
 	var hex = document.getElementById('msg-insertHexManual').value;
-	if (hex !== ""){
+	if (hex !== ''){
 		var check = hex.match(/.{1,2}/g);
 		while(c < check.length){
 			if (check[c].length < 2){
@@ -360,9 +360,9 @@ function MSG_seekCameras(){
 		var c = 0; // Here we go!
 		MSG_useSeekCameras = true;
 		$("#msg-cam-id").css({'display': 'none'});
-		var listCameras = fs.readdirSync(APP_PATH + "\\Assets\\DATA_A\\BSS\\").filter(fn => fn.startsWith(getFileName(ORIGINAL_FILENAME).toUpperCase()));
+		var listCameras = fs.readdirSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\').filter(fn => fn.startsWith(getFileName(ORIGINAL_FILENAME).toUpperCase()));
 		while(c < listCameras.length){
-			if (listCameras[c].indexOf(".SLD") !== -1 || listCameras[c].length !== 10){
+			if (listCameras[c].indexOf('.SLD') !== -1 || listCameras[c].length !== 10){
 				listCameras.splice(c, 1);
 			}
 			c++;
@@ -375,7 +375,7 @@ function MSG_seekCameras(){
 		}
 		$("#MSG_camPreview").css({'display': 'inline'});
 		$("#msg-selectCam-id").css({'display': 'inline'});
-		$("#dialog-msg-addcomand").css({"top": "54px", "height": "382px"});
+		$("#dialog-msg-addcomand").css({'top': '54px', 'height': '382px'});
 		MSG_renderCamPreview();
 	}
 }
@@ -410,7 +410,7 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 	}
 	MSG_increment = false;
 	var attrFinal = document.getElementById('msg-fim-id').value;
-	if (attrFinal !== "*#"){
+	if (attrFinal !== '*#'){
 		if (attrFinal === '' || attrFinal.length > 2){
 			attrFinal = '00';
 		}

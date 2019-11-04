@@ -2371,8 +2371,8 @@ function RDT_canvasResetPos(){
 	document.getElementById('RDT_slider_Y').value = 32767;
 	document.getElementById('RDT_slider_D').value = 32767;
 	document.getElementById('RDT_slider_D2').value = 32767;
-	document.getElementById('RDT_lbl_pd').innerHTML = "32767";
-	document.getElementById('RDT_lbl_pd2').innerHTML = "32767";
+	document.getElementById('RDT_lbl_pd').innerHTML = '32767';
+	document.getElementById('RDT_lbl_pd2').innerHTML = '32767';
 	RDT_updateCanvasInfos(0);
 }
 function RDT_transferMessageToMSG(msgId){
@@ -2418,7 +2418,7 @@ function RDT_Backup(){
 	checkFolders();
 	if (RDT_arquivoBruto !== undefined){
 		try{
-			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + "-" + currentTime() + ".rdtbackup";
+			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + "-" + currentTime() + '.rdtbackup';
 			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
 			addLog("log", "INFO - A backup of your RDT file was made successfully! - File: " + backup_name);
@@ -2426,48 +2426,48 @@ function RDT_Backup(){
 			RDT_lastBackup = APP_PATH + "\\Backup\\RDT\\" + backup_name;
 			log_separador();
 			WZ_saveConfigs(true);
-			$("#RDT_restoreLastBackup").css({"display": "inline"});
+			$("#RDT_restoreLastBackup").css({'display': 'inline'});
 		} catch (err){
 			addLog("error", "ERROR - Unable to make backup! - " + err);
 		}
 	} else {
-		addLog("error", "ERROR - You can't make a backup if you haven't opened a map yet!");
+		addLog("error", 'ERROR - You can\'t make a backup if you haven\'t opened a map yet!');
 	}
 }
 function RDT_restoreLastBackup(){
 	main_closeFileList();
-	if (RDT_lastBackup !== "" && fs.existsSync(RDT_lastBackup) === true){
+	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
 		var loc = "Unknown";
-		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf("-")).toUpperCase();
+		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf('-')).toUpperCase();
 		if (RDT_locations[mName] !== undefined && RDT_locations[mName] !== null){
 			loc = RDT_locations[mName][0];
 		}
 		var ask = confirm("Restore Last Backup\n\nMap: " + mName + "\nOriginal Local Name: " + loc + "\nPath: " + RDT_lastBackup + "\n\nDo you want to proceed?");
 		if (ask === true){
 			try{
-				if (fs.existsSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + mName + ".RDT") === true){
-					fs.unlinkSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + mName + ".RDT");
+				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.RDT') === true){
+					fs.unlinkSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.RDT');
 				}
 				RDT_restoreLastBackup_1(mName);
 			} catch (err){
 				console.error(err);
-				addLog('error', "ERROR - Unable to delete RDT!");
+				addLog('error', 'ERROR - Unable to delete RDT!');
 				addLog('error', err);
 			}
 		}
 	} else {
 		$("#RDT_restoreLastBackup").css({'display': 'none'});
-		addLog('warn', "WARN - Unable to find backup!");
+		addLog('warn', 'WARN - Unable to find backup!');
 		scrollLog();
 	}
 }
 function RDT_restoreLastBackup_1(name){
 	try{
 		var BK = fs.readFileSync(RDT_lastBackup, 'hex');
-		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + ".RDT", BK, 'hex');
+		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + '.RDT', BK, 'hex');
 		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
 		if (ORIGINAL_FILENAME !== undefined){
-			RDT_CARREGAR_ARQUIVO(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + ".RDT");
+			RDT_CARREGAR_ARQUIVO(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + '.RDT');
 		}
 	} catch (err){
 		console.error(err);
@@ -2499,7 +2499,7 @@ function RDT_COMPILE_Lv1(){
 			// Generate the final file
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
-			document.getElementById('RDT_CANVAS_0').innerHTML = "";
+			document.getElementById('RDT_CANVAS_0').innerHTML = '';
 			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$("#RDT-aba-menu-3").trigger('click');
@@ -2526,8 +2526,8 @@ function RDT_COMPILE_Lv2(oldHex, newReplacementHex){
 function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
-		addLog("log", "INFO: The file was saved successfully! - File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".rdt");
-		addLog("log", "Folder: " + ORIGINAL_FILENAME);
+		addLog('log', 'INFO: The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
+		addLog('log', 'Folder: ' + ORIGINAL_FILENAME);
 		log_separador();
 		RDT_doAfterSave();
 	}

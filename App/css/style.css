@@ -1977,17 +1977,25 @@ input[type="range" i]{
 .SETTINGS_slider{
     width: 200px !important;
 }
+.SETTINGS_MENUBTNFIX{
+    margin-top: 6px !important;
+    width: 370px;
+}
 .SETTINGS_ABA-1{
     left: 24px;
     top: 56px;
 }
 .SETTINGS_ABA-2{
     left: 24px;
-    top: 148px;
+    top: 302px;
 }
 .SETTINGS_ABA-3{
     left: 424px;
     top: 56px;
+}
+.SETTINGS_ABA-4{
+    left: 24px;
+    top: 146px;
 }
 .SETTINGS_WINDOW-1{
     height: 48px;
@@ -1999,13 +2007,19 @@ input[type="range" i]{
     height: 186px;
     width: 374px;
     left: 14px;
-    top: 170px;
+    top: 324px;
 }
 .SETTINGS_WINDOW-3{
     height: 278px;
     width: 374px;
     left: 408px;
     top: 78px;
+}
+.SETTINGS_WINDOW-4{
+    height: 116px;
+    width: 374px;
+    left: 14px;
+    top: 168px;
 }
 .SETTINGS_FUTURE{
     position: absolute;

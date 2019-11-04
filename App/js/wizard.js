@@ -20,6 +20,11 @@ function WZ_verifyConfigFile(){
 	if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor') === false){
 		WZ_showWizard = true;
 		WZ_showWizardDialog(0);
+		$('#img-logo').css({'display': 'none'});
+		if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
+			addLog('log', 'Removing Assets for inicial setup...');
+			deleteFolderRecursive(APP_PATH + '\\Assets');
+		}
 	} else {
 		WZ_showWizard = false;
 		WZ_loadFiles(APP_PATH + '\\Configs\\configs.r3ditor');
@@ -28,9 +33,8 @@ function WZ_verifyConfigFile(){
 function WZ_showWizardDialog(id){
 	WZ_lastMenu = id;
 	if (WZ_showWizard === true){
-		$("#WZ_dialog").css({"display": "block"});
+		$('#WZ_dialog').css({'display': 'block'});
 		if (id === 0){
-			$("#img-logo").css({'display': 'none'});
 			document.getElementById('WZ_title').innerHTML = 'Welcome to R3ditor!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_0;
 			document.getElementById('WZ_BTN_1').value = 'No';
@@ -185,7 +189,7 @@ function WZ_showWizardDialog(id){
 			document.getElementById('wz_lbl_path_hex').innerHTML = HEX_EDITOR;
 			document.getElementById('WZ_BTN_1').onclick = function(){
 				SHOW_EDITONHEX = false;
-				HEX_EDITOR = "";
+				HEX_EDITOR = '';
 				WZ_showWizardDialog(6);
 			};
 			document.getElementById('WZ_BTN_2').onclick = function(){
@@ -196,8 +200,8 @@ function WZ_showWizardDialog(id){
 	} else {
 		$('#WZ_dialog').css({'display': 'none'});
 		addLog('log', 'WIZARD - Skipping...');
-		scrollLog();
 	}
+	scrollLog();
 }
 // Extract game assets process
 function WZ_STARTFINALPROCESS(){
@@ -210,6 +214,9 @@ function WZ_STARTFINALPROCESS(){
 }
 function WZ_EXTRACT_ROFS(){
 	var current_rofs = 0;
+	if (fs.existsSync(APP_PATH + '\\Assets') === false){
+		fs.mkdirSync(APP_PATH + '\\Assets');
+	}
 	var timer = setInterval(function(){
 		if (current_rofs !== 16){
 			if (EXTERNAL_APP_RUNNING === false && current_rofs < 16){
@@ -303,7 +310,6 @@ function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
 			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS;
-
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -439,7 +445,7 @@ function WZ_loadFiles(file){
 			$("#menu-utility-aba-2").css({'display': 'inline'});
 		}
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + ' (' + process.arch + ')';
-		// Init memory js
+		// Init Memory JS
 		MEMORY_JS_initMemoryJs();
 	}
 	if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
@@ -460,13 +466,92 @@ function WZ_APPEND(){
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 }
-function WZ_APPLY_R3DITOR_SETTINGS(){
-	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
-	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
-	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
-	//
-	WZ_saveConfigs(true);
-	reload();
+/*
+	Settings
+*/
+function SETTINGS_removeFiles(mode){
+	var confirmAction;
+	var totFiles;
+	// RDT Backups
+	if (mode === 0){
+		confirmAction = confirm('WARNING:\n\nThis operation will remove all your RDT Backups!\nYou will not able to restore any older backup before your confirmation.\n\nDo you want to proceed?');
+		if (confirmAction === true){
+			totFiles = fs.readdirSync(APP_PATH + '\\Backup\\RDT');
+			if (totFiles.length > 0){
+				addLog('log', 'INFO - Removing all RDT Backups...');
+				deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
+				var timer = setInterval(function(){
+					if (EXTERNAL_APP_RUNNING === false){
+						clearInterval(timer);
+						reload();
+					}
+				}, 50);
+			} else {
+				addLog('log', 'INFO - There is no backup to remove!');
+			}
+		}
+	}
+	// SAV Backups
+	if (mode === 1){
+		confirmAction = confirm('WARNING:\n\nThis operation will remove all your SAV Backups!\nYou will not able to restore any older backup before your confirmation.\n\nDo you want to proceed?');
+		if (confirmAction === true){
+			totFiles = fs.readdirSync(APP_PATH + '\\Backup\\SAV');
+			if (totFiles.length > 0){
+				addLog('log', 'INFO - Removing all SAV Backups...');
+				deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
+				var timer = setInterval(function(){
+					if (EXTERNAL_APP_RUNNING === false){
+						clearInterval(timer);
+						reload();
+					}
+				}, 50);
+			} else {
+				addLog('log', 'INFO - There is no backup to remove!');
+			}
+		}
+	}
+	// RDT Maps
+	if (mode === 2){
+		confirmAction = confirm('WARNING:\n\nThis operation will remove all your RDT Maps!\nDoing this you will have to generate all RDT Maps again.\n\nDo you want to proceed?');
+		if (confirmAction === true){
+			totFiles = fs.readdirSync(APP_PATH + '\\Configs\\RDT');
+			if (totFiles.length > 0){
+				addLog('log', 'INFO - Removing all RDT Map Files...');
+				deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
+				var timer = setInterval(function(){
+					if (EXTERNAL_APP_RUNNING === false){
+						clearInterval(timer);
+						reload();
+					}
+				}, 50);
+			} else {
+				addLog('log', 'INFO - There is no Map File to remove!');
+			}
+		}
+	}
+	// Reset R3ditor
+	if (mode === 3){
+		confirmAction = confirm('WARNING:\n\nThis operation will remove all your RDT Maps, Backups and your assets!\nAlso, you will need to run the inicial process (Wizard) again.\n\nDo you want to proceed?');
+		if (confirmAction === true){
+			SETTINGS_RESET();
+		}
+	}
+	scrollLog();
+}
+function SETTINGS_RESET(){
+	fs.unlinkSync(APP_PATH + '\\Configs\\configs.r3ditor');
+	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
+	var delInterval = setInterval(function(){
+		var check_1 = fs.existsSync(APP_PATH + '\\Configs\\RDT');
+		var check_2 = fs.existsSync(APP_PATH + '\\Backup\\RDT');
+		var check_3 = fs.existsSync(APP_PATH + '\\Backup\\SAV');
+		if (check_1 === false && check_2 === false && check_3 === false){
+			clearInterval(delInterval);
+			reload();
+		}
+	}, 100);
 }
 function WZ_FORCE_UPDATE(){
 	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be buggy or incomplete.\n\nDo you want to continue anyway?');
@@ -481,4 +566,12 @@ function WZ_FORCE_UPDATE(){
 		$('#menu-topo').css({'display': 'none'});
 		R3DITOR_applyUpdate();
 	}
+}
+function WZ_APPLY_R3DITOR_SETTINGS(){
+	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
+	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
+	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
+	//
+	WZ_saveConfigs(true);
+	reload();
 }

@@ -6,9 +6,9 @@
 	Node escrito por Rob-- (https://github.com/Rob--)
 	Pagina oficial do memoryjs: https://github.com/Rob--/memoryjs
 */
-
 var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;
+var MEM_JS_requreSucess = false;
 
 var REALTIME_X_Pos = '0000';
 var REALTIME_Y_Pos = '0000';
@@ -29,12 +29,23 @@ var PREV_INVENT = '';
 */
 var RE3_LIVE_CURRENTMOD = 1;
 //
+function MEMORY_JS_verifyNodeJsVer(){
+	if (process.versions['node-webkit'] === '0.37.4'){
+		MEM_JS = require('memoryjs');
+		MEM_JS_requreSucess = true;
+	} else {
+		MEM_JS_requreSucess = false;
+		addLog('warn', 'INFO - Your node-webkit version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
+		addLog('warn', 'INFO - You will not able to use RE3 Live Info!');
+	}
+	scrollLog();
+}
 function MEMORY_JS_initMemoryJs(){
 	var c = 0;
 	var PROCESSES = MEM_JS.getProcesses();
 	PROCESS_OBJ = undefined;
 	while(c < PROCESSES.length){
-		if (PROCESSES[c]["szExeFile"] === "ResidentEvil3.exe"){
+		if (PROCESSES[c]['szExeFile'] === 'ResidentEvil3.exe'){
 			var p_info = PROCESSES[c];
 			addLog('log', 'INFO - MemoryJS - Load Process: Done! (PID: ' + p_info['th32ProcessID'] + ')');
 			PROCESS_OBJ = MEM_JS.openProcess(p_info['th32ProcessID']);
@@ -44,12 +55,12 @@ function MEMORY_JS_initMemoryJs(){
 				R3DITOR_RUNGAME(0);
 			}
 			// Some render goes here!
-			document.getElementById('RE3_LIVESTATUS_lbl_processHandle').innerHTML = PROCESS_OBJ["handle"];
-			document.getElementById('RE3_LIVESTATUS_lbl_processID').innerHTML = PROCESS_OBJ["th32ProcessID"];
-			document.getElementById('RE3_LIVESTATUS_lbl_processThreads').innerHTML = PROCESS_OBJ["cntThreads"];
-			document.getElementById('RE3_LIVESTATUS_lbl_parentProcessID').innerHTML = PROCESS_OBJ["th32ParentProcessID"];
+			document.getElementById('RE3_LIVESTATUS_lbl_processHandle').innerHTML = PROCESS_OBJ['handle'];
+			document.getElementById('RE3_LIVESTATUS_lbl_processID').innerHTML = PROCESS_OBJ['th32ProcessID'];
+			document.getElementById('RE3_LIVESTATUS_lbl_processThreads').innerHTML = PROCESS_OBJ['cntThreads'];
+			document.getElementById('RE3_LIVESTATUS_lbl_parentProcessID').innerHTML = PROCESS_OBJ['th32ParentProcessID'];
 			document.getElementById('RE3_LIVESTATUS_closeGameBtn').onclick = function(){
-				killExternalSoftware(PROCESS_OBJ["th32ProcessID"]);
+				killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
 			}
 			R3ditor_enableLiveStatusButton();
 			break;
