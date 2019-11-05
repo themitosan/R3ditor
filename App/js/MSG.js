@@ -753,7 +753,7 @@ function MSG_applyMSGCommand(mode){
 	if (mode === 1){
 		if (MSG_totalComandos !== 0){
 			try{
-				R3DITOR_SAVE('MyMessage.msg', newHex, 'hex');
+				R3DITOR_SAVE('MyMessage.msg', newHex, 'hex', 'msg');
 			} catch(err){
 				addLog("error", "ERROR - Unable to save the MSG File " + ask + " - " + err);
 			}

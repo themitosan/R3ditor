@@ -88,6 +88,7 @@
 		<!-- Menu Saves -->
 		<div class="menu-topo none" id="menu-topo-save">
 			<input type="button" class="botao-menu" value="Open Save" onclick="triggerLoad(4);">
+			<input type="button" class="botao-menu" id="SAV_generateSave" value="Generate SAV" onclick="SAV_GenerateNewSave();">
 			<input type="button" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Direita -->
@@ -139,7 +140,7 @@
 					<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-1">
 						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - Check for updates on Startup / Go Back</font><br>
-						<center><input type="button" class="botao-menu updater_title_holder" onclick="WZ_FORCE_UPDATE();" value="Download the last changes on GitHub"></center>
+						<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" onclick="WZ_FORCE_UPDATE();" value="Download the last changes on GitHub"></center>
 					</div>
 
 					<!-- Performance -->
@@ -1211,6 +1212,9 @@
 		</div>
 		<!-- File Loader and things - the user don't need to see this -->
 		<div class="none">
+			<!-- Save File -->
+			<input type="file" nwsaveas id="r3ditorSaveFile"/>
+			<!-- Loader -->
 			<input type="file" onchange="setLoadFile(1);"  id="loadWAVForm" accept=".wav"/>
 			<input type="file" onchange="setLoadFile(2);"  id="loadWZForm" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(3);"  id="loadWZHexForm" accept=".exe"/>

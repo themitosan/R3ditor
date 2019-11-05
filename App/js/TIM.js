@@ -131,7 +131,7 @@ function TIM_generateMapForPatterns(totalPatches, bpp){
 			c++;
 		}
 		var FINAL = fileHeader + patches;
-		R3DITOR_SAVE(getFileName(TIM_ORIGINAL_FILENAME).toUpperCase() + ".r3timmap", FINAL, 'utf-8');
+		R3DITOR_SAVE(getFileName(TIM_ORIGINAL_FILENAME).toUpperCase() + '.r3timmap', FINAL, 'utf-8', '.r3timmap');
 	}
 }
 function TIM_openPatchFile(fileMap){
@@ -140,14 +140,14 @@ function TIM_openPatchFile(fileMap){
 			TIM_mapFile.push(line); 
 		});
 		TIM_SIZE = parseInt(TIM_mapFile[13]);
-		TIM_required = TIM_mapFile[7].replace("Name=", "").replace(" ", "_");
+		TIM_required = TIM_mapFile[7].replace('Name=', '').replace(' ', '_');
 		document.getElementById('TIMPATCHER_patchName').title = 'Path: ' + fileMap;
 		document.getElementById('TIMPATCHER_totalPatches').innerHTML = TIM_mapFile[4];
 		document.getElementById('TIMPATCHER_timName').innerHTML = TIM_required + '.TIM';
 		document.getElementById('TIMPATCHER_lbl_patternMin').innerHTML = TIM_mapFile[16];
 		document.getElementById('TIMPATCHER_BPP').innerHTML = TIM_BPP[TIM_mapFile[10]][1];
 		document.getElementById('TIMPATCHER_patchName').innerHTML = getFileName(fileMap).toUpperCase() + '.r3timmap';
-		document.getElementById('TIMPATCHER_Size').innerHTML = parseInt(TIM_mapFile[13] / 1024) + " KB (" + parseInt(TIM_mapFile[13]) + " Bytes)";
+		document.getElementById('TIMPATCHER_Size').innerHTML = parseInt(TIM_mapFile[13] / 1024) + ' KB (' + parseInt(TIM_mapFile[13]) + ' Bytes)';
 		$('#tim_patcher_inicialMenu').css({'display': 'none'});
 		$('#TIMPATCHER_applyBtns').css({'display': 'inline'});
 		$('#tim_patcher_status').css({'display': 'inline'});
@@ -163,7 +163,7 @@ function TIM_verifyToPatchFile(tFile){
 	var canApply = true;
 	var STATUS = TIM_LOAD(tFile);
 	if (STATUS === true && TIM_mapFile !== []){
-		cFileName = getFileName(tFile).replace(' ', '_').toUpperCase() + ".TIM";
+		cFileName = getFileName(tFile).replace(' ', '_').toUpperCase() + '.TIM';
 	} else {
 		canApply = false;
 		reason = 'The patcher can\'t recognize the map file or the TIM file are broken.';
@@ -249,7 +249,7 @@ function TIM_cancelPatch(){
 	TIM_arquivoBruto = undefined;
 	TIM_seekPattern_MIN = undefined;
 	TIM_ORIGINAL_FILENAME = undefined;
-	document.title = APP_NAME + " - TIM Patcher";
+	document.title = APP_NAME + ' - TIM Patcher';
 	$('#tim_patcher_inicialMenu').css({'display': 'block'});
 	$('#TIMPATCHER_applyBtns').css({'display': 'none'});
 	$('#tim_patcher_status').css({'display': 'none'});
@@ -261,7 +261,7 @@ function TIM_verify_integrity(){
 	if (TIM_arquivoBruto !== undefined){
 		var header = TIM_arquivoBruto.slice(RANGES["TIM_header"][0], RANGES["TIM_header"][1]);
 		var BPP    = TIM_arquivoBruto.slice(RANGES["TIM_BPP"][0], 	 RANGES["TIM_BPP"][1]);
-		if (header !== "10000000"){
+		if (header !== '10000000'){
 			verify = false;
 		}
 		if (TIM_BPP[BPP] === undefined){

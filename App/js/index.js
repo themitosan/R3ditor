@@ -348,15 +348,31 @@ function runExternalSoftware(exe, args){
 	});
 }
 // Save Files
-function R3DITOR_SAVE(filename, content, mode){
+function R3DITOR_SAVE(filename, content, mode, extension){
 	// Mode: utf-8, hex...
-	var elementTAG = document.createElement('a');
-	elementTAG.setAttribute('href', 'data:text/plain;charset=' + mode + ',' + encodeURIComponent(content));
-	elementTAG.setAttribute('download', filename);
-	elementTAG.style.display = 'none';
-	document.body.appendChild(elementTAG);
-	elementTAG.click();
-	document.body.removeChild(elementTAG);
+	document.getElementById('r3ditorSaveFile').nwsaveas = filename;
+	document.getElementById('r3ditorSaveFile').accept = '.' + extension;
+	document.getElementById('r3ditorSaveFile').onchange = function(){
+		R3DITOR_PROCESS_SAVE(filename, content, mode);
+	}
+	$('#r3ditorSaveFile').trigger('click');
+}
+function R3DITOR_PROCESS_SAVE(filename, content, mode){
+	var location = document.getElementById('r3ditorSaveFile').value;
+	if (location.replace(filename, '') !== ''){
+		try{
+			fs.writeFileSync(location, content, mode);
+			addLog('log', 'File - Save sucessfull!');
+			addLog('log', 'Path: ' + location);
+		} catch(err){
+			addLog('error', 'ERROR - Unable to Save File!');
+			addLog('error', err);
+		}
+	}
+	log_separador();
+	document.getElementById('r3ditorSaveFile').accept = '';
+	document.getElementById('r3ditorSaveFile').value = '';
+	scrollLog();
 }
 /// Download Files
 function R3DITOR_downloadFile(url, nomedoarquivo){

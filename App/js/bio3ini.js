@@ -868,7 +868,7 @@ function BIO3INI_MAKEFILE(path, mode){
 			addLog('error', err);
 		}
 	} else {
-		R3DITOR_SAVE('Bio3.ini', FINAL, 'utf-8');
+		R3DITOR_SAVE('Bio3.ini', FINAL, 'utf-8', 'ini');
 	}
 	scrollLog();
 }

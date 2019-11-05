@@ -1868,13 +1868,13 @@ function RDT_startMessageAnalysis(){
 }
 function RDT_getGameMode(){
 	var cfgFile;
-	if (ORIGINAL_FILENAME.indexOf("DATA_E") !== -1){
+	if (ORIGINAL_FILENAME.indexOf('DATA_E') !== -1){
 		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase() + "_E";
 	}
-	if (ORIGINAL_FILENAME.indexOf("DATA_AJ") !== -1){
+	if (ORIGINAL_FILENAME.indexOf('DATA_AJ') !== -1){
 		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase() + "_AJ";
 	}
-	if (ORIGINAL_FILENAME.indexOf("DATA_AJ") === -1 && ORIGINAL_FILENAME.indexOf("DATA_E") === -1){
+	if (ORIGINAL_FILENAME.indexOf('DATA_AJ') === -1 && ORIGINAL_FILENAME.indexOf("DATA_E") === -1){
 		cfgFile = getFileName(ORIGINAL_FILENAME).toUpperCase();
 	}
 	return cfgFile;
@@ -1888,7 +1888,7 @@ function RDT_lookForRDTConfigFile(){
 	}
 	RDT_generateMapFile = false;
 	startFirstMessage = undefined;
-	document.title = APP_NAME + " - Please wait...";
+	document.title = APP_NAME + ' - Please wait...';
 	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap") === true && RDT_loop < 4){
 		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + " (" + APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap)");
@@ -2418,31 +2418,31 @@ function RDT_Backup(){
 	checkFolders();
 	if (RDT_arquivoBruto !== undefined){
 		try{
-			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + "-" + currentTime() + '.rdtbackup';
+			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-' + currentTime() + '.rdtbackup';
 			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
-			addLog("log", "INFO - A backup of your RDT file was made successfully! - File: " + backup_name);
-			addLog("log", "Folder - " + APP_PATH + "\\Backup\\RDT\\" + backup_name);
-			RDT_lastBackup = APP_PATH + "\\Backup\\RDT\\" + backup_name;
+			addLog('log', 'INFO - A backup of your RDT file was made successfully! - File: ' + backup_name);
+			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\RDT\\' + backup_name);
+			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
 			log_separador();
 			WZ_saveConfigs(true);
 			$("#RDT_restoreLastBackup").css({'display': 'inline'});
 		} catch (err){
-			addLog("error", "ERROR - Unable to make backup! - " + err);
+			addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
 	} else {
-		addLog("error", 'ERROR - You can\'t make a backup if you haven\'t opened a map yet!');
+		addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a map yet!');
 	}
 }
 function RDT_restoreLastBackup(){
 	main_closeFileList();
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
-		var loc = "Unknown";
+		var loc = 'Unknown';
 		var mName = getFileName(RDT_lastBackup).slice(0, getFileName(RDT_lastBackup).indexOf('-')).toUpperCase();
 		if (RDT_locations[mName] !== undefined && RDT_locations[mName] !== null){
 			loc = RDT_locations[mName][0];
 		}
-		var ask = confirm("Restore Last Backup\n\nMap: " + mName + "\nOriginal Local Name: " + loc + "\nPath: " + RDT_lastBackup + "\n\nDo you want to proceed?");
+		var ask = confirm('Restore Last Backup\n\nMap: ' + mName + '\nOriginal Local Name: ' + loc + '\nPath: ' + RDT_lastBackup + '\n\nDo you want to proceed?');
 		if (ask === true){
 			try{
 				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.RDT') === true){
@@ -2464,14 +2464,14 @@ function RDT_restoreLastBackup(){
 function RDT_restoreLastBackup_1(name){
 	try{
 		var BK = fs.readFileSync(RDT_lastBackup, 'hex');
-		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + '.RDT', BK, 'hex');
+		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT', BK, 'hex');
 		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
 		if (ORIGINAL_FILENAME !== undefined){
 			RDT_CARREGAR_ARQUIVO(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + '.RDT');
 		}
 	} catch (err){
 		console.error(err);
-		addLog('error', "ERROR - Unable to restore backup!");
+		addLog('error', 'ERROR - Unable to restore backup!');
 		addLog('error', err);
 	}
 }
@@ -2484,15 +2484,15 @@ function RDT_COMPILE_Lv1(){
 			var RDT_CLONE = RDT_arquivoBruto;
 			// Apply Itens, Maps and Files
 			while(c < RDT_ItensArray.length){
-				var NEW_ITEM = localStorage.getItem("RDT_Item-" + c);
-				if (NEW_ITEM.slice(0, 2) === "67"){
+				var NEW_ITEM = localStorage.getItem('RDT_Item-' + c);
+				if (NEW_ITEM.slice(0, 2) === '67'){
 					var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
 					var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 52), RDT_CLONE.length);
-					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem('RDT_Item-' + c) + TEMP_RDT_MAX;
 				} else {
 					var TEMP_RDT_MIN = RDT_CLONE.slice(0, RDT_ItensArray[c] - 4);
 					var TEMP_RDT_MAX = RDT_CLONE.slice(parseInt(parseInt(RDT_ItensArray[c] - 4) + 60), RDT_CLONE.length);
-					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem("RDT_Item-" + c) + TEMP_RDT_MAX;
+					RDT_CLONE = TEMP_RDT_MIN + localStorage.getItem('RDT_Item-' + c) + TEMP_RDT_MAX;
 				}
 				c++;
 			}
@@ -2500,16 +2500,16 @@ function RDT_COMPILE_Lv1(){
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
-			addLog("log", "RDT - Reloading File: " + ORIGINAL_FILENAME);
+			addLog('log', "RDT - Reloading File: " + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$("#RDT-aba-menu-3").trigger('click');
 		} catch(err){
-			addLog("error", "ERROR: Something went wrong on save process!");
-			addLog("error", err);
+			addLog('error', 'ERROR - Something went wrong on save process!');
+			addLog('error', err);
 			console.error(err);
 		}
 	} else {
-		addLog("error", "ERROR - You cannot save an RDT file if you have not opened it!");
+		addLog('error', 'ERROR - You cannot save an RDT file if you have not opened it!');
 	}
 	scrollLog();
 }

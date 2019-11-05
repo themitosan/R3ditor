@@ -86,7 +86,7 @@ var j_files;
 // Versão do game
 var gVersion;
 var gDetails;
-// Mapas Obtidos - wip
+// Mapas Obtidos - WIP
 var mapExtractA;
 var mapExtractB;
 // Vida e Poison
@@ -109,61 +109,78 @@ var decimos   = 0;
 var minutos   = 0;
 var hora      = 0;
 var dia       = 0;
+
+/*
+	Functions
+*/
+
+function SAV_GenerateNewSave(){
+	if (main_currentMenu === 1 && SAVE_arquivoBruto === undefined){
+		if (fs.existsSync(APP_PATH + '\\App\\tools\\format.r3save') === true){
+			SAVE_arquivoBruto = fs.readFileSync(APP_PATH + '\\App\\tools\\format.r3save', 'hex');
+			R3DITOR_SAVE('Bu00.sav', SAVE_arquivoBruto, 'hex', 'sav');
+			SAVE_arquivoBruto = undefined;
+		} else {
+			addLog('error', 'SAVE - Unable to find blank save file!');
+		}
+	}
+	scrollLog();
+}
 function MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
-		S_HEADER = localStorage.getItem("Save_" + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); // 0x2000 - 0x21FF
+		S_HEADER = localStorage.getItem('Save_' + slot).slice(RANGES["save_HEADER"][0], RANGES["save_HEADER"][1]); // 0x2000 - 0x21FF
 		// Gerando Inventário da Jill
-		var J_INV_TEMP = "";
+		var J_INV_TEMP = '';
 		var c = 0;
 		while(c < JILL_INVENT.length){
 			J_INV_TEMP = J_INV_TEMP + JILL_INVENT[c];
 			c++;
 		}
 		// Gerando Baú da Jill
-		var J_BOX_TEMP = "";
+		var J_BOX_TEMP = '';
 		c = 0;
 		while(c < JILL_BAU.length){
 			J_BOX_TEMP = J_BOX_TEMP + JILL_BAU[c];
 			c++;
 		}
 		// Gerando Inventário do Carlos
-		var C_INV_TEMP = "";
+		var C_INV_TEMP = '';
 		var c = 0;
 		while(c < CARLOS_INVENT.length){
 			C_INV_TEMP = C_INV_TEMP + CARLOS_INVENT[c];
 			c++;
 		}
 		// Gerando Baú do Carlos
-		var C_BOX_TEMP = "";
+		var C_BOX_TEMP = '';
 		c = 0;
 		while(c < CARLOS_BAU.length){
 			C_BOX_TEMP = C_BOX_TEMP + CARLOS_BAU[c];
 			c++;
 		}
 		// Ranges não mapeadas
-		range_0x2204_0x2207 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2204-0x2207"][0], RANGES["0x2204-0x2207"][1]); // 0x2204 - 0x2207
-		range_0x2209_0x220D = localStorage.getItem("Save_" + slot).slice(RANGES["0x2209-0x220D"][0], RANGES["0x2209-0x220D"][1]); // 0x2209 - 0x220D
-		range_0x2210_0x2211 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2210-0x2211"][0], RANGES["0x2210-0x2211"][1]); // 0x2209 - 0x220D
-		range_0x2217_0x2217 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2217-0x2217"][0], RANGES["0x2217-0x2217"][1]); // 0x2217
-		range_0x2219_0x2219 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2219-0x2219"][0], RANGES["0x2219-0x2219"][1]); // 0x2219
-		range_0x221C_0x224D = localStorage.getItem("Save_" + slot).slice(RANGES["0x221C-0x224D"][0], RANGES["0x221C-0x224D"][1]); // 0x221C - 0x224D
-		range_0x224F_0x224F = localStorage.getItem("Save_" + slot).slice(RANGES["0x224F-0x224F"][0], RANGES["0x224F-0x224F"][1]); // 0x224F
-		range_0x2251_0x225D = localStorage.getItem("Save_" + slot).slice(RANGES["0x2251-0x225D"][0], RANGES["0x2251-0x225D"][1]); // 0x2251 - 0x225D
-		range_0x225F_0x23FE = localStorage.getItem("Save_" + slot).slice(RANGES["0x225F-0x23FE"][0], RANGES["0x225F-0x23FE"][1]); // 0x225F - 0x23FE
-		range_0x2400_0x2402 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2400-0x2402"][0], RANGES["0x2400-0x2402"][1]); // 0x2400 - 0x2402
-		range_0x240A_0x240B = localStorage.getItem("Save_" + slot).slice(RANGES["0x240A-0x240B"][0], RANGES["0x240A-0x240B"][1]); // 0x240A - 0x240B
-		range_0x2534_0x2534 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2534-0x2534"][0], RANGES["0x2534-0x2534"][1]); // 0x2534
-		range_0x2537_0x254B = localStorage.getItem("Save_" + slot).slice(RANGES["0x2537-0x254B"][0], RANGES["0x2537-0x254B"][1]); // 0x2537 - 0x254B
-		range_0x2674_0x2674 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2674-0x2674"][0], RANGES["0x2674-0x2674"][1]); // 0x2674
-		range_0x2677_0x28D3 = localStorage.getItem("Save_" + slot).slice(RANGES["0x2677-0x28D3"][0], RANGES["0x2677-0x28D3"][1]); // 0x2677 - 0x28D3
-		S_END = localStorage.getItem("Save_" + slot).slice(RANGES["save_END"][0], RANGES["save_END"][1]);
+		range_0x2204_0x2207 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2204-0x2207'][0], RANGES['0x2204-0x2207'][1]); // 0x2204 - 0x2207
+		range_0x2209_0x220D = localStorage.getItem('Save_' + slot).slice(RANGES['0x2209-0x220D'][0], RANGES['0x2209-0x220D'][1]); // 0x2209 - 0x220D
+		range_0x2210_0x2211 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2210-0x2211'][0], RANGES['0x2210-0x2211'][1]); // 0x2209 - 0x220D
+		range_0x2217_0x2217 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2217-0x2217'][0], RANGES['0x2217-0x2217'][1]); // 0x2217
+		range_0x2219_0x2219 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2219-0x2219'][0], RANGES['0x2219-0x2219'][1]); // 0x2219
+		range_0x221C_0x224D = localStorage.getItem('Save_' + slot).slice(RANGES['0x221C-0x224D'][0], RANGES['0x221C-0x224D'][1]); // 0x221C - 0x224D
+		range_0x224F_0x224F = localStorage.getItem('Save_' + slot).slice(RANGES['0x224F-0x224F'][0], RANGES['0x224F-0x224F'][1]); // 0x224F
+		range_0x2251_0x225D = localStorage.getItem('Save_' + slot).slice(RANGES['0x2251-0x225D'][0], RANGES['0x2251-0x225D'][1]); // 0x2251 - 0x225D
+		range_0x225F_0x23FE = localStorage.getItem('Save_' + slot).slice(RANGES['0x225F-0x23FE'][0], RANGES['0x225F-0x23FE'][1]); // 0x225F - 0x23FE
+		range_0x2400_0x2402 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2400-0x2402'][0], RANGES['0x2400-0x2402'][1]); // 0x2400 - 0x2402
+		range_0x240A_0x240B = localStorage.getItem('Save_' + slot).slice(RANGES['0x240A-0x240B'][0], RANGES['0x240A-0x240B'][1]); // 0x240A - 0x240B
+		range_0x2534_0x2534 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2534-0x2534'][0], RANGES['0x2534-0x2534'][1]); // 0x2534
+		range_0x2537_0x254B = localStorage.getItem('Save_' + slot).slice(RANGES['0x2537-0x254B'][0], RANGES['0x2537-0x254B'][1]); // 0x2537 - 0x254B
+		range_0x2674_0x2674 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2674-0x2674'][0], RANGES['0x2674-0x2674'][1]); // 0x2674
+		range_0x2677_0x28D3 = localStorage.getItem('Save_' + slot).slice(RANGES['0x2677-0x28D3'][0], RANGES['0x2677-0x28D3'][1]); // 0x2677 - 0x28D3
+		S_END = localStorage.getItem('Save_' + slot).slice(RANGES['save_END'][0], RANGES['save_END'][1]);
 		TEMP_SLOT = S_HEADER + IGTExtract + range_0x2204_0x2207 + dificuldade + range_0x2209_0x220D + xPos + range_0x2210_0x2211 + yPos + life + epil + 
 		range_0x2217_0x2217 + totalVezesSaves + range_0x2219_0x2219 + veneno + localSave + range_0x221C_0x224D + lCidade + range_0x224F_0x224F + rEvent + 
 		range_0x2251_0x225D + cPlayer + range_0x225F_0x23FE + mapExtractA + range_0x2400_0x2402 + mapExtractB + j_files + range_0x240A_0x240B + J_INV_TEMP + 
 		J_BOX_TEMP + range_0x2534_0x2534 + jArmaEquip + jSide + range_0x2537_0x254B + C_INV_TEMP + C_BOX_TEMP + range_0x2674_0x2674 + cArmaEquip + cSide + 
 		range_0x2677_0x28D3 + outf + S_END;
 		// Final
-		if (TEMP_SLOT.length === RANGES["slot-offset"][0]){
+		if (TEMP_SLOT.length === RANGES['slot-offset'][0]){
 			localStorage.setItem("Save_" + slot, TEMP_SLOT);
 			addLog("log", "The Slot " + slot + " was saved successfully!");
 			save_Backup();
@@ -224,15 +241,15 @@ function CARREGAR_SAVE(sFile){
 	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + 
 	SAVE_INDICADOR_HEADER_END;
 
-	localStorage.setItem('Save_1', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	   RANGES["slot-offset"][0] * 2));
-	localStorage.setItem('Save_2', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 2,  RANGES["slot-offset"][0] * 3));
-	localStorage.setItem('Save_3', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 3,  RANGES["slot-offset"][0] * 4));
-	localStorage.setItem('Save_4', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 4,  RANGES["slot-offset"][0] * 5));
-	localStorage.setItem('Save_5', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 5,  RANGES["slot-offset"][0] * 6));
-	localStorage.setItem('Save_6', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 6,  RANGES["slot-offset"][0] * 7));
-	localStorage.setItem('Save_7', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 7,  RANGES["slot-offset"][0] * 8));
-	localStorage.setItem('Save_8', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 8,  RANGES["slot-offset"][0] * 9));
-	localStorage.setItem('Save_9', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0]  * 9,  RANGES["slot-offset"][0] * 10));
+	localStorage.setItem('Save_1',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0],  	   RANGES["slot-offset"][0] * 2));
+	localStorage.setItem('Save_2',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 2,  RANGES["slot-offset"][0] * 3));
+	localStorage.setItem('Save_3',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 3,  RANGES["slot-offset"][0] * 4));
+	localStorage.setItem('Save_4',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 4,  RANGES["slot-offset"][0] * 5));
+	localStorage.setItem('Save_5',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 5,  RANGES["slot-offset"][0] * 6));
+	localStorage.setItem('Save_6',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 6,  RANGES["slot-offset"][0] * 7));
+	localStorage.setItem('Save_7',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 7,  RANGES["slot-offset"][0] * 8));
+	localStorage.setItem('Save_8',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 8,  RANGES["slot-offset"][0] * 9));
+	localStorage.setItem('Save_9',  SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 9,  RANGES["slot-offset"][0] * 10));
 	localStorage.setItem('Save_10', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 10, RANGES["slot-offset"][0] * 11));
 	localStorage.setItem('Save_11', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 11, RANGES["slot-offset"][0] * 12));
 	localStorage.setItem('Save_12', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 12, RANGES["slot-offset"][0] * 13));
@@ -240,7 +257,7 @@ function CARREGAR_SAVE(sFile){
 	localStorage.setItem('Save_14', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 14, RANGES["slot-offset"][0] * 15));
 	localStorage.setItem('Save_15', SAVE_arquivoBruto.slice(RANGES["slot-offset"][0] * 15, RANGES["slot-offset"][0] * 16));
 	// Render Infos
-	$("#SAV_clearFile").css({'display': 'inline'});
+	$('#SAV_clearFile').css({'display': 'inline'});
 	save_renderSlot(CURRENT_SAVE_SLOT);
 }
 function save_renderSlot(slotID){
@@ -263,7 +280,7 @@ function save_renderSaveSlots() {
 	while(cu < to){
 		tmpSaveSlot = SAVE_arquivoBruto.slice(RANGES["he-indicador-" + cu][0], RANGES["he-indicador-" + cu][1]);
 		checker = tmpSaveSlot.slice(0, 4);
-		if (checker === "5100"){ 
+		if (checker === '5100'){ 
 			// Save presente
 			var totVSave = localStorage.getItem("Save_" + cu).slice(RANGES["totalSaves"][0], RANGES["totalSaves"][1]);
 			var locSave = localStorage.getItem("Save_" + cu).slice(RANGES["localSave"][0], RANGES["localSave"][1]);
@@ -272,7 +289,7 @@ function save_renderSaveSlots() {
 		} else {
 			// Save Vazio
 			document.getElementById("slt-save-" + cu).innerHTML = 'Empty';
-			$("#slt-save-" + cu).addClass("slot-ausente");
+			$("#slt-save-" + cu).addClass('slot-ausente');
 		}
 		cu++;
 	}

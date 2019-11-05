@@ -348,6 +348,7 @@ function SAVE_showMenu(menuId){
 	main_closeFileList();
 	$("#SAV_reload").css({'display': 'inline'});
 	$("#menu-topo-MOD").css({'display': 'none'});
+	$("#SAV_generateSave").css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
 		$("#img-logo").fadeOut({duration: 100, queue: false});
 	} else {
