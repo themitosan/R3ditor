@@ -67,7 +67,7 @@ function TIM_seekPattern(){
 			TIM_seekPattern = 20;
 		}
 		//
-		var current_BPP = TIM_arquivoBruto.slice(RANGES["TIM_BPP"][0], RANGES["TIM_BPP"][1]);
+		var current_BPP = TIM_arquivoBruto.slice(RANGES['TIM_BPP'][0], RANGES['TIM_BPP'][1]);
 		var currentPos_A = TIM_BPP[current_BPP][2];
 		var currentPos_B = parseInt(TIM_BPP[current_BPP][2] + 4);
 
@@ -90,8 +90,8 @@ function TIM_seekPattern(){
 				if (start_record === true){
 					end_position = parseInt(currentPos_B - 4);
 					var REAL_OFFSET = TIM_arquivoBruto.slice(start_position, end_position);
-					console.log(REAL_OFFSET + "\n\nStart: " + start_position + "\nEnd: " + end_position + '\nLength: ' + REAL_OFFSET.length);
-					localStorage.setItem('TIMPATCHER_Patch-' + TOT_PATCHS, start_position + "-END_POS-" + end_position + "-PATCH-" + REAL_OFFSET);
+					console.log(REAL_OFFSET + '\n\nStart: ' + start_position + '\nEnd: ' + end_position + '\nLength: ' + REAL_OFFSET.length);
+					localStorage.setItem('TIMPATCHER_Patch-' + TOT_PATCHS, start_position + '-END_POS-' + end_position + '-PATCH-' + REAL_OFFSET);
 					TOT_PATCHS++;
 					//
 					start_position = undefined;
@@ -123,10 +123,10 @@ function TIM_generateMapForPatterns(totalPatches, bpp){
 			getFileSize(TIM_ORIGINAL_FILENAME, 0) + '\n\n[PATTERN MIN]\n' + TIM_seekPattern_MIN + '\n\n';
 
 		while (c < totalPatches){
-			var extract = localStorage.getItem("TIMPATCHER_Patch-" + c);
-			var OFFSET_START = extract.slice(0, extract.indexOf("-END_POS-"));
-			var OFFSET_END = extract.slice(parseInt(extract.indexOf("-END_POS-") + 9), extract.indexOf("-PATCH-"));
-			var CURRENT_PATCH = extract.slice(parseInt(extract.indexOf("-PATCH-") + 7), extract.length)
+			var extract = localStorage.getItem('TIMPATCHER_Patch-' + c);
+			var OFFSET_START = extract.slice(0, extract.indexOf('-END_POS-'));
+			var OFFSET_END = extract.slice(parseInt(extract.indexOf('-END_POS-') + 9), extract.indexOf('-PATCH-'));
+			var CURRENT_PATCH = extract.slice(parseInt(extract.indexOf('-PATCH-') + 7), extract.length)
 			patches = patches + '[PATCH ' + c + ']\nStart=' + OFFSET_START + '\nEnd=' + OFFSET_END + '\nData=' + CURRENT_PATCH + '\n\n';
 			c++;
 		}
@@ -259,8 +259,8 @@ function TIM_cancelPatch(){
 function TIM_verify_integrity(){
 	var verify = true;
 	if (TIM_arquivoBruto !== undefined){
-		var header = TIM_arquivoBruto.slice(RANGES["TIM_header"][0], RANGES["TIM_header"][1]);
-		var BPP    = TIM_arquivoBruto.slice(RANGES["TIM_BPP"][0], 	 RANGES["TIM_BPP"][1]);
+		var header = TIM_arquivoBruto.slice(RANGES['TIM_header'][0], RANGES['TIM_header'][1]);
+		var BPP    = TIM_arquivoBruto.slice(RANGES['TIM_BPP'][0], 	 RANGES['TIM_BPP'][1]);
 		if (header !== '10000000'){
 			verify = false;
 		}

@@ -49,9 +49,9 @@ function WZ_showWizardDialog(id){
 		// Set the game folder location
 		if (id === 1){
 			R3DITOR_movePercent(1, 25);
-			$("#WZ_dialog").css({'top': '29%'});
-			$("#WZ_BTN_2").css({'display': 'none'});
-			$("#WZ_progressbar").fadeIn({duration: 500, queue: false});
+			$('#WZ_dialog').css({'top': '29%'});
+			$('#WZ_BTN_2').css({'display': 'none'});
+			$('#WZ_progressbar').fadeIn({duration: 500, queue: false});
 			document.getElementById('WZ_title').innerHTML = 'First Step';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_1;
 			document.getElementById('WZ_BTN_1').value = 'Cancel';
@@ -66,9 +66,9 @@ function WZ_showWizardDialog(id){
 		// Wrong file
 		if (id === 2){
 			R3DITOR_movePercent(1, 0);
-			$("#WZ_dialog").css({'top': '34%'});
-			$("#WZ_BTN_2").css({'display': 'none'});
-			$("#WZ_progressbar").fadeOut({duration: 100, queue: false});
+			$('#WZ_dialog').css({'top': '34%'});
+			$('#WZ_BTN_2').css({'display': 'none'});
+			$('#WZ_progressbar').fadeOut({duration: 100, queue: false});
 			document.getElementById('WZ_title').innerHTML = 'Whoops...';
 			if (EXEC_BIO3_original === "Bio3_PC"){
 				document.getElementById('WZ_content').innerHTML = WZ_DIALOG_10;
@@ -84,9 +84,9 @@ function WZ_showWizardDialog(id){
 		// Confirm
 		if (id === 3){
 			R3DITOR_movePercent(1, 40);
-			$("#WZ_dialog").css({'top': '24%'});
+			$('#WZ_dialog').css({'top': '24%'});
 			GAME_PATH = EXEC_BIO3_original.replace('ResidentEvil3.exe', '');
-			$("#WZ_BTN_2").css({'display': 'inline'});
+			$('#WZ_BTN_2').css({'display': 'inline'});
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_3;
 			document.getElementById('WZ_title').innerHTML = 'Great!';
 			document.getElementById('WZ_BTN_2').value = 'Yes!';
@@ -105,9 +105,9 @@ function WZ_showWizardDialog(id){
 		if (id === 4){
 			R3DITOR_movePercent(1, 100);
 			R3DITOR_movePercent(0, 100, 'Done!');
-			$("#WZ_BTN_2").css({'display': 'none'});
-			$("#WZ_BTN_1").css({'display': 'inline'});
-			$("#progress_window").css({'display': 'none'});
+			$('#WZ_BTN_2').css({'display': 'none'});
+			$('#WZ_BTN_1').css({'display': 'inline'});
+			$('#progress_window').css({'display': 'none'});
 			document.getElementById('WZ_BTN_1').value = 'Close';
 			document.getElementById('WZ_title').innerHTML = 'Finish Line!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_4;
@@ -121,8 +121,8 @@ function WZ_showWizardDialog(id){
 		// Find Game - File failed
 		if (id === 5){
 			R3DITOR_movePercent(1, 0);
-			$("#WZ_BTN_2").css({'display': 'inline'});
-			$("#WZ_progressbar").fadeOut({duration: 100, queue: false});
+			$('#WZ_BTN_2').css({'display': 'inline'});
+			$('#WZ_progressbar').fadeOut({duration: 100, queue: false});
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_5;
 			document.getElementById('WZ_title').innerHTML = 'Ouch!';
 			document.getElementById('WZ_BTN_1').value = 'No...';
@@ -138,9 +138,9 @@ function WZ_showWizardDialog(id){
 		if (id === 6){
 			killExternalSoftware();
 			R3DITOR_movePercent(1, 60);
-			$("#WZ_dialog").css({'top': '80px'});
-			$("#WZ_BTN_1").css({'display': 'inline'});
-			$("#WZ_BTN_2").css({'display': 'inline'});
+			$('#WZ_dialog').css({'top': '80px'});
+			$('#WZ_BTN_1').css({'display': 'inline'});
+			$('#WZ_BTN_2').css({'display': 'inline'});
 			EXEC_rofs = TEMP_APP_PATH + '\\App\\tools\\rofs.exe';
 			document.getElementById('WZ_title').innerHTML = 'Extract Game Assets';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_6;
@@ -157,7 +157,7 @@ function WZ_showWizardDialog(id){
 		// Extracting Game Assets
 		if (id === 7){
 			enable_mod = true;
-			$("#WZ_dialog").css({'top': '28%'});
+			$('#WZ_dialog').css({'top': '28%'});
 			document.getElementById('WZ_title').innerHTML = 'Extracting Game Assets...';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_7;
 			WZ_STARTFINALPROCESS();
@@ -165,9 +165,9 @@ function WZ_showWizardDialog(id){
 		// Show Hex Editor
 		if (id === 8){
 			R3DITOR_movePercent(1, 50);
-			$("#WZ_dialog").css({'top': '28%'});
-			$("#WZ_BTN_2").css({'display': 'none'});
-			$("#WZ_BTN_1").css({'display': 'inline'});
+			$('#WZ_dialog').css({'top': '28%'});
+			$('#WZ_BTN_2').css({'display': 'none'});
+			$('#WZ_BTN_1').css({'display': 'inline'});
 			document.getElementById('WZ_title').innerHTML = 'Open in Hex Editor';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_8;
 			document.getElementById('WZ_BTN_1').value = 'Skip';
@@ -179,9 +179,9 @@ function WZ_showWizardDialog(id){
 		// Test Hex Editor
 		if (id === 9){
 			R3DITOR_movePercent(1, 50);
-			$("#WZ_dialog").css({'top': '24%'});
-			$("#WZ_BTN_1").css({'display': 'inline'});
-			$("#WZ_BTN_2").css({'display': 'inline'});
+			$('#WZ_dialog').css({'top': '24%'});
+			$('#WZ_BTN_1').css({'display': 'inline'});
+			$('#WZ_BTN_2').css({'display': 'inline'});
 			document.getElementById('WZ_title').innerHTML = 'Test Hex Editor';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_9;
 			document.getElementById('WZ_BTN_1').value = 'Cancel';
@@ -402,47 +402,47 @@ function WZ_loadFiles(file){
 		Visuals
 	*/
 	if (EXEC_BIO3_original !== ''){
-		$("#btn_run_bio3").css({'display': 'inline'});
+		$('#btn_run_bio3').css({'display': 'inline'});
 		if (HEX_EDITOR !== ''){
-			$("#main_openBio3OnHex").css({'display': 'inline'});
+			$('#main_openBio3OnHex').css({'display': 'inline'});
 		}
 	}
 	if (EXEC_BIO3_MERCE !== ''){
-		$("#btn_run_merce").css({'display': 'inline'});
+		$('#btn_run_merce').css({'display': 'inline'});
 		if (HEX_EDITOR !== ''){
-			$("#main_openBio3MerceOnHex").css({'display': 'inline'});
+			$('#main_openBio3MerceOnHex').css({'display': 'inline'});
 		}
 	}
 	if (enable_mod === true){
-		$("#btn_run_bio3-mod").css({'display': 'inline'});
-		$("#btn_run_merce-mod").css({'display': 'inline'});
+		$('#btn_run_bio3-mod').css({'display': 'inline'});
+		$('#btn_run_merce-mod').css({'display': 'inline'});
 	}
 	if (fs.existsSync(APP_PATH + '\\forceupdate.txt') == true){
 		fs.unlinkSync(APP_PATH + '\\forceupdate.txt');
-		$("#menu-topo").css({'display': 'none'});
+		$('#menu-topo').css({'display': 'none'});
 		R3DITOR_applyUpdate();
 	} else {
 		WZ_APPEND();
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#img-logo").fadeIn({duration: 2000, queue: false});
-			$("#menu-topo").fadeIn({duration: 200, queue: false});
-			$("#menu-utility").fadeIn({duration: 200, queue: false});
-			$("#menu-utility-aba").fadeIn({duration: 200, queue: false});
-			$("#menu-utility-aba-2").fadeIn({duration: 200, queue: false});
-			$("#menu-topo").animate({'top': '32px'}, {duration: 100, queue: false});
-			$("#menu-utility").animate({'top': '546px'}, {duration: 100, queue: false});
-			$("#menu-utility-aba").animate({'top': '472px'}, {duration: 140, queue: false});
-			$("#menu-utility-aba-2").animate({"top": "-44px"}, {duration: 140, queue: false});
+			$('#img-logo').fadeIn({duration: 2000, queue: false});
+			$('#menu-topo').fadeIn({duration: 200, queue: false});
+			$('#menu-utility').fadeIn({duration: 200, queue: false});
+			$('#menu-utility-aba').fadeIn({duration: 200, queue: false});
+			$('#menu-utility-aba-2').fadeIn({duration: 200, queue: false});
+			$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
+			$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
+			$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
+			$('#menu-utility-aba-2').animate({"top": "-44px"}, {duration: 140, queue: false});
 		} else {
-			$("#menu-topo").css({'top': '32px'});
-			$("#menu-utility").css({'top': '546px'});
-			$("#img-logo").css({'display': 'inline'});
-			$("#menu-topo").css({'display': 'inline'});
-			$("#menu-utility-aba").css({'top': '472px'});
-			$("#menu-utility").css({'display': 'inline'});
-			$("#menu-utility-aba-2").css({"top": "-44px"});
-			$("#menu-utility-aba").css({'display': 'inline'});
-			$("#menu-utility-aba-2").css({'display': 'inline'});
+			$('#menu-topo').css({'top': '32px'});
+			$('#menu-utility').css({'top': '546px'});
+			$('#img-logo').css({'display': 'inline'});
+			$('#menu-topo').css({'display': 'inline'});
+			$('#menu-utility-aba').css({'top': '472px'});
+			$('#menu-utility').css({'display': 'inline'});
+			$('#menu-utility-aba-2').css({'top': '-44px'});
+			$('#menu-utility-aba').css({'display': 'inline'});
+			$('#menu-utility-aba-2').css({'display': 'inline'});
 		}
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + ' (' + process.arch + ')';
 		// Init Memory JS
@@ -450,13 +450,13 @@ function WZ_loadFiles(file){
 	}
 	if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#menu-topo-MOD").fadeIn({duration: 150, queue: false});
+			$('#menu-topo-MOD').fadeIn({duration: 150, queue: false});
 		} else {
-			$("#menu-topo-MOD").css({'display': 'inline'});
+			$('#menu-topo-MOD').css({'display': 'inline'});
 		}
 	} else {
-		$("#menu-utility-aba").css({'top': '510px'});
-		$("#menu-utility").css({'top': '586px'});
+		$('#menu-utility-aba').css({'top': '510px'});
+		$('#menu-utility').css({'top': '586px'});
 	}
 	if (R3DITOR_check_for_updates === true){
 		checkForUpdates();

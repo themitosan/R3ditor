@@ -49,9 +49,9 @@ function R3DITOR_readUpdate(file){
 		if (parseInt(update_info[0]) > internal_version || TEST_RELEASE == true){
 			if (TEST_RELEASE === true){
 			RE3_LIVE_closeForm();
-				$("#aplicarUpdate").css({'display': 'none'});
+				$('#aplicarUpdate').css({'display': 'none'});
 			} else {
-				$("#aplicarUpdate").css({'display': 'inline'});
+				$('#aplicarUpdate').css({'display': 'inline'});
 			}
 			document.getElementById('new_version').innerHTML = update_info[1];
 			document.getElementById('new_version_title').innerHTML = update_info[2];
@@ -85,7 +85,7 @@ function R3DITOR_applyUpdate(){
 			fs.unlinkSync(APP_PATH + '\\App\\check.r3ditor');
 		}
 		R3DITOR_movePercent(0, 1, 'Downloading Master branch from GitHub...');
-		R3DITOR_downloadFile("https://codeload.github.com/themitosan/R3ditor/zip/master", APP_PATH + '\\Update\\master.zip');
+		R3DITOR_downloadFile('https://codeload.github.com/themitosan/R3ditor/zip/master', APP_PATH + '\\Update\\master.zip');
 		var timer = setInterval(function(){
 			if (DOWNLOAD_COMPLETE === true){
 				clearInterval(timer);
@@ -99,11 +99,11 @@ function R3DITOR_applyUpdate(){
 		R3DITOR_movePercent(0, 100, 'ERROR - You are offline!');
 		addLog('error', 'Check your internet status, Reload R3ditor and try again!');
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#btn_update_ok").fadeIn({duration: 200, queue: false});
+			$('#btn_update_ok').fadeIn({duration: 200, queue: false});
 		} else {
-			$("#btn_update_ok").css({'display': 'inline'});
+			$('#btn_update_ok').css({'display': 'inline'});
 		}
-		$("#progress_window").css({'top': '528px', 'height': '74px'});
+		$('#progress_window').css({'top': '528px', 'height': '74px'});
 		scrollLog();
 	}
 }
@@ -111,7 +111,7 @@ function R3DITOR_update_0(){
 	clearInterval(timer);
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
 		R3DITOR_movePercent(0, 20, 'Extracting Package...');
-		runExternalSoftware(APP_PATH + "\\App\\tools\\7za.exe", ["x", APP_PATH + "\\Update\\master.zip", "-o" + APP_PATH + "\\Update\\Extract", "-aoa"]);
+		runExternalSoftware(APP_PATH + '\\App\\tools\\7za.exe', ['x', APP_PATH + '\\Update\\master.zip', '-o' + APP_PATH + '\\Update\\Extract', '-aoa']);
 		var timer = setInterval(function(){
 			if (EXTERNAL_APP_RUNNING === false){
 				clearInterval(timer);
@@ -141,7 +141,7 @@ function R3DITOR_update_2(){
 	if (fs.existsSync(APP_PATH + '\\App') === false){
 		fs.mkdirSync(APP_PATH + '\\App');
 		R3DITOR_movePercent(0, 50, 'Moving the new files...');
-		runExternalSoftware("cmd", ["/C", "xcopy", APP_PATH + "\\Update\\Extract\\R3ditor-master\\App\\*", APP_PATH + "\\App\\", '/h', '/i', '/c', '/k', '/e', '/r', '/y']);
+		runExternalSoftware('cmd', ['/C', 'xcopy', APP_PATH + '\\Update\\Extract\\R3ditor-master\\App\\*', APP_PATH + '\\App\\', '/h', '/i', '/c', '/k', '/e', '/r', '/y']);
 		var timer = setInterval(function(){
 			if (EXTERNAL_APP_RUNNING === false){
 				clearInterval(timer);
@@ -169,13 +169,13 @@ function R3DITOR_update_4(){
 	R3DITOR_movePercent(0, 100, 'Update Ok!');
 	document.title = APP_NAME + ' - Update Ok!';
 	if (DESIGN_ENABLE_ANIMS === true){
-		$("#img-logo").fadeOut({duration: 2000, queue: false});
-		$("#btn_update_ok").fadeIn({duration: 500, queue: false});
+		$('#img-logo').fadeOut({duration: 2000, queue: false});
+		$('#btn_update_ok').fadeIn({duration: 500, queue: false});
 	} else {
-		$("#img-logo").css({'display': 'none'});
-		$("#btn_update_ok").css({'display': 'inline'});
+		$('#img-logo').css({'display': 'none'});
+		$('#btn_update_ok').css({'display': 'inline'});
 	}
-	$("#progress_window").css({'top': '528px', 'height': '74px'});
+	$('#progress_window').css({'top': '528px', 'height': '74px'});
 	addLog('log', 'INFO - Click on Reload App to apply changes!');
 	scrollLog();
 }

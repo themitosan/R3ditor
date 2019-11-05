@@ -59,6 +59,7 @@ function load(){
 		addLog('error', 'BETA is true!');
 		addLog('error', 'BETA is true!');
 		addLog('error', 'BETA is true!');
+		alert('ERROR - BETA IS TRUE!');
 	}
 	scrollLog();
 }
@@ -264,7 +265,7 @@ function checkCanPlay(runArgs, gameId){
 }
 // Remover pastas recursivamente
 function deleteFolderRecursive(path){
-	runExternalSoftware("cmd", ["/C", "rd", "/s", "/q", path]);
+	runExternalSoftware('cmd', ['/C', 'rd', '/s', '/q', path]);
 };
 /// Function WIP
 function WIP(){
@@ -294,8 +295,8 @@ function runExternalSoftware(exe, args){
 	const ls = spawn(exe, args);
 	EXTERNAL_APP_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
-		$("#menu-utility-aba").css({'top': '512px'});
-		$("#menu-utility").css({'top': '586px'});
+		$('#menu-utility-aba').css({'top': '512px'});
+		$('#menu-utility').css({'top': '586px'});
 	}
 	ls.stdout.on('data', (data) => {
 		addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
@@ -311,7 +312,7 @@ function runExternalSoftware(exe, args){
 		EXTERNAL_APP_RUNNING = false;
 		EXTERNAL_APP_EXITCODE = code;
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
-			$("#WZ_BTN_2").css({'display': 'inline'});
+			$('#WZ_BTN_2').css({'display': 'inline'});
 		}
 		if (RE3_RUNNING === true){
 			RE3_RUNNING = false;
@@ -324,8 +325,8 @@ function runExternalSoftware(exe, args){
 				log_separador();
 			}
 			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
-				$("#menu-utility-aba").css({"top": "472px"});
-				$("#menu-utility").css({"top": "546px"});
+				$('#menu-utility-aba').css({'top': '472px'});
+				$('#menu-utility').css({'top': '546px'});
 			}
 			R3DITOR_RUNGAME(1);
 		}
@@ -400,18 +401,8 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 function getFileName(file){
 	var fileName = file.toLowerCase();
 	var removePath = fileName.split(/(\\|\/)/g).pop();
-	var filterA = removePath.replace('.rdt', '');
-	var filterB = filterA.replace('.txt', '');
-	var filterC = filterB.replace('.msg', '');
-	var filterD = filterC.replace('.sav', '');
-	var filterE = filterD.replace('.exe', '');
-	var filterF = filterE.replace('.ini', '');
-	var filterG = filterF.replace('.r3ditor', '');
-	var filterH = filterG.replace('.rdtmap', '');
-	var filterI = filterH.replace('.tim', '');
-	var filterJ = filterI.replace('.r3timmap', '');
-	var filterK = filterJ.replace('.sld', '');
-	return filterK;
+	var filter = removePath.replace('.rdt', '').replace('.txt', '').replace('.msg', '').replace('.sav', '').replace('.exe', '').replace('.ini', '').replace('.r3ditor', '').replace('.rdtmap', '').replace('.tim', '').replace('.r3timmap', '').replace('.sld', '').replace('.rbj', '')
+	return filter;
 }
 /// Formata valores hex para leitura interna
 function solveHEX(hex){
@@ -432,9 +423,9 @@ function currentTime(){
 		e_e++;
 		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#special_msg").fadeIn({duration: 2200, queue: false});
+			$('#special_msg').fadeIn({duration: 2200, queue: false});
 		} else {
-			$("#special_msg").css({'display': 'inline'});
+			$('#special_msg').css({'display': 'inline'});
 		}
 		scrollLog();
 	}
@@ -442,26 +433,26 @@ function currentTime(){
 		e_e++;
 		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#special_msg").fadeIn({duration: 2200, queue: false});
+			$('#special_msg').fadeIn({duration: 2200, queue: false});
 		} else {
-			$("#special_msg").css({'display': 'inline'});
+			$('#special_msg').css({'display': 'inline'});
 		}
 		scrollLog();
 	}
 	if (d.toString().length < 2){
-		d = "0" + t.getDate();
+		d = '0' + t.getDate();
 	}
 	if (m.toString().length < 2){
-		m = "0" + parseInt(t.getMonth() + 1);
+		m = '0' + parseInt(t.getMonth() + 1);
 	}
 	if (h.toString().length < 2){
-		h = "0" + t.getHours(); 
+		h = '0' + t.getHours(); 
 	}
 	if (mi.toString().length < 2){
-		mi = "0" + t.getMinutes(); 
+		mi = '0' + t.getMinutes(); 
 	}
 	if (s.toString().length < 2){
-		s = "0" + t.getSeconds();
+		s = '0' + t.getSeconds();
 	}
 	return d + '-' + m + '-' + y + '_' + h + '.' + mi + '.' + s;
 }
@@ -633,43 +624,43 @@ function parsePercentage(current, maximum){
 function triggerLoad(loadForm){
 	// RDT Audio
 	if (loadForm === 1){
-		$("#loadWAVForm").trigger('click');
+		$('#loadWAVForm').trigger('click');
 	}
 	// Wizard - ResidentEvil3.exe
 	if (loadForm === 2){
-		$("#loadWZForm").trigger('click');
+		$('#loadWZForm').trigger('click');
 	}
 	// Wizard - Hex Editor
 	if (loadForm === 3){
-		$("#loadWZHexForm").trigger('click');
+		$('#loadWZHexForm').trigger('click');
 	}
 	// Save
 	if (loadForm === 4){
-		$("#loadSaveForm").trigger('click');
+		$('#loadSaveForm').trigger('click');
 	}
 	// MSG
 	if (loadForm === 5){
-		$("#loadMSGForm").trigger('click');
+		$('#loadMSGForm').trigger('click');
 	}
 	// RDT
 	if (loadForm === 6){
-		$("#loadRDTForm").trigger('click');
+		$('#loadRDTForm').trigger('click');
 	}
 	// Tim - Seek Pattern
 	if (loadForm === 7){
-		$("#loadTIMForm").trigger('click');
+		$('#loadTIMForm').trigger('click');
 	}
 	// Tim - Tim Map
 	if (loadForm === 8){
-		$("#loadTimMapForm").trigger('click');
+		$('#loadTimMapForm').trigger('click');
 	}
 	// Tim - Tim To Patch
 	if (loadForm === 9){
-		$("#loadTimForPatchForm").trigger('click');
+		$('#loadTimForPatchForm').trigger('click');
 	}
 	// INI Load
 	if (loadForm === 10){
-		$("#loadINIForm").trigger('click');
+		$('#loadINIForm').trigger('click');
 	}
 }
 function setLoadFile(input){
