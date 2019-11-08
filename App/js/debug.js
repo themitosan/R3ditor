@@ -4,18 +4,11 @@
 	Me ajuda ae véi!
 */
 var DEBUG_LOCKRENDER = false;
-function copyToClipboard(text){
-    var dummy = document.createElement("textarea");
-    document.body.appendChild(dummy);
-    dummy.value = text;
-    dummy.select();
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
-}
+
 /// Reload js file
 function reloadJsFile(src){
-	console.info("Recarregando Script: " + src);
-	addLog('error', "Recarregando Script: " + src);
+	console.info('Recarregando Script: ' + src);
+	addLog('warn', 'Recarregando Script: ' + src);
     $('script[src="' + src + '"]').remove();
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -37,15 +30,7 @@ function DEBUG_RDT_MSG_START_RANGE(value){
 }
 function DEBUG_TESTUPDATE(){
 	TEST_RELEASE = true;
-	R3DITOR_readUpdate(APP_PATH + "\\version.r3ditor");
-}
-function DEBUG_RESETSLIDER(){
-	document.getElementById('RDT_slider_X').value = 0;
-	document.getElementById('RDT_slider_Y').value = 0;
-	document.getElementById('RDT_slider_Z').value = 0;
-	document.getElementById('RDT_slider_R').value = 0;
-	document.getElementById('RDT_slider_D').value = 0;
-	RDT_updateCanvasInfos(0);
+	R3DITOR_readUpdate(APP_PATH + '\\version.r3ditor');
 }
 function DEBUG_TESTER(){
 	TESTEVAR = document.getElementById('RDT_slider_TESTE').value;

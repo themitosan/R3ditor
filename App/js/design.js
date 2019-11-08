@@ -40,6 +40,17 @@ function scrollLog(){
 /// General
 function main_renderFileList(id, mode){
 	var c = 0;
+	var gameModePath;
+	if (mode === undefined || mode === null){
+		gameModePath = 'DATA_E';
+	} else {
+		if (mode === 1){
+			gameModePath = 'DATA_AJ';
+		}
+		if (mode === 2){
+			gameModePath = 'DATA_E';
+		}
+	}
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ''){
 		var mFile;
@@ -57,10 +68,14 @@ function main_renderFileList(id, mode){
 		} else {
 			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap') === true){
-			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap';
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
 		} else {
-			mFile = 'There is no map file for this RDT. Open it to generate!';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
+				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+			} else {
+				mFile = 'There is no Map File for this RDT. Open it to generate!';
+			}
 		}
 		if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 			origName = RDT_locations[RDT_name][0];
@@ -86,21 +101,10 @@ function main_renderFileList(id, mode){
 	}
 	// RDT
 	if (id === 3){
-		var gameModePath;
 		$('#fileListHolder').css({'height': '440px'});
 		$('#fileListHolder_AJ').css({'height': '440px'});
 		$('#fileList_aba_list').css({'display': 'inline'});
 		document.getElementById('fileList_title').innerHTML = 'File List';
-		if (mode === undefined || mode === null){
-			gameModePath = 'DATA_E';
-		} else {
-			if (mode === 1){
-				gameModePath = 'DATA_AJ';
-			}
-			if (mode === 2){
-				gameModePath = 'DATA_E';
-			}
-		}
 		if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
 			var listRDT = fs.readdirSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\').filter(fn => fn.endsWith('.RDT'));
 			if (listRDT.length < 1){
@@ -128,7 +132,7 @@ function main_renderFileList(id, mode){
 					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
 						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
 					} else {
-						mFile = 'There is no map file for this RDT. Open it to generate!';
+						mFile = 'There is no Map File for this RDT. Open it to generate!';
 					}
 				}
 				if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
@@ -1112,7 +1116,7 @@ function RDT_showEditMsgCode(index, codeHex){
 	} else {
 		RDT_editItemCancel();
 		var warnMSG = 'This message code contains a WIP header (64)';
-		alert('INFO: Unable to edit this message code! (For now!)\n\n' + warnMSG);
+		alert('INFO - Unable to edit this message code! (For now!)\n\n' + warnMSG);
 		addLog('warn', 'WARN - ' + warnMSG);
 	}
 	scrollLog();
@@ -1240,7 +1244,7 @@ function RDT_renderNextRDTLbl(){
 				document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
 				$('#RDT_doorCamPreviewImg').css({'display': 'inline'});
 			} else {
-				document.getElementById("RDT_doorCamPreviewImg").src = APP_PATH + '/App/img/404.png';
+				document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 				$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
 			}
 			RDT_renderEditDoorCamPreview();
@@ -1318,7 +1322,7 @@ function RDT_BG_display(){
 				found = true;
 				var d = 1;
 				while(d < parseInt(RDT_totalMenus + 1)){
-					$("#RDT_BG_" + d).css({'background-image': 'url(../Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '0' + c + '.JPG)', 'filter': 'blur(2px)', 'opacity': '1'});
+					$('#RDT_BG_' + d).css({'background-image': 'url(../Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '0' + c + '.JPG)', 'filter': 'blur(2px)', 'opacity': '1'});
 					if (DESIGN_ENABLE_ANIMS === true){
 						$('#RDT_BG_' + d).fadeIn({duration: 500, queue: false});
 					} else {
@@ -1403,10 +1407,10 @@ function RDT_displayItemEdit(id, idx, itemHx){
 		anim    = itemHx.slice(RANGES['RDT_item-0-itemMP'][0],   		   RANGES['RDT_item-0-itemMP'][1]);
 	}
 	if (header === '68'){
-		posX    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
-		posY    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
-		posZ    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
-		posR    = '[WIP]'; //itemHx.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
+		posX    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemXX'][0], RANGES['RDT_item-1-itemXX'][1]);
+		posY    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemYY'][0], RANGES['RDT_item-1-itemYY'][1]);
+		posZ    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemZZ'][0], RANGES['RDT_item-1-itemZZ'][1]);
+		posR    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemRR'][0], RANGES['RDT_item-1-itemRR'][1]);
 		hex     = itemHx.slice(RANGES['RDT_item-1-itemID'][0], 				RANGES['RDT_item-1-itemID'][1]);
 		quant   = parseInt(itemHx.slice(RANGES['RDT_item-1-itemQuant'][0],  RANGES['RDT_item-1-itemQuant'][1]), 16);
 		iFlag   = '[WIP]';
@@ -1478,7 +1482,7 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	$('#RDT_item_Y').css({'display': 'block'});
 	$('#RDT_item_Z').css({'display': 'block'});
 	$('#RDT_item_R').css({'display': 'block'});
-	$('#RDT-item-list').css({'width': '622px'});
+	$('#RDT-item-list').css({'width': '722px'});
 	$('#RDT-Item-Edit').css({'display': 'block'});
 	if (header === '68'){
 		$('#RDT_btnEditPos').css({'display': 'none'});
@@ -1556,6 +1560,7 @@ function RDT_applyMenuFocus(menuId){
 function RDT_showCanvasTab(){
 	$('#RDT-aba-menu-4').css({'display': 'inline'});
 	RDT_selectPoint(RDT_selectedPoint);
+	RDT_updateCanvasInfos(0);
 	RDT_showMenu(4);
 }
 /*
@@ -1569,6 +1574,8 @@ function R3ditor_enableLiveStatusButton(){
 		$('#RDT_LIVESTATUS').css({'display': 'inline'});
 		$('#MSG_LIVESTATUS').css({'display': 'inline'});
 		$('#SAV_LIVESTATUS').css({'display': 'inline'});
+		// Another Buttons
+		$('#RDT_useJillPos_Item').css({'display': 'inline'});
 	}
 }
 function R3ditor_disableLiveStatusButton(){
@@ -1578,6 +1585,8 @@ function R3ditor_disableLiveStatusButton(){
 	$('#RDT_LIVESTATUS').css({'display': 'none'});
 	$('#MSG_LIVESTATUS').css({'display': 'none'});
 	$('#SAV_LIVESTATUS').css({'display': 'none'});
+	// Another Buttons
+	$('#RDT_useJillPos_Item').css({'display': 'none'});
 }
 function RE3_LIVE_RENDER(){
 	if (MEM_JS_canRender === true){
@@ -1634,7 +1643,6 @@ function RE3_LIVE_RENDER(){
 			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
 			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
 			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
-			RE3_LIVE_CANVAS_RENDER();
 		}
 		var enableInfiniteLife = document.getElementById('RE3_LIVESTATUS_CHEAT_INFHP').checked;
 		if (enableInfiniteLife === true){
@@ -1642,6 +1650,7 @@ function RE3_LIVE_RENDER(){
 		}
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
 		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
+		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').title = RDT_locations[REALTIME_CurrentRDT][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
@@ -1763,8 +1772,8 @@ function INI_showMenu(menuId){
 		$('#INI_menu_' + c).css({'display': 'none'});
 		c++;
 	}
-	$('#INI_applyBtn').css({'display': 'inline'});
 	$('#INI_makeNewIni').css({'display': 'none'});
+	$('#INI_applyBtn').css({'display': 'inline'});
 	$('#INI_reloadFile').css({'display': 'inline'});
 	$('#INI_applyBtn_ask').css({'display': 'inline'});
 	$('#INI_openOnNotepad').css({'display': 'inline'});

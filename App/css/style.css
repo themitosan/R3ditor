@@ -46,11 +46,11 @@ a{
 audio{
     width: 100%;
 }
-input[type="range" i]{
+input[type='range' i]{
     position: relative;
     margin-right: 6px;
     margin-top: 4px;
-    width: 82%;
+    width: 62%;
     top: 6px;
 }
 .chkbox{
@@ -75,7 +75,7 @@ input[type="range" i]{
 }
 .RDT_lbl_pointers{
     left: 200px;
-    width: 1090px;
+    width: 1104px;
     position: sticky;
     margin-top: -18px;
 }
@@ -85,8 +85,8 @@ input[type="range" i]{
     padding: 6px;
     height: auto;
     display: none;
-    border-radius: 4px;
     position: absolute;
+    border-radius: 4px;
     background-image: linear-gradient(to bottom, #555, #222);
 }
 .feature_title{
@@ -256,11 +256,11 @@ input[type="range" i]{
     display: flex;
 }
 .inventario{
-    overflow: hidden;
-    height: 406px;
     width: 218px;
-    background-color: #000040;
+    height: 406px;
+    overflow: hidden;
     border-radius: 4px;
+    background-color: #000040;
 }
 .invent-principal{
     cursor: pointer;
@@ -306,6 +306,9 @@ input[type="range" i]{
 .invent-10{
     top: 504px;
     left: 1195px;
+}
+.overflow-hidden{
+    overflow: hidden !important;
 }
 .b-quant-lbl{
 	z-index: 1;
@@ -527,7 +530,7 @@ input[type="range" i]{
 }
 .RDT-item-select{
     text-transform: none !important;
-    width: 550px !important;
+    width: 510px !important;
     position: sticky;
     left: 740px;
 }
@@ -537,7 +540,7 @@ input[type="range" i]{
 .RDT-item-pos{
     position: sticky;
     width: 560px;
-    left: 740px;
+    left: 832px;
 }
 .RDT-btn-apply{
     border: 1px;
@@ -905,12 +908,12 @@ input[type="range" i]{
 }
 .RDT-item-editOtherFix{
     position: absolute;
-    left: 172px;
+    left: 154px;
     top: 266px;
 }
 .RDT_itemEditOtherLeftFix{
     position: sticky;
-    left: 894px !important;
+    left: 980px !important;
 }
 .RDT-valueEdit-fix{
     width: 50px !important;
@@ -1065,6 +1068,9 @@ input[type="range" i]{
     filter: blur(2px);
     position: absolute;
 }
+.RDT_MSGCODE-eDisplay{
+    width: 318px !important;
+}
 .RDT-Item-Misc{
     width: 30%;
     left: 120px;
@@ -1099,9 +1105,9 @@ input[type="range" i]{
 }
 .RDT-Item-Edit{
     top: 53px;
-    left: 648px;
+    left: 750px;
     padding: 6px;
-    width: 650px;
+    width: 550px;
     height: 468px;
     border-radius: 6px;
     position: absolute;
@@ -1277,7 +1283,7 @@ input[type="range" i]{
     border-style: solid;
     background-color: #000;
     background-position: center;
-    background-image: url("../Img/Grade.png");
+    background-image: url('../Img/Grade.png');
 }
 .render-item{
     top: 0px;
@@ -1324,43 +1330,23 @@ input[type="range" i]{
     position: absolute;
 }
 .infoXY3{
-    top: 450px;
     left: 8px;
+    top: 450px;
     position: absolute;
-}
-.infoXYLine{
-    z-index: 3;
-    top: 266px;
-    left: -26px;
-    height: 1px;
-    width: 610px;
-    position: absolute;
-    background-color: #fff;
-    transform: rotate(45deg);
-    box-shadow: 0 0 10px #b1b1b1;
-}
-.infoXY2Line{
-    z-index: 3;
-    top: 266px;
-    left: -26px;
-    height: 1px;
-    width: 610px;
-    position: absolute;
-    background-color: #fff;
-    transform: rotate(135deg);
-    box-shadow: 0 0 10px #b1b1b1;
 }
 .canvasInfos{
     background-image: linear-gradient(to bottom, #555, #333);
     border-radius: 6px;
     position: absolute;
     padding: 6px;
-    width: 446px;
+    width: 470px;
     left: 560px;
     top: 46px;
 }
 .box-fix{
-    width: 112px;
+    left: 60px;
+    width: 40px;
+    position: sticky;
 }
 .secondfieldSticky{
     position: sticky;
@@ -1376,7 +1362,7 @@ input[type="range" i]{
     margin-top: 6px;
 }
 /*
-    Filegen
+    File Gen
 */
 .FG_CANVAS{
     zoom: 2;
@@ -1563,7 +1549,7 @@ input[type="range" i]{
     width: 16px;
     height: 16px;
     position: absolute;
-    background-image: url("../Img/arrow.png");
+    background-image: url('../Img/arrow.png');
 }
 .RE3_LIVESTATUS_closeGameBtnFix{
     margin-left: 38px;
@@ -1990,7 +1976,7 @@ input[type="range" i]{
     top: 302px;
 }
 .SETTINGS_ABA-3{
-    left: 424px;
+    left: 478px;
     top: 56px;
 }
 .SETTINGS_ABA-4{
@@ -2005,14 +1991,14 @@ input[type="range" i]{
 }
 .SETTINGS_WINDOW-2{
     height: 186px;
-    width: 374px;
+    width: 434px;
     left: 14px;
     top: 324px;
 }
 .SETTINGS_WINDOW-3{
     height: 278px;
     width: 374px;
-    left: 408px;
+    left: 468px;
     top: 78px;
 }
 .SETTINGS_WINDOW-4{

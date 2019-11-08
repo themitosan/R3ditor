@@ -12,8 +12,8 @@ var progressbar_0 = 0;
 var progressbar_1 = 65;
 var EXEC_BIO3_original;
 var enable_mod = false;
-var WZ_EXTRACTLIST = [];
 var WZ_skipRofs = false;
+var WZ_EXTRACTLIST = [];
 var WZ_showWizard = true;
 function WZ_verifyConfigFile(){
 	TEMP_APP_PATH = APP_PATH;

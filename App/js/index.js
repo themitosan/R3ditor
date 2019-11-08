@@ -144,10 +144,10 @@ function openFileOnHex(file){
 }
 // Notifications Desktop
 function showNotify(titulo, texto, tempo){
-	if (titulo == ''){
+	if (titulo === ''){
 		titulo = 'R3ditor - Notification';
 	}
-	if (texto == ''){
+	if (texto === ''){
 		texto = 'Message';
 	}
 	if (tempo === null || tempo === undefined || tempo === ''){
@@ -162,7 +162,7 @@ function showNotify(titulo, texto, tempo){
 		setTimeout(NOTIFY.close.bind(NOTIFY), tempo);
 	}
 	catch(err){
-		if (DEBUG == true){
+		if (DEBUG === true){
 			console.error('(Notification) ERROR: ' + err);
 			addLog('error', '(Notification) ERROR: ' + err);
 		}
@@ -319,6 +319,7 @@ function runExternalSoftware(exe, args){
 			RE3_LIVE_closeForm();
 			R3ditor_disableLiveStatusButton();
 			if (PROCESS_OBJ !== undefined){
+				clearInterval(MEM_JS_updatePosTimer);
 				MEM_JS.closeProcess(PROCESS_OBJ.handle);
 				log_separador();
 				addLog('log', 'INFO - MemoryJS - Process closed!');
@@ -491,9 +492,6 @@ function parsePositive(value){
 }
 function parseHex(value){
 	return parseInt(value / 2).toString(16);
-}
-function calcCanvasXY(value, max){
-	return value / 100 * max;
 }
 function calcBIO3Numbers(n){
 	var a = parseInt(n) + 32767;

@@ -23,8 +23,8 @@
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
 		<script type="text/javascript" src="js/filegen.js"></script>
-		<script type="text/javascript" src="js/debug.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
+		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
 	<body>
 		<!-- Menu Principal -->
@@ -151,7 +151,7 @@
 						<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
 						Fast (50) - <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> - Slow (120)</center><br>
 						Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>
-						Fast causes information to be updated in real time, but may decrease overall performance due to <i>JS Heap</i>.
+						Fast causes information to be updated in real time, but may decrease overall performance due to <i>Forced reflow</i> and <i>JS Heap</i>.
 					</div>
 
 					<!-- Remove Options -->
@@ -557,7 +557,7 @@
 					<div id="RDT_BG_9" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Cameras - Total: <font id="RDT_lbl_totalCameras">???</font></font></center>
 					<div id="RDT_camera_holder" class="RDT-holder">						
-						<!-- CAMERA vai aqui -->
+						<!-- CAMERA Goes Here -->
 					</div>
 					<!-- RDT: CAMERA - Edit -->
 					<div class="RDT-Item-Edit RDT_camEditFixForm none" id="RDT-camera-Edit">
@@ -598,7 +598,7 @@
 					<div id="RDT_BG_8" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Enemies / NPC's - Total: <font id="RDT_lbl_totalEnemy">???</font></font></center>
 					<div id="RDT_enemy_holder" class="RDT-holder">
-						<!-- Os inimigos vão aqui -->
+						<!-- Enemy / NPC goes here -->
 					</div>
 					<!-- RDT: Enemy / NPC - Editar -->
 					<div class="RDT-Item-Edit RDT_enemyNPC_editForm-fix" id="RDT-enemyNPC-Edit">
@@ -611,17 +611,17 @@
 							<div class="RDT_coordsHolder_A">
 								Enemy / NPC: 
 								<select class="item-select-mod RDT_editSelectEnemyNPC-fix no-transform-text" id="RDT_selectEnemyNPC" onchange="RDT_enemyNPCValidateInput();">
-									<!-- As opções vão aqui -->
+									<!-- Options goes here -->
 								</select>
 							</div>
-							<div class="RDT_coordsHolder_B">X Position: <input type="text" id="RDT_enemyNPC-edit-X" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Y Position: <input type="text" id="RDT_enemyNPC-edit-Y" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Z Position: <input type="text" id="RDT_enemyNPC-edit-Z" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">R Position: <input type="text" id="RDT_enemyNPC-edit-R" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" id="RDT_enemyNPC-edit-X" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" id="RDT_enemyNPC-edit-Y" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" id="RDT_enemyNPC-edit-Z" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" id="RDT_enemyNPC-edit-R" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Pose: 
 								<select id="RDT_enemyNPC-edit-PO" class="item-select-mod RDT-item-lbl-fix-9 RDT_editSelectEnemyNPC-fix no-transform-text" onchange="RDT_enemyNPCValidateInput();">
-									<!-- As pos. vão aqui -->
+									<!-- Pos. goes here -->
 								</select>
 							</div>
 							<div class="RDT_coordsHolder_B">Texture: <input type="text" id="RDT_enemyNPC-edit-TX" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
@@ -647,9 +647,9 @@
 					<div id="RDT_BG_7" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Message Code - Total: <font id="RDT_lbl_totalmsgCode">???</font></font></center>
 					<div id="RDT_msgCode_holder" class="RDT-holder">
-						<!-- MSG CODE vai aqui -->
+						<!-- MSGCODE vai aqui -->
 					</div>
-					<!-- RDT: MSG CODE - Editar -->
+					<!-- RDT: MSGCODE - Editar -->
 					<div class="RDT-Item-Edit RDT_editParamMSGCODE" id="RDT-MSGCODE-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Message: <font id="RDT-lbl-MSGCODE-edit">???</font> - ID: <font id="RDT-lbl-MSGCODE-index">???</font></center>
 						<div id="RDT-msgCode-edit-form">
@@ -662,7 +662,7 @@
 							<div class="RDT_coordsHolder_B">Special: <input type="text" id="RDT_MSGCODE-edit-special" class="item-select-mod RDT-item-lbl-fix-7" placeholder="00" maxlength="2"></div>
 							<div class="RDT_coordsHolder_B">
 								Display mode: 
-								<select id="RDT_MSGCODE-edit-display" class="item-select-mod no-transform-text" style="width: 318px;">
+								<select id="RDT_MSGCODE-edit-display" class="item-select-mod no-transform-text RDT_MSGCODE-eDisplay">
 									<!-- As opções vão aqui -->
 								</select>
 							</div>
@@ -686,15 +686,15 @@
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form">
-							<div class="RDT_coordsHolder_A">X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B">Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B">Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B">Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A">Next X Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B">Next Y Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B">Next Z Position: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B">Next Rotation: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Next X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Next Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Next Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Next R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>
@@ -752,7 +752,7 @@
 				</div>
 			</div>
 			<!-- RDT: Canvas -->
-			<div class="menu" id="RDT_menu-4" onclick="main_closeFileList();">
+			<div class="menu overflow-hidden" id="RDT_menu-4" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-canvas-hold">
 					<div id="RDT_BG_4" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Edit Position</font></center>
@@ -760,8 +760,6 @@
 					<div class="infoXY1">X: FFFF<br>Y: FFFF</div>
 					<div class="infoXY2">X: FFFF<br>Y: 0000</div>
 					<div class="infoXY3">X: 0000<br>Y: FFFF</div>
-					<div class="infoXYLine"></div>
-					<div class="infoXY2Line"></div>
 					<div id="RDT_CANVAS_0" class="divCanvas">
 						<!-- Render vai aqui -->
 					</div>
@@ -769,18 +767,16 @@
 						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br>
 						Name: <font id="RDT_lbl_canvasItemName">???</font></center>
 						<div class="canvasInfoOverflow">
-							X BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" maxlength="4" id="RDT_lbl_point_x_hex"><font class="padding-left">X BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_x_bio"><br>
-							Y BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" maxlength="4" id="RDT_lbl_point_y_hex"><font class="padding-left">Y BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_y_bio"><br>
-							Z BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" maxlength="4" id="RDT_lbl_point_z_hex"><font class="padding-left">Z BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_z_bio"><br>
-							R BIO3: <input type="text" onchange="RDT_updateCanvasInfos(2);" class="item-select-mod box-fix" value="0000" maxlength="4" id="RDT_lbl_point_r_hex"><font class="padding-left">R BIO3 Convert: </font><input type="number" min="0" max="65535" step="1" onchange="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix secondfieldSticky" value="0000" id="RDT_lbl_point_r_bio"><br>
-							X: <input type="range" id="RDT_slider_X" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_px">0</font><br>
-							Y: <input type="range" id="RDT_slider_Y" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_py">0</font><br>
-							Z: <input type="range" id="RDT_slider_Z" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pz">0</font><br>
-							R: <input type="range" id="RDT_slider_R" value="0" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pr">0</font><br>
-							D1: <input type="range" id="RDT_slider_D" value="0" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(0);"><font id="RDT_lbl_pd">0</font><br>
-							D2: <input type="range" id="RDT_slider_D2" value="0" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(1);"><font id="RDT_lbl_pd2">0</font><br>
-							<br>
+							<font class="RE3_LIVESTATUS_X_color">X BIO3: <input type="text" oninput="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix" value="0" maxlength="4" id="RDT_lbl_point_x_hex"><font class="padding-left"></font><input type="range" id="RDT_slider_X" value="32767" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_px">0</font></font><br>
+							<font class="RE3_LIVESTATUS_Y_color">Y BIO3: <input type="text" oninput="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix" value="0" maxlength="4" id="RDT_lbl_point_y_hex"><font class="padding-left"></font><input type="range" id="RDT_slider_Y" value="32767" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_py">0</font></font><br>
+							<font class="RE3_LIVESTATUS_Z_color">Z BIO3: <input type="text" oninput="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix" value="0" maxlength="4" id="RDT_lbl_point_z_hex"><font class="padding-left"></font><input type="range" id="RDT_slider_Z" value="32767" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pz">0</font></font><br>
+							<font class="RE3_LIVESTATUS_R_color">R BIO3: <input type="text" oninput="RDT_updateCanvasInfos(1);" class="item-select-mod box-fix" value="0" maxlength="4" id="RDT_lbl_point_r_hex"><font class="padding-left"></font><input type="range" id="RDT_slider_R" value="32767" min="0" max="65535" step="1" oninput="RDT_updateCanvasInfos(0);"><font id="RDT_lbl_pr">0</font></font><br>
+							<center>
+								D1: <input type="range" id="RDT_slider_D" value="32767" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(0);"><font id="RDT_lbl_pd">0</font><br>
+								D2: <input type="range" id="RDT_slider_D2" value="32767" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(1);"><font id="RDT_lbl_pd2">0</font>
+							</center><br>
 							<input type="button" value="Center Pos." class="botao-menu" onclick="RDT_canvasResetPos();">
+							<input type="button" value="Use Player Pos." id="RDT_useJillPos_Item" class="botao-menu botao-aplicar none" onclick="RDT_getJillPosToApply(0);">
 						</div><br>
 						<center><input type="button" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
 					</div>
@@ -854,15 +850,15 @@
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
 						<input type="button" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
-						<div class="RDT_coordsHolder_A" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
-						<div class="RDT_coordsHolder_B" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
-						<div class="RDT_coordsHolder_B" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
-						<div class="RDT_coordsHolder_B" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
+						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
 						<div class="menu-separador"></div>
 						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
 						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-MI" placeholder="00" value=""></div>
 						<div class="RDT-item-editOtherFix"l id="RDT-iEditOther">
-							<div>Item flag: <input type="text" class="item-select-mod RDT_itemEditOtherLeftFix RDT-valueEdit-fix" id="RDT_item-edit-IF" placeholder="00" value=""></div>
+							<div>Item flag: <input type="text" class="item-select-mod RDT_itemEditOtherLeftFix RDT-valueEdit-fix" id="RDT_item-edit-IF" placeholder="00"></div>
 							Convert to: 
 							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix no-transform-text" style="width: 60px;">
 								<option value="1">Item</option><option value="2">File</option><option value="3">Map</option>

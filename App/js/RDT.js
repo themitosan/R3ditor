@@ -110,6 +110,7 @@ function RDT_resetVars(){
 	RDT_cameraArray = [];
 	RDT_enemiesArray = [];
 	RDT_MSG_POINTERS = [];
+	RDT_selectedPoint = 0;
 	RDT_messagesArray = [];
 	RDT_MSG_finalLenght = 0;
 	RDT_MSG_startLength = 0;
@@ -142,7 +143,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_doorsArray = [];
 	RE3_LIVE_closeForm();
 	RDT_CANCRASH = false;
-	RDT_ERRORMOTIVE = "";
+	RDT_ERRORMOTIVE = '';
 	localStorage.clear();
 	RDT_editItemCancel();
 	RDT_FILEMAP_MSG = [];
@@ -167,24 +168,24 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		WZ_saveConfigs(true);
 	}
 	startFirstMessage = undefined;
-	$("#RDT-aba-menu-4").css({'display': 'none'});
-	$("#RDT-aba-menu-2").css({"display": "inline"});
-	$("#RDT-aba-menu-3").css({"display": "inline"});
+	$('#RDT-aba-menu-4').css({'display': 'none'});
+	$('#RDT-aba-menu-2').css({"display": 'inline'});
+	$('#RDT-aba-menu-3').css({"display": 'inline'});
 	document.getElementById('RDT_slider_D').value = 0;
 	document.getElementById('RDT_slider_D2').value = 0;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
-	document.getElementById('RDT_lbl_pd').innerHTML = "0";
-	document.getElementById('RDT_lbl_pd2').innerHTML = "0";
-	document.getElementById('RDT_CANVAS_0').innerHTML = "";
-	document.getElementById('RDT-aba-menu-2').disabled = "";
-	document.getElementById('RDT_MSG-holder').innerHTML = "";
-	document.getElementById('RDT_door_holder').innerHTML = "";
-	document.getElementById('RDT_audio_holder').innerHTML = "";
-	document.getElementById('RDT_enemy_holder').innerHTML = "";
-	document.getElementById('RDT_camera_holder').innerHTML = "";
-	document.getElementById('RDT_msgCode_holder').innerHTML = "";
-	document.getElementById('RDT_lbl_selectedPoint').innerHTML = "";
-	addLog("log", "RDT - The file was loaded successfully! - File: " + rdtFile);
+	document.getElementById('RDT_lbl_pd').innerHTML = '0';
+	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
+	document.getElementById('RDT_CANVAS_0').innerHTML = '';
+	document.getElementById('RDT-aba-menu-2').disabled = '';
+	document.getElementById('RDT_MSG-holder').innerHTML = '';
+	document.getElementById('RDT_door_holder').innerHTML = '';
+	document.getElementById('RDT_audio_holder').innerHTML = '';
+	document.getElementById('RDT_enemy_holder').innerHTML = '';
+	document.getElementById('RDT_camera_holder').innerHTML = '';
+	document.getElementById('RDT_msgCode_holder').innerHTML = '';
+	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
+	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile);
 	log_separador();
 	//
 	RDT_getEnemiesArray();
@@ -209,7 +210,7 @@ function RDT_getCameras(){
 			extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
 		}
 		while(c < RDT_cameraArray.length){
-			localStorage.setItem("RDT_Camera-" + c, RDT_cameraArray[c]);
+			localStorage.setItem('RDT_Camera-' + c, RDT_cameraArray[c]);
 			RDT_decompileCameras(c);
 			c++;
 		}
@@ -941,7 +942,7 @@ function RDT_getAllRelatedAudios(){
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Remove" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';RDT_deleteAudio();">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoad(1);">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Open" ' + 
-			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), "/") + "/Assets/DATA_A/VOICE/" + getAudioArray[c] + '\']);"><br>Path: <font class="italic">' + 
+			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '\']);"><br>Path: <font class="italic">' + 
 			APP_PATH.replace(new RegExp('\\\\', 'g'), "/") + "/Assets/DATA_A/VOICE/" + getAudioArray[c] + '</font><br></div>';
 		$('#RDT_audio_holder').append(AUDIO_HTML_TEMPLATE);
 		c++;
@@ -954,7 +955,7 @@ function RDT_replaceWavFile(file){
 	if (askConfirm === true){
 		fs.unlinkSync(deleteFile);
 		var newWaveFile = fs.readFileSync(file, 'hex');
-		fs.writeFileSync(APP_PATH + "\\Assets\\DATA_A\\VOICE\\" + RDT_currentAudio.toUpperCase(), newWaveFile, 'hex');
+		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_A\\VOICE\\' + RDT_currentAudio.toUpperCase(), newWaveFile, 'hex');
 		addLog('log', 'WAV - Replace successfull!');
 	} else {
 		addLog('warn', 'WARN - Operation Canceled!');
@@ -991,9 +992,8 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw('02310200');
 	RDT_generateItemIndexRaw('02310300');
 	RDT_generateItemIndexRaw('02310400');
-	RDT_generateItemIndexRaw('02310a00'); // R503.RDT - Fábrica
+	RDT_generateItemIndexRaw('02310a00'); // R503.RDT - Dead Factory
 	RDT_totalItensGeral = RDT_ItensArray.length;
-	c = 0;
 	while (c < RDT_totalItensGeral){
 		var RDT_itemStartRange = RDT_ItensArray[c] - 4;
 		var RDT_itemEndRange = parseInt(RDT_ItensArray[c] - 4) + 52;
@@ -1120,7 +1120,7 @@ function RDT_renderItens(index, hex){
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': <font class="italic">' + convert + 
 			' (Hex: <font title="' + convert + '">' + id.toUpperCase() + '</font>)</font><input type="button" class="btn-remover-comando" id="RDT_editItemBtn_' + index + '" style="margin-top: 0px;" value="Modify" onclick="RDT_selectPoint(' + index + ');' + 
 			'RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>Quantity: <font class="italic">' + parseInt(quant, 16) + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
-			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br>Rotation: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
+			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
 			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
 			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc" style="left: 220px;margin-top: -70px;"><br><br><br>Item flag: ' + iFlag.toUpperCase() +  '</div><div class="menu-separador">' + 
 			'</div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
@@ -2053,18 +2053,18 @@ function RDT_lookForRDTConfigFile(){
 		if (RDT_requestReload === false){
 			startFirstMessage = undefined;
 			if (RDT_totalMessages !== 0){
-				block_size_hex = mapfile[parseInt(mapfile.indexOf("[MSGBLOCK]") + 1)];
+				block_size_hex = mapfile[parseInt(mapfile.indexOf('[MSGBLOCK]') + 1)];
 				var block_size_str = parseInt(block_size_hex, 16);
 				var c_block_size_hex = BLOCK_MSGS.length.toString(16);
 				var c_block_size_str = BLOCK_MSGS.length;
 				if (c_block_size_str === block_size_str){
-					$("#MSG_RDT_lbl_blockUsage").addClass('green');
-					$("#RDT_lbl-msg_c_blockHex").addClass('green');
-					$("#RDT_lbl-msg_c_blockHex").removeClass('red');
+					$('#MSG_RDT_lbl_blockUsage').addClass('green');
+					$('#RDT_lbl-msg_c_blockHex').addClass('green');
+					$('#RDT_lbl-msg_c_blockHex').removeClass('red');
 				} else {
-					$("#RDT_lbl-msg_c_blockHex").addClass('red');
-					$("#RDT_lbl-msg_c_blockHex").removeClass('green');
-					$("#MSG_RDT_lbl_blockUsage").removeClass('green');
+					$('#RDT_lbl-msg_c_blockHex').addClass('red');
+					$('#RDT_lbl-msg_c_blockHex').removeClass('green');
+					$('#MSG_RDT_lbl_blockUsage').removeClass('green');
 				}
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
@@ -2116,7 +2116,7 @@ function RDT_lookForRDTConfigFile(){
 		}
 	} else {
 		if (RDT_loop < 3){
-			if (getFileName(ORIGINAL_FILENAME) === "r209"){
+			if (getFileName(ORIGINAL_FILENAME) === 'r209'){
 				RDT_totalMessages++;
 			}
 			RDT_startMessageAnalysis();
@@ -2128,10 +2128,10 @@ function RDT_lookForRDTConfigFile(){
 			RDT_requestReloadWithFix1 = false;
 			$("#RDT_lbl-msg_c_blockHex").removeClass('red');
 			$("#RDT_lbl-msg_c_blockHex").removeClass('green');
-			if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap') === true){
-				RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
+				RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
 			} else {
-				RDT_MAPFILE = "The map was not generated due an error";
+				RDT_MAPFILE = 'The map was not generated due an error';
 			}
 			RDT_showMenu(1);
 		}
@@ -2146,11 +2146,28 @@ function RDT_renderMessages(id, startOffset, endOffset){
 		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
 	}
 }
+/*
+	Item Canvas
+*/
+function RDT_getJillPosToApply(where){
+	if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+		MEM_JS_canRender = true;
+		// Item Pos
+		if (where === 0){
+			document.getElementById('RDT_lbl_point_x_hex').value = REALTIME_X_Pos;
+			document.getElementById('RDT_lbl_point_y_hex').value = REALTIME_Y_Pos;
+			document.getElementById('RDT_lbl_point_z_hex').value = REALTIME_Z_Pos;
+			document.getElementById('RDT_lbl_point_r_hex').value = REALTIME_R_Pos;
+			RDT_updateCanvasInfos(1);
+		}
+		MEM_JS_canRender = false;
+	}
+}
 function RDT_hideCanvasTab(){
 	var c = 0;
 	var cItem = localStorage.getItem('RDT_Item-' + RDT_selectedPoint);
-	var offset1 = cItem.slice(0, RANGES["RDT_item-0-itemXX"][0]);
-	var offset2 = cItem.slice(RANGES["RDT_item-0-itemRR"][1], cItem.length);
+	var offset1 = cItem.slice(0, RANGES['RDT_item-0-itemXX'][0]);
+	var offset2 = cItem.slice(RANGES['RDT_item-0-itemRR'][1], cItem.length);
 	var X = document.getElementById('RDT_lbl_point_x_hex').value.toLowerCase();
 	var Y = document.getElementById('RDT_lbl_point_y_hex').value.toLowerCase();
 	var Z = document.getElementById('RDT_lbl_point_z_hex').value.toLowerCase();
@@ -2162,28 +2179,25 @@ function RDT_hideCanvasTab(){
 	var tItems = RDT_totalItens;
 	RDT_totalItens = 0;
 	while(c < parseInt(tItems + 1)){
-		console.warn(localStorage.getItem("RDT_Item-" + c));
+		console.warn(localStorage.getItem('RDT_Item-' + c));
 		RDT_decompileItens(c, false);
 		c++;
 	}
-	$("#RDT-aba-menu-4").css({'display': 'none'});
-	$("#RDT-aba-menu-3").trigger('click');
+	$('#RDT-aba-menu-4').css({'display': 'none'});
+	$('#RDT-aba-menu-3').trigger('click');
+	$('#RDT_editItemBtn_' + RDT_selectedPoint).trigger('click');
 }
 function RDT_selectPoint(id){
 	var c = 0;
 	RDT_selectedPoint = id;
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = RDT_selectedPoint;
-	var cItem = localStorage.getItem("RDT_Item-" + RDT_selectedPoint);
-	if (cItem.slice(0, 2) === "67"){
-		RDT_CURRENT_X = cItem.slice(RANGES["RDT_item-0-itemXX"][0], RANGES["RDT_item-0-itemXX"][1]);
-		RDT_CURRENT_Y = cItem.slice(RANGES["RDT_item-0-itemYY"][0], RANGES["RDT_item-0-itemYY"][1]);
-		RDT_CURRENT_Z = cItem.slice(RANGES["RDT_item-0-itemZZ"][0], RANGES["RDT_item-0-itemZZ"][1]);
-		RDT_CURRENT_R = cItem.slice(RANGES["RDT_item-0-itemRR"][0], RANGES["RDT_item-0-itemRR"][1]);
-		var itemName = cItem.slice(RANGES["RDT_item-0-itemID"][0], RANGES["RDT_item-0-itemID"][1]);
-		document.getElementById('RDT_lbl_point_x_bio').value = processBIO3Vars(RDT_CURRENT_X);
-		document.getElementById('RDT_lbl_point_y_bio').value = processBIO3Vars(RDT_CURRENT_Y);
-		document.getElementById('RDT_lbl_point_z_bio').value = processBIO3Vars(RDT_CURRENT_Z);
-		document.getElementById('RDT_lbl_point_r_bio').value = processBIO3Vars(RDT_CURRENT_R);
+	var cItem = localStorage.getItem('RDT_Item-' + RDT_selectedPoint);
+	if (cItem.slice(0, 2) === '67'){
+		RDT_CURRENT_X = cItem.slice(RANGES['RDT_item-0-itemXX'][0], RANGES['RDT_item-0-itemXX'][1]);
+		RDT_CURRENT_Y = cItem.slice(RANGES['RDT_item-0-itemYY'][0], RANGES['RDT_item-0-itemYY'][1]);
+		RDT_CURRENT_Z = cItem.slice(RANGES['RDT_item-0-itemZZ'][0], RANGES['RDT_item-0-itemZZ'][1]);
+		RDT_CURRENT_R = cItem.slice(RANGES['RDT_item-0-itemRR'][0], RANGES['RDT_item-0-itemRR'][1]);
+		var itemName  = cItem.slice(RANGES['RDT_item-0-itemID'][0], RANGES['RDT_item-0-itemID'][1]);
 		document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X.toUpperCase();
 		document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y.toUpperCase();
 		document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z.toUpperCase();
@@ -2206,10 +2220,10 @@ function RDT_selectPoint(id){
 			document.getElementById('RDT_lbl_canvasItemName').innerHTML = RDT_MAPAS[itemName][0];
 		}
 		while (c < 100){
-			$("#RDT_ICONCANVAS_" + c).removeClass('render-item-select');
+			$('#RDT_ICONCANVAS_' + c).removeClass('render-item-select');
 			c++;
 		}
-		$("#RDT_ICONCANVAS_" + RDT_selectedPoint).addClass('render-item-select');
+		$('#RDT_ICONCANVAS_' + RDT_selectedPoint).addClass('render-item-select');
 	} else {
 		document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 	}
@@ -2219,18 +2233,18 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var nome;
 	if (parseInt(hex, 16) < 134 || parseInt(hex, 16) > 170){
 		tipo = 'Item';
-		nome = "(" + hex + ") " + ITEM[hex][0];
+		nome = '(' + hex + ') ' + ITEM[hex][0];
 	}
 	if (parseInt(hex, 16) > 133 && parseInt(hex, 16) < 164){
-		tipo = "File";
-		nome = "(" + hex + ") " + FILES[hex][0];
+		tipo = 'File';
+		nome = '(' + hex + ') ' + FILES[hex][0];
 	}
 	if (parseInt(hex, 16) > 163 && parseInt(hex, 16) < 171){
-		tipo = "Map";
-		nome = "(" + hex + ") " + RDT_MAPAS[hex][0];
+		tipo = 'Map';
+		nome = '(' + hex + ') ' + RDT_MAPAS[hex][0];
 	}
 	if (x === '' || x === undefined){
-		x = "0000";
+		x = '0000';
 	}
 	if (y === '' || y === undefined){
 		y = '0000';
@@ -2244,14 +2258,13 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 	var HTML_ICONCANVAS_TEMPLATE = '<div class="render-item render-item-color-' + type + '" title="Type: ' + tipo + '\nName: ' + nome + 
 		'\n\nOriginal Info:\nX: ' + x.toUpperCase() + ' (' + processBIO3Vars(x) + ')\nY: ' + y.toUpperCase() + ' (' + processBIO3Vars(y) + ')\nZ: ' + z.toUpperCase() + 
 		' (' + processBIO3Vars(z) + ')\nR: ' + r.toUpperCase() + ' (' + processBIO3Vars(r) + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
-	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(x), 65535), 410);
-	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(y), 65535), 410);
-	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(z), 65535), 0.5) + 1;
-	//var posR = processBIO3Vars(r) / 16; // <-- isso não está correto ainda
 
+	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(x)) + 32767), 65535);
+	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(y)) + 32767), 65535);
+	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(r)) + 32767) / FATORDEGIRO;
 	// Final
-	$("#RDT_CANVAS_0").append(HTML_ICONCANVAS_TEMPLATE);
-	$("#RDT_ICONCANVAS_" + id).css({"left": posX + "px", "top": posY + "px", "transform": "scale(" + posZ + ")"});
+	$('#RDT_CANVAS_0').append(HTML_ICONCANVAS_TEMPLATE);
+	$('#RDT_ICONCANVAS_' + id).css({'left': posX + '%', 'top': posY + '%'});
 }
 function RDT_updateCanvasInfos(mode){
 	// Ranges
@@ -2260,130 +2273,87 @@ function RDT_updateCanvasInfos(mode){
 		RDT_CURRENT_Y = parseDecimalToBIO3Var(document.getElementById('RDT_slider_Y').value, 0);
 		RDT_CURRENT_Z = parseDecimalToBIO3Var(document.getElementById('RDT_slider_Z').value, 0);
 		RDT_CURRENT_R = parseDecimalToBIO3Var(document.getElementById('RDT_slider_R').value, 0);
+		document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X;
+		document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y;
+		document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z;
+		document.getElementById('RDT_lbl_point_r_hex').value = RDT_CURRENT_R;
 	}
-	// Decimal
+	// Hex
 	if (mode === 1){
-		if (document.getElementById('RDT_lbl_point_x_bio').value > 65535){
-			document.getElementById('RDT_lbl_point_x_bio').value = 65535;
+		if (document.getElementById('RDT_lbl_point_x_hex').value === ''){
+			RDT_CURRENT_X = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_y_bio').value > 65535){
-			document.getElementById('RDT_lbl_point_y_bio').value = 65535;
+		if (document.getElementById('RDT_lbl_point_y_hex').value === ''){
+			RDT_CURRENT_Y = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_z_bio').value > 65535){
-			document.getElementById('RDT_lbl_point_z_bio').value = 65535;
+		if (document.getElementById('RDT_lbl_point_z_hex').value === ''){
+			RDT_CURRENT_Z = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_r_bio').value > 65535){
-			document.getElementById('RDT_lbl_point_r_bio').value = 65535;
+		if (document.getElementById('RDT_lbl_point_r_hex').value === ''){
+			RDT_CURRENT_R = '0000';
 		}
-		if (document.getElementById('RDT_lbl_point_x_bio').value < 0){
-			document.getElementById('RDT_lbl_point_x_bio').value = 0;
-		}
-		if (document.getElementById('RDT_lbl_point_y_bio').value < 0){
-			document.getElementById('RDT_lbl_point_y_bio').value = 0;
-		}
-		if (document.getElementById('RDT_lbl_point_z_bio').value < 0){
-			document.getElementById('RDT_lbl_point_z_bio').value = 0;
-		}
-		if (document.getElementById('RDT_lbl_point_r_bio').value < 0){
-			document.getElementById('RDT_lbl_point_r_bio').value = 0;
-		}
-		RDT_CURRENT_X = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_x_bio').value, 0);
-		RDT_CURRENT_Y = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_y_bio').value, 0);
-		RDT_CURRENT_Z = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_z_bio').value, 0);
-		RDT_CURRENT_R = parseDecimalToBIO3Var(document.getElementById('RDT_lbl_point_r_bio').value, 0);
-	}
-	// Bio 3 Mode
-	if (mode === 2){
-		if (parseInt(document.getElementById('RDT_lbl_point_x_hex').value, 16) > 65535){
-			document.getElementById('RDT_lbl_point_x_hex').value = "FFFF";
-		}
-		if (parseInt(document.getElementById('RDT_lbl_point_y_hex').value, 16) > 65535){
-			document.getElementById('RDT_lbl_point_y_hex').value = "FFFF";
-		}
-		if (parseInt(document.getElementById('RDT_lbl_point_z_hex').value, 16) > 65535){
-			document.getElementById('RDT_lbl_point_z_hex').value = "FFFF";
-		}
-		if (parseInt(document.getElementById('RDT_lbl_point_r_hex').value, 16) > 65535){
-			document.getElementById('RDT_lbl_point_r_hex').value = "FFFF";
-		}
-		if (document.getElementById('RDT_lbl_point_x_hex').value === '' || document.getElementById('RDT_lbl_point_x_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_x_hex').value = '0000';
-		}
-		if (document.getElementById('RDT_lbl_point_y_hex').value === '' || document.getElementById('RDT_lbl_point_y_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_y_hex').value = '0000';
-		}
-		if (document.getElementById('RDT_lbl_point_z_hex').value === '' || document.getElementById('RDT_lbl_point_z_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_z_hex').value = '0000';
-		}
-		if (document.getElementById('RDT_lbl_point_r_hex').value === '' || document.getElementById('RDT_lbl_point_r_hex').value.length > 4){
-			document.getElementById('RDT_lbl_point_r_hex').value = '0000';
-		}
-		if (document.getElementById('RDT_lbl_point_x_hex').value.length > 3 && document.getElementById('RDT_lbl_point_x_hex').value.length < 5){
+		if (document.getElementById('RDT_lbl_point_x_hex').value.length === 4){
 			RDT_CURRENT_X = document.getElementById('RDT_lbl_point_x_hex').value;
+			document.getElementById('RDT_slider_X').value = processBIO3Vars(RDT_CURRENT_X);
 		}
-		if (document.getElementById('RDT_lbl_point_y_hex').value.length > 3 && document.getElementById('RDT_lbl_point_y_hex').value.length < 5){
+		if (document.getElementById('RDT_lbl_point_y_hex').value.length === 4){
 			RDT_CURRENT_Y = document.getElementById('RDT_lbl_point_y_hex').value;
+			document.getElementById('RDT_slider_Y').value = processBIO3Vars(RDT_CURRENT_Y);
 		}
-		if (document.getElementById('RDT_lbl_point_z_hex').value.length > 3 && document.getElementById('RDT_lbl_point_z_hex').value.length < 5){
+		if (document.getElementById('RDT_lbl_point_z_hex').value.length === 4){
 			RDT_CURRENT_Z = document.getElementById('RDT_lbl_point_z_hex').value;
+			document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
 		}
-		if (document.getElementById('RDT_lbl_point_r_hex').value.length > 3 && document.getElementById('RDT_lbl_point_r_hex').value.length < 5){
+		if (document.getElementById('RDT_lbl_point_r_hex').value.length === 4){
 			RDT_CURRENT_R = document.getElementById('RDT_lbl_point_r_hex').value;
+			document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
 		}
 	}
-	var posX = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_X), 65535), 410);
-	var posY = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Y), 65535), 410);
-	var posZ = calcCanvasXY(parsePercentage(processBIO3Vars(RDT_CURRENT_Z), 65535), 0.5) + 1;
-	//var posR = processBIO3Vars(RDT_CURRENT_R) / 16;
-	document.getElementById('RDT_lbl_point_x_bio').value = processBIO3Vars(RDT_CURRENT_X);
-	document.getElementById('RDT_lbl_point_y_bio').value = processBIO3Vars(RDT_CURRENT_Y);
-	document.getElementById('RDT_lbl_point_z_bio').value = processBIO3Vars(RDT_CURRENT_Z);
-	document.getElementById('RDT_lbl_point_r_bio').value = processBIO3Vars(RDT_CURRENT_R);
-	document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X.toUpperCase();
-	document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y.toUpperCase();
-	document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z.toUpperCase();
-	document.getElementById('RDT_lbl_point_r_hex').value = RDT_CURRENT_R.toUpperCase();
-	document.getElementById('RDT_lbl_px').innerHTML = processBIO3Vars(RDT_CURRENT_X);
-	document.getElementById('RDT_lbl_py').innerHTML = processBIO3Vars(RDT_CURRENT_Y);
-	document.getElementById('RDT_lbl_pz').innerHTML = processBIO3Vars(RDT_CURRENT_Z);
-	document.getElementById('RDT_lbl_pr').innerHTML = processBIO3Vars(RDT_CURRENT_R);
-	document.getElementById('RDT_slider_X').value = processBIO3Vars(RDT_CURRENT_X);
-	document.getElementById('RDT_slider_Y').value = processBIO3Vars(RDT_CURRENT_Y);
-	document.getElementById('RDT_slider_Z').value = processBIO3Vars(RDT_CURRENT_Z);
-	document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
-	$("#RDT_ICONCANVAS_" + RDT_selectedPoint).css({"left": posX + "px", "top": posY + "px", "transform": "scale(" + posZ + ")"});
+	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X)) + 32767), 65535);
+	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y)) + 32767), 65535);
+	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y)) + 32767) / FATORDEGIRO;
+
+	document.getElementById('RDT_lbl_px').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X) + 32767);
+	document.getElementById('RDT_lbl_py').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y) + 32767);
+	document.getElementById('RDT_lbl_pz').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Z) + 32767);
+	document.getElementById('RDT_lbl_pr').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_R) + 32767);
+
+	$('#RDT_ICONCANVAS_' + RDT_selectedPoint).css({'left': posX + '%', 'top': posY + '%'});
 }
 function RDT_posMoveDiagonal(mode){
 	if (mode === 0){
 		document.getElementById('RDT_slider_X').value = document.getElementById('RDT_slider_D').value;
 		document.getElementById('RDT_slider_Y').value = document.getElementById('RDT_slider_D').value;
-		document.getElementById('RDT_lbl_pd').innerHTML = document.getElementById('RDT_slider_D').value;
+		document.getElementById('RDT_lbl_pd').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D').value) + 32767);
 	}
 	if (mode === 1){
 		var x = 65535 - document.getElementById('RDT_slider_D2').value;
 		var y = 0 + document.getElementById('RDT_slider_D2').value;
 		document.getElementById('RDT_slider_X').value = x;
 		document.getElementById('RDT_slider_Y').value = y;
-		document.getElementById('RDT_lbl_pd2').innerHTML = document.getElementById('RDT_slider_D2').value;
+		document.getElementById('RDT_lbl_pd2').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D2').value) + 32767);
 	}
 	RDT_updateCanvasInfos(0);
 }
 function RDT_canvasResetPos(){
-	document.getElementById('RDT_slider_X').value = 32767;
-	document.getElementById('RDT_slider_Y').value = 32767;
-	document.getElementById('RDT_slider_D').value = 32767;
-	document.getElementById('RDT_slider_D2').value = 32767;
-	document.getElementById('RDT_lbl_pd').innerHTML = '32767';
-	document.getElementById('RDT_lbl_pd2').innerHTML = '32767';
+	document.getElementById('RDT_slider_X').value = 0;
+	document.getElementById('RDT_slider_Y').value = 0;
+	document.getElementById('RDT_slider_Z').value = 0;
+	document.getElementById('RDT_slider_R').value = 0;
+	document.getElementById('RDT_slider_D').value = 0;
+	document.getElementById('RDT_slider_D2').value = 0;
+	document.getElementById('RDT_lbl_pd').innerHTML = '0';
+	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
 	RDT_updateCanvasInfos(0);
 }
+//
 function RDT_transferMessageToMSG(msgId){
-	var msg_transfer = sessionStorage.getItem("MESSAGE_HEX_" + msgId);
+	var msg_transfer = sessionStorage.getItem('MESSAGE_HEX_' + msgId);
 	if (msg_transfer !== null && msg_transfer !== undefined){
 		MSG_ID = msgId;
-		document.getElementById('RDT_MSG_NUMBER').innerHTML = "Message " + msgId + " - ";
-		MSG_CURRENT_RDT_MESSAGE_END = parseInt(sessionStorage.getItem("MESSAGE_END_" + msgId));
-		MSG_CURRENT_RDT_MESSAGE_START = parseInt(sessionStorage.getItem("MESSAGE_START_" + msgId));
+		document.getElementById('RDT_MSG_NUMBER').innerHTML = 'Message ' + msgId + ' - ';
+		MSG_CURRENT_RDT_MESSAGE_END = parseInt(sessionStorage.getItem('MESSAGE_END_' + msgId));
+		MSG_CURRENT_RDT_MESSAGE_START = parseInt(sessionStorage.getItem('MESSAGE_START_' + msgId));
 		MSG_startMSGDecrypt_Lv2(msg_transfer);
 		TRANSFER_RDT_TO_MSG();
 	} else {
@@ -2421,14 +2391,14 @@ function RDT_Backup(){
 	if (RDT_arquivoBruto !== undefined){
 		try{
 			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-' + currentTime() + '.rdtbackup';
-			fs.writeFileSync(APP_PATH + "\\Backup\\RDT\\" + backup_name, RDT_arquivoBruto, 'hex');
+			fs.writeFileSync(APP_PATH + '\\Backup\\RDT\\' + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
 			addLog('log', 'INFO - A backup of your RDT file was made successfully! - File: ' + backup_name);
 			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\RDT\\' + backup_name);
 			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
 			log_separador();
 			WZ_saveConfigs(true);
-			$("#RDT_restoreLastBackup").css({'display': 'inline'});
+			$('#RDT_restoreLastBackup').css({'display': 'inline'});
 		} catch (err){
 			addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
@@ -2469,7 +2439,7 @@ function RDT_restoreLastBackup_1(name){
 		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT', BK, 'hex');
 		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
 		if (ORIGINAL_FILENAME !== undefined){
-			RDT_CARREGAR_ARQUIVO(APP_PATH + "\\Assets\\DATA_E\\RDT\\" + name + '.RDT');
+			RDT_CARREGAR_ARQUIVO(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT');
 		}
 	} catch (err){
 		console.error(err);
@@ -2502,7 +2472,7 @@ function RDT_COMPILE_Lv1(){
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
-			addLog('log', "RDT - Reloading File: " + ORIGINAL_FILENAME);
+			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$("#RDT-aba-menu-3").trigger('click');
 		} catch(err){
@@ -2528,7 +2498,7 @@ function RDT_COMPILE_Lv2(oldHex, newReplacementHex){
 function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
-		addLog('log', 'INFO: The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
+		addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
 		addLog('log', 'Folder: ' + ORIGINAL_FILENAME);
 		log_separador();
 		RDT_doAfterSave();
