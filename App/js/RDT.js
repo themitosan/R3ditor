@@ -1084,7 +1084,7 @@ function RDT_renderItens(index, hex){
 		quant 	= hex.slice(RANGES['RDT_item-1-itemQuant'][0],  RANGES['RDT_item-1-itemQuant'][1]);
 		iFlag  	= '[WIP]';
 		modelId = '[WIP]';
-		mp 		= hex.slice(RANGES['DT_item-1-itemMP'][0],     RANGES['RDT_item-1-itemMP'][1]);
+		mp 		= hex.slice(RANGES['RDT_item-1-itemMP'][0],     RANGES['RDT_item-1-itemMP'][1]);
 		hexComp = localStorage.getItem('RDT_Item-' + index).toUpperCase() + ' [WIP]';
 	}
 	try{
