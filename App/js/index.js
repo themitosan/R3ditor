@@ -186,7 +186,6 @@ function R3DITOR_RUN_RE3(mode){
 			} else {
 				RE3_RUNNING = true;
 				var msg = 'Running Resident Evil 3...';
-				document.title = APP_NAME + msg;
 				addLog('log', 'INFO - ' + msg);
 				log_separador();
 			}
@@ -223,7 +222,6 @@ function R3DITOR_RUN_MERCE(mode){
 			} else {
 				process.chdir(APP_PATH + '\\Assets');
 			}
-			document.title = APP_NAME + ' - Running Mercenaries...';
 			runExternalSoftware(EXEC_BIO3_MERCE);
 		}catch(err){
 			if (WZ_showWizard === true){
@@ -331,7 +329,6 @@ function runExternalSoftware(exe, args){
 			}
 			R3DITOR_RUNGAME(1);
 		}
-		document.title = APP_NAME;
 		process.chdir(TEMP_APP_PATH);
 		if (code > 1){
 			color = 'red';

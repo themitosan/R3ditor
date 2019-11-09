@@ -951,7 +951,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - Map Editor (*.RDT) - File: ' + ORIGINAL_FILENAME;
+	document.title = APP_NAME + ' - Map Editor (*.RDT) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1066,6 +1066,7 @@ function RDT_showMenu(id){
 	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
 	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\');
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
 	$('#RDT_menu-' + id).css({'display': 'block'});
 	$('#menu-RDT').css({'display': 'block'});

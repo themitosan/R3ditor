@@ -185,7 +185,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_camera_holder').innerHTML = '';
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
-	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile);
+	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile.replace(new RegExp('/', 'gi'), '\\'));
 	log_separador();
 	//
 	RDT_getEnemiesArray();
