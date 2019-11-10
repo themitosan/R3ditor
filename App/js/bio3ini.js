@@ -750,121 +750,121 @@ function BIO3INI_SAVE(askSave){
 }
 function BIO3INI_MAKE_WZINI(mode){
 	mode = parseInt(mode);
-	BIO3INI_Save = ".\\Save";
-	BIO3INI_Movie = ".\\zmovie";
-	BIO3INI_Regist = ".\\regist.txt";
+	BIO3INI_Save = '.\\Save';
+	BIO3INI_Movie = '.\\zmovie';
+	BIO3INI_Regist = '.\\regist.txt';
 	if (mode !== 2){
-		BIO3INI_Rofs1 = ".\\DATA\\DOOR";
-		BIO3INI_Rofs2 = ".\\DATA_AE\\ETC2";
-		BIO3INI_Rofs3 = ".\\DATA\\ETC";
-		BIO3INI_Rofs4 = ".\\DATA_E\\ETC2";
-		BIO3INI_Rofs5 = ".\\DATA\\PLD";
-		BIO3INI_Rofs6 = ".\\DATA_A\\PLD";
-		BIO3INI_Rofs7 = ".\\DATA\\SOUND";
-		BIO3INI_Rofs8 = ".\\DATA_A\\BSS";
-		BIO3INI_Rofs9 = ".\\ROOM\\EMD";
-		BIO3INI_Rofs10 = ".\\ROOM\\EMD08";
+		BIO3INI_Rofs1 = '.\\DATA\\DOOR';
+		BIO3INI_Rofs2 = '.\\DATA_AE\\ETC2';
+		BIO3INI_Rofs3 = '.\\DATA\\ETC';
+		BIO3INI_Rofs4 = '.\\DATA_E\\ETC2';
+		BIO3INI_Rofs5 = '.\\DATA\\PLD';
+		BIO3INI_Rofs6 = '.\\DATA_A\\PLD';
+		BIO3INI_Rofs7 = '.\\DATA\\SOUND';
+		BIO3INI_Rofs8 = '.\\DATA_A\\BSS';
+		BIO3INI_Rofs9 = '.\\ROOM\\EMD';
+		BIO3INI_Rofs10 = '.\\ROOM\\EMD08';
 		// Rofs fix
 		if (mode === 0){
-			BIO3INI_Rofs11 = ".\\ROOM\\RBJ";
+			BIO3INI_Rofs11 = '.\\ROOM\\RBJ';
 		} else if (mode === 1){
-			BIO3INI_Rofs11 = ".\\rofs11.dat";
+			BIO3INI_Rofs11 = '.\\rofs11.dat';
 		}
-		BIO3INI_Rofs12 = ".\\DATA_AJ\\RDT";
-		BIO3INI_Rofs13 = ".\\DATA_E\\RDT";
-		BIO3INI_Rofs14 = ".\\DATA_A\\VOICE";
-		BIO3INI_Rofs15 = ".\\DATA_A\\SOUND";
-		BIO3INI_MAKEFILE(APP_PATH + "\\Assets\\Bio3.ini", 0);
+		BIO3INI_Rofs12 = '.\\DATA_AJ\\RDT';
+		BIO3INI_Rofs13 = '.\\DATA_E\\RDT';
+		BIO3INI_Rofs14 = '.\\DATA_A\\VOICE';
+		BIO3INI_Rofs15 = '.\\DATA_A\\SOUND';
+		BIO3INI_MAKEFILE(APP_PATH + '\\Assets\\Bio3.ini', 0);
 	} else {
-		BIO3INI_Rofs1 = ".\\Rofs1.dat";
-		BIO3INI_Rofs2 = ".\\Rofs2.dat";
-		BIO3INI_Rofs3 = ".\\Rofs3.dat";
-		BIO3INI_Rofs4 = ".\\Rofs4.dat";
-		BIO3INI_Rofs5 = ".\\Rofs5.dat";
-		BIO3INI_Rofs6 = ".\\Rofs6.dat";
-		BIO3INI_Rofs7 = ".\\Rofs7.dat";
-		BIO3INI_Rofs8 = ".\\Rofs8.dat";
-		BIO3INI_Rofs9 = ".\\Rofs9.dat";
-		BIO3INI_Rofs10 = ".\\Rofs10.dat";
-		BIO3INI_Rofs11 = ".\\rofs11.dat";
-		BIO3INI_Rofs12 = ".\\Rofs12.dat";
-		BIO3INI_Rofs13 = ".\\Rofs13.dat";
-		BIO3INI_Rofs14 = ".\\Rofs14.dat";
-		BIO3INI_Rofs15 = ".\\Rofs15.dat";
-		BIO3INI_MAKEFILE(APP_PATH + "\\Assets\\Bio3.ini", 1);
+		BIO3INI_Rofs1 = '.\\Rofs1.dat';
+		BIO3INI_Rofs2 = '.\\Rofs2.dat';
+		BIO3INI_Rofs3 = '.\\Rofs3.dat';
+		BIO3INI_Rofs4 = '.\\Rofs4.dat';
+		BIO3INI_Rofs5 = '.\\Rofs5.dat';
+		BIO3INI_Rofs6 = '.\\Rofs6.dat';
+		BIO3INI_Rofs7 = '.\\Rofs7.dat';
+		BIO3INI_Rofs8 = '.\\Rofs8.dat';
+		BIO3INI_Rofs9 = '.\\Rofs9.dat';
+		BIO3INI_Rofs10 = '.\\Rofs10.dat';
+		BIO3INI_Rofs11 = '.\\rofs11.dat';
+		BIO3INI_Rofs12 = '.\\Rofs12.dat';
+		BIO3INI_Rofs13 = '.\\Rofs13.dat';
+		BIO3INI_Rofs14 = '.\\Rofs14.dat';
+		BIO3INI_Rofs15 = '.\\Rofs15.dat';
+		BIO3INI_MAKEFILE(APP_PATH + '\\Assets\\Bio3.ini', 1);
 	}
 }
 function BIO3INI_MAKEFILE(path, mode){
 	// Mode 0: replace the original file, 1: ask to save
-	var FINAL = "[General]\n" +
-		"Save=" + BIO3INI_Save + "\n" +
-		"Regist=" + BIO3INI_Regist + '\n' + // what is this file anyways?
-		"Movie=" + BIO3INI_Movie + "\n" +
-		"Rofs1=" + BIO3INI_Rofs1 + "\n" +
-		"Rofs2=" + BIO3INI_Rofs2 + "\n" +
-		"Rofs3=" + BIO3INI_Rofs3 + "\n" +
-		"Rofs4=" + BIO3INI_Rofs4 + "\n" +
-		"Rofs5=" + BIO3INI_Rofs5 + "\n" +
-		"Rofs6=" + BIO3INI_Rofs6 + "\n" +
-		"Rofs7=" + BIO3INI_Rofs7 + "\n" +
-		"Rofs8=" + BIO3INI_Rofs8 + "\n" +
-		"Rofs9=" + BIO3INI_Rofs9 + "\n" +
-		"Rofs10=" + BIO3INI_Rofs10 + "\n" +
-		"Rofs11=" + BIO3INI_Rofs11 + "\n" +
-		"Rofs12=" + BIO3INI_Rofs12 + "\n" +
-		"Rofs13=" + BIO3INI_Rofs13 + "\n" +
-		"Rofs14=" + BIO3INI_Rofs14 + "\n" +
-		"Rofs15=" + BIO3INI_Rofs15 + "\n\n[Video]\n" +
-		"DisableMovie=" + BIO3INI_v_disableMovie + "\n" +
-		"DisableAlpha=" + BIO3INI_v_disableAlpha + "\n" +
-		"DisableLinear=" + BIO3INI_v_disableLinear + "\n" +
-		"DisableSpecular=" + BIO3INI_v_disableSpecular + "\n" +
-		"TextureAdjust=" + BIO3INI_v_textureAdjust + "\n" +
-		"Mode=" + BIO3INI_v_mode + "\n\n[Windowed]\n" +
-		"Driver=" + BIO3INI_w_driver + "\n" +
-		"Device=" + BIO3INI_w_device + "\n" +
-		"Width=" + BIO3INI_w_width + "\n" +
-		"Height=" + BIO3INI_w_height + "\n" +
-		"BPP=" + BIO3INI_w_BPP + "\n\n[FullScreen]\n" +
-		"Driver=" + BIO3INI_f_driver + "\n" +
-		"Device=" + BIO3INI_f_device + "\n" +
-		"Width=" + BIO3INI_f_width + "\n" +
-		"Height=" + BIO3INI_f_height + "\n" +
-		"BPP=" + BIO3INI_f_BPP + "\n\n[Keyboard]\n" +
-		"Key1=" + BIO3INI_kb_key1 + "\n" +
-		"Key2=" + BIO3INI_kb_key2 + "\n" +
-		"Key3=" + BIO3INI_kb_key3 + "\n" +
-		"Key4=" + BIO3INI_kb_key4 + "\n" +
-		"Key5=" + BIO3INI_kb_key5 + "\n" +
-		"Key6=" + BIO3INI_kb_key6 + "\n" +
-		"Key7=" + BIO3INI_kb_key7 + "\n" +
-		"Key8=" + BIO3INI_kb_key8 + "\n" +
-		"Key9=" + BIO3INI_kb_key9 + "\n" +
-		"KeyA=" + BIO3INI_kb_keyA + "\n" +
-		"KeyB=" + BIO3INI_kb_keyB + "\n" +
-		"KeyC=" + BIO3INI_kb_keyC + "\n" +
-		"KeyD=" + BIO3INI_kb_keyD + "\n" +
-		"KeyE=" + BIO3INI_kb_keyE + "\n\n[Sound]\n" +
-		"Device=" + BIO3INI_sound_device + "\n" +
-		"SEvol=" + BIO3INI_sound_seVol + "\n" +
-		"BGMvol=" + BIO3INI_sound_bgmVol + "\n\n[Data]\n" +
+	var FINAL = '[General]\n' +
+		'Save=' + BIO3INI_Save + '\n' +
+		'Regist=' + BIO3INI_Regist + '\n' + // what is this file anyways?
+		'Movie=' + BIO3INI_Movie + '\n' +
+		'Rofs1=' + BIO3INI_Rofs1 + '\n' +
+		'Rofs2=' + BIO3INI_Rofs2 + '\n' +
+		'Rofs3=' + BIO3INI_Rofs3 + '\n' +
+		'Rofs4=' + BIO3INI_Rofs4 + '\n' +
+		'Rofs5=' + BIO3INI_Rofs5 + '\n' +
+		'Rofs6=' + BIO3INI_Rofs6 + '\n' +
+		'Rofs7=' + BIO3INI_Rofs7 + '\n' +
+		'Rofs8=' + BIO3INI_Rofs8 + '\n' +
+		'Rofs9=' + BIO3INI_Rofs9 + '\n' +
+		'Rofs10=' + BIO3INI_Rofs10 + '\n' +
+		'Rofs11=' + BIO3INI_Rofs11 + '\n' +
+		'Rofs12=' + BIO3INI_Rofs12 + '\n' +
+		'Rofs13=' + BIO3INI_Rofs13 + '\n' +
+		'Rofs14=' + BIO3INI_Rofs14 + '\n' +
+		'Rofs15=' + BIO3INI_Rofs15 + '\n\n[Video]\n' +
+		'DisableMovie=' + BIO3INI_v_disableMovie + '\n' +
+		'DisableAlpha=' + BIO3INI_v_disableAlpha + '\n' +
+		'DisableLinear=' + BIO3INI_v_disableLinear + '\n' +
+		'DisableSpecular=' + BIO3INI_v_disableSpecular + '\n' +
+		'TextureAdjust=' + BIO3INI_v_textureAdjust + '\n' +
+		'Mode=' + BIO3INI_v_mode + '\n\n[Windowed]\n' +
+		'Driver=' + BIO3INI_w_driver + '\n' +
+		'Device=' + BIO3INI_w_device + '\n' +
+		'Width=' + BIO3INI_w_width + '\n' +
+		'Height=' + BIO3INI_w_height + '\n' +
+		'BPP=' + BIO3INI_w_BPP + '\n\n[FullScreen]\n' +
+		'Driver=' + BIO3INI_f_driver + '\n' +
+		'Device=' + BIO3INI_f_device + '\n' +
+		'Width=' + BIO3INI_f_width + '\n' +
+		'Height=' + BIO3INI_f_height + '\n' +
+		'BPP=' + BIO3INI_f_BPP + '\n\n[Keyboard]\n' +
+		'Key1=' + BIO3INI_kb_key1 + '\n' +
+		'Key2=' + BIO3INI_kb_key2 + '\n' +
+		'Key3=' + BIO3INI_kb_key3 + '\n' +
+		'Key4=' + BIO3INI_kb_key4 + '\n' +
+		'Key5=' + BIO3INI_kb_key5 + '\n' +
+		'Key6=' + BIO3INI_kb_key6 + '\n' +
+		'Key7=' + BIO3INI_kb_key7 + '\n' +
+		'Key8=' + BIO3INI_kb_key8 + '\n' +
+		'Key9=' + BIO3INI_kb_key9 + '\n' +
+		'KeyA=' + BIO3INI_kb_keyA + '\n' +
+		'KeyB=' + BIO3INI_kb_keyB + '\n' +
+		'KeyC=' + BIO3INI_kb_keyC + '\n' +
+		'KeyD=' + BIO3INI_kb_keyD + '\n' +
+		'KeyE=' + BIO3INI_kb_keyE + '\n\n[Sound]\n' +
+		'Device=' + BIO3INI_sound_device + '\n' +
+		'SEvol=' + BIO3INI_sound_seVol + '\n' +
+		'BGMvol=' + BIO3INI_sound_bgmVol + '\n\n[Data]\n' +
 		'Complete=' + BIO3INI_data_complete + '\n' +
 		'Data00=' + BIO3INI_data_00 + '\n' +
 		'Data01=' + BIO3INI_data_01 + '\n' +
 		'Data02=' + BIO3INI_data_02 + '\n' +
 		'Data03=' + BIO3INI_data_03 + '\n' +
 		'Data10=' + BIO3INI_data_10 + '\n\n';
-	addLog('log', "INFO - Bio3INI: The file was generated sucessfully!");
+	addLog('log', 'INFO - Bio3INI: The file was generated sucessfully!');
 	log_separador();
 	// Saving the file!
 	if (mode === 0){
 		try{
 			fs.writeFileSync(path, FINAL, 'utf-8');
-			addLog('log', "INFO - Bio3INI: The file was saved sucessfully!");
+			addLog('log', 'INFO - Bio3INI: The file was saved sucessfully!');
 			addLog('log', 'Path - ' + path);
 		} catch (err){
-			console.error("ERROR - Bio3INI: Something went wrong!\n" + err);
-			addLog('error', "ERROR - Bio3INI: Something went wrong!");
+			console.error('ERROR - Bio3INI: Something went wrong!\n' + err);
+			addLog('error', 'ERROR - Bio3INI: Something went wrong!');
 			addLog('error', err);
 		}
 	} else {

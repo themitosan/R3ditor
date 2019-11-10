@@ -18,7 +18,7 @@ function TIM_LOAD(timFile){
 		var tim_status = TIM_verify_integrity();
 		if (tim_status === true){
 			TIM_ORIGINAL_FILENAME = timFile.replace(new RegExp(' ', 'gi'), '_');
-			var BPP = TIM_arquivoBruto.slice(RANGES["TIM_BPP"][0], RANGES["TIM_BPP"][1]);
+			var BPP = TIM_arquivoBruto.slice(RANGES['TIM_BPP'][0], RANGES['TIM_BPP'][1]);
 			addLog('log', 'INFO - TIM Health: Status OK! - File: ' + timFile);
 			addLog('log', 'INFO - BPP: ' + TIM_BPP[BPP][1]);
 			log_separador();

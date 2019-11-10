@@ -70,7 +70,7 @@ function WZ_showWizardDialog(id){
 			$('#WZ_BTN_2').css({'display': 'none'});
 			$('#WZ_progressbar').fadeOut({duration: 100, queue: false});
 			document.getElementById('WZ_title').innerHTML = 'Whoops...';
-			if (EXEC_BIO3_original === "Bio3_PC"){
+			if (EXEC_BIO3_original === 'Bio3_PC'){
 				document.getElementById('WZ_content').innerHTML = WZ_DIALOG_10;
 			} else {
 				document.getElementById('WZ_content').innerHTML = WZ_DIALOG_2;
@@ -432,7 +432,7 @@ function WZ_loadFiles(file){
 			$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
 			$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
 			$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
-			$('#menu-utility-aba-2').animate({"top": "-44px"}, {duration: 140, queue: false});
+			$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
 		} else {
 			$('#menu-topo').css({'top': '32px'});
 			$('#menu-utility').css({'top': '546px'});

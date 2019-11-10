@@ -96,8 +96,8 @@ function main_renderFileList(id, mode){
 		$('#RDT_recentFile').append(fileList_HTML_template);
 		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to bottom, #2d2d2d, #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
-		document.getElementById("fileListHolder").innerHTML = '';
-		document.getElementById("fileListHolder_AJ").innerHTML = '';
+		document.getElementById('fileListHolder').innerHTML = '';
+		document.getElementById('fileListHolder_AJ').innerHTML = '';
 	}
 	// RDT
 	if (id === 3){
@@ -140,7 +140,7 @@ function main_renderFileList(id, mode){
 					origCity = RDT_locations[RDT_name][1];
 				}
 				if (mFile.length > 58){
-					mFile = "..." + mFile.slice(parseInt(mFile.length / 3), mFile.length);
+					mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 					nOriginal = mFile;
 				}
 				if (gameModePath === 'DATA_E'){
@@ -210,12 +210,12 @@ function main_renderFileList(id, mode){
 					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
 					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)<div class="menu-separador"></div>' + 
 					'Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
-				$("#fileListHolder").append(fileList_HTML_template);
+				$('#fileListHolder').append(fileList_HTML_template);
 				c++;
 			}
-			$("#fileListHolder_AJ").css({'display': 'none'});
-			$("#avaliable_fileList").css({'display': 'block', 'height': '502px'});
-			$("#fileListHolder").css({'display': 'block', 'height': '450px', 'background-image': 'linear-gradient(to bottom, #292929, #151515)', 'box-shadow': '0 0 12px #222'});
+			$('#fileListHolder_AJ').css({'display': 'none'});
+			$('#avaliable_fileList').css({'display': 'block', 'height': '502px'});
+			$('#fileListHolder').css({'display': 'block', 'height': '450px', 'background-image': 'linear-gradient(to bottom, #292929, #151515)', 'box-shadow': '0 0 12px #222'});
 		} else {
 			if (enable_mod === true){
 				console.warn('WARN - Unable to render FileList!');
@@ -231,8 +231,8 @@ function main_openFileList(){
 }
 function main_closeFileList(){
 	if (RDT_arquivoBruto !== undefined || SAVE_arquivoBruto !== undefined || MSG_arquivoBruto !== undefined || TIM_arquivoBruto !== undefined){
-		$("#avaliable_fileList").css({'display': 'none'});
-		$("#FILELIST_goBackBtn").css({'display': 'none'});
+		$('#avaliable_fileList').css({'display': 'none'});
+		$('#FILELIST_goBackBtn').css({'display': 'none'});
 	}
 }
 function main_menu(anim){
@@ -252,7 +252,7 @@ function main_menu(anim){
 	if (anim === 1){ // Save
 		$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'none'});
 		document.title = APP_NAME + ' - Save Editor (*.SAV)';
-		$('#menu-topo-save').css({"display": "block"});
+		$('#menu-topo-save').css({'display': 'block'});
 		$('#SAV_slots').append(SAV_SLOT_LIST);
 		main_renderFileList(2);
 	}
@@ -364,7 +364,7 @@ function SAVE_showMenu(menuId){
 		$('#SAV_openInHex').css({'display': 'none'});
 	}
 	if (request_render_save !== true){
-		$("#menu-SAVE").css({'display': 'block'});
+		$('#menu-SAVE').css({'display': 'block'});
 	}
 	cancelShowModItem();
 	if (menuId === 0){ // Menu Geral
@@ -723,8 +723,8 @@ function cleanMSGFields(){
 	ORIGINAL_FILENAME = undefined;
 	$('#MSG_saveAs').css({'display': 'none'});
 	$('#MSG_applyMessageRDT').css({'display': 'none'});
-	document.getElementById("text-msg-raw").innerHTML = '';
-	document.getElementById("lbl-msg-length").innerHTML = '0';
+	document.getElementById('text-msg-raw').innerHTML = '';
+	document.getElementById('lbl-msg-length').innerHTML = '0';
 }
 function MSG_clearHexTextfield(){
 	document.getElementById('msg-hex-toTrans').value = '';
@@ -826,7 +826,7 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Exibir Nome de Item
 	if (id === 5){ 
 		if (args === ''){
-			args = "00";
+			args = '00';
 		}
 		$('#dialog-msg-addcomand').css({'top': '200px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Show Item Name';
@@ -902,7 +902,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			msgHex = '';
 		}
 		$('#dialog-msg-addcomand').css({'top': '126px'});
-		$("#msg-addcomand-confirm").css({'display': 'none'});
+		$('#msg-addcomand-confirm').css({'display': 'none'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Insert / Modify Hex';
 		document.getElementById('dialog-msg-render').innerHTML = DIALOG_MSG_INSERTHEX;
 		document.getElementById('msg-insertHexManual').innerHTML = msgHex;
@@ -1403,7 +1403,7 @@ function RDT_displayItemEdit(id, idx, itemHx){
 		posZ    = itemHx.slice(RANGES['RDT_item-0-itemZZ'][0],   		   RANGES['RDT_item-0-itemZZ'][1]);
 		posR    = itemHx.slice(RANGES['RDT_item-0-itemRR'][0],   		   RANGES['RDT_item-0-itemRR'][1]);
 		hex     = itemHx.slice(RANGES['RDT_item-0-itemID'][0],   		   RANGES['RDT_item-0-itemID'][1]);
-		quant   = parseInt(itemHx.slice(RANGES["RDT_item-0-itemQuant"][0], RANGES["RDT_item-0-itemQuant"][1]), 16);
+		quant   = parseInt(itemHx.slice(RANGES['RDT_item-0-itemQuant'][0], RANGES['RDT_item-0-itemQuant'][1]), 16);
 		iFlag   = itemHx.slice(RANGES['RDT_item-0-itemFlag'][0], 		   RANGES['RDT_item-0-itemFlag'][1]);
 		modelId = itemHx.slice(RANGES['RDT_item-0-modelID'][0],  		   RANGES['RDT_item-0-modelID'][1]);
 		anim    = itemHx.slice(RANGES['RDT_item-0-itemMP'][0],   		   RANGES['RDT_item-0-itemMP'][1]);
@@ -1478,7 +1478,7 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	}
 	document.getElementById('RDT_canvas_btn_apply').onclick = function(){
 		RDT_hideCanvasTab();
-		$("#RDT_editItemBtn_" + index).trigger('click');
+		$('#RDT_editItemBtn_' + index).trigger('click');
 	}
 	$('#RDT_item_X').css({'display': 'block'});
 	$('#RDT_item_Y').css({'display': 'block'});
@@ -1545,9 +1545,9 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_MSGCODE-edit-radiusX').value = '';
 	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = '';
 	document.getElementById('RDT_MSGCODE-edit-special').value = '';
-	document.getElementById("RDT-lbl-edit-index").innerHTML = 'N/A';
+	document.getElementById('RDT-lbl-edit-index').innerHTML = 'N/A';
 	document.getElementById('RDT_MSGCODE-edit-display').value = 'ffff';
-	document.getElementById("RDT-lbl-item-edit").innerHTML = 'No item select';
+	document.getElementById('RDT-lbl-item-edit').innerHTML = 'No item select';
 }
 function RDT_applyMenuFocus(menuId){
 	RDT_aba_atual = menuId;
@@ -1739,7 +1739,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 				if (attr === '02' || attr === '06' || attr === '0a' || attr === '0e'){
 					remaining = parseInt(quan, 16) + '%';
 				}
-				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f' || attr === "13" || attr === '17'){
+				if (attr === '03' || attr === '07' || attr === '0b' || attr === '0f' || attr === '13' || attr === '17'){
 					remaining = 'Inf.';
 				}
 				document.getElementById('RE3_LIVESTATUS_LBL_ITEM-' + n).innerHTML = remaining;
@@ -1770,7 +1770,7 @@ function INI_showMenu(menuId){
 	var c = 0;
 	document.title = APP_NAME + ' - INI Editor (*.INI) - File: ' + ORIGINAL_FILENAME;
 	while (c < parseInt(INI_totalMenus + 1)){
-		$("#INI-aba-menu-" + c).removeClass('aba-select');
+		$('#INI-aba-menu-' + c).removeClass('aba-select');
 		$('#INI_menu_' + c).css({'display': 'none'});
 		c++;
 	}
@@ -1818,13 +1818,13 @@ function R3DITORcloseUpdate(){
 	$('#menu-utility').css({'display': 'block'});
 	$('#menu-topo').css({'display': 'block'});
 	if (EXEC_BIO3_original !== ''){
-		$("#menu-topo-MOD").css({'display': 'block'});
+		$('#menu-topo-MOD').css({'display': 'block'});
 	}
 }
 function R3DITORshowUpdateProgress(){
 	document.title = APP_NAME + ' - Updating...';
-	$("#R3ditor_update").css({'display': 'none'});
-	$("#progress_window").css({'display': 'block'});
+	$('#R3ditor_update').css({'display': 'none'});
+	$('#progress_window').css({'display': 'block'});
 }
 function R3DITOR_movePercent(id, percent, status){
 	var p = parseInt(percent);

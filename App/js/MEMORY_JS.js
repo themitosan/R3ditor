@@ -207,8 +207,8 @@ function RE3_LIVE_APPLYITEM(slotID){
 		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_invent_item-' + slotID][2], novoAttr, MEM_JS.BYTE);
 		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_invent_item-' + slotID][3], 0, MEM_JS.BYTE);
 		// After
-		$("#RE3_LIVESTATUS_inernalTab_editSlot").css({'display': 'none'});
-		$("#RE3_LIVESTATUS_editItemSlot_window").css({'display': 'none'});
+		$('#RE3_LIVESTATUS_inernalTab_editSlot').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_editItemSlot_window').css({'display': 'none'});
 	}
 }
 
@@ -217,10 +217,10 @@ function RE3_LIVE_closeForm(){
 	clearInterval(RE3_LIVE_RENDERTIMER);
 	RE3_LIVE_RENDERTIMER = undefined;
 	if (main_currentMenu === undefined){
-		$("#menu-topo").css({'top': '32px'});
-		$("#menu-utility-aba-2").css({'display': 'inline-block'});
+		$('#menu-topo').css({'top': '32px'});
+		$('#menu-utility-aba-2').css({'display': 'inline-block'});
 	}
-	$("#R3DITOR_RE3_LIVESTATUS").css({"display": "none"});
+	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
 	scrollLog();
 }
 function RE3_LIVE_openForm(){
@@ -231,10 +231,10 @@ function RE3_LIVE_openForm(){
 		}
 		MEM_JS_canRender = true;
 		if (main_currentMenu === undefined){
-			$("#menu-topo").css({'top': '8px'});
-			$("#menu-utility-aba-2").css({'display': 'none'});
+			$('#menu-topo').css({'top': '8px'});
+			$('#menu-utility-aba-2').css({'display': 'none'});
 		}
-		$("#R3DITOR_RE3_LIVESTATUS").css({"display": "block"});
+		$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'block'});
 		RE3_LIVE_RENDERTIMER = setInterval(function(){
 			MEMORY_JS_renderInfo();
 		}, RE3_LIVE_RENDER_TIME);

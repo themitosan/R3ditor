@@ -7,8 +7,8 @@ var DEBUG_LOCKRENDER = false;
 
 /// Reload js file
 function reloadJsFile(src){
-	console.info('Recarregando Script: ' + src);
-	addLog('warn', 'Recarregando Script: ' + src);
+	console.info('Reloading Script: ' + src);
+	addLog('warn', 'Reloading Script: ' + src);
     $('script[src="' + src + '"]').remove();
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');

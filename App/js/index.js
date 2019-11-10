@@ -120,18 +120,18 @@ function addLog(type, texto){
 		classe = 'log-error';
 	}
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
-	$("#log-programa").append(logTemplate);
+	$('#log-programa').append(logTemplate);
 }
 function clearInternalLog(){
 	document.getElementById('log-programa').innerHTML = '';
-	addLog("log", APP_NAME);
+	addLog('log', APP_NAME);
 	scrollLog();
 }
 /// Open in Hex Editor
 function openFileOnHex(file){
 	main_closeFileList();
 	if (HEX_EDITOR !== undefined || HEX_EDITOR !== ''){
-		if (file !== undefined || file !== '' || fs.existsSync(file) !== false || file !== APP_PATH + "\\undefined"){
+		if (file !== undefined || file !== '' || fs.existsSync(file) !== false || file !== APP_PATH + '\\undefined'){
 			runExternalSoftware(HEX_EDITOR, [file]);
 			EXTERNAL_APP_RUNNING = false;
 		} else {
@@ -173,12 +173,12 @@ function R3DITOR_RUN_RE3(mode){
 	main_closeFileList();
 	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === '' || GAME_PATH === '' || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
-		console.error("ERROR - The game path is not defined!");
+		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
 			R3DITOR_RUNGAME(0);
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({'display': 'none'});
+				$('#WZ_BTN_2').css({'display': 'none'});
 				var msg = 'Testing Resident Evil 3...';
 				document.title = APP_NAME + msg;
 				addLog('log', 'INFO - ' + msg);
@@ -200,7 +200,7 @@ function R3DITOR_RUN_RE3(mode){
 			}, 20);
 		} catch (err) {
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({'display': 'inline'});
+				$('#WZ_BTN_2').css({'display': 'inline'});
 			}
 			console.error('ERROR - Something went wrong! - ' + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);
@@ -212,7 +212,7 @@ function R3DITOR_RUN_MERCE(mode){
 	main_closeFileList();
 	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === '' || GAME_PATH === '' || GAME_PATH === undefined){
 		addLog('error', 'ERROR - The game path is not defined!');
-		console.error("ERROR - The game path is not defined!");
+		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
 			R3DITOR_RUNGAME(0);
@@ -225,7 +225,7 @@ function R3DITOR_RUN_MERCE(mode){
 			runExternalSoftware(EXEC_BIO3_MERCE);
 		}catch(err){
 			if (WZ_showWizard === true){
-				$("#WZ_BTN_2").css({'display': 'inline'});
+				$('#WZ_BTN_2').css({'display': 'inline'});
 			}
 			console.error('ERROR - Something went wrong! - ' + err);
 			addLog('error', 'ERROR - Something went wrong! - ' + err);

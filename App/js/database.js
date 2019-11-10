@@ -300,21 +300,21 @@ var RDT_MAPAS = {
 }
 var ATTR = {
 	'00': ['None',								 		  '#fff0',  '0 0 10px #fff0'], // Use this for puzzle items that don't have the ammo display.
-	'01': ["Remaining ammo in green",		            '#008400', '0 0 2px #004200'],
-	'02': ["% remaining in green", 			            '#008400', '0 0 2px #004200'],
-	'03': ["Inf. ammo in green", 			            '#008400', '0 0 2px #004200'],
-	'05': ["Remaining ammo in red",			            '#840000', '0 0 2px #310000'],
-	'06': ["% remaining in red", 			            '#840000', '0 0 2px #310000'],
-	'07': ["Inf. ammo in red", 				            '#840000', '0 0 2px #310000'],
-	'09': ["Remaining ammo in yellow", 		            '#fff0a3', '0 0 2px #b4b194'],
-	'0a': ["%. remaining in yellow",		            '#fff0a3', '0 0 2px #b4b194'],
-	'0b': ["Inf. ammo in yellow", 			            '#fff0a3', '0 0 2px #b4b194'],
-	'0d': ["Remaining ammo in blue", 		            '#9393ff', '0 0 2px #004242'],
-	'0e': ["% remaining in blue", 			            '#9393ff', '0 0 2px #004242'],
-	'0f': ["Inf. ammo in blue", 	 		   			'#9393ff', '0 0 2px #004242'],
-	'13': ["Attr. used by M4A1 Assault Rifle (Manual)", '#008400', '0 0 2px #004200'],
-	'16': ["Attr. used by M4A1 Assault Rifle",   		'#840000', '0 0 2px #310000'],
-	'17': ["Attr. used by M4A1 Assault Rifle (Auto)", 	'#840000', '0 0 2px #310000']  // Atributo encontrado na shotgun do Carlos?
+	'01': ['Remaining ammo in green',		            '#008400', '0 0 2px #004200'],
+	'02': ['% remaining in green', 			            '#008400', '0 0 2px #004200'],
+	'03': ['Inf. ammo in green', 			            '#008400', '0 0 2px #004200'],
+	'05': ['Remaining ammo in red',			            '#840000', '0 0 2px #310000'],
+	'06': ['% remaining in red', 			            '#840000', '0 0 2px #310000'],
+	'07': ['Inf. ammo in red', 				            '#840000', '0 0 2px #310000'],
+	'09': ['Remaining ammo in yellow', 		            '#fff0a3', '0 0 2px #b4b194'],
+	'0a': ['%. remaining in yellow',		            '#fff0a3', '0 0 2px #b4b194'],
+	'0b': ['Inf. ammo in yellow', 			            '#fff0a3', '0 0 2px #b4b194'],
+	'0d': ['Remaining ammo in blue', 		            '#9393ff', '0 0 2px #004242'],
+	'0e': ['% remaining in blue', 			            '#9393ff', '0 0 2px #004242'],
+	'0f': ['Inf. ammo in blue', 	 		   			'#9393ff', '0 0 2px #004242'],
+	'13': ['Attr. used by M4A1 Assault Rifle (Manual)', '#008400', '0 0 2px #004200'],
+	'16': ['Attr. used by M4A1 Assault Rifle',   		'#840000', '0 0 2px #310000'],
+	'17': ['Attr. used by M4A1 Assault Rifle (Auto)', 	'#840000', '0 0 2px #310000']  // Atributo encontrado na shotgun do Carlos?
 }
 // Segunda variavel
 var VOID = {
@@ -322,13 +322,13 @@ var VOID = {
 }
 // AKA. STAGE
 var CIDADE = {
-	'00': ["Uptown (Including RPD, Stage 1)", 'Uptown'],
-    '01': ["Downtown (Stage 2)", 'Downtown'],
-    '02': ["Clock Tower / Park before the Hospital (Stage 3)", 'Clock Tower'],
-    '03': ["Clock Tower / Park after the Hospital (Stage 4)", 'CT / Park'],
-    '04': ["Dead Factory (Stage 5)", 'Dead Factory'],
-    '05': ["Shows first the Mercenaries-minigame ending, then the ending video of the main game (the one without Barry Burton, assuming 0x2250 has been set to 00. If not, then it only crashes).", 'Mercenaries End'],
-    '06': ["Downtown again. I have no idea what's different here. This may be after the scene where Jill falls trough the parking lot floor.", 'Downtown']
+	'00': ['Uptown (Including RPD, Stage 1)', 'Uptown'],
+    '01': ['Downtown (Stage 2)', 'Downtown'],
+    '02': ['Clock Tower / Park before the Hospital (Stage 3)', 'Clock Tower'],
+    '03': ['Clock Tower / Park after the Hospital (Stage 4)', 'CT / Park'],
+    '04': ['Dead Factory (Stage 5)', 'Dead Factory'],
+    '05': ['Shows first the Mercenaries-minigame ending, then the ending video of the main game (the one without Barry Burton, assuming 0x2250 has been set to 00. If not, then it only crashes).', 'Mercenaries End'],
+    '06': ['Downtown again. I have no idea what\'s different here. This may be after the scene where Jill falls trough the parking lot floor.', 'Downtown']
 }
 var PLAYERS = {
 	'00': ['Jill with normal outfit'],
@@ -1073,10 +1073,10 @@ var MSG_DICIONARIO = {
 
 		Pelo menos no mapa R105.RDT (Brad entra no bar)
 	*/
-	"f4": [true, '(Function: Change Camera ', 			 			7], // Trocar Camera
-	"f5": [true, '(Unknown Command used on R101.RDT ', 	 			8], // Comando usado na cutscene "Septemer, 28".
-	"f9": [true, '(Function: Text Color ', 				 			9], // Formatação - Cor Verde
-	"*#": [false,'(Next Option)', 				 	 			false], // Segunda Opção de climax
+	'f4': [true, '(Function: Change Camera ', 			 			7], // Trocar Camera
+	'f5': [true, '(Unknown Command used on R101.RDT ', 	 			8], // Comando usado na cutscene "Septemer, 28".
+	'f9': [true, '(Function: Text Color ', 				 			9], // Formatação - Cor Verde
+	'*#': [false,'(Next Option)', 				 	 			false], // Segunda Opção de climax
 	// CT-STARS PATCH COMPAT
 	'd7': [false, ' ', false],
 	'3c': [false, 'ã', false],
@@ -1194,8 +1194,8 @@ var MSG_DICIONARIO_REVERSO = {
 	'&': 'ea12',
 	'[': 'ea14',
 	']': 'ea15',
-	'(': "05",
-	')': "06",
+	'(': '05',
+	')': '06',
 	// Comum
 	' ': '00',
 	'.': '01',
@@ -1278,20 +1278,20 @@ var MSG_DICIONARIO_REVERSO = {
 	'y': '55',
 	'z': '56',
 	// Acentuações
-	'ü': "51",
-	'ú': "51",
-	'ù': "51",
-	'û': "51",
-	'è': "41",
-	'ë': "41",
-	'ò': "4b",
-	'ô': "4b",
-	'ö': "4b",
-	'ã': "3d",
-	'ä': "3d",
-	'í': "45",
-	'ï': "45",
-	'ì': "45",
+	'ü': '51',
+	'ú': '51',
+	'ù': '51',
+	'û': '51',
+	'è': '41',
+	'ë': '41',
+	'ò': '4b',
+	'ô': '4b',
+	'ö': '4b',
+	'ã': '3d',
+	'ä': '3d',
+	'í': '45',
+	'ï': '45',
+	'ì': '45',
 	// Extra for CUSTOM TEXE.TIM
 	'á': '5a',
 	'à': '5b',
@@ -1317,12 +1317,12 @@ var special_day_01 = 'T2N0b2JlciAxc3QsIG5pZ2h0LiBJIHdva2UgdXAgdG8gdGhlIHNvdW5kIG
 //
 var TIM_BPP = {
 	//  HEX     TYPE       BPP          POS (String)
-	'08000000': [1,			   "4 BPP", 0],    // WIP
-	'09000000': [2,			   "8 BPP", 1084], // WIP
-	'02000000': [3,			  "16 BPP", 0],    // Esse tipo não contém CLUT [WIP]
-	'03000000': [4,			  "24 BPP", 0],    // Esse tipo não contém CLUT [WIP]
-	'00000000': [5,  "4 BPP (No CLUT)", 0],    // WIP
-	'01000000': [6,  "8 BPP (No CLUT)", 0]     // WIP
+	'08000000': [1,			   '4 BPP', 0],    // WIP
+	'09000000': [2,			   '8 BPP', 1084], // WIP
+	'02000000': [3,			  '16 BPP', 0],    // Esse tipo não contém CLUT [WIP]
+	'03000000': [4,			  '24 BPP', 0],    // Esse tipo não contém CLUT [WIP]
+	'00000000': [5,  '4 BPP (No CLUT)', 0],    // WIP
+	'01000000': [6,  '8 BPP (No CLUT)', 0]     // WIP
 }
 var TIM_EXCLUDEPATTERN = {
 	'0000': [true]
@@ -1549,9 +1549,9 @@ var RANGES = {
 	/*
 		Prop models [WIP]
 	*/
-	"RDT_propModel-header": 		   [0, 2], // RE2 = 2D, RE3 = 7F
-	"RDT_propModel-id": 			   [2, 4],
-	"RDT_propModel-ident": 			  [4, 24],
+	'RDT_propModel-header': 		   [0, 2], // RE2 = 2D, RE3 = 7F
+	'RDT_propModel-id': 			   [2, 4],
+	'RDT_propModel-ident': 			  [4, 24],
 	/*
 		Enemy [WIP]
 	*/
@@ -1572,9 +1572,9 @@ var RANGES = {
 	/*
 		MSG codes
 	*/
-	"RDT_msgCode-header": 			   [0, 2], // RE2 = 2C, RE3 = 63 || 64
-	"RDT_msgCode-id":  				   [2, 4],
-	"RDT_msgCode-identifier": 		  [4, 12], // 04 31 00 00
+	'RDT_msgCode-header': 			   [0, 2], // RE2 = 2C, RE3 = 63 || 64
+	'RDT_msgCode-id':  				   [2, 4],
+	'RDT_msgCode-identifier': 		  [4, 12], // 04 31 00 00
 	// Header 63
 	'RDT_msgCode-0-xPos': 			 [12, 16],
 	'RDT_msgCode-0-zPos': 			 [16, 20],

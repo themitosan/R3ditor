@@ -202,7 +202,7 @@ function finalizeSave(){
 	localStorage.Save_6 + localStorage.Save_7 + localStorage.Save_8 + localStorage.Save_9 + localStorage.Save_10 + 
 	localStorage.Save_11 + localStorage.Save_12 + localStorage.Save_13 + localStorage.Save_14 + localStorage.Save_15;
 	fs.writeFileSync(ORIGINAL_FILENAME, FILE, 'hex');
-	TEMP_SLOT = "";
+	TEMP_SLOT = '';
 	CARREGAR_SAVE(ORIGINAL_FILENAME);
 }
 function CARREGAR_SAVE(sFile){
@@ -210,7 +210,7 @@ function CARREGAR_SAVE(sFile){
 	SAVE_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = sFile;
 	log_separador();
-	addLog('log', 'Loading save file: ' + sFile);
+	addLog('log', 'SAV - Loading file: ' + sFile);
 	log_separador();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente
@@ -285,7 +285,7 @@ function save_renderSaveSlots(){
 			var totVSave = localStorage.getItem('Save_' + cu).slice(RANGES['totalSaves'][0], RANGES['totalSaves'][1]);
 			var locSave  = localStorage.getItem('Save_' + cu).slice(RANGES['localSave'][0],  RANGES['localSave'][1]);
 			document.getElementById('slt-save-' + cu).innerHTML = '(' + parseInt(totVSave, 16) + ') ' + LOCAIS[locSave][0];
-			$('#slt-save-' + cu).addClass("slot-presente");
+			$('#slt-save-' + cu).addClass('slot-presente');
 		} else {
 			// Save Vazio
 			document.getElementById('slt-save-' + cu).innerHTML = 'Empty';
@@ -425,9 +425,9 @@ function save_renderInfos(s_slot){
 		var diffi = DIFICULDADE[dificuldade][0];
 		document.getElementById('lbl-dificuldade').innerHTML = diffi;
 		// Saves
-		totalVezesSaves = localStorage.getItem('Save_' + s_slot).slice(RANGES['totalSaves'][0], RANGES["totalSaves"][1]);
+		totalVezesSaves = localStorage.getItem('Save_' + s_slot).slice(RANGES['totalSaves'][0], RANGES['totalSaves'][1]);
 		var tvs = parseInt('0x' + totalVezesSaves);
-		document.getElementById("lbl-saves").innerHTML = tvs;
+		document.getElementById('lbl-saves').innerHTML = tvs;
 		// Sala de Save
 		localSave = localStorage.getItem('Save_' + s_slot).slice(RANGES['localSave'][0], RANGES['localSave'][1]);
 		var nomeLocSave = LOCAIS[localSave][0];
@@ -509,7 +509,7 @@ function save_renderLife(s_slot){
 		var co = 'txt-fine';
 		$('#JILL-LIFESTATUS').removeClass('txt-poison');
 		$('#CARLOS-LIFESTATUS').removeClass('txt-poison');
-		if (chkB === "00"){
+		if (chkB === '00'){
 			// Caso a vida esteja conforme o game manda = 200
 			HP = parseInt('0x' + chkA);
 		} else {
@@ -576,7 +576,7 @@ function save_Backup(){
 	if (SAVE_arquivoBruto !== undefined){
 		try{
 			var backup_name = gDetails + '-' + getFileName(ORIGINAL_FILENAME) + '-' + currentTime() + '.savbackup';
-			fs.writeFileSync(APP_PATH + "\\Backup\\SAV\\" + backup_name, SAVE_arquivoBruto, 'hex');
+			fs.writeFileSync(APP_PATH + '\\Backup\\SAV\\' + backup_name, SAVE_arquivoBruto, 'hex');
 			log_separador();
 			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\SAV\\' + backup_name);
@@ -695,7 +695,7 @@ function applyHP(){
 	}
 	var newHPPlus = parseInt(newHP).toString(16);
 	if (newHPPlus.length < 2){
-		newHPPlus = "0" + newHPPlus;
+		newHPPlus = '0' + newHPPlus;
 	}
 	if (SAV_godMode === false){
 		life = newHPPlus + '00';
@@ -816,9 +816,9 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
 	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Modify"></div>';
 	if (PERSON === 0){ // Adicionar item ao baú da jill
-		$("#JILL-BOX").append(HTMLTEMPLATE);
-	} else {		  // Adicionar item ao baú do carlos
-		$("#CARLOS-BOX").append(HTMLTEMPLATE);
+		$('#JILL-BOX').append(HTMLTEMPLATE);
+	} else {		   // Adicionar item ao baú do carlos
+		$('#CARLOS-BOX').append(HTMLTEMPLATE);
 	}
 	// Fix para porcentagem
 	if (ATRIBUTO === '0e' || ATRIBUTO === '06' || ATRIBUTO === '02' || ATRIBUTO === '16'){
@@ -864,7 +864,7 @@ function addInfo(person, itemId){
 	} else {
 		document.getElementById('text-info-0' + person).innerHTML = '<!-- Empty Slot -->';
 	}
-	document.getElementById('icon-info-0' + person).src = "img/details-0" + imgSet + ".png";
+	document.getElementById('icon-info-0' + person).src = 'img/details-0' + imgSet + '.png';
 	$('#icon-info-0' + person).css({display: 'inline', 'clip-path': 'inset(0px ' + finalA + 'px 0px ' + finalB + 'px)', 'margin-left': finalMargin + 'px'});
 }
 function addInvent(person, itemHex, quantHex, block, atrib, nulo){
@@ -886,22 +886,22 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	// Caso seja em porcentagem
 	var classN = document.getElementById('J-LBL-' + block).className;
 	if (atrib === '0e' || atrib === '06' || atrib === '02' || atrib === '16'){
-		quanti = parseInt("0x" + quantHex) + "%";
+		quanti = parseInt('0x' + quantHex) + '%';
 		percent = true;
 	} else {
-		quanti = parseInt("0x" + quantHex);
+		quanti = parseInt('0x' + quantHex);
 	}
 	// Caso seja ammo infinita
 	if (atrib === '03' || atrib === '07' || atrib === '0f' || atrib === '13' || atrib === '17'){
 		quanti = 'Inf.';
 	}
 	// Pixels
+	var s = 0;
+	var fix = 4;
 	var startB = 0;
 	var startA = 956;
 	var pushOffset = 106;
 	var marginOffset = 110;
-	var fix = 4;
-	var s = 0;
 	// Finais
 	var finalA = startA;
 	var finalB = startB;
@@ -943,7 +943,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		}
 		document.getElementById('J-LBL-' + block).innerHTML = quanti;
 		$('#J-LBL-' + block).css({'color': cor, 'text-shadow': shad});
-		$('#J-icon-' + block).css({"clip-path": 'inset(0px ' + finalA + 'px 4px ' + finalB + 'px)', 'margin-left': finalMargin + 'px'});
+		$('#J-icon-' + block).css({'clip-path': 'inset(0px ' + finalA + 'px 4px ' + finalB + 'px)', 'margin-left': finalMargin + 'px'});
 	} else { // Inventário do Carlos
 		document.getElementById('C-icon-' + block).src = 'img/box-set-' + spriteNumber + '.png';
 		document.getElementById('C-icon-' + block).onclick = function(){

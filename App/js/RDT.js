@@ -63,9 +63,9 @@ var startFirstMessage;
 var RDT_loading = false;
 var RDT_CANCRASH = false;
 var RDT_FILEMAP_MSG = [];
-var RDT_ERRORMOTIVE = "";
+var RDT_ERRORMOTIVE = '';
 var RDT_MSG_POINTERS = [];
-var RDT_currentAudio = "";
+var RDT_currentAudio = '';
 var RDT_requestReload = false;
 var RDT_generateMapFile = false;
 var RDT_requestReloadWithFix0 = false;
@@ -169,8 +169,8 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	}
 	startFirstMessage = undefined;
 	$('#RDT-aba-menu-4').css({'display': 'none'});
-	$('#RDT-aba-menu-2').css({"display": 'inline'});
-	$('#RDT-aba-menu-3').css({"display": 'inline'});
+	$('#RDT-aba-menu-2').css({'display': 'inline'});
+	$('#RDT-aba-menu-3').css({'display': 'inline'});
 	document.getElementById('RDT_slider_D').value = 0;
 	document.getElementById('RDT_slider_D2').value = 0;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
@@ -255,7 +255,7 @@ function RDT_decompileCameras(id){
 		'<font title="(2) X Origin">' + CAM_originX_2.toUpperCase() + '</font> <font title="(1) Y Origin">' + CAM_originY_1.toUpperCase() + '</font> <font title="(2) Y Origin">' + CAM_originY_2.toUpperCase() + '</font> <font title="(1) Z Origin">' + CAM_originZ_1.toUpperCase() + '</font> <font title="(2) Z Origin">' + 
 		CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + '</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + 
 		CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> <font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
-	$("#RDT_camera_holder").append(MASSIVE_HTML_RDTCAMERA_TEMPLATE);
+	$('#RDT_camera_holder').append(MASSIVE_HTML_RDTCAMERA_TEMPLATE);
 }
 function RDT_copyPasteCameraInfo(mode){
 	// Copy
@@ -401,7 +401,7 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 		EN_pose.toUpperCase() + '</font> <font title="Extra Flag">' + EN_exFlag.toUpperCase() + '</font> ' + enemyHex.slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]) + ' <font title="Sound Set">' + EN_soundSet.toUpperCase() + '</font> <font title="Texture">' + EN_texture.toUpperCase() + 
 		'</font> <font title="E. Flag">' + EN_enFlag.toUpperCase() + '</font> <font title="X pos.">' + EN_xPos.toUpperCase() + '</font> <font title="Z pos.">' + EN_yPos.toUpperCase() + '</font> <font title="Y pos.">' + EN_zPos.toUpperCase() + '</font> <font title="R pos.">' + EN_rPos.toUpperCase() + '</font> ' + 
 		enemyHex.slice(RANGES["RDT_enemy-offset-1"][0], RANGES["RDT_enemy-offset-1"][1]).toUpperCase() + '</font></div>';
-	$("#RDT_enemy_holder").append(ENEMY_HTML_TEMPLATE);
+	$('#RDT_enemy_holder').append(ENEMY_HTML_TEMPLATE);
 }
 function RDT_copyPasteEnemyNpcInfo(mode){
 	if (mode === 1){
@@ -515,7 +515,7 @@ function RDT_getEnemies(hx){
 				RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
 				c++;
 			} else {
-				if (RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + RANGES["RDT_enemy-type"][0]), parseInt(enemyRaw[c] + RANGES["RDT_enemy-type"][1])) === "34" && RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === "000003"){
+				if (RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + RANGES['RDT_enemy-type'][0]), parseInt(enemyRaw[c] + RANGES['RDT_enemy-type'][1])) === '34' && RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === '000003'){
 					RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
 					c++;
 				} else {
@@ -606,7 +606,7 @@ function RDT_decompileMessageCode(index, hex){
 		var MC_ID 			 = hex.slice(RANGES['RDT_msgCode-id'][0],              RANGES['RDT_msgCode-id'][1]);
 		var MC_HEADER 		 = hex.slice(RANGES['RDT_msgCode-header'][0],          RANGES['RDT_msgCode-header'][1]);
 		var MC_IDENT 		 = hex.slice(RANGES['RDT_msgCode-identifier'][0],      RANGES['RDT_msgCode-identifier'][1]);
-		
+
 		if (MC_HEADER === '63'){
 			MC_XPOS 		 = hex.slice(RANGES['RDT_msgCode-0-xPos'][0],          RANGES['RDT_msgCode-0-xPos'][1]);
 			MC_ZPOS 		 = hex.slice(RANGES['RDT_msgCode-0-zPos'][0],          RANGES['RDT_msgCode-0-zPos'][1]);
@@ -631,7 +631,6 @@ function RDT_decompileMessageCode(index, hex){
 			MC_READMODE 	 = hex.slice(RANGES['RDT_msgCode-1-readMode'][0],      RANGES['RDT_msgCode-1-readMode'][1]);
 			fHex			 = hex.slice(RANGES['RDT_msgCode-header'][0],		   RANGES['RDT_msgCode-1-readMode'][1]);
 		}
-
 		localStorage.setItem('RDT_MSGBLOCK-' + index, fHex);
 		//console.log(MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
@@ -644,7 +643,7 @@ function RDT_decompileMessageCode(index, hex){
 			'</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Z pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="X Width">' + MC_XWIDTHTRIGGER.toUpperCase() + 
 			'</font> <font title="Z Width">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + 
 			' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></font></div>';
-		$("#RDT_msgCode_holder").append(HTML_HUGE_MSGCODE_TEMPLATE);
+		$('#RDT_msgCode_holder').append(HTML_HUGE_MSGCODE_TEMPLATE);
 	}
 }
 function RDT_MSGCODE_APPLY(id){
@@ -801,7 +800,7 @@ function RDT_decompileDoors(index, location){
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
 		} else {
-			addLog('warn', 'WARN - Unable to add Door! - ' + reason);
+			addLog('warn', 'WARN - Unable to add door! - ' + reason);
 			scrollLog();
 		}
 	}
@@ -1124,10 +1123,10 @@ function RDT_renderItens(index, hex){
 			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
 			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc" style="left: 220px;margin-top: -70px;"><br><br><br>Item flag: ' + iFlag.toUpperCase() +  '</div><div class="menu-separador">' + 
 			'</div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
-		$("#RDT-item-list").append(RDT_ITEM_HTML_TEMPLATE);
+		$('#RDT-item-list').append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = 'RDT - ERROR: Unable to render item ' + id.toUpperCase() + ' - ' + msg;
-		addLog("error", msg);
+		addLog('error', msg);
 		console.error(msg);
 	}
 	scrollLog();
@@ -1285,7 +1284,7 @@ function RDT_readMessages(){
 	// Finding the end of every message
 	c = 0;
 	while(c < RDT_messagesArray.length){
-		RDT_MSG_END = getAllIndexes(RDT_arquivoBruto, "fe");
+		RDT_MSG_END = getAllIndexes(RDT_arquivoBruto, 'fe');
 		// This will elimiate (almost) every wrong guess of end message!
 		var r;
 		if (RDT_arquivoBruto.length > 14088){
@@ -1309,18 +1308,18 @@ function RDT_readMessages(){
 	while(c < RDT_messagesArray.length){
 		var RDT_canAdd = true;
 		var RDT_canAdd_lvl = 0;
-		var RDT_canAdd_reason = "";
+		var RDT_canAdd_reason = '';
 
 		if (RDT_MSG_END[c] === undefined || RDT_MSG_END[c] === NaN){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 2;
-			RDT_canAdd_reason = "The current pos. in RDT_MSG_END (" + c + ") is Null or Undefined!";
+			RDT_canAdd_reason = 'The current pos. in RDT_MSG_END (' + c + ') is Null or Undefined!';
 			break;
 		}
 		if (RDT_MSG_CURRENT_TEST !== 4 && RDT_messagesArray[c] > RDT_MSG_finalLenght || RDT_MSG_CURRENT_TEST !== 4 && RDT_MSG_END[c] > RDT_MSG_finalLenght){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message position is very far than usual!";
+			RDT_canAdd_reason = 'The message position is very far than usual!';
 			break;
 		}
 		var MESSAGE;
@@ -1346,7 +1345,7 @@ function RDT_readMessages(){
 						break;
 						RDT_canAdd = false;
 						RDT_canAdd_lvl = 1;
-						RDT_canAdd_reason = "The next pos. of RDT_MSG_END returns NaN!";
+						RDT_canAdd_reason = 'The next pos. of RDT_MSG_END returns NaN!';
 					}
 				} else {
 					MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c] + 4));
@@ -1942,7 +1941,7 @@ function RDT_lookForRDTConfigFile(){
 			if (getFileName(ORIGINAL_FILENAME) === 'r301'){
 				RDT_MSG_POINTERS.splice(0, 1);
 			}
-			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), pointerCompiled);
+			localStorage.setItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase(), pointerCompiled);
 			if (RDT_MSG_POINTERS.length !== 2){
 				while(c < RDT_MSG_POINTERS.length){
 					if (c !== RDT_MSG_POINTERS.length - 1){
@@ -1963,13 +1962,13 @@ function RDT_lookForRDTConfigFile(){
 						c++;
 					} else {
 						POS_START = LAST_POS_END;
-						var SEEK = getAllIndexes(RDT_arquivoBruto, "fe");
+						var SEEK = getAllIndexes(RDT_arquivoBruto, 'fe');
 						while(parseInt(SEEK[0]) < LAST_POS_END){
 							SEEK.splice(0, 1);
 						}
 						if (SEEK.length > 0){
 							// If is an climax message
-							if (RDT_arquivoBruto.slice(SEEK[1], parseInt(SEEK[1] + 4)) === "fefe"){
+							if (RDT_arquivoBruto.slice(SEEK[1], parseInt(SEEK[1] + 4)) === 'fefe'){
 								POS_END = parseInt(SEEK[1] + 4);
 								RDT_messagesArray.push(POS_START, POS_END);
 							} else {
@@ -1987,13 +1986,13 @@ function RDT_lookForRDTConfigFile(){
 				}
 			} else {
 				POS_START = MSG_START;
-				var SEEK = getAllIndexes(RDT_arquivoBruto, "fe");
+				var SEEK = getAllIndexes(RDT_arquivoBruto, 'fe');
 				while(parseInt(SEEK[0]) < POS_START){
 					SEEK.splice(0, 1);
 				}
 				if (SEEK.length > 0){
 					// If is an climax message
-					if (RDT_arquivoBruto.slice(SEEK[1], parseInt(SEEK[1] + 4)) === "fefe"){
+					if (RDT_arquivoBruto.slice(SEEK[1], parseInt(SEEK[1] + 4)) === 'fefe'){
 						POS_END = parseInt(SEEK[1] + 4);
 						RDT_messagesArray.push(POS_START, POS_END);
 					} else {
@@ -2016,9 +2015,9 @@ function RDT_lookForRDTConfigFile(){
 				sta_offset = RDT_messagesArray[c];
 				end_offset = RDT_messagesArray[c + 1];
 				if (sta_offset !== end_offset){
-					sessionStorage.setItem("MESSAGE_HEX_" + parseInt(soma + 1), RDT_arquivoBruto.slice(sta_offset, end_offset));
-					sessionStorage.setItem("MESSAGE_START_" + parseInt(soma + 1), sta_offset);
-					sessionStorage.setItem("MESSAGE_END_" + parseInt(soma + 1), end_offset);
+					sessionStorage.setItem('MESSAGE_HEX_' + parseInt(soma + 1), RDT_arquivoBruto.slice(sta_offset, end_offset));
+					sessionStorage.setItem('MESSAGE_START_' + parseInt(soma + 1), sta_offset);
+					sessionStorage.setItem('MESSAGE_END_' + parseInt(soma + 1), end_offset);
 					RDT_renderMessages(parseInt(soma + 1), sta_offset, end_offset);
 				} else {
 					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
@@ -2046,8 +2045,8 @@ function RDT_lookForRDTConfigFile(){
 			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 		}
 		// Final
-		$("#RDT_msgBlock_health").removeClass('red');
-		$("#RDT_msgBlock_health").removeClass('green');
+		$('#RDT_msgBlock_health').removeClass('red');
+		$('#RDT_msgBlock_health').removeClass('green');
 		document.getElementById('RDT_msgBlock_infos').innerHTML = '';
 		document.getElementById('RDT_msgBlock_health').innerHTML = '';
 		if (RDT_requestReload === false){
@@ -2066,8 +2065,8 @@ function RDT_lookForRDTConfigFile(){
 					$('#RDT_lbl-msg_c_blockHex').removeClass('green');
 					$('#MSG_RDT_lbl_blockUsage').removeClass('green');
 				}
-				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = "Hex: " + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
-				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = "Hex: " + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
+				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = 'Hex: ' + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
+				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = 'Hex: ' + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
 				document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = block_size_hex.toUpperCase();
 				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
 				if (c_block_size_hex !== block_size_hex){
@@ -2075,11 +2074,11 @@ function RDT_lookForRDTConfigFile(){
 					var a = parseInt(c_block_size_hex, 16);
 					if (a > b){
 						document.getElementById('RDT_msgBlock_health').innerHTML = 'Bad';
-						$("#RDT_msgBlock_health").addClass('red');
+						$('#RDT_msgBlock_health').addClass('red');
 						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_HIGH;
 					} else {
 						document.getElementById('RDT_msgBlock_health').innerHTML = 'Bad';
-						$("#RDT_msgBlock_health").addClass('red');
+						$('#RDT_msgBlock_health').addClass('red');
 						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_LOW;
 					}
 					document.getElementById("RDT_lblError_msgExpected").innerHTML = block_size_hex.toUpperCase();
