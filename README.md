@@ -51,13 +51,22 @@ Expect compatibility improvements and more features in the future!
 You can create a new config. file, edit your screen resolution, use an experimental resolution scaler and more. [WIP] <br>
 Expect compatibility improvements and more features in the future!
 
+## Other Features
+R3ditor also can do:
+
+- Read XYZR pos. in game
+- Edit inventory in game
+- Edit HP in game (infinite life and enable god mode)
+- Write texts with RE3 font with File Generator (WIP)
+- Patch TIM files generated with RE3SLDE 0.1b (WIP) 
+- Extract all Rofs (.dat) files (Wizard)
+
 ### Important
 Any changes you make will automatically apply to your files.
 If you want to recover your save, open the "backup" folder and select the file you want to recover. <br><br>
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
-
 External JS Plugins:
 - <a href="https://jquery.com/" target="_blank">jQuery</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
 
