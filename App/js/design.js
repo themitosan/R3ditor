@@ -40,17 +40,6 @@ function scrollLog(){
 /// General
 function main_renderFileList(id, mode){
 	var c = 0;
-	var gameModePath;
-	if (mode === undefined || mode === null){
-		gameModePath = 'DATA_E';
-	} else {
-		if (mode === 1){
-			gameModePath = 'DATA_AJ';
-		}
-		if (mode === 2){
-			gameModePath = 'DATA_E';
-		}
-	}
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ''){
 		var mFile;
@@ -101,8 +90,18 @@ function main_renderFileList(id, mode){
 	}
 	// RDT
 	if (id === 3){
-		$('#fileListHolder').css({'height': '440px'});
-		$('#fileListHolder_AJ').css({'height': '440px'});
+		var gameModePath;
+		if (mode === undefined || mode === null){
+			gameModePath = 'DATA_E';
+			$('#fileListHolder').css({'height': '440px', 'display': 'block'});
+		} else {
+			if (mode === 1){
+				gameModePath = 'DATA_AJ';
+			}
+			if (mode === 2){
+				gameModePath = 'DATA_E';
+			}
+		}
 		$('#fileList_aba_list').css({'display': 'inline'});
 		document.getElementById('fileList_title').innerHTML = 'File List';
 		if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
@@ -161,15 +160,15 @@ function main_renderFileList(id, mode){
 				c++;
 			}
 			if (gameModePath === 'DATA_E'){
-				$('#fileListHolder').css({'display': 'block'});
 				$('#fileListHolder_AJ').css({'display': 'none'});
 				$('#fileList_aba_hard').addClass('aba-select-2');
 				$('#fileList_aba_easy').removeClass('aba-select-2');
+				$('#fileListHolder').css({'height': '440px', 'display': 'block'});
 			} else {
-				$('fileListHolder').css({'display': 'none'});
-				$('fileList_aba_easy').addClass('aba-select-2');
-				$('fileListHolder_AJ').css({'display': 'block'});
-				$('fileList_aba_hard').removeClass('aba-select-2');
+				$('#fileListHolder').css({'display': 'none'});
+				$('#fileList_aba_easy').addClass('aba-select-2');
+				$('#fileList_aba_hard').removeClass('aba-select-2');
+				$('#fileListHolder_AJ').css({'height': '440px', 'display': 'block'});
 			}
 			if (RDT_arquivoBruto !== undefined){
 				$('#FILELIST_goBackBtn').css({'display': 'inline'});

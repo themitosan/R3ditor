@@ -1248,6 +1248,10 @@ function RDT_ITEM_APPLY(index, type, convert){
 		scrollLog();
 	}
 }
+/*
+	MESSAGES
+	This section will receive a HUUUUUUUUUUGE refactor!
+*/
 function RDT_readMessages(){
 	var c = 0;
 	RDT_MSG_END = [];
@@ -1379,7 +1383,7 @@ function RDT_readMessages(){
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message contains more than 2 cases of ff!";
+			RDT_canAdd_reason = 'The message contains more than 2 cases of ff!';
 		}
 		// Step 7 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
@@ -1391,7 +1395,7 @@ function RDT_readMessages(){
 		}
 		// Step 9 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
-		RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, "dc").length + getAllIndexes(MESSAGE, "ba").length);
+		RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, 'dc').length + getAllIndexes(MESSAGE, "ba").length);
 		if (RDT_MSGfilter > 1){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
