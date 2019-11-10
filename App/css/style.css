@@ -634,7 +634,7 @@ input[type='range' i]{
 }
 .msg-raw{
     top: 455px;
-    width: 926px;
+    width: 546px;
     height: 152px;
     overflow: auto;
     margin-top: 4px;
@@ -645,6 +645,21 @@ input[type='range' i]{
     padding-right: 10px;
     padding-bottom: 6px;
     background-image: linear-gradient(to bottom, #283a29, #13251e);
+}
+.msg-textPreview{
+    top: 455px;
+    left: 578px;
+    width: 356px;
+    height: 152px;
+    overflow: auto;
+    margin-top: 4px;
+    padding-top: 6px;
+    padding-left: 10px;
+    border-radius: 6px;
+    position: absolute;
+    padding-right: 10px;
+    padding-bottom: 6px;
+    background-image: linear-gradient(to bottom, #354165, #222a42);
 }
 .msg-events{
     top: 44px;
@@ -919,7 +934,7 @@ input[type='range' i]{
     width: 50px !important;
 }
 .user-can-select{
-    user-select:all;
+    user-select: all;
 }
 .RDT-item-lbl-fix{
     position: sticky;
@@ -1976,7 +1991,7 @@ input[type='range' i]{
     top: 302px;
 }
 .SETTINGS_ABA-3{
-    left: 478px;
+    left: 478msg-rawpx;
     top: 56px;
 }
 .SETTINGS_ABA-4{

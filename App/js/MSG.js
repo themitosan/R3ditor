@@ -55,6 +55,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	scrollLog();
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
+	var t;
 	var c = 0; // The great c = 0!
 	MSG_DECRYPT_LV1_LAST = '';
 	$('#RDT-aba-menu-2').css({'display': 'inline'});
@@ -74,7 +75,6 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		scrollLog();
 	}
 	MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST.slice(0, parseInt(MSG_DECRYPT_LV1_LAST.length - 1));
-	var t;
 	if (RAW_DATA_ARRAY !== null){
 		t = RAW_DATA_ARRAY.length;
 	} else {
@@ -89,7 +89,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		// Se for um comando / função especial
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 			if (textoTraduzido !== ''){
-				final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)');
+				final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)<br>');
 				textoTraduzido = '';
 				cAtual++;
 			}
@@ -105,11 +105,11 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 					break;
 				}
 			} else {
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + RAW_DATA_ARRAY[startPoint + 1] + ')';
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + RAW_DATA_ARRAY[startPoint + 1] + ')<br>';
 			}
 			// End message - fix for climax
 			if (RAW_DATA_ARRAY[startPoint] === 'fe' && MSG_useClimaxFix === true){
-				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].slice(0, MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].length - 1) + ')';
+				COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].slice(0, MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1].length - 1) + ')<br>';
 				MSG_useClimaxFix = false;
 				startPoint--;
 			}
@@ -120,9 +120,9 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			// Text Color
 			if (RAW_DATA_ARRAY[startPoint] === 'f9'){
 				if (RAW_DATA_ARRAY[startPoint + 1] === '00'){
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ')';
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1]] + ')<br>';
 				} else {
-					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ')';
+					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + MSG_TEXTCOLOR[RAW_DATA_ARRAY[startPoint + 1].slice(1)] + ')<br>';
 				}
 			}
 			if (RAW_DATA_ARRAY[startPoint] === 'f3' || RAW_DATA_ARRAY[startPoint] === 'f5'){
@@ -140,7 +140,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		}
 	}
 	if (textoTraduzido !== ''){
-		final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)');
+		final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)<br>');
 		textoTraduzido = '';
 		cAtual++;
 	}
@@ -206,6 +206,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 		cAtual++;
 	}
 	// Final
+	document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(RAW_DATA);
 	document.getElementById('text-msg-raw').innerHTML = finalArray.toUpperCase();
 	MSG_doTheTitleThing();
 	MSG_renderCommands();
@@ -769,8 +770,9 @@ function MSG_applyMSGCommand(mode){
 		MSG_FILL_PASS = '';
 		localStorage.clear();
 		if (POINTER_HOLD !== undefined){
-			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
+			localStorage.setItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
 		}
+		document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
 		MSG_startMSGDecrypt_Lv2(newHex);
 		scrollLog();
 	}

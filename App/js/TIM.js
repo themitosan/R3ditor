@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help the manolo brow!
 */
-
 var TIM_SIZE;
 var TIM_required;
 var TIM_mapFile = [];

@@ -239,7 +239,7 @@ function RDT_decompileCameras(id){
 		CAM_ID = '0' + CAM_ID;
 	}
 	if (fs.existsSync(APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG') === true){
-		CAM_IMG = APP_PATH + "/Assets/DATA_A/BSS/" + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
+		CAM_IMG = APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
 		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
 	} else {
 		CAM_IMG = APP_PATH + '/App/Img/404.png';
@@ -1592,25 +1592,25 @@ function RDT_findPointers(){
 		RDT_totalMessages++;
 	}
 	if (RDT_totalMessages !== 0){
-		var pont = "";
+		var pont = '';
 		var fatorA = 4;
 		var fatorB = 0;
 		var totalVezesPush = 0;
 		while (c < RDT_FILEMAP_MSG.length){
-			if (RDT_FILEMAP_MSG[c].indexOf("NaN") !== -1){
+			if (RDT_FILEMAP_MSG[c].indexOf('NaN') !== -1){
 				RDT_FILEMAP_MSG.splice(c, 1);
 			}
 			c++;
 		}
 		if (startFirstMessage === undefined){
-			var askPrompt = prompt("File: " + getFileName(ORIGINAL_FILENAME).toUpperCase() + ".RDT\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"");
+			var askPrompt = prompt('File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"');
 			if (askPrompt !== '' && askPrompt !== null && RDT_arquivoBruto.indexOf(solveHEX(askPrompt)) !== -1){
 				startFirstMessage = RDT_arquivoBruto.indexOf(solveHEX(askPrompt));
 			} else {
 				RDT_findPointers();
 			}
 		}
-		console.log("Looking for pointer with base " + startFirstMessage);
+		console.log('Looking for pointer with base ' + startFirstMessage);
 		while(totalVezesPush < RDT_totalMessages * 20){
 			if (RDT_mapHack2[getFileName(ORIGINAL_FILENAME)] !== undefined){
 				if (RDT_POINTERTYPE4[pont] !== undefined){
@@ -1623,7 +1623,7 @@ function RDT_findPointers(){
 						fatorA = 4;
 						fatorB = 0;
 						totalVezesPush = 0;
-						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 					} else {
 						console.log("Pointer - Current Result: " + pont);
 						totalVezesPush++;
@@ -1689,7 +1689,7 @@ function RDT_findPointers(){
 		var fake = pont;
 		var pointerTest = RDT_MSG_pointerTest(parseInt(startFirstMessage - fatorB));
 		if (pointerTest === false){
-			pont = "";
+			pont = '';
 			fatorA = 4;
 			fatorB = 0;
 			totalVezesPush = 0;
@@ -1785,7 +1785,7 @@ function RDT_makeRDTConfigFile(){
 	// Final
 	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
 	try{
-		fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", FILE_COMPILED, 'utf-8');
+		fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', FILE_COMPILED, 'utf-8');
 		addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
 		log_separador();
 		RDT_generateMapFile = false;
@@ -1821,8 +1821,8 @@ function RDT_requestFix(fix){
 	RDT_MAPFILE = undefined;
 	RDT_generateMapFile = false;
 	document.getElementById('RDT_MSG-holder').innerHTML = '';
-	if (fs.existsSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap') === true){
-		fs.unlinkSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap');
+	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
+		fs.unlinkSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap');
 	}
 	if (fix === 0){
 		RDT_requestReloadWithFix0 = true;
@@ -1897,7 +1897,7 @@ function RDT_lookForRDTConfigFile(){
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
-		RDT_MAPFILE = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap', 'utf-8').toString().split('\n').forEach(function(line){ 
+		RDT_MAPFILE = fs.readFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', 'utf-8').toString().split('\n').forEach(function(line){ 
 			mapfile.push(line); 
 		});
 		// Messages (MSG)
@@ -1907,8 +1907,8 @@ function RDT_lookForRDTConfigFile(){
 		var BLOCK_MSGS = '';
 		var firstEndOffset = 5;
 		var firstStartOffset = 6;
-		var pointerSplit = "Undefined";
-		var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf("[POINTERS]") + 1)]);
+		var pointerSplit = 'Undefined';
+		var tMessages = parseInt(mapfile[parseInt(mapfile.indexOf('[POINTERS]') + 1)]);
 		if (tMessages !== 0){
 			while(c < tMessages){
 				s_offset = mapfile[parseInt(firstEndOffset + soma)];
@@ -1939,7 +1939,7 @@ function RDT_lookForRDTConfigFile(){
 			} else {
 				MSG_START = RDT_arquivoBruto.indexOf(pointerCompiled) + pointerCompiled.length;
 			}
-			if (getFileName(ORIGINAL_FILENAME) === "r301"){
+			if (getFileName(ORIGINAL_FILENAME) === 'r301'){
 				RDT_MSG_POINTERS.splice(0, 1);
 			}
 			localStorage.setItem("RDT_POINTER_" + getFileName(ORIGINAL_FILENAME).toUpperCase(), pointerCompiled);

@@ -1304,6 +1304,7 @@ function TRANSFER_RDT_TO_MSG(){
 	$('#RDT_openInHex').css({'display': 'none'});
 	$('#MSG_openInHex').css({'display': 'none'});
 	$('#menu-topo-msg').css({'display': 'block'});
+	$('#MSG_textPreview').css({'height': '122px'});
 	$('#RDT_MSG_NUMBER').css({'display': 'inline'});
 	$('#btn-goback-rdt').css({'display': 'inline'});
 	$('#MSG_RDT_BLOCKUSAGE').css({'display': 'block'});

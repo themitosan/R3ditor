@@ -5,7 +5,7 @@
 		<title>Loading, Please wait...</title>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<!-- External API -->
-		<script type="text/javascript" src="js/external_api/jquery.min.js"></script>
+		<script type="text/javascript" src="js/external_api/jquery-3.4.1.min.js"></script>
 		<!--<script type="text/javascript" src="js/external_api/html2canvas.js"></script>-->
 		<!--<script type="text/javascript" src="js/external_api/canvas2image.js"></script>-->
 		<!-- Database -->
@@ -40,7 +40,7 @@
 			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor" value="Check for updates" onclick="checkForUpdates();">
 			<input type="button" class="botao-menu right" title="Edit R3ditor Settings" value="Settings" onclick="main_menu(7);">
 		</div>
-		<!-- Outras ferramentas -->
+		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
@@ -551,7 +551,7 @@
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
-			<!-- RDT: Cameras -->
+			<!-- RDT Cameras -->
 			<div class="menu" id="RDT_menu-9" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-camera-hold">
 					<div id="RDT_BG_9" class="RDT_BG_IMAGE"></div>
@@ -559,7 +559,7 @@
 					<div id="RDT_camera_holder" class="RDT-holder">						
 						<!-- CAMERA Goes Here -->
 					</div>
-					<!-- RDT: CAMERA - Edit -->
+					<!-- RDT CAMERA - Edit -->
 					<div class="RDT-Item-Edit RDT_camEditFixForm none" id="RDT-camera-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Camera: <font id="RDT-lbl-CAMERA-edit">???</font> - ID: <font id="RDT-lbl-CAMERA-index">???</font></center>
 						<div id="RDT-camera-edit-form">
@@ -592,7 +592,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- RDT: Enemy / NPC's -->
+			<!-- RDT Enemy / NPC's -->
 			<div class="menu" id="RDT_menu-8" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-enemy-hold">
 					<div id="RDT_BG_8" class="RDT_BG_IMAGE"></div>
@@ -907,10 +907,10 @@
 			<div class="dialog-addcomando" id="dialog-msg-addcomand">
 				<font class="titulo">Add Function - <font id="msg-addcomand-title">???</font></font>
 				<div class="msg-render" id="dialog-msg-render">
-					<!-- o dialogo ser Ħ renderizado aqui -->
+					<!-- O dialogo serão renderizado aqui -->
 				</div>
 				<input type="button" value="Cancel" class="botao-menu" onclick="MSG_renderDialog(0);">
-				<input type="button" value="Apply" class="botao-menu" id="msg-addcomand-confirm" onclick="">
+				<input type="button" value="Apply" class="botao-menu" id="msg-addcomand-confirm">
 			</div>
 			<!-- MSG Raw -->
 			<div class="msg-raw" id="MSG_hexPrev">
@@ -920,11 +920,18 @@
 					<!-- Hex vai aqui -->
 				</div>
 			</div>
+			<!-- MSG Preview -->
+			<div class="msg-textPreview" id="MSG_textPreview">
+				<center>Text Preview</center>
+				<div class="menu-separador"></div>
+				<div id="text-msg-textPrev" class="user-can-select">
+					<!-- Preview vai aqui -->
+				</div>
+			</div>
 			<!-- Block Size -->
 			<div class="blockUsage" id="MSG_RDT_BLOCKUSAGE">
 				<center>
-					Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - 
-					Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
+					Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
 				</center>
 			</div>
 			<!-- MSG: Hex Input -->
@@ -1135,7 +1142,7 @@
 			<!-- Diálogos -->
 			<div class="menu-alterar-item none" id="menu-mod-item">
 				<div id="dialog_render">
-					<!-- diálogos vão aqui -->
+					<!-- Dialogs goes here -->
 				</div><br/>
 				<input type="button" value="Cancel" class="botao-menu" id="btn-item-cancel" onclick="cancelShowModItem();">
 				<input type="button" value="Apply" class="botao-menu" id="btn-item-apply" onclick="">

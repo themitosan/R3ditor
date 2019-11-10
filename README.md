@@ -57,6 +57,10 @@ If you want to recover your save, open the "backup" folder and select the file y
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
+
+External JS Plugins:
+- <a href="https://jquery.com/" target="_blank">jQuery</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
+
 Node-Webkit Plugins:
 - <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> <a href="https://github.com/Rob--" target="_blank">By Rob--</a>
 
