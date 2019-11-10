@@ -925,7 +925,7 @@ function MSG_renderDialog(id, args, index, isMod){
 }
 function MSG_hideTranslateInput(){
 	$('#text-hex-editor').css({'display': 'none'});
-	$('#MSG_addcomand-menu').css({'height': '562px'});
+	$('#MSG_addcomand-menu').css({'height': '566px'});
 	$('#MSG_optionTranslate').css({'display': 'inline'});
 }
 function MSG_showTranslateInput(){

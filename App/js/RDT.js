@@ -1338,7 +1338,7 @@ function RDT_readMessages(){
 				MESSAGE_RAW = RDT_arquivoBruto.slice(RDT_messagesArray[c], parseInt(RDT_MSG_END[c + 1] + 4));
 			} else {
 				// Fix for cases like R20B.RDT, R102.RDT
-				if (RDT_MSG_CURRENT_TEST === 1 && RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4)).indexOf("fa") === -1){
+				if (RDT_MSG_CURRENT_TEST === 1 && RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4)).indexOf('fa') === -1){
 					if (parseInt(RDT_MSG_END[c + 1] + 4) !== NaN){
 						MESSAGE_RAW = RDT_arquivoBruto.slice(parseInt(RDT_MSG_END[c] + 4), parseInt(RDT_MSG_END[c + 1] + 4));
 					} else {
@@ -1353,13 +1353,13 @@ function RDT_readMessages(){
 			}
 		}
 		if (MESSAGE_RAW !== undefined){
-			MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf("fe") + 4));
+			MESSAGE = MESSAGE_RAW.slice(0, parseInt(MESSAGE_RAW.indexOf('fe') + 4));
 		} else {
 			MESSAGE = '';
 		}
 		// Step 2 - Number of specific hex value
 		// Case: Yes / No
-		var RDT_MSGfilter = getAllIndexes(MESSAGE, "fb");
+		var RDT_MSGfilter = getAllIndexes(MESSAGE, 'fb');
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
@@ -1367,7 +1367,7 @@ function RDT_readMessages(){
 		}
 		// Step 3 - Number of specific hex value
 		// Case: Unknown hex appears more than usual - 78
-		RDT_MSGfilter = getAllIndexes(MESSAGE, "78");
+		RDT_MSGfilter = getAllIndexes(MESSAGE, '78');
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
@@ -1375,7 +1375,7 @@ function RDT_readMessages(){
 		}
 		// Step 4 - Number of specific hex value
 		// Case: Hex FF appears more than usual
-		RDT_MSGfilter = getAllIndexes(MESSAGE, "ff");
+		RDT_MSGfilter = getAllIndexes(MESSAGE, 'ff');
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
@@ -1383,7 +1383,7 @@ function RDT_readMessages(){
 		}
 		// Step 7 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
-		RDT_MSGfilter = getAllIndexes(MESSAGE, "00");
+		RDT_MSGfilter = getAllIndexes(MESSAGE, '00');
 		if (RDT_MSG_CURRENT_TEST === 3 && RDT_MSGfilter.length > 61){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
@@ -2471,9 +2471,9 @@ function RDT_COMPILE_Lv1(){
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
-			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME);
+			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\'));
 			RDT_readItens();
-			$("#RDT-aba-menu-3").trigger('click');
+			$('#RDT-aba-menu-3').trigger('click');
 		} catch(err){
 			addLog('error', 'ERROR - Something went wrong on save process!');
 			addLog('error', err);
@@ -2498,7 +2498,7 @@ function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
 		addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
-		addLog('log', 'Folder: ' + ORIGINAL_FILENAME);
+		addLog('log', 'Path: ' + ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\'));
 		log_separador();
 		RDT_doAfterSave();
 	}

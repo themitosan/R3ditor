@@ -779,14 +779,14 @@ input[type='range' i]{
     background-image: linear-gradient(to right, #82af9a, transparent);
 }
 .evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
-    background-image: linear-gradient(to right, #d20606, transparent);
+    background-image: linear-gradient(to right, #aa1717, transparent);
 }
 .evt-type-5{ /* Comando: Mostrar Nome de Item */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #804987, transparent);
 }
-.evt-type-8{ /* Comando: Comandon desconhecido usado em r101.rdt */
+.evt-type-8{ /* Comando: Comandon desconhecido usado em R101.RDT */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #bd93a3d6, transparent);
