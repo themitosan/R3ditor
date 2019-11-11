@@ -632,16 +632,16 @@ function RDT_decompileMessageCode(index, hex){
 			fHex			 = hex.slice(RANGES['RDT_msgCode-header'][0],		   RANGES['RDT_msgCode-1-readMode'][1]);
 		}
 		localStorage.setItem('RDT_MSGBLOCK-' + index, fHex);
-		//console.log(MC_HEADER.toUpperCase() + " " + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
+		//console.log(MC_HEADER.toUpperCase() + ' ' + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditMsgCode(' + index + ', \'' + fHex + '\');">' + 
-			'(' + parseInt(index + 1) + ') Message ID: <font class="italic">' + MC_ID.toUpperCase() + '</font><br><div class="menu-separador"></div>' + 
-			'X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
-			'X Width: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>Z Width: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc">' + 
+			'(' + parseInt(index + 1) + ') Message ID: ' + MC_ID.toUpperCase() + '<br><div class="menu-separador"></div>' + 
+			'X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
+			'Radius: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc">' + 
 			'<br>Header: <font class="RDT-item-lbl-fix-6">' + MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: ' + 
 			'<font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + 
-			'</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Z pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="X Width">' + MC_XWIDTHTRIGGER.toUpperCase() + 
-			'</font> <font title="Z Width">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + 
+			'</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Y pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="Size Radius">' + MC_XWIDTHTRIGGER.toUpperCase() + 
+			'</font> <font title="R pos.">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + 
 			' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></font></div>';
 		$('#RDT_msgCode_holder').append(HTML_HUGE_MSGCODE_TEMPLATE);
 	}
@@ -942,7 +942,7 @@ function RDT_getAllRelatedAudios(){
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoad(1);">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Open" ' + 
 			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '\']);"><br>Path: <font class="italic">' + 
-			APP_PATH.replace(new RegExp('\\\\', 'g'), "/") + "/Assets/DATA_A/VOICE/" + getAudioArray[c] + '</font><br></div>';
+			APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '</font><br></div>';
 		$('#RDT_audio_holder').append(AUDIO_HTML_TEMPLATE);
 		c++;
 	}
@@ -1130,6 +1130,23 @@ function RDT_renderItens(index, hex){
 		console.error(msg);
 	}
 	scrollLog();
+}
+function RDT_copyPasteItemPos(mode){
+	if (mode === 0){
+		var TEXT_FOR_CP = '[Item, Files & Map]\nItem X: ' + RDT_CURRENT_X.toUpperCase() + '\nItem Y: ' + RDT_CURRENT_Y.toUpperCase() + '\nItem Z: ' + RDT_CURRENT_Z.toUpperCase() + '\nItem R: ' + RDT_CURRENT_R.toUpperCase();
+		R3DITOR_COPY(TEXT_FOR_CP);
+		RDT_CURRENT_X = document.getElementById('RDT_lbl_point_x_hex').value;
+		RDT_CURRENT_Y = document.getElementById('RDT_lbl_point_y_hex').value;
+		RDT_CURRENT_Z = document.getElementById('RDT_lbl_point_z_hex').value;
+		RDT_CURRENT_R = document.getElementById('RDT_lbl_point_r_hex').value;
+	} else {
+		if (RDT_CURRENT_X !== '' && RDT_CURRENT_Y !== '' && RDT_CURRENT_Z !== '' && RDT_CURRENT_R !== ''){
+			document.getElementById('RDT_lbl_point_x_hex').value = RDT_CURRENT_X;
+			document.getElementById('RDT_lbl_point_y_hex').value = RDT_CURRENT_Y;
+			document.getElementById('RDT_lbl_point_z_hex').value = RDT_CURRENT_Z;
+			document.getElementById('RDT_lbl_point_r_hex').value = RDT_CURRENT_R;
+		}
+	}
 }
 function RDT_ITEM_APPLY(index, type, convert){
 	var error;
@@ -1748,7 +1765,7 @@ function RDT_makeRDTConfigFile(){
 			RDT_FILEMAP_MSG.splice(c, 1);
 			fatorMinus++;
 		} else {
-			foundMessages = foundMessages + parseInt(c - fatorMinus) + "\n" + RDT_FILEMAP_MSG[c] + "\n";
+			foundMessages = foundMessages + parseInt(c - fatorMinus) + '\n' + RDT_FILEMAP_MSG[c] + '\n';
 		}
 		c++;
 	}
@@ -1773,7 +1790,7 @@ function RDT_makeRDTConfigFile(){
 		var increment_B = 4;
 		c = 0;
 		while(c < parseInt(max + 1)){
-			PONTEIRO = PONTEIRO + parseInt(ponteiro_start + increment_A) + "\n" + parseInt(ponteiro_start + increment_B) + "\n";
+			PONTEIRO = PONTEIRO + parseInt(ponteiro_start + increment_A) + '\n' + parseInt(ponteiro_start + increment_B) + '\n';
 			increment_A = increment_A + 4;
 			increment_B = increment_B + 4;
 			totalMessages++;
@@ -1793,8 +1810,8 @@ function RDT_makeRDTConfigFile(){
 		log_separador();
 		RDT_generateMapFile = false;
 	} catch (err){
-		console.error("ERROR - Something went wrong while saving RDT map!\n" + err);
-		addLog('error', "ERROR - Something went wrong while saving RDT map!");
+		console.error('ERROR - Something went wrong while saving RDT map!\n' + err);
+		addLog('error', 'ERROR - Something went wrong while saving RDT map!');
 		addLog('error', err);
 	}
 	RDT_lookForRDTConfigFile();
@@ -2431,7 +2448,7 @@ function RDT_restoreLastBackup(){
 			}
 		}
 	} else {
-		$("#RDT_restoreLastBackup").css({'display': 'none'});
+		$('#RDT_restoreLastBackup').css({'display': 'none'});
 		addLog('warn', 'WARN - Unable to find backup!');
 		scrollLog();
 	}

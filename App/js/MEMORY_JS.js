@@ -10,11 +10,12 @@ var MEM_JS_updatePosTimer;
 var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;
 var MEM_JS_requreSucess = false;
+var REALTIME_renderToolbar = false;
 
-var REALTIME_X_Pos = '0000';
-var REALTIME_Y_Pos = '0000';
-var REALTIME_Z_Pos = '0000';
-var REALTIME_R_Pos = '0000';
+var REALTIME_X_Pos;
+var REALTIME_Y_Pos;
+var REALTIME_Z_Pos;
+var REALTIME_R_Pos;
 var REALTIME_CurrentCam = '00';
 var REALTIME_CurrentHP = '0000';
 var REALTIME_CurrentStage = '00';
@@ -63,6 +64,7 @@ function MEMORY_JS_initMemoryJs(){
 			document.getElementById('RE3_LIVESTATUS_closeGameBtn').onclick = function(){
 				killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
 			}
+			RE3_LIVE_enableDisableToolBar(0);
 			R3ditor_enableLiveStatusButton();
 			MEM_JS_updatePosTimer = setInterval(function(){
 				MEMORY_JS_getPosition();
@@ -97,7 +99,12 @@ function MEMORY_JS_getPosition(){
 		REALTIME_Y_Pos = Y1 + Y2;
 		REALTIME_Z_Pos = Z1 + Z2;
 		REALTIME_R_Pos = R1 + R2;
-		RE3_LIVE_CANVAS_RENDER();
+		var NEWPOS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
+		if (NEWPOS !== RE3_LIVE_POS){
+			RE3_LIVE_RENDER_POSITIONS();
+			RE3_LIVE_CANVAS_RENDER();
+			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
+		}
 	}
 }
 function MEMORY_JS_renderInfo(){

@@ -1,7 +1,7 @@
 /*
 	R3ditor - index.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - Por favorzu! UwU
+	Help me - Por favorzu! '\(UwU )/'
 */
 var fs;
 var MEM_JS;
@@ -309,6 +309,7 @@ function runExternalSoftware(exe, args){
 		MEM_JS_canRender = false;
 		EXTERNAL_APP_RUNNING = false;
 		EXTERNAL_APP_EXITCODE = code;
+		RE3_LIVE_enableDisableToolBar(1);
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
 			$('#WZ_BTN_2').css({'display': 'inline'});
 		}

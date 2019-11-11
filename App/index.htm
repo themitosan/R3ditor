@@ -66,6 +66,14 @@
 			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoad(6);">
 			<input type="button" class="botao-menu none" id="RDT_reload" value="Reload RDT" onclick="RDT_openFile(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
+			<!-- Live Status -->
+			<div id="RDT_LIVESTATUS_toolBar" class="none">
+				Live Status - 
+				<font class="RE3_LIVESTATUS_X_color">X: <font id="RDT_LIVESTATUS_toolBar_X" class="user-can-select">????</font></font> - 
+				<font class="RE3_LIVESTATUS_Y_color">Y: <font id="RDT_LIVESTATUS_toolBar_Y" class="user-can-select">????</font></font> - 
+				<font class="RE3_LIVESTATUS_Z_color">Z: <font id="RDT_LIVESTATUS_toolBar_Z" class="user-can-select">????</font></font> - 
+				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font>
+			</div>
 			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
@@ -146,7 +154,8 @@
 					<!-- Performance -->
 					<input type="button" value="Performance" class="INI_inernalTab SETTINGS_ABA-2">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-2">
-						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - Enable Menu Animations</font>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - Enable Menu Animations</font><br>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableRE3_live_toolBar"><font class="font-chkbox-fix"> - Enable RE3 Live Toolbar</font>
 						<div class="menu-separador"></div>
 						<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
 						Fast (50) - <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> - Slow (120)</center><br>
@@ -502,7 +511,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- Lista de Arquivos Disponiveis - FileList -->
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
@@ -651,19 +659,20 @@
 					</div>
 					<!-- RDT: MSGCODE - Editar -->
 					<div class="RDT-Item-Edit RDT_editParamMSGCODE" id="RDT-MSGCODE-Edit">
-						<center><font class="titulo">Edit Parameters</font><br>Message: <font id="RDT-lbl-MSGCODE-edit">???</font> - ID: <font id="RDT-lbl-MSGCODE-index">???</font></center>
+						<center>
+							<font class="titulo">Edit Parameters</font><br>Message: <font id="RDT-lbl-MSGCODE-edit">???</font> - ID: <font id="RDT-lbl-MSGCODE-index">???</font>
+						</center>
 						<div id="RDT-msgCode-edit-form">
-							<div class="RDT_coordsHolder_A">X Position: <input type="text" id="RDT_MSGCODE-edit-X" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Z Position: <input type="text" id="RDT_MSGCODE-edit-Z" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">X Width: <input type="text" id="RDT_MSGCODE-edit-radiusX" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">Z Width: <input type="text" id="RDT_MSGCODE-edit-radiusZ" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color">X Position: <input type="text" id="RDT_MSGCODE-edit-X" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color">Y Position: <input type="text" id="RDT_MSGCODE-edit-Z" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color">Size (Radius): <input type="text" id="RDT_MSGCODE-edit-radiusX" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color">R Position: <input type="text" id="RDT_MSGCODE-edit-radiusZ" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Special: <input type="text" id="RDT_MSGCODE-edit-special" class="item-select-mod RDT-item-lbl-fix-7" placeholder="00" maxlength="2"></div>
 							<div class="RDT_coordsHolder_B">
-								Display mode: 
+								Display mode:
 								<select id="RDT_MSGCODE-edit-display" class="item-select-mod no-transform-text RDT_MSGCODE-eDisplay">
-									<!-- As opções vão aqui -->
+									<!-- Options goes here -->
 								</select>
 							</div>
 							<div class="RDT-applyBtn-div">
@@ -776,6 +785,8 @@
 								D2: <input type="range" id="RDT_slider_D2" value="32767" min="0" max="65535" step="1" oninput="RDT_posMoveDiagonal(1);"><font id="RDT_lbl_pd2">0</font>
 							</center><br>
 							<input type="button" value="Center Pos." class="botao-menu" onclick="RDT_canvasResetPos();">
+							<input type="button" value="Copy Item Pos." class="botao-menu" onclick="RDT_copyPasteItemPos(0);">
+							<input type="button" value="Paste Item Pos." class="botao-menu" onclick="RDT_copyPasteItemPos(1);">
 							<input type="button" value="Use Player Pos." id="RDT_useJillPos_Item" class="botao-menu botao-aplicar none" onclick="RDT_getJillPosToApply(0);">
 						</div><br>
 						<center><input type="button" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>

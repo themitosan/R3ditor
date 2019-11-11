@@ -40,6 +40,18 @@ function scrollLog(){
 /// General
 function main_renderFileList(id, mode){
 	var c = 0;
+	var gameModePath;
+	if (mode === undefined || mode === null){
+		gameModePath = 'DATA_E';
+		$('#fileListHolder').css({'height': '440px', 'display': 'block'});
+	} else {
+		if (mode === 1){
+			gameModePath = 'DATA_AJ';
+		}
+		if (mode === 2){
+			gameModePath = 'DATA_E';
+		}
+	}
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ''){
 		var mFile;
@@ -90,18 +102,6 @@ function main_renderFileList(id, mode){
 	}
 	// RDT
 	if (id === 3){
-		var gameModePath;
-		if (mode === undefined || mode === null){
-			gameModePath = 'DATA_E';
-			$('#fileListHolder').css({'height': '440px', 'display': 'block'});
-		} else {
-			if (mode === 1){
-				gameModePath = 'DATA_AJ';
-			}
-			if (mode === 2){
-				gameModePath = 'DATA_E';
-			}
-		}
 		$('#fileList_aba_list').css({'display': 'inline'});
 		document.getElementById('fileList_title').innerHTML = 'File List';
 		if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
@@ -125,11 +125,15 @@ function main_renderFileList(id, mode){
 				} else {
 					imgPreview = APP_PATH + '\\App\\img\\404.png';
 				}
-				if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
-					mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
-				} else {
+				if (gameModePath === 'DATA_AJ'){
 					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
 						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+					} else {
+						mFile = 'There is no Map File for this RDT. Open it to generate!';
+					}
+				} else {
+					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
+						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
 					} else {
 						mFile = 'There is no Map File for this RDT. Open it to generate!';
 					}
@@ -1632,19 +1636,6 @@ function RE3_LIVE_RENDER(){
 			RE3_LIVE_prevCam = jpgCam;
 			document.getElementById('RE3_LIVESTATUS_lbl_CurrentCamera').innerHTML = REALTIME_CurrentCam;
 		}
-		var NEWPOS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
-		if (NEWPOS !== RE3_LIVE_POS){
-			document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionHex').innerHTML = REALTIME_X_Pos;
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionHex').innerHTML = REALTIME_Y_Pos;
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionHex').innerHTML = REALTIME_Z_Pos;
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionHex').innerHTML = REALTIME_R_Pos;
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos));
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos));
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
-			document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
-			RE3_LIVE_POS = REALTIME_X_Pos + REALTIME_Y_Pos + REALTIME_Z_Pos + REALTIME_R_Pos;
-		}
 		var enableInfiniteLife = document.getElementById('RE3_LIVESTATUS_CHEAT_INFHP').checked;
 		if (enableInfiniteLife === true){
 			RE3_LIVE_cheatInfiniteLife();
@@ -1750,6 +1741,30 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'clip-path': 'inset(' + clipPath + ')', 'left': leftoffset + 'px', 'display': 'inline'});
 	}
 	scrollLog();
+}
+function RE3_LIVE_enableDisableToolBar(mode){
+	if (PROCESS_OBJ !== undefined && REALTIME_renderToolbar === true && mode === 0){
+		$('#RDT_LIVESTATUS_toolBar').css({'display': 'inline'});
+	} else {
+		$('#RDT_LIVESTATUS_toolBar').css({'display': 'none'});
+	}
+}
+function RE3_LIVE_RENDER_POSITIONS(){
+	if (REALTIME_renderToolbar === true){
+		document.getElementById('RDT_LIVESTATUS_toolBar_X').innerHTML = REALTIME_X_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_Y').innerHTML = REALTIME_Y_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_Z').innerHTML = REALTIME_Z_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_R').innerHTML = REALTIME_R_Pos;
+	}
+	document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionHex').innerHTML = REALTIME_X_Pos;
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionHex').innerHTML = REALTIME_Y_Pos;
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionHex').innerHTML = REALTIME_Z_Pos;
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionHex').innerHTML = REALTIME_R_Pos;
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos));
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos));
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
 }
 // MINI_MAP
 var ACRESIMO = 10;
