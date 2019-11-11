@@ -57,7 +57,7 @@ R3ditor also can do:
 - Read XYZR pos. in game
 - Edit inventory in game
 - Edit HP in game (infinite life and enable god mode)
-- Write texts with RE3 font with File Generator (WIP)
+- Write texts using RE3 font with File Generator (WIP)
 - Patch TIM files generated with RE3SLDE 0.1b (WIP) 
 - Extract all Rofs (.dat) files (Wizard)
 
