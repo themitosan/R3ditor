@@ -1238,7 +1238,7 @@ input[type='range' i]{
     height: 514px;
     border-radius: 6px;
     position: absolute;
-    background-image: linear-gradient(to bottom, #3f3f3f, #505050);
+    background-image: linear-gradient(to bottom, #3f3f3f, #515151);
 }
 .fileList_files{
     top: 70px;
@@ -1248,7 +1248,7 @@ input[type='range' i]{
     overflow: auto;
     position: absolute;
     border-radius: 4px;
-    background-image: linear-gradient(to bottom, #626262, #151515);
+    background-image: linear-gradient(to bottom, #626262, #0c0827);
 }
 .fileList_img{
     width: 134px;
@@ -1274,6 +1274,12 @@ input[type='range' i]{
 }
 .fileList_item_color_c{
     background-image: linear-gradient(to right, #2a2a6f, transparent);
+}
+.fileList_removeListBtn{
+    top: 10px;
+    left: 536px;
+    position: absolute;
+    box-shadow: 0 0 6px #222;
 }
 .blockInfo_fix{
     left: 972px;
@@ -1979,6 +1985,7 @@ input[type='range' i]{
     width: 200px !important;
 }
 .SETTINGS_MENUBTNFIX{
+    box-shadow: 0 0 10px #323232;
     margin-top: 6px !important;
     width: 370px;
 }
@@ -2017,7 +2024,7 @@ input[type='range' i]{
     top: 78px;
 }
 .SETTINGS_WINDOW-4{
-    height: 116px;
+    height: 146px;
     width: 374px;
     left: 14px;
     top: 168px;

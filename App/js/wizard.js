@@ -321,6 +321,7 @@ function WZ_saveConfigs(justSave){
 				addLog('log', 'CONFIGS - Configs Saved!');
 				scrollLog();
 			} else {
+				clearInternalLog();
 				reload();
 			}
 		}
@@ -546,10 +547,18 @@ function SETTINGS_removeFiles(mode){
 			SETTINGS_RESET();
 		}
 	}
+	// Remove Recent Lists
+	if (mode === 4){
+		confirmAction = confirm('WARNING:\n\nThis operation will clean your recent opened lists.\n\nDo you want to proceed?');
+		if (confirmAction === true){
+			R3DITOR_REMOVE_RECENT_FILES();
+		}
+	}
 	scrollLog();
 }
 function SETTINGS_RESET(){
 	fs.unlinkSync(APP_PATH + '\\Configs\\configs.r3ditor');
+	fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
 	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');

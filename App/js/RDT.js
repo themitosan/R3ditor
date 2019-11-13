@@ -162,11 +162,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_messageCodesArray = [];
 	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
-	if (RDT_lastFileOpened !== ORIGINAL_FILENAME){
-		RDT_loop = 0;
-		RDT_lastFileOpened = rdtFile;
-		WZ_saveConfigs(true);
-	}
 	startFirstMessage = undefined;
 	$('#RDT-aba-menu-4').css({'display': 'none'});
 	$('#RDT-aba-menu-2').css({'display': 'inline'});
@@ -174,6 +169,16 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_slider_D').value = 0;
 	document.getElementById('RDT_slider_D2').value = 0;
 	RDT_arquivoBruto = fs.readFileSync(rdtFile, 'hex');
+	if (RDT_lastFileOpened !== ORIGINAL_FILENAME){
+		RDT_loop = 0;
+		RDT_lastFileOpened = rdtFile;
+		WZ_saveConfigs(true);
+		R3DITOR_RECENT_FILES(0);
+	} else {
+		if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3list') === false){
+			R3DITOR_RECENT_FILES(0);
+		}
+	}
 	document.getElementById('RDT_lbl_pd').innerHTML = '0';
 	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
 	document.getElementById('RDT_CANVAS_0').innerHTML = '';
@@ -606,7 +611,6 @@ function RDT_decompileMessageCode(index, hex){
 		var MC_ID 			 = hex.slice(RANGES['RDT_msgCode-id'][0],              RANGES['RDT_msgCode-id'][1]);
 		var MC_HEADER 		 = hex.slice(RANGES['RDT_msgCode-header'][0],          RANGES['RDT_msgCode-header'][1]);
 		var MC_IDENT 		 = hex.slice(RANGES['RDT_msgCode-identifier'][0],      RANGES['RDT_msgCode-identifier'][1]);
-
 		if (MC_HEADER === '63'){
 			MC_XPOS 		 = hex.slice(RANGES['RDT_msgCode-0-xPos'][0],          RANGES['RDT_msgCode-0-xPos'][1]);
 			MC_ZPOS 		 = hex.slice(RANGES['RDT_msgCode-0-zPos'][0],          RANGES['RDT_msgCode-0-zPos'][1]);
@@ -620,19 +624,19 @@ function RDT_decompileMessageCode(index, hex){
 			fHex			 = hex.slice(RANGES['RDT_msgCode-header'][0],		   RANGES['RDT_msgCode-0-readMode'][1]);
 		}
 		if (MC_HEADER === '64'){
-			MC_XPOS 		 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-xPos"][0],          RANGES["RDT_msgCode-1-xPos"][1]);
-			MC_ZPOS 		 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-zPos"][0],          RANGES["RDT_msgCode-1-zPos"][1]);
-			MC_XWIDTHTRIGGER = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-xWidthTrigger"][0], RANGES["RDT_msgCode-1-xWidthTrigger"][1]);
-			MC_ZWIDTHTRIGGER = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-zWidthTrigger"][0], RANGES["RDT_msgCode-1-zWidthTrigger"][1]);
-			MC_OFFSET0  	 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-offset_0"][0],      RANGES["RDT_msgCode-1-offset_0"][1]);
-			MC_JAPCHARS 	 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-japChars"][0],      RANGES["RDT_msgCode-1-japChars"][1]);
-			MC_OFFSET1  	 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-offset_1"][0],      RANGES["RDT_msgCode-1-offset_1"][1]);
-			MC_SPECIALPROP 	 = '[WIP]'; //hex.slice(RANGES["RDT_msgCode-1-specialProp"][0],   RANGES["RDT_msgCode-1-specialProp"][1]);
+			MC_XPOS 		 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-xPos'][0],          RANGES['RDT_msgCode-1-xPos'][1]);
+			MC_ZPOS 		 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-zPos'][0],          RANGES['RDT_msgCode-1-zPos'][1]);
+			MC_XWIDTHTRIGGER = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-xWidthTrigger'][0], RANGES['RDT_msgCode-1-xWidthTrigger'][1]);
+			MC_ZWIDTHTRIGGER = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-zWidthTrigger'][0], RANGES['RDT_msgCode-1-zWidthTrigger'][1]);
+			MC_OFFSET0  	 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-offset_0'][0],      RANGES['RDT_msgCode-1-offset_0'][1]);
+			MC_JAPCHARS 	 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-japChars'][0],      RANGES['RDT_msgCode-1-japChars'][1]);
+			MC_OFFSET1  	 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-offset_1'][0],      RANGES['RDT_msgCode-1-offset_1'][1]);
+			MC_SPECIALPROP 	 = '[WIP]'; //hex.slice(RANGES['RDT_msgCode-1-specialProp'][0],   RANGES['RDT_msgCode-1-specialProp'][1]);
 			MC_READMODE 	 = hex.slice(RANGES['RDT_msgCode-1-readMode'][0],      RANGES['RDT_msgCode-1-readMode'][1]);
 			fHex			 = hex.slice(RANGES['RDT_msgCode-header'][0],		   RANGES['RDT_msgCode-1-readMode'][1]);
 		}
 		localStorage.setItem('RDT_MSGBLOCK-' + index, fHex);
-		//console.log(MC_HEADER.toUpperCase() + ' ' + MC_ID.toUpperCase() + " " + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
+		//console.log(MC_HEADER.toUpperCase() + ' ' + MC_ID.toUpperCase() + ' ' + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditMsgCode(' + index + ', \'' + fHex + '\');">' + 
 			'(' + parseInt(index + 1) + ') Message ID: ' + MC_ID.toUpperCase() + '<br><div class="menu-separador"></div>' + 
@@ -819,7 +823,7 @@ function RDT_copyPastePos(mode){
 		} else {
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value;
 		}
-		var TEXT_FOR_CP = 'Current Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+		var TEXT_FOR_CP = '[Doors]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next
@@ -841,9 +845,15 @@ function RDT_DOOR_APPLY(index){
 	var reason = '';
 	var canCompile = true;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
+
+	var header 	= ident.slice(RANGES['RDT_door-0-header'][0], 		  RANGES['RDT_door-0-doorIdentifier'][1]);
+	var offset0 = ident.slice(RANGES['RDT_door-0-doorHexOffset0'][0], RANGES['RDT_door-0-doorHexOffset0'][1]);
+	var offset1 = ident.slice(RANGES['RDT_door-0-doorHexOffset1'][0], RANGES['RDT_door-0-doorHexOffset1'][1]);
+	var offset2 = ident.slice(RANGES['RDT_door-0-doorHexOffset2'][0], RANGES['RDT_door-0-doorHexOffset2'][1]);
+
 	var cX 		= document.getElementById('RDT_door-edit-X').value.toLowerCase();
-	var cY 		= document.getElementById('RDT_door-edit-Y').value.toLowerCase();
-	var cZ 		= document.getElementById('RDT_door-edit-Z').value.toLowerCase();
+	var cY 		= document.getElementById('RDT_door-edit-Z').value.toLowerCase();
+	var cZ 		= document.getElementById('RDT_door-edit-Y').value.toLowerCase();
 	var cR 		= document.getElementById('RDT_door-edit-R').value.toLowerCase();
 	var nX 		= document.getElementById('RDT_door-edit-NX').value.toLowerCase();
 	var nY 		= document.getElementById('RDT_door-edit-NY').value.toLowerCase();
@@ -856,10 +866,7 @@ function RDT_DOOR_APPLY(index){
 	var nType	= document.getElementById('RDT_door-edit-DT').value.toLowerCase();
 	var nStage 	= document.getElementById('RDT_door-edit-NS').value.toLowerCase();
 	var nRN 	= document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
-	var header 	= ident.slice(RANGES['RDT_door-0-header'][0], 		  RANGES['RDT_door-0-doorIdentifier'][1]);
-	var offset0 = ident.slice(RANGES['RDT_door-0-doorHexOffset0'][0], RANGES['RDT_door-0-doorHexOffset0'][1]);
-	var offset1 = ident.slice(RANGES['RDT_door-0-doorHexOffset1'][0], RANGES['RDT_door-0-doorHexOffset1'][1]);
-	var offset2 = ident.slice(RANGES['RDT_door-0-doorHexOffset2'][0], RANGES['RDT_door-0-doorHexOffset2'][1]);
+
 	if (cX.length !== 4){
 		canCompile = false;
 		reason = '(X Pos) The length is wrong!';
@@ -1022,7 +1029,6 @@ function RDT_decompileItens(id, edit){
 	var RDT_CanRender = true;
 	var currentItem   = localStorage.getItem('RDT_Item-' + id);
 	var header		  = currentItem.slice(RANGES['RDT_item-header'][0], RANGES['RDT_item-header'][1]);
-	//console.log("Header: " + header + "\nHex: " + itemID + "\nHex Completa:\n" + currentItem);
 	if (header === '90' || header === '51' || header === '02' || header === 'c0'){
 		RDT_totalItensGeral--;
 		RDT_CanRender = false;
@@ -1075,10 +1081,10 @@ function RDT_renderItens(index, hex){
 				  modelId.toUpperCase() + '</font> <font title="Animation">' + mp.toUpperCase() + '</font>';
 	}
 	if (header === '68'){
-		x 		= '[WIP]'; //hex.slice(RANGES["RDT_item-1-itemXX"][0], RANGES["RDT_item-1-itemXX"][1]);
-		y 		= '[WIP]'; //hex.slice(RANGES["RDT_item-1-itemYY"][0], RANGES["RDT_item-1-itemYY"][1]);
-		z 		= '[WIP]'; //hex.slice(RANGES["RDT_item-1-itemZZ"][0], RANGES["RDT_item-1-itemZZ"][1]);
-		r 		= '[WIP]'; //hex.slice(RANGES["RDT_item-1-itemRR"][0], RANGES["RDT_item-1-itemRR"][1]);
+		x 		= '[WIP]'; //hex.slice(RANGES['RDT_item-1-itemXX'][0], RANGES['RDT_item-1-itemXX'][1]);
+		y 		= '[WIP]'; //hex.slice(RANGES['RDT_item-1-itemYY'][0], RANGES['RDT_item-1-itemYY'][1]);
+		z 		= '[WIP]'; //hex.slice(RANGES['RDT_item-1-itemZZ'][0], RANGES['RDT_item-1-itemZZ'][1]);
+		r 		= '[WIP]'; //hex.slice(RANGES['RDT_item-1-itemRR'][0], RANGES['RDT_item-1-itemRR'][1]);
 		id 		= hex.slice(RANGES['RDT_item-1-itemID'][0],     RANGES['RDT_item-1-itemID'][1]);
 		quant 	= hex.slice(RANGES['RDT_item-1-itemQuant'][0],  RANGES['RDT_item-1-itemQuant'][1]);
 		iFlag  	= '[WIP]';
@@ -1384,7 +1390,7 @@ function RDT_readMessages(){
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message contains more than 2 cases of <i>(Yes / No)</i> option!";
+			RDT_canAdd_reason = 'The message contains more than 2 cases of <i>(Yes / No)</i> option!';
 		}
 		// Step 3 - Number of specific hex value
 		// Case: Unknown hex appears more than usual - 78
@@ -1392,7 +1398,7 @@ function RDT_readMessages(){
 		if (RDT_MSGfilter.length > 2){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message contains more than 2 cases of an Unknown Function! - Hex 78 (Total: " + RDT_MSGfilter.length + ")";
+			RDT_canAdd_reason = 'The message contains more than 2 cases of an Unknown Function! - Hex 78 (Total: ' + RDT_MSGfilter.length + ')';
 		}
 		// Step 4 - Number of specific hex value
 		// Case: Hex FF appears more than usual
@@ -1408,86 +1414,86 @@ function RDT_readMessages(){
 		if (RDT_MSG_CURRENT_TEST === 3 && RDT_MSGfilter.length > 61){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message contains WAY more cases of 00! (Total: " + RDT_MSGfilter.length + ")";
+			RDT_canAdd_reason = 'The message contains WAY more cases of 00! (Total: ' + RDT_MSGfilter.length + ')';
 		}
 		// Step 9 - Number of specific hex value
 		// Case: Hex 00 appears WAY more than usual
-		RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, 'dc').length + getAllIndexes(MESSAGE, "ba").length);
+		RDT_MSGfilter = parseInt(getAllIndexes(MESSAGE, 'dc').length + getAllIndexes(MESSAGE, 'ba').length);
 		if (RDT_MSGfilter > 1){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message contains WAY more cases of DC or BA! (Total: " + RDT_MSGfilter + ")";
+			RDT_canAdd_reason = 'The message contains WAY more cases of DC or BA! (Total: ' + RDT_MSGfilter + ')';
 		}
 		// Step 10 - Especific size with abnormal fe attr
 		// Case: Message with size 32 and FE attr !== 00
-		if (MESSAGE.length === 32 && MESSAGE.slice(MESSAGE.length - 2) !== "00"){
+		if (MESSAGE.length === 32 && MESSAGE.slice(MESSAGE.length - 2) !== '00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 1)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 1)';
 		}
 		// Step 12 - Another pattern
 		// Case: Contains FE with strange pattern (100 = 64 in hex)
-		if (getAllIndexes(MESSAGE, "fa").length > 2 && parseInt(MESSAGE.slice(MESSAGE.length - 2), 16) > 100){
+		if (getAllIndexes(MESSAGE, 'fa').length > 2 && parseInt(MESSAGE.slice(MESSAGE.length - 2), 16) > 100){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 2)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 2)';
 		}
 		// Step 13 - Use more than 3 times Function F8 (show item name) / Wrong Offset
 		// Case: Another Wrong Offset
-		if (MESSAGE.Length > 31 && getAllIndexes(MESSAGE, "f8").length > 3 && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
+		if (MESSAGE.Length > 31 && getAllIndexes(MESSAGE, 'f8').length > 3 && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === 'efe00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 3)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 3)';
 		}
 		// Step 14 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.slice(0, 2) !== "fa" && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === "efe00"){
+		if (MESSAGE.slice(0, 2) !== 'fa' && MESSAGE.slice(MESSAGE.length - 5, MESSAGE.length) === 'efe00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 4)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 4)';
 		}
 		// Step 15 - Show Unknown Item Name
 		// Case: Command F8 with attr higher than 85
-		if (getAllIndexes(MESSAGE, "f8").length > 0){
+		if (getAllIndexes(MESSAGE, 'f8').length > 0){
 			var C2 = 0;
-			var F8Cases = getAllIndexes(MESSAGE, "f8");
+			var F8Cases = getAllIndexes(MESSAGE, 'f8');
 			while(C2 < F8Cases.length){
 				var caseSlice = MESSAGE.slice(parseInt(F8Cases[C2] + 2), parseInt(F8Cases[C2] + 4));
 				if (parseInt(caseSlice, 16) > 133){
 					RDT_canAdd = false;
 					RDT_canAdd_lvl = 1;
-					RDT_canAdd_reason = "Command F8 have Attr higher than 85! (Value: " + caseSlice + ")";
+					RDT_canAdd_reason = 'Command F8 have Attr higher than 85! (Value: ' + caseSlice + ')';
 				}
 				C2++;
 			}
 		}
 		// Step 16 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.slice(parseInt(MESSAGE.length - 8), MESSAGE.length) === "fbb9fe00"){
+		if (MESSAGE.slice(parseInt(MESSAGE.length - 8), MESSAGE.length) === 'fbb9fe00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 5)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 5)';
 		}
 		// Step 17 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 2), MESSAGE.length) !== "00"){
+		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 2), MESSAGE.length) !== '00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 6)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 6)';
 		}
 		// Step 18 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.length < 38 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && getAllIndexes(MESSAGE, "bafa00").length > 0){
+		if (MESSAGE.length < 38 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === '3efe00' && getAllIndexes(MESSAGE, 'bafa00').length > 0){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 7)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 7)';
 		}
 		// Step 19 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === "3efe00" && MESSAGE.slice(0, 4) === "fa00"){
+		if (MESSAGE.length < 22 && MESSAGE.slice(parseInt(MESSAGE.length - 6), MESSAGE.length) === '3efe00' && MESSAGE.slice(0, 4) === 'fa00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 8)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 8)';
 		}
 		// Step 20 - Count of unknown functions and hex integrity
 		// Case: Message with a lot of unknown functions / chars
@@ -1503,22 +1509,22 @@ function RDT_readMessages(){
 				} else {
 					RDT_canAdd = false;
 					RDT_canAdd_lvl = 1;
-					RDT_canAdd_reason = "The hex integrity of this message is broken!";
+					RDT_canAdd_reason = 'The hex integrity of this message is broken!';
 				}
 				C2++;
 			}
 			if (tot_unk > 3){
 				RDT_canAdd = false;
 				RDT_canAdd_lvl = 1;
-				RDT_canAdd_reason = "The message contains more unknown function than usual! (Total: " + tot_unk + ")";
+				RDT_canAdd_reason = 'The message contains more unknown function than usual! (Total: ' + tot_unk + ')';
 			}
 		}
 		// Step 21 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.indexOf("5d") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00" && MESSAGE.indexOf("fa00") !== -1){
+		if (MESSAGE.indexOf('5d') !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== '00' && MESSAGE.indexOf('fa00') !== -1){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 9)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 9)';
 		}
 		// Step 22 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
@@ -1545,18 +1551,10 @@ function RDT_readMessages(){
 		if (RDT_canAdd === true){
 			var MSGSTART = RDT_arquivoBruto.indexOf(MESSAGE);
 			var MSGEND = parseInt(RDT_arquivoBruto.indexOf(MESSAGE) + MESSAGE.length);
-			localStorage.setItem("RDT_MESSAGE-START-" + c, MSGSTART);
-			localStorage.setItem("RDT_MESSAGE-END-" + c, MSGEND);
-			localStorage.setItem("RDT_MESSAGE-" + c, MESSAGE);
+			localStorage.setItem('RDT_MESSAGE-START-' + c, MSGSTART);
+			localStorage.setItem('RDT_MESSAGE-END-' + c, MSGEND);
+			localStorage.setItem('RDT_MESSAGE-' + c, MESSAGE);
 			RDT_totalMessages++;
-		} else {
-			//var msg = "Something went wrong in message analysis - Message: " + c + " - Reason: ";
-			//if (RDT_canAdd_lvl === 1){
-			//	//console.warn("WARNING - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-			//}
-			//if (RDT_canAdd_lvl === 2){
-			//	//console.error("ERROR - " + msg + RDT_canAdd_reason + " - This message will be discarted.");
-			//}
 		}
 		c++;
 	}
@@ -1583,7 +1581,7 @@ function RDT_readMessages(){
 function RDT_postMessageProcess(){
 	var c = 0;
 	var plus = 0;
-	console.log("Post Message: \nTotal Messages: " + RDT_totalMessages + "\n\n" + localStorage.getItem("RDT_MESSAGE-END-" + c) + "\n" + localStorage.getItem("RDT_MESSAGE-START-" + c));
+	console.log('Post Message: \nTotal Messages: ' + RDT_totalMessages + '\n\n' + localStorage.getItem('RDT_MESSAGE-END-' + c) + '\n' + localStorage.getItem('RDT_MESSAGE-START-' + c));
 	if (RDT_totalMessages === 1){
 		plus = 1;
 	}
@@ -1593,11 +1591,11 @@ function RDT_postMessageProcess(){
 		fixValue = 1;
 	}
 	while(c < parseInt(RDT_totalMessages + fixValue)){
-		var ED = parseInt(localStorage.getItem("RDT_MESSAGE-END-" + c));
-		var ST = parseInt(localStorage.getItem("RDT_MESSAGE-START-" + c));
-		console.log("Adicionando itens na RDT_FILEMAP_MSG: \n" + localStorage.getItem("RDT_MESSAGE-START-" + c) + "\n" + localStorage.getItem("RDT_MESSAGE-END-" + c));
-		if (ST !== 0 && ED !== 0 && RDT_arquivoBruto.slice(ST, ST + 2) === "fa"){
-			RDT_FILEMAP_MSG.push(ST + "\n" + ED);
+		var ED = parseInt(localStorage.getItem('RDT_MESSAGE-END-' + c));
+		var ST = parseInt(localStorage.getItem('RDT_MESSAGE-START-' + c));
+		console.log('Adding itens on RDT_FILEMAP_MSG: \n' + localStorage.getItem('RDT_MESSAGE-START-' + c) + '\n' + localStorage.getItem('RDT_MESSAGE-END-' + c));
+		if (ST !== 0 && ED !== 0 && RDT_arquivoBruto.slice(ST, ST + 2) === 'fa'){
+			RDT_FILEMAP_MSG.push(ST + '\n' + ED);
 			c++;
 		} else {
 			c++;
@@ -1607,8 +1605,8 @@ function RDT_postMessageProcess(){
 }
 function RDT_findPointers(){
 	var c = 0;
-	document.title = APP_NAME + " - Generating File Map (Step 3 / 4)";
-	if (getFileName(ORIGINAL_FILENAME) === "r40c"){
+	document.title = APP_NAME + ' - Generating File Map (Step 3 / 4)';
+	if (getFileName(ORIGINAL_FILENAME) === 'r40c'){
 		RDT_totalMessages++;
 	}
 	if (RDT_totalMessages !== 0){
@@ -1639,31 +1637,31 @@ function RDT_findPointers(){
 					fatorA = fatorA + 4;
 					fatorB = fatorB + 4;
 					pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === '00fa02fcfe00'){
 						fatorA = 4;
 						fatorB = 0;
 						totalVezesPush = 0;
 						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 					} else {
-						console.log("Pointer - Current Result: " + pont);
+						console.log('Pointer - Current Result: ' + pont);
 						totalVezesPush++;
 					}
 				}
 			} else {
-				if (getFileName(ORIGINAL_FILENAME) === "r210" || getFileName(ORIGINAL_FILENAME) === "r301"){
+				if (getFileName(ORIGINAL_FILENAME) === 'r210' || getFileName(ORIGINAL_FILENAME) === 'r301'){
 					if (RDT_THIRDPOINTERTYPE[pont] !== undefined){
 						break;
 					} else {
 						fatorA = fatorA + 4;
 						fatorB = fatorB + 4;
 						pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-						if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+						if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === '00fa02fcfe00'){
 							fatorA = 4;
 							fatorB = 0;
 							totalVezesPush = 0;
-							startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+							startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 						} else {
-							console.log("Pointer - Current Result: " + pont);
+							console.log('Pointer - Current Result: ' + pont);
 							totalVezesPush++;
 						}
 					}
@@ -1675,13 +1673,13 @@ function RDT_findPointers(){
 							fatorA = fatorA + 4;
 							fatorB = fatorB + 4;
 							pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === '00fa02fcfe00'){
 								fatorA = 4;
 								fatorB = 0;
 								totalVezesPush = 0;
-								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 							} else {
-								console.log("Pointer - Current Result: " + pont);
+								console.log('Pointer - Current Result: ' + pont);
 								totalVezesPush++;
 							}
 						}
@@ -1692,13 +1690,13 @@ function RDT_findPointers(){
 							fatorA = fatorA + 4;
 							fatorB = fatorB + 4;
 							pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+							if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === '00fa02fcfe00'){
 								fatorA = 4;
 								fatorB = 0;
 								totalVezesPush = 0;
-								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+								startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 							} else {
-								console.log("Pointer - Current Result: " + pont);
+								console.log('Pointer - Current Result: ' + pont);
 								totalVezesPush++;
 							}
 						}
@@ -1720,13 +1718,13 @@ function RDT_findPointers(){
 					fatorA = fatorA + 4;
 					fatorB = fatorB + 4;
 					pont = RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB));
-					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === "00fa02fcfe00"){
+					if (RDT_arquivoBruto.slice(parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB) + 8) === '00fa02fcfe00'){
 						fatorA = 4;
 						fatorB = 0;
 						totalVezesPush = 0;
-						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf("fa02fcfe00"));
+						startFirstMessage = parseInt(RDT_arquivoBruto.indexOf('fa02fcfe00'));
 					} else {
-						console.log("Pointer - Current Result: " + pont);
+						console.log('Pointer - Current Result: ' + pont);
 						totalVezesPush++;
 					}
 				}
@@ -1734,11 +1732,11 @@ function RDT_findPointers(){
 		}
 		if (RDT_FIRSTPOINTERTYPE[pont] !== undefined || RDT_SECONDPOINTERTYPE[pont] !== undefined || RDT_THIRDPOINTERTYPE !== undefined){
 			console.log("Pointer Found! (Type: " + pont + ")");
-			console.log("Result: \n\nTotal Searches: " + totalVezesPush + "\nFator A: " + fatorA + "\nFator B: " + fatorB + "\nPos: " + parseInt(startFirstMessage - fatorA) + " - " + parseInt(startFirstMessage - fatorB));
+			console.log("Result:\n\nTotal Searches: " + totalVezesPush + '\nQuery A: ' + fatorA + '\nQuery B: ' + fatorB + '\nPos: ' + parseInt(startFirstMessage - fatorA) + ' - ' + parseInt(startFirstMessage - fatorB));
 			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
 		} else {
-			console.error("ERROR - Unable to find pointers on this file!");
-			addLog('error', "ERROR - Unable to find pointers on this file!");
+			console.error('ERROR - Unable to find pointers on this file!');
+			addLog('error', 'ERROR - Unable to find pointers on this file!');
 			scrollLog();
 		}
 	}
@@ -1747,7 +1745,7 @@ function RDT_MSG_pointerTest(fPointer){
 	var firstPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer, fPointer + 4));
 	var secondPointer = processBIO3Vars(RDT_arquivoBruto.slice(fPointer + 4, fPointer + 8));
 	if (parseInt(secondPointer - firstPointer) < 0){
-		console.log("Pointer test deu errado!\n Second: " + secondPointer + " - First: " + firstPointer);
+		console.log('Pointer test it\'s wrong!\n Second: ' + secondPointer + ' - First: ' + firstPointer);
 		return false;
 	} else {
 		return true;
@@ -1757,7 +1755,7 @@ function RDT_makeRDTConfigFile(){
 	var c = 0;
 	var fatorMinus = 0;
 	var foundMessages = '';
-	var fileHeader = "Map for " + getFileName(ORIGINAL_FILENAME).toUpperCase() + "\nGenerated With " + APP_NAME + "\n\n[POINTERS]\n";
+	var fileHeader = 'Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '\nGenerated With ' + APP_NAME + '\n\n[POINTERS]\n';
 	console.log(RDT_FILEMAP_MSG);
 	while(c < RDT_FILEMAP_MSG.length){
 		if (RDT_FILEMAP_MSG[c].indexOf('NaN') !== -1){
@@ -1870,7 +1868,7 @@ function RDT_finishMessageAnalysis(){
 		RDT_MSG_CURRENT_TEST = 4;
 	}
 	RDT_generateMapFile = true;
-	console.info('\nBest option: ' + RDT_MSG_CURRENT_TEST + '\nResultado do Teste 1: ' + RDT_MSG_RESULT_1 + '\nResultado do Teste 2: ' + RDT_MSG_RESULT_2 + '\nResultado do Teste 3: ' + RDT_MSG_RESULT_3 + '\nResultado do Teste 4: ' + RDT_MSG_RESULT_4 + '\n\n');
+	console.info('\nBest option: ' + RDT_MSG_CURRENT_TEST + '\nTest Result 1: ' + RDT_MSG_RESULT_1 + '\nTest Result 2: ' + RDT_MSG_RESULT_2 + '\nTest Result 3: ' + RDT_MSG_RESULT_3 + '\nTest Result 4: ' + RDT_MSG_RESULT_4 + '\n\n');
 	RDT_readMessages();
 	addLog('log', 'RDT - Analysis Complete!');
 	scrollLog();
@@ -2086,10 +2084,10 @@ function RDT_lookForRDTConfigFile(){
 					$('#RDT_lbl-msg_c_blockHex').removeClass('green');
 					$('#MSG_RDT_lbl_blockUsage').removeClass('green');
 				}
-				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = 'Hex: ' + block_size_hex.toUpperCase() + " (Bio 3 Mode: " + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + " - String: " + block_size_str + ")";
-				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = 'Hex: ' + c_block_size_hex.toUpperCase() + " (" + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + "%)";
+				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = 'Hex: ' + block_size_hex.toUpperCase() + ' (RE3 Mode: ' + parseDecimalToBIO3Var(block_size_str, 0).toUpperCase() + ' - String: ' + block_size_str + ')';
+				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = 'Hex: ' + c_block_size_hex.toUpperCase() + ' (' + parsePercentage(parseInt(c_block_size_hex, 16), parseInt(block_size_hex, 16)) + '%)';
 				document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = block_size_hex.toUpperCase();
-				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + " (" + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + "%)";
+				document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = c_block_size_hex.toUpperCase() + ' (' + Math.floor((parseInt(c_block_size_hex, 16) / parseInt(block_size_hex, 16)) * 100) + '%)';
 				if (c_block_size_hex !== block_size_hex){
 					var b = parseInt(block_size_hex, 16);
 					var a = parseInt(c_block_size_hex, 16);
@@ -2102,29 +2100,29 @@ function RDT_lookForRDTConfigFile(){
 						$('#RDT_msgBlock_health').addClass('red');
 						document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_LOW;
 					}
-					document.getElementById("RDT_lblError_msgExpected").innerHTML = block_size_hex.toUpperCase();
-					document.getElementById("RDT_lblError_msgAtual").innerHTML = c_block_size_hex.toUpperCase();
-					RDT_ERRORMOTIVE = "Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?";
+					document.getElementById('RDT_lblError_msgExpected').innerHTML = block_size_hex.toUpperCase();
+					document.getElementById('RDT_lblError_msgAtual').innerHTML = c_block_size_hex.toUpperCase();
+					RDT_ERRORMOTIVE = 'Beware: the current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?';
 					RDT_CANCRASH = true;
 				} else {
 					document.getElementById('RDT_msgBlock_health').innerHTML = 'Good';
-					$("#RDT_msgBlock_health").addClass('green');
+					$('#RDT_msgBlock_health').addClass('green');
 					document.getElementById('RDT_msgBlock_infos').innerHTML = MSGBLOCK_PERFECT;
 				}
 			} else {
 				document.getElementById('RDT_lbl-msg_blockHex').innerHTML = 'Undefined';
 				document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = 'Undefined';
 			}
-			RDT_MAPFILE = APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + '.rdtmap';
+			RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
 			document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = pointerSplit;
 			RDT_getMessageCodesArray();
 			RDT_loading = false;
 			RDT_showMenu(1);
 		} else {
-			var newMapFile = fs.readFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", 'utf-8');
-			var BLOCK_SECTOR = newMapFile + "\n[MSGBLOCK]\n" + BLOCK_MSGS.length.toString(16) + "\n";
+			var newMapFile = fs.readFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', 'utf-8');
+			var BLOCK_SECTOR = newMapFile + '\n[MSGBLOCK]\n' + BLOCK_MSGS.length.toString(16) + '\n';
 			try{
-				fs.writeFileSync(APP_PATH + "\\Configs\\RDT\\" + RDT_getGameMode() + ".rdtmap", BLOCK_SECTOR, 'utf-8');
+				fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', BLOCK_SECTOR, 'utf-8');
 			}catch(err){
 				console.error(err);
 				addLog('error', 'ERROR - Something went wrong while saving mapfile!');
@@ -2146,8 +2144,8 @@ function RDT_lookForRDTConfigFile(){
 			startFirstMessage = undefined;
 			RDT_requestReloadWithFix0 = false;
 			RDT_requestReloadWithFix1 = false;
-			$("#RDT_lbl-msg_c_blockHex").removeClass('red');
-			$("#RDT_lbl-msg_c_blockHex").removeClass('green');
+			$('#RDT_lbl-msg_c_blockHex').removeClass('red');
+			$('#RDT_lbl-msg_c_blockHex').removeClass('green');
 			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
 				RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
 			} else {

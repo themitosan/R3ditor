@@ -167,10 +167,11 @@
 					<input type="button" value="Remove Options" class="INI_inernalTab SETTINGS_ABA-4">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-4">
 						<center>
-							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All RDT Backups" onclick="SETTINGS_removeFiles(0);"><br>
-							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All SAV Backups" onclick="SETTINGS_removeFiles(1);"><br>
-							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove All RDT Generated Maps" onclick="SETTINGS_removeFiles(2);"><br>
-							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all your RDT Backups." value="Remove All RDT Backups" onclick="SETTINGS_removeFiles(0);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all your SAV Backups." value="Remove All SAV Backups" onclick="SETTINGS_removeFiles(1);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will clean your recent opened lists." value="Clean Recent Opened Lists" onclick="SETTINGS_removeFiles(4);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all RDT maps generated." value="Remove All RDT Generated Maps" onclick="SETTINGS_removeFiles(2);"><br>
+							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all Assets, RDT Map Files (*.rdtmap), SAV Backups, RDT Backups, Recent Opened lists and all configs!" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
 						</center>
 					</div>
 
@@ -503,21 +504,23 @@
 					</div>
 				</div>
 			</div>
-			<!-- Invent -->
+			<!-- Item Box -->
 			<div class="RE3_LIVESTATUS_MENU none" id="LIVESTATUS_menu-2">
 				<div class="RE3_LIVESTATUS_ABACONTENT">
-					<center><font class="titulo">Inventory</font></center>
-					<!-- for now, WIP -->
+					<center><font class="titulo">Item Box</font></center>
+					<!-- for now - WIP -->
 				</div>
 			</div>
 		</div>
 		<!-- Lista de Arquivos Disponiveis - FileList -->
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
-			<input type="button" value="Close" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right">
+			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right" />
+			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();" />
 			<div class="fileList_aba_holder" id="fileList_aba_list">
 				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
 				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">
+				<input type="button" id="fileList_aba_recent" value="Recent Files" class="aba" onclick="main_renderFileList(3, 3);">
 			</div>
 			<div id="fileListHolder" class="fileList_files none">
 				<!-- A lista de arquivos vai aqui -->
@@ -525,11 +528,14 @@
 			<div id="fileListHolder_AJ" class="fileList_files none">
 				<!-- A lista de arquivos (Data_AJ) vai aqui -->
 			</div>
+			<div id="RDT_lastThreeFiles" class="fileList_files none">
+				<!-- A lista de arquivos recentes dentro de (filelist) vai aqui -->
+			</div>
 		</div>
 		<!-- Last RDT File -->
 		<div class="fileList none" id="RDT_recentFile">
-			<center><font class="titulo">Recently opened</font></center>
-				<!-- O ultimo RDT vai aqui -->
+			<center><font class="titulo">Last File Opened</font></center>
+				<!-- The last RDT goes here -->
 			</div>
 		</div>
 		<!-- FORM: File Generator -->
@@ -696,8 +702,8 @@
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form">
 							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
 								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Next X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>

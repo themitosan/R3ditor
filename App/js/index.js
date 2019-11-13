@@ -38,7 +38,7 @@ function load(){
 	try{
 		fs = require('fs');
 		APP_PATH = process.cwd();
-		checkFolders();
+		R3DITOR_CHECK_FILES_AND_DIRS();
 		WZ_verifyConfigFile();
 	} catch(err){
 		console.error(err);
@@ -55,15 +55,16 @@ function load(){
 		addLog('error', err);
 	}
 	if (BETA === true){
-		console.error('ERROR - BETA is true!');
+		console.error('ERROR - BETA is true! - Seu Jumento!');
 		addLog('error', 'BETA is true!');
-		addLog('error', 'BETA is true!');
+		addLog('warn', 'BETA is true!');
+		addLog('log', 'BETA is true!');
 		addLog('error', 'BETA is true!');
 		alert('ERROR - BETA IS TRUE!');
 	}
 	scrollLog();
 }
-function checkFolders(){
+function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Update') === false){
 		fs.mkdirSync(APP_PATH + '\\Update');
 	}
@@ -168,7 +169,64 @@ function showNotify(titulo, texto, tempo){
 		}
 	}
 }
-/// RUN RE3
+/*
+	Last Files
+*/
+function R3DITOR_RECENT_FILES(mode){
+	var c = 0;
+	var fList = [];
+	// RDT
+	if (mode === 0){
+		if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') === false){
+			fs.writeFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor', RDT_lastFileOpened, 'utf-8');
+		} else {
+			if (ORIGINAL_FILENAME !== undefined){
+				var final_list = '';
+				fs.readFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor').toString().split('\n').forEach(function(line){ 
+					if (line !== ''){
+						fList.push(line);
+					}
+				});
+				if (fList[0] !== ORIGINAL_FILENAME){
+					fList.unshift(ORIGINAL_FILENAME);
+				}
+				if (fList.length > 5){
+					fList.pop();
+				}
+				while (c < fList.length){
+					final_list = final_list + fList[c] + '\n';
+					c++;
+				}
+				try{
+					fs.writeFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor', final_list, 'utf-8');
+				} catch (err){
+					addLog('error', 'ERROR - There was an error while saving the recent files list!');
+					addLog('error', err);
+				}
+			} else {
+				log_separador();
+				addLog('warn', 'RECENT FILES - Unable to generate list!');
+				addLog('warn', 'Reason: RDT not present - Try opening a RDT file and try again!');
+				log_separador();
+			}
+		}
+	}
+	scrollLog();
+}
+function R3DITOR_REMOVE_RECENT_FILES(){
+	if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') === true){
+		fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
+		addLog('log', 'INFO - Removing recent files...');
+	} else {
+		addLog('warn', 'WARN - Unable to find recent files list!');
+	}
+	main_renderFileList(3, 2);
+	main_closeFileList();
+	scrollLog();
+}
+/*
+	RUN RE3 / Mercenaries
+*/
 function R3DITOR_RUN_RE3(mode){
 	main_closeFileList();
 	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === '' || GAME_PATH === '' || GAME_PATH === undefined){
