@@ -1615,9 +1615,11 @@ var RANGES = {
 	/*
 		Doors
 	*/
-	'RDT_door-0-header':         	   [0, 2], // RE2 = 3B, RE3 = 61 || 62
-	'RDT_door-0-id':                   [2, 4],
-	'RDT_door-0-doorIdentifier':      [4, 12],
+	'RDT_door-header':         	       [0, 2], // RE2 = 3B, RE3 = 61 || 62
+	'RDT_door-id':                     [2, 4],
+	'RDT_door-doorIdentifier':        [4, 12],
+	
+	// Header 61
 	'RDT_door-0-doorXpos':           [12, 16],
 	'RDT_door-0-doorYpos': 		     [16, 20],
 	'RDT_door-0-doorZpos': 		     [20, 24],
@@ -1636,4 +1638,27 @@ var RANGES = {
 	'RDT_door-0-doorLockedFlag': 	 [58, 60],
 	'RDT_door-0-doorKey': 		 	 [60, 62],
 	'RDT_door-0-doorHexOffset2': 	 [62, 64],
+	
+	// Header 62
+	// Organizado por ordem de slice
+	'RDT_door-1-doorXpos':           [12, 16], // Precisa verificar
+	'RDT_door-1-doorYpos': 		     [16, 20], // Precisa verificar
+	'RDT_door-1-doorZpos': 		     [20, 24], // Precisa verificar
+	'RDT_door-1-doorRpos': 		     [24, 28], // Precisa verificar
+
+	'RDT_door-1-doorHexOffset0': 	 [28, 44], // Precisa realocar essa pos.
+
+	'RDT_door-1-doorNextXpos': 	     [44, 48],
+	'RDT_door-1-doorNextZpos': 	     [48, 52],
+	'RDT_door-1-doorNextYpos': 	     [52, 56],
+	'RDT_door-1-doorNextRpos': 	     [56, 60],
+	'RDT_door-1-doorNextStage':      [60, 62],
+	'RDT_door-1-doorNextRoomNumber': [62, 64],
+	'RDT_door-1-doorNextCamNumber':  [64, 66],
+	'RDT_door-1-doorType': 			 [68, 70],
+	'RDT_door-1-doorOpenOrient': 	 [70, 72], // 00: Handle Left, 01: Handle Right
+
+	'RDT_door-1-doorLockedFlag': 	 [72, 74],
+	'RDT_door-1-doorKey': 		 	 [74, 76],
+	'RDT_door-1-doorHexOffset1': 	 [76, 80]
 }

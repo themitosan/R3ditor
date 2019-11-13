@@ -474,6 +474,7 @@ function WZ_loadFiles(file){
 	}
 }
 function WZ_APPEND(){
+	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 }

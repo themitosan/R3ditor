@@ -200,7 +200,10 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_BG_display();
 	scrollLog();
 }
-// This will have a different way to retrive the infos
+/*
+	Cameras
+	This will have a different way to retrive the infos
+*/
 function RDT_getCameras(){
 	var c = 0;
 	if (RDT_arquivoBruto !== undefined){
@@ -362,7 +365,8 @@ function RDT_CAMERA_APPLY(id){
 	}
 	if (canCompile === true){
 		var NEW_CAMERA_HEX = header + CM_NEW_Origin_X_1 + CM_NEW_Origin_X_2 + CM_NEW_Origin_Y_1 + CM_NEW_Origin_Y_2 + CM_NEW_Origin_Z_1 + CM_NEW_Origin_Z_2 + 
-		CM_NEW_Direction_X_1 + CM_NEW_Direction_X_2 + CM_NEW_Direction_Y_1 + CM_NEW_Direction_Y_2 + CM_NEW_Direction_Z_1 + CM_NEW_Direction_Z_2 + future;
+			CM_NEW_Direction_X_1 + CM_NEW_Direction_X_2 + CM_NEW_Direction_Y_1 + CM_NEW_Direction_Y_2 + CM_NEW_Direction_Z_1 + CM_NEW_Direction_Z_2 + future;
+
 		RDT_COMPILE_Lv2(ORIGINAL_CM, NEW_CAMERA_HEX);
 		$('#RDT-aba-menu-9').trigger('click');
 	} else {
@@ -371,7 +375,9 @@ function RDT_CAMERA_APPLY(id){
 	}
 	scrollLog();
 }
-// Enemies & NPC's
+/*
+	Enemies & NPC's
+*/
 function RDT_getEnemiesArray(){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 0;
@@ -515,7 +521,7 @@ function RDT_getEnemies(hx){
 			var check_0 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48)) === '00000000';
 			var check_1 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === '000000';
 			var check_2 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26)) === '00000000';
-			//console.log("Teste " + c + "\nCheck 0: " + check_0 + " (true) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48)) + "\nCheck 1: " + check_1 + " (true) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) + "\nCheck 2: " + check_2 + " (false) - " + RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 18), parseInt(enemyRaw[c] + 26))  + "\n\nHex:\n" + RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
+		
 			if (check_0 === true && check_1 === true && check_2 === false){
 				RDT_enemiesArray.push(RDT_arquivoBruto.slice(parseInt(enemyRaw[c]), parseInt(enemyRaw[c] + 48)));
 				c++;
@@ -530,7 +536,9 @@ function RDT_getEnemies(hx){
 		}
 	}
 }
-// Props [WIP]
+/*
+	Props [WIP]
+*/
 function RDT_getPropModelsArray(){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 0;
@@ -556,7 +564,9 @@ function RDT_getpropModels(hx){
 		}
 	}
 }
-// Message Code (63 ID 04 31 00 00)
+/*
+	Message Code (63 ID 04 31 00 00)
+*/
 function RDT_getMessageCodesArray(){
 	var c = 0;
 	RDT_getMessageCodes('043100');
@@ -703,7 +713,9 @@ function RDT_MSGCODE_APPLY(id){
 	}
 	scrollLog();
 }
-// Portas
+/*
+	Doors
+*/
 function RDT_readDoors(){
 	var c = 0;
 	RDT_getDoorsArray('012100');
@@ -739,33 +751,82 @@ function RDT_getDoorsArray(str){
 }
 function RDT_decompileDoors(index, location){
 	if (location !== undefined && location !== null){
+		var dr_key;
+		var dr_xPos;
+		var dr_yPos;
+		var dr_zPos;
+		var dr_rPos;
+		var dr_type;
+		var dr_nXpos;
+		var dr_nYpos;
+		var dr_nZpos;
+		var dr_nRpos;
+		var dr_nStage;
+		var dr_nCamPos;
+		var dr_offset0;
+		var dr_offset1;
+		var dr_offset2;
+		var dr_lockFlag;
+		var dr_openOrient;
+		var dr_nRoomNumber;
+		var EXTREME_MASSIVE_HTML_TEMPLATE;
+
 		var reason = '';
 		var canAdd = true;
 		var itemTitle = '';
 		var loc = parseInt(location);
 		var DOOR_RAW 	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
-		var dr_header 	   = DOOR_RAW.slice(RANGES['RDT_door-0-header'][0], 		    RANGES['RDT_door-0-header'][1]);
-		var dr_id 	  	   = DOOR_RAW.slice(RANGES['RDT_door-0-id'][0], 			    RANGES['RDT_door-0-id'][1]);
-		var dr_ident  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorIdentifier'][0],     RANGES['RDT_door-0-doorIdentifier'][1]);
-		var dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorXpos'][0], 		    RANGES['RDT_door-0-doorXpos'][1]);
-		var dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorYpos'][0], 		    RANGES['RDT_door-0-doorYpos'][1]);
-		var dr_zPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorZpos'][0], 		    RANGES['RDT_door-0-doorZpos'][1]);
-		var dr_rPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorRpos'][0], 		    RANGES['RDT_door-0-doorRpos'][1]);
-		var dr_nXpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextXpos'][0], 	    RANGES['RDT_door-0-doorNextXpos'][1]);
-		var dr_nYpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextYpos'][0], 	    RANGES['RDT_door-0-doorNextYpos'][1]);
-		var dr_nZpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextZpos'][0], 	    RANGES['RDT_door-0-doorNextZpos'][1]);
-		var dr_nRpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextRpos'][0], 	    RANGES['RDT_door-0-doorNextRpos'][1]);
-		var dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextStage'][0], 	    RANGES['RDT_door-0-doorNextStage'][1]);
-		var dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextRoomNumber'][0], RANGES['RDT_door-0-doorNextRoomNumber'][1]);
-		var dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextCamNumber'][0],  RANGES['RDT_door-0-doorNextCamNumber'][1]);
-		var dr_offset0	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset0'][0], 	RANGES['RDT_door-0-doorHexOffset0'][1]);
-		var dr_type		   = DOOR_RAW.slice(RANGES['RDT_door-0-doorType'][0], 		    RANGES['RDT_door-0-doorType'][1]);
-		var dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-0-doorOpenOrient'][0], 	RANGES['RDT_door-0-doorOpenOrient'][1]);
-		var dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset1'][0], 	RANGES['RDT_door-0-doorHexOffset1'][1]);
-		var dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorLockedFlag'][0], 	RANGES['RDT_door-0-doorLockedFlag'][1]);
-		var dr_key 		   = DOOR_RAW.slice(RANGES['RDT_door-0-doorKey'][0], 		    RANGES['RDT_door-0-doorKey'][1]);
-		var dr_offset2	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset2'][0], 	RANGES['RDT_door-0-doorHexOffset2'][1]);
-		// Que coisa feia...
+
+		var dr_header 	   = DOOR_RAW.slice(RANGES['RDT_door-header'][0], 		    	RANGES['RDT_door-header'][1]);
+		var dr_id 	  	   = DOOR_RAW.slice(RANGES['RDT_door-id'][0], 			    	RANGES['RDT_door-id'][1]);
+		var dr_ident  	   = DOOR_RAW.slice(RANGES['RDT_door-doorIdentifier'][0],    	RANGES['RDT_door-doorIdentifier'][1]);
+
+		if (dr_header === '61'){
+			dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorXpos'][0], 		    RANGES['RDT_door-0-doorXpos'][1]);
+			dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorYpos'][0], 		    RANGES['RDT_door-0-doorYpos'][1]);
+			dr_zPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorZpos'][0], 		    RANGES['RDT_door-0-doorZpos'][1]);
+			dr_rPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorRpos'][0], 		    RANGES['RDT_door-0-doorRpos'][1]);
+			dr_nXpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextXpos'][0], 	    RANGES['RDT_door-0-doorNextXpos'][1]);
+			dr_nYpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextYpos'][0], 	    RANGES['RDT_door-0-doorNextYpos'][1]);
+			dr_nZpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextZpos'][0], 	    RANGES['RDT_door-0-doorNextZpos'][1]);
+			dr_nRpos  	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextRpos'][0], 	    RANGES['RDT_door-0-doorNextRpos'][1]);
+			dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextStage'][0], 	    RANGES['RDT_door-0-doorNextStage'][1]);
+			dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextRoomNumber'][0], RANGES['RDT_door-0-doorNextRoomNumber'][1]);
+			dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorNextCamNumber'][0],  RANGES['RDT_door-0-doorNextCamNumber'][1]);
+			dr_offset0	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset0'][0], 	RANGES['RDT_door-0-doorHexOffset0'][1]);
+			dr_type		   = DOOR_RAW.slice(RANGES['RDT_door-0-doorType'][0], 		    RANGES['RDT_door-0-doorType'][1]);
+			dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-0-doorOpenOrient'][0], 	RANGES['RDT_door-0-doorOpenOrient'][1]);
+			dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset1'][0], 	RANGES['RDT_door-0-doorHexOffset1'][1]);
+			dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorLockedFlag'][0], 	RANGES['RDT_door-0-doorLockedFlag'][1]);
+			dr_key 		   = DOOR_RAW.slice(RANGES['RDT_door-0-doorKey'][0], 		    RANGES['RDT_door-0-doorKey'][1]);
+			dr_offset2	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorHexOffset2'][0], 	RANGES['RDT_door-0-doorHexOffset2'][1]);
+		} else {
+			// Header 62
+			DOOR_RAW	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 80));
+			addLog('warn', 'INFO - Door ' + parseInt(index + 1) + ' (ID: ' + dr_id + ') have a WIP header! (Header 62)');
+			console.log(DOOR_RAW);
+			//
+			dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorXpos'][0], 		    RANGES['RDT_door-1-doorXpos'][1]);
+			dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorYpos'][0], 		    RANGES['RDT_door-1-doorYpos'][1]);
+			dr_zPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorZpos'][0], 		    RANGES['RDT_door-1-doorZpos'][1]);
+			dr_rPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorRpos'][0], 		    RANGES['RDT_door-1-doorRpos'][1]);
+			dr_offset0	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset0'][0], 	RANGES['RDT_door-1-doorHexOffset0'][1]);
+			dr_nXpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextXpos'][0], 	    RANGES['RDT_door-1-doorNextXpos'][1]);
+			dr_nYpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextYpos'][0], 	    RANGES['RDT_door-1-doorNextYpos'][1]);
+			dr_nZpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextZpos'][0], 	    RANGES['RDT_door-1-doorNextZpos'][1]);
+			dr_nRpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRpos'][0], 	    RANGES['RDT_door-1-doorNextRpos'][1]);
+			dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextStage'][0], 	    RANGES['RDT_door-1-doorNextStage'][1]);
+			dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRoomNumber'][0], RANGES['RDT_door-1-doorNextRoomNumber'][1]);
+			dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextCamNumber'][0],  RANGES['RDT_door-1-doorNextCamNumber'][1]);
+
+			dr_type		   = parseInt(parseInt(DOOR_RAW.slice(RANGES['RDT_door-1-doorType'][0],  RANGES['RDT_door-1-doorType'][1]), 16) + 1).toString(16).toUpperCase();
+
+			dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-1-doorOpenOrient'][0], 	RANGES['RDT_door-1-doorOpenOrient'][1]);
+			dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorLockedFlag'][0], 	RANGES['RDT_door-1-doorLockedFlag'][1]);
+			dr_key 		   = DOOR_RAW.slice(RANGES['RDT_door-1-doorKey'][0], 		    RANGES['RDT_door-1-doorKey'][1]);
+			dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset1'][0], 	RANGES['RDT_door-1-doorHexOffset1'][1]);
+		}
+		// Too bad :(
 		if (dr_key === '53' && dr_openOrient === '53' && dr_key === '53' && dr_type === '53' && dr_xPos === 'b1b1' && dr_yPos === 'b1b1' && dr_zPos === '31b1'){
 			canAdd = false;
 			reason = 'Pattern is out of range!';
@@ -789,25 +850,39 @@ function RDT_decompileDoors(index, location){
 			if (parseInt(dr_key, 16) > 171){
 				itemTitle = 'Unknown Hex Value! (' + dr_key + ')';
 			}
-			var EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-				'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
-				'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
-				dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
-				'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
-				'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
-				'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-				'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-				'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + ' ' + dr_id.toUpperCase() + ' ' + dr_ident.toUpperCase() + ' ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
-				' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
-				dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_type.toUpperCase() + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' ' + dr_lockFlag.toUpperCase() + ' ' + 
-				dr_key.toUpperCase() + ' ' + dr_offset2.toUpperCase() + '</font></div>';
+			if (dr_header === '61'){
+				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
+					'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+					dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
+					'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
+					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
+					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + ' ' + dr_id.toUpperCase() + ' ' + dr_ident.toUpperCase() + ' ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
+					' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
+					dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_type.toUpperCase() + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' ' + dr_lockFlag.toUpperCase() + ' ' + 
+					dr_key.toUpperCase() + ' ' + dr_offset2.toUpperCase() + '</font></div>';
+			} else {
+				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando" id="RDT_editDoor-0" style="margin-top: 0px;" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="italic RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
+					'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+					dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Next X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Next Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>' + 
+					'Next Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Next R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
+					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
+					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
+					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + ' ' + dr_id.toUpperCase() + ' ' + dr_ident.toUpperCase() + ' ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
+					' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
+					dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_type.toUpperCase() + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_lockFlag.toUpperCase() + ' ' + dr_key.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' [WIP]</font></div>';
+			}
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
 		} else {
 			addLog('warn', 'WARN - Unable to add door! - ' + reason);
-			scrollLog();
 		}
 	}
+	scrollLog();
 }
 function RDT_copyPastePos(mode){
 	// Copy Next
@@ -823,7 +898,7 @@ function RDT_copyPastePos(mode){
 		} else {
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value;
 		}
-		var TEXT_FOR_CP = '[Doors]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+		var TEXT_FOR_CP = '[Doors]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nNext Map: R' + parseInt(RDT_TEMP_NEXT_STAGE + 1) + RDT_TEMP_NEXT_ROOM + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next
@@ -832,8 +907,8 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NY').value 		  = RDT_TEMP_NEXTY;
 		document.getElementById('RDT_door-edit-NZ').value 		  = RDT_TEMP_NEXTZ;
 		document.getElementById('RDT_door-edit-NR').value 		  = RDT_TEMP_NEXTR;
-		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NRN').value 		  = RDT_TEMP_NEXT_ROOM;
+		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NC').value 	  	  = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_door-edit-NC-TXT').value 	  = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
@@ -842,22 +917,31 @@ function RDT_copyPastePos(mode){
 	}
 }
 function RDT_DOOR_APPLY(index){
+	var offset0;
+	var offset1;
+	var offset2;
 	var reason = '';
+	var DOOR_COMPILED;
 	var canCompile = true;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
 
-	var header 	= ident.slice(RANGES['RDT_door-0-header'][0], 		  RANGES['RDT_door-0-doorIdentifier'][1]);
-	var offset0 = ident.slice(RANGES['RDT_door-0-doorHexOffset0'][0], RANGES['RDT_door-0-doorHexOffset0'][1]);
-	var offset1 = ident.slice(RANGES['RDT_door-0-doorHexOffset1'][0], RANGES['RDT_door-0-doorHexOffset1'][1]);
-	var offset2 = ident.slice(RANGES['RDT_door-0-doorHexOffset2'][0], RANGES['RDT_door-0-doorHexOffset2'][1]);
+	var header 	= ident.slice(RANGES['RDT_door-header'][0], 		  RANGES['RDT_door-doorIdentifier'][1]);
+	if (header.slice(0, 2) === '61'){
+		offset0 = ident.slice(RANGES['RDT_door-0-doorHexOffset0'][0], RANGES['RDT_door-0-doorHexOffset0'][1]);
+		offset1 = ident.slice(RANGES['RDT_door-0-doorHexOffset1'][0], RANGES['RDT_door-0-doorHexOffset1'][1]);
+		offset2 = ident.slice(RANGES['RDT_door-0-doorHexOffset2'][0], RANGES['RDT_door-0-doorHexOffset2'][1]);
+	} else {
+		offset0 = ident.slice(RANGES['RDT_door-1-doorHexOffset0'][0], RANGES['RDT_door-1-doorHexOffset0'][1]);
+		offset1 = ident.slice(RANGES['RDT_door-1-doorHexOffset1'][0], RANGES['RDT_door-1-doorHexOffset1'][1]);
+	}
 
 	var cX 		= document.getElementById('RDT_door-edit-X').value.toLowerCase();
 	var cY 		= document.getElementById('RDT_door-edit-Z').value.toLowerCase();
 	var cZ 		= document.getElementById('RDT_door-edit-Y').value.toLowerCase();
 	var cR 		= document.getElementById('RDT_door-edit-R').value.toLowerCase();
 	var nX 		= document.getElementById('RDT_door-edit-NX').value.toLowerCase();
-	var nY 		= document.getElementById('RDT_door-edit-NY').value.toLowerCase();
-	var nZ 		= document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
+	var nY 		= document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
+	var nZ 		= document.getElementById('RDT_door-edit-NY').value.toLowerCase();
 	var nR 		= document.getElementById('RDT_door-edit-NR').value.toLowerCase();
 	var nCP 	= document.getElementById('RDT_door-edit-NC').value.toLowerCase();
 	var nOO 	= document.getElementById('RDT_door-edit-OO').value.toLowerCase();
@@ -928,16 +1012,24 @@ function RDT_DOOR_APPLY(index){
 		reason = '(Stage) The length is wrong!';
 	}
 	if (canCompile === true){
-		var DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nY + nZ + nR + nStage + nRN + nCP + offset0 + nType + nOO + offset1 + nLF + nLK + offset2;
-		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
-		$('#RDT-aba-menu-6').trigger('click');
+
+		if (header.slice(0, 2) === '61'){
+			DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nZ + nY + nR + nStage + nRN + nCP + offset0 + nType + nOO + offset1 + nLF + nLK + offset2;
+			RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
+			$('#RDT-aba-menu-6').trigger('click');
+		} else {
+			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nY + nZ + nR + nStage + nRN + nCP + nType + nOO + nLF + nLK + offset1;
+			console.log('New Door:\n' + DOOR_COMPILED);
+		}
 	} else {
 		alert('WARNING: ' + reason);
 		addLog('warn', 'WARN - ' + reason);
 	}
 	scrollLog();
 }
-// Audios
+/*
+	Related Audios
+*/
 function RDT_getAllRelatedAudios(){
 	var c = 0;
 	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
@@ -980,7 +1072,9 @@ function RDT_deleteAudio(){
 	}
 	scrollLog();
 }
-//
+/*
+	Items, Files and Maps
+*/
 function RDT_readItens(){
 	var c = 0;
 	RDT_totalItens = 0;
@@ -1911,7 +2005,7 @@ function RDT_lookForRDTConfigFile(){
 	document.title = APP_NAME + ' - Please wait...';
 	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true && RDT_loop < 4){
-		addLog('log', 'INFO - Loading Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap)');
+		addLog('log', 'INFO - Loading RDT Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap)');
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
@@ -2405,7 +2499,7 @@ function RDT_pickStartMessages(str){
 	}
 }
 function RDT_Backup(){
-	checkFolders();
+	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (RDT_arquivoBruto !== undefined){
 		try{
 			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-' + currentTime() + '.rdtbackup';

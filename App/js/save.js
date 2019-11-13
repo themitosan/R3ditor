@@ -183,7 +183,7 @@ function MAKE_SAVE(slot){
 		if (TEMP_SLOT.length === RANGES['slot-offset'][0]){
 			localStorage.setItem('Save_' + slot, TEMP_SLOT);
 			addLog('log', 'The Slot ' + slot + ' was saved successfully!');
-			save_Backup();
+			SAV_Backup();
 			finalizeSave();
 		} else {
 			var msg = 'Unable to save current slot because compilation is divergent size: Size Expected: ' + RANGES['slot-offset'][0] + ' - Current Size: ' + TEMP_SLOT.length;
@@ -557,7 +557,7 @@ function save_renderLife(s_slot){
 		}
 		// Status: God Mode
 		if (HP > 29999){
-			STATUS = 'Unfair! (HP: ' + HP + ')';
+			STATUS = 'GOD MODE (HP: ' + HP + ')';
 			co = 'txt-fine';
 		}
 	}
@@ -571,8 +571,8 @@ function save_renderLife(s_slot){
 	save_renderBox(s_slot);
 }
 // Fazer Backup
-function save_Backup(){
-	checkFolders();
+function SAV_Backup(){
+	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (SAVE_arquivoBruto !== undefined){
 		try{
 			var backup_name = gDetails + '-' + getFileName(ORIGINAL_FILENAME) + '-' + currentTime() + '.savbackup';

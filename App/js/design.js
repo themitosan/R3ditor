@@ -266,6 +266,7 @@ function main_renderFileList(id, mode){
 	// Save
 	if (id === 2){
 		$('#fileList_aba_list').css({'display': 'none'});
+		$('#FILELIST_removeRecentFiles').css({'display': 'none'});
 		$('#fileListHolder').css({'height': '466px', 'top': '46px'});
 		document.getElementById('fileList_title').innerHTML = 'Saves';
 		if (fs.existsSync(APP_PATH + '\\Assets\\Save\\') === true){
@@ -1230,28 +1231,42 @@ function RDT_showEditEnemyNPC(index, codeHex){
 	$('#RDT_enemy_holder').css({'width': '780px'});
 }
 function RDT_showEditDoor(index, id, hex){
+	var nextCam;
+	var realStage;
+	var roomNumber;
+	var DOOR_READ_MODE;
 	main_closeFileList();
 	RDT_doorShowCamPreview(1);
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
-	var nextCam 											  = hex.slice(RANGES['RDT_door-0-doorNextCamNumber'][0],  			   RANGES['RDT_door-0-doorNextCamNumber'][1]);
-	var roomNumber 											  = hex.slice(RANGES['RDT_door-0-doorNextRoomNumber'][0], 			   RANGES['RDT_door-0-doorNextRoomNumber'][1]).toUpperCase();
-	var realStage 											  = parseInt(parseInt(hex.slice(RANGES['RDT_door-0-doorNextStage'][0], RANGES['RDT_door-0-doorNextStage'][1]), 16) + 1).toString();
 	document.getElementById('RDT-lbl-doorEdit-id').innerHTML  = id;
 	document.getElementById('RDT-lbl-door-index').innerHTML   = index;
-	document.getElementById('RDT_door-edit-LK').innerHTML     = RDT_EDIT_ITEM;
-	document.getElementById('RDT_door-edit-LK').value 	      = hex.slice(RANGES['RDT_door-0-doorKey'][0], 		  RANGES['RDT_door-0-doorKey'][1]);
-	document.getElementById('RDT_door-edit-X').value  	      = hex.slice(RANGES['RDT_door-0-doorXpos'][0],		  RANGES['RDT_door-0-doorXpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-Y').value  	      = hex.slice(RANGES['RDT_door-0-doorZpos'][0],		  RANGES['RDT_door-0-doorZpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-Z').value  	      = hex.slice(RANGES['RDT_door-0-doorYpos'][0],		  RANGES['RDT_door-0-doorYpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-R').value  	      = hex.slice(RANGES['RDT_door-0-doorRpos'][0],		  RANGES['RDT_door-0-doorRpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-DT').value 	      = hex.slice(RANGES['RDT_door-0-doorType'][0],		  RANGES['RDT_door-0-doorType'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NX').value 	      = hex.slice(RANGES['RDT_door-0-doorNextXpos'][0],   RANGES['RDT_door-0-doorNextXpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NY').value 	      = hex.slice(RANGES['RDT_door-0-doorNextYpos'][0],   RANGES['RDT_door-0-doorNextYpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NZ').value 	      = hex.slice(RANGES['RDT_door-0-doorNextZpos'][0],   RANGES['RDT_door-0-doorNextZpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NR').value 	      = hex.slice(RANGES['RDT_door-0-doorNextRpos'][0],   RANGES['RDT_door-0-doorNextRpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NS').value 	      = hex.slice(RANGES['RDT_door-0-doorNextStage'][0],  RANGES['RDT_door-0-doorNextStage'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-OO').value 	      = hex.slice(RANGES['RDT_door-0-doorOpenOrient'][0], RANGES['RDT_door-0-doorOpenOrient'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-0-doorLockedFlag'][0], RANGES['RDT_door-0-doorLockedFlag'][1]).toUpperCase();
+	// Check if header === 62
+	var header = hex.slice(0, 2);
+	if (header === '61'){
+		DOOR_READ_MODE = 0;
+	} else {
+		DOOR_READ_MODE = 1;
+	}
+	//
+	nextCam 											 	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextCamNumber'][0],  			    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextCamNumber'][1]);
+	roomNumber 											 	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRoomNumber'][0], 			    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRoomNumber'][1]).toUpperCase();
+	realStage 											 	  = parseInt(parseInt(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][1]), 16) + 1).toString();
+	document.getElementById('RDT_door-edit-LK').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]);
+	document.getElementById('RDT_door-edit-X').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-Y').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-Z').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-R').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-DT').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NX').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NY').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NZ').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NR').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NS').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][0],  RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-OO').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
+	//
+	console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));
+	//
 	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;
 	RDT_renderNextRDTLbl();
@@ -1619,7 +1634,6 @@ function RDT_editItemCancel(){
 	document.getElementById('RDT_enemyNPC-edit-Y').value = '';
 	document.getElementById('RDT_enemyNPC-edit-Z').value = '';
 	document.getElementById('RDT_enemyNPC-edit-R').value = '';
-	document.getElementById('RDT_door-edit-LK').innerHTML = '';
 	document.getElementById('RDT_enemyNPC-edit-PO').value = '';
 	document.getElementById('RDT_enemyNPC-edit-TX').value = '';
 	document.getElementById('RDT_enemyNPC-edit-SS').value = '';
@@ -1735,7 +1749,7 @@ function RE3_LIVE_RENDER(){
 function RE3_LIVE_cheatInfiniteLifeTrigger(){
 	$('#RE3_LIVESTATUS_CHEAT_INFHP').trigger('click');
 }
-// Inventario
+// Inventory
 function RE3_LIVE_EDITINVENTSLOT(slotID){
 	if (slotID > 10){
 		slotID = 10;
