@@ -218,7 +218,15 @@ function RE3_LIVE_APPLYITEM(slotID){
 		$('#RE3_LIVESTATUS_editItemSlot_window').css({'display': 'none'});
 	}
 }
-
+function RE3_LIVE_COPY_LOCATION(){
+	if (RE3_RUNNING === true && PROCESS_OBJ !== undefined){
+		var TEXT_FOR_CP = '[CURRENT LOCATION]\nCurrent Map: R' + parseInt(REALTIME_CurrentStage) + REALTIME_CurrentRoomNumber + '.RDT\nX Pos: ' + REALTIME_X_Pos + '\nY Pos: ' + REALTIME_Y_Pos + '\nZ Pos: ' + REALTIME_Z_Pos + '\nR Pos: ' + REALTIME_R_Pos;
+		R3DITOR_COPY(TEXT_FOR_CP);
+	}
+}
+/*
+	Open and Close
+*/
 function RE3_LIVE_closeForm(){
 	MEM_JS_canRender = false;
 	clearInterval(RE3_LIVE_RENDERTIMER);

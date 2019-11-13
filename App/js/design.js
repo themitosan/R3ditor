@@ -1240,7 +1240,7 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
 	document.getElementById('RDT-lbl-doorEdit-id').innerHTML  = id;
 	document.getElementById('RDT-lbl-door-index').innerHTML   = index;
-	// Check if header === 62
+	// Check if header === 61 || 62
 	var header = hex.slice(0, 2);
 	if (header === '61'){
 		DOOR_READ_MODE = 0;
@@ -1265,7 +1265,9 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-OO').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][1]).toUpperCase();
 	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
 	//
-	console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));
+	if (DOOR_READ_MODE === 1){
+		console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));
+	}
 	//
 	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;

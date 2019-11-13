@@ -139,7 +139,7 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #555, #222);
 }
 .botao-menu{
-	color: #0f0;
+	color: #0e0;
 	border: none;
     cursor: pointer;
 	margin-left: 2px;
@@ -151,12 +151,20 @@ input[type='range' i]{
 	text-shadow: 0 0 10px #888;
 	background-image: linear-gradient(to bottom, #202020, #000);
 }
+.botao-menu:active{
+    color: #0f0;
+    background-image: linear-gradient(to bottom, #303030, #001c00);
+}
 .botao-aplicar{
     color: #fff;
     margin-right: 2px;
     box-shadow: 0 0 4px #002808;
     text-shadow: 0 0 10px #1cff00;
     background-image: linear-gradient(to bottom, #009a3a, #003f18);
+}
+.botao-aplicar:active{
+    color: #e6ffdc;
+    background-image: linear-gradient(to bottom, #264230, #304036);
 }
 .info-icon-holder{
     margin-top: 8px;
@@ -1586,6 +1594,11 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_SELECT{
     width: 274px;
+}
+.RE3_LIVESTATUS_copyLoc{
+    position: absolute;
+    left: 218px;
+    top: 64px;
 }
 .RE3_LIVESTATUS_APPLYBTNFIX{
     float: right;

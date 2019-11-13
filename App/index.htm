@@ -474,6 +474,7 @@
 							Current RDT: <font id="RE3_LIVESTATUS_lbl_CurrentRDT">???</font><br>
 							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnR3Ditor" style="margin-top: 2px;" value="Open on R3ditor">
 							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnHex" value="Open on Hex Editor">
+							<input type="button" class="botao-menu RE3_LIVESTATUS_copyLoc" id="RE3_LIVESTATUS_copyCurrentLocation" value="Copy Current Location" onclick="RE3_LIVE_COPY_LOCATION();">
 						</center>
 						<div class="menu-separador"></div>
 						Current Stage: <font id="RE3_LIVESTATUS_lbl_CurrentStage">???</font><br>
@@ -697,7 +698,7 @@
 					<div id="RDT_door_holder" class="RDT-holder">
 						<!-- Portas vai aqui -->
 					</div>
-					<!-- RDT: Doors - Editar -->
+					<!-- RDT: Doors - Edit -->
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form">
@@ -707,8 +708,8 @@
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
 								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Next X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Next Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Next Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Next Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Next Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
 								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Next R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
 							</div>
 							<div class="RDT_doorOtherFix">
@@ -776,7 +777,7 @@
 					<div class="infoXY2">X: FFFF<br>Y: 0000</div>
 					<div class="infoXY3">X: 0000<br>Y: FFFF</div>
 					<div id="RDT_CANVAS_0" class="divCanvas">
-						<!-- Render vai aqui -->
+						<!-- Render goes here -->
 					</div>
 					<div class="canvasInfos">
 						<center>Selected Point: <font id="RDT_lbl_selectedPoint">???</font><br>

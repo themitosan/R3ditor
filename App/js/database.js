@@ -1625,8 +1625,8 @@ var RANGES = {
 	'RDT_door-0-doorZpos': 		     [20, 24],
 	'RDT_door-0-doorRpos': 		     [24, 28],
 	'RDT_door-0-doorNextXpos': 	     [28, 32],
-	'RDT_door-0-doorNextYpos': 	     [32, 36],
-	'RDT_door-0-doorNextZpos': 	     [36, 40],
+	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OWO
+	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OWO
 	'RDT_door-0-doorNextRpos': 	     [40, 44],
 	'RDT_door-0-doorNextStage':      [44, 46],
 	'RDT_door-0-doorNextRoomNumber': [46, 48],
