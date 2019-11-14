@@ -347,41 +347,57 @@ function WZ_loadFiles(file){
 		R3DITOR_check_for_updates = false;
 	}
 	document.getElementById('SETTINGS_edit_enableUpdates').checked = R3DITOR_check_for_updates;
+	// RE3 Path
 	if (cfgs[1] !== undefined){
 		EXEC_BIO3_original = cfgs[1];
+		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
+		document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
 	} else {
 		EXEC_BIO3_original = '';
+		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'Undefined';
+		document.getElementById('SETTINGS_lvl_path_RE3').title = '';
 	}
+	// RE3 Merce Path
 	if (cfgs[2] !== undefined){
 		EXEC_BIO3_MERCE = cfgs[2];
 	} else {
 		EXEC_BIO3_MERCE = '';
 	}
+	// Game Folder Path
 	if (cfgs[3] !== undefined){
 		GAME_PATH = cfgs[3];
 	} else {
 		GAME_PATH = '';
 	}
+	// Enable Mod
 	if (cfgs[4] !== undefined){
 		enable_mod = JSON.parse(cfgs[4]);
 	} else {
 		enable_mod = false;
 	}
+	// Show edit on hex
 	if (cfgs[5] !== undefined){
 		SHOW_EDITONHEX = JSON.parse(cfgs[5]);
 	} else {
 		SHOW_EDITONHEX = false;
 	}
+	// Hex editor path
 	if (cfgs[6] !== undefined){
 		HEX_EDITOR = cfgs[6];
+		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = R3DITOR_reduceStrings(HEX_EDITOR, 30);
+		document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
 	} else {
 		HEX_EDITOR = '';
+		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Undefined';
+		document.getElementById('SETTINGS_lvl_path_HEX').title = '';
 	}
+	// Last file open path
 	if (cfgs[7] !== undefined){
 		RDT_lastFileOpened = cfgs[7];
 	} else {
 		RDT_lastFileOpened = '';
 	}
+	// Last Backup
 	if (cfgs[8] !== undefined){
 		RDT_lastBackup = cfgs[8];
 	} else {
@@ -479,7 +495,7 @@ function WZ_APPEND(){
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 }
 /*
-	Settings
+	SETTINGS MENU
 */
 function SETTINGS_removeFiles(mode){
 	var confirmAction;
@@ -560,6 +576,7 @@ function SETTINGS_removeFiles(mode){
 function SETTINGS_RESET(){
 	fs.unlinkSync(APP_PATH + '\\Configs\\configs.r3ditor');
 	fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
+	//
 	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
@@ -572,6 +589,41 @@ function SETTINGS_RESET(){
 			reload();
 		}
 	}, 100);
+}
+function SETTINGS_openConfigFile(){
+	if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor') === true){
+		runExternalSoftware('notepad.exe', [APP_PATH + '\\Configs\\configs.r3ditor']);
+	}
+}
+function SETTINGS_SET_PATH(mode, path){
+	if (path !== '' && path !== undefined && path !== null){
+		// RE3
+		if (mode === 0){
+			if (path !== EXEC_BIO3_MERCE){
+				if (getFileName(path) === 'residentevil3'){
+					EXEC_BIO3_original = path;
+					document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
+					document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
+					addLog('log', 'INFO - New RE3 Path - this is the same executable!');
+				} else {
+					addLog('warn', 'WARN - Unable to set RE3 Path - this is the wrong executable!');
+				}
+			} else {
+				addLog('warn', 'WARN - Unable to set RE3 Path - You must select ResidentEvil3.exe instead of RE3_MERCE.exe!');
+			}
+		}
+		// Hex
+		if (mode === 1){
+			if (path !== HEX_EDITOR){
+				HEX_EDITOR = path;
+				document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = R3DITOR_reduceStrings(HEX_EDITOR, 50);
+				document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
+			} else {
+				addLog('warn', 'WARN - Unable to set Hex editor Path - this is the same executable!');
+			}
+		}
+	}
+	scrollLog();
 }
 function WZ_FORCE_UPDATE(){
 	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be buggy or incomplete.\n\nDo you want to continue anyway?');

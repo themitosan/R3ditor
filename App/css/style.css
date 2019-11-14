@@ -149,11 +149,11 @@ input[type='range' i]{
 	padding-bottom: 4px;
 	padding-right: 10px;
 	text-shadow: 0 0 10px #888;
-	background-image: linear-gradient(to bottom, #202020, #000);
+	background-image: linear-gradient(to bottom, #232323, #000);
 }
 .botao-menu:active{
     color: #0f0;
-    background-image: linear-gradient(to bottom, #303030, #001c00);
+    background-image: linear-gradient(to bottom, #000, #001c00);
 }
 .botao-aplicar{
     color: #fff;
@@ -2018,6 +2018,10 @@ input[type='range' i]{
     left: 24px;
     top: 146px;
 }
+.SETTINGS_ABA-5{
+    left: 24px;
+    top: 332px;
+}
 .SETTINGS_WINDOW-1{
     height: 48px;
     width: 374px;
@@ -2025,7 +2029,7 @@ input[type='range' i]{
     top: 78px;
 }
 .SETTINGS_WINDOW-2{
-    height: 220px;
+    height: 236px;
     width: 408px;
     left: 414px;
     top: 78px;
@@ -2041,6 +2045,12 @@ input[type='range' i]{
     width: 374px;
     left: 14px;
     top: 168px;
+}
+.SETTINGS_WINDOW-5{
+    height: 52px;
+    width: 554px;
+    left: 14px;
+    top: 354px;
 }
 .SETTINGS_FUTURE{
     position: absolute;

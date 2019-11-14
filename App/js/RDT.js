@@ -1018,8 +1018,8 @@ function RDT_DOOR_APPLY(index){
 			$('#RDT-aba-menu-6').trigger('click');
 		} else {
 			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nY + nZ + nR + nStage + nRN + nCP + nType + nOO + nLF + nLK + offset1;
-			console.log('New Door:\n' + DOOR_COMPILED);
 		}
+		console.log('New Door:\n' + DOOR_COMPILED);
 	} else {
 		alert('WARNING: ' + reason);
 		addLog('warn', 'WARN - ' + reason);

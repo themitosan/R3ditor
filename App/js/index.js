@@ -672,6 +672,15 @@ function processBIO3PosNumbers(number){
 function parsePercentage(current, maximum){
 	return Math.floor((current / maximum) * 100);
 }
+function R3DITOR_reduceStrings(str, size){
+	if (str !== '' && parseInt(size) !== NaN){
+		if (str.length === size || str.length > size){
+			return '...' + str.slice(parseInt(str.length / 2), str.length);
+		} else {
+			return str;
+		}
+	}
+}
 /*
 	Triggers & Load Files
 */
@@ -700,21 +709,29 @@ function triggerLoad(loadForm){
 	if (loadForm === 6){
 		$('#loadRDTForm').trigger('click');
 	}
-	// Tim - Seek Pattern
+	// TIM - Seek Pattern
 	if (loadForm === 7){
 		$('#loadTIMForm').trigger('click');
 	}
-	// Tim - Tim Map
+	// TIM - TIM Map
 	if (loadForm === 8){
 		$('#loadTimMapForm').trigger('click');
 	}
-	// Tim - Tim To Patch
+	// TIM - TIM To Patch
 	if (loadForm === 9){
 		$('#loadTimForPatchForm').trigger('click');
 	}
 	// INI Load
 	if (loadForm === 10){
 		$('#loadINIForm').trigger('click');
+	}
+	// SETTINGS RE3
+	if (loadForm === 11){
+		$('#loadSETTINGS_RE3').trigger('click');
+	}
+	// SETTINGS HEX
+	if (loadForm === 12){
+		$('#loadSETTINGS_HEX').trigger('click');
 	}
 }
 function setLoadFile(input){
@@ -838,6 +855,28 @@ function setLoadFile(input){
 			BIO3INI_arquivoBruto = undefined;
 			INI_CARREGAR_ARQUIVO(cFile.path);
 			document.getElementById('loadINIForm').value = '';
+		}
+	}
+	// SETTINGS - RE3 Path
+	if (input === 11){
+		cFile = document.getElementById('loadSETTINGS_RE3').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'SETTINGS - RE3 Path';
+		} else {
+			SETTINGS_SET_PATH(0, cFile.path);
+			document.getElementById('loadSETTINGS_RE3').value = '';
+		}
+	}
+	// SETTINGS - Hex Path
+	if (input === 12){
+		cFile = document.getElementById('loadSETTINGS_HEX').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'SETTINGS - Hex Path';
+		} else {
+			SETTINGS_SET_PATH(1, cFile.path);
+			document.getElementById('loadSETTINGS_HEX').value = '';
 		}
 	}
 	if (BETA === true){

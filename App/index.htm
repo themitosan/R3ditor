@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
 	<body>
-		<!-- Menu Principal -->
+		<!-- Main Menu -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
 		<div class="menu-topo none" id="menu-topo">
 			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your saves!" onclick="main_menu(1);">
@@ -117,6 +117,8 @@
 		</div>
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
+			<input type="button" class="botao-menu" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
+			<!-- Direita -->
 			<input type="button" class="botao-menu right" value="Cancel" onclick="reload();">
 			<input type="button" class="botao-menu right botao-aplicar" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
 		</div>
@@ -173,6 +175,14 @@
 							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all RDT maps generated." value="Remove All RDT Generated Maps" onclick="SETTINGS_removeFiles(2);"><br>
 							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all Assets, RDT Map Files (*.rdtmap), SAV Backups, RDT Backups, Recent Opened lists and all configs!" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
 						</center>
+					</div>
+					
+					<!-- Paths -->
+					<input type="button" value="Paths" class="INI_inernalTab SETTINGS_ABA-5">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-5">
+						RE 3 Exe Path: <font title="???" id="SETTINGS_lvl_path_RE3" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(11);"><br>
+						<div class="menu-separador"></div>
+						Hex Editor: <font title="???" id="SETTINGS_lvl_path_HEX" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(12);">
 					</div>
 
 					<!-- Note -->
@@ -1244,6 +1254,8 @@
 			<input type="file" onchange="setLoadFile(5);"  id="loadMSGForm" accept=".msg"/>
 			<input type="file" onchange="setLoadFile(6);"  id="loadRDTForm" accept=".rdt"/>
 			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
+			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
+			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>
