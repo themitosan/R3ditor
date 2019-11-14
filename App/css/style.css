@@ -416,10 +416,16 @@ input[type='range' i]{
     color: #0f0;
 }
 .slot-presente{
-    background-color: #03a700;
+    background-image: linear-gradient(to bottom, #00ce2c, #03a700);
 }
 .slot-ausente{
-    background-color: #aaa;
+    background-image: linear-gradient(to bottom, #bcbcbc, #aaa);
+}
+.slot-presente:active{
+    background-image: linear-gradient(to bottom, #007c1b, #03b500);
+}
+.slot-ausente:active{
+    background-image: linear-gradient(to bottom, #636363, #a9a9a9);
 }
 .slot-easy{
     color: #00f;
@@ -825,7 +831,12 @@ input[type='range' i]{
     border-radius: 4px;
     padding-bottom: 4px;
     font-style: oblique;
+    text-shadow: 0 0 10px #fff;
     background-image: linear-gradient(to bottom, #fff, #c4c4c4);
+}
+.botao-add-comando:active{
+    text-shadow: 0 0 10px #fff;
+    background-image: linear-gradient(to bottom, #c1c1c1, #fff);
 }
 .btn-remover-comando{
     color: #0f0;
