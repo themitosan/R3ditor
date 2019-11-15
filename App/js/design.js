@@ -1720,7 +1720,14 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-NZ').value = REALTIME_Z_Pos;
 		document.getElementById('RDT_door-edit-NR').value = REALTIME_R_Pos;
 	}
+	if (enable_mod === true){
+		document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
+	} else {
+		document.getElementById('RDT_door-edit-NC-TXT').vaue = REALTIME_CurrentCam.toUpperCase();
+	}
+	document.getElementById('RDT_lbl_door_editCam').innerHTML = REALTIME_CurrentCam.toUpperCase();
 	RDT_enableDisableDoorUsePlayerPos(1);
+	RDT_renderEditDoorCamPreview();
 }
 function RE3_LIVE_RENDER(){
 	if (MEM_JS_canRender === true){

@@ -87,6 +87,12 @@ function MEMORY_JS_fixVars(input, v){
 }
 function MEMORY_JS_getPosition(){
 	if (MEM_JS_requreSucess === true && PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+		// Stage
+		REALTIME_CurrentStage 	   = 		  parseInt(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_Stage'][0], MEM_JS.BYTE) + 1).toString();
+		REALTIME_CurrentRoomNumber = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentRoomNumber'][0], MEM_JS.BYTE).toString(16), 2).toUpperCase();
+		REALTIME_CurrentCam 	   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentCam'][0], MEM_JS.BYTE).toString(16), 2).toUpperCase();
+		REALTIME_CurrentRDT 	   = 'R' + REALTIME_CurrentStage + REALTIME_CurrentRoomNumber;
+		// XYZR
 		var X1 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		var X2 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][1], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		var Y1 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_yPosition'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
@@ -161,16 +167,11 @@ function MEMORY_JS_renderInfo(){
 		localStorage.setItem('REALTIME_INVENT_SLOT_8',  SLOT_8_ITEM_HEX  + SLOT_8_ITEM_QNT  + SLOT_8_ITEM_ATR  + SLOT_8_ITEM_NUL);
 		localStorage.setItem('REALTIME_INVENT_SLOT_9',  SLOT_9_ITEM_HEX  + SLOT_9_ITEM_QNT  + SLOT_9_ITEM_ATR  + SLOT_9_ITEM_NUL);
 		localStorage.setItem('REALTIME_INVENT_SLOT_10', SLOT_10_ITEM_HEX + SLOT_10_ITEM_QNT + SLOT_10_ITEM_ATR + SLOT_10_ITEM_NUL);
-		// Stage
-		REALTIME_CurrentStage 	   = 		  parseInt(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_Stage'][0], MEM_JS.BYTE) + 1).toString();
-		REALTIME_CurrentRoomNumber = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentRoomNumber'][0], MEM_JS.BYTE).toString(16), 2).toUpperCase();
-		REALTIME_CurrentCam 	   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentCam'][0], MEM_JS.BYTE).toString(16), 2).toUpperCase();
-		REALTIME_CurrentRDT 	   = 'R' + REALTIME_CurrentStage + REALTIME_CurrentRoomNumber;
 		// Status
-		var HPC8 				   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
-		var HP00 				   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][1], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var HP_C8 				   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		var HP_00 				   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_HP'][1], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		REALTIME_CurrentWeapon 	   = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentWeapon'][0], MEM_JS.BYTE).toString(16), 2);
-		REALTIME_CurrentHP 		   = HPC8 + HP00;
+		REALTIME_CurrentHP 		   = HP_C8 + HP_00;
 		// Render all info
 		if (DEBUG_LOCKRENDER === false){
 			RE3_LIVE_RENDER();
