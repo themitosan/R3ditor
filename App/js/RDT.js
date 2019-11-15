@@ -52,8 +52,8 @@ var RDT_MSG_RESULT_3 = 0;
 var RDT_MSG_RESULT_4 = 0;
 var RDT_MSG_CURRENT_TEST = 0;
 
-var RDT_totalCameras = 0;
 var RDT_cameraArray = [];
+var RDT_totalCameras = 0;
 
 var RDT_MAPFILE;
 var mapfile = [];
@@ -89,6 +89,9 @@ var RDT_MSG_startLength = 0;
 var RDT_lastFileOpened = '';
 var RDT_propModelsArray = [];
 var RDT_messageCodesArray = [];
+/*
+	Functions
+*/
 function RDT_resetVars(){
 	mapfile = [];
 	RDT_loop = 0;
@@ -136,17 +139,17 @@ function RDT_openFile(file){
 }
 function RDT_CARREGAR_ARQUIVO(rdtFile){
 	mapfile = [];
-	RDT_doAfterSave();
 	RDT_doorsRaw = [];
+	RDT_doAfterSave();
 	RDT_loading = true;
 	RDT_totalDoors = 0;
 	RDT_doorsArray = [];
 	RE3_LIVE_closeForm();
 	RDT_CANCRASH = false;
 	RDT_ERRORMOTIVE = '';
+	RDT_FILEMAP_MSG = [];
 	localStorage.clear();
 	RDT_editItemCancel();
-	RDT_FILEMAP_MSG = [];
 	RDT_MSG_RESULT_1 = 0;
 	RDT_MSG_RESULT_2 = 0;
 	RDT_MSG_RESULT_3 = 0;
@@ -160,8 +163,8 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_propModelsArray = [];
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
-	RDT_generateMapFile = false;
 	ORIGINAL_FILENAME = rdtFile;
+	RDT_generateMapFile = false;
 	startFirstMessage = undefined;
 	$('#RDT-aba-menu-4').css({'display': 'none'});
 	$('#RDT-aba-menu-2').css({'display': 'inline'});
@@ -1621,24 +1624,24 @@ function RDT_readMessages(){
 		}
 		// Step 22 - Another Pattern - Variant of 13
 		// Case: Another wrong offset
-		if (MESSAGE.indexOf("7dfafef2") !== -1 && MESSAGE.length < 24 || MESSAGE.indexOf("68") !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== "00"){
+		if (MESSAGE.indexOf('7dfafef2') !== -1 && MESSAGE.length < 24 || MESSAGE.indexOf('68') !== -1 && MESSAGE.slice(MESSAGE.length - 2, MESSAGE.length) !== '00'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 10)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 10)';
 		}
 		// Step 23 - Another Pattern - Variant of 13!
 		// Case: Another wrong offset
-		if (MESSAGE.indexOf("c7") !== -1 && MESSAGE.indexOf("e5") !== -1 && MESSAGE.slice(0, 4) !== "fa02"){
+		if (MESSAGE.indexOf('c7') !== -1 && MESSAGE.indexOf('e5') !== -1 && MESSAGE.slice(0, 4) !== 'fa02'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
 			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 11)";
 		}
 		// Step 24 - Another Pattern - Variant of 13!
 		// Case: Map R20C.RDT returning 60+ messages!
-		if (MESSAGE.slice(MESSAGE.length - 8, MESSAGE.length - 6) === "fa" && getAllIndexes(MESSAGE, "00").length > 71 && MESSAGE.length > 70 && MESSAGE.slice(MESSAGE.length - 4, MESSAGE.length) !== "fe00" && MESSAGE.slice(0, 4) !== "fa02"){
+		if (MESSAGE.slice(MESSAGE.length - 8, MESSAGE.length - 6) === 'fa' && getAllIndexes(MESSAGE, '00').length > 71 && MESSAGE.length > 70 && MESSAGE.slice(MESSAGE.length - 4, MESSAGE.length) !== 'fe00' && MESSAGE.slice(0, 4) !== 'fa02'){
 			RDT_canAdd = false;
 			RDT_canAdd_lvl = 1;
-			RDT_canAdd_reason = "The message was extracted from incorrect offset! (Type 12)";
+			RDT_canAdd_reason = 'The message was extracted from incorrect offset! (Type 12)';
 		}
 		// Final process
 		if (RDT_canAdd === true){
@@ -1759,7 +1762,7 @@ function RDT_findPointers(){
 						}
 					}
 				} else {
-					if (getFileName(ORIGINAL_FILENAME) === "r30d"){
+					if (getFileName(ORIGINAL_FILENAME) === 'r30d'){
 						if (RDT_THIRDPOINTERTYPE[pont] !== undefined){
 							break;
 						} else {
@@ -1824,8 +1827,8 @@ function RDT_findPointers(){
 			}
 		}
 		if (RDT_FIRSTPOINTERTYPE[pont] !== undefined || RDT_SECONDPOINTERTYPE[pont] !== undefined || RDT_THIRDPOINTERTYPE !== undefined){
-			console.log("Pointer Found! (Type: " + pont + ")");
-			console.log("Result:\n\nTotal Searches: " + totalVezesPush + '\nQuery A: ' + fatorA + '\nQuery B: ' + fatorB + '\nPos: ' + parseInt(startFirstMessage - fatorA) + ' - ' + parseInt(startFirstMessage - fatorB));
+			console.log('Pointer Found! (Type: ' + pont + ')');
+			console.log('Result:\n\nTotal Searches: ' + totalVezesPush + '\nQuery A: ' + fatorA + '\nQuery B: ' + fatorB + '\nPos: ' + parseInt(startFirstMessage - fatorA) + ' - ' + parseInt(startFirstMessage - fatorB));
 			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
 		} else {
 			console.error('ERROR - Unable to find pointers on this file!');
@@ -1892,7 +1895,7 @@ function RDT_makeRDTConfigFile(){
 		scrollLog();
 	}
 	document.title = APP_NAME + ' - Generating File Map (Step 4 / 4)';
-	totalMessages = totalMessages + "\n";
+	totalMessages = totalMessages + '\n';
 	// Final
 	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
 	try{
@@ -2254,7 +2257,7 @@ function RDT_renderMessages(id, startOffset, endOffset){
 		var MESSAGE_TO_TEXT = MSG_startMSGDecrypt_Lv1(SAMPLE);
 		var RDT_MESSAGE_HTML_TEMPLATE = '<div id="RDT_MSG-' + id + '" class="RDT-Item RDT-msg-bg"><input type="button" class="botao-menu right" value="Edit Message" onclick="RDT_transferMessageToMSG(' + id + ');">' + 
 			'(' + id + ') Message: <div class="RDT-message-content">' + MESSAGE_TO_TEXT + '</div><div class="menu-separador"></div>Hex: <div class="RDT-message-content user-can-select">' + MSG_DECRYPT_LV1_LAST.toUpperCase() + '</div></div>';
-		$("#RDT_MSG-holder").append(RDT_MESSAGE_HTML_TEMPLATE);
+		$('#RDT_MSG-holder').append(RDT_MESSAGE_HTML_TEMPLATE);
 	}
 }
 /*

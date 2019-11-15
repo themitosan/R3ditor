@@ -608,6 +608,7 @@ input[type='range' i]{
     text-transform: uppercase;
     box-shadow: 0 0 10px #00285087;
     text-shadow: 0 0 10px #ffffff2e;
+    background-image: linear-gradient(to bottom, #000, #041300);
 }
 .btn-box{
     top: -20px;
@@ -1008,7 +1009,7 @@ input[type='range' i]{
     left: 830px !important;
 }
 .RDT_door_textEditFix_0{
-    left: 857px;
+    left: 844px;
     width: 52px;
     position: sticky;
 }
@@ -1026,13 +1027,13 @@ input[type='range' i]{
     width: 52px;
 }
 .RDT_door_textEditFix_4{
-    left: 854px;
-    width: 444px;
+    left: 840px;
+    width: 462px;
     position: sticky;
 }
 .RDT_door-edit-posFix{
-    left: 780px !important;
-    width: 520px !important;
+    left: 766px !important;
+    width: 536px !important;
 }
 .menu-utility-fix{
     top: 526px;
@@ -1069,8 +1070,8 @@ input[type='range' i]{
     left: 808px !important;
 }
 .RDT_doorOtherFix{
-    top: 61px;
-    left: 325px;
+    top: 60.5px;
+    left: 338px;
     position: absolute;
 }
 .RDT_btn_fix1{

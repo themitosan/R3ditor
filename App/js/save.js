@@ -1172,7 +1172,6 @@ function contadorFinal(DD, HH, MM, SS, DC, MS){
 	if (dia.toString().length < 2){
 		dia = '0' + dia;
 	}
-	//console.log("DD:HH:MM:SS:DC:MS\n" + dia + ":" + hora + ":" + minutos + ":" + segundos + ":" + decimos + ":" + milesimos);
 }
 function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	resetTimer();

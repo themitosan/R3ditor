@@ -435,8 +435,7 @@
 						<div class="menu-separador"></div>
 						Current Weapon: <font id="RE3_LIVESTATUS_lbl_pCurrentWeapon">???</font>
 					</div>
-
-					<!-- Inventory Preview -->
+					<!-- Inventory View -->
 					<input type="button" value="Inventory" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-5">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-5">
 						<div class="RE3_LIVESTATUS_INVENT_BG">
@@ -504,7 +503,6 @@
 						<center>Current Camera: <font id="RE3_LIVESTATUS_lbl_CurrentCamera">???</font><br>
 						<img class="RE3_LIVESTATUS_CAM_IMG" alt="Current Cam" id="RE3_LIVESTATUS_currentCam_img"></center>
 					</div>
-
 					<!-- Map View -->
 					<input type="button" value="Map View [WIP]" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-4">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-4">
@@ -523,11 +521,11 @@
 				</div>
 			</div>
 		</div>
-		<!-- Lista de Arquivos Disponiveis - FileList -->
+		<!-- Avaliable filelist - FileList -->
 		<div class="fileList none" id="avaliable_fileList">
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
-			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right" />
-			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();" />
+			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
+			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();"/>
 			<div class="fileList_aba_holder" id="fileList_aba_list">
 				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
 				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">
@@ -576,6 +574,9 @@
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<!-- WIP -->
+			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD (WIP)" onclick="">
+			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="">
 			<!-- RDT Cameras -->
 			<div class="menu" id="RDT_menu-9" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-camera-hold">
@@ -672,7 +673,7 @@
 					<div id="RDT_BG_7" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Message Code - Total: <font id="RDT_lbl_totalmsgCode">???</font></font></center>
 					<div id="RDT_msgCode_holder" class="RDT-holder">
-						<!-- MSGCODE vai aqui -->
+						<!-- MSGCODE goes here -->
 					</div>
 					<!-- RDT: MSGCODE - Editar -->
 					<div class="RDT-Item-Edit RDT_editParamMSGCODE" id="RDT-MSGCODE-Edit">
@@ -706,7 +707,7 @@
 					<div id="RDT_BG_6" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Doors - Total: <font id="RDT_lbl_totDoors">???</font></font></center>
 					<div id="RDT_door_holder" class="RDT-holder">
-						<!-- Portas vai aqui -->
+						<!-- Doors goes here -->
 					</div>
 					<!-- RDT: Doors - Edit -->
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
@@ -717,10 +718,10 @@
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Next X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Next Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Next Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Next R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>
@@ -728,17 +729,28 @@
 								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00" maxlength="2"></div>
 								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
 							</div>
-							<center>
-								<input type="button" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
-								<input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
-							</center>
+							<div id="RDT_door_edit_copyPasteOptions_div">
+								<center>
+									<input type="button" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
+									<input type="button" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
+									<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(0);" class="botao-menu botao-aplicar none" id="RDT_door_usePlayerPos" value="Use Player Pos.">
+								</center>	
+							</div>
+							<div id="RDT_door_edit_usePlayerPos_div" class="none">
+								<center>
+									Use Player Pos. In: 
+									<input type="button" onclick="RDT_applyDoorUsePlayerPos(0);" title="Set the door location with Player Pos." class="botao-menu botao-aplicar RDT_door_cameraCopyPasteFix" value="On Door Pos.">
+									<input type="button" onclick="RDT_applyDoorUsePlayerPos(1);" title="Set Spawn location with Player Pos." class="botao-menu botao-aplicar" value="On Spawn Pos.">
+									<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(1);" class="botao-menu" value="Cancel">
+								</center>	
+							</div>
 							<div class="menu-separador"></div>
-								Next Cam: <font id="RDT_lbl_door_editCam" class="italic">???</font> 
+								Next Cam: <font id="RDT_lbl_door_editCam">???</font> 
 								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Lock Key: 
 								<select class="item-select-mod RDT_door_textEditFix_4 no-transform-text" id="RDT_door-edit-LK">
-									<!-- Os itens vão aqui -->
+									<!-- Items goes here -->
 								</select>
 							</div>
 							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
@@ -748,7 +760,7 @@
 							<center>Next Camera: 
 								<input type="text" class="item-select-mod none" placeholder="00" id="RDT_door-edit-NC-TXT" maxlength="2">
 									<select class="item-select-mod no-transform-text" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
-										<!-- Cam vai aqui -->			
+										<!-- Cam goes here -->			
 									</select><br>
 								<img src="" id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
 							</center>
@@ -773,7 +785,7 @@
 					<div id="RDT_BG_5" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Audios - Total: <font id="RDT_lbl_totalAudios">???</font></font></center>
 					<div id="RDT_audio_holder" class="RDT-holder">
-						<!-- Audios vai aqui -->
+						<!-- Audios goes here -->
 					</div>
 				</div>
 			</div>
@@ -810,7 +822,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- RDT: Menu Geral -->
+			<!-- RDT: General -->
 			<div class="menu" id="RDT_menu-1">
 				<div class="menu-general-content" id="RDT-geral" onclick="main_closeFileList();">
 					<div id="RDT_BG_1" class="RDT_BG_IMAGE"></div>
@@ -828,6 +840,7 @@
 					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
 					<div class="menu-separador"></div>
 					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
+					SLD Avaliable: <font class="RDT-menu-geral-text" id="RDT_lbl-SLD_PRESENT">???</font><br>
 					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
 					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
 					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>

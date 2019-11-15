@@ -999,7 +999,6 @@ function MSG_renderDialog(id, args, index, isMod){
 	// Selecionar Opção
 	if (id === 11){
 		$('#dialog-msg-addcomand').css({'top': '200px'});
-		console.log(args);
 		document.getElementById('msg-addcomand-title').innerHTML = 'Select Option';
 		document.getElementById('dialog-msg-render').innerHTML = DIALOG_MSG_SELECTOPTION;
 		document.getElementById('msg-selectOption-id').value = args;
@@ -1117,6 +1116,11 @@ function RDT_showMenu(id){
 		$('#RDT_enemy_holder').css({'height': '430px'});
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
+	}
+	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true){
+		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
+	} else {
+		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'No';
 	}
 	$('#RDT_backupBtn').css({'display': 'inline'});
 	document.getElementById('RDT-item-list').scrollTop = 0;
@@ -1279,7 +1283,7 @@ function RDT_showEditDoor(index, id, hex){
 		RDT_renderEditDoorCamPreview();
 	}
 	$('#RDT-door-Edit').css({'display': 'block'});
-	$('#RDT_door_holder').css({'width': '752px'});
+	$('#RDT_door_holder').css({'width': '738px'});
 }
 function RDT_doorValidadeInput(){
 	document.getElementById('RDT_door-edit-X').value      = document.getElementById('RDT_door-edit-X').value.toUpperCase();
@@ -1677,6 +1681,7 @@ function R3ditor_enableLiveStatusButton(){
 		$('#MSG_LIVESTATUS').css({'display': 'inline'});
 		$('#SAV_LIVESTATUS').css({'display': 'inline'});
 		// Another Buttons
+		$('#RDT_door_usePlayerPos').css({'display': 'inline'});
 		$('#RDT_useJillPos_Item').css({'display': 'inline'});
 	}
 }
@@ -1688,7 +1693,34 @@ function R3ditor_disableLiveStatusButton(){
 	$('#MSG_LIVESTATUS').css({'display': 'none'});
 	$('#SAV_LIVESTATUS').css({'display': 'none'});
 	// Another Buttons
+	$('#RDT_door_usePlayerPos').css({'display': 'none'});
 	$('#RDT_useJillPos_Item').css({'display': 'none'});
+	RDT_enableDisableDoorUsePlayerPos(1);
+}
+function RDT_enableDisableDoorUsePlayerPos(mode){
+	if (mode === 0){
+		$('#RDT_door_edit_copyPasteOptions_div').css({'display': 'none'});
+		$('#RDT_door_edit_usePlayerPos_div').css({'display': 'inline'});
+	}
+	if (mode === 1){
+		$('#RDT_door_edit_copyPasteOptions_div').css({'display': 'inline'});
+		$('#RDT_door_edit_usePlayerPos_div').css({'display': 'none'});
+	}
+}
+function RDT_applyDoorUsePlayerPos(mode){
+	if (mode === 0){
+		document.getElementById('RDT_door-edit-X').value = REALTIME_X_Pos;
+		document.getElementById('RDT_door-edit-Y').value = REALTIME_Z_Pos;
+		document.getElementById('RDT_door-edit-Z').value = REALTIME_Y_Pos;
+		document.getElementById('RDT_door-edit-R').value = REALTIME_R_Pos;
+	}
+	if (mode === 1){
+		document.getElementById('RDT_door-edit-NX').value = REALTIME_X_Pos;
+		document.getElementById('RDT_door-edit-NY').value = REALTIME_Y_Pos;
+		document.getElementById('RDT_door-edit-NZ').value = REALTIME_Z_Pos;
+		document.getElementById('RDT_door-edit-NR').value = REALTIME_R_Pos;
+	}
+	RDT_enableDisableDoorUsePlayerPos(1);
 }
 function RE3_LIVE_RENDER(){
 	if (MEM_JS_canRender === true){
