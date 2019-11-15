@@ -1255,19 +1255,20 @@ function RDT_showEditDoor(index, id, hex){
 	nextCam 											 	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextCamNumber'][0],  			    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextCamNumber'][1]);
 	roomNumber 											 	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRoomNumber'][0], 			    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRoomNumber'][1]).toUpperCase();
 	realStage 											 	  = parseInt(parseInt(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][1]), 16) + 1).toString();
-	document.getElementById('RDT_door-edit-LK').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]);
-	document.getElementById('RDT_door-edit-X').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-Y').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-Z').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][0],	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-R').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-DT').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][0], 	   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NX').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NY').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NZ').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NR').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-NS').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][0],  RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-OO').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][1]).toUpperCase();
-	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-LK').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], 	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]);
+	document.getElementById('RDT_door-edit-X').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][0],	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorXpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-Y').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][0],	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorZpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-Z').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][0],	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorYpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-R').value  	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][0], 	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorRpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-DT').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][0], 	    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorType'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NX').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][0],    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextXpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NY').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][0],    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextYpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NZ').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][0],    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextZpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NR').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][0],    RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextRpos'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-NS').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][0],   RANGES['RDT_door-' + DOOR_READ_MODE + '-doorNextStage'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-OO').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][0],  RANGES['RDT_door-' + DOOR_READ_MODE + '-doorOpenOrient'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0],  RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
+	document.getElementById('RDT_door-edit-DispTxt').value	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][1]).toUpperCase();
 	//
 	if (DOOR_READ_MODE === 1){
 		console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));

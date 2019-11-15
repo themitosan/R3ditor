@@ -1639,7 +1639,7 @@ var RANGES = {
 	'RDT_door-0-doorHexOffset1': 	 [56, 58],
 	'RDT_door-0-doorLockedFlag': 	 [58, 60],
 	'RDT_door-0-doorKey': 		 	 [60, 62],
-	'RDT_door-0-doorHexOffset2': 	 [62, 64],
+	'RDT_door-0-doorDisplayText': 	 [62, 64], // Display Text
 	
 	// Header 62
 	// Organizado por ordem de slice
@@ -1648,7 +1648,7 @@ var RANGES = {
 	'RDT_door-1-doorZpos': 		     [20, 24], // Precisa verificar
 	'RDT_door-1-doorRpos': 		     [24, 28], // Precisa verificar
 
-	'RDT_door-1-doorHexOffset0': 	 [28, 44], // Precisa realocar essa pos.
+	'RDT_door-1-doorHexOffset0': 	 [28, 44], // Precisa verificar
 
 	'RDT_door-1-doorNextXpos': 	     [44, 48],
 	'RDT_door-1-doorNextZpos': 	     [48, 52],
@@ -1662,5 +1662,6 @@ var RANGES = {
 
 	'RDT_door-1-doorLockedFlag': 	 [72, 74],
 	'RDT_door-1-doorKey': 		 	 [74, 76],
-	'RDT_door-1-doorHexOffset1': 	 [76, 80]
+	'RDT_door-1-doorHexOffset1': 	 [76, 78],
+	'RDT_door-1-doorDisplayText': 	 [78, 80]  // Display Text - If you set 73, it will show (You want do go down the ladder?)
 }

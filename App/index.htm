@@ -712,7 +712,7 @@
 					<!-- RDT: Doors - Edit -->
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
-						<div id="RDT-door-edit-form">
+						<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
 							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
@@ -744,6 +744,11 @@
 									<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(1);" class="botao-menu" value="Cancel">
 								</center>	
 							</div>
+							<div class="menu-separador"></div>
+								Display Message: 
+								<select class="item-select-mod RDT_fixForSeparador no-transform-text" id="RDT_door-edit-DispTxt">
+									<!-- Door display text options goes here -->
+								</select>
 							<div class="menu-separador"></div>
 								Next Cam: <font id="RDT_lbl_door_editCam">???</font> 
 								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">

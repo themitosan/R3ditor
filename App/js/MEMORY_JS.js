@@ -54,8 +54,8 @@ function MEMORY_JS_initMemoryJs(){
 			if (RE3_RUNNING === false){
 				EXTERNAL_APP_PID = p_info['th32ProcessID'];
 				RE3_RUNNING = true;
-				R3DITOR_RUNGAME(0);
 			}
+			R3DITOR_RUNGAME(0);
 			// Some render goes here!
 			document.getElementById('RE3_LIVESTATUS_lbl_processHandle').innerHTML = PROCESS_OBJ['handle'];
 			document.getElementById('RE3_LIVESTATUS_lbl_processID').innerHTML = PROCESS_OBJ['th32ProcessID'];

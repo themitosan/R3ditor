@@ -966,15 +966,15 @@ input[type='range' i]{
 }
 .RDT-item-lbl-fix-3{
     position: sticky;
-    left: 242px;
+    left: 254px;
 }
 .RDT-item-lbl-fix-4{
     position: sticky;
-    left: 428px;
+    left: 444px;
 }
 .RDT-item-lbl-fix-5{
     position: sticky;
-    left: 576px;
+    left: 592px;
 }
 .RDT-item-lbl-fix-6{
     position: sticky;
@@ -998,6 +998,10 @@ input[type='range' i]{
     position: sticky;
     left: 1096px;
     width: 56px;
+}
+.RDT_doorEditHolderFix{
+    margin-top: -16px;
+    position: static;
 }
 .RDT_editSelectEnemyNPC-fix{
     width: 380px !important;
@@ -1063,16 +1067,19 @@ input[type='range' i]{
 .RDT_doorNextPosFix{
     position: absolute;
     left: 148px;
-    top: 61px;
+    top: 45px;
 }
 .RDT_enemyNPC_editForm-fix{
     width: 490px !important;
     left: 808px !important;
 }
 .RDT_doorOtherFix{
-    top: 60.5px;
+    top: 45px;
     left: 338px;
     position: absolute;
+}
+.RDT_fixForSeparador{
+    margin-top: 0px !important;
 }
 .RDT_btn_fix1{
     top: 174px;
@@ -1116,7 +1123,7 @@ input[type='range' i]{
 }
 .RDT-Item-Misc-2{
     width: 30%;
-    left: 278px;
+    left: 292px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
@@ -1124,7 +1131,7 @@ input[type='range' i]{
 }
 .RDT-Item-Misc-3{
     width: 30%;
-    left: 446px;
+    left: 460px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
