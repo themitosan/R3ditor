@@ -350,7 +350,7 @@ function main_menu(anim){
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + ' - Map Editor (*.RDT)';
+		document.title = APP_NAME + ' - RDT Editor (*.RDT)';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
 			$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'inline'});
@@ -452,7 +452,7 @@ function SAVE_showMenu(menuId){
 		$('#menu-SAVE').css({'display': 'block'});
 	}
 	cancelShowModItem();
-	if (menuId === 0){ // Menu Geral
+	if (menuId === 0){ // General
 		if (request_render_save == false){
 			addInfo(0, '00');
 			addInfo(1, '00');
@@ -1035,7 +1035,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - Map Editor (*.RDT) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.title = APP_NAME + ' - RDT Editor (*.RDT) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1094,7 +1094,7 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-localCity').innerHTML = 'Unknown';
 	}
 	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
-	var RDT_MSG_P = 'Undefined - This map don\'t have any messages!';
+	var RDT_MSG_P = 'Undefined - This RDT don\'t have any messages!';
 	if (RDT_MSG_POINTERS[0] !== undefined){
 		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
 	}

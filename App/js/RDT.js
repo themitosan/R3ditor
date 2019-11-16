@@ -854,7 +854,7 @@ function RDT_decompileDoors(index, location){
 				itemTitle = RDT_MAPAS[dr_key][0];
 			}
 			if (parseInt(dr_key, 16) > 171){
-				itemTitle = 'Unknown Hex Value! (' + dr_key + ')';
+				itemTitle = 'Unknown Hex Value! (' + dr_key.toUpperCase() + ')';
 			}
 			var doorLeadsTo_title;
 			var doorLeadsTo = 'R' + parseInt(parseInt(dr_nStage, 16) + 1) + dr_nRoomNumber.toUpperCase();
@@ -915,7 +915,9 @@ function RDT_copyPastePos(mode){
 		} else {
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC-TXT').value.toUpperCase();
 		}
-		var TEXT_FOR_CP = '[Door]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nNext Map: R' + parseInt(RDT_TEMP_NEXT_STAGE + 1) + RDT_TEMP_NEXT_ROOM + '.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+		var TEXT_FOR_CP = '[Door]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nNext Map: R' + parseInt(RDT_TEMP_NEXT_STAGE + 1) + RDT_TEMP_NEXT_ROOM + 
+			'.RDT\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + RDT_TEMP_NEXT_STAGE + 
+			'\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next
