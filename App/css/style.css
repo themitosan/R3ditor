@@ -1078,6 +1078,10 @@ input[type='range' i]{
     left: 338px;
     position: absolute;
 }
+.RDT_modifyBtnFix{
+    margin-top: 0px;
+    margin-right: 0px;
+}
 .RDT_fixForSeparador{
     margin-top: 0px !important;
 }
