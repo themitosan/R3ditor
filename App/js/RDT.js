@@ -872,7 +872,7 @@ function RDT_decompileDoors(index, location){
 					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
 					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="Id">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + 
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + 
 					'</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + 
 					'<font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> ' + dr_offset0.toUpperCase() + ' <font id="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + 
 					dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
@@ -885,9 +885,9 @@ function RDT_decompileDoors(index, location){
 					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
 					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + dr_header.toUpperCase() + ' ' + dr_id.toUpperCase() + ' ' + dr_ident.toUpperCase() + ' ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
 					' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
-					dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset2.toUpperCase() + ' ' + parseInt(parseInt(dr_type, 16) - 1).toString(16) + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' ' + dr_lockFlag.toUpperCase() + ' ' + dr_key.toUpperCase() + ' ' + ' <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset2.toUpperCase() + ' ' + MEMORY_JS_fixVars(parseInt(parseInt(dr_type, 16) - 1), 2).toUpperCase() + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
 			}
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
@@ -1031,7 +1031,7 @@ function RDT_DOOR_APPLY(index){
 		} else {
 			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nZ + nY + nR + nStage + nRN + nCP + offset2 + nType + nOO + offset1 + nLF + nLK + displayTxt;
 		}
-		console.log('New Cam:\n' + DOOR_COMPILED);
+		console.log('New Door:\n' + DOOR_COMPILED);
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 		$('#RDT-aba-menu-6').trigger('click');
 	} else {
@@ -1049,11 +1049,11 @@ function RDT_getAllRelatedAudios(){
 	var getAudioArray = fs.readdirSync(APP_PATH + '\\Assets\\DATA_A\\VOICE\\').filter(fn => fn.startsWith('M' + MAPID));
 	while(c < getAudioArray.length){
 		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">' +
-			'(' + parseInt(c + 1) + ') File Name: <font class="italic RDT-item-lbl-fix user-can-select">' + getAudioArray[c] + '</font>' + 
+			'(' + parseInt(c + 1) + ') File Name: <font class="italic RDT-item-lbl-fix">' + getAudioArray[c] + '</font>' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Remove" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';RDT_deleteAudio();">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoad(1);">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Open" ' + 
-			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '\']);"><br>Path: <font class="italic">' + 
+			'onclick="runExternalSoftware(\'cmd\', [\'/C\', \'start\', \'wmplayer\', \'' + APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '\']);"><br>Path: <font class="italic user-can-select">' + 
 			APP_PATH.replace(new RegExp('\\\\', 'g'), '/') + '/Assets/DATA_A/VOICE/' + getAudioArray[c] + '</font><br></div>';
 		$('#RDT_audio_holder').append(AUDIO_HTML_TEMPLATE);
 		c++;
