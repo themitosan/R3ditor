@@ -54,6 +54,9 @@ function FILELIST_triggerSearchBox(){
 				if (fileList_gameMode === 'DATA_E'){
 					document.getElementById('fileListHolder').innerHTML = '';
 					$('#fileListHolder').append(searchResult);
+				} else {
+					document.getElementById('fileListHolder_AJ').innerHTML = '';
+					$('#fileListHolder_AJ').append(searchResult);
 				}
 			} else {
 				addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
