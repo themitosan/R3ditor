@@ -41,6 +41,9 @@ function scrollLog(){
 /*
 	File list
 */
+function FILELIST_clearTextBox(){
+	document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = '';
+}
 function FILELIST_triggerSearchBox(){
 	if (main_currentMenu === 3){
 		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase().replace('R', '');
@@ -219,6 +222,7 @@ function main_renderFileList(id, mode){
 			}
 		} else {
 			var fList = [];
+			FILELIST_clearTextBox();
 			document.getElementById('RDT_lastThreeFiles').innerHTML = '';
 			if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') !== false){
 				c = 0;

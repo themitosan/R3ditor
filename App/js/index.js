@@ -108,7 +108,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	};
 }
-/// Log
+/*
+	Internal Log
+*/
 function addLog(type, texto){
 	var classe = undefined;
 	if (type.toLowerCase() === 'log' || type === undefined || type === null){
@@ -190,7 +192,7 @@ function R3DITOR_RECENT_FILES(mode){
 				if (fList[0] !== ORIGINAL_FILENAME){
 					fList.unshift(ORIGINAL_FILENAME);
 				}
-				if (fList.length > 5){
+				if (fList.length > 4){
 					fList.pop();
 				}
 				while (c < fList.length){

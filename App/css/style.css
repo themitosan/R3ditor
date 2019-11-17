@@ -38,7 +38,7 @@ body{
 	color: #fff;
 }
 u{
-    text-shadow: 0 0 10px #ff000063;
+    text-shadow: 0px 0px 10px #ff000063;
 }
 a{
     color: #fff;
@@ -67,11 +67,11 @@ input[type='range' i]{
 }
 .red{
     color: #f00;
-    text-shadow: 0 0 10px #ff8e8e;
+    text-shadow: 0px 0px 10px #ff8e8e;
 }
 .green{
     color: #0f0;
-    text-shadow: 0 0 10px #0f0;
+    text-shadow: 0px 0px 10px #0f0;
 }
 .RDT_lbl_pointers{
     left: 200px;
@@ -92,13 +92,13 @@ input[type='range' i]{
 .feature_title{
     font-size: x-large;
     text-decoration: underline;
-    text-shadow: 0 0 10px #555;
+    text-shadow: 0px 0px 10px #555;
 }
 .about{
     background-image: linear-gradient(to bottom, #5f4774, #1b163f);
     border-bottom-right-radius: 160px;
     border-bottom-left-radius: 70px;
-    box-shadow: 0 0 30px #5d46727a;
+    box-shadow: 0px 0px 30px #5d46727a;
     border-top-left-radius: 160px;
     border-top-right-radius: 70px;
     position: absolute;
@@ -121,7 +121,7 @@ input[type='range' i]{
 .textLOGO{
     color: #fff;
     font-size: xx-large;
-    text-shadow: 0 0 30px #f00;
+    text-shadow: 0px 0px 30px #f00;
 }
 .msg-legenda-sticky{
     position: sticky;
@@ -148,7 +148,7 @@ input[type='range' i]{
 	border-radius: 4px;
 	padding-bottom: 4px;
 	padding-right: 10px;
-	text-shadow: 0 0 10px #888;
+	text-shadow: 0px 0px 10px #888;
 	background-image: linear-gradient(to bottom, #232323, #000);
 }
 .botao-menu:active{
@@ -158,8 +158,8 @@ input[type='range' i]{
 .botao-aplicar{
     color: #fff;
     margin-right: 2px;
-    box-shadow: 0 0 4px #002808;
-    text-shadow: 0 0 10px #1cff00;
+    box-shadow: 0px 0px 4px #002808;
+    text-shadow: 0px 0px 10px #1cff00;
     background-image: linear-gradient(to bottom, #009a3a, #003f18);
 }
 .botao-aplicar:active{
@@ -183,19 +183,19 @@ input[type='range' i]{
 .log-text{
     width: 99%;
     color: #0f0;
-    text-shadow: 0 0 5px #367948;
+    text-shadow: 0px 0px 5px #367948;
 }
 .log-warn{
     width: 99%;
     color: #fffc84;
-    text-shadow: 0 0 5px #8a8c2b;
+    text-shadow: 0px 0px 5px #8a8c2b;
 }
 .log-error{
     width: 99%;
     color: #ffbdbd;
     margin-top: 4px;
     margin-bottom: 4px;
-    text-shadow: 0 0 5px #793636;
+    text-shadow: 0px 0px 5px #793636;
 }
 .log-holder{
     top: 622px;
@@ -216,7 +216,7 @@ input[type='range' i]{
     height: 520px;
     margin-top: 2px;
     border-radius: 6px;
-    text-shadow: 0 0 5px #367948;
+    text-shadow: 0px 0px 5px #367948;
     background-image: linear-gradient(to bottom, #212121c7, #000123b5);
 }
 .menu-geral-text{
@@ -245,7 +245,7 @@ input[type='range' i]{
 }
 .separador-log-fix{
     background-image: linear-gradient(to right, #0f0, #0000);
-    box-shadow: 0 0 10px #00330096;
+    box-shadow: 0px 0px 10px #00330096;
     margin-bottom: 8px;
     margin-top: 8px;
     width: 88%;
@@ -327,7 +327,7 @@ input[type='range' i]{
     font-size: 20px;
     display: -webkit-box;
     cursor: pointer;
-    text-shadow: 0 0 4px #bfbfbf85;
+    text-shadow: 0px 0px 4px #bfbfbf85;
 }
 .menu-re3-box{
     top: 154px;
@@ -455,10 +455,10 @@ input[type='range' i]{
     padding-top: 4px;
     padding-bottom: 4px;
     background-color: #fff;
-    text-shadow: 0 0 0 #000;
     text-align: -webkit-center;
     display: -webkit-inline-box;
     border-top-left-radius: 4px;
+    text-shadow: 0px 0px 0px #000;
     border-bottom-left-radius: 4px;
 }
 .txt-status{
@@ -470,23 +470,23 @@ input[type='range' i]{
 }
 .txt-fine{
 	color: #0f0;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
 }
 .txt-caution{
 	color: #fff900;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
 }
 .txt-caution-red{
 	color: #ff9b00;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
 }
 .txt-danger{
     color: #ff7373;
-    text-shadow: 0 0 10px #ffb5b5;
+    text-shadow: 0px 0px 10px #ffb5b5;
 }
 .txt-poison{
 	color: #c29aff;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
 }
 .status-menu{
     background-color: #000039;
@@ -533,13 +533,13 @@ input[type='range' i]{
 .aba-select{
     zoom: 1;
     outline: none;
-    text-shadow: 0 0 6px #000;
+    text-shadow: 0px 0px 6px #000;
     background-image: linear-gradient(to bottom, #696969, #444);
 }
 .aba-select-2{
     zoom: 1;
     outline: none;
-    text-shadow: 0 0 6px #000;
+    text-shadow: 0px 0px 6px #000;
     background-image: linear-gradient(to bottom, #9e9e9e, #626262);
 }
 .RDT-item-select{
@@ -564,8 +564,8 @@ input[type='range' i]{
     margin-left: 4px;
     border-radius: 0px;
     border-style: double;
-    box-shadow: 0 0 15px #3d3d3d;
-    text-shadow: 0 0 10px #939393;
+    box-shadow: 0px 0px 15px #3d3d3d;
+    text-shadow: 0px 0px 10px #939393;
     background-image: linear-gradient(to bottom, #222, #000);
 }
 .color-green{
@@ -591,7 +591,7 @@ input[type='range' i]{
     padding-right: 20px;
     padding-bottom: 4px;
     text-align: -webkit-center;
-    box-shadow: 0 0 20px #0c0c52;
+    box-shadow: 0px 0px 20px #0c0c52;
     background-image: linear-gradient(to bottom, #332892, #1e1850);
 }
 .item-select-mod{
@@ -606,8 +606,8 @@ input[type='range' i]{
     padding-bottom: 6px;
     background-color: #000;
     text-transform: uppercase;
-    box-shadow: 0 0 10px #00285087;
-    text-shadow: 0 0 10px #ffffff2e;
+    box-shadow: 0px 0px 10px #00285087;
+    text-shadow: 0px 0px 10px #ffffff2e;
     background-image: linear-gradient(to bottom, #000, #041300);
 }
 .btn-box{
@@ -624,7 +624,7 @@ input[type='range' i]{
     padding-bottom: 4px;
     padding-right: 10px;
     background-color: #000;
-    box-shadow: 0 0 10px #000031;
+    box-shadow: 0px 0px 10px #000031;
 }
 .btn-box-fix{
     top: -25px;
@@ -738,7 +738,7 @@ input[type='range' i]{
     height: 138px;
     font-size: 16px;
     border-radius: 6px;
-    box-shadow: 0 0 2px #000;
+    box-shadow: 0px 0px 2px #000;
     text-shadow: rgba(255, 255, 255, 0.18) 0px 0px 10px;
     background-image: linear-gradient(to bottom, #151515, #0f0f0f);
 }
@@ -748,7 +748,7 @@ input[type='range' i]{
     font-family: Times;
     font-weight: normal;
     font-style: oblique;
-    text-shadow: 0 0 2px #00f;
+    text-shadow: 0px 0px 2px #00f;
     text-align: -webkit-center;
 }
 .italic{
@@ -773,45 +773,45 @@ input[type='range' i]{
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
-.evt-type-0{ /* Comando: Mostrar Texto */
+.evt-type-0{ /* Function: Mostrar Texto */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #747463, transparent);
 }
-.evt-type-1{ /* Comando: Reproduzir SE */
+.evt-type-1{ /* Function: Reproduzir SE */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #60698b, transparent);
 }
-.evt-type-2{ /* Comando: Mostrar Camera */
+.evt-type-2{ /* Function: Mostrar Camera */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #00757ae8, transparent);
 }
-.evt-type-3{ /* Comando: Mostar Char Especial */
+.evt-type-3{ /* Function: Mostar Char Especial */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #82af9a, transparent);
 }
-.evt-type-4{ /* Comando: Inicalizar / Finalizar Mensagem */
+.evt-type-4{ /* Function: Inicalizar / Finalizar Mensagem */
     background-image: linear-gradient(to right, #aa1717, transparent);
 }
-.evt-type-5{ /* Comando: Mostrar Nome de Item */
+.evt-type-5{ /* Function: Mostrar Nome de Item */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #804987, transparent);
 }
-.evt-type-8{ /* Comando: Comandon desconhecido usado em R101.RDT */
+.evt-type-8{ /* Function: Funcion desconhecida usada em R101.RDT */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #bd93a3d6, transparent);
 }
-.evt-type-9{ /* Comando: Trocar Cor do Texto */
+.evt-type-9{ /* Function: Trocar Cor do Texto */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #00950b, transparent);
 }
-.evt-type-11{ /* Comando: Selecionar Opção */
+.evt-type-11{ /* Function: Selecionar Opção */
     width: 96%;
     margin-left: 30px;
     background-image: linear-gradient(to right, #a29d00, transparent);
@@ -820,7 +820,7 @@ input[type='range' i]{
     display: none;
     height: 260px;
     padding-top: 10px;
-    box-shadow: 0 0 10px #41419c;
+    box-shadow: 0px 0px 10px #41419c;
 }
 .botao-add-comando{
     width: 99%;
@@ -832,11 +832,11 @@ input[type='range' i]{
     border-radius: 4px;
     padding-bottom: 4px;
     font-style: oblique;
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
     background-image: linear-gradient(to bottom, #fff, #c4c4c4);
 }
 .botao-add-comando:active{
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0px 0px 10px #fff;
     background-image: linear-gradient(to bottom, #c1c1c1, #fff);
 }
 .btn-remover-comando{
@@ -851,7 +851,7 @@ input[type='range' i]{
     border-radius: 6px;
     padding-bottom: 7px;
     background-color: #000;
-    box-shadow: 0 0 5px #383838;
+    box-shadow: 0px 0px 5px #383838;
 }
 .btn-editMSGfix{
     z-index: 4;
@@ -880,7 +880,7 @@ input[type='range' i]{
     padding-right: 20px;
     padding-bottom: 4px;
     text-align: -webkit-center;
-    box-shadow: 0 0 20px #07072f;
+    box-shadow: 0px 0px 20px #07072f;
     background-image: linear-gradient(to bottom, #473cab, #251d65);
 }
 .RDT-holder{
@@ -1196,7 +1196,7 @@ input[type='range' i]{
     border-radius: 4px;
     font-family: monospace;
     background-color: #010101;
-    box-shadow: 0 0 10px #bfffc12b;
+    box-shadow: 0px 0px 10px #bfffc12b;
 }
 .update_subtitle{
     font-size: x-large;
@@ -1222,7 +1222,7 @@ input[type='range' i]{
     border-radius: 6px;
     margin-bottom: 8px;
     background-color: #0f0;
-    box-shadow: 0 0 10px #26562e;
+    box-shadow: 0px 0px 10px #26562e;
 }
 .WZ_info{
     padding: 4px;
@@ -1234,7 +1234,7 @@ input[type='range' i]{
     top: 10px;
     left: 616px;
     position: absolute;
-    box-shadow: 0 0 6px #2b2b2b;
+    box-shadow: 0px 0px 6px #2b2b2b;
 }
 .wizard{
     top: 28%;
@@ -1289,7 +1289,7 @@ input[type='range' i]{
     padding: 4px;
     height: 100px;
     cursor: pointer;
-    margin-bottom: 4px;
+    margin-top: 2px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
@@ -1319,12 +1319,12 @@ input[type='range' i]{
     top: 10px;
     left: 536px;
     position: absolute;
-    box-shadow: 0 0 6px #222;
+    box-shadow: 0px 0px 6px #222;
 }
 .blockInfo_fix{
     left: 972px;
     height: 449px;
-    box-shadow: 0 0 10px #a2a2a247;
+    box-shadow: 0px 0px 10px #a2a2a247;
 }
 .msg_holder_fix{
     width: 942px;
@@ -1361,18 +1361,18 @@ input[type='range' i]{
     border-bottom-right-radius: 4px;
 }
 .render-item-select{
-    box-shadow: 0 0 16px #fff;
+    box-shadow: 0px 0px 16px #fff;
 }
 .render-item-color-1{ /* Item */
-    text-shadow: 0 0 2px #124800;
+    text-shadow: 0px 0px 2px #124800;
     background-image: linear-gradient(to bottom, #1aac00, #2c7300);
 }
 .render-item-color-2{ /* File */
-    text-shadow: 0 0 2px #aa98df;
+    text-shadow: 0px 0px 2px #aa98df;
     background-image: linear-gradient(to bottom, #776191, #2a3e53);
 }
 .render-item-color-3{ /* Map */
-    text-shadow: 0 0 2px #00ff99;
+    text-shadow: 0px 0px 2px #00ff99;
     background-image: linear-gradient(to bottom, #4d8a71, #275046);
 }
 .infoXY0{
@@ -1433,7 +1433,7 @@ input[type='range' i]{
     overflow: hidden;
     position: absolute;
     background-color: #000;
-    box-shadow: 0 0 10px #616161d9;
+    box-shadow: 0px 0px 10px #616161d9;
 }
 .FG_TEXT{
     z-index: 9;
@@ -1460,7 +1460,7 @@ input[type='range' i]{
 .imgPreviewCamSpawn{
     width: 352px;
     margin-top: 6px;
-    box-shadow: 0 0 10px #858dbfa3;
+    box-shadow: 0px 0px 10px #858dbfa3;
 }
 .RDT_cam_holderInfos{
     margin-left: 226px;
@@ -1478,7 +1478,7 @@ input[type='range' i]{
 .RDT_camImgItem{
     width: 218px;
     border-radius: 6px;
-    box-shadow: 0 0 4px #222;
+    box-shadow: 0px 0px 4px #222;
 }
 .RDT_camShowMisc{
     top: -1px;
@@ -1516,7 +1516,7 @@ input[type='range' i]{
     width: 34px;
 }
 .timPatcher_titulo{
-    text-shadow: 0 0 10px #9d40a9;
+    text-shadow: 0px 0px 10px #9d40a9;
 }
 .timPatcher_infos{
     position: sticky;
@@ -1547,7 +1547,7 @@ input[type='range' i]{
     height: 564px;
     border-radius: 6px;
     position: absolute;
-    box-shadow: 0 0 10px #222;
+    box-shadow: 0px 0px 10px #222;
     background-image: linear-gradient(to bottom, #424242, #333);
 }
 .RE3_LIVESTATUS_CLOSEBTN{
@@ -1588,10 +1588,10 @@ input[type='range' i]{
     background-color: #454545;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    text-shadow: 0 0 10px #010101;
+    text-shadow: 0px 0px 10px #010101;
 }
 .RE3_LIVESTATUS_CAM_IMG{
-    box-shadow: 0 0 10px #222222a6;
+    box-shadow: 0px 0px 10px #222222a6;
     border-radius: 6px;
     margin-top: 8px;
     width: 268px;
@@ -1732,19 +1732,19 @@ input[type='range' i]{
 
 .RE3_LIVESTATUS_X_color{
     color: #ffe6e6;
-    text-shadow: 0 0 10px #4d0000;
+    text-shadow: 0px 0px 10px #4d0000;
 }
 .RE3_LIVESTATUS_Y_color{
     color: #cdffc2;
-    text-shadow: 0 0 10px #cef6bd94;
+    text-shadow: 0px 0px 10px #cef6bd94;
 }
 .RE3_LIVESTATUS_Z_color{
     color: #e0e1ff;
-    text-shadow: 0 0 10px #a5a5ff;
+    text-shadow: 0px 0px 10px #a5a5ff;
 }
 .RE3_LIVESTATUS_R_color{
     color: #e9b0ef;
-    text-shadow: 0 0 10px #b74fc3c7;
+    text-shadow: 0px 0px 10px #b74fc3c7;
 }
 .RE3_LIVESTATUS_INVENT_ICON_BASE{
     zoom: 2;
@@ -1852,7 +1852,7 @@ input[type='range' i]{
     background-color: #454545;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    text-shadow: 0 0 10px #010101;
+    text-shadow: 0px 0px 10px #010101;
 }
 .INI_insertVal{
     width: 68px !important;
@@ -1922,7 +1922,7 @@ input[type='range' i]{
 }
 .title_mini{
     font-size: x-large;
-    text-shadow: 0 0 10px #818181;
+    text-shadow: 0px 0px 10px #818181;
 }
 .INI_clearBtnFix{
     position: absolute;
@@ -2030,7 +2030,7 @@ input[type='range' i]{
     width: 200px !important;
 }
 .SETTINGS_MENUBTNFIX{
-    box-shadow: 0 0 10px #323232;
+    box-shadow: 0px 0px 10px #323232;
     margin-top: 6px !important;
     width: 370px;
 }
