@@ -526,6 +526,8 @@
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
 			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
 			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();"/>
+			<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" placeholder="Search RDT... (11A for R11A.RDT)">
+			<!-- Lists -->
 			<div class="fileList_aba_holder" id="fileList_aba_list">
 				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
 				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">

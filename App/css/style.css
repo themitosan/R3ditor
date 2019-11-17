@@ -1293,6 +1293,15 @@ input[type='range' i]{
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
+.fileList_serachBox{
+    top: 34px;
+    left: 406px;
+    padding: 4px;
+    width: 262px;
+    position: absolute;
+    text-transform: none;
+    box-shadow: 0px 0px 0px #000;
+}
 .fileList_details{
     margin-top: -104px;
     margin-left: 138px;

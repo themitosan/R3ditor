@@ -8,6 +8,7 @@ var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
 var main_currentMenu;
+var fileList_gameMode;
 var RDT_totalMenus = 9;
 var INI_totalMenus = 3;
 var SAVE_totalMenus = 4;
@@ -37,7 +38,33 @@ function reload(){
 function scrollLog(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
-/// General
+/*
+	File list
+*/
+function FILELIST_triggerSearchBox(){
+	if (main_currentMenu === 3){
+		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase().replace('R', '');
+		var searchQuery = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase();
+		if (searchQuery !== '' && searchQuery.length === 3){
+			var searchResult = document.getElementById('RDT_file_' + fileList_gameMode + '_R' + searchQuery);
+			if (searchResult !== null){
+				if (fileList_gameMode === 'DATA_E'){
+					document.getElementById('fileListHolder').innerHTML = '';
+					$('#fileListHolder').append(searchResult);
+				}
+			} else {
+				addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
+			}
+			scrollLog();
+		} else {
+			if (fileList_gameMode === 'DATA_E'){
+				main_renderFileList(3, 2);
+			} else {
+				main_renderFileList(3, 1);
+			}
+		}
+	}
+}
 function main_renderFileList(id, mode){
 	var c = 0;
 	var gameModePath;
@@ -103,6 +130,7 @@ function main_renderFileList(id, mode){
 	}
 	// RDT
 	if (id === 3){
+		fileList_gameMode = gameModePath;
 		$('#fileList_aba_list').css({'display': 'inline'});
 		document.getElementById('fileList_title').innerHTML = 'File List';
 		if (mode !== 3){
@@ -145,15 +173,15 @@ function main_renderFileList(id, mode){
 						origCity = RDT_locations[RDT_name][1];
 					}
 					if (mFile.length > 58){
-						mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 						nOriginal = mFile;
+						mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 					}
 					if (gameModePath === 'DATA_E'){
 						gMODE = 'Hard';
 					} else {
 						gMODE = 'Easy';
 					}
-					var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
+					var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + gameModePath + '_' + RDT_name.toUpperCase() + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Game Mode: ' + gMODE + 
 						'<br>Map File: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + 
@@ -169,6 +197,7 @@ function main_renderFileList(id, mode){
 				$('#RDT_lastThreeFiles').css({'display': 'none'});
 				$('#fileList_aba_recent').removeClass('aba-select-2');
 				$('#FILELIST_removeRecentFiles').css({'display': 'none'});
+				$('#fileList_RDT_SEARCH_TEXTBOX').css({'display': 'inline'});
 				if (gameModePath === 'DATA_E'){
 					$('#fileListHolder_AJ').css({'display': 'none'});
 					$('#fileList_aba_hard').addClass('aba-select-2');
@@ -259,6 +288,7 @@ function main_renderFileList(id, mode){
 			$('#fileList_aba_hard').removeClass('aba-select-2');
 			$('#fileList_aba_easy').removeClass('aba-select-2');
 			$('#fileList_aba_recent').css({'display': 'inline'});
+			$('#fileList_RDT_SEARCH_TEXTBOX').css({'display': 'none'});
 			$('#RDT_lastThreeFiles').css({'display': 'inline', 'height': '440px'});
 			$('#avaliable_fileList').css({'display': 'block', 'border-bottom-right-radius': '2px'});
 		}
@@ -267,6 +297,7 @@ function main_renderFileList(id, mode){
 	if (id === 2){
 		$('#fileList_aba_list').css({'display': 'none'});
 		$('#FILELIST_removeRecentFiles').css({'display': 'none'});
+		$('#fileList_RDT_SEARCH_TEXTBOX').css({'display': 'none'});
 		$('#fileListHolder').css({'height': '466px', 'top': '46px'});
 		document.getElementById('fileList_title').innerHTML = 'Saves';
 		if (fs.existsSync(APP_PATH + '\\Assets\\Save\\') === true){
@@ -320,6 +351,9 @@ function main_closeFileList(){
 		$('#FILELIST_goBackBtn').css({'display': 'none'});
 	}
 }
+/*
+	Main Functions
+*/
 function main_menu(anim){
 	main_closeFileList();
 	localStorage.clear();
@@ -1840,14 +1874,15 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 	}
 	if (ITEM[itemHex] !== undefined){
 		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'display': 'none'});
-		var itemTitle  = ITEM[itemHex][0];
 		var clipPath   = ITEM[itemHex][9];
 		var leftoffset = ITEM[itemHex][10];
 		var spriteId   = ITEM[itemHex][11];
+		var itemTitle  = ITEM[itemHex][0] + '\nClick to edit this slot';
 		if (n === 2 || n === 4 || n === 6 || n === 8 || n === 10){
 			leftoffset = parseInt(leftoffset) + 42;
 		}
 		if (itemHex === '00' && quan === '00' && attr === '00'){
+			itemTitle = '';
 			$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': 'none'});
 		} else {
 			if (ITEM[itemHex][12] === false){
