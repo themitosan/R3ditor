@@ -234,28 +234,32 @@ function R3DITOR_RUN_RE3(mode){
 		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
-			R3DITOR_RUNGAME(0);
-			if (WZ_showWizard === true){
-				$('#WZ_BTN_2').css({'display': 'none'});
-				var msg = 'Testing Resident Evil 3...';
-				document.title = APP_NAME + msg;
-				addLog('log', 'INFO - ' + msg);
-				log_separador();
+			if (fs.existsSync(EXEC_BIO3_original) === true){
+				R3DITOR_RUNGAME(0);
+				if (WZ_showWizard === true){
+					$('#WZ_BTN_2').css({'display': 'none'});
+					var msg = 'Testing Resident Evil 3...';
+					document.title = APP_NAME + msg;
+					addLog('log', 'INFO - ' + msg);
+					log_separador();
+				} else {
+					RE3_RUNNING = true;
+					var msg = 'Running Resident Evil 3...';
+					addLog('log', 'INFO - ' + msg);
+					log_separador();
+				}
+				if (mode === 0){
+					process.chdir(GAME_PATH);
+				} else {
+					process.chdir(APP_PATH + '\\Assets');
+				}
+				runExternalSoftware(EXEC_BIO3_original);
+				setTimeout(function(){
+					MEMORY_JS_initMemoryJs();
+				}, 20);
 			} else {
-				RE3_RUNNING = true;
-				var msg = 'Running Resident Evil 3...';
-				addLog('log', 'INFO - ' + msg);
-				log_separador();
+				addLog('error', 'Unable to run ResidentEvil3 - The file was not found!');
 			}
-			if (mode === 0){
-				process.chdir(GAME_PATH);
-			} else {
-				process.chdir(APP_PATH + '\\Assets');
-			}
-			runExternalSoftware(EXEC_BIO3_original);
-			setTimeout(function(){
-				MEMORY_JS_initMemoryJs();
-			}, 20);
 		} catch (err) {
 			if (WZ_showWizard === true){
 				$('#WZ_BTN_2').css({'display': 'inline'});
@@ -273,15 +277,20 @@ function R3DITOR_RUN_MERCE(mode){
 		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
-			R3DITOR_RUNGAME(0);
-			RE3_RUNNING = true;
-			if (mode === 0){
-				process.chdir(GAME_PATH);
+			if (fs.existsSync(EXEC_BIO3_MERCE) === true){
+				R3DITOR_RUNGAME(0);
+				RE3_RUNNING = true;
+				if (mode === 0){
+					process.chdir(GAME_PATH);
+				} else {
+					process.chdir(APP_PATH + '\\Assets');
+				}
+				addLog('log', 'INFO - Running Mercenaries...');
+				runExternalSoftware(EXEC_BIO3_MERCE);
 			} else {
-				process.chdir(APP_PATH + '\\Assets');
+				addLog('error', 'Unable to run RE3_MERCE - The file was not found!');
 			}
-			runExternalSoftware(EXEC_BIO3_MERCE);
-		}catch(err){
+		} catch (err){
 			if (WZ_showWizard === true){
 				$('#WZ_BTN_2').css({'display': 'inline'});
 			}
@@ -291,7 +300,7 @@ function R3DITOR_RUN_MERCE(mode){
 	}
 	scrollLog();
 }
-// Copiar e Colar
+// Copy and paste
 function R3DITOR_COPY(cpText){
     var dummy = document.createElement('textarea');
     document.body.appendChild(dummy);
@@ -300,7 +309,7 @@ function R3DITOR_COPY(cpText){
     document.execCommand('copy');
     document.body.removeChild(dummy);
 }
-// Verificar por erros
+// Look for ERRORS before running the game
 function checkCanPlay(runArgs, gameId){
 	if (RDT_CANCRASH === true){
 		var ask = confirm('BEWARE: The current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?');
@@ -340,6 +349,7 @@ function killExternalSoftware(processID){
 		}
 	}
 }
+// Run external apps (.exe)
 function runExternalSoftware(exe, args){
 	var color;
 	EXTERNAL_APP_EXITCODE = 0;
@@ -454,7 +464,7 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 /* 
 	Utils
 */
-/// Obter nome do arquivo
+/// Get file names
 function getFileName(file){
 	var fileName = file.toLowerCase();
 	var removePath = fileName.split(/(\\|\/)/g).pop();
@@ -523,7 +533,9 @@ function getAllIndexes(arr, val){
     	return indexes;
 	} else {
 		console.error('ERROR - Invalid arguments on getAllIndexes!');
+		addLog('error', 'ERROR - Invalid arguments on getAllIndexes!');
 	}
+	scrollLog();
 }
 function getFileSize(filePath, mode){
 	if (filePath !== undefined && filePath !== ''){
