@@ -270,7 +270,10 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(7, \'' + args + '\', ' + index + ', true);"><br>Camera: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
-	// COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
+	/*
+		COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
+		I Think this is a "Wait" function - it put the message execution on hold for a XX time)
+	*/
 	if (com === 8){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-8" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Unknown Function (<font class="italic">F5</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 

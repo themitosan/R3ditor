@@ -927,23 +927,23 @@
 			<div class="msg-addcomand-menu" id="MSG_addcomand-menu">
 				<h2 class="title-eventos">Function List</h2>
 				<center>Header</center>
-				<input type="button" value="Start Message / Text Speed" class="botao-add-comando" onclick="MSG_renderDialog(1);">
-				<input type="button" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
+				<input type="button" id="MSG_ADDFUNC_BTN_1" value="Start Message / Text Speed" class="botao-add-comando" onclick="MSG_renderDialog(1);">
+				<input type="button" id="MSG_ADDFUNC_BTN_2" value="End Message" class="botao-add-comando" onclick="MSG_renderDialog(2);"><br><br>
 				<center>Text and Special Chars</center>
-				<input type="button" value="Show Text" class="botao-add-comando" onclick="MSG_renderDialog(3);">
-				<input type="button" value="Show Special Char" class="botao-add-comando" onclick="MSG_renderDialog(4);">
-				<input type="button" value="Change Text Color" class="botao-add-comando" onclick="MSG_renderDialog(9);">
-				<input type="button" value="Show Item Name" class="botao-add-comando" onclick="MSG_renderDialog(5);">
-				<input type="button" value="Select Option" class="botao-add-comando" onclick="MSG_renderDialog(11);"><br><br>
+				<input type="button" id="MSG_ADDFUNC_BTN_3" value="Show Text" class="botao-add-comando" onclick="MSG_renderDialog(3);">
+				<input type="button" id="MSG_ADDFUNC_BTN_4" value="Show Special Char" class="botao-add-comando" onclick="MSG_renderDialog(4);">
+				<input type="button" id="MSG_ADDFUNC_BTN_5" value="Change Text Color" class="botao-add-comando" onclick="MSG_renderDialog(9);">
+				<input type="button" id="MSG_ADDFUNC_BTN_6" value="Show Item Name" class="botao-add-comando" onclick="MSG_renderDialog(5);">
+				<input type="button" id="MSG_ADDFUNC_BTN_7" value="Select Option" class="botao-add-comando" onclick="MSG_renderDialog(11);"><br><br>
 				<center>Effects</center>
-				<input type="button" value="Execute SE" class="botao-add-comando" onclick="MSG_renderDialog(6);"><br><br>
+				<input type="button" id="MSG_ADDFUNC_BTN_8" value="Execute SE" class="botao-add-comando" onclick="MSG_renderDialog(6);"><br><br>
 				<center>Camera Position and Field</center>
-				<input type="button" value="Change Camera" class="botao-add-comando" onclick="MSG_renderDialog(7);"><br><br>
+				<input type="button" id="MSG_ADDFUNC_BTN_9" value="Change Camera" class="botao-add-comando" onclick="MSG_renderDialog(7);"><br><br>
 				<center>Unknown Function</center>
-				<input type="button" value="Function F5 (September 28th - R101.RDT)" title="DON'T USE THIS!" class="botao-add-comando" onclick="MSG_renderDialog(8);"><br><br>
+				<input type="button" value="Function F5 (September 28th - R101.RDT)" id="MSG_ADDFUNC_BTN_12" title="DON'T USE THIS!" class="botao-add-comando" onclick="MSG_renderDialog(8);"><br><br>
 				<center>Misc</center>
-				<input type="button" value="Insert / Modify Hex (USE WITH CARE!)" title="Use with care!" class="botao-add-comando" onclick="MSG_renderDialog(10);">
-				<input type="button" value="Show Hex Translator" id="MSG_optionTranslate" class="botao-add-comando none" onclick="MSG_showTranslateInput();"><br>
+				<input type="button" id="MSG_ADDFUNC_BTN_10" value="Insert / Modify Hex (USE WITH CARE!)" title="Use with care!" class="botao-add-comando" onclick="MSG_renderDialog(10);">
+				<input type="button" id="MSG_ADDFUNC_BTN_11" value="Show Hex Translator" id="MSG_optionTranslate" class="botao-add-comando none" onclick="MSG_showTranslateInput();"><br>
 			</div>
 			<div class="msg-events" id="text-msg-events">
 				<h2 class="title-eventos"><font id="RDT_MSG_NUMBER" class="none">??? - </font>Script (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>

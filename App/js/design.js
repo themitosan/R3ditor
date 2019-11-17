@@ -80,9 +80,11 @@ function main_renderFileList(id, mode){
 	} else {
 		if (mode === 1){
 			gameModePath = 'DATA_AJ';
+			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '410px', 'width': '258px'});
 		}
 		if (mode === 2){
 			gameModePath = 'DATA_E';
+			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '406px', 'width': '262px'});
 		}
 	}
 	// RDT Recent
