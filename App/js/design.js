@@ -125,6 +125,8 @@ function main_renderFileList(id, mode){
 			originalPFile = pFile;
 			pFile = '...' + pFile.slice(parseInt(pFile.length / 3), pFile.length);
 		}
+		pFile = pFile.replace(new RegExp('/', 'gi'), '\\');
+		originalPFile = originalPFile.replace(new RegExp('/', 'gi'), '\\');
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
 			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + 
@@ -269,8 +271,8 @@ function main_renderFileList(id, mode){
 						origCity = RDT_locations[RDT_name][1];
 					}
 					if (mFile.length > 58){
-						mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 						nOriginal = mFile;
+						mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 					}
 					if (RDT_name.toUpperCase() !== ''){
 						var RECENT_FILE_INSIDE_HTML_TEMPLATE = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
