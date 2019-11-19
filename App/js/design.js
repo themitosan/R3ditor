@@ -355,6 +355,7 @@ function main_openFileList(){
 	$('#FILELIST_goBackBtn').css({'display': 'inline'});
 }
 function main_closeFileList(){
+	FILELIST_clearTextBox();
 	if (RDT_arquivoBruto !== undefined || SAVE_arquivoBruto !== undefined || MSG_arquivoBruto !== undefined || TIM_arquivoBruto !== undefined){
 		$('#avaliable_fileList').css({'display': 'none'});
 		$('#FILELIST_goBackBtn').css({'display': 'none'});
@@ -1313,9 +1314,9 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0],  RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
 	document.getElementById('RDT_door-edit-DispTxt').value	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][1]).toUpperCase();
 	//
-	if (DOOR_READ_MODE === 1){
-		console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));
-	}
+	//if (DOOR_READ_MODE === 1){
+	//	console.log(hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorKey'][1]));
+	//}
 	//
 	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;

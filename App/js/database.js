@@ -826,8 +826,8 @@ var MSG_DICIONARIO = {
 	'06': [false, '<code>></code>', false],
 	'07': [false, '(SPECIAL CHAR 3)', false],
 	'08': [false, '(SPECIAL CHAR 4)', false],
-	'09': [false, '\"', false],
-	'0a': [false, '\"', false],
+	'09': [false, '"', false],
+	'0a': [false, '"', false],
 	'0b': [false, '(Down Arrow)', false],
 	'0c': [false, '0', false],
 	'0d': [false, '1', false],
@@ -1203,8 +1203,8 @@ var MSG_DICIONARIO_REVERSO = {
 	'<': '05',
 	'>': '06',
 	'0': '0c',
-	'\'': '09',
-	'\'': '0a',
+	'"': '09',
+	'"': '0a',
 	'1': '0d',
 	'2': '0e',
 	'3': '0f',
@@ -1517,7 +1517,7 @@ var RANGES = {
 		TIM Ranges [WIP]
 	*/
 	'TIM_header': 					   [0, 8], // Header
-	'TIM_BPP': 						  [8, 16], // Bit Per Pixel
+	'TIM_BPP': 						  [8, 16], // Bit Per Pixel (BPP)
 	/*
 		RDT Ranges
 	*/

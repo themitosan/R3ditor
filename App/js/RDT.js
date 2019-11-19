@@ -205,7 +205,9 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 }
 /*
 	Cameras
-	This will have a different way to retrive the infos
+	This will have a different way to retrive the infos!
+	
+	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
 */
 function RDT_getCameras(){
 	var c = 0;
