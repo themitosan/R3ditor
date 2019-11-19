@@ -381,14 +381,14 @@ function main_menu(anim){
 		$('#menu-topo').css({'display': 'none'});
 	}
 	if (anim === 1){ // Save
-		$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});
 		document.title = APP_NAME + ' - Save Editor (*.SAV)';
 		$('#menu-topo-save').css({'display': 'block'});
 		$('#SAV_slots').append(SAV_SLOT_LIST);
 		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG
-		$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});
 		document.title = APP_NAME + ' - Message Editor (*.MSG)';
 		$('#msg-lbl-totalCommands').html(MSG_totalComandos);
 		$('#menu-topo-msg').css({'display': 'block'});
@@ -399,7 +399,7 @@ function main_menu(anim){
 		document.title = APP_NAME + ' - RDT Editor (*.RDT)';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
-			$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'inline'});
+			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
 			main_renderFileList(3, 2);
 		} else {
 			$('#avaliable_fileList').css({'display': 'none'});
@@ -1800,7 +1800,7 @@ function RE3_LIVE_RENDER(){
 			var RDT_LIVEFILE = APP_PATH + '\\Assets\\DATA_E\\RDT\\' + REALTIME_CurrentRDT + '.RDT';
 			var RDT_avaliable = fs.existsSync(RDT_LIVEFILE);
 			if (RDT_avaliable === true){
-				document.getElementById('RE3_LIVESTATUS_openOnR3Ditor').onclick = function(){
+				document.getElementById('RE3_LIVESTATUS_openOnR3ditor').onclick = function(){
 					if (main_currentMenu === undefined){
 						main_menu(3);
 					}
@@ -1814,7 +1814,7 @@ function RE3_LIVE_RENDER(){
 				}
 			} else {
 				$('#RE3_LIVESTATUS_openOnHex').css({'display': 'none'});
-				$('#RE3_LIVESTATUS_openOnR3Ditor').css({'display': 'none'});
+				$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});
 			}
 			RE3_LIVE_prevCam = jpgCam;
 			document.getElementById('RE3_LIVESTATUS_lbl_CurrentCamera').innerHTML = REALTIME_CurrentCam;

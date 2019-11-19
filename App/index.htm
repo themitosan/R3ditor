@@ -30,14 +30,14 @@
 		<!-- Main Menu -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
 		<div class="menu-topo none" id="menu-topo">
-			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your saves!" onclick="main_menu(1);">
-			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to edit internal messages! (FA02FC...)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room Data Table files!" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your save file" onclick="main_menu(1);">
+			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to create / edit messages (FA02FC...)" onclick="main_menu(2);">
+			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room Data Table (RDT) files" onclick="main_menu(3);">
 			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Reload this application!" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" title="Click to see the about page!" value="About" onclick="showAbout();">
-			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor" value="Check for updates" onclick="checkForUpdates();">
+			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor." value="Check for updates" onclick="checkForUpdates();">
 			<input type="button" class="botao-menu right" title="Edit R3ditor Settings" value="Settings" onclick="main_menu(7);">
 		</div>
 		<!-- Other Tools -->
@@ -47,7 +47,7 @@
 			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu botao-aplicar right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 			<!-- (SET FOR FUTURE) WIP -->
 			<input type="button" class="botao-menu right none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
@@ -57,7 +57,7 @@
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
 			<input type="button" class="botao-menu none" id="btn_run_bio3" title="Runs the original game" value="Run Resident Evil 3 / Bio 3" onclick="checkCanPlay(0, 1);">
 			<input type="button" class="botao-menu none" id="btn_run_merce" title="Runs the original Mercenaries minigame" value="Run Mercenaries" onclick="checkCanPlay(0, 0);">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Runs the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
 			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Runs the original game in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
@@ -74,7 +74,7 @@
 				<font class="RE3_LIVESTATUS_Z_color">Z: <font id="RDT_LIVESTATUS_toolBar_Z" class="user-can-select">????</font></font> - 
 				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font>
 			</div>
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
@@ -88,7 +88,7 @@
 			<input type="button" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
 			<input type="button" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON RDT" onclick="MSG_applyMSGCommand(2);">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
 			<input type="button" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
@@ -99,7 +99,7 @@
 			<input type="button" class="botao-menu" id="SAV_generateSave" value="Generate SAV" onclick="SAV_GenerateNewSave();">
 			<input type="button" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
 			<input type="button" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
 			<input type="button" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
@@ -118,7 +118,7 @@
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
 			<input type="button" class="botao-menu" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Cancel" onclick="reload();">
 			<input type="button" class="botao-menu right botao-aplicar" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
 		</div>
@@ -128,12 +128,11 @@
 			<input type="button" class="botao-menu none" id="INI_makeNewIni" value="Ganerate INI" onclick="BIO3INI_MAKE_WZINI(2);">
 			<input type="button" class="botao-menu none" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
 			<input type="button" class="botao-menu none" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
-			<!-- Direita -->
+			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
 		</div>
-
 		<!-- CONTENT -->
 
 		<!-- FORM: Settings -->
@@ -481,7 +480,7 @@
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-3">
 						<center>
 							Current RDT: <font id="RE3_LIVESTATUS_lbl_CurrentRDT">???</font><br>
-							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnR3Ditor" style="margin-top: 2px;" value="Open on R3ditor">
+							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnR3ditor" style="margin-top: 2px;" value="Open on R3ditor">
 							<input type="button" class="botao-menu" id="RE3_LIVESTATUS_openOnHex" value="Open on Hex Editor">
 							<input type="button" class="botao-menu RE3_LIVESTATUS_copyLoc" id="RE3_LIVESTATUS_copyCurrentLocation" value="Copy Current Location" onclick="RE3_LIVE_COPY_LOCATION();">
 						</center>
