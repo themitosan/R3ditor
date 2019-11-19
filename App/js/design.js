@@ -1188,6 +1188,7 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
 	document.getElementById('RDT_lbl-totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT_lbl_totalAudios').innerHTML = RDT_totalAudios;
+	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME;
 	document.getElementById('RDT_lbl-totItens').innerHTML = RDT_totalItensGeral;
 	document.getElementById('RDT_lbl_totalCameras').innerHTML = RDT_totalCameras;
 	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
@@ -1201,7 +1202,6 @@ function RDT_showMenu(id){
 	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
 	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
-	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\');
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
 	$('#RDT_menu-' + id).css({'display': 'block'});
 	$('#menu-RDT').css({'display': 'block'});
@@ -1800,6 +1800,7 @@ function RE3_LIVE_RENDER(){
 			var RDT_LIVEFILE = APP_PATH + '\\Assets\\DATA_E\\RDT\\' + REALTIME_CurrentRDT + '.RDT';
 			var RDT_avaliable = fs.existsSync(RDT_LIVEFILE);
 			if (RDT_avaliable === true){
+				console.log(RDT_LIVEFILE);
 				document.getElementById('RE3_LIVESTATUS_openOnR3ditor').onclick = function(){
 					if (main_currentMenu === undefined){
 						main_menu(3);

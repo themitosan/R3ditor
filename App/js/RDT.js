@@ -163,7 +163,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_propModelsArray = [];
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
-	ORIGINAL_FILENAME = rdtFile;
+	ORIGINAL_FILENAME = rdtFile.replace(new RegExp('/', 'gi'), '\\');
 	RDT_generateMapFile = false;
 	startFirstMessage = undefined;
 	$('#RDT-aba-menu-4').css({'display': 'none'});
@@ -193,7 +193,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_camera_holder').innerHTML = '';
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
-	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile.replace(new RegExp('/', 'gi'), '\\'));
+	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile);
 	log_separador();
 	//
 	RDT_getEnemiesArray();
@@ -2605,7 +2605,7 @@ function RDT_COMPILE_Lv1(){
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
-			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\'));
+			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$('#RDT-aba-menu-3').trigger('click');
 		} catch(err){
@@ -2632,7 +2632,7 @@ function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
 		addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
-		addLog('log', 'Path: ' + ORIGINAL_FILENAME.replace(new RegExp('/', 'gi'), '\\'));
+		addLog('log', 'Path: ' + ORIGINAL_FILENAME);
 		log_separador();
 		RDT_doAfterSave();
 	}
