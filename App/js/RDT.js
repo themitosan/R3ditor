@@ -1037,7 +1037,7 @@ function RDT_DOOR_APPLY(index){
 		} else {
 			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nZ + nY + nR + nStage + nRN + nCP + offset2 + nType + nOO + offset1 + nLF + nLK + displayTxt;
 		}
-		console.log('New Door:\n' + DOOR_COMPILED);
+		//console.log('New Door:\n' + DOOR_COMPILED);
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 		$('#RDT-aba-menu-6').trigger('click');
 	} else {
@@ -1081,7 +1081,7 @@ function RDT_replaceWavFile(file){
 }
 function RDT_deleteAudio(){
 	var deleteFile = APP_PATH + '\\Assets\\DATA_A\\VOICE\\' + RDT_currentAudio;
-	var askConfirm = confirm('File: ' + RDT_currentAudio + '\n\nR3ditor will delete this file.\nDo you accept this?');
+	var askConfirm = confirm('File: ' + RDT_currentAudio + '\n\nR3ditor will delete this file.\nDo you want to proceed?');
 	if (askConfirm === true){
 		fs.unlinkSync(deleteFile);
 		addLog('log', 'WAV - Done!');
@@ -2311,7 +2311,6 @@ function RDT_hideCanvasTab(){
 	var tItems = RDT_totalItens;
 	RDT_totalItens = 0;
 	while(c < parseInt(tItems + 1)){
-		console.warn(localStorage.getItem('RDT_Item-' + c));
 		RDT_decompileItens(c, false);
 		c++;
 	}

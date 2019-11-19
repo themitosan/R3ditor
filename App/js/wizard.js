@@ -388,7 +388,7 @@ function WZ_loadFiles(file){
 		document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
 	} else {
 		HEX_EDITOR = '';
-		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Undefined';
+		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not found!';
 		document.getElementById('SETTINGS_lvl_path_HEX').title = '';
 	}
 	// Last file open path

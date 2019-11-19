@@ -1288,8 +1288,8 @@ input[type='range' i]{
 .fileList_item{
     padding: 4px;
     height: 100px;
-    cursor: pointer;
     margin-top: 2px;
+    cursor: pointer;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
 }
@@ -1663,7 +1663,7 @@ input[type='range' i]{
 /* HP & IGT */
 .RE3_LIVESTATUS_lbl_window-6-fix{
     position: sticky;
-    left: 68px;
+    left: 64px;
 }
 /* XYZR in decimal */
 .RE3_LIVESTATUS_lbl_window-7-fix{
