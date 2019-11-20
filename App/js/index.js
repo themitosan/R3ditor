@@ -255,7 +255,7 @@ function R3DITOR_RUN_RE3(mode){
 				} else {
 					process.chdir(APP_PATH + '\\Assets');
 				}
-				runExternalSoftware(EXEC_BIO3_original);
+				runGame(EXEC_BIO3_original);
 				setTimeout(function(){
 					MEMORY_JS_initMemoryJs();
 				}, 20);
@@ -288,7 +288,7 @@ function R3DITOR_RUN_MERCE(mode){
 					process.chdir(APP_PATH + '\\Assets');
 				}
 				addLog('log', 'INFO - Running Mercenaries...');
-				runExternalSoftware(EXEC_BIO3_MERCE);
+				runGame(EXEC_BIO3_MERCE);
 			} else {
 				addLog('error', 'Unable to run RE3_MERCE - The file was not found!');
 			}
@@ -351,8 +351,10 @@ function killExternalSoftware(processID){
 		}
 	}
 }
-// Run external apps (.exe)
-function runExternalSoftware(exe, args){
+/*
+	Run external apps (.exe)
+*/
+function runGame(exe, args){
 	var color;
 	EXTERNAL_APP_EXITCODE = 0;
 	EXTERNAL_APP_RUNNING = true;
@@ -416,6 +418,44 @@ function runExternalSoftware(exe, args){
 			return code;
 		}
 	});
+}
+function runExternalSoftware(exe, args){
+	var color;
+	EXTERNAL_APP_EXITCODE = 0;
+	EXTERNAL_APP_RUNNING = true;
+	const { spawn } = require('child_process');
+	if (args === undefined || args === null){
+		args = [''];
+	}
+	const ls = spawn(exe, args);
+	EXTERNAL_APP_PID = ls.pid;
+	ls.stdout.on('data', (data) => {
+		addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		scrollLog();
+	});
+	ls.stderr.on('data', (data) => {
+		addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		scrollDownLog();
+	});
+	ls.on('close', (code) => {
+		EXTERNAL_APP_PID = 0;
+		EXTERNAL_APP_RUNNING = false;
+		EXTERNAL_APP_EXITCODE = code;
+		if (WZ_showWizard === true && WZ_lastMenu === 3){
+			$('#WZ_BTN_2').css({'display': 'inline'});
+		}
+		process.chdir(TEMP_APP_PATH);
+		if (code > 1){
+			color = 'red';
+		} else {
+			color = 'green';
+		}
+		if (exe !== 'cmd'){
+			addLog('log', 'External App - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
+			return code;
+		}
+	});
+	scrollLog();
 }
 // Save Files
 function R3DITOR_SAVE(filename, content, mode, extension){
