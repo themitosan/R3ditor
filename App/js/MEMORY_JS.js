@@ -254,11 +254,11 @@ function RE3_LIVE_APPLY_PLAYER_POS(){
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_zPosition'][1], parseInt(newZ.slice(2, 4), 16), MEM_JS.BYTE);
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][0], parseInt(newR.slice(0, 2), 16), MEM_JS.BYTE);
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][1], parseInt(newR.slice(2, 4), 16), MEM_JS.BYTE);
+			RE3_LIVE_showHideStageOptions(1);
 		} else {
 			addLog('warn', 'WARN - Unable to set new location!');
 			addLog('warn', reason);
 		}
-		RE3_LIVE_showHideStageOptions(1);
 	}
 	scrollLog();
 }
@@ -294,6 +294,7 @@ function RE3_LIVE_openForm(){
 			$('#menu-topo').css({'top': '8px'});
 			$('#menu-utility-aba-2').css({'display': 'none'});
 		}
+		RE3_LIVE_showHideStageOptions(1);
 		$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'block'});
 		RE3_LIVE_RENDERTIMER = setInterval(function(){
 			MEMORY_JS_renderInfo();
