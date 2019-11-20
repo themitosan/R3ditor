@@ -3,7 +3,6 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Helpa eu!
 */
-var RE3_LIVE_POS;
 var onMSG = false;
 var RDT_aba_atual;
 var SAVE_aba_atual;
@@ -18,28 +17,15 @@ var RE3_LIVE_prevCam = '';
 var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
-window.onclose = function(){
-	localStorage.clear();
-	sessionStorage.clear();
-	killExternalSoftware();
-}
-window.onresize = function(){
-	window.resizeBy(1340, 733);
-}
-function reload(){
-	process.chdir(TEMP_APP_PATH);
-	if (RE3_RUNNING === true){
-		killExternalSoftware();
-	}
-	sessionStorage.clear();
-	localStorage.clear();
-	location.reload();
-}
 function scrollLog(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
+function log_separador(){
+	addLog('log', l_separador);
+	scrollLog();
+}
 /*
-	File list
+	Filelist
 */
 function FILELIST_clearTextBox(){
 	document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = '';
@@ -766,9 +752,6 @@ function adjustDialogSave(percent){
 	$('#SAV_openFileList').css({'display': 'none'});
 	$('#menu-mod-item').css({'top': percent + '%'});
 }
-function log_separador() {
-	addLog('log', l_separador);
-}
 /// About
 function showAbout(){
 	main_closeFileList();
@@ -1087,7 +1070,7 @@ function RDT_showMenu(id){
 	if (RDT_lastFileOpened !== ''){
 		$('#RDT_recentFile').remove();
 	}
-	if (enable_mod === true && EXTERNAL_APP_RUNNING === false){
+	if (enable_mod === true && RE3_RUNNING === false){
 		$('#RDT_openFileList').css({'display': 'inline'});
 		$('#RDT-enemyNPC-Edit').css({'height': '418px'});
 		$('#RDT-camera-Edit').css({'height': '418px'});

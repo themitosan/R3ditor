@@ -6,6 +6,7 @@
 	Plugin para Node.js escrito por Rob-- (https://github.com/Rob--)
 	Pagina oficial do memoryjs: https://github.com/Rob--/memoryjs
 */
+var RE3_LIVE_POS;
 var MEM_JS_updatePosTimer;
 var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;

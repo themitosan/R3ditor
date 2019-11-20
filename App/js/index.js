@@ -9,6 +9,7 @@ var e_e = 0;
 var APP_PATH;
 var HEX_EDITOR;
 var PROCESS_OBJ;
+var RE3_PID = 0;
 var BETA = false;
 var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
@@ -20,8 +21,33 @@ var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
 var APP_VERSION = '0.3.1 [BETA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
+/*
+	Onload
+*/
 window.onload = function(){
 	load();
+}
+window.onclose = function(){
+	localStorage.clear();
+	sessionStorage.clear();
+	if (RE3_RUNNING === true){
+		killExternalSoftware(RE3_PID);
+	}
+}
+window.onresize = function(){
+	window.resizeBy(1340, 733);
+}
+/*
+	Functions
+*/
+function reload(){
+	process.chdir(TEMP_APP_PATH);
+	if (RE3_RUNNING === true){
+		killExternalSoftware(RE3_PID);
+	}
+	sessionStorage.clear();
+	localStorage.clear();
+	location.reload();
 }
 function load(){
 	localStorage.clear();
@@ -356,14 +382,13 @@ function killExternalSoftware(processID){
 */
 function runGame(exe, args){
 	var color;
-	EXTERNAL_APP_EXITCODE = 0;
-	EXTERNAL_APP_RUNNING = true;
+	RE3_PID = 0;
 	const { spawn } = require('child_process');
 	if (args === undefined || args === null){
 		args = [''];
 	}
 	const ls = spawn(exe, args);
-	EXTERNAL_APP_PID = ls.pid;
+	RE3_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
 		$('#menu-utility-aba').css({'top': '512px'});
 		$('#menu-utility').css({'top': '586px'});
@@ -377,47 +402,37 @@ function runGame(exe, args){
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
-		EXTERNAL_APP_PID = 0;
+		RE3_PID = 0;
 		MEM_JS_canRender = false;
-		EXTERNAL_APP_RUNNING = false;
-		EXTERNAL_APP_EXITCODE = code;
 		RE3_LIVE_enableDisableToolBar(1);
 		if (WZ_showWizard === true && WZ_lastMenu === 3){
 			$('#WZ_BTN_2').css({'display': 'inline'});
 		}
-		if (RE3_RUNNING === true){
-			RE3_RUNNING = false;
-			RE3_LIVE_closeForm();
-			R3ditor_disableLiveStatusButton();
-			if (PROCESS_OBJ !== undefined){
-				clearInterval(MEM_JS_updatePosTimer);
-				MEM_JS.closeProcess(PROCESS_OBJ.handle);
-				log_separador();
-				addLog('log', 'INFO - MemoryJS - Process closed!');
-				log_separador();
-			}
-			if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
-				$('#menu-utility-aba').css({'top': '472px'});
-				$('#menu-utility').css({'top': '546px'});
-			}
-			R3DITOR_RUNGAME(1);
+		RE3_RUNNING = false;
+		RE3_LIVE_closeForm();
+		R3ditor_disableLiveStatusButton();
+		if (PROCESS_OBJ !== undefined){
+			clearInterval(MEM_JS_updatePosTimer);
+			MEM_JS.closeProcess(PROCESS_OBJ.handle);
+			log_separador();
+			addLog('log', 'INFO - MemoryJS - Process closed!');
+			log_separador();
 		}
+		if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
+			$('#menu-utility-aba').css({'top': '472px'});
+			$('#menu-utility').css({'top': '546px'});
+		}
+		R3DITOR_RUNGAME(1);
 		process.chdir(TEMP_APP_PATH);
 		if (code > 1){
 			color = 'red';
 		} else {
 			color = 'green';
 		}
-		if (exe !== 'cmd'){
-			if (exe === EXEC_BIO3_original || exe === EXEC_BIO3_MERCE){
-				addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
-			} else {
-				addLog('log', 'External App - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
-			}
-			scrollLog();
-			return code;
-		}
+		addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
+		return code;
 	});
+	scrollLog();
 }
 function runExternalSoftware(exe, args){
 	var color;
