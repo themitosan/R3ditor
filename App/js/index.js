@@ -394,11 +394,11 @@ function runGame(exe, args){
 		$('#menu-utility').css({'top': '586px'});
 	}
 	ls.stdout.on('data', (data) => {
-		addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		addLog('log', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollLog();
 	});
 	ls.stderr.on('data', (data) => {
-		addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		addLog('warn', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
@@ -431,6 +431,7 @@ function runGame(exe, args){
 		}
 		addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
 		return code;
+		scrollLog();
 	});
 	scrollLog();
 }
@@ -468,6 +469,7 @@ function runExternalSoftware(exe, args){
 		if (exe !== 'cmd'){
 			addLog('log', 'External App - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
 			return code;
+			scrollLog();
 		}
 	});
 	scrollLog();
