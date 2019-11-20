@@ -40,3 +40,27 @@ function DEBUG_TESTER(){
 function cls(){
 	console.clear();
 }
+//
+function DEBUG_createLineElement(where, x, y, length, angle){
+    $('#LIVE_LINE_TEST').remove();
+    var line = document.createElement('div');
+    var css = 'width: ' + length + 'px;'
+            + 'transform: rotate(' + angle + 'rad);'
+            + 'top: ' + y + 'px;'
+            + 'left: ' + x + 'px;';
+    line.setAttribute('style', css);
+    line.setAttribute('class', 'RE3_LIVECANVAS_BOUNDARY_TEST');
+    line.setAttribute('id', 'LIVE_LINE_TEST');
+    $('#' + where).append(line);
+}
+function DEBUG_createLine(where, x1, x2, y1, y2){
+    var a = x1 - x2,
+        b = y1 - y2,
+        c = Math.sqrt(a * a + b * b);
+    var sx = (x1 + x2) / 2,
+        sy = (y1 + y2) / 2;
+    var x = sx - c / 2,
+        y = sy;
+    var alpha = Math.PI - Math.atan2(-b, a);
+    return DEBUG_createLineElement(where, x, y, c, alpha);
+}

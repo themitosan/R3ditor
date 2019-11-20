@@ -14,6 +14,7 @@ var SAVE_totalMenus = 4;
 var request_render_save;
 var RE3_LIVE_RENDERTIMER;
 var RE3_LIVE_prevCam = '';
+var RE3_LIVE_prevRDT = '';
 var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
@@ -1771,19 +1772,18 @@ function RE3_LIVE_RENDER(){
 		if (jpgCam !== RE3_LIVE_prevCam){
 			var newTitle;
 			if (fs.existsSync(jpgCam.toUpperCase()) === true){
-				newTitle = 'Cam: ' + REALTIME_CurrentCam + '\nPath: ' + jpgCam;
+				newTitle = 'Cam: ' + REALTIME_CurrentCam + '\nPath: ' + jpgCam.replace(new RegExp('/', 'gi'), '\\');
 				document.getElementById('RE3_LIVESTATUS_currentCam_img').src = jpgCam;
 				document.getElementById('RE3_LIVESTATUS_currentCam_img').title = newTitle;
 			} else {
 				newTitle = 'Cam not found!';
 				document.getElementById('RE3_LIVESTATUS_currentCam_img').title = newTitle;
-				document.getElementById('RE3_LIVESTATUS_currentCam_img').src = APP_PATH + '/App/img/404.png';
+				document.getElementById('RE3_LIVESTATUS_currentCam_img').src = APP_PATH + '\\App\\img\\404.png';
 			}
 			// Por enquanto vai ser apenas para o modo hard
 			var RDT_LIVEFILE = APP_PATH + '\\Assets\\DATA_E\\RDT\\' + REALTIME_CurrentRDT + '.RDT';
 			var RDT_avaliable = fs.existsSync(RDT_LIVEFILE);
 			if (RDT_avaliable === true){
-				console.log(RDT_LIVEFILE);
 				document.getElementById('RE3_LIVESTATUS_openOnR3ditor').onclick = function(){
 					if (main_currentMenu === undefined){
 						main_menu(3);
@@ -1803,17 +1803,22 @@ function RE3_LIVE_RENDER(){
 			RE3_LIVE_prevCam = jpgCam;
 			document.getElementById('RE3_LIVESTATUS_lbl_CurrentCamera').innerHTML = REALTIME_CurrentCam;
 		}
+		// Stage
+		var cRDT = REALTIME_CurrentRDT + '.RDT';
+		if (cRDT !== RE3_LIVE_prevRDT){
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').title = RDT_locations[REALTIME_CurrentRDT][0];
+			document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
+			document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
+			RE3_LIVE_prevRDT = cRDT;
+		}
 		var enableInfiniteLife = document.getElementById('RE3_LIVESTATUS_CHEAT_INFHP').checked;
 		if (enableInfiniteLife === true){
 			RE3_LIVE_cheatInfiniteLife();
 		}
-		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
-		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
-		document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').title = RDT_locations[REALTIME_CurrentRDT][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
-		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
-		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (<font class="user-can-select">' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + '</font>)';
 		RE3_LIVE_RENDER_INVENT();
 	}

@@ -1620,9 +1620,9 @@ input[type='range' i]{
     background-image: url('../Img/arrow.png');
 }
 .RE3_LIVECANVAS_BOUNDARY_TEST{
-    border: 2px;
+    height: 0px;
+    border: 1px solid;
     position: absolute;
-    border-style: groove;
     border-color: #bebeff;
     background-color: #0000;
 }
