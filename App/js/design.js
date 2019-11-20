@@ -1132,7 +1132,7 @@ function RDT_showMenu(id){
 		$('#RDT-aba-menu-4').css({'display': 'none'});
 	}
 	$('#RDT_reload').css({'display': 'inline'});
-	if (EXTERNAL_APP_RUNNING === false && enable_mod === true){
+	if (RE3_RUNNING === false && enable_mod === true){
 		$('#RDT-door-Edit').css({'height': '417px'});
 		$('#RDT-door-hold').css({'height': '472px'});
 		$('#RDT-enemy-hold').css({'height': '472px'});
