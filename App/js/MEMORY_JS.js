@@ -1,7 +1,7 @@
 /*
 	R3ditor - MEMORY_JS.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Hullo Hullo!
+	Hullo Hullo...
 	
 	Plugin para Node.js escrito por Rob-- (https://github.com/Rob--)
 	Pagina oficial do memoryjs: https://github.com/Rob--/memoryjs
@@ -219,10 +219,54 @@ function RE3_LIVE_APPLYITEM(slotID){
 		$('#RE3_LIVESTATUS_editItemSlot_window').css({'display': 'none'});
 	}
 }
+function RE3_LIVE_APPLY_PLAYER_POS(){
+	if (RE3_RUNNING === true && PROCESS_OBJ !== undefined){
+		var reason;
+		var canChange = true;
+		var newX = document.getElementById('RE3_LIVESTATUS_edit_X').value.toLowerCase();
+		var newY = document.getElementById('RE3_LIVESTATUS_edit_Y').value.toLowerCase();
+		var newZ = document.getElementById('RE3_LIVESTATUS_edit_Z').value.toLowerCase();
+		var newR = document.getElementById('RE3_LIVESTATUS_edit_R').value.toLowerCase();
+		if (newX.length !== 4){
+			canChange = false;
+			reason = 'The X value are wrong!';
+		}
+		if (newY.length !== 4){
+			canChange = false;
+			reason = 'The Y value are wrong!';
+		}
+		if (newZ.length !== 4){
+			canChange = false;
+			reason = 'The Z value are wrong!';
+		}
+		if (newR.length !== 4){
+			canChange = false;
+			reason = 'The R value are wrong!';
+		}
+		//
+		if (canChange === true){
+			addLog('log', 'INFO - Applying new coordinates - X: <font class="user-can-select">' + newX.toUpperCase() + '</font>, Y: <font class="user-can-select">' + newY.toUpperCase() + '</font>, Z: <font class="user-can-select">' + newZ.toUpperCase() + '</font>, R: <font class="user-can-select">' + newR.toUpperCase() + '</font>');
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][0], parseInt(newX.slice(0, 2), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][1], parseInt(newX.slice(2, 4), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_yPosition'][0], parseInt(newY.slice(0, 2), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_yPosition'][1], parseInt(newY.slice(2, 4), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_zPosition'][0], parseInt(newZ.slice(0, 2), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_zPosition'][1], parseInt(newZ.slice(2, 4), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][0], parseInt(newR.slice(0, 2), 16), MEM_JS.BYTE);
+			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][1], parseInt(newR.slice(2, 4), 16), MEM_JS.BYTE);
+		} else {
+			addLog('warn', 'WARN - Unable to set new location!');
+			addLog('warn', reason);
+		}
+		RE3_LIVE_showHideStageOptions(1);
+	}
+	scrollLog();
+}
 function RE3_LIVE_COPY_LOCATION(){
 	if (RE3_RUNNING === true && PROCESS_OBJ !== undefined){
 		var TEXT_FOR_CP = '[CURRENT LOCATION]\nCurrent Map: R' + parseInt(REALTIME_CurrentStage) + REALTIME_CurrentRoomNumber + '.RDT\nX Pos: ' + REALTIME_X_Pos + '\nY Pos: ' + REALTIME_Y_Pos + '\nZ Pos: ' + REALTIME_Z_Pos + '\nR Pos: ' + REALTIME_R_Pos;
 		R3DITOR_COPY(TEXT_FOR_CP);
+		RE3_LIVE_showHideStageOptions(1);
 	}
 }
 /*

@@ -1,7 +1,7 @@
 ﻿/*
 	R3ditor - RDT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Já chegou o disco voadoooor!
+	Sorry.
 */
 
 // Copy-Paste Door

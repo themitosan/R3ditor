@@ -1831,12 +1831,51 @@ function RE3_LIVE_RENDER(){
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
-		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + ')';
+		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (<font class="user-can-select">' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + '</font>)';
 		RE3_LIVE_RENDER_INVENT();
 	}
 }
 function RE3_LIVE_cheatInfiniteLifeTrigger(){
 	$('#RE3_LIVESTATUS_CHEAT_INFHP').trigger('click');
+}
+function RE3_LIVE_showHideStageOptions(mode){
+	if (mode === 0){
+		$('#RE3_LIVESTATUS_STAGE_DIV').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_currentCam_img').css({'width': '324px'});
+		$('#RE3_LIVESTATUS_stageOptionsBtn').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_STAGE_OPTIONS_DIV').css({'display': 'block'});
+	} else {
+		$('#RE3_LIVESTATUS_STAGE_DIV').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_currentCam_img').css({'width': '266px'});
+		$('#RE3_LIVESTATUS_stageOptionsBtn').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_STAGE_OPTIONS_DIV').css({'display': 'none'});
+		RE3_LIVE_showEditXYZR(1);
+	}
+}
+function RE3_LIVE_showEditXYZR(mode){
+	if (mode === 0){
+		$('#RE3_LIVESTATUS_XYZR_div').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_editXYZR_Btn').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_currentCam_img').css({'width': '264px'});
+		$('#RE3_LIVESTATUS_copyCurrentLocation').css({'display': 'none'});
+		//
+		document.getElementById('RE3_LIVESTATUS_edit_X').value = REALTIME_X_Pos;
+		document.getElementById('RE3_LIVESTATUS_edit_Y').value = REALTIME_Y_Pos;
+		document.getElementById('RE3_LIVESTATUS_edit_Z').value = REALTIME_Z_Pos;
+		document.getElementById('RE3_LIVESTATUS_edit_R').value = REALTIME_R_Pos;
+		//
+		$('#RE3_LIVESTATUS_edit_XYZR_div').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_stageOptions_applyBtn').css({'display': 'inline'});
+		document.getElementById('RE3_LIVESTATUS_stageOptions_applyBtn').onclick = function(){
+			RE3_LIVE_APPLY_PLAYER_POS();
+		}
+	} else {
+		$('#RE3_LIVESTATUS_XYZR_div').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_edit_XYZR_div').css({'display': 'none'});
+		$('#RE3_LIVESTATUS_editXYZR_Btn').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_copyCurrentLocation').css({'display': 'inline'});
+		$('#RE3_LIVESTATUS_stageOptions_applyBtn').css({'display': 'none'});
+	}
 }
 // Inventory
 function RE3_LIVE_EDITINVENTSLOT(slotID){
