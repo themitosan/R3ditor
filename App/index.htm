@@ -495,8 +495,7 @@
 							<center>
 								<!-- Apply Btn -->
 								<input type="button" class="botao-menu botao-aplicar none" id="RE3_LIVESTATUS_stageOptions_applyBtn" value="Apply Changes">
-								
-								<input type="button" class="botao-menu" id="RE3_LIVESTATUS_copyCurrentLocation" value="Copy Current Location" onclick="RE3_LIVE_COPY_LOCATION();">
+								<input type="button" class="botao-menu" id="RE3_LIVESTATUS_copyCurrentLocation" value="Copy Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(0);RE3_LIVE_showHideStageOptions(1);">
 								<input type="button" class="botao-menu" id="RE3_LIVESTATUS_editXYZR_Btn" value="Modify Player Pos." onclick="RE3_LIVE_showEditXYZR(0);">
 								<input type="button" class="botao-menu" value="Cancel" onclick="RE3_LIVE_showHideStageOptions(1);">
 							</center>
@@ -505,18 +504,18 @@
 						<!-- XYZR -->
 						<div id="RE3_LIVESTATUS_XYZR_div">
 							<font class="RE3_LIVESTATUS_X_color">X Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_X_PositionHex">????</font> 
-							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_X_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_X_PositionDecimal" class="user-can-select">????</font>)</font></font><br>
 							<font class="RE3_LIVESTATUS_Y_color">Y Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Y_PositionHex">????</font>
-							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal" class="user-can-select">????</font>)</font></font><br>
 							<font class="RE3_LIVESTATUS_Z_color">Z Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_Z_PositionHex">????</font>
-							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal" class="user-can-select">?????</font>)</font></font><br>
+							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal" class="user-can-select">????</font>)</font></font><br>
 							<font class="RE3_LIVESTATUS_R_color">R Position: <font class="RE3_LIVESTATUS_lbl_window-5-fix user-can-select" id="RE3_LIVESTATUS_lbl_Current_R_PositionHex">????</font>
-							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_R_PositionDecimal" class="user-can-select">?????</font>)</font></font>
+							<font class="RE3_LIVESTATUS_lbl_window-7-fix">(<font id="RE3_LIVESTATUS_lbl_Current_R_PositionDecimal" class="user-can-select">????</font>)</font></font>
 						</div>
 						<!-- Edit XYZR -->
 						<div id="RE3_LIVESTATUS_edit_XYZR_div" class="none">
-							<font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_X" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><br>
-							<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_Y" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><br>
+							<font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_X" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu" value="Copy Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(0);"><br>
+							<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_Y" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu none" id="RE3_LIVESTATUS_stageOptions_pastePos" value="Paste Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(1);"><br>
 							<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_Z" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><br>
 							<font class="RE3_LIVESTATUS_R_color">R Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_R" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4">
 						</div>
@@ -529,7 +528,8 @@
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-4">
 						<div class="RE3_LIVESTATUS_CANVAS_CSS" id="RE3_LIVESTATUS_CANVAS">
 							<!-- WIP -->
-							<div id="RE3_LIVESTATUS_CANVAS_POINTER" class="RE3_LIVECANVAS_TESTICON_CSS"></div>
+							<div id="RE3_LIVESTATUS_CANVAS_POINTER" class="RE3_LIVECANVAS_PLAYER_ARROW"></div>
+							<!--<div id="RE3_LIVESTATUS_CANVAS_BOUNDARIES_TEST" class="RE3_LIVECANVAS_BOUNDARY_TEST"></div>-->
 						</div>
 					</div>
 				</div>
@@ -538,7 +538,7 @@
 			<div class="RE3_LIVESTATUS_MENU none" id="LIVESTATUS_menu-2">
 				<div class="RE3_LIVESTATUS_ABACONTENT">
 					<center><font class="titulo">Item Box</font></center>
-					<!-- for now - WIP -->
+					<!-- For now - WIP -->
 				</div>
 			</div>
 		</div>

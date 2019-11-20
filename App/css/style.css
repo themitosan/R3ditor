@@ -1090,6 +1090,7 @@ input[type='range' i]{
     width: 36px;
     margin-top: 4px;
     position: sticky;
+    margin-right: 6px;
 }
 .RDT_btn_fix1{
     top: 174px;
@@ -1610,13 +1611,20 @@ input[type='range' i]{
     height: 438px;
     width: 438px;
 }
-.RE3_LIVECANVAS_TESTICON_CSS{
+.RE3_LIVECANVAS_PLAYER_ARROW{
     top: 50%;
     left: 50%;
     width: 16px;
     height: 16px;
     position: absolute;
     background-image: url('../Img/arrow.png');
+}
+.RE3_LIVECANVAS_BOUNDARY_TEST{
+    border: 2px;
+    position: absolute;
+    border-style: groove;
+    border-color: #bebeff;
+    background-color: #0000;
 }
 .RE3_LIVESTATUS_closeGameBtnFix{
     margin-left: 38px;

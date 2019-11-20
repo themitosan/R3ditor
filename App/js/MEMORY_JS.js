@@ -13,6 +13,10 @@ var RE3_LIVE_RENDER_TIME = 80;
 var MEM_JS_requreSucess = false;
 var REALTIME_renderToolbar = false;
 
+var TEMP_X_Pos;
+var TEMP_Y_Pos;
+var TEMP_Z_Pos;
+var TEMP_R_Pos;
 var REALTIME_X_Pos;
 var REALTIME_Y_Pos;
 var REALTIME_Z_Pos;
@@ -263,11 +267,22 @@ function RE3_LIVE_APPLY_PLAYER_POS(){
 	}
 	scrollLog();
 }
-function RE3_LIVE_COPY_LOCATION(){
+function RE3_LIVE_COPY_PASTE_LOCATION(mode){
 	if (RE3_RUNNING === true && PROCESS_OBJ !== undefined){
-		var TEXT_FOR_CP = '[CURRENT LOCATION]\nCurrent Map: R' + parseInt(REALTIME_CurrentStage) + REALTIME_CurrentRoomNumber + '.RDT\nX Pos: ' + REALTIME_X_Pos + '\nY Pos: ' + REALTIME_Y_Pos + '\nZ Pos: ' + REALTIME_Z_Pos + '\nR Pos: ' + REALTIME_R_Pos;
-		R3DITOR_COPY(TEXT_FOR_CP);
-		RE3_LIVE_showHideStageOptions(1);
+		if (mode === 0){
+			TEMP_X_Pos = REALTIME_X_Pos;
+			TEMP_Y_Pos = REALTIME_Y_Pos;
+			TEMP_Z_Pos = REALTIME_Z_Pos;
+			TEMP_R_Pos = REALTIME_R_Pos;
+			var TEXT_FOR_CP = '[CURRENT LOCATION]\nCurrent Map: R' + parseInt(REALTIME_CurrentStage) + REALTIME_CurrentRoomNumber + '.RDT\nX Pos: ' + REALTIME_X_Pos + '\nY Pos: ' + REALTIME_Y_Pos + '\nZ Pos: ' + REALTIME_Z_Pos + '\nR Pos: ' + REALTIME_R_Pos;
+			R3DITOR_COPY(TEXT_FOR_CP);
+			$('#RE3_LIVESTATUS_stageOptions_pastePos').css({'display': 'inline'});
+		} else {
+			document.getElementById('RE3_LIVESTATUS_edit_X').value = TEMP_X_Pos;
+			document.getElementById('RE3_LIVESTATUS_edit_Y').value = TEMP_Y_Pos;
+			document.getElementById('RE3_LIVESTATUS_edit_Z').value = TEMP_Z_Pos;
+			document.getElementById('RE3_LIVESTATUS_edit_R').value = TEMP_R_Pos;
+		}
 	}
 }
 /*

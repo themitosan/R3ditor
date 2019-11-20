@@ -1836,6 +1836,11 @@ function RE3_LIVE_showHideStageOptions(mode){
 	}
 }
 function RE3_LIVE_showEditXYZR(mode){
+	if (TEMP_X_Pos !== undefined){
+		$('#RE3_LIVESTATUS_stageOptions_pastePos').css({'display': 'inline'});
+	} else {
+		$('#RE3_LIVESTATUS_stageOptions_pastePos').css({'display': 'none'});
+	}
 	if (mode === 0){
 		$('#RE3_LIVESTATUS_XYZR_div').css({'display': 'none'});
 		$('#RE3_LIVESTATUS_editXYZR_Btn').css({'display': 'none'});
