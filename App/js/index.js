@@ -35,6 +35,7 @@ window.onclose = function(){
 	}
 }
 window.onresize = function(){
+	window.moveTo(0, 0);
 	window.resizeBy(1340, 733);
 }
 /*
@@ -76,11 +77,12 @@ function load(){
 		document.title = 'Whoops...';
 		addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
 		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
-		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
+		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		log_separador();
 		addLog('error', err);
 	}
 	if (BETA === true){
+		console.warn('WARN - BETA is true! - IDIOT!');
 		console.error('ERROR - BETA is true! - Seu Jumento!');
 		addLog('error', 'BETA is true!');
 		addLog('warn', 'BETA is true!');
@@ -647,20 +649,24 @@ function parseDecimalToBIO3Var(value, mode){
 	}
 }
 function processBIO3Vars(hex){
-	if (hex.length === 4){
-		var numerofinal = 0;
-		var first = parseInt(hex.slice(0, 2), 16);
-		var second = parseInt(hex.slice(2, 4), 16);
-		while(second !== 0){
-			numerofinal = numerofinal + 255;
-			numerofinal++;
-			second--;
+	if (hex !== undefined && hex !== ''){
+		if (hex.length === 4){
+			var numerofinal = 0;
+			var first = parseInt(hex.slice(0, 2), 16);
+			var second = parseInt(hex.slice(2, 4), 16);
+			while(second !== 0){
+				numerofinal = numerofinal + 255;
+				numerofinal++;
+				second--;
+			}
+			while(first !== 0){
+				numerofinal++;
+				first--;
+			}
+			return numerofinal;
 		}
-		while(first !== 0){
-			numerofinal++;
-			first--;
-		}
-		return numerofinal;
+	} else {
+		return 0;
 	}
 }
 function processBIO3HP(hex){

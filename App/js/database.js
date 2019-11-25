@@ -815,7 +815,6 @@ var FG_DICIONARIO = {
 	'û': ['0px 16px 0px 1093px',  '-1093', 8],
 	'ü': ['0px 8px 0px 1102px',   '-1102', 8]
 }
-//
 var MSG_DICIONARIO = {
 	'00': [false, ' ', false],
 	'01': [false, '.', false],

@@ -15,6 +15,7 @@ var enable_mod = false;
 var WZ_skipRofs = false;
 var WZ_EXTRACTLIST = [];
 var WZ_showWizard = true;
+var WINDOW_MOVETOLEFT = false;
 /*
 	Functions
 */
@@ -312,7 +313,7 @@ function WZ_makeConfigs(){
 function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
-			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar;
+			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + '\n' + WINDOW_MOVETOLEFT;
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -325,7 +326,7 @@ function WZ_saveConfigs(justSave){
 				reload();
 			}
 		}
-	} catch(err){
+	} catch(err) {
 		if (WZ_showWizard === true){
 			WZ_showWizardDialog(5);
 		}
@@ -419,12 +420,19 @@ function WZ_loadFiles(file){
 	}
 	document.getElementById('SETTINGS_edit_enableAnimations').checked = DESIGN_ENABLE_ANIMS;
 	// Enable Toolbar
-	if (cfgs[10] !== undefined){
+	if (cfgs[11] !== undefined){
 		REALTIME_renderToolbar = JSON.parse(cfgs[11]);
 	} else {
 		REALTIME_renderToolbar = false;
 	}
 	document.getElementById('SETTINGS_edit_enableRE3_live_toolBar').checked = REALTIME_renderToolbar;
+	// Window moveto
+	if (cfgs[12] !== undefined){
+		WINDOW_MOVETOLEFT = JSON.parse(cfgs[12]);
+	} else {
+		WINDOW_MOVETOLEFT = false;
+	}
+	document.getElementById('SETTINGS_edit_enableMoveTo').checked = WINDOW_MOVETOLEFT;
 	/*
 		Visuals
 	*/
@@ -443,6 +451,9 @@ function WZ_loadFiles(file){
 	if (enable_mod === true){
 		$('#btn_run_bio3-mod').css({'display': 'inline'});
 		$('#btn_run_merce-mod').css({'display': 'inline'});
+	}
+	if (WINDOW_MOVETOLEFT === true){
+		window.moveTo(0, 0);
 	}
 	if (fs.existsSync(APP_PATH + '\\forceupdate.txt') == true){
 		fs.unlinkSync(APP_PATH + '\\forceupdate.txt');
@@ -658,6 +669,7 @@ function WZ_APPLY_R3DITOR_SETTINGS(){
 	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
 	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
 	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
+	WINDOW_MOVETOLEFT = document.getElementById('SETTINGS_edit_enableMoveTo').checked;
 	//
 	WZ_saveConfigs(true);
 	reload();

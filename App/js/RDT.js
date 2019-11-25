@@ -1,7 +1,7 @@
 ﻿/*
 	R3ditor - RDT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Sorry.
+	Sorry. For real.
 */
 
 // Copy-Paste Door

@@ -3,8 +3,8 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Me ajuda ae véi!
 */
+var DEBUG_TOTAL_LINES = 0;
 var DEBUG_LOCKRENDER = false;
-
 /// Reload js file
 function reloadJsFile(src){
 	console.info('Reloading Script: ' + src);
@@ -40,27 +40,36 @@ function DEBUG_TESTER(){
 function cls(){
 	console.clear();
 }
-//
-function DEBUG_createLineElement(where, x, y, length, angle){
-    $('#LIVE_LINE_TEST').remove();
-    var line = document.createElement('div');
-    var css = 'width: ' + length + 'px;'
-            + 'transform: rotate(' + angle + 'rad);'
-            + 'top: ' + y + 'px;'
-            + 'left: ' + x + 'px;';
-    line.setAttribute('style', css);
-    line.setAttribute('class', 'RE3_LIVECANVAS_BOUNDARY_TEST');
-    line.setAttribute('id', 'LIVE_LINE_TEST');
-    $('#' + where).append(line);
+function DEBUG_processHexPositions(hexVar){
+	if (hexVar !== undefined){
+		if (hexVar !== ''){
+			return processBIO3PosNumbers(processBIO3Vars(hexVar));
+		}
+	}
 }
-function DEBUG_createLine(where, x1, x2, y1, y2){
-    var a = x1 - x2,
-        b = y1 - y2,
-        c = Math.sqrt(a * a + b * b);
-    var sx = (x1 + x2) / 2,
-        sy = (y1 + y2) / 2;
-    var x = sx - c / 2,
-        y = sy;
-    var alpha = Math.PI - Math.atan2(-b, a);
-    return DEBUG_createLineElement(where, x, y, c, alpha);
-}
+/*
+	Draw Lines
+*/
+// https://stackoverflow.com/questions/20969434/drawing-line-in-a-div-with-javascript
+function DEBUG_createLine_Lv2(where, lineId, cssClass, ax, ay, bx, by){
+     $('#' + lineId).remove();
+     if (ax > bx){
+         bx = ax + bx;
+         ax = bx - ax;
+         bx = bx - ax;
+         by = ay + by;
+         ay = by - ay;
+         by = by - ay;
+     }
+     var angle = Math.atan((ay - by) / (bx - ax));
+     angle = (angle * 180 / Math.PI);
+     angle = -angle;
+     var length = Math.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
+     var style = 'top: ' + parseInt(ay + 8) + 'px; left: ' + parseInt(ax + 10) + 'px; ' +
+				 'width: ' + length + 'px; -webkit-transform-origin: 0% 0%; ' +
+				 '-webkit-transform: rotate(' + angle + 'deg);';
+     var LINE_HTML_TEMPLATE = '<div id="' + lineId + '" class="' + cssClass + '" style="' + style + '"></div>';
+     $('#' + where).append(LINE_HTML_TEMPLATE);
+     console.log(document.getElementById(lineId));
+     // RE3_LIVECANVAS_BOUNDARY_TEST_LV_2_0
+ }

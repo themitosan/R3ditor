@@ -148,7 +148,6 @@
 					<!-- Update -->
 					<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-1">
-						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - Check for updates on Startup / Go Back</font><br>
 						<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" onclick="WZ_FORCE_UPDATE();" value="Download the last changes on GitHub"></center>
 					</div>
 
@@ -179,12 +178,19 @@
 					<!-- Paths -->
 					<input type="button" value="Paths" class="INI_inernalTab SETTINGS_ABA-5">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-5">
-						RE 3 Exe Path: <font title="???" id="SETTINGS_lvl_path_RE3" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(11);"><br>
+						RE3 EXE Path: <font title="???" id="SETTINGS_lvl_path_RE3" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(11);"><br>
 						<div class="menu-separador"></div>
-						Hex Editor: <font title="???" id="SETTINGS_lvl_path_HEX" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(12);">
+						Hex Editor Path: <font title="???" id="SETTINGS_lvl_path_HEX" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(12);">
 					</div>
 
-					<!-- Note -->
+					<!-- Onload -->
+					<input type="button" value="Startup" class="INI_inernalTab SETTINGS_ABA-6">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-6">
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - Check for updates on Startup / Go Back</font><br>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableMoveTo"><font class="font-chkbox-fix"> - Move window to upper left corner on load / reload</font>
+					</div>
+
+					<!-- Note (Future) -->
 					<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-3">
 						<div class="SETTINGS_FUTURE">
