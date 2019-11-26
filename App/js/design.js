@@ -1978,18 +1978,18 @@ function RE3_LIVE_RENDER_POSITIONS(){
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionHex').innerHTML = REALTIME_Y_Pos;
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionHex').innerHTML = REALTIME_Z_Pos;
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionHex').innerHTML = REALTIME_R_Pos;
-	document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos));
-	document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos));
-	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos));
-	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos));
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos), 0);
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Y_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos), 0);
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos), 0);
+	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos), 0);
 }
 // MINI_MAP
 var ACRESIMO = 10;
 var FATORDEGIRO = 11.1;
 function RE3_LIVE_CANVAS_RENDER(){
-	var X = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos)) + 32767), 65535);
-	var Y = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos)) + 32767), 65535);
-	var R = parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos)) + 32767) / FATORDEGIRO;
+	var X = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos), 0) + 32767), 65535);
+	var Y = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos), 0) + 32767), 65535);
+	var R = parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos), 0) + 32767) / FATORDEGIRO;
 	$('#RE3_LIVESTATUS_CANVAS_POINTER').css({'top': X + '%', 'left': Y + '%', 'transform': 'rotate(' + parseInt(R + ACRESIMO) + 'deg)'});
 }
 /*

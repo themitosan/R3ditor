@@ -2392,9 +2392,9 @@ function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
 		'\n\nOriginal Info:\nX: ' + x.toUpperCase() + ' (' + processBIO3Vars(x) + ')\nY: ' + y.toUpperCase() + ' (' + processBIO3Vars(y) + ')\nZ: ' + z.toUpperCase() + 
 		' (' + processBIO3Vars(z) + ')\nR: ' + r.toUpperCase() + ' (' + processBIO3Vars(r) + ')" id="RDT_ICONCANVAS_'+ id + '">' + id +'</div>';
 
-	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(x)) + 32767), 65535);
-	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(y)) + 32767), 65535);
-	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(r)) + 32767) / FATORDEGIRO;
+	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(x), 0) + 32767), 65535);
+	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(y), 0) + 32767), 65535);
+	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(r), 0) + 32767) / FATORDEGIRO;
 	// Final
 	$('#RDT_CANVAS_0').append(HTML_ICONCANVAS_TEMPLATE);
 	$('#RDT_ICONCANVAS_' + id).css({'left': posX + '%', 'top': posY + '%'});
@@ -2442,14 +2442,14 @@ function RDT_updateCanvasInfos(mode){
 			document.getElementById('RDT_slider_R').value = processBIO3Vars(RDT_CURRENT_R);
 		}
 	}
-	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X)) + 32767), 65535);
-	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y)) + 32767), 65535);
-	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y)) + 32767) / FATORDEGIRO;
+	var posX = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X), 0) + 32767), 65535);
+	var posY = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y), 0) + 32767), 65535);
+	//var posR = parseFloat(processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y), 0) + 32767) / FATORDEGIRO;
 
-	document.getElementById('RDT_lbl_px').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X) + 32767);
-	document.getElementById('RDT_lbl_py').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y) + 32767);
-	document.getElementById('RDT_lbl_pz').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Z) + 32767);
-	document.getElementById('RDT_lbl_pr').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_R) + 32767);
+	document.getElementById('RDT_lbl_px').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_X) + 32767, 0);
+	document.getElementById('RDT_lbl_py').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Y) + 32767, 0);
+	document.getElementById('RDT_lbl_pz').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_Z) + 32767, 0);
+	document.getElementById('RDT_lbl_pr').innerHTML = processBIO3PosNumbers(processBIO3Vars(RDT_CURRENT_R) + 32767, 0);
 
 	$('#RDT_ICONCANVAS_' + RDT_selectedPoint).css({'left': posX + '%', 'top': posY + '%'});
 }
@@ -2457,14 +2457,14 @@ function RDT_posMoveDiagonal(mode){
 	if (mode === 0){
 		document.getElementById('RDT_slider_X').value = document.getElementById('RDT_slider_D').value;
 		document.getElementById('RDT_slider_Y').value = document.getElementById('RDT_slider_D').value;
-		document.getElementById('RDT_lbl_pd').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D').value) + 32767);
+		document.getElementById('RDT_lbl_pd').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D').value) + 32767, 0);
 	}
 	if (mode === 1){
 		var x = 65535 - document.getElementById('RDT_slider_D2').value;
 		var y = 0 + document.getElementById('RDT_slider_D2').value;
 		document.getElementById('RDT_slider_X').value = x;
 		document.getElementById('RDT_slider_Y').value = y;
-		document.getElementById('RDT_lbl_pd2').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D2').value) + 32767);
+		document.getElementById('RDT_lbl_pd2').innerHTML = processBIO3PosNumbers(parseInt(document.getElementById('RDT_slider_D2').value) + 32767, 0);
 	}
 	RDT_updateCanvasInfos(0);
 }

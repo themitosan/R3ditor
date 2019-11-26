@@ -1520,11 +1520,14 @@ var RANGES = {
 	/*
 		RDT Ranges
 	*/
-	// Item Ranges
-	'RDT_item-header': 			       [0, 2], // RE2 = 4E, RE3 = 67 || 68
+	////////////////////////////////////////////////////////////////////////////////////////
+	/*
+		Item, File or Map
+	*/
+	'RDT_item-header': 			       [0, 2], // RE2 = 4E, RE3 = 67 || 68...
 	'RDT_item-itemIdetifier': 	       [2, 4], // OK
 	'RDT_item-espaco1': 		      [4, 12], // OK
-	// Se a Header do Item for 67
+	// Header 67
 	'RDT_item-0-itemXX': 		     [12, 16], // OK
 	'RDT_item-0-itemYY': 		     [16, 20], // OK
 	'RDT_item-0-itemZZ': 		     [20, 24], // OK
@@ -1536,7 +1539,7 @@ var RANGES = {
 	'RDT_item-0-itemFlag': 			 [38, 40], // OK
 	'RDT_item-0-modelID': 			 [40, 42], // OK
 	'RDT_item-0-itemMP': 		     [42, 44], // OK
-	// Se a Header do item for 68
+	// Header 68
 	'RDT_item-1-itemXX': 		     [12, 16],
 	'RDT_item-1-itemYY': 		     [16, 20],
 	'RDT_item-1-itemZZ': 		     [20, 24],
@@ -1597,8 +1600,9 @@ var RANGES = {
 	'RDT_msgCode-1-readMode': 		 [52, 56], // OK
 	/*
 		Cameras
+		Length (Hex): 20h
 	*/
-	'RDT_cam-0-Header': 			   [0, 4], // RE2 = 3C 68 || B7 73, RE3 = B7 73 || B2 80 || 2D 91
+	'RDT_cam-0-Header': 			   [0, 4], // RE2 = 3C 68 || B7 73, RE3 = B7 73 || B2 80 || 2D 91...
 	'RDT_cam-0-cX-1': 			   	   [4, 8],
 	'RDT_cam-0-cX-2': 			   	  [8, 12], // Look like it is ALWAYS FF FF
 	'RDT_cam-0-cY-1': 			   	 [12, 16],
@@ -1613,12 +1617,45 @@ var RANGES = {
 	'RDT_cam-0-nZ-2': 			   	 [48, 52],
 	'RDT_cam-0-misc': 				 [52, 64], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
 	/*
+		Cameras Hitbox
+		Length (Hex): 14h
+		
+		Anotações:
+
+		A hitbox de troca de câmera na maioria sempre começa com 01 08.
+		Elas estão sempre depois das câmeras ("B7 73", tamanho 20h) mas
+		existe um padrão de 8 Blocos hex que sempre vem antes.  No caso 
+		de R101, eles começam com "7C F9" antes das hitboxes (cameras).
+
+		Para verificar, procure por "7C F9 00 00 3C 81 00 00" no 
+		arquivo R101.RDT
+		
+		O que isso faz? Ainda não sei!
+		O Tamanho das hitboxes em Hex é 14 (28 em String).
+
+		Desde já vos digo: Valeeeeu residentevilartist!
+	*/
+	'RDT_camHitBox-header': 		   [0, 4], // RE3 = 01 80
+	'RDT_camHitBox-0-prevCam': 		   [4, 6],
+	'RDT_camHitBox-0-nextCam': 		   [6, 8],
+	'RDT_camHitBox-0-X1': 		   	  [8, 12],
+	'RDT_camHitBox-0-Y1': 		   	 [12, 16],
+	'RDT_camHitBox-0-X2': 		   	 [16, 20],
+	'RDT_camHitBox-0-Y2': 		   	 [20, 24],
+	'RDT_camHitBox-0-X3': 		   	 [24, 28],
+	'RDT_camHitBox-0-Y3': 		   	 [28, 32],
+	'RDT_camHitBox-0-X4': 		   	 [32, 36],
+	'RDT_camHitBox-0-Y4': 		   	 [36, 40],
+	/*
 		Doors
+
+		Length:
+			Header 61 = 
+			Header 62 = 28h
 	*/
 	'RDT_door-header':         	       [0, 2], // RE2 = 3B, RE3 = 61 || 62
 	'RDT_door-id':                     [2, 4],
 	'RDT_door-doorIdentifier':        [4, 12],
-	
 	// Header 61
 	'RDT_door-0-doorXpos':           [12, 16],
 	'RDT_door-0-doorYpos': 		     [16, 20],

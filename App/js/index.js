@@ -737,17 +737,34 @@ function splitHex(hex, mode){
 	}
 	return fina.slice(0, fina.length - 1);
 }
-function processBIO3PosNumbers(number){
-	if (number !== undefined){
+function processBIO3PosNumbers(number, mode){
+	if (number !== undefined && number !== '' && number !== NaN && number !== null){
 		var numTemp = parseInt(number);
 		if (numTemp > 32767){
 			numTemp = numTemp - 65536;
 		}
-		return numTemp;
+		/*
+			Mode 0: Simple conversion
+			Mode 1: Bring back to full rane number (Min = 0 [0000], Max = 65535 [FFFF])
+		*/
+		if (mode === 0 || mode === undefined){
+			return numTemp;
+		} else {
+			if (numTemp < 0){
+				return parseInt(numTemp + 32767);
+			} else {
+				return numTemp;
+			}
+		}
+	} else {
+		return 0;
 	}
 }
 function parsePercentage(current, maximum){
 	return Math.floor((current / maximum) * 100);
+}
+function parsePercentageReverse(percent, maximum){
+	return parseFloat((percent * maximum) / 100);
 }
 function R3DITOR_reduceStrings(str, size){
 	if (str !== '' && parseInt(size) !== NaN){

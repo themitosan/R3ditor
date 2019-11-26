@@ -49,10 +49,11 @@ function DEBUG_processHexPositions(hexVar){
 }
 /*
 	Draw Lines
+	
+	Thanks Amarnath Balasubramanian 
+	Original code: https://stackoverflow.com/questions/20969434/drawing-line-in-a-div-with-javascript
 */
-// https://stackoverflow.com/questions/20969434/drawing-line-in-a-div-with-javascript
 function DEBUG_createLine_Lv2(where, lineId, cssClass, ax, ay, bx, by){
-     $('#' + lineId).remove();
      if (ax > bx){
          bx = ax + bx;
          ax = bx - ax;
