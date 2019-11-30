@@ -193,7 +193,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_camera_holder').innerHTML = '';
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
-	addLog('log', 'RDT - The file was loaded successfully! - File: ' + rdtFile);
+	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
 	log_separador();
 	//
 	RDT_getEnemiesArray();
@@ -1737,7 +1737,7 @@ function RDT_findPointers(){
 			c++;
 		}
 		if (startFirstMessage === undefined){
-			var askPrompt = prompt('File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"');
+			var askPrompt = prompt('File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nOriginal Local Name: ' + RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()][0] + '\nOriginal City Location: ' + RDT_locations[getFileName(ORIGINAL_FILENAME).toUpperCase()][1] + '\n\nInsert the first message - it looks like:\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"');
 			if (askPrompt !== '' && askPrompt !== null && RDT_arquivoBruto.indexOf(solveHEX(askPrompt)) !== -1){
 				startFirstMessage = RDT_arquivoBruto.indexOf(solveHEX(askPrompt));
 			} else {

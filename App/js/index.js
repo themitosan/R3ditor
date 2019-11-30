@@ -431,11 +431,10 @@ function runGame(exe, args){
 		} else {
 			color = 'green';
 		}
-		addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
-		return code;
+		addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
 		scrollLog();
+		return code;
 	});
-	scrollLog();
 }
 function runExternalSoftware(exe, args){
 	var color;
@@ -469,7 +468,7 @@ function runExternalSoftware(exe, args){
 			color = 'green';
 		}
 		if (exe !== 'cmd'){
-			addLog('log', 'External App - The application was finished with exit code <font class="' + color + '">' + code + '</font>.');
+			addLog('log', 'External App - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
 			return code;
 			scrollLog();
 		}
