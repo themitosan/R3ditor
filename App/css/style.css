@@ -2070,7 +2070,7 @@ input[type='range' i]{
 }
 .SETTINGS_ABA-6{
     top: 332px;
-    left: 602px;
+    left: 858px;
 }
 .SETTINGS_WINDOW-1{
     top: 78px;
@@ -2097,14 +2097,14 @@ input[type='range' i]{
     height: 146px;
 }
 .SETTINGS_WINDOW-5{
-    left: 14px;
     top: 354px;
+    left: 14px;
+    width: 809px;
     height: 52px;
-    width: 554px;
 }
 .SETTINGS_WINDOW-6{
     top: 354px;
-    left: 592px;
+    left: 848px;
     width: 364px;
     height: 38px;
 }
