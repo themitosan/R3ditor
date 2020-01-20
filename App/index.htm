@@ -180,6 +180,8 @@
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-5">
 						RE3 EXE Path: <font title="???" id="SETTINGS_lvl_path_RE3" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(11);"><br>
 						<div class="menu-separador"></div>
+						RE3_MERCE EXE Path: <font title="???" id="SETTINGS_lvl_path_merce" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(13);"><br>
+						<div class="menu-separador"></div>
 						Hex Editor Path: <font title="???" id="SETTINGS_lvl_path_HEX" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(12);">
 					</div>
 
@@ -1302,6 +1304,7 @@
 			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>
+			<input type="file" onchange="setLoadFile(13);" id="loadSETTINGS_REM" accept=".exe"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>

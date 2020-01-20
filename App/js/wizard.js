@@ -352,24 +352,29 @@ function WZ_loadFiles(file){
 	if (cfgs[1] !== undefined){
 		EXEC_BIO3_original = cfgs[1];
 		if (fs.existsSync(EXEC_BIO3_original) === true){
-			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 			document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
+			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 		} else {
 			EXEC_BIO3_original = '';
-			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not found!';
-			document.getElementById('SETTINGS_lvl_path_RE3').title = '';
 			addLog('error', 'ERROR - ResidentEvil3.exe was not found!');
+			document.getElementById('SETTINGS_lvl_path_RE3').title = '';
+			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not found!';
 		}
 	} else {
 		EXEC_BIO3_original = '';
-		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not defined!';
 		document.getElementById('SETTINGS_lvl_path_RE3').title = '';
+		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not defined!';
 	}
 	// RE3 Merce Path
 	if (cfgs[2] !== undefined){
 		EXEC_BIO3_MERCE = cfgs[2];
 		if (fs.existsSync(EXEC_BIO3_MERCE) === false){
+			EXEC_BIO3_MERCE = '';
 			addLog('error', 'ERROR - RE3_MERCE.exe was not found!');
+			document.getElementById('SETTINGS_lvl_path_merce').innerHTML = 'RE3_MERCE.exe was not found!';
+		} else {
+			document.getElementById('SETTINGS_lvl_path_merce').title = EXEC_BIO3_MERCE;
+			document.getElementById('SETTINGS_lvl_path_merce').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_MERCE, 50);
 		}
 	} else {
 		EXEC_BIO3_MERCE = '';
@@ -644,7 +649,6 @@ function SETTINGS_SET_PATH(mode, path){
 					EXEC_BIO3_original = path;
 					document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 					document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
-					addLog('log', 'INFO - New RE3 Path - this is the same executable!');
 				} else {
 					addLog('warn', 'WARN - Unable to set RE3 Path - this is the wrong executable!');
 				}
@@ -659,7 +663,21 @@ function SETTINGS_SET_PATH(mode, path){
 				document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = R3DITOR_reduceStrings(HEX_EDITOR, 50);
 				document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
 			} else {
-				addLog('warn', 'WARN - Unable to set Hex editor Path - this is the same executable!');
+				addLog('warn', 'WARN - Unable to set Hex editor Path - this is the same path!');
+			}
+		}
+		// Merce
+		if (mode === 2){
+			if (path !== EXEC_BIO3_original){
+				if (getFileName(path) === 're3_merce'){
+					EXEC_BIO3_MERCE = path;
+					document.getElementById('SETTINGS_lvl_path_merce').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_MERCE, 50);
+					document.getElementById('SETTINGS_lvl_path_merce').title = EXEC_BIO3_original;
+				} else {
+					addLog('warn', 'WARN - Unable to set RE3_MERCE Path - this is the wrong executable!');
+				}
+			} else {
+				addLog('warn', 'WARN - Unable to set RE3 Path - You must select RE3_MERCE.exe instead of ResidentEvil3.exe!');
 			}
 		}
 	}

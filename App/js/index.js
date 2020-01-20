@@ -826,6 +826,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 12){
 		$('#loadSETTINGS_HEX').trigger('click');
 	}
+	// SETTINGS Merce
+	if (loadForm === 13){
+		$('#loadSETTINGS_REM').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -970,6 +974,17 @@ function setLoadFile(input){
 		} else {
 			SETTINGS_SET_PATH(1, cFile.path);
 			document.getElementById('loadSETTINGS_HEX').value = '';
+		}
+	}
+	// SETTINGS - Merce Path
+	if (input === 13){
+		cFile = document.getElementById('loadSETTINGS_REM').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'SETTINGS - RE3_MERCE Path';
+		} else {
+			SETTINGS_SET_PATH(2, cFile.path);
+			document.getElementById('loadSETTINGS_REM').value = '';
 		}
 	}
 	if (BETA === true){
