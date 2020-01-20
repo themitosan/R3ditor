@@ -351,16 +351,26 @@ function WZ_loadFiles(file){
 	// RE3 Path
 	if (cfgs[1] !== undefined){
 		EXEC_BIO3_original = cfgs[1];
-		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
-		document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
+		if (fs.existsSync(EXEC_BIO3_original) === true){
+			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
+			document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
+		} else {
+			EXEC_BIO3_original = '';
+			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not found!';
+			document.getElementById('SETTINGS_lvl_path_RE3').title = '';
+			addLog('error', 'ERROR - ResidentEvil3.exe was not found!');
+		}
 	} else {
 		EXEC_BIO3_original = '';
-		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'Undefined';
+		document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not defined!';
 		document.getElementById('SETTINGS_lvl_path_RE3').title = '';
 	}
 	// RE3 Merce Path
 	if (cfgs[2] !== undefined){
 		EXEC_BIO3_MERCE = cfgs[2];
+		if (fs.existsSync(EXEC_BIO3_MERCE) === false){
+			addLog('error', 'ERROR - RE3_MERCE.exe was not found!');
+		}
 	} else {
 		EXEC_BIO3_MERCE = '';
 	}
@@ -386,10 +396,15 @@ function WZ_loadFiles(file){
 	if (cfgs[6] !== undefined){
 		HEX_EDITOR = cfgs[6];
 		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = R3DITOR_reduceStrings(HEX_EDITOR, 30);
-		document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
+		if (fs.existsSync(HEX_EDITOR) === true){
+			document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
+		} else {
+			document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not found!';
+			addLog('error', 'ERROR - Hex editor was not found!');
+		}
 	} else {
 		HEX_EDITOR = '';
-		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not found!';
+		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not defined!';
 		document.getElementById('SETTINGS_lvl_path_HEX').title = '';
 	}
 	// Last file open path
