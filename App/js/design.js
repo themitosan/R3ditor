@@ -8,7 +8,7 @@ var RDT_aba_atual;
 var SAVE_aba_atual;
 var main_currentMenu;
 var fileList_gameMode;
-var RDT_totalMenus = 9;
+var RDT_totalMenus = 10;
 var INI_totalMenus = 3;
 var SAVE_totalMenus = 4;
 var request_render_save;
@@ -2125,6 +2125,12 @@ function R3DITOR_RUNGAME(id){
 			$('#RDT-geral').css({'height': '516px'});
 			$('#RDT-msgs').css({'height': '516px'});
 			$('#RDT-ifm').css({'height': '516px'});
+
+			$('#RDT-SLD-hold').css({'height': '516px'});
+			$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+
+			console.log('Anim A');
+
 		} else {
 			if (EXEC_BIO3_original !== ''){
 				$('#btn_run_bio3').css({'display': 'inline'});
@@ -2164,6 +2170,12 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT-geral').css({'height': '472px'});
 				$('#RDT-msgs').css({'height': '472px'});
 				$('#RDT-ifm').css({'height': '472px'});
+
+				$('#RDT-SLD-hold').css({'height': '472px'});
+				$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+
+				console.log('Anim B');
+
 				if (main_currentMenu !== 6){
 					if (DESIGN_ENABLE_ANIMS === true){
 						$('#menu-topo-MOD').fadeIn({duration: 120, queue: false});

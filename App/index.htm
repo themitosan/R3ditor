@@ -587,7 +587,7 @@
 					<div class="RDT-holder" id="FILEGEN_contents">
 						<textarea placeholder="Insert your text here" class="FG_TEXT" id="FILEGEN_text" oninput="FG_RENDER();"></textarea>
 						<input type="button" value="Toggle Size (Size: Double)" id="BTN_saveImage" class="RDT-btn-apply color-white FG_BTN" onclick="FILEGEN_TOGGLE_RES();">
-						<!-- Canvas de texto -->
+						<!-- Text Canvas -->
 						<div class="FG_CANVAS" id="FILEGEN_CANVAS"></div>
 					</div>
 				</div>
@@ -604,9 +604,21 @@
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
+			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD (WIP)" onclick="RDT_showMenu(10);">
 			<!-- WIP -->
-			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD (WIP)" onclick="">
 			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="">
+
+			<!-- RDT SLD LAYERS -->
+			<div class="menu" id="RDT_menu-10" onclick="main_closeFileList();">
+				<div class="menu-general-content" id="RDT-SLD-hold">
+					<div id="RDT_BG_10" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">SLD Layers</font></center>
+					<div id="RDT_SLD_LAYER_holder" class="RDT-holder">						
+						<!-- SLD LAYERS Goes Here -->
+					</div>
+				</div>
+			</div>
+
 			<!-- RDT Cameras -->
 			<div class="menu" id="RDT_menu-9" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-camera-hold">

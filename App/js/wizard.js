@@ -1,7 +1,7 @@
 /*
 	R3ditor - wizard.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Eu já te falei hoje que você é demais?
+	Eu jÃ¡ te falei hoje que vocÃª Ã© demais?
 */
 var EXEC_rofs;
 var TEMP_APP_PATH;
@@ -502,6 +502,10 @@ function WZ_loadFiles(file){
 			$('#menu-utility-aba').css({'display': 'inline'});
 			$('#menu-utility-aba-2').css({'display': 'inline'});
 		}
+
+		$('#RDT-SLD-hold').css({'height': '472px'});
+		$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + ' (' + process.arch + ')';
 		// Init Memory JS
 		MEMORY_JS_initMemoryJs();
@@ -647,8 +651,8 @@ function SETTINGS_SET_PATH(mode, path){
 			if (path !== EXEC_BIO3_MERCE){
 				if (getFileName(path) === 'residentevil3'){
 					EXEC_BIO3_original = path;
-					document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 					document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
+					document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 				} else {
 					addLog('warn', 'WARN - Unable to set RE3 Path - this is the wrong executable!');
 				}
