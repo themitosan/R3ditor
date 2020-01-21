@@ -89,6 +89,9 @@ var RDT_MSG_startLength = 0;
 var RDT_lastFileOpened = '';
 var RDT_propModelsArray = [];
 var RDT_messageCodesArray = [];
+
+var RDT_SLD_LAYER_TILESET_BMP;
+
 /*
 	Functions
 */
@@ -132,6 +135,8 @@ function RDT_resetVars(){
 	RDT_totalItensGeral = undefined;
 	RDT_requestReloadWithFix0 = false;
 	RDT_requestReloadWithFix1 = false;
+
+	RDT_SLD_LAYER_TILESET_BMP = undefined;
 }
 function RDT_openFile(file){
 	RDT_loop = 0;
@@ -193,6 +198,9 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_camera_holder').innerHTML = '';
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
+
+	document.getElementById('SLD_Layer_BG_cam').innerHTML =  '';
+
 	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
 	log_separador();
 	//
@@ -203,12 +211,70 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_BG_display();
 	scrollLog();
 }
+
+/*
+	SLD Layers
+	This is a beta thing.
+
+	This will break!
+*/
+
+function RDT_getSLDPosition(){
+	var c = 0;
+	var askForHex = prompt('Hey - This STILL WIP!\n\nPlease insert the layer start below:');
+	if (askForHex !== '' && askForHex !== null && askForHex.length > 2){
+		var foundLayer = RDT_arquivoBruto.indexOf(solveHEX(askForHex));
+		if (foundLayer !== -1){
+			console.log('Position: ' + foundLayer);
+			var askForBlocks = prompt('How many blocks?');
+			var parseBlocks = parseInt(askForBlocks);
+			if (parseBlocks !== NaN || parseInt(parseBlocks) !== 0){
+				RDT_decryptSldLayer(foundLayer, parseBlocks);
+			} else {
+				addLog('warn', 'SLD - Unable to get blocks!');
+			}
+		} else {
+			addLog('warn', 'SLD - Unable to find pattern!');
+		}
+	} else {
+		addLog('warn', 'SLD - Process Canceled!');
+	}
+	scrollLog();
+}
+
+function RDT_decryptSldLayer(startPosition, pushes){
+	//
+	document.getElementById('SLD_Layer_X_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
+	document.getElementById('SLD_Layer_Y_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
+	document.getElementById('SLD_Layer_Offset_1').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][1]));
+	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
+	document.getElementById('SLD_Layer_BG_cam').value = '00';
+	RDT_applySLDBG();
+	//
+	$('#RDT-aba-menu-10').removeClass('none');
+	RDT_showMenu(10);
+}
+function RDT_applySLDBG(){
+	var camId = document.getElementById('SLD_Layer_BG_cam').value;
+	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
+	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
+	$('#SLD_LAYER_CANVAS').css({'background-image': 'url(' + BG_IMG + ')'});
+}
+function RDT_SLD_layer_setBMP(file){
+	if (file !== ''){
+		RDT_SLD_LAYER_TILESET_BMP = file;
+		addLog('log', 'SLD - Tileset File: ' + RDT_SLD_LAYER_TILESET_BMP);
+	}
+	scrollLog();
+}
+
 /*
 	Cameras
 	This will have a different way to retrive the infos!
 	
 	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
 */
+
 function RDT_getCameras(){
 	var c = 0;
 	if (RDT_arquivoBruto !== undefined){
@@ -254,6 +320,9 @@ function RDT_decompileCameras(id){
 	if (fs.existsSync(APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG') === true){
 		CAM_IMG = APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
 		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
+
+		$('#SLD_Layer_BG_cam').append('<option value="' + CAM_ID + '">Cam ' + CAM_ID + '</option>');
+
 	} else {
 		CAM_IMG = APP_PATH + '/App/Img/404.png';
 		titleFileName = '';

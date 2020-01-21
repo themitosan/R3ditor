@@ -1633,7 +1633,7 @@ var RANGES = {
 		O que isso faz? Ainda não sei!
 		O Tamanho das hitboxes em Hex é 14 (28 em String).
 
-		Desde já vos digo: Valeeeeu residentevilartist!
+		Desde já vos digo: Valeeeeu residentevilartist! :D
 	*/
 	'RDT_camHitBox-header': 		   [0, 4], // RE3 = 01 80
 	'RDT_camHitBox-0-prevCam': 		   [4, 6],
@@ -1700,5 +1700,15 @@ var RANGES = {
 	'RDT_door-1-doorHexOffset1': 	 [72, 74], 
 	'RDT_door-1-doorLockedFlag':  	 [74, 76], // OK
 	'RDT_door-1-doorKey': 	 		 [76, 78], // OK
-	'RDT_door-1-doorDisplayText': 	 [78, 80]  // Display Text - If you set 40, it will show (You want do go down the ladder?)
+	'RDT_door-1-doorDisplayText': 	 [78, 80], // Display Text - If you set 40, it will show (You want do go down the ladder?)
+	/*
+		SLD Layers
+		The beginning of a new era!
+	*/
+	'SLD_LAYER_header': 	    [0, 4],
+	'SLD_LAYER_crp_offset_1':   [4, 8], // Alterar esses valores faz alguns blocos desaparecer
+	'SLD_LAYER_crp_offset_2':  [8, 12], // Alterar esses valores faz alguns blocos desaparecer
+	'SLD_LAYER_offset_0': 	  [12, 16], // Normalmente é 00 78
+	'SLD_LAYER_X_POS': 		  [16, 20],
+	'SLD_LAYER_Y_POS': 		  [20, 24]
 }

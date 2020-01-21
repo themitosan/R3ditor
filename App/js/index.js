@@ -141,14 +141,18 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 */
 function addLog(type, texto){
 	var classe = undefined;
-	if (type.toLowerCase() === 'log' || type === undefined || type === null){
+	if (type.toLowerCase !== 'log' && type.toLowerCase !== 'warn' && type.toLowerCase !== 'error'){
 		classe = 'log-text';
-	}
-	if (type.toLowerCase() === 'warn'){
-		classe = 'log-warn';
-	}
-	if (type.toLowerCase() === 'error'){
-		classe = 'log-error';
+	} else {
+		if (type.toLowerCase() === 'log' || type === undefined || type === null){
+			classe = 'log-text';
+		}
+		if (type.toLowerCase() === 'warn'){
+			classe = 'log-warn';
+		}
+		if (type.toLowerCase() === 'error'){
+			classe = 'log-error';
+		}
 	}
 	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
 	$('#log-programa').append(logTemplate);
@@ -830,6 +834,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 13){
 		$('#loadSETTINGS_REM').trigger('click');
 	}
+	// Load BMP Tileset
+	if (loadForm === 14){
+		$('#loadTilesetBMP').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -985,6 +993,17 @@ function setLoadFile(input){
 		} else {
 			SETTINGS_SET_PATH(2, cFile.path);
 			document.getElementById('loadSETTINGS_REM').value = '';
+		}
+	}
+	// BMP Tileset
+	if (input === 14){
+		cFile = document.getElementById('loadTilesetBMP').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load BMP Tileset';
+		} else {
+			RDT_SLD_layer_setBMP(cFile.path);
+			document.getElementById('loadTilesetBMP').value = '';
 		}
 	}
 	if (BETA === true){

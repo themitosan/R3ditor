@@ -604,7 +604,7 @@
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
-			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD (WIP)" onclick="RDT_showMenu(10);">
+			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD Layer" onclick="RDT_showMenu(10);">
 			<!-- WIP -->
 			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="">
 
@@ -612,9 +612,22 @@
 			<div class="menu" id="RDT_menu-10" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-SLD-hold">
 					<div id="RDT_BG_10" class="RDT_BG_IMAGE"></div>
-					<center><font class="titulo">SLD Layers</font></center>
-					<div id="RDT_SLD_LAYER_holder" class="RDT-holder">						
-						<!-- SLD LAYERS Goes Here -->
+					<center><font class="titulo">SLD Layer</font></center>
+					<div id="RDT_SLD_LAYER_holder" class="RDT-holder">
+						<div class="RDT_SLD_LAYER_otherInfo">
+							Background Cam: 
+							<select id="SLD_Layer_BG_cam" oninput="RDT_applySLDBG();" class="item-select-mod no-transform-text espaco-right">
+								<!-- Cam Goes Here -->
+							</select>
+							Tileset: <input type="button" class="botao-menu" value="Load BMP" onclick="triggerLoad(14);">
+							<div class="menu-separador"></div>
+							Layer X Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_X_Position">SLD Offset 1: <input type="text" class="item-select-mod RDT_camEditXYZOrigin" id="SLD_Layer_Offset_1"><br>
+							Layer Y Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Y_Position">SLD Offset 2: <input type="text" class="item-select-mod RDT_camEditXYZOrigin" id="SLD_Layer_Offset_2"><br>
+						</div>
+						<!-- Canvas -->
+						<div class="RDT_SLD_LAYER_CANVAS" id="SLD_LAYER_CANVAS">
+							<!-- The Magic Happens Here -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -1317,6 +1330,9 @@
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(13);" id="loadSETTINGS_REM" accept=".exe"/>
+
+			<input type="file" onchange="setLoadFile(14);" id="loadTilesetBMP" accept=".bmp"/>
+
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>

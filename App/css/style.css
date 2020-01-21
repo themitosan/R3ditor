@@ -541,6 +541,9 @@ input[type='range' i]{
     text-shadow: 0px 0px 6px #000;
     background-image: linear-gradient(to bottom, #9e9e9e, #626262);
 }
+.espaco-right{
+    margin-right: 6px;
+}
 .RDT-item-select{
     left: 740px;
     position: sticky;
@@ -2113,4 +2116,26 @@ input[type='range' i]{
     left: 40px;
     width: 300px;
     position: absolute;
+}
+/*
+    SLD Layer
+*/
+.RDT_SLD_LAYER_otherInfo{
+    color: #fff;
+    width: 700px;
+    padding: 6px;
+    border-radius: 6px;
+    background-image: linear-gradient(to bottom, #768593, #3a4753);
+}
+.RDT_SLD_LAYER_CANVAS{
+    top: 52px;
+    color: #fff;
+    left: 740px;
+    width: 573px;
+    height: 430px;
+    position: absolute;
+    background-color: #000;
+    background-size: contain;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 10px #85859d;
 }
