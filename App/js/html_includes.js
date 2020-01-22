@@ -56,4 +56,4 @@ var RDT_EDIT_ENEMYNP_EMDPOS = '<option value="00">(00) Normal</option><option va
 // Edit Message Code
 var RDT_EDIT_MESSAGECODE_SELECT = '<option value="ffff">(FFFF) Normal</option><option value="0000">(0000) Can move</option><option value="0101">(0101) Don\'t Freeze + Can\'t move</option><option value="1020">(1020) Can move and message dissapears after some seconds</option><option value="2010">(2010) Can move and message dissapears after some seconds</option>';
 // SLD
-var RDT_SEEK_SLD_BTN = 'Yes <input type="button" value="Seek Layer" id="RDT_btn_findLayerSLD" class="botao-menu none" onclick="RDT_getSLDPosition();">';
+var RDT_SEEK_SLD_BTN = 'Yes <input type="button" value="Seek Layer" id="RDT_btn_findLayerSLD" class="botao-menu" onclick="RDT_getSLDPosition();">';

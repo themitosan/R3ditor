@@ -1704,11 +1704,24 @@ var RANGES = {
 	/*
 		SLD Layers
 		The beginning of a new era!
+
+		Header
 	*/
 	'SLD_LAYER_header': 	    [0, 4],
 	'SLD_LAYER_crp_offset_1':   [4, 8], // Alterar esses valores faz alguns blocos desaparecer
 	'SLD_LAYER_crp_offset_2':  [8, 12], // Alterar esses valores faz alguns blocos desaparecer
 	'SLD_LAYER_offset_0': 	  [12, 16], // Normalmente é 00 78
 	'SLD_LAYER_X_POS': 		  [16, 20],
-	'SLD_LAYER_Y_POS': 		  [20, 24]
+	'SLD_LAYER_Y_POS': 		  [20, 24],
+	// Blocks
+	'SLD_BLK_crop_1': 			[0, 2],
+	'SLD_BLK_crop_2': 			[2, 4],
+	'SLD_BLK_pos_X': 			[4, 6],
+	'SLD_BLK_pos_Y': 			[6, 8],
+	'SLD_BLK_offset_1': 	   [8, 10],
+	'SLD_BLK_displayMode': 	  [10, 12],
+	'SLD_BLK_size': 		  [12, 14],
+	'SLD_BLK_offset_2': 	  [14, 16],
+	// Extended
+	'SLD_BLK_extended': 	  [16, 24]
 }

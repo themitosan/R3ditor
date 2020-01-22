@@ -620,6 +620,8 @@
 								<!-- Cam Goes Here -->
 							</select>
 							Tileset: <input type="button" class="botao-menu" value="Load BMP" onclick="triggerLoad(14);">
+							Pushes: <input type="number" min="1" maxlength="4" max="9999" value="1" id="RDT_SLD_MISC_PUSH" class="item-select-mod RDT_camEditXYZOrigin espaco-right">
+							<input type="button" value="Seek!" onclick="RDT_decryptSLDLayer(RDT_SLD_FOUNDPOS);" class="botao-menu">
 							<div class="menu-separador"></div>
 							Layer X Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_X_Position">SLD Offset 1: <input type="text" class="item-select-mod RDT_camEditXYZOrigin" id="SLD_Layer_Offset_1"><br>
 							Layer Y Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Y_Position">SLD Offset 2: <input type="text" class="item-select-mod RDT_camEditXYZOrigin" id="SLD_Layer_Offset_2"><br>
@@ -627,6 +629,10 @@
 						<!-- Canvas -->
 						<div class="RDT_SLD_LAYER_CANVAS" id="SLD_LAYER_CANVAS">
 							<!-- The Magic Happens Here -->
+						</div>
+						<!-- Blocks -->
+						<div id="RDT_SLD_LAYER_BLOCK_LIST" class="RDT_SLD_LAYER_BLOCK_HOLDER">
+							<!-- Blocks goes here -->
 						</div>
 					</div>
 				</div>

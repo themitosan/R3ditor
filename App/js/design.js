@@ -2127,7 +2127,8 @@ function R3DITOR_RUNGAME(id){
 			$('#RDT-ifm').css({'height': '516px'});
 
 			$('#RDT-SLD-hold').css({'height': '516px'});
-			$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+			$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
+			$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '322px'});
 
 			console.log('Anim A');
 
@@ -2173,6 +2174,7 @@ function R3DITOR_RUNGAME(id){
 
 				$('#RDT-SLD-hold').css({'height': '472px'});
 				$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '280px'});
 
 				console.log('Anim B');
 

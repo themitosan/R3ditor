@@ -90,6 +90,7 @@ var RDT_lastFileOpened = '';
 var RDT_propModelsArray = [];
 var RDT_messageCodesArray = [];
 
+var RDT_SLD_FOUNDPOS;
 var RDT_SLD_LAYER_TILESET_BMP;
 
 /*
@@ -136,7 +137,9 @@ function RDT_resetVars(){
 	RDT_requestReloadWithFix0 = false;
 	RDT_requestReloadWithFix1 = false;
 
+	RDT_SLD_FOUNDPOS = undefined;
 	RDT_SLD_LAYER_TILESET_BMP = undefined;
+
 }
 function RDT_openFile(file){
 	RDT_loop = 0;
@@ -200,6 +203,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
 	document.getElementById('SLD_Layer_BG_cam').innerHTML =  '';
+	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 
 	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
 	log_separador();
@@ -221,18 +225,12 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 
 function RDT_getSLDPosition(){
 	var c = 0;
-	var askForHex = prompt('Hey - This STILL WIP!\n\nPlease insert the layer start below:');
+	var askForHex = prompt('Hey - THIS STILL WIP!\n\nPlease insert the layer header below:\nYou can find it by searching "FF FF FF FF" twice!');
 	if (askForHex !== '' && askForHex !== null && askForHex.length > 2){
 		var foundLayer = RDT_arquivoBruto.indexOf(solveHEX(askForHex));
 		if (foundLayer !== -1){
-			console.log('Position: ' + foundLayer);
-			var askForBlocks = prompt('How many blocks?');
-			var parseBlocks = parseInt(askForBlocks);
-			if (parseBlocks !== NaN || parseInt(parseBlocks) !== 0){
-				RDT_decryptSldLayer(foundLayer, parseBlocks);
-			} else {
-				addLog('warn', 'SLD - Unable to get blocks!');
-			}
+			RDT_SLD_FOUNDPOS = foundLayer;
+			RDT_decryptSLDLayer(foundLayer);
 		} else {
 			addLog('warn', 'SLD - Unable to find pattern!');
 		}
@@ -242,21 +240,54 @@ function RDT_getSLDPosition(){
 	scrollLog();
 }
 
-function RDT_decryptSldLayer(startPosition, pushes){
+function RDT_decryptSLDLayer(startPosition){
+	var c = 0;
+	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
+	var pushes = parseInt(document.getElementById('RDT_SLD_MISC_PUSH').value);
 	//
 	document.getElementById('SLD_Layer_X_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
 	document.getElementById('SLD_Layer_Y_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
 	document.getElementById('SLD_Layer_Offset_1').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][1]));
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
-	document.getElementById('SLD_Layer_BG_cam').value = '00';
-	RDT_applySLDBG();
+	// Routine
+	var currentPos = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
+	while (c < parseInt(pushes)){
+		var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
+		
+		var LAYER_crop_1 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_1'][0], RANGES['SLD_BLK_crop_1'][1]);
+		var LAYER_crop_2 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_2'][0], RANGES['SLD_BLK_crop_2'][1]);
+		var LAYER_pos_X			  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0], RANGES['SLD_BLK_pos_X'][1]);
+		var LAYER_pos_Y			  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0], RANGES['SLD_BLK_pos_Y'][1]);
+		var LAYER_displayMode     = sliceBlock.slice(RANGES['SLD_BLK_displayMode'][0], RANGES['SLD_BLK_displayMode'][1]);
+		var LAYER_isExtendedBlock = sliceBlock.slice(RANGES['SLD_BLK_size'][0], RANGES['SLD_BLK_size'][1]); // Size
+		var LAYER_extendedBlock   = 'N/A';
+
+		if (LAYER_isExtendedBlock === '00'){
+			sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
+			LAYER_extendedBlock = sliceBlock.slice(RANGES['SLD_BLK_extended'][0], RANGES['SLD_BLK_extended'][1]);
+			currentPos = parseInt(currentPos + 24);
+		} else {
+			currentPos = parseInt(currentPos + 16);
+		}
+
+		var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
+			'Crop X: <font class="user-can-select">' + LAYER_crop_1.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_crop_2.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
+			'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
+			'Display Mode: ' + LAYER_displayMode + '<br>Size Crop: <font class="user-can-select">' + LAYER_isExtendedBlock + '</font></div><div class="SLD_BLOCK_MENU_OTHER">Other Values: <font class="user-can-select">' + LAYER_extendedBlock.toUpperCase() + 
+			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + sliceBlock.toUpperCase() + '</font></div>';
+
+		$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
+		c++;
+	}
 	//
+	RDT_applySLDBG();
+	document.getElementById('SLD_Layer_BG_cam').value = '00';
 	$('#RDT-aba-menu-10').removeClass('none');
 	RDT_showMenu(10);
 }
 function RDT_applySLDBG(){
-	var camId = document.getElementById('SLD_Layer_BG_cam').value;
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
+	var camId = document.getElementById('SLD_Layer_BG_cam').value;
 	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
 	$('#SLD_LAYER_CANVAS').css({'background-image': 'url(' + BG_IMG + ')'});
 }

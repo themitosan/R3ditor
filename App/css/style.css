@@ -939,6 +939,9 @@ input[type='range' i]{
 .RDT-camera-bg{
     background-image: linear-gradient(to bottom, #5a6282, #323544);
 }
+.RDT-SLD-BLOCK-bg{
+    background-image: linear-gradient(to bottom, #4b7571, #2c4245);
+}
 .txtarea-hex-fix{
     height: 128px;
     margin-top: 8px;
@@ -2138,4 +2141,23 @@ input[type='range' i]{
     background-size: contain;
     background-repeat: no-repeat;
     box-shadow: 0 0 10px #85859d;
+}
+.RDT_SLD_LAYER_BLOCK_HOLDER{
+    padding: 4px;
+    width: 704px;
+    height: 280px;
+    overflow: auto;
+    margin-top: 6px;
+}
+.SLD_BLOCK_MENU_POSITION{
+    margin-left: 82px;
+    margin-top: -36px;
+}
+.SLD_BLOCK_MENU_SIZEDISPLAYMODE{
+    margin-left: 184px;
+    margin-top: -36px;
+}
+.SLD_BLOCK_MENU_OTHER{
+    margin-left: 316px;
+    margin-top: -18px;
 }
