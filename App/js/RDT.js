@@ -249,17 +249,18 @@ function RDT_decryptSLDLayer(startPosition){
 	document.getElementById('SLD_Layer_Y_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
 	document.getElementById('SLD_Layer_Offset_1').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_1'][1]));
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
+
 	// Routine
 	var currentPos = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
 	while (c < parseInt(pushes)){
 		var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
-		
-		var LAYER_crop_1 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_1'][0], RANGES['SLD_BLK_crop_1'][1]);
-		var LAYER_crop_2 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_2'][0], RANGES['SLD_BLK_crop_2'][1]);
-		var LAYER_pos_X			  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0], RANGES['SLD_BLK_pos_X'][1]);
-		var LAYER_pos_Y			  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0], RANGES['SLD_BLK_pos_Y'][1]);
+
+		var LAYER_crop_1 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_1'][0], 	   RANGES['SLD_BLK_crop_1'][1]);
+		var LAYER_crop_2 		  = sliceBlock.slice(RANGES['SLD_BLK_crop_2'][0], 	   RANGES['SLD_BLK_crop_2'][1]);
+		var LAYER_pos_X			  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0],  	   RANGES['SLD_BLK_pos_X'][1]);
+		var LAYER_pos_Y			  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0],  	   RANGES['SLD_BLK_pos_Y'][1]);
 		var LAYER_displayMode     = sliceBlock.slice(RANGES['SLD_BLK_displayMode'][0], RANGES['SLD_BLK_displayMode'][1]);
-		var LAYER_isExtendedBlock = sliceBlock.slice(RANGES['SLD_BLK_size'][0], RANGES['SLD_BLK_size'][1]); // Size
+		var LAYER_isExtendedBlock = sliceBlock.slice(RANGES['SLD_BLK_size'][0], 	   RANGES['SLD_BLK_size'][1]); // Size
 		var LAYER_extendedBlock   = 'N/A';
 
 		if (LAYER_isExtendedBlock === '00'){
@@ -273,7 +274,7 @@ function RDT_decryptSLDLayer(startPosition){
 		var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
 			'Crop X: <font class="user-can-select">' + LAYER_crop_1.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_crop_2.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
 			'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
-			'Display Mode: ' + LAYER_displayMode + '<br>Size Crop: <font class="user-can-select">' + LAYER_isExtendedBlock + '</font></div><div class="SLD_BLOCK_MENU_OTHER">Other Values: <font class="user-can-select">' + LAYER_extendedBlock.toUpperCase() + 
+			'Display Mode: ' + LAYER_displayMode + '<br>Size Crop: <font class="user-can-select">' + LAYER_isExtendedBlock.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_OTHER">Other Values: <font class="user-can-select">' + LAYER_extendedBlock.toUpperCase() + 
 			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + sliceBlock.toUpperCase() + '</font></div>';
 
 		$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
