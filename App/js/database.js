@@ -1707,21 +1707,22 @@ var RANGES = {
 
 		Header
 	*/
-	'SLD_LAYER_header': 	    [0, 4],
-	'SLD_LAYER_crp_offset_1':   [4, 8], // Alterar esses valores faz alguns blocos desaparecer
-	'SLD_LAYER_crp_offset_2':  [8, 12], // Alterar esses valores faz alguns blocos desaparecer
-	'SLD_LAYER_offset_0': 	  [12, 16], // Normalmente é 00 78
-	'SLD_LAYER_X_POS': 		  [16, 20],
-	'SLD_LAYER_Y_POS': 		  [20, 24],
+	'SLD_LAYER_header': 	     [0, 4],
+	'SLD_LAYER_count_offsets':   [4, 8], // Offsets (Block Ammount)
+	'SLD_LAYER_crp_offset_2':   [8, 12], // Alterar esses valores faz alguns blocos desaparecer
+	'SLD_LAYER_offset_0': 	   [12, 16], // Normalmente é 00 78
+	'SLD_LAYER_X_POS': 		   [16, 20],
+	'SLD_LAYER_Y_POS': 		   [20, 24],
 	// Blocks
-	'SLD_BLK_crop_1': 			[0, 2],
-	'SLD_BLK_crop_2': 			[2, 4],
-	'SLD_BLK_pos_X': 			[4, 6],
-	'SLD_BLK_pos_Y': 			[6, 8],
-	'SLD_BLK_offset_1': 	   [8, 10],
-	'SLD_BLK_displayMode': 	  [10, 12],
-	'SLD_BLK_size': 		  [12, 14],
-	'SLD_BLK_offset_2': 	  [14, 16],
+	'SLD_BLK_source_X': 		 [0, 2], // Source X
+	'SLD_BLK_source_Y': 		 [2, 4], // Source Y
+	'SLD_BLK_pos_X': 		 	 [4, 6], // Pos. X
+	'SLD_BLK_pos_Y': 		 	 [6, 8], // Pos. Y
+	'SLD_BLK_offset_1': 	    [8, 10],
+	'SLD_BLK_layerPosition':   [10, 12], // Layer pos. is like Photoshop
+	'SLD_BLK_model': 		   [12, 14], // Layer Type: 08 = Square, 00 = Rect
+	'SLD_BLK_offset_2': 	   [14, 16], // Modity these values can make the image go nuts!
 	// Extended
-	'SLD_BLK_extended': 	  [16, 24]
+	'SLD_BLK_width': 	   	   [16, 20], // Rect Width 
+	'SLD_BLK_height': 		   [20, 24]  // Rect Height
 }
