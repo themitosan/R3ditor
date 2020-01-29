@@ -1708,8 +1708,8 @@ var RANGES = {
 		Header
 	*/
 	'SLD_LAYER_header': 	     [0, 4],
-	'SLD_LAYER_count_offsets':   [4, 8], // Offsets (Block Ammount)
-	'SLD_LAYER_crp_offset_2':   [8, 12], // Alterar esses valores faz alguns blocos desaparecer
+	'SLD_LAYER_crp_offset_2':    [4, 8], // Alterar esses valores faz alguns blocos desaparecer
+	'SLD_LAYER_count_offsets':  [8, 12], // Offsets (Block Ammount)
 	'SLD_LAYER_offset_0': 	   [12, 16], // Normalmente é 00 78
 	'SLD_LAYER_X_POS': 		   [16, 20],
 	'SLD_LAYER_Y_POS': 		   [20, 24],
