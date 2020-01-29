@@ -174,6 +174,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_MAPFILE = undefined;
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_propModelsArray = [];
+	RDT_SLD_totalMasksAva = 0;
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
 	RDT_SLD_MASKS_POSITION = [];
