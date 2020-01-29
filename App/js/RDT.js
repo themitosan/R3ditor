@@ -134,15 +134,15 @@ function RDT_resetVars(){
 	RDT_arquivoBruto = undefined;
 	RDT_messasgesRaw = undefined;
 	RDT_itemIndexRAW = undefined;
-	startFirstMessage = undefined;
 	RDT_totalMessages = undefined;
+	startFirstMessage = undefined;
+	RDT_SLD_SEEK_SEMAPHORE = true;
 	RDT_totalItensGeral = undefined;
 	RDT_requestReloadWithFix0 = false;
 	RDT_requestReloadWithFix1 = false;
 
-	RDT_SLD_FOUNDPOS = undefined;
+	RDT_SLD_FOUNDPOS = 0;
 	RDT_SLD_LAYER_TILESET_BMP = undefined;
-
 }
 function RDT_openFile(file){
 	RDT_loop = 0;
@@ -174,6 +174,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_propModelsArray = [];
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
+	RDT_SLD_MASKS_POSITION = [];
 	ORIGINAL_FILENAME = rdtFile.replace(new RegExp('/', 'gi'), '\\');
 	RDT_generateMapFile = false;
 	startFirstMessage = undefined;
@@ -205,8 +206,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
-	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
-
 	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
 	log_separador();
 	//
@@ -237,18 +236,19 @@ function RDT_getSLDPosition(){
 		if (RDT_SLD_SEEK_SEMAPHORE === true){
 			var maskAvaliable = RDT_arquivoBruto.slice(RDT_SLD_FOUNDPOS, parseInt(RDT_SLD_FOUNDPOS + 8));
 			console.log('Seek on ' + RDT_SLD_FOUNDPOS + ' - ' + maskAvaliable);
+			var displayValue = c.toString(16).toUpperCase();
+			if (displayValue.length < 2){
+				displayValue = '0' + displayValue;
+			}
 			if (maskAvaliable !== 'ffffffff'){
 				RDT_SLD_SEEK_SEMAPHORE = false;
-				var displayValue = c.toString(16).toUpperCase();
-				if (displayValue.length < 2){
-					displayValue = '0' + displayValue;
-				}
 				$('#RDT_SLD_SELECT_LAYER').append('<option value="' + displayValue + '">Mask ' + displayValue + '</option>');
 				RDT_SLD_MASKS_POSITION.push(RDT_SLD_FOUNDPOS);
 				RDT_decryptSldMask(RDT_SLD_FOUNDPOS);
 			} else {
 				$('#RDT_SLD_SELECT_LAYER').append('<option disabled>Mask ' + displayValue + ' - No mask detected!</option>');
 				RDT_SLD_FOUNDPOS = parseInt(RDT_SLD_FOUNDPOS + 8);
+				RDT_SLD_MASKS_POSITION.push(null);
 			}
 			c++;
 		} else {
@@ -311,11 +311,16 @@ function RDT_decryptSldMask(startPosition){
 function RDT_SLD_selectMask(){
 	var selectMask = document.getElementById('RDT_SLD_SELECT_LAYER').value;
 	var maskPos = RDT_SLD_MASKS_POSITION[parseInt(selectMask)];
-	RDT_decryptSldMask(maskPos);
-	//
-	document.getElementById('RDT_SLD_ACTIVE_CAM_TITLE').innerHTML = selectMask;
-	RDT_applySLDBG();
+	console.log(maskPos);
+	if (maskPos !== null){
+		RDT_decryptSldMask(maskPos);
+		document.getElementById('RDT_SLD_ACTIVE_CAM_TITLE').innerHTML = selectMask;
+		RDT_applySLDBG();
+	} else {
+		addLog('warn', 'ERROR - 404: Mask not found!');
+	}
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').scrollTop = 0;
+	scrollLog();
 }
 
 function RDT_applySLDBG(){
