@@ -436,7 +436,10 @@
 						HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
 						<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
 						<font class="font-chkbox-fix" onclick="RE3_LIVE_cheatInfiniteLifeTrigger();">- Enable Infinite HP</font><br>
-						<center><input type="button" class="botao-menu" value="Add 30K Health (God Mode)" onclick="RE3_LIVE_ADDGODHP();"></center>
+						<center>
+							<input type="button" class="botao-menu" title="Click here to gain 30000 HP!" value="Add 30K Health" onclick="RE3_LIVE_ADDGODHP();">
+							<input type="button" class="botao-menu" title="Click here to go to main title screen." value="Goto Title" onclick="RE3_LIVE_gotoTitleScreen();">
+						</center>
 						<div class="menu-separador"></div>
 						<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
 						<div class="menu-separador"></div>
@@ -615,11 +618,16 @@
 					<center><font class="titulo">Cam <font id="RDT_SLD_ACTIVE_CAM_TITLE">???</font> Mask</font></center>
 					<div id="RDT_SLD_LAYER_holder" class="RDT-holder">
 						<div class="RDT_SLD_LAYER_otherInfo">
+							Select Camera: 
+							<select id="RDT_SLD_SELECT_CAM" oninput="RDT_applySLDBG();" class="item-select-mod no-transform-text espaco-right">
+								<!-- Cameras Goes Here -->
+							</select>
 							Select Mask: 
 							<select id="RDT_SLD_SELECT_LAYER" oninput="RDT_SLD_selectMask();" class="item-select-mod no-transform-text espaco-right">
 								<!-- Masks Goes Here -->
 							</select>
-							Tileset: <input type="button" class="botao-menu" value="Load BMP" onclick="triggerLoad(14);">
+							<div class="menu-separador"></div>
+							Tileset: <input type="button" class="botao-menu" value="Load BMP" onclick="triggerLoad(14);"> - File: <font id="RDT_SLD_MASK_TILESET_FILENAME" class="user-can-select">No file selected</font>
 							<div class="menu-separador"></div>
 							Mask X Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_X_Position">Header: <font class="user-can-select" id="RDT_SLD_MASK_HEADER">???</font><br>
 							Mask Y Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Y_Position">

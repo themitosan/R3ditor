@@ -95,6 +95,7 @@ var RDT_SLD_LAYER_TILESET_BMP;
 var RDT_SLD_totalMasksAva = 0;
 var RDT_SLD_MASKS_POSITION = [];
 var RDT_SLD_SEEK_SEMAPHORE = true;
+var RDT_SLD_SEEK_MULTIMASK = false;
 
 /*
 	Functions
@@ -207,7 +208,9 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_enemy_holder').innerHTML = '';
 	document.getElementById('RDT_camera_holder').innerHTML = '';
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
+	document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
+
 
 	addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 	log_separador();
@@ -264,57 +267,59 @@ function RDT_getSLDPosition(){
 
 function RDT_decryptSldMask(startPosition){
 	var c = 0;
+	var t_m = 0;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
 	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (Hex: ' + pushes.toString(16).toUpperCase() + ')';
 	//
-	var MASK_X_POS = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
-	var MASK_Y_POS = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
+	var MASKS_TOTAL = parseInt(RDT_arquivoBruto.slice(startPosition, parseInt(startPosition + RANGES['SLD_LAYER_header'][1])).slice(0, 2), 16); // Nº of total masks on camera
+	var MASK_X_POS  = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
+	var MASK_Y_POS  = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
+	var currentPos  = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
+	var MASK_HEADER = RDT_arquivoBruto.slice(startPosition, currentPos).toUpperCase();
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
+	document.getElementById('RDT_SLD_MASK_HEADER').innerHTML = MASK_HEADER;
 	document.getElementById('SLD_Layer_X_Position').value = MASK_X_POS;
 	document.getElementById('SLD_Layer_Y_Position').value = MASK_Y_POS;
-	
+	RDT_SLD_SEEK_MULTIMASK = false;
 	// Routine
-	var currentPos = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
-	var MASK_HEADER = RDT_arquivoBruto.slice(startPosition, currentPos).toUpperCase();
-	document.getElementById('RDT_SLD_MASK_HEADER').innerHTML = MASK_HEADER;
-
 	while (c < parseInt(pushes)){
-		var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
+		if (RDT_SLD_SEEK_MULTIMASK === false){
+			var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
+			var LAYER_source_X 	  = sliceBlock.slice(RANGES['SLD_BLK_source_X'][0], 	 RANGES['SLD_BLK_source_X'][1]); 	  // Source X
+			var LAYER_source_Y 	  = sliceBlock.slice(RANGES['SLD_BLK_source_Y'][0], 	 RANGES['SLD_BLK_source_Y'][1]); 	  // Source Y
+			var LAYER_pos_X		  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0],  	     RANGES['SLD_BLK_pos_X'][1]); 		  // Dest. X
+			var LAYER_pos_Y		  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0],  	     RANGES['SLD_BLK_pos_Y'][1]); 		  // Dest. Y
+			var LAYER_offset_1    = sliceBlock.slice(RANGES['SLD_BLK_offset_1'][0],		 RANGES['SLD_BLK_offset_1'][1]); 
+			var LAYER_layPosition = sliceBlock.slice(RANGES['SLD_BLK_layerPosition'][0], RANGES['SLD_BLK_layerPosition'][1]); // Layer pos. is like Photoshop
+			var LAYER_crop_type   = sliceBlock.slice(RANGES['SLD_BLK_model'][0], 	     RANGES['SLD_BLK_model'][1]); 		  // Size
+			var LAYER_offset_2    = sliceBlock.slice(RANGES['SLD_BLK_offset_2'][0],		 RANGES['SLD_BLK_offset_2'][1]); 
+			var LAYER_width   	  = 'N/A'; 																					  // Rect X
+			var LAYER_height   	  = 'N/A'; 																					  // Rect Y
 
-		var LAYER_source_X 	  = sliceBlock.slice(RANGES['SLD_BLK_source_X'][0], 	 RANGES['SLD_BLK_source_X'][1]); 	  // Source X
-		var LAYER_source_Y 	  = sliceBlock.slice(RANGES['SLD_BLK_source_Y'][0], 	 RANGES['SLD_BLK_source_Y'][1]); 	  // Source Y
-		var LAYER_pos_X		  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0],  	     RANGES['SLD_BLK_pos_X'][1]); 		  // Dest. X
-		var LAYER_pos_Y		  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0],  	     RANGES['SLD_BLK_pos_Y'][1]); 		  // Dest. Y
-		var LAYER_offset_1    = sliceBlock.slice(RANGES['SLD_BLK_offset_1'][0],		 RANGES['SLD_BLK_offset_1'][1]); 
-		var LAYER_layPosition = sliceBlock.slice(RANGES['SLD_BLK_layerPosition'][0], RANGES['SLD_BLK_layerPosition'][1]); // Layer pos. is like Photoshop
-		var LAYER_crop_type   = sliceBlock.slice(RANGES['SLD_BLK_model'][0], 	     RANGES['SLD_BLK_model'][1]); 		  // Size
-		var LAYER_offset_2    = sliceBlock.slice(RANGES['SLD_BLK_offset_2'][0],		 RANGES['SLD_BLK_offset_2'][1]); 
-		var LAYER_width   	  = 'N/A'; 																					  // Rect X
-		var LAYER_height   	  = 'N/A'; 																					  // Rect Y
+			if (LAYER_crop_type === '00'){
+				sliceBlock   = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
+				//
+				LAYER_width  = sliceBlock.slice(RANGES['SLD_BLK_width'][0], RANGES['SLD_BLK_width'][1]);
+				LAYER_height = sliceBlock.slice(RANGES['SLD_BLK_height'][0], RANGES['SLD_BLK_height'][1]);
+				//
+				currentPos = parseInt(currentPos + 24);
+			} else {
+				currentPos = parseInt(currentPos + 16);
+			}
+			var L_replace_w = LAYER_width.replace('N/A', '');
+			var L_replace_h = LAYER_height.replace('N/A', '');
 
-		if (LAYER_crop_type === '00'){
-			sliceBlock   = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
-			//
-			LAYER_width  = sliceBlock.slice(RANGES['SLD_BLK_width'][0], RANGES['SLD_BLK_width'][1]);
-			LAYER_height = sliceBlock.slice(RANGES['SLD_BLK_height'][0], RANGES['SLD_BLK_height'][1]);
-			//
-			currentPos = parseInt(currentPos + 24);
-		} else {
-			currentPos = parseInt(currentPos + 16);
+			var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
+				'Crop X: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_source_Y.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
+				'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
+				'Block Layer: <font class="user-can-select">' + LAYER_layPosition.toUpperCase() + '</font><br>Block Size: <font class="user-can-select">' + LAYER_crop_type.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_OTHER">' + 
+				'Rect Width: <font class="user-can-select">' + LAYER_width.toUpperCase() + '</font><br>Rect Height: <font class="user-can-select">' + LAYER_height.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + 
+				'<font class="user-can-select">' + LAYER_source_X.toUpperCase() + ' ' + LAYER_source_Y.toUpperCase() + ' ' + LAYER_pos_X.toUpperCase() + ' ' + LAYER_pos_Y.toUpperCase() + ' ' + LAYER_offset_1.toUpperCase() + ' ' +
+				LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
+
+			$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
 		}
-		var L_replace_w = LAYER_width.replace('N/A', '');
-		var L_replace_h = LAYER_height.replace('N/A', '');
-
-		var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
-			'Crop X: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_source_Y.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
-			'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
-			'Block Layer: <font class="user-can-select">' + LAYER_layPosition.toUpperCase() + '</font><br>Block Size: <font class="user-can-select">' + LAYER_crop_type.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_OTHER">' + 
-			'Rect Width: <font class="user-can-select">' + LAYER_width.toUpperCase() + '</font><br>Rect Height: <font class="user-can-select">' + LAYER_height.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + 
-			'<font class="user-can-select">' + LAYER_source_X.toUpperCase() + ' ' + LAYER_source_Y.toUpperCase() + ' ' + LAYER_pos_X.toUpperCase() + ' ' + LAYER_pos_Y.toUpperCase() + ' ' + LAYER_offset_1.toUpperCase() + ' ' +
-			LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
-
-		$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
 		c++;
 	}
 	RDT_SLD_FOUNDPOS = currentPos;
@@ -337,13 +342,14 @@ function RDT_SLD_selectMask(){
 
 function RDT_applySLDBG(){
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
-	var camId = document.getElementById('RDT_SLD_SELECT_LAYER').value;
+	var camId = document.getElementById('RDT_SLD_SELECT_CAM').value;
 	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
 	$('#SLD_LAYER_CANVAS').css({'background-image': 'url(' + BG_IMG + ')'});
 }
 function RDT_SLD_layer_setBMP(file){
 	if (file !== ''){
 		RDT_SLD_LAYER_TILESET_BMP = file;
+		document.getElementById('RDT_SLD_MASK_TILESET_FILENAME').innerHTML = file;
 		addLog('log', 'SLD - Tileset File: ' + RDT_SLD_LAYER_TILESET_BMP);
 	}
 	scrollLog();
@@ -406,6 +412,7 @@ function RDT_decompileCameras(id){
 		CAM_IMG = APP_PATH + '/App/Img/404.png';
 		titleFileName = '';
 	}
+	$('#RDT_SLD_SELECT_CAM').append('<option value="' + CAM_ID + '">Camera ' + CAM_ID + '</option>');
 	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg" id="RDT_CAM_ID_' + id + '"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
 		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + 
 		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + '<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + 

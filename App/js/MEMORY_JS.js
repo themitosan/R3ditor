@@ -185,6 +185,12 @@ function MEMORY_JS_renderInfo(){
 		RE3_LIVE_closeForm();
 	}
 }
+function RE3_LIVE_gotoTitleScreen(){
+	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
+		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_goto_titleScreen'][0], 40, MEM_JS.BYTE);
+		MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_goto_titleScreen'][1], 0, MEM_JS.BYTE);
+	}
+}
 function RE3_LIVE_cheatInfiniteLife(){
 	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
 		if (REALTIME_CurrentHP.toLowerCase() !== 'c800'){

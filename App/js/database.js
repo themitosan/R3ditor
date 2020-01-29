@@ -1358,7 +1358,12 @@ var MEMJS_HEXPOS = {
 	// HP
 	'RE3_mode_1_HP': 				[0xA5CE00, 0xA5CE01],
 	// Current Weapon
-	'RE3_mode_1_currentWeapon': 	[0xA623CD]
+	'RE3_mode_1_currentWeapon': 	[0xA623CD],
+	/*
+		Title Screen
+		Set 0xA5C9C0 to 28 and 0xA5C9C3 to 00 make the game go to title screen
+	*/
+	'RE3_mode_1_goto_titleScreen':  [0xA5C9C0, 0xA5C9C3]
 }
 var RANGES = {
 	/*
