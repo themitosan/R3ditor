@@ -92,6 +92,7 @@ var RDT_messageCodesArray = [];
 
 var RDT_SLD_FOUNDPOS;
 var RDT_SLD_LAYER_TILESET_BMP;
+var RDT_SLD_totalMasksAva = 0;
 var RDT_SLD_MASKS_POSITION = [];
 var RDT_SLD_SEEK_SEMAPHORE = true;
 
@@ -127,6 +128,7 @@ function RDT_resetVars(){
 	RDT_propModelsArray = [];
 	RDT_MSG_CURRENT_TEST = 0;
 	RDT_requestReload = false;
+	RDT_SLD_totalMasksAva = 0;
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
 	RDT_SLD_MASKS_POSITION = [];
@@ -206,7 +208,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
-	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
+	addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 	log_separador();
 	//
 	RDT_getEnemiesArray();
@@ -216,14 +218,12 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	RDT_BG_display();
 	scrollLog();
 }
-
 /*
 	SLD Layers
 	This is a beta thing.
 
 	This will break!
 */
-
 function RDT_getSLDPosition(){
 	var c = 0;
 	var totalSlots = RDT_totalCameras;
@@ -244,6 +244,8 @@ function RDT_getSLDPosition(){
 				RDT_SLD_SEEK_SEMAPHORE = false;
 				$('#RDT_SLD_SELECT_LAYER').append('<option value="' + displayValue + '">Mask ' + displayValue + '</option>');
 				RDT_SLD_MASKS_POSITION.push(RDT_SLD_FOUNDPOS);
+				document.getElementById('RDT_SLD_SELECT_LAYER').value = displayValue;
+				RDT_SLD_totalMasksAva++;
 				RDT_decryptSldMask(RDT_SLD_FOUNDPOS);
 			} else {
 				$('#RDT_SLD_SELECT_LAYER').append('<option disabled>Mask ' + displayValue + ' - No mask detected!</option>');
@@ -255,22 +257,27 @@ function RDT_getSLDPosition(){
 			console.log('SLD - Waiting RDT_SLD_SEEK_SEMAPHORE');
 		}
 	}
-	document.getElementById('RDT_SLD_SELECT_LAYER').value = '00';
-	RDT_applySLDBG();
-	scrollLog();
+	document.getElementById('RDT-aba-menu-10').value = 'SLD Masks (' + RDT_SLD_totalMasksAva + ')';
+	RDT_SLD_selectMask();
 }
 
 function RDT_decryptSldMask(startPosition){
 	var c = 0;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
-	//
 	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (Hex: ' + pushes.toString(16).toUpperCase() + ')';
-	document.getElementById('SLD_Layer_X_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
-	document.getElementById('SLD_Layer_Y_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
+	//
+	var MASK_X_POS = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
+	var MASK_Y_POS = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
+	document.getElementById('SLD_Layer_X_Position').value = MASK_X_POS;
+	document.getElementById('SLD_Layer_Y_Position').value = MASK_Y_POS;
+	
 	// Routine
 	var currentPos = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
+	var MASK_HEADER = RDT_arquivoBruto.slice(startPosition, currentPos).toUpperCase();
+	document.getElementById('RDT_SLD_MASK_HEADER').innerHTML = MASK_HEADER;
+
 	while (c < parseInt(pushes)){
 		var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
 
@@ -316,7 +323,6 @@ function RDT_decryptSldMask(startPosition){
 function RDT_SLD_selectMask(){
 	var selectMask = document.getElementById('RDT_SLD_SELECT_LAYER').value;
 	var maskPos = RDT_SLD_MASKS_POSITION[parseInt(selectMask)];
-	console.log(maskPos);
 	if (maskPos !== null){
 		RDT_decryptSldMask(maskPos);
 		document.getElementById('RDT_SLD_ACTIVE_CAM_TITLE').innerHTML = selectMask;
@@ -2168,7 +2174,7 @@ function RDT_lookForRDTConfigFile(){
 	document.title = APP_NAME + ' - Please wait...';
 	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true && RDT_loop < 4){
-		addLog('log', 'INFO - Loading RDT Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap)');
+		addLog('log', 'INFO - Loading RDT Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (<font class="user-can-select">' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap</font>)');
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
@@ -2772,7 +2778,7 @@ function RDT_COMPILE_Lv2(oldHex, newReplacementHex){
 function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
-		addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
+		addLog('log', 'INFO - The file was saved successfully! - File: <font class="user-can-select">' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT</font>');
 		addLog('log', 'Path: ' + ORIGINAL_FILENAME);
 		log_separador();
 		RDT_doAfterSave();
