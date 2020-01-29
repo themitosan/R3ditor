@@ -92,6 +92,8 @@ var RDT_messageCodesArray = [];
 
 var RDT_SLD_FOUNDPOS;
 var RDT_SLD_LAYER_TILESET_BMP;
+var RDT_SLD_MASKS_POSITION = [];
+var RDT_SLD_SEEK_SEMAPHORE = true;
 
 /*
 	Functions
@@ -127,6 +129,7 @@ function RDT_resetVars(){
 	RDT_requestReload = false;
 	block_size_hex = undefined;
 	RDT_messageCodesArray = [];
+	RDT_SLD_MASKS_POSITION = [];
 	RDT_generateMapFile = false;
 	RDT_arquivoBruto = undefined;
 	RDT_messasgesRaw = undefined;
@@ -202,7 +205,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_msgCode_holder').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
-	document.getElementById('SLD_Layer_BG_cam').innerHTML =  '';
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 
 	addLog('log', 'RDT - The file was loaded successfully! - File: ' + ORIGINAL_FILENAME);
@@ -225,31 +227,48 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 
 function RDT_getSLDPosition(){
 	var c = 0;
-	var askForHex = prompt('Hey - THIS STILL WIP!\n\nPlease insert the layer header below:\nYou can find it by searching "FF FF FF FF" twice!');
-	if (askForHex !== '' && askForHex !== null && askForHex.length > 2){
-		var foundLayer = RDT_arquivoBruto.indexOf(solveHEX(askForHex));
-		if (foundLayer !== -1){
-			RDT_SLD_FOUNDPOS = foundLayer;
-			RDT_decryptSLDLayer(foundLayer);
+	var totalSlots = RDT_totalCameras;
+	document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
+	/*
+		While other things are not implemented on R3ditor, i will use this method to find the masks because it works in most maps!
+	*/
+	RDT_SLD_FOUNDPOS = parseInt(getAllIndexes(RDT_arquivoBruto, 'ffffffff')[1] + 8);
+	while(c < totalSlots){
+		if (RDT_SLD_SEEK_SEMAPHORE === true){
+			var maskAvaliable = RDT_arquivoBruto.slice(RDT_SLD_FOUNDPOS, parseInt(RDT_SLD_FOUNDPOS + 8));
+			console.log('Seek on ' + RDT_SLD_FOUNDPOS + ' - ' + maskAvaliable);
+			if (maskAvaliable !== 'ffffffff'){
+				RDT_SLD_SEEK_SEMAPHORE = false;
+				var displayValue = c.toString(16).toUpperCase();
+				if (displayValue.length < 2){
+					displayValue = '0' + displayValue;
+				}
+				$('#RDT_SLD_SELECT_LAYER').append('<option value="' + displayValue + '">Mask ' + displayValue + '</option>');
+				RDT_SLD_MASKS_POSITION.push(RDT_SLD_FOUNDPOS);
+				RDT_decryptSldMask(RDT_SLD_FOUNDPOS);
+			} else {
+				$('#RDT_SLD_SELECT_LAYER').append('<option disabled>Mask ' + displayValue + ' - No mask detected!</option>');
+				RDT_SLD_FOUNDPOS = parseInt(RDT_SLD_FOUNDPOS + 8);
+			}
+			c++;
 		} else {
-			addLog('warn', 'SLD - Unable to find pattern!');
+			console.log('SLD - Waiting RDT_SLD_SEEK_SEMAPHORE');
 		}
-	} else {
-		addLog('warn', 'SLD - Process Canceled!');
 	}
+	document.getElementById('RDT_SLD_SELECT_LAYER').value = '00';
+	RDT_applySLDBG();
 	scrollLog();
 }
 
-function RDT_decryptSLDLayer(startPosition){
+function RDT_decryptSldMask(startPosition){
 	var c = 0;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
 	//
-	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (' + pushes.toString(16).toUpperCase() + ')';
+	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (Hex: ' + pushes.toString(16).toUpperCase() + ')';
 	document.getElementById('SLD_Layer_X_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
 	document.getElementById('SLD_Layer_Y_Position').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
-
 	// Routine
 	var currentPos = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
 	while (c < parseInt(pushes)){
@@ -285,15 +304,23 @@ function RDT_decryptSLDLayer(startPosition){
 		$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
 		c++;
 	}
-	//
-	RDT_applySLDBG();
-	document.getElementById('SLD_Layer_BG_cam').value = '00';
-	$('#RDT-aba-menu-10').removeClass('none');
-	RDT_showMenu(10);
+	RDT_SLD_FOUNDPOS = currentPos;
+	RDT_SLD_SEEK_SEMAPHORE = true;
 }
+
+function RDT_SLD_selectMask(){
+	var selectMask = document.getElementById('RDT_SLD_SELECT_LAYER').value;
+	var maskPos = RDT_SLD_MASKS_POSITION[parseInt(selectMask)];
+	RDT_decryptSldMask(maskPos);
+	//
+	document.getElementById('RDT_SLD_ACTIVE_CAM_TITLE').innerHTML = selectMask;
+	RDT_applySLDBG();
+	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').scrollTop = 0;
+}
+
 function RDT_applySLDBG(){
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
-	var camId = document.getElementById('SLD_Layer_BG_cam').value;
+	var camId = document.getElementById('RDT_SLD_SELECT_LAYER').value;
 	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
 	$('#SLD_LAYER_CANVAS').css({'background-image': 'url(' + BG_IMG + ')'});
 }
@@ -330,6 +357,7 @@ function RDT_getCameras(){
 			RDT_decompileCameras(c);
 			c++;
 		}
+		RDT_getSLDPosition();
 	}
 }
 function RDT_decompileCameras(id){
@@ -357,14 +385,11 @@ function RDT_decompileCameras(id){
 	if (fs.existsSync(APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG') === true){
 		CAM_IMG = APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
 		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
-
-		$('#SLD_Layer_BG_cam').append('<option value="' + CAM_ID + '">Cam ' + CAM_ID + '</option>');
-
 	} else {
 		CAM_IMG = APP_PATH + '/App/Img/404.png';
 		titleFileName = '';
 	}
-	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
+	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg" id="RDT_CAM_ID_' + id + '"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
 		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + 
 		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + '<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + 
 		'</font><br>(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font>' + 

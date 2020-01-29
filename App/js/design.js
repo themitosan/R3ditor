@@ -1148,7 +1148,7 @@ function RDT_showMenu(id){
 		$('#RDT_msgCode_holder').css({'height': '430px'});
 	}
 	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true){
-		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = RDT_SEEK_SLD_BTN;
+		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 	} else {
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'No';
 	}
