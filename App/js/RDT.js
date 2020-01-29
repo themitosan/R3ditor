@@ -274,12 +274,14 @@ function RDT_decryptSldMask(startPosition){
 	while (c < parseInt(pushes)){
 		var sliceBlock = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 16)); // 16 = Normal length
 
-		var LAYER_crop_1 	  = sliceBlock.slice(RANGES['SLD_BLK_source_X'][0], 	 RANGES['SLD_BLK_source_X'][1]); 	  // Source X
-		var LAYER_crop_2 	  = sliceBlock.slice(RANGES['SLD_BLK_source_Y'][0], 	 RANGES['SLD_BLK_source_Y'][1]); 	  // Source Y
+		var LAYER_source_X 	  = sliceBlock.slice(RANGES['SLD_BLK_source_X'][0], 	 RANGES['SLD_BLK_source_X'][1]); 	  // Source X
+		var LAYER_source_Y 	  = sliceBlock.slice(RANGES['SLD_BLK_source_Y'][0], 	 RANGES['SLD_BLK_source_Y'][1]); 	  // Source Y
 		var LAYER_pos_X		  = sliceBlock.slice(RANGES['SLD_BLK_pos_X'][0],  	     RANGES['SLD_BLK_pos_X'][1]); 		  // Dest. X
 		var LAYER_pos_Y		  = sliceBlock.slice(RANGES['SLD_BLK_pos_Y'][0],  	     RANGES['SLD_BLK_pos_Y'][1]); 		  // Dest. Y
+		var LAYER_offset_1    = sliceBlock.slice(RANGES['SLD_BLK_offset_1'][0],		 RANGES['SLD_BLK_offset_1'][1]); 
 		var LAYER_layPosition = sliceBlock.slice(RANGES['SLD_BLK_layerPosition'][0], RANGES['SLD_BLK_layerPosition'][1]); // Layer pos. is like Photoshop
 		var LAYER_crop_type   = sliceBlock.slice(RANGES['SLD_BLK_model'][0], 	     RANGES['SLD_BLK_model'][1]); 		  // Size
+		var LAYER_offset_2    = sliceBlock.slice(RANGES['SLD_BLK_offset_2'][0],		 RANGES['SLD_BLK_offset_2'][1]); 
 		var LAYER_width   	  = 'N/A'; 																					  // Rect X
 		var LAYER_height   	  = 'N/A'; 																					  // Rect Y
 
@@ -293,13 +295,16 @@ function RDT_decryptSldMask(startPosition){
 		} else {
 			currentPos = parseInt(currentPos + 16);
 		}
+		var L_replace_w = LAYER_width.replace('N/A', '');
+		var L_replace_h = LAYER_height.replace('N/A', '');
 
 		var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
-			'Crop X: <font class="user-can-select">' + LAYER_crop_1.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_crop_2.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
+			'Crop X: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_source_Y.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
 			'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
 			'Block Layer: <font class="user-can-select">' + LAYER_layPosition.toUpperCase() + '</font><br>Block Size: <font class="user-can-select">' + LAYER_crop_type.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_OTHER">' + 
 			'Rect Width: <font class="user-can-select">' + LAYER_width.toUpperCase() + '</font><br>Rect Height: <font class="user-can-select">' + LAYER_height.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + 
-			'<font class="user-can-select">' + sliceBlock.toUpperCase() + '</font></div>';
+			'<font class="user-can-select">' + LAYER_source_X.toUpperCase() + ' ' + LAYER_source_Y.toUpperCase() + ' ' + LAYER_pos_X.toUpperCase() + ' ' + LAYER_pos_Y.toUpperCase() + ' ' + LAYER_offset_1.toUpperCase() + ' ' +
+			LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
 
 		$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
 		c++;
