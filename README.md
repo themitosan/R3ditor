@@ -82,4 +82,4 @@ These files can be found in "App/tools/":
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
 - <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 
-<i>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i>
+<p align="center"><i>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i></p>

@@ -600,7 +600,7 @@
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
 			<input type="button" id="RDT-aba-menu-9" class="aba" value="Cameras (???)" onclick="RDT_showMenu(9);">
-			<input type="button" id="RDT-aba-menu-10" class="aba" value="SLD Masks" onclick="RDT_showMenu(10);">
+			<input type="button" id="RDT-aba-menu-10" class="aba" value="SLD Masks (???)" onclick="RDT_showMenu(10);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
@@ -631,14 +631,16 @@
 							<div class="menu-separador"></div>
 							Mask X Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_X_Position">
 							Header: <font class="user-can-select" id="RDT_SLD_MASK_HEADER">???</font> - 
-							Relative Offsets: <font class="user-can-select" id="RDT_SLD_relativeOffsetsNumber">???</font><br>
+							Relative offsets: <font class="user-can-select" id="RDT_SLD_relativeOffsetsNumber">???</font><br>
 							Mask Y Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Y_Position">
 							Offset (count_masks): <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Offset_2">
 							Total Blocks: <font id="SLD_Layer_totalBlocks">???</font>
 						</div>
 						<!-- Canvas -->
 						<div class="RDT_SLD_LAYER_CANVAS" id="SLD_LAYER_CANVAS">
+							<div class="RDT_SLD_CANVAS_BG_IMG" id="SLD_LAYER_CANVAS_BG"></div>
 							<!-- The Magic Happens Here -->
+							<!-- <img id="RDT_SLD_MASK_IMG_BLOCK_00" class="RDT_SLD_MASK_IMG_BLOCK"> -->
 						</div>
 						<!-- Blocks -->
 						<div id="RDT_SLD_LAYER_BLOCK_LIST" class="RDT_SLD_LAYER_BLOCK_HOLDER">

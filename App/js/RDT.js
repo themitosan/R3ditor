@@ -358,7 +358,7 @@ function RDT_applySLDBG(){
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
 	var camId = document.getElementById('RDT_SLD_SELECT_CAM').value;
 	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
-	$('#SLD_LAYER_CANVAS').css({'background-image': 'url(' + BG_IMG + ')'});
+	$('#SLD_LAYER_CANVAS_BG').css({'background-image': 'url(' + BG_IMG + ')'});
 }
 function RDT_SLD_layer_setBMP(file){
 	if (file !== ''){
