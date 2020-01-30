@@ -270,7 +270,7 @@ function RDT_decryptSldMask(startPosition){
 	var t_m = 0;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
-	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (Hex: ' + pushes.toString(16).toUpperCase() + ')';
+	document.getElementById('SLD_Layer_totalBlocks').innerHTML = '<font class="user-can-select">' + pushes + '</font> (Hex: <font class="user-can-select">' + pushes.toString(16).toUpperCase() + '</font>)';
 	//
 	RDT_SLD_relativeOffsets = parseInt(RDT_arquivoBruto.slice(startPosition + RANGES['SLD_LAYER_relativeOffsets'][0], startPosition + RANGES['SLD_LAYER_relativeOffsets'][1]), 16);
 	var MASK_X_POS			= RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
@@ -282,9 +282,11 @@ function RDT_decryptSldMask(startPosition){
 	document.getElementById('SLD_Layer_X_Position').value = MASK_X_POS;
 	document.getElementById('SLD_Layer_Y_Position').value = MASK_Y_POS;
 	
-	RDT_SLD_SEEK_MULTIMASK = false; // In PRIedit this is called "Relative Offset"
-	console.log('Relative Offsets: ' + parseInt(RDT_arquivoBruto.slice(startPosition + RANGES['SLD_LAYER_relativeOffsets'][0], startPosition + RANGES['SLD_LAYER_relativeOffsets'][1]), 16));
-
+	if (RDT_SLD_relativeOffsets === 1){
+		RDT_SLD_SEEK_MULTIMASK = false; // In PRIedit this is called "Relative Offset"
+	} else {
+		RDT_SLD_SEEK_MULTIMASK = true;
+	}
 	// Routine
 	while (c < parseInt(pushes)){
 		if (RDT_SLD_SEEK_MULTIMASK === false){
@@ -302,7 +304,7 @@ function RDT_decryptSldMask(startPosition){
 			var cropName 		  = '';
 
 			if (LAYER_crop_type === '00'){
-				cropName = 'Rect';
+				cropName 	 = 'Rect';
 				sliceBlock   = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
 				//
 				LAYER_width  = sliceBlock.slice(RANGES['SLD_BLK_width'][0], RANGES['SLD_BLK_width'][1]);
@@ -325,8 +327,12 @@ function RDT_decryptSldMask(startPosition){
 				LAYER_offset_1.toUpperCase() + ' ' + LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
 
 			$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
+			c++;
+		} else {
+			console.log('Skipping Relative Offsets');
+			currentPos = parseInt(currentPos + parseInt(12 * RDT_SLD_relativeOffsets));
+			RDT_SLD_SEEK_MULTIMASK = false;
 		}
-		c++;
 	}
 	document.getElementById('RDT_SLD_relativeOffsetsNumber').innerHTML = RDT_SLD_relativeOffsets;
 	RDT_SLD_FOUNDPOS = currentPos;
