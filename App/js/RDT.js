@@ -212,6 +212,18 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
+	/*
+		Remove the code below later
+	*/
+	$('#RDT_SLD_seekMasksManualBtn').removeClass('none');
+	$('#SLD_LAYER_CANVAS_BG').css({'background-image': 'url()'});
+	document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
+	document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
+	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
+	/*
+		Remove the code above later
+	*/
+
 	addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 	log_separador();
 	//
@@ -229,6 +241,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	This will break!
 */
 function RDT_getSLDPosition(){
+	$('#RDT_SLD_seekMasksManualBtn').addClass('none');
 	var c = 0;
 	var totalSlots = RDT_totalCameras;
 	document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
