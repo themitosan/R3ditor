@@ -1149,8 +1149,10 @@ function RDT_showMenu(id){
 	}
 	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
+		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
 	} else {
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'No';
+		$('#RDT_btn_openOnRE3SLDE').addClass('none');
 	}
 	$('#RDT_backupBtn').css({'display': 'inline'});
 	document.getElementById('RDT-item-list').scrollTop = 0;
@@ -2130,7 +2132,7 @@ function R3DITOR_RUNGAME(id){
 			$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
 			$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
 
-			console.log('Anim A');
+			console.log('Open RE3');
 
 		} else {
 			if (EXEC_BIO3_original !== ''){
@@ -2176,7 +2178,7 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
 				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
 
-				console.log('Anim B');
+				console.log('Close RE3');
 
 				if (main_currentMenu !== 6){
 					if (DESIGN_ENABLE_ANIMS === true){

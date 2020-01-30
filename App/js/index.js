@@ -16,6 +16,7 @@ var RE3_RUNNING = false;
 var STATUS = 'Undefined';
 var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
+var RE3SLDE_CANRUN = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;

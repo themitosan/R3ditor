@@ -453,6 +453,12 @@ function WZ_loadFiles(file){
 		WINDOW_MOVETOLEFT = false;
 	}
 	document.getElementById('SETTINGS_edit_enableMoveTo').checked = WINDOW_MOVETOLEFT;
+	// RE3SLDE
+	if (fs.existsSync(APP_PATH + '\\App\\tools\\RE3SLDE.exe') === true){
+		RE3SLDE_CANRUN = true;
+	} else {
+		RE3SLDE_CANRUN = false;
+	}
 	/*
 		Visuals
 	*/

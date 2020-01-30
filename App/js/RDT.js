@@ -211,7 +211,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 	document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 
-
 	addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 	log_separador();
 	//
@@ -339,7 +338,6 @@ function RDT_SLD_selectMask(){
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').scrollTop = 0;
 	scrollLog();
 }
-
 function RDT_applySLDBG(){
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
 	var camId = document.getElementById('RDT_SLD_SELECT_CAM').value;
@@ -354,6 +352,12 @@ function RDT_SLD_layer_setBMP(file){
 	}
 	scrollLog();
 }
+function RDT_SLD_openOnSLDE(){
+	if (RE3SLDE_CANRUN === true && enable_mod === true){
+		var sld_file_path = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD';
+		runExternalSoftware(APP_PATH + '\\App\\tools\\RE3SLDE.exe', [sld_file_path]);
+	}
+}
 
 /*
 	Cameras
@@ -361,7 +365,6 @@ function RDT_SLD_layer_setBMP(file){
 	
 	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
 */
-
 function RDT_getCameras(){
 	var c = 0;
 	if (RDT_arquivoBruto !== undefined){

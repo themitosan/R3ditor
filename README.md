@@ -67,6 +67,10 @@ If you want to recover your save, open the "backup" folder and select the file y
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
+
+Engine:
+- <a href="https://nwjs.io" target="_blank">NW.js</a> by <a href="https://twitter.com/nw_js" target="_blank">NW.js community</a>
+
 External JS Plugins:
 - <a href="https://jquery.com/" target="_blank">jQuery</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
 
