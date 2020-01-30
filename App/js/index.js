@@ -77,7 +77,7 @@ function load(){
 		}
 		document.title = 'Whoops...';
 		addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
-		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! “w”');
+		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! √íw√ì');
 		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		log_separador();
 		addLog('error', err);
@@ -175,8 +175,8 @@ function openFileOnHex(file){
 		}
 	} else {
 		addLog('error', 'ERROR - You can\'t open a hex editor if you don\'t specify where it is!');
-		scrollLog();
 	}
+	scrollLog();
 }
 // Notifications Desktop
 function showNotify(titulo, texto, tempo){
@@ -496,7 +496,7 @@ function R3DITOR_PROCESS_SAVE(filename, content, mode){
 		try{
 			fs.writeFileSync(location, content, mode);
 			addLog('log', 'File - Save sucessfull!');
-			addLog('log', 'Path: ' + location);
+			addLog('log', 'Path: <font class="user-can-select">' + location + '</font>');
 		} catch(err){
 			addLog('error', 'ERROR - Unable to Save File!');
 			addLog('error', err);
@@ -588,7 +588,7 @@ function currentTime(){
 	}
 	return d + '-' + m + '-' + y + '_' + h + '.' + mi + '.' + s;
 }
-/// IndexOf com multiplas ocorrÍcias
+/// IndexOf com multiplas ocorr√™cias
 function getAllIndexes(arr, val){
 	if (arr !== null && val !== null || arr !== undefined && val !== undefined){
     	var indexes = [], i = -1;
@@ -680,7 +680,7 @@ function processBIO3HP(hex){
 		var vital = processBIO3Vars(hex);
 		/*
 			O correto seria 32767 mas estou deixando uma margem de erro para
-			que o R3ditor n„o pense que o player esteja vivo.
+			que o R3ditor n√£o pense que o player esteja vivo.
 		*/
 		if (vital > 30100){
 			stat = 'Dead';

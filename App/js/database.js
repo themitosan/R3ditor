@@ -1698,7 +1698,7 @@ var RANGES = {
 	'RDT_door-1-doorNextStage':      [60, 62],
 	'RDT_door-1-doorNextRoomNumber': [62, 64],
 	'RDT_door-1-doorNextCamNumber':  [64, 66],
-	'RDT_door-1-doorHexOffset2':  	 [66, 68], // Parece que todos são 00...?
+	'RDT_door-1-doorHexOffset2':  	 [66, 68], // Always 00...?
 	'RDT_door-1-doorType': 			 [68, 70],
 	'RDT_door-1-doorOpenOrient': 	 [70, 72], // 00: Handle Left, 01: Handle Right
 
@@ -1707,17 +1707,16 @@ var RANGES = {
 	'RDT_door-1-doorKey': 	 		 [76, 78], // OK
 	'RDT_door-1-doorDisplayText': 	 [78, 80], // Display Text - If you set 40, it will show (You want do go down the ladder?)
 	/*
-		SLD Layers
-		The beginning of a new era!
-
+		SLD Layers (Masks)
 		Header
 	*/
-	'SLD_LAYER_header': 	     [0, 4],
+	'SLD_LAYER_relativeOffsets': [0, 2], // PRIedit Relative Offsets
+	'SLD_LAYER_offset_1': 		 [2, 4], //
 	'SLD_LAYER_crp_offset_2':    [4, 8], // Alterar esses valores faz alguns blocos desaparecer
 	'SLD_LAYER_count_offsets':  [8, 12], // Offsets (Block Ammount)
 	'SLD_LAYER_offset_0': 	   [12, 16], // Normalmente é 00 78
-	'SLD_LAYER_X_POS': 		   [16, 20],
-	'SLD_LAYER_Y_POS': 		   [20, 24],
+	'SLD_LAYER_X_POS': 		   [16, 20], // Pos. X
+	'SLD_LAYER_Y_POS': 		   [20, 24], // Pos. Y
 	// Blocks
 	'SLD_BLK_source_X': 		 [0, 2], // Source X
 	'SLD_BLK_source_Y': 		 [2, 4], // Source Y
@@ -1726,8 +1725,8 @@ var RANGES = {
 	'SLD_BLK_offset_1': 	    [8, 10],
 	'SLD_BLK_layerPosition':   [10, 12], // Layer pos. is like Photoshop
 	'SLD_BLK_model': 		   [12, 14], // Layer Type: 08 = Square, 00 = Rect
-	'SLD_BLK_offset_2': 	   [14, 16], // Modity these values can make the image go nuts!
-	// Extended
+	'SLD_BLK_offset_2': 	   [14, 16], // Modify these values can make the image go nuts!
+	// Extended (If Rect)
 	'SLD_BLK_width': 	   	   [16, 20], // Rect Width 
 	'SLD_BLK_height': 		   [20, 24]  // Rect Height
 }

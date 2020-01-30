@@ -94,6 +94,7 @@ var RDT_SLD_FOUNDPOS;
 var RDT_SLD_LAYER_TILESET_BMP;
 var RDT_SLD_totalMasksAva = 0;
 var RDT_SLD_MASKS_POSITION = [];
+var RDT_SLD_relativeOffsets = 0;
 var RDT_SLD_SEEK_SEMAPHORE = true;
 var RDT_SLD_SEEK_MULTIMASK = false;
 
@@ -271,16 +272,19 @@ function RDT_decryptSldMask(startPosition){
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
 	document.getElementById('SLD_Layer_totalBlocks').innerHTML = pushes + ' (Hex: ' + pushes.toString(16).toUpperCase() + ')';
 	//
-	var MASKS_TOTAL = parseInt(RDT_arquivoBruto.slice(startPosition, parseInt(startPosition + RANGES['SLD_LAYER_header'][1])).slice(0, 2), 16); // Nº of total masks on camera
-	var MASK_X_POS  = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
-	var MASK_Y_POS  = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
-	var currentPos  = parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
-	var MASK_HEADER = RDT_arquivoBruto.slice(startPosition, currentPos).toUpperCase();
+	RDT_SLD_relativeOffsets = parseInt(RDT_arquivoBruto.slice(startPosition + RANGES['SLD_LAYER_relativeOffsets'][0], startPosition + RANGES['SLD_LAYER_relativeOffsets'][1]), 16);
+	var MASK_X_POS			= RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_X_POS'][1]));
+	var MASK_Y_POS			= RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][0]), parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]));
+	var currentPos			= parseInt(startPosition + RANGES['SLD_LAYER_Y_POS'][1]);
+	var MASK_HEADER			= RDT_arquivoBruto.slice(startPosition, currentPos).toUpperCase();
 	document.getElementById('SLD_Layer_Offset_2').value = RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][0]), parseInt(startPosition + RANGES['SLD_LAYER_crp_offset_2'][1]));
 	document.getElementById('RDT_SLD_MASK_HEADER').innerHTML = MASK_HEADER;
 	document.getElementById('SLD_Layer_X_Position').value = MASK_X_POS;
 	document.getElementById('SLD_Layer_Y_Position').value = MASK_Y_POS;
-	RDT_SLD_SEEK_MULTIMASK = false;
+	
+	RDT_SLD_SEEK_MULTIMASK = false; // In PRIedit this is called "Relative Offset"
+	console.log('Relative Offsets: ' + parseInt(RDT_arquivoBruto.slice(startPosition + RANGES['SLD_LAYER_relativeOffsets'][0], startPosition + RANGES['SLD_LAYER_relativeOffsets'][1]), 16));
+
 	// Routine
 	while (c < parseInt(pushes)){
 		if (RDT_SLD_SEEK_MULTIMASK === false){
@@ -292,11 +296,13 @@ function RDT_decryptSldMask(startPosition){
 			var LAYER_offset_1    = sliceBlock.slice(RANGES['SLD_BLK_offset_1'][0],		 RANGES['SLD_BLK_offset_1'][1]); 
 			var LAYER_layPosition = sliceBlock.slice(RANGES['SLD_BLK_layerPosition'][0], RANGES['SLD_BLK_layerPosition'][1]); // Layer pos. is like Photoshop
 			var LAYER_crop_type   = sliceBlock.slice(RANGES['SLD_BLK_model'][0], 	     RANGES['SLD_BLK_model'][1]); 		  // Size
-			var LAYER_offset_2    = sliceBlock.slice(RANGES['SLD_BLK_offset_2'][0],		 RANGES['SLD_BLK_offset_2'][1]); 
+			var LAYER_offset_2    = sliceBlock.slice(RANGES['SLD_BLK_offset_2'][0],		 RANGES['SLD_BLK_offset_2'][1]); 	  // Unknown Value
 			var LAYER_width   	  = 'N/A'; 																					  // Rect X
 			var LAYER_height   	  = 'N/A'; 																					  // Rect Y
+			var cropName 		  = '';
 
 			if (LAYER_crop_type === '00'){
+				cropName = 'Rect';
 				sliceBlock   = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
 				//
 				LAYER_width  = sliceBlock.slice(RANGES['SLD_BLK_width'][0], RANGES['SLD_BLK_width'][1]);
@@ -304,6 +310,7 @@ function RDT_decryptSldMask(startPosition){
 				//
 				currentPos = parseInt(currentPos + 24);
 			} else {
+				cropName   = 'Square';
 				currentPos = parseInt(currentPos + 16);
 			}
 			var L_replace_w = LAYER_width.replace('N/A', '');
@@ -313,14 +320,15 @@ function RDT_decryptSldMask(startPosition){
 				'Crop X: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_source_Y.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
 				'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
 				'Block Layer: <font class="user-can-select">' + LAYER_layPosition.toUpperCase() + '</font><br>Block Size: <font class="user-can-select">' + LAYER_crop_type.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_OTHER">' + 
-				'Rect Width: <font class="user-can-select">' + LAYER_width.toUpperCase() + '</font><br>Rect Height: <font class="user-can-select">' + LAYER_height.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: ' + 
-				'<font class="user-can-select">' + LAYER_source_X.toUpperCase() + ' ' + LAYER_source_Y.toUpperCase() + ' ' + LAYER_pos_X.toUpperCase() + ' ' + LAYER_pos_Y.toUpperCase() + ' ' + LAYER_offset_1.toUpperCase() + ' ' +
-				LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
+				'Rect Width: <font class="user-can-select">' + LAYER_width.toUpperCase() + '</font><br>Rect Height: <font class="user-can-select espaco-right">' + LAYER_height.toUpperCase() + '</font>Block type: ' + cropName + 
+				'</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + ' ' + LAYER_source_Y.toUpperCase() + ' ' + LAYER_pos_X.toUpperCase() + ' ' + LAYER_pos_Y.toUpperCase() + ' ' +
+				LAYER_offset_1.toUpperCase() + ' ' + LAYER_layPosition.toUpperCase() + ' ' + LAYER_crop_type.toUpperCase() + ' ' + LAYER_offset_2.toUpperCase() + ' ' + L_replace_w.toUpperCase() + ' ' + L_replace_h.toUpperCase() + '</font></div>';
 
 			$('#RDT_SLD_LAYER_BLOCK_LIST').append(HTML_LAYER_TEMPLATE);
 		}
 		c++;
 	}
+	document.getElementById('RDT_SLD_relativeOffsetsNumber').innerHTML = RDT_SLD_relativeOffsets;
 	RDT_SLD_FOUNDPOS = currentPos;
 	RDT_SLD_SEEK_SEMAPHORE = true;
 }
@@ -339,6 +347,8 @@ function RDT_SLD_selectMask(){
 	scrollLog();
 }
 function RDT_applySLDBG(){
+	RDT_SLD_LAYER_TILESET_BMP = undefined;
+	document.getElementById('RDT_SLD_MASK_TILESET_FILENAME').innerHTML = 'No file selected';
 	var RDT_NAME = getFileName(ORIGINAL_FILENAME).toUpperCase();
 	var camId = document.getElementById('RDT_SLD_SELECT_CAM').value;
 	var BG_IMG = APP_PATH.replace(new RegExp('\\\\', 'gi'), '/') + '/Assets/DATA_A/BSS/' + RDT_NAME + camId + '.JPG';
