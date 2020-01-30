@@ -2123,6 +2123,9 @@ input[type='range' i]{
 /*
     SLD Layer
 */
+.RDT_SLD_selectFix{
+    width: 120px;
+}
 .RDT_SLD_LAYER_otherInfo{
     color: #fff;
     width: 700px;

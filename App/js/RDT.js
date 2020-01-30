@@ -399,7 +399,6 @@ function RDT_getCameras(){
 			RDT_decompileCameras(c);
 			c++;
 		}
-		RDT_getSLDPosition();
 	}
 }
 function RDT_decompileCameras(id){
