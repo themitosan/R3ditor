@@ -10,8 +10,10 @@ This file can (and will be) modified several times!
 - Edit the messages on MSG editor
 - Edit every type of item, file or maps! (Header 68)
 - Edit all Doors [WIP]
-- Edit Enemies on map
-- Add suport for itens, files and maps with header 68
+- Edit Enemies on map [WIP]
+- Add support for itens, files and maps with header 68
+- Add support for SLD Masks [WIP]
+- Add function to find and extract TIM files
 - ~~Add a Screenshot of map in all tabs (BSS)~~
 
 ## Saves (Bu00.sav)
@@ -33,13 +35,24 @@ This file can (and will be) modified several times!
 - Modify Drivers used on Audio / Video
 - Add the NG+ Option
 
+## RE3 Livestatus (WIP)
+- ~~Add reset button~~
+- Add IGT (In-Game Time)
+- Add Current Player
+- Add Item Box
+- ~~Add Inventory~~
+- ~~Add Location~~
+- Add Map View [WIP]
+- ~~Enable Infinite HP~~
+- ~~Add 30K Health~~
+
 ## Advanced and Long-Term Goals
 - ~~Create a updater~~
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
-- Add RE3 live status [WIP 50%]
 - Add the option to extract all the Rofs files [WIP 50%]
 - Add a file generator! [WIP]
 - ~~Add restore backup function on RDT~~
+- ~~Misc: Add support for RE3SLDE in RDT section~~
 - Misc: Add support for saves from RE2! ~~(They are very similar! - Also, don't expect this sooner!)~~
