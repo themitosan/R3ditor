@@ -22,7 +22,7 @@
 		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
-		<script type="text/javascript" src="js/filegen.js"></script>
+		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
@@ -45,6 +45,8 @@
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
+			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
+			
 			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 			<!-- Right -->
@@ -636,6 +638,12 @@
 							Mask Y Position: <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Y_Position">
 							Offset (count_masks): <input type="text" class="item-select-mod RDT_camEditXYZOrigin espaco-right" id="SLD_Layer_Offset_2">
 							Total Blocks: <font id="SLD_Layer_totalBlocks">???</font>
+						</div>
+						<!-- Canvas Controls -->
+						<div class="RDT_SLD_CANVAS_CONTROLS">
+							Background opacity: 
+							<input type="range" min="0.01" max="1" oninput="RDT_SLD_CANVAS_BG_CHANGE_OPACITY();" step="0.01" class="espaco-right" id="RDT_SLD_CANVAS_BG_OPACITY">
+							<font id="RDT_SLD_LBL_BG_OPACITY">???</font>
 						</div>
 						<!-- Canvas -->
 						<div class="RDT_SLD_LAYER_CANVAS" id="SLD_LAYER_CANVAS">
@@ -1286,11 +1294,13 @@
 					Rick (aka. The CheatEngine Player!) - <a href="https://www.youtube.com/channel/UCcjNDIi38w9FCvB-Am0OT9A" target="_blank">More Info</a><br>
 					The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
 					Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
+					Biohazard España - Fix OBJ to RE3MV (OBJ Patcher) - <a target="_blank" href="https://twitter.com/biohazardEsp">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
 				</div><br>
 				Special Thanks To:<br><br>
+				<a target="_blank" href="https://twitter.com/biohazardEsp"><u><font title="Saludos, mi querido amigo!">Biohazard España</font> - for teaching me several RE3 tricks!</u></a><br>
 				<a target="_blank" href="https://www.ct-stars.com/"><u>The Entire CT-Stars Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!)</u></a><br>
-				<u>Kazuhiro Aoyama, Shinji Mikami and Capcom Dev 1 Team - Thanks by creating the game of my life!</u>
+				<u>Kazuhiro Aoyama, Shinji Mikami and <a target="_blank" href="https://twitter.com/dev1_official">Capcom Dev 1 Team</a> - Thanks by creating the game of my life!</u>
 				<br><br>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
 				<input type="button" class="botao-menu" value="Go Back" onclick="reload();">
 			</center>
@@ -1350,9 +1360,8 @@
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(13);" id="loadSETTINGS_REM" accept=".exe"/>
-
 			<input type="file" onchange="setLoadFile(14);" id="loadTilesetBMP" accept=".bmp"/>
-
+			<input type="file" onchange="setLoadFile(15);" id="loadOBJPatcherFile" accept=".obj"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>

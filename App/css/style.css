@@ -94,7 +94,7 @@ input[type='range' i]{
     text-shadow: 0px 0px 10px #555;
 }
 .about{
-    top: 20px;
+    top: 12px;
     width: 80%;
     left: 110px;
     padding: 34px;
@@ -2128,17 +2128,17 @@ input[type='range' i]{
 }
 .RDT_SLD_LAYER_otherInfo{
     color: #fff;
-    width: 700px;
+    width: 762px;
     padding: 6px;
     border-radius: 6px;
     background-image: linear-gradient(to bottom, #768593, #3a4753);
 }
 .RDT_SLD_LAYER_CANVAS{
-    top: 52px;
+    top: 98px;
     color: #fff;
-    left: 740px;
-    width: 573px;
-    height: 430px;
+    left: 802px;
+    width: 507px;
+    height: 380px;
     overflow: hidden;
     position: absolute;
     background-color: #000;
@@ -2149,8 +2149,8 @@ input[type='range' i]{
     left: 0;
     z-index: 0;
     opacity: 0.7;
-    width: 573px;
-    height: 430px;
+    width: 523px;
+    height: 380px;
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
@@ -2158,7 +2158,7 @@ input[type='range' i]{
 }
 .RDT_SLD_LAYER_BLOCK_HOLDER{
     padding: 4px;
-    width: 704px;
+    width: 766px;
     height: 242px;
     overflow: auto;
     margin-top: 6px;
@@ -2184,4 +2184,16 @@ input[type='range' i]{
     opacity: 1;
     position: absolute;
     z-index: 2 !important;
+}
+.RDT_SLD_CANVAS_CONTROLS{
+    top: 53px;
+    z-index: 4;
+    color: #fff;
+    left: 802px;
+    width: 498px;
+    height: 38px;
+    padding-left: 10px;
+    border-radius: 6px;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #879396, #4a4f50);
 }

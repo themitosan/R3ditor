@@ -142,7 +142,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 */
 function addLog(type, texto){
 	var classe = undefined;
-	if (type.toLowerCase !== 'log' && type.toLowerCase !== 'warn' && type.toLowerCase !== 'error'){
+	if (type.toLowerCase() !== 'log' && type.toLowerCase() !== 'warn' && type.toLowerCase() !== 'error'){
 		classe = 'log-text';
 	} else {
 		if (type.toLowerCase() === 'log' || type === undefined || type === null){
@@ -839,6 +839,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 14){
 		$('#loadTilesetBMP').trigger('click');
 	}
+	// Load OBJ Patcher
+	if (loadForm === 15){
+		$('#loadOBJPatcherFile').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -1005,6 +1009,17 @@ function setLoadFile(input){
 		} else {
 			RDT_SLD_layer_setBMP(cFile.path);
 			document.getElementById('loadTilesetBMP').value = '';
+		}
+	}
+	// OBJ Patcher
+	if (input === 15){
+		cFile = document.getElementById('loadOBJPatcherFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load OBJ Patcher';
+		} else {
+			UTILS_OBJ_Patcher_RUN(cFile.path);
+			document.getElementById('loadOBJPatcherFile').value = '';
 		}
 	}
 	if (BETA === true){

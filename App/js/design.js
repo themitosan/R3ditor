@@ -17,6 +17,7 @@ var RE3_LIVE_prevCam = '';
 var RE3_LIVE_prevRDT = '';
 var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
+var R3ditor_tool_selected = false;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
 function scrollLog(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
@@ -362,6 +363,7 @@ function main_menu(anim){
 	if (anim === 0){ // Voltar
 		reload();
 	} else {
+		R3ditor_tool_selected = true;
 		$('#menu-utility-aba-2').css({'display': 'none'});
 		$('#menu-utility-aba').css({'display': 'none'});
 		$('#menu-utility').css({'display': 'none'});
@@ -1154,6 +1156,7 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'No';
 		$('#RDT_btn_openOnRE3SLDE').addClass('none');
 	}
+	RDT_SLD_CANVAS_BG_CHANGE_OPACITY();
 	$('#RDT_backupBtn').css({'display': 'inline'});
 	document.getElementById('RDT-item-list').scrollTop = 0;
 	document.getElementById('RDT_MSG-holder').scrollTop = 0;
@@ -1197,6 +1200,17 @@ function RDT_showMenu(id){
 	}
 	RDT_Error_404();
 	scrollLog();
+}
+function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
+	var newOpacity = document.getElementById('RDT_SLD_CANVAS_BG_OPACITY').value;
+	$('#SLD_LAYER_CANVAS_BG').css({'opacity': newOpacity});
+	if (newOpacity.toString().length === 3){
+		newOpacity = newOpacity + '0';
+	}
+	if (newOpacity.toString() === '1'){
+		newOpacity = '1.00';
+	}
+	document.getElementById('RDT_SLD_LBL_BG_OPACITY').innerHTML = newOpacity;
 }
 function RDT_showEditCamera(index, camEdit, codeHex){
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
