@@ -1466,6 +1466,7 @@ function TRANSFER_RDT_TO_MSG(){
 	MSG_showMenu(1);
 	MSG_hideTranslateInput();
 	$('#MSG_optionTranslate').css({'display': 'none'});
+	scrollLog();
 }
 function RDT_BG_display(){
 	if (enable_mod === true){

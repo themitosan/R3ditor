@@ -26,6 +26,7 @@ var REALTIME_CurrentHP = '0000';
 var REALTIME_CurrentStage = '00';
 var REALTIME_CurrentRDT = '0000';
 var REALTIME_CurrentWeapon = '00';
+var RE3_LIVE_keyPress_enable = false;
 var REALTIME_CurrentRoomNumber = '00';
 //
 var PREV_INVENT = '';
@@ -71,6 +72,7 @@ function MEMORY_JS_initMemoryJs(){
 			}
 			RE3_LIVE_enableDisableToolBar(0);
 			R3ditor_enableLiveStatusButton();
+			RE3_LIVE_keyPress_enable = true;
 			MEM_JS_updatePosTimer = setInterval(function(){
 				MEMORY_JS_getPosition();
 			}, RE3_LIVE_RENDER_TIME);
@@ -88,6 +90,18 @@ function MEMORY_JS_fixVars(input, v){
 			input = '0' + input;
 		}
 		return input;
+	}
+}
+function MEMORY_JS_keyPress(){
+	if (MEM_JS_requreSucess === true){
+			window.onkeypress = function(key){
+			if (RE3_LIVE_keyPress_enable === true){
+				// Keys
+				if (key.keyCode === 114 || key.keyCode === 82){ // R = to go title
+					RE3_LIVE_gotoTitleScreen();
+				}
+			}
+		} 
 	}
 }
 function MEMORY_JS_getPosition(){
@@ -119,7 +133,6 @@ function MEMORY_JS_getPosition(){
 	}
 }
 function MEMORY_JS_renderInfo(){
-	// Running
 	if (MEM_JS_requreSucess === true && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
 		// Inventory
 		var SLOT_1_ITEM_HEX  = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_invent_item-1'][0],  MEM_JS.BYTE).toString(16).toUpperCase(), 2);
@@ -303,6 +316,7 @@ function RE3_LIVE_closeForm(){
 		$('#menu-utility-aba-2').css({'display': 'inline-block'});
 	}
 	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
+	window.onkeypress = undefined;
 	scrollLog();
 }
 function RE3_LIVE_openForm(){
