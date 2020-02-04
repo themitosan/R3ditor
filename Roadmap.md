@@ -30,7 +30,7 @@ This file can (and will be) modified several times!
 - ~~Modify BPP~~
 - ~~Modify Rofs Location~~
 - ~~Modify Volume~~
-- Modify Key Mapping
+- Modify Key Mapping [WIP]
 - ~~Modify Video Options (Texture Fixes, Voodoo...)~~
 - ~~Modify Drivers used on Audio / Video~~
 - Add the NG+ Option
