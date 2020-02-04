@@ -98,6 +98,9 @@ var RDT_SLD_relativeOffsets = 0;
 var RDT_SLD_SEEK_SEMAPHORE = true;
 var RDT_SLD_SEEK_MULTIMASK = false;
 
+// workaround
+var RDT_skipMsgAnalisys = false;
+
 /*
 	Functions
 */
@@ -147,6 +150,8 @@ function RDT_resetVars(){
 
 	RDT_SLD_FOUNDPOS = 0;
 	RDT_SLD_LAYER_TILESET_BMP = undefined;
+
+	RDT_skipMsgAnalisys = false;
 }
 function RDT_openFile(file){
 	RDT_loop = 0;
@@ -572,7 +577,6 @@ function RDT_CAMERA_APPLY(id){
 	if (canCompile === true){
 		var NEW_CAMERA_HEX = header + CM_NEW_Origin_X_1 + CM_NEW_Origin_X_2 + CM_NEW_Origin_Y_1 + CM_NEW_Origin_Y_2 + CM_NEW_Origin_Z_1 + CM_NEW_Origin_Z_2 + 
 			CM_NEW_Direction_X_1 + CM_NEW_Direction_X_2 + CM_NEW_Direction_Y_1 + CM_NEW_Direction_Y_2 + CM_NEW_Direction_Z_1 + CM_NEW_Direction_Z_2 + future;
-
 		RDT_COMPILE_Lv2(ORIGINAL_CM, NEW_CAMERA_HEX);
 		$('#RDT-aba-menu-9').trigger('click');
 	} else {
@@ -744,7 +748,7 @@ function RDT_getEnemies(hx){
 	}
 }
 /*
-	Props [WIP]
+	Props [EXTREME WIP]
 */
 function RDT_getPropModelsArray(){
 	if (RDT_arquivoBruto !== undefined){
@@ -1302,7 +1306,7 @@ function RDT_readItens(){
 	RDT_generateItemIndexRaw('02310900');
 	RDT_generateItemIndexRaw('02318000');
 	RDT_generateItemIndexRaw('02310800');
-	RDT_generateItemIndexRaw('02310000'); // Padrão encontrado em (quase) todos os itens
+	RDT_generateItemIndexRaw('02310000'); // Pattern found in almost every file
 	RDT_generateItemIndexRaw('02310500');
 	RDT_generateItemIndexRaw('02310100');
 	RDT_generateItemIndexRaw('02310200');
@@ -1583,8 +1587,8 @@ function RDT_ITEM_APPLY(index, type, convert){
 }
 /*
 	MESSAGES
-	This section will receive a HUUUUUUUUUUGE refactor!
-	I need to be honest - i'm not proud of this...
+	This section will receive a EXTREEEEEEEEEEME refactor!
+	I need to be honest - i'm not proud of this... no!
 */
 function RDT_readMessages(){
 	var c = 0;
@@ -2212,6 +2216,13 @@ function RDT_getGameMode(){
 }
 function RDT_lookForRDTConfigFile(){
 	var c = 0;
+	var fName = getFileName(ORIGINAL_FILENAME);
+	if (fName.slice(parseInt(fName.length - 4), fName.length).toUpperCase() === '.ARD'){
+		RDT_totalCameras = 0;
+		addLog('warn', 'WARN - This is a Playstation RE3 map file (ARD).');
+		addLog('warn', 'Please be aware that for now R3ditor does not fully support this type of file.');
+		alert('WARN - This is a Playstation RE3 map file (ARD).\n\nPlease be aware that for now R3ditor does not fully support this type of file.');
+	}
 	if (getFileName(ORIGINAL_FILENAME) === 'r216' || getFileName(ORIGINAL_FILENAME) === 'r50b' || getFileName(ORIGINAL_FILENAME) === 'r212'){
 		RDT_loop = 665;
 	} else {
@@ -2434,37 +2445,52 @@ function RDT_lookForRDTConfigFile(){
 			var BLOCK_SECTOR = newMapFile + '\n[MSGBLOCK]\n' + BLOCK_MSGS.length.toString(16) + '\n';
 			try{
 				fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', BLOCK_SECTOR, 'utf-8');
-			}catch(err){
-				console.error(err);
+			} catch(err) {
 				addLog('error', 'ERROR - Something went wrong while saving mapfile!');
 				addLog('error', err);
-				scrollLog();
+				console.error(err);
 			}
 			RDT_requestReload = false;
 			RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 		}
 	} else {
 		if (RDT_loop < 3){
-			if (getFileName(ORIGINAL_FILENAME) === 'r209'){
-				RDT_totalMessages++;
-			}
-			RDT_startMessageAnalysis();
-		} else {
-			RDT_generateDummyMapFile();
-			RDT_totalMessages = 0;
-			startFirstMessage = undefined;
-			RDT_requestReloadWithFix0 = false;
-			RDT_requestReloadWithFix1 = false;
-			$('#RDT_lbl-msg_c_blockHex').removeClass('red');
-			$('#RDT_lbl-msg_c_blockHex').removeClass('green');
-			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
-				RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
+			if (RDT_skipMsgAnalisys === false){
+				var skp = confirm('Do you want to skip Message Analysis?');
+				if (skp === true){
+					TEMP_GEN_DUMMY_MAPFILE();
+				} else {
+					if (getFileName(ORIGINAL_FILENAME) === 'r209'){
+						RDT_totalMessages++;
+					}
+					RDT_startMessageAnalysis();
+				}
 			} else {
-				RDT_MAPFILE = 'The map was not generated due an error';
+				if (getFileName(ORIGINAL_FILENAME) === 'r209'){
+					RDT_totalMessages++;
+				}
+				RDT_startMessageAnalysis();
 			}
-			RDT_showMenu(1);
+		} else {
+			TEMP_GEN_DUMMY_MAPFILE();
 		}
 	}
+	scrollLog();
+}
+function TEMP_GEN_DUMMY_MAPFILE(){
+	RDT_generateDummyMapFile();
+	RDT_totalMessages = 0;
+	startFirstMessage = undefined;
+	RDT_requestReloadWithFix0 = false;
+	RDT_requestReloadWithFix1 = false;
+	$('#RDT_lbl-msg_c_blockHex').removeClass('red');
+	$('#RDT_lbl-msg_c_blockHex').removeClass('green');
+	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
+		RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
+	} else {
+		RDT_MAPFILE = 'The map was not generated for this file.';
+	}
+	RDT_showMenu(1);
 }
 function RDT_renderMessages(id, startOffset, endOffset){
 	if (startOffset !== endOffset && RDT_arquivoBruto !== undefined){

@@ -114,7 +114,11 @@ function main_renderFileList(id, mode){
 			pFile = '...' + pFile.slice(parseInt(pFile.length / 3), pFile.length);
 		}
 		pFile = pFile.replace(new RegExp('/', 'gi'), '\\');
-		originalPFile = originalPFile.replace(new RegExp('/', 'gi'), '\\');
+		if (originalPFile !== undefined){
+			if (originalPFile.indexOf('/') !== -1){
+				originalPFile = originalPFile.replace(new RegExp('/', 'gi'), '\\');
+			}
+		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
 			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + 
@@ -1989,6 +1993,7 @@ function RE3_LIVE_RENDER_POSITIONS(){
 		document.getElementById('RDT_LIVESTATUS_toolBar_Y').innerHTML = REALTIME_Y_Pos;
 		document.getElementById('RDT_LIVESTATUS_toolBar_Z').innerHTML = REALTIME_Z_Pos;
 		document.getElementById('RDT_LIVESTATUS_toolBar_R').innerHTML = REALTIME_R_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_CAM').innerHTML = REALTIME_CurrentCam;
 	}
 	document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_X_PositionHex').innerHTML = REALTIME_X_Pos;
