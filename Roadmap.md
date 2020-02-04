@@ -46,6 +46,9 @@ This file can (and will be) modified several times!
 - ~~Enable Infinite HP~~
 - ~~Add 30K Health~~
 
+## ARD Map File
+- Almost everything!
+
 ## Advanced and Long-Term Goals
 - ~~Create a updater~~
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
