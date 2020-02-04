@@ -2222,6 +2222,9 @@ function RDT_lookForRDTConfigFile(){
 		addLog('warn', 'WARN - This is a Playstation RE3 map file (ARD).');
 		addLog('warn', 'Please be aware that for now R3ditor does not fully support this type of file.');
 		alert('WARN - This is a Playstation RE3 map file (ARD).\n\nPlease be aware that for now R3ditor does not fully support this type of file.');
+		$('#RDT-aba-menu-9').addClass('none');
+	} else {
+		$('#RDT-aba-menu-9').removeClass('none');
 	}
 	if (getFileName(ORIGINAL_FILENAME) === 'r216' || getFileName(ORIGINAL_FILENAME) === 'r50b' || getFileName(ORIGINAL_FILENAME) === 'r212'){
 		RDT_loop = 665;
