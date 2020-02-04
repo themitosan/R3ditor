@@ -25,14 +25,14 @@ This file can (and will be) modified several times!
 - ~~Add God Mode (Add a lot of health to Jill / Carlos)~~
 
 ## Bio3.ini (INI) [WIP]
-- Create this section on App
-- Modify Res.
-- Modify BPP
-- Modify Rofs Location
-- Modify Volume
+- ~~Create this section on App~~
+- ~~Modify Res.~~
+- ~~Modify BPP~~
+- ~~Modify Rofs Location~~
+- ~~Modify Volume~~
 - Modify Key Mapping
-- Modify Video Options (Texture Fixes, Voodoo...)
-- Modify Drivers used on Audio / Video
+- ~~Modify Video Options (Texture Fixes, Voodoo...)~~
+- ~~Modify Drivers used on Audio / Video~~
 - Add the NG+ Option
 
 ## RE3 Livestatus (WIP)
