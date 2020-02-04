@@ -47,6 +47,9 @@ You can view / edit the game's internal messages by loading .msg files or using 
 You can edit messages, doors, which item is in the room, change its position and its animation. [WIP]<br>
 Expect compatibility improvements and more features in the future!
 
+### ARD Map File (.ARD)
+For now this type of file cannot be fully recognized. Keep in mind that R3ditor is a long way from being able to change this type of file.
+
 ### Configuration File (.INI)
 You can create a new config. file, edit your screen resolution, use an experimental resolution scaler and more. [WIP] <br>
 Expect compatibility improvements and more features in the future!
