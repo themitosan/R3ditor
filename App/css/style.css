@@ -52,6 +52,10 @@ input[type='range' i]{
     margin-right: 6px;
     position: relative;
 }
+.fill{
+    width: 100%;
+    height: 100%;
+}
 .chkbox{
     position: absolute;
 }
@@ -1350,6 +1354,7 @@ input[type='range' i]{
     width: 430px;
     height: 430px;
     margin-left: 2px;
+    overflow: hidden;
     border-radius: 2px;
     border-color: #fff;
     position: absolute;

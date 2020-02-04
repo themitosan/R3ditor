@@ -244,6 +244,7 @@ function RDT_getSLDPosition(){
 	$('#RDT_SLD_seekMasksManualBtn').addClass('none');
 	var c = 0;
 	var totalSlots = RDT_totalCameras;
+	document.getElementById('SLD_LAYER_CANVAS').innerHTML = '';
 	document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
 	/*
 		While other things are not implemented on R3ditor, i will use this method to find the masks because it works in most maps!
@@ -315,22 +316,27 @@ function RDT_decryptSldMask(startPosition){
 			var LAYER_width   	  = 'N/A'; 																					  // Rect X
 			var LAYER_height   	  = 'N/A'; 																					  // Rect Y
 			var cropName 		  = '';
-
+			// If Rect
 			if (LAYER_crop_type === '00'){
 				cropName 	 = 'Rect';
 				sliceBlock   = RDT_arquivoBruto.slice(currentPos, parseInt(currentPos + 24));
-				//
 				LAYER_width  = sliceBlock.slice(RANGES['SLD_BLK_width'][0], RANGES['SLD_BLK_width'][1]);
 				LAYER_height = sliceBlock.slice(RANGES['SLD_BLK_height'][0], RANGES['SLD_BLK_height'][1]);
-				//
 				currentPos = parseInt(currentPos + 24);
 			} else {
 				cropName   = 'Square';
 				currentPos = parseInt(currentPos + 16);
 			}
+			// Attempt to render
+
+			var currentCam = document.getElementById('RDT_SLD_SELECT_LAYER').value;
+			var maskImage = localStorage.getItem('RDT_CAM_' + currentCam + '_MASK');
+			if (maskImage !== null && fs.existsSync(maskImage) === true){
+				RDT_RENDER_MASK(c, maskImage, parseInt(LAYER_source_X, 16), parseInt(LAYER_source_Y, 16), parseInt(LAYER_pos_X, 16), parseInt(LAYER_pos_Y, 16), LAYER_crop_type);
+			}
+
 			var L_replace_w = LAYER_width.replace('N/A', '');
 			var L_replace_h = LAYER_height.replace('N/A', '');
-
 			var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
 				'Crop X: <font class="user-can-select">' + LAYER_source_X.toUpperCase() + '</font><br>Crop Y: <font class="user-can-select">' + LAYER_source_Y.toUpperCase() + '</font><div class="SLD_BLOCK_MENU_POSITION">' + 
 				'Position X: <font class="user-can-select">' + LAYER_pos_X.toUpperCase() + '</font><br>Position Y: <font class="user-can-select">' + LAYER_pos_Y.toUpperCase() + '</font></div><div class="SLD_BLOCK_MENU_SIZEDISPLAYMODE">' + 
@@ -351,7 +357,9 @@ function RDT_decryptSldMask(startPosition){
 	RDT_SLD_FOUNDPOS = currentPos;
 	RDT_SLD_SEEK_SEMAPHORE = true;
 }
-
+function RDT_RENDER_MASK(mask_id, mask_src, source_x, source_y, pos_x, pos_y, cropType){
+	var HTML_BLOCK_TEMPLATE = '<img id="RDT_SLD_MASK_IMG_BLOCK_' + mask_id + '" style="top: ' + pos_y + 'px; left: ' + pos_x + 'px;" class="RDT_SLD_MASK_IMG_BLOCK" src="' + mask_src + '">';
+}
 function RDT_SLD_selectMask(){
 	var selectMask = document.getElementById('RDT_SLD_SELECT_LAYER').value;
 	var maskPos = RDT_SLD_MASKS_POSITION[parseInt(selectMask)];
@@ -377,6 +385,8 @@ function RDT_SLD_layer_setBMP(file){
 	if (file !== ''){
 		RDT_SLD_LAYER_TILESET_BMP = file;
 		document.getElementById('RDT_SLD_MASK_TILESET_FILENAME').innerHTML = file;
+		var currentCam = document.getElementById('RDT_SLD_SELECT_CAM').value;
+		localStorage.setItem('RDT_CAM_' + currentCam + '_MASK', RDT_SLD_LAYER_TILESET_BMP);
 		addLog('log', 'SLD - Tileset File: ' + RDT_SLD_LAYER_TILESET_BMP);
 	}
 	scrollLog();
@@ -387,7 +397,6 @@ function RDT_SLD_openOnSLDE(){
 		runExternalSoftware(APP_PATH + '\\App\\tools\\RE3SLDE.exe', [sld_file_path]);
 	}
 }
-
 /*
 	Cameras
 	This will have a different way to retrive the infos!
@@ -2816,12 +2825,19 @@ function RDT_COMPILE_Lv2(oldHex, newReplacementHex){
 }
 function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
-		fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
-		addLog('log', 'INFO - The file was saved successfully! - File: <font class="user-can-select">' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT</font>');
-		addLog('log', 'Path: ' + ORIGINAL_FILENAME);
-		log_separador();
-		RDT_doAfterSave();
+		try{
+			fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
+			addLog('log', 'INFO - The file was saved successfully! - File: <font class="user-can-select">' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT</font>');
+			addLog('log', 'Path: ' + ORIGINAL_FILENAME);
+			log_separador();
+			RDT_doAfterSave();
+		} catch (err){
+			addLog('error', 'ERROR - Something went wrong while saving RDT!');
+			addLog('error', 'Details: ' + err);
+			alert('ERROR!\nSomething went wrong while saving RDT!\n\n' + err);
+		}
 	}
+	scrollLog();
 }
 function RDT_doAfterSave(){
 	document.getElementById('RDT_audio_holder').innerHTML = '';

@@ -47,14 +47,6 @@ function DEBUG_processHexPositions(hexVar){
 		}
 	}
 }
-function sldZoom(){
-	var zValue = document.getElementById('zoomSLDvalue').value;
-	$('#RDT_SLD_MASK_IMG_BLOCK_0').css({'zoom': zValue});
-}
-function sldOpacity(){
-	var oValue = document.getElementById('opacitySLDvalue').value;
-	$('#RDT_SLD_MASK_IMG_BLOCK_0').css({'opacity': oValue});
-}
 /*
 	Draw Lines
 	
