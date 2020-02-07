@@ -29,7 +29,6 @@ function TIM_LOAD(timFile){
 			addLog('warn', 'Maybe the file was not found or the file is broken!');
 		}
 	} catch (err){
-		console.error('ERROR - Something went wrong while loading TIM!\n' + err);
 		addLog('error', 'ERROR - Something went wrong while loading TIM: ' + err);
 	}
 	scrollLog();
@@ -49,7 +48,6 @@ function TIM_seekPattern(){
 		var cases = 0;
 		localStorage.clear();
 		sessionStorage.clear();
-
 		var end_position;
 		var TOT_PATCHS = 0;
 		var start_position;

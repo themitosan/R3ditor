@@ -37,27 +37,32 @@ function MSG_goBackToRDT(){
 	$('#RDT-aba-menu-2').trigger('click');
 }
 function MSG_CARREGAR_ARQUIVO(msgFile){
-	MSG_LENGTH = 0;
-	MSG_Commands = [];
-	MSG_FILL_PASS = '';
-	RE3_LIVE_closeForm();
-	localStorage.clear();
-	MSG_increment = true;
-	MSG_totalComandos = 0;
-	sessionStorage.clear();
-	MSG_useSeekCameras = false;
-	ORIGINAL_FILENAME = msgFile;
-	addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
-	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
-	$('#MSG_openInHex').css({'display': 'inline'});
-	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
-	MSG_hideTranslateInput();
+	if (fs.existsSync(msgFile) === true){
+		MSG_LENGTH = 0;
+		MSG_Commands = [];
+		MSG_FILL_PASS = '';
+		RE3_LIVE_closeForm();
+		localStorage.clear();
+		MSG_increment = true;
+		MSG_totalComandos = 0;
+		sessionStorage.clear();
+		MSG_useSeekCameras = false;
+		ORIGINAL_FILENAME = msgFile;
+		addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
+		MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
+		$('#MSG_openInHex').css({'display': 'inline'});
+		MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
+		MSG_hideTranslateInput();
+	} else {
+		addLog('error', 'ERROR - Unable to read ' + getFileName(msgFile) + '!');
+		addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + msgFile + '</font>)');
+	}
 	scrollLog();
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	if (RAW_DATA !== '' && RAW_DATA !== undefined && RAW_DATA !== null){
 		var t;
-		var c = 0; // The great c = 0!
+		var c = 0;
 		MSG_DECRYPT_LV1_LAST = '';
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
 		var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
@@ -87,7 +92,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		var startPoint = 0;
 		var textoTraduzido = '';
 		while (startPoint < t){
-			// Se for um comando / função especial
+			// If is a funcion / special command
 			if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 				if (textoTraduzido !== ''){
 					final = final + ' ' + textoTraduzido.replace('(Yes / No)(Function: Climax)', '*(Function: Climax)<br>');
@@ -175,7 +180,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var startPoint = 0;
 	var textoTraduzido = '';
 	while (startPoint < t){
-		// Se for um comando / função especial
+		// if is a command / special function
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 			if (textoTraduzido !== ''){
 				localStorage.setItem('MSG_comando-' + cAtual, textoHex);
@@ -217,21 +222,21 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 }
 function MSG_addCommandToList(com, args, hexCommand, index){
 	var COM_HTML_TEMPLATE;
-	// Iniciar Mensagem
+	// Start Message
 	if (com === 1){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Start Message / Change text speed (<font class="italic">FA</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(1, \'' + args + '\', ' + index + ', true);"><br>Text Speed: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
-	// Finalizar Mensgagem
+	// End Message
 	if (com === 2){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: End Message (<font class="italic">FE</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(2, \'' + args + ', ' + index + '\', true);"><br>Final Value: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>'
 	}
-	// Exibir Texto
+	// Show Text
 	if (com === 3){
 		var displayText = localStorage.getItem('MSG_Mensagem-' + index).replace(new RegExp('<code><</code>', 'gi'), '(').replace(new RegExp('<code>></code>', 'gi'), ')');
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-0" id="msg-evento-' + index + '">' + 
@@ -240,7 +245,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<input type="button" value="Hex Edit" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(10, \'' + index + '\', ' + index + ', true);"><br>Text: ' + 
 			'<div class="italic msg-command-text-fix" id="msg-comand-args' + index + '">' + displayText + '</div></div>';
 	}
-	// Exibir Caracter Especial
+	// Display Special Char
 	if (com === 4){
 		var MSG_CHAR = MSG_CHARESPECIAL[localStorage.getItem('MSG_comando-' + index)];
 		var RAW_COM = localStorage.getItem('MSG_comando-' + index);
@@ -249,21 +254,21 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(4, \'' + RAW_COM + '\', ' + index + ', true);"><br>Char ID: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + ' (' + MSG_CHAR + ')</font></div>';
 	}
-	// Exibir o nome de item
+	// Display Item Name
 	if (com === 5){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-5" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Show Item Name (<font class="italic">F8</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(5, \'' + args + '\', ' + index + ', true);"><br>Item Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + ' (' + ITEM[args][0] + ')</font></div>';
 	}
-	// Reproduzir SE
+	// Play SE
 	if (com === 6){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-1" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Execute SE (<font class="italic">F3</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(6, \'' + args + '\', ' + index + ', true);"><br>SE Hex: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
-	// Trocar a Câmera
+	// Exchange the camera
 	if (com === 7){
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-2" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: Change Camera (<font class="italic">F4</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' + 
@@ -271,7 +276,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
 	/*
-		COMANDO DESCONHECIDO USADO EM R101.RDT - SEPTEMBER 28TH
+		SPECIAL FUNCION USED ON R101.RDT - SEPTEMBER 28TH
 		I Think this is a "Wait" function - it put the message execution on hold for a XX time)
 	*/
 	if (com === 8){
@@ -280,7 +285,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(8, \'' + args + '\', ' + index + ', true);"><br>Args: ' + 
 			'<font class="italic" id="msg-comand-args' + index + '">' + args.toUpperCase() + '</font></div>';
 	}
-	// Trocar a cor do texto
+	// Change camera
 	if (com === 9){
 		var cor;
 		var argsFilter;
@@ -387,7 +392,7 @@ function MSG_seekCameras(){
 		MSG_renderCamPreview();
 	}
 }
-// Comandos / Funções
+// Commands / Functions
 function MSG_COMMAND_STARTMSG(index, isModify){
 	if (isModify === undefined){
 		isModify = false;
