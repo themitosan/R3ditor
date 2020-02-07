@@ -1046,13 +1046,13 @@ function MSG_renderDialog(id, args, index, isMod){
 }
 function MSG_hideTranslateInput(){
 	$('#text-hex-editor').css({'display': 'none'});
-	$('#MSG_addcomand-menu').css({'height': '566px'});
-	$('#MSG_optionTranslate').css({'display': 'inline'});
+	$('#MSG_addcomand-menu').css({'height': '563px'});
+	$('#MSG_ADDFUNC_BTN_11').css({'display': 'inline'});
 }
 function MSG_showTranslateInput(){
 	$('#text-hex-editor').css({'display': 'inline'});
 	$('#MSG_addcomand-menu').css({'height': '350px'});
-	$('#MSG_optionTranslate').css({'display': 'none'});
+	$('#MSG_ADDFUNC_BTN_11').css({'display': 'none'});
 }
 function MSG_renderCamPreview(){
 	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
@@ -1470,7 +1470,7 @@ function TRANSFER_RDT_TO_MSG(){
 	document.getElementById('MSG_saveAs').value = 'Save as MSG';
 	MSG_showMenu(1);
 	MSG_hideTranslateInput();
-	$('#MSG_optionTranslate').css({'display': 'none'});
+	$('#MSG_ADDFUNC_BTN_11').css({'display': 'none'});
 	scrollLog();
 }
 function RDT_BG_display(){

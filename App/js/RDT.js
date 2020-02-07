@@ -2183,9 +2183,8 @@ function RDT_finishMessageAnalysis(){
 		RDT_MSG_CURRENT_TEST = 4;
 	}
 	RDT_generateMapFile = true;
-	console.info('\nBest option: ' + RDT_MSG_CURRENT_TEST + '\nTest Result 1: ' + RDT_MSG_RESULT_1 + '\nTest Result 2: ' + RDT_MSG_RESULT_2 + '\nTest Result 3: ' + RDT_MSG_RESULT_3 + '\nTest Result 4: ' + RDT_MSG_RESULT_4 + '\n\n');
 	RDT_readMessages();
-	addLog('log', 'RDT - Analysis Complete!');
+	addLog('log', 'MSG - Analysis Complete!');
 	scrollLog();
 }
 function RDT_startMessageAnalysis(){
