@@ -46,9 +46,10 @@
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
+			<input type="button" class="botao-menu" value="ROFS Extractor" title="Extract Rofs**.dat files using rofs.exe" id="UTILS_rofsExtract_btn" onclick="triggerLoad(16);">
 			<!-- Right -->
-			<input type="button" class="botao-menu botao-aplicar right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
-			<input type="button" class="botao-menu right espaco-right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
+			<input type="button" class="botao-menu botao-aplicar espaco-left right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" class="botao-menu right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 			<input type="button" class="botao-menu right none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<!-- (SET FOR FUTURE) WIP -->
 			<input type="button" class="botao-menu right none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
@@ -1361,6 +1362,7 @@
 			<input type="file" onchange="setLoadFile(13);" id="loadSETTINGS_REM" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(14);" id="loadTilesetBMP" accept=".bmp"/>
 			<input type="file" onchange="setLoadFile(15);" id="loadOBJPatcherFile" accept=".obj"/>
+			<input type="file" onchange="setLoadFile(16);" id="loadRofsFile" accept=".dat"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>

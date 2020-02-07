@@ -340,6 +340,13 @@ function WZ_loadFiles(file){
 	fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 		cfgs.push(line); 
 	});
+	// Rofs Exec
+	if (fs.existsSync(APP_PATH + '\\App\\tools\\rofs.exe') === true){
+		EXEC_rofs = APP_PATH + '\\App\\tools\\rofs.exe';
+	} else {
+		$('#UTILS_rofsExtract_btn').css({'display': 'none'});
+		addLog('error', 'ERROR - Unable to find rofs.exe!');
+	}
 	// Update
 	if (cfgs[0] !== undefined){
 		R3DITOR_check_for_updates = JSON.parse(cfgs[0]);

@@ -98,3 +98,34 @@ function UTILS_OBJ_Patcher_RUN(file){
 	}
 	scrollLog();
 }
+/*
+	Extract ROFS
+*/
+function UTILS_extract_rofs(rofsFile){
+	try{
+		addLog('log', 'ROFS - Extracting file: <font class="user-can-select">' + rofsFile + '</font>');
+		if (R3ditor_tool_selected === false && rofsFile !== undefined && rofsFile !== '' && EXEC_rofs !== undefined){
+			UTILS_rofs_hideButtons();
+			process.chdir(rofsFile.slice(0, parseInt(rofsFile.length - getFileName(rofsFile).length)));
+			runExternalSoftware(EXEC_rofs, [rofsFile]);
+			var timer = setInterval(function(){
+				if (EXTERNAL_APP_EXITCODE === 0){
+					addLog('log', 'ROFS - Process Complete!');
+					setTimeout(function(){
+						reload();
+					}, 1200);
+					clearInterval(timer);
+				}
+			}, 50);
+		}
+	} catch (err){
+		if (err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
+			addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
+			addLog('error', 'Details: ' + err);
+		} else {
+			addLog('error', 'ERROR - Something went wrong while extracting rofs!');
+			addLog('error', 'ERROR - Details: ' + err);
+		}
+	}
+	scrollLog();
+}

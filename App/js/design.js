@@ -2107,6 +2107,19 @@ function R3DITOR_movePercent(id, percent, status){
 		}
 	}
 }
+// Utils - Extract Rofs
+function UTILS_rofs_hideButtons(){
+	$('#menu-topo').css({'display': 'none'});
+	$('#menu-utility').css({'display': 'none'});
+	$('#menu-topo-MOD').css({'display': 'none'});
+	$('#menu-utility-aba').css({'display': 'none'});
+	$('#menu-utility-aba-2').css({'display': 'none'});
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#img-logo').fadeOut({duration: 500, queue: false});
+	} else {
+		$('#img-logo').css({'display': 'none'});
+	}
+}
 /// Run game
 function R3DITOR_RUNGAME(id){
 	if (WZ_showWizard === false){

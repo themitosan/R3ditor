@@ -548,6 +548,9 @@ input[type='range' i]{
 .espaco-right{
     margin-right: 6px;
 }
+.espaco-left{
+    margin-left: 6px;
+}
 .RDT-item-select{
     left: 740px;
     position: sticky;

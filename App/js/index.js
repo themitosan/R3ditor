@@ -367,7 +367,7 @@ function checkCanPlay(runArgs, gameId){
 function deleteFolderRecursive(path){
 	runExternalSoftware('cmd', ['/C', 'rd', '/s', '/q', path]);
 };
-/// Function WIP
+// Function WIP
 function WIP(){
 	log_separador();
 	addLog('warn', 'Sorry buddy... This function / option still #WIP');
@@ -854,6 +854,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 15){
 		$('#loadOBJPatcherFile').trigger('click');
 	}
+	// Load Rofs Extractor
+	if (loadForm === 16){
+		$('#loadRofsFile').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -1031,6 +1035,17 @@ function setLoadFile(input){
 		} else {
 			UTILS_OBJ_Patcher_RUN(cFile.path);
 			document.getElementById('loadOBJPatcherFile').value = '';
+		}
+	}
+	// Rofs
+	if (input === 16){
+		cFile = document.getElementById('loadRofsFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load Rofs Extractor';
+		} else {
+			UTILS_extract_rofs(cFile.path);
+			document.getElementById('loadRofsFile').value = '';
 		}
 	}
 	if (BETA === true){

@@ -56,7 +56,7 @@ This file can (and will be) modified several times!
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
-- Add the option to extract all the Rofs files [WIP 50%]
+- ~~Add the option to extract all the Rofs files~~
 - Add a file generator! [WIP - html2canvas still buggy!]
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
