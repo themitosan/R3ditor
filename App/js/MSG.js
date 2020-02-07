@@ -47,7 +47,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 	sessionStorage.clear();
 	MSG_useSeekCameras = false;
 	ORIGINAL_FILENAME = msgFile;
-	addLog('log', 'MSG - Loading MSG File: ' + msgFile);
+	addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
 	MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
 	$('#MSG_openInHex').css({'display': 'inline'});
 	MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
@@ -654,7 +654,7 @@ function MAKE_NEW_POINTERS(msg_hex){
 	var NEXT_POINTER;
 	var OLD_POINTERS = localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()).match(/.{1,4}/g);
 	var NEW_POINTERS = OLD_POINTERS[0];
-	console.log('Ponteiros antigos: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
+	console.log('Old pointers: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
 	while(c < OLD_POINTERS.length){
 		if (c !== parseInt(OLD_POINTERS.length - 1)){
 			if (c < MSG_ID){
@@ -695,7 +695,7 @@ function MSG_SAVE_ON_RDT(msgHex){
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');
 			log_separador();
 			addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
-			addLog('log', 'Folder: ' + ORIGINAL_FILENAME);
+			addLog('log', 'Folder: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			log_separador();
 		} catch(err){
 			var msgError = 'ERROR - Something went wrong while saving - ';
@@ -769,7 +769,7 @@ function MSG_applyMSGCommand(mode){
 			addLog('warn', 'WARNING - You can\'t save an empty save file!');
 		}
 	}
-	if (mode === 2 && MSG_totalComandos !== 0){ // SAVE MESSAGE ON RDT (I STILL very tense writing this lines!)
+	if (mode === 2 && MSG_totalComandos !== 0){
 		MSG_SAVE_ON_RDT(newHex);
 		MSG_goBackToRDT();
 	} else {
@@ -781,6 +781,6 @@ function MSG_applyMSGCommand(mode){
 		}
 		document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
 		MSG_startMSGDecrypt_Lv2(newHex);
-		scrollLog();
 	}
+	scrollLog();
 }

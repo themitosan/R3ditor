@@ -139,7 +139,7 @@ function INI_CARREGAR_ARQUIVO(file){
 	ORIGINAL_FILENAME = file;
 	BIO3INI_arquivoBruto = fs.readFileSync(ORIGINAL_FILENAME, 'utf-8');
 	INI_resetVars();
-	addLog('log', 'INFO - The file was loaded sucessfully! - File: ' + ORIGINAL_FILENAME);
+	addLog('log', 'INFO - The file was loaded sucessfully! - File: <font class="user-can-select>' + ORIGINAL_FILENAME + '</font>');
 	fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 		INI_array.push(line); 
 	});
@@ -857,14 +857,14 @@ function BIO3INI_MAKEFILE(path, mode){
 		'Data02=' + BIO3INI_data_02 + '\n' +
 		'Data03=' + BIO3INI_data_03 + '\n' +
 		'Data10=' + BIO3INI_data_10 + '\n\n';
-	addLog('log', 'INFO - Bio3INI: The file was generated sucessfully!');
+	addLog('log', 'Bio3INI - The file was generated sucessfully!');
 	log_separador();
 	// Saving the file!
 	if (mode === 0){
 		try{
 			fs.writeFileSync(path, FINAL, 'utf-8');
-			addLog('log', 'INFO - Bio3INI: The file was saved sucessfully!');
-			addLog('log', 'Path - ' + path);
+			addLog('log', 'Bio3INI - The file was saved sucessfully!');
+			addLog('log', 'Path - <font class="user-can-select">' + path + '</font>');
 		} catch (err){
 			console.error('ERROR - Bio3INI: Something went wrong!\n' + err);
 			addLog('error', 'ERROR - Bio3INI: Something went wrong!');

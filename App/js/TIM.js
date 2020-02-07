@@ -24,7 +24,7 @@ function TIM_LOAD(timFile){
 			log_separador();
 			ret = true;
 		} else {
-			addLog('WARN', 'INFO - TIM Health: Status FAIL! - File: ' + timFile);
+			addLog('WARN', 'INFO - TIM Health: Status FAIL! - File: <font class="user-can-select">' + timFile + '</font>');
 			addLog('warn', 'WARN - There is something wrong with this file!');
 			addLog('warn', 'Maybe the file was not found or the file is broken!');
 		}

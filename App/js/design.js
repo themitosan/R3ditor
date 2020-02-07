@@ -19,6 +19,7 @@ var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
 var l_separador = '<div class="menu-separador separador-log-fix"></div>';
+//
 function scrollLog(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
@@ -2108,106 +2109,110 @@ function R3DITOR_movePercent(id, percent, status){
 }
 /// Run game
 function R3DITOR_RUNGAME(id){
-	var c = 0;
-	if (onMSG === false){
-		if (id === 0){
-			if (DESIGN_ENABLE_ANIMS === true){
-				$('#menu-topo-MOD').fadeOut({duration: 120, queue: false});
-			} else {
-				$('#menu-topo-MOD').css({'display': 'none'});
-			}
-			while(c < parseInt(RDT_totalMenus + 1)){
-				$('#RDT_menu-' + c).css({'height': '530px'});
-				$('#RDT_BG_' + c).css({'height': '512px'});
-				c++;
-			}
-			$('#RDT_msgCode_holder').css({'height': '474px'});
-			$('#RDT-enemyNPC-Edit').css({'height': '458px'});
-			$('#RDT_camera_holder').css({'height': '474px'});
-			$('#RDT_enemy_holder').css({'height': '474px'});
-			$('#RDT-MSGCODE-Edit').css({'height': '463px'});
-			$('#RDT-msgCode-hold').css({'height': '516px'});
-			$('#RRDT-camera-Edit').css({'height': '458px'});
-			$('#FILEGEN_contents').css({'height': '474px'});
-			$('#RDT_MSGBLOCKINFO').css({'height': '493px'});
-			$('#RDT_audio_holder').css({'height': '472px'});
-			$('#RDT_door_holder').css({'height': '474px'});
-			$('#RDT-canvas-hold').css({'height': '516px'});
-			$('#RDT-camera-hold').css({'height': '516px'});
-			$('#RDT-camera-Edit').css({'height': '458px'});
-			$('#RDT-enemy-hold').css({'height': '516px'});
-			$('#RDT-audio-hold').css({'height': '516px'});
-			$('#RDT_MSG-holder').css({'height': '472px'});
-			$('#FILEGEN_holder').css({'height': '516px'});
-			$('#RDT-door-hold').css({'height': '518px'});
-			$('#RDT-item-list').css({'height': '472px'});
-			$('#RDT-Item-Edit').css({'height': '458px'});
-			$('#RDT-door-Edit').css({'height': '463px'});
-			$('#FILEGEN_menu').css({'height': '526px'});
-			$('#RDT-geral').css({'height': '516px'});
-			$('#RDT-msgs').css({'height': '516px'});
-			$('#RDT-ifm').css({'height': '516px'});
-
-			$('#RDT-SLD-hold').css({'height': '516px'});
-			$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
-			$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
-
-			console.log('Open RE3');
-
-		} else {
-			if (EXEC_BIO3_original !== ''){
-				$('#btn_run_bio3').css({'display': 'inline'});
-			}
-			if (EXEC_BIO3_MERCE !== ''){
-				$('#btn_run_merce').css({'display': 'inline'});
-			}
-			if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
+	if (WZ_showWizard === false){
+		var c = 0;
+		if (onMSG === false){
+			if (id === 0){
+				if (DESIGN_ENABLE_ANIMS === true){
+					$('#menu-topo-MOD').fadeOut({duration: 120, queue: false});
+				} else {
+					$('#menu-topo-MOD').css({'display': 'none'});
+				}
 				while(c < parseInt(RDT_totalMenus + 1)){
-					$('#RDT_menu-' + c).css({'height': '482px'});
-					$('#RDT_BG_' + c).css({'height': '470px'});
+					$('#RDT_menu-' + c).css({'height': '530px'});
+					$('#RDT_BG_' + c).css({'height': '512px'});
 					c++;
 				}
-				$('#RDT_msgCode_holder').css({'height': '430px'});
-				$('#RDT-enemyNPC-Edit').css({'height': '418px'});
-				$('#RDT_camera_holder').css({'height': '430px'});
-				$('#RRDT-camera-Edit').css({'height': '418px'});
-				$('#RDT_enemy_holder').css({'height': '430px'});
-				$('#RDT-msgCode-hold').css({'height': '472px'});
-				$('#FILEGEN_contents').css({'height': '434px'});
-				$('#RDT_MSGBLOCKINFO').css({'height': '449px'});
-				$('#RDT_audio_holder').css({'height': '430px'});
-				$('#RDT-MSGCODE-Edit').css({'height': '417px'});
-				$('#RDT_door_holder').css({'height': '430px'});
-				$('#RDT-camera-Edit').css({'height': '418px'});
-				$('#RDT-canvas-hold').css({'height': '472px'});
-				$('#RDT-camera-hold').css({'height': '472px'});
-				$('#RDT-enemy-hold').css({'height': '472px'});
-				$('#RDT-audio-hold').css({'height': '472px'});
-				$('#RDT_MSG-holder').css({'height': '430px'});
-				$('#FILEGEN_holder').css({'height': '474px'});
-				$('#RDT-door-Edit').css({'height': '417px'});
-				$('#RDT-door-hold').css({'height': '472px'});
-				$('#RDT-item-list').css({'height': '428px'});
-				$('#RDT-Item-Edit').css({'height': '418px'});
-				$('#FILEGEN_menu').css({'height': '484px'});
-				$('#RDT-geral').css({'height': '472px'});
-				$('#RDT-msgs').css({'height': '472px'});
-				$('#RDT-ifm').css({'height': '472px'});
-
-				$('#RDT-SLD-hold').css({'height': '472px'});
-				$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
-				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
-
-				console.log('Close RE3');
-
-				if (main_currentMenu !== 6){
-					if (DESIGN_ENABLE_ANIMS === true){
-						$('#menu-topo-MOD').fadeIn({duration: 120, queue: false});
-					} else {
-						$('#menu-topo-MOD').css({'display': 'inline'});
+				$('#RDT_msgCode_holder').css({'height': '474px'});
+				$('#RDT-enemyNPC-Edit').css({'height': '458px'});
+				$('#RDT_camera_holder').css({'height': '474px'});
+				$('#RDT_enemy_holder').css({'height': '474px'});
+				$('#RDT-MSGCODE-Edit').css({'height': '463px'});
+				$('#RDT-msgCode-hold').css({'height': '516px'});
+				$('#RRDT-camera-Edit').css({'height': '458px'});
+				$('#FILEGEN_contents').css({'height': '474px'});
+				$('#RDT_MSGBLOCKINFO').css({'height': '493px'});
+				$('#RDT_audio_holder').css({'height': '472px'});
+				$('#RDT_door_holder').css({'height': '474px'});
+				$('#RDT-canvas-hold').css({'height': '516px'});
+				$('#RDT-camera-hold').css({'height': '516px'});
+				$('#RDT-camera-Edit').css({'height': '458px'});
+				$('#RDT-enemy-hold').css({'height': '516px'});
+				$('#RDT-audio-hold').css({'height': '516px'});
+				$('#RDT_MSG-holder').css({'height': '472px'});
+				$('#FILEGEN_holder').css({'height': '516px'});
+				$('#RDT-door-hold').css({'height': '518px'});
+				$('#RDT-item-list').css({'height': '472px'});
+				$('#RDT-Item-Edit').css({'height': '458px'});
+				$('#RDT-door-Edit').css({'height': '463px'});
+				$('#FILEGEN_menu').css({'height': '526px'});
+				$('#RDT-geral').css({'height': '516px'});
+				$('#RDT-msgs').css({'height': '516px'});
+				$('#RDT-ifm').css({'height': '516px'});
+	
+				$('#RDT-SLD-hold').css({'height': '516px'});
+				$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
+				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
+	
+				console.log('Open RE3');
+	
+			} else {
+				if (EXEC_BIO3_original !== ''){
+					$('#btn_run_bio3').css({'display': 'inline'});
+				}
+				if (EXEC_BIO3_MERCE !== ''){
+					$('#btn_run_merce').css({'display': 'inline'});
+				}
+				if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
+					while(c < parseInt(RDT_totalMenus + 1)){
+						$('#RDT_menu-' + c).css({'height': '482px'});
+						$('#RDT_BG_' + c).css({'height': '470px'});
+						c++;
+					}
+					$('#RDT_msgCode_holder').css({'height': '430px'});
+					$('#RDT-enemyNPC-Edit').css({'height': '418px'});
+					$('#RDT_camera_holder').css({'height': '430px'});
+					$('#RRDT-camera-Edit').css({'height': '418px'});
+					$('#RDT_enemy_holder').css({'height': '430px'});
+					$('#RDT-msgCode-hold').css({'height': '472px'});
+					$('#FILEGEN_contents').css({'height': '434px'});
+					$('#RDT_MSGBLOCKINFO').css({'height': '449px'});
+					$('#RDT_audio_holder').css({'height': '430px'});
+					$('#RDT-MSGCODE-Edit').css({'height': '417px'});
+					$('#RDT_door_holder').css({'height': '430px'});
+					$('#RDT-camera-Edit').css({'height': '418px'});
+					$('#RDT-canvas-hold').css({'height': '472px'});
+					$('#RDT-camera-hold').css({'height': '472px'});
+					$('#RDT-enemy-hold').css({'height': '472px'});
+					$('#RDT-audio-hold').css({'height': '472px'});
+					$('#RDT_MSG-holder').css({'height': '430px'});
+					$('#FILEGEN_holder').css({'height': '474px'});
+					$('#RDT-door-Edit').css({'height': '417px'});
+					$('#RDT-door-hold').css({'height': '472px'});
+					$('#RDT-item-list').css({'height': '428px'});
+					$('#RDT-Item-Edit').css({'height': '418px'});
+					$('#FILEGEN_menu').css({'height': '484px'});
+					$('#RDT-geral').css({'height': '472px'});
+					$('#RDT-msgs').css({'height': '472px'});
+					$('#RDT-ifm').css({'height': '472px'});
+	
+					$('#RDT-SLD-hold').css({'height': '472px'});
+					$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
+					$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
+	
+					console.log('Close RE3');
+	
+					if (main_currentMenu !== 6){
+						if (DESIGN_ENABLE_ANIMS === true){
+							$('#menu-topo-MOD').fadeIn({duration: 120, queue: false});
+						} else {
+							$('#menu-topo-MOD').css({'display': 'inline'});
+						}
 					}
 				}
 			}
 		}
+	} else {
+		$('#menu-utility-aba-2').css({'display': 'none'});
 	}
 }

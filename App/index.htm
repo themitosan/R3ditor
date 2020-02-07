@@ -46,11 +46,10 @@
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
-			
-			<input type="button" class="botao-menu none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
-			<input type="button" class="botao-menu none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 			<!-- Right -->
 			<input type="button" class="botao-menu botao-aplicar right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" class="botao-menu right espaco-right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
+			<input type="button" class="botao-menu right none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 			<!-- (SET FOR FUTURE) WIP -->
 			<input type="button" class="botao-menu right none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
 			<input type="button" class="botao-menu right none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
@@ -119,10 +118,10 @@
 		</div>
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
-			<input type="button" class="botao-menu" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
+			<input type="button" class="botao-menu" title="Click here to open the config file on Windows Notepad" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
 			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Cancel" onclick="reload();">
-			<input type="button" class="botao-menu right botao-aplicar" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
+			<input type="button" class="botao-menu right botao-aplicar" title="Click here to to save!" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
 		</div>
 		<!-- Menu INI Editor -->
 		<div class="menu-topo none" id="menu-topo-INI">
@@ -140,8 +139,6 @@
 		<!-- FORM: Settings -->
 		<div class="none" id="menu-SETTINGS" onclick="main_closeFileList();">
 			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="Settings">
-			<input type="button" id="SETTINGS-aba-menu-2" class="aba none" value="Status [WIP]">
-			<input type="button" id="SETTINGS-aba-menu-3" class="aba none" value="[WIP]">
 			<!-- General -->
 			<div class="menu none" id="SETTINGS_menu_1">
 				<div class="menu-general-content" id="SETTINGS_content_1">
@@ -160,7 +157,7 @@
 						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableRE3_live_toolBar"><font class="font-chkbox-fix"> - Enable RE3 Live Toolbar</font>
 						<div class="menu-separador"></div>
 						<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
-						Fast (50) - <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> - Slow (120)</center><br>
+						Fast (50ms) <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> Slow (120ms)</center><br>
 						Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>
 						Fast causes information to be updated in real time, but may decrease overall performance due to <i>Forced reflow</i> and <i>JS Heap</i>.
 					</div>
@@ -199,7 +196,7 @@
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-3">
 						<div class="SETTINGS_FUTURE">
 							I know that for now this menu is very empty and with few options...<br><br>
-							But do not worry! Wait for more options here in the future!<br><br><br>
+							But do not worry! Wait for more options here in the future!<br><br>
 							- TheMitoSan.
 						</div>
 					</div>

@@ -140,7 +140,6 @@ function WZ_showWizardDialog(id){
 		}
 		// Decompile Game
 		if (id === 6){
-			killExternalSoftware();
 			R3DITOR_movePercent(1, 60);
 			$('#WZ_dialog').css({'top': '80px'});
 			$('#WZ_BTN_1').css({'display': 'inline'});

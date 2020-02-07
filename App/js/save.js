@@ -109,11 +109,9 @@ var decimos   = 0;
 var minutos   = 0;
 var hora      = 0;
 var dia       = 0;
-
 /*
 	Functions
 */
-
 function SAV_GenerateNewSave(){
 	if (main_currentMenu === 1 && SAVE_arquivoBruto === undefined){
 		if (fs.existsSync(APP_PATH + '\\App\\tools\\format.r3save') === true){
@@ -191,7 +189,7 @@ function MAKE_SAVE(slot){
 			addLog('error', msg);
 		}
 	} else {
-		var msg = 'Unable to save the game save if you haven\'t opened it yet! (File: ' + ORIGINAL_FILENAME + ')';
+		var msg = 'Unable to save the game save if you haven\'t opened it yet! (File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>)';
 		addLog('error', 'ERROR - ' + msg);
 		console.error(msg);
 	}
@@ -207,10 +205,11 @@ function finalizeSave(){
 }
 function CARREGAR_SAVE(sFile){
 	localStorage.clear();
+	sessionStorage.clear();
 	SAVE_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = sFile;
 	log_separador();
-	addLog('log', 'SAV - Loading file: ' + sFile);
+	addLog('log', 'SAV - Loading file: <font class="user-can-select">' + sFile + '</font>');
 	log_separador();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente

@@ -391,7 +391,7 @@ function runGame(exe, args){
 	var color;
 	RE3_PID = 0;
 	const { spawn } = require('child_process');
-	if (args === undefined || args === null){
+	if (args === undefined || args === null || args === ''){
 		args = [''];
 	}
 	const ls = spawn(exe, args);
@@ -442,42 +442,53 @@ function runGame(exe, args){
 	});
 }
 function runExternalSoftware(exe, args){
-	var color;
-	EXTERNAL_APP_EXITCODE = 0;
-	EXTERNAL_APP_RUNNING = true;
-	const { spawn } = require('child_process');
-	if (args === undefined || args === null){
-		args = [''];
-	}
-	const ls = spawn(exe, args);
-	EXTERNAL_APP_PID = ls.pid;
-	ls.stdout.on('data', (data) => {
-		addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
-		scrollLog();
-	});
-	ls.stderr.on('data', (data) => {
-		addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
-		scrollDownLog();
-	});
-	ls.on('close', (code) => {
-		EXTERNAL_APP_PID = 0;
-		EXTERNAL_APP_RUNNING = false;
-		EXTERNAL_APP_EXITCODE = code;
-		if (WZ_showWizard === true && WZ_lastMenu === 3){
-			$('#WZ_BTN_2').css({'display': 'inline'});
+	try{
+		var color;
+		EXTERNAL_APP_EXITCODE = 0;
+		EXTERNAL_APP_RUNNING = true;
+		const { spawn } = require('child_process');
+		if (args === undefined || args === null || args === ''){
+			args = [''];
 		}
-		process.chdir(TEMP_APP_PATH);
-		if (code > 1){
-			color = 'red';
-		} else {
-			color = 'green';
-		}
-		if (exe !== 'cmd'){
-			addLog('log', 'External App - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
-			return code;
+		const ls = spawn(exe, args);
+		EXTERNAL_APP_PID = ls.pid;
+		ls.stdout.on('data', (data) => {
+			addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 			scrollLog();
+		});
+		ls.stderr.on('data', (data) => {
+			addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+			scrollDownLog();
+		});
+		ls.on('close', (code) => {
+			EXTERNAL_APP_PID = 0;
+			EXTERNAL_APP_RUNNING = false;
+			EXTERNAL_APP_EXITCODE = code;
+			if (WZ_showWizard === true && WZ_lastMenu === 3){
+				$('#WZ_BTN_2').css({'display': 'inline'});
+			}
+			process.chdir(TEMP_APP_PATH);
+			if (code > 1){
+				color = 'red';
+			} else {
+				color = 'green';
+			}
+			if (exe !== 'cmd'){
+				addLog('log', 'External App - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
+				return code;
+				scrollLog();
+			}
+		});
+	} catch (err){
+		log_separador();
+		if (WZ_showWizard === true && err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
+			addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
+			addLog('error', 'Details: ' + err);
+		} else {
+			addLog('error', 'Something went wrong while running ' + getFileName(exe) + '!');
+			addLog('error', 'Details: ' + err);
 		}
-	});
+	}
 	scrollLog();
 }
 // Save Files
