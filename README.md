@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
 
 # R3ditor
-R3ditor (it reads REditor) is a editor of files written in JS / Node-Webkit to perform reverse engineering studies on Resident Evil 3.<br>
+R3ditor (it reads REditor) is a editor of files written in JS / NW.js (aka. Node-Webkit) to perform reverse engineering studies on Resident Evil 3.<br>
 <p align="center"><img src="https://i.imgur.com/bV0ljHH.png" width="680" height="360"></p>
 
 ## How to install
@@ -72,12 +72,12 @@ You can restore your RDT by using the "Restore Last Backup" button on "RDT Edito
 ## Third-Party software used on this project
 
 Engine:
-- <a href="https://nwjs.io" target="_blank">NW.js</a> by <a href="https://twitter.com/nw_js" target="_blank">NW.js community</a>
+- <a href="https://nwjs.io" target="_blank">NW.js (aka. Node-Webkit)</a> by <a href="https://twitter.com/nw_js" target="_blank">NW.js community</a>
 
 External JS Plugins:
 - <a href="https://jquery.com/" target="_blank">jQuery</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
 
-Node-Webkit Plugins:
+NW.js Plugins:
 - <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> by <a href="https://github.com/Rob--" target="_blank"> Rob--</a>
 
 These files can be found in "App/tools/":
