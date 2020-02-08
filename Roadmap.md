@@ -57,6 +57,7 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Add the option to extract all the Rofs files~~
+- ~~Create a custom executable for nw.exe~~
 - Add a file generator! [WIP - html2canvas still buggy!]
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
