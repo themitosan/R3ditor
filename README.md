@@ -8,7 +8,7 @@ R3ditor (it reads REditor) is a editor of files written in JS / NW.js (aka. Node
 - Download NW.js (Node-Webkit) V. 0.37.4 and extract it into a folder of your choice!<br>(Click <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" target="_blank">here</a> to download)
 
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
-- Open "nw.exe".
+- Open "R3ditor.exe".
 
 ## Requirements
 - OS: Windows 7 or higher
