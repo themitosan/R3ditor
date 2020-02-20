@@ -12,12 +12,12 @@ var MSG_useSlice = false;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
 var MSG_useClimaxFix = false;
+var MSG_CONTAINS_FE00 = false;
 var MSG_DECRYPT_LV1_LAST = '';
 var MSG_useSeekCameras = false;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
 function MSG_goBackToRDT(){
-	document.title = APP_NAME + ' - Please wait...';
 	localStorage.clear();
 	sessionStorage.clear();
 	MSG_LENGTH = 0;
@@ -27,11 +27,13 @@ function MSG_goBackToRDT(){
 	MSG_totalComandos = 0;
 	MSG_Commands = undefined;
 	MSG_FILL_PASS = undefined;
+	MSG_CONTAINS_FE00 = false;
 	MSG_DECRYPT_LV1_LAST = '';
 	MSG_useSeekCameras = false;
 	MSG_arquivoBruto = undefined;
 	MSG_CURRENT_RDT_MESSAGE_END = 0;
 	MSG_CURRENT_RDT_MESSAGE_START = 0;
+	document.title = APP_NAME + ' - Please wait...';
 	TRANSFER_MSG_TO_RDT();
 	RDT_openFile(ORIGINAL_FILENAME);
 	$('#RDT-aba-menu-2').trigger('click');
@@ -112,6 +114,10 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 					}
 				} else {
 					COMMAND = MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][1] + ' - Attr: ' + RAW_DATA_ARRAY[startPoint + 1] + ')<br>';
+				}
+				// End message - fix for last message
+				if (RAW_DATA_ARRAY[startPoint] === 'fe'){
+					MSG_CONTAINS_FE00 = true;
 				}
 				// End message - fix for climax
 				if (RAW_DATA_ARRAY[startPoint] === 'fe' && MSG_useClimaxFix === true){
@@ -231,6 +237,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	}
 	// End Message
 	if (com === 2){
+		MSG_CONTAINS_FE00 = true;
 		COM_HTML_TEMPLATE = '<div class="evento evt-type-4" id="msg-evento-' + index + '">' + 
 			'(' + parseInt(index + 1) + ') Function: End Message (<font class="italic">FE</font>)<input type="button" value="Remove" class="btn-remover-comando btn-editMSGfix" onclick="MSG_REMOVECOMMAND(' + index + ', false);">' +
 			'<input type="button" value="Modify" class="btn-remover-comando btn-editMSGfix" onclick="MSG_renderDialog(2, \'' + args + ', ' + index + '\', true);"><br>Final Value: ' + 
@@ -422,6 +429,7 @@ function MSG_COMMAND_ENDMSG(index, isModify){
 		isModify = false;
 	}
 	MSG_increment = false;
+	MSG_CONTAINS_FE00 = true;
 	var attrFinal = document.getElementById('msg-fim-id').value;
 	if (attrFinal !== '*#'){
 		if (attrFinal === '' || attrFinal.length > 2){
@@ -630,8 +638,10 @@ function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
 		scrollLog();
 	}
 }
-// The dark side of this ENTIRE FILE!
-// Like... DON'T TOUCH THIS PART - FOR REAL!
+/*
+	The dark side of this ENTIRE FILE!
+	Like... DON'T TOUCH THIS PART - FOR REAL!
+*/
 function MSG_renderPreviewBlock(c_msg_hex){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 1;
@@ -659,7 +669,7 @@ function MAKE_NEW_POINTERS(msg_hex){
 	var NEXT_POINTER;
 	var OLD_POINTERS = localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()).match(/.{1,4}/g);
 	var NEW_POINTERS = OLD_POINTERS[0];
-	console.log('Old pointers: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
+	//console.log('Old pointers: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
 	while(c < OLD_POINTERS.length){
 		if (c !== parseInt(OLD_POINTERS.length - 1)){
 			if (c < MSG_ID){
@@ -708,7 +718,7 @@ function MSG_SAVE_ON_RDT(msgHex){
 			console.error(msgError + err);
 		}
 	} else {
-		addLog('ERROR - Function list are empty or RDT file was not defined!');
+		addLog('error', 'ERROR - Function list are empty or RDT file was not defined!');
 	}
 	scrollLog();
 }
@@ -775,8 +785,13 @@ function MSG_applyMSGCommand(mode){
 		}
 	}
 	if (mode === 2 && MSG_totalComandos !== 0){
-		MSG_SAVE_ON_RDT(newHex);
-		MSG_goBackToRDT();
+		if (MSG_CONTAINS_FE00 === true){
+			MSG_SAVE_ON_RDT(newHex);
+			MSG_goBackToRDT();
+		} else {
+			addLog('warn', 'WARN - Unable to save message: You need insert \"End Message\" function before saving!');
+			alert('ERROR - Unable to save message!\nYou need insert \"End Message\" function before saving!');
+		}
 	} else {
 		MSG_Commands = [];
 		MSG_FILL_PASS = '';
@@ -784,6 +799,7 @@ function MSG_applyMSGCommand(mode){
 		if (POINTER_HOLD !== undefined){
 			localStorage.setItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
 		}
+		MSG_CONTAINS_FE00 = false;
 		document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
 		MSG_startMSGDecrypt_Lv2(newHex);
 	}
