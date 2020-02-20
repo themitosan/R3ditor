@@ -6,8 +6,8 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<!-- External API -->
 		<script type="text/javascript" src="js/external_api/jquery-3.4.1.min.js"></script>
-		<!--<script type="text/javascript" src="js/external_api/html2canvas.js"></script>-->
-		<!--<script type="text/javascript" src="js/external_api/canvas2image.js"></script>-->
+		<script type="text/javascript" src="js/external_api/html2canvas.js"></script>
+		<script type="text/javascript" src="js/external_api/canvas2image.js"></script>
 		<!-- Database -->
 		<script type="text/javascript" src="js/database.js"></script>
 		<script type="text/javascript" src="js/html_includes.js"></script>
@@ -580,23 +580,31 @@
 				<!-- The last RDT goes here -->
 			</div>
 		</div>
-		<!-- FORM: File Generator -->
+		<!-- FORM - File Generator -->
 		<div class="none" id="menu-FILEGEN">
 			<input type="button" id="FILEGEN-aba-menu" class="aba aba-left-fix aba-select" value="File Generator">
-			<!-- FILEGEN: General -->
+			<!-- FILEGEN - General -->
 			<div class="menu" id="FILEGEN_menu">
 				<div class="menu-general-content" id="FILEGEN_holder">
 					<center><font class="titulo">File Generator</font></center>
 					<div class="RDT-holder" id="FILEGEN_contents">
 						<textarea placeholder="Insert your text here" class="FG_TEXT" id="FILEGEN_text" oninput="FG_RENDER();"></textarea>
+						<div class="FG_FILE_Options">
+							<center><font class="titulo">Options</font></center><br>
+							<input type="radio" class="CURSOR_POINTER" onclick="FG_selectTextColor(0);" checked="true" id="FG_select_color_0"><font class="CURSOR_POINTER" onclick="FG_selectTextColor(0);">Normal Color</font>
+							<input type="radio" class="CURSOR_POINTER FG_selectColor_space_0" onclick="FG_selectTextColor(1);" id="FG_select_color_1"><font class="CURSOR_POINTER FG_selectColor_space_1" onclick="FG_selectTextColor(1);">Red Color</font><br>
+							<input type="radio" class="CURSOR_POINTER" onclick="FG_selectTextColor(2);" id="FG_select_color_2"><font class="CURSOR_POINTER" onclick="FG_selectTextColor(2);">Green Color</font>
+							<input type="radio" class="CURSOR_POINTER FG_selectColor_space_0" onclick="FG_selectTextColor(3);" id="FG_select_color_3"><font class="CURSOR_POINTER FG_selectColor_space_1" onclick="FG_selectTextColor(3);">Ice Blue Color</font>
+						</div>
 						<input type="button" value="Toggle Size (Size: Double)" id="BTN_saveImage" class="RDT-btn-apply color-white FG_BTN" onclick="FILEGEN_TOGGLE_RES();">
+						<input type="button" value="Save Image as BMP [WIP]" id="BTN_saveImage" class="RDT-btn-apply color-green FG_BTN" style="left: 806px;" onclick="FILEGEN_saveImage();">
 						<!-- Text Canvas -->
 						<div class="FG_CANVAS" id="FILEGEN_CANVAS"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- FORM: RDT -->
+		<!-- FORM - RDT -->
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
 			<input type="button" id="RDT-aba-menu-9" class="aba" value="Cameras (???)" onclick="RDT_showMenu(9);">
@@ -1290,12 +1298,14 @@
 					Rob-- - memoryjs - <a target="_blank" href="https://github.com/Rob--/memoryjs">More Info</a><br>
 					MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
 					pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
+					hongru - Canvas2Image - <a  target="_blank" href="https://github.com/hongru/canvas2image">GitHub</a><br>
 					The Mortican - BIO3GPS - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
+					Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
 					Rick (aka. The CheatEngine Player!) - <a href="https://www.youtube.com/channel/UCcjNDIi38w9FCvB-Am0OT9A" target="_blank">More Info</a><br>
 					The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
 					Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
-					Biohazard España - Fix OBJ to RE3MV (OBJ Patcher) and ARD info - <a target="_blank" href="https://twitter.com/biohazardEsp">More Info</a><br>
+					<font title="The great master!">Biohazard España</font> - Fix OBJ to RE3MV (OBJ Patcher) and ARD info - <a target="_blank" href="https://twitter.com/biohazardEsp">More Info</a><br>
 				</div><br>
 				Special Thanks To:<br><br>
 				<a target="_blank" href="https://twitter.com/biohazardEsp"><u><font title="Saludos, mi querido amigo!">Biohazard España</font> - for teaching me several RE3 tricks!</u></a><br>

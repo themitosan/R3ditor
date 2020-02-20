@@ -6,6 +6,12 @@
 /*
 	FILEGEN
 	File Generator Code
+
+	html2canvas pertence a Niklas von Hertzen.
+	https://html2canvas.hertzen.com/
+
+	Canvas2Image pertence a hongru
+	https://github.com/hongru/canvas2image
 */
 var FILEGEN_TOGGLE = false;
 function FILEGEN_TOGGLE_RES(){
@@ -19,21 +25,21 @@ function FILEGEN_TOGGLE_RES(){
 		FILEGEN_TOGGLE = false;
 	}
 }
-/*
 function FILEGEN_saveImage(){
 	$('#FILEGEN_CANVAS').css({'zoom': '1', 'left': '926px'});
 	html2canvas(document.getElementById('FILEGEN_CANVAS'), { useCORS: true, foreignObjectRendering: false }).then(function(canvas){
-		Canvas2Image.saveAsPNG(canvas);
+		Canvas2Image.saveAsBMP(canvas);
 	});
 	$('#FILEGEN_CANVAS').css({'zoom': '2', 'left': '400px'});
-}*/
+}
+var FG_file_color = '';
 function FG_RENDER(){
 	var c = 0;
 	var x_offset = 0;
 	var y_offset = 0;
 	document.getElementById('FILEGEN_CANVAS').innerHTML = '';
 	if (document.getElementById('FILEGEN_text').value !== ''){
-		var text = document.getElementById('FILEGEN_text').value.replace(new RegExp('\n', 'gi'), '@').match(/.{1,1}/g);
+		var text = document.getElementById('FILEGEN_text').value.toString().replace(new RegExp('\n', 'gi'), '@').match(/.{1,1}/g);
 		while(c < text.length){
 			if (FG_DICIONARIO[text[c]] !== undefined){
 				if (text[c] === '@' || text[c] === '\n'){
@@ -42,8 +48,8 @@ function FG_RENDER(){
 					c++;
 				} else {
 					var distance = parseInt(FG_DICIONARIO[text[c]][1]) + x_offset;
-					var HTML_TEMPLATE = '<img src="' + APP_PATH + '/App/Img/chars.png" style="clip-path: inset(' + FG_DICIONARIO[text[c]][0] + '); position: absolute; left: ' + distance + 'px;top: ' + y_offset + 'px;">';
-					$('#FILEGEN_CANVAS').append(HTML_TEMPLATE);
+					var FG_HTML_TEMPLATE = '<img src="' + APP_PATH + '/App/Img/chars' + FG_file_color + '.png" style="clip-path: inset(' + FG_DICIONARIO[text[c]][0] + '); position: absolute; left: ' + distance + 'px;top: ' + y_offset + 'px;">';
+					$('#FILEGEN_CANVAS').append(FG_HTML_TEMPLATE);
 					x_offset = x_offset + FG_DICIONARIO[text[c]][2];
 					c++;
 				}
@@ -51,6 +57,31 @@ function FG_RENDER(){
 				c++;
 			}
 		}
+	}
+}
+function FG_selectTextColor(colorId){
+	FG_clearAllRadioButtons();
+	if (colorId === 0){
+		FG_file_color = '';
+	}
+	if (colorId === 1){
+		FG_file_color = '_red';
+	}
+	if (colorId === 2){
+		FG_file_color = '_green';
+	}
+	if (colorId === 3){
+		FG_file_color = '_iceBlue';
+	}
+	document.getElementById('FG_select_color_' + colorId).checked = true;
+	FG_RENDER();
+}
+function FG_clearAllRadioButtons(){
+	var t = 3;
+	var c = 0;
+	while(c < parseInt(t + 1)){
+		document.getElementById('FG_select_color_' + c).checked = false;
+		c++;
 	}
 }
 /*

@@ -116,7 +116,7 @@ input[type='range' i]{
     filter: blur(200px);
 }
 .about-tks{
-    width: 80%;
+    width: 62%;
     height: 108px;
     overflow: auto;
     border-radius: 6px;
@@ -1443,8 +1443,19 @@ input[type='range' i]{
     margin-bottom: 2px;
 }
 /*
-    File Gen
+    FileGen
 */
+.CURSOR_POINTER{
+    cursor: pointer;
+}
+.FG_selectColor_space_0{
+    position: sticky;
+    left: 130px;
+}
+.FG_selectColor_space_1{
+    position: sticky;
+    left: 146px;
+}
 .FG_CANVAS{
     zoom: 2;
     left: 400px;
@@ -1453,7 +1464,7 @@ input[type='range' i]{
     overflow: hidden;
     position: absolute;
     background-color: #000;
-    box-shadow: 0px 0px 10px #616161d9;
+    box-shadow: 0px 0px 10px #14141450;
 }
 .FG_TEXT{
     z-index: 9;
@@ -1461,7 +1472,7 @@ input[type='range' i]{
     border: 2px;
     resize: none;
     width: 772px;
-    height: 422px;
+    height: 182px;
     font-size: medium;
     position: absolute;
     border-color: #fff;
@@ -1469,10 +1480,21 @@ input[type='range' i]{
     background-color: #141414;
 }
 .FG_BTN{
-    top: 422px;
-    left: 808px;
+    top: 424px;
+    left: 152px;
     width: 492px;
     position: absolute;
+}
+.FG_FILE_Options{
+    z-index: 1;
+    top: 250px;
+    color: #fff;
+    width: 760px;
+    height: 140px;
+    padding: 10px;
+    border-radius: 6px;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #444, #222);
 }
 /*
     RDT Door Edit Prev
