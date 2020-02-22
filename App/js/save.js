@@ -1,6 +1,6 @@
 ﻿/*
 	R3ditor - save.js
-	Por mitosan/mscore/misto_quente/mscorehdr
+	By mitosan/mscore/misto_quente/mscorehdr
 	Help me - please!
 */
 var SAVE_arquivoBruto;
@@ -358,10 +358,10 @@ function save_renderBox(s_slot){
 		if (current > l){
 			break;
 		} else {
-			var IT = JILL_BAU[current].slice(0, 2); // Nome do Item
-			var QU = JILL_BAU[current].slice(2, 4); // Quantidade
+			var IT = JILL_BAU[current].slice(0, 2); 	  // Nome do Item
+			var QU = JILL_BAU[current].slice(2, 4); 	  // Quantidade
 			var AT = '0' + JILL_BAU[current].slice(5, 6); // Atributo
-			var NU = JILL_BAU[current].slice(6, 8); // Segunda var
+			var NU = JILL_BAU[current].slice(6, 8); 	  // Segunda var
 			if (ATTR[AT] === undefined){
 				var msg = '(Item Box) Item ' + current + ' have an unknown attr.: ' + AT;
 				console.warn('WARNING - ' + msg);
@@ -392,10 +392,10 @@ function save_renderBox(s_slot){
 		if (current > l){
 			break;
 		} else {
-			var IT = CARLOS_BAU[current].slice(0, 2); // Nome do Item
-			var QU = CARLOS_BAU[current].slice(2, 4); // Quantidade
+			var IT = CARLOS_BAU[current].slice(0, 2); 		// Nome do Item
+			var QU = CARLOS_BAU[current].slice(2, 4); 		// Quantidade
 			var AT = '0' + CARLOS_BAU[current].slice(5, 6); // Atributo
-			var NU = CARLOS_BAU[current].slice(6, 8); // Segunda var
+			var NU = CARLOS_BAU[current].slice(6, 8); 		// Segunda var
 			if (ATTR[AT] === undefined){
 				var msg = '(Item Box) Item ' + current + ' have unknown attr.: ' + AT;
 				console.warn('WARN - ' + msg);
@@ -686,6 +686,9 @@ function applySaveCount(){
 }
 function applyHP(){
 	var newHP = document.getElementById('ex-HP-id').value;
+	if (newHP === ''){
+		newHP = 200;
+	}
 	if (newHP < 0){
 		newHP = 0;
 	}

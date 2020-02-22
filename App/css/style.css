@@ -1062,6 +1062,17 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #737373, #545454);
     animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
 }
+.aba-settings-fix{
+    left: 970px;
+    width: 350px;
+}
+.aba-principal-fix{
+    width: 644px;
+}
+.aba-settings-fix-2{
+    top: -44px;
+    left: 970px;
+}
 .aba-utility-fix{
     top: 484px;
     display: none;

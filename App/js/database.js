@@ -1,6 +1,6 @@
 ﻿/*
-	R3ditor - Database.js
-	Por mitosan/mscore/misto_quente/mscorehdr
+	R3ditor - database.js
+	By mitosan/mscore/misto_quente/mscorehdr
 	Em terra de quem tem nemmy jill's sofrem!
 */
 var ITEM = {
@@ -9,7 +9,7 @@ var ITEM = {
 	'02': ['Sigpro SP 2009 handgun', 						   'Carlos alternative pistol.<br>Not a big deal but it can help you if you\'re in the worst...', 																																	   							 '0px 392px 0px 112px',  '-277px', '0', '0', '2', '2', '0',    '0px 296px 0px 84px',    '61', '0', true], // px
 	'03': ['Beretta M92F handgun, custom S.T.A.R.S edition',   'M92F special version of S.T.A.R.S made by Kendo.<br><br>There is a legend has it that those who have no life play using it without ever reloading.', 																										 '0px 335px 0px 168px',  '-390px', '0', '0', '3', '3', '0',    '0px 254px 0px 127px',   '19', '0', true], // px
 	'04': ['Shotgun Benelli M3S', 							   'This is a Benelli M3S Shotgun but with a sawed-off barrel.<br><br>It can be a great help if you aim up when you have an enemy nearby!', 								   																					 '0px 280px 0px 224px',  '-500px', '0', '0', '4', '4', '0',    '0px 211px 0px 168px',  '-23', '0', true], // px
-	'05': ['Smith & Wesson M629C .44-caliber magnum revolver', 'It\'s a magnum boy! Just shoot the foot and the head explodes! <br> Even though it\'s absurdly powerful, it doesn\'t quite match the magnum of the previous games. (design)', 														   						 '0px 227px 0px 280px',  '-609px', '0', '0', '5', '5', '0',    '0px 170px 0px 210px',  '-65', '0', true], // px
+	'05': ['Smith & Wesson M629C .44-caliber magnum revolver', 'It\'s a magnum boy! Just shoot the foot and the head explodes!<br>Even though it\'s absurdly powerful, it doesn\'t quite match the magnum of the previous games. (design)', 														   						 '0px 227px 0px 280px',  '-609px', '0', '0', '5', '5', '0',    '0px 170px 0px 210px',  '-65', '0', true], // px
 	'06': ['Hk-p Grenade launcher with commmon rounds',		   'It is extremely effective against most enemies in the game.', 																																	   															 '0px 168px 0px 335px',  '-722px', '0', '0', '6', '8', '0',    '0px 127px 0px 252px', '-107', '0', true],
 	'07': ['Hk-p Grenade launcher with fire rounds',	 	   'It is extremely effective against most enemies in the game.', 																																	   															 '0px 114px 0px 392px',  '-833px', '0', '0', '6', '8', '0',    '0px 86px 0px 294px',  '-149', '0', true],
 	'08': ['Hk-p Grenade launcher with acid rounds',	 	   'It is extremely effective against the worm you find in the cemetery (park).', 																														   														 '0px 58px 0px 446px',   '-943px', '0', '0', '6', '8', '0',    '0px 43px 0px 336px',  '-191', '0', true],

@@ -29,12 +29,16 @@
 	<body>
 		<!-- Main Menu -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
-		<div class="menu-topo none" id="menu-topo">
+		<div class="menu-topo aba-principal-fix none" style="width: 560px;" id="menu-topo">
 			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your save file" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to create / edit messages (FA02FC...)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.RDT)" title="Click here to edit Resident Evil 3 Room Data Table (RDT) files" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="RDT Editor (.RDT, .ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT) files" onclick="main_menu(3);">
 			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
-			<!-- Right -->
+			<!--<input type="button" class="botao-menu" value="Mix Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="WIP();"> -->
+		</div>
+		<!-- Settings Tab -->
+		<input type="button" id="menu-utility-aba-3" class="aba aba-left-fix aba-select aba-utility-fix-2 aba-settings-fix-2" value="Settings">
+		<div class="menu-topo aba-settings-fix" id="menu-settings">
 			<input type="button" class="botao-menu right" title="Reload this application!" value="Reload App" onclick="reload();">
 			<input type="button" class="botao-menu right" title="Click to see the about page!" value="About" onclick="showAbout();">
 			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor." value="Check for updates" onclick="checkForUpdates();">
@@ -127,7 +131,7 @@
 		<!-- Menu INI Editor -->
 		<div class="menu-topo none" id="menu-topo-INI">
 			<input type="button" class="botao-menu" value="Open INI" onclick="triggerLoad(10);">
-			<input type="button" class="botao-menu none" id="INI_makeNewIni" value="Ganerate INI" onclick="BIO3INI_MAKE_WZINI(2);">
+			<input type="button" class="botao-menu none" id="INI_makeNewIni" value="Generate INI" onclick="BIO3INI_MAKE_WZINI(2);">
 			<input type="button" class="botao-menu none" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
 			<input type="button" class="botao-menu none" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
 			<!-- Right -->
