@@ -138,6 +138,7 @@ var ITEM = {
 	'83': ['Game inst. A', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180° Rotation, Emergency Escape, Emergency Bypass, and more.', 											 						 '0px 446px 0px 57px', '-166px',  '13', '5', '17', '1', '13', '0px 337px 0px 42px',   '103', '13', false],
 	'84': ['Game inst. B', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.', 													 												 '0px 392px 0px 112px', '-277px', '13', '5', '18', '2', '13', '0px 296px 0px 84px',    '61', '13', false],
 	'85': ['(BOTU) Recipient with liquid inside',			   'BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.', 													 									 '0px 335px 0px 168px', '-390px', '13', '5', '19', '3', '13', '0px 254px 0px 127px',   '19', '13', false],
+	'86': ['DUMMY ITEM',			   						   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.', 													 									 												 '0px 335px 0px 168px', '-390px', '13', '5', '19', '3', '13', '0px 254px 0px 127px',   '19', '13', false],
 	/*
 		The values below can be added to inventory as an item, but checking them can make the game crash.
 		If you insert these values in RDT as an item, it will recognize as current map.
