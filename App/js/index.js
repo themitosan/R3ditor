@@ -94,6 +94,9 @@ function load(){
 	scrollLog();
 }
 function R3DITOR_CHECK_FILES_AND_DIRS(){
+	if (fs.existsSync(APP_PATH + '\\nw.exe') === true){
+		fs.unlinkSync(APP_PATH + '\\nw.exe');
+	}
 	if (fs.existsSync(APP_PATH + '\\Update') === false){
 		fs.mkdirSync(APP_PATH + '\\Update');
 	}
@@ -108,10 +111,10 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\README.md') === true){
 		fs.unlinkSync(APP_PATH + '\\README.md');
-	};
+	}
 	if (fs.existsSync(APP_PATH + '\\Roadmap.md') === true){
 		fs.unlinkSync(APP_PATH + '\\Roadmap.md');
-	};
+	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\SAV') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\SAV');
 	}

@@ -1,7 +1,7 @@
 /*
 	utils.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Me ajuda? Pliiiiz!
+	Help me? Pliiiiz!
 */
 /*
 	FILEGEN
