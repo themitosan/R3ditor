@@ -4,12 +4,12 @@
 	Em terra de quem tem nemmy jill's sofrem!
 */
 var ITEM = {
-	'00': ['Empty Slot', 									   '', 																																																									   						 '0px 502px 0px 0px',     '-54px', '0', '0', '0', '0', '0',    '0px 380px 0px 0px',    '145', '0', false], // px
-	'01': ['Combat Knife', 									   'It is a simple combat Knife<br><br>It can be very useful when you are low on ammunition. In the hand of those who know how to use, it does damage!', 																								   		 '0px 446px 0px 57px',   '-166px', '0', '0', '1', '1', '0',    '0px 337px 0px 42px',   '103', '0', false], // px
-	'02': ['Sigpro SP 2009 handgun', 						   'Carlos alternative pistol.<br>Not a big deal but it can help you if you\'re in the worst...', 																																	   							 '0px 392px 0px 112px',  '-277px', '0', '0', '2', '2', '0',    '0px 296px 0px 84px',    '61', '0', true], // px
-	'03': ['Beretta M92F handgun, custom S.T.A.R.S edition',   'M92F special version of S.T.A.R.S made by Kendo.<br><br>There is a legend has it that those who have no life play using it without ever reloading.', 																										 '0px 335px 0px 168px',  '-390px', '0', '0', '3', '3', '0',    '0px 254px 0px 127px',   '19', '0', true], // px
-	'04': ['Shotgun Benelli M3S', 							   'This is a Benelli M3S Shotgun but with a sawed-off barrel.<br><br>It can be a great help if you aim up when you have an enemy nearby!', 								   																					 '0px 280px 0px 224px',  '-500px', '0', '0', '4', '4', '0',    '0px 211px 0px 168px',  '-23', '0', true], // px
-	'05': ['Smith & Wesson M629C .44-caliber magnum revolver', 'It\'s a magnum boy! Just shoot the foot and the head explodes!<br>Even though it\'s absurdly powerful, it doesn\'t quite match the magnum of the previous games. (design)', 														   						 '0px 227px 0px 280px',  '-609px', '0', '0', '5', '5', '0',    '0px 170px 0px 210px',  '-65', '0', true], // px
+	'00': ['Empty Slot', 									   '', 																																																									   						 '0px 502px 0px 0px',     '-54px', '0', '0', '0', '0', '0',    '0px 380px 0px 0px',    '145', '0', false],
+	'01': ['Combat Knife', 									   'It is a simple combat Knife<br><br>It can be very useful when you are low on ammunition. In the hand of those who know how to use, it does damage!', 																								   		 '0px 446px 0px 57px',   '-166px', '0', '0', '1', '1', '0',    '0px 337px 0px 42px',   '103', '0', false],
+	'02': ['Sigpro SP 2009 handgun', 						   'Carlos alternative pistol.<br>Not a big deal but it can help you if you\'re in the worst...', 																																	   							 '0px 392px 0px 112px',  '-277px', '0', '0', '2', '2', '0',    '0px 296px 0px 84px',    '61', '0', true],
+	'03': ['Beretta M92F handgun',   						   'M92F special version of S.T.A.R.S made by Kendo.<br><br>There is a legend has it that those who have no life play using it without ever reloading.', 																										 '0px 335px 0px 168px',  '-390px', '0', '0', '3', '3', '0',    '0px 254px 0px 127px',   '19', '0', true],
+	'04': ['Shotgun Benelli M3S', 							   'This is a Benelli M3S Shotgun but with a sawed-off barrel.<br><br>It can be a great help if you aim up when you have an enemy nearby!', 								   																					 '0px 280px 0px 224px',  '-500px', '0', '0', '4', '4', '0',    '0px 211px 0px 168px',  '-23', '0', true],
+	'05': ['Magnum M629C', 									   'Smith & Wesson M629C .44-caliber magnum revolver<br>It\'s a magnum boy! Just shoot the foot and the head explodes!<br>Even though it\'s absurdly powerful, it doesn\'t quite match the magnum of the previous games. (design)', 							 '0px 227px 0px 280px',  '-609px', '0', '0', '5', '5', '0',    '0px 170px 0px 210px',  '-65', '0', true],
 	'06': ['Hk-p Grenade launcher with commmon rounds',		   'It is extremely effective against most enemies in the game.', 																																	   															 '0px 168px 0px 335px',  '-722px', '0', '0', '6', '8', '0',    '0px 127px 0px 252px', '-107', '0', true],
 	'07': ['Hk-p Grenade launcher with fire rounds',	 	   'It is extremely effective against most enemies in the game.', 																																	   															 '0px 114px 0px 392px',  '-833px', '0', '0', '6', '8', '0',    '0px 86px 0px 294px',  '-149', '0', true],
 	'08': ['Hk-p Grenade launcher with acid rounds',	 	   'It is extremely effective against the worm you find in the cemetery (park).', 																														   														 '0px 58px 0px 446px',   '-943px', '0', '0', '6', '8', '0',    '0px 43px 0px 336px',  '-191', '0', true],
@@ -28,7 +28,7 @@ var ITEM = {
 	'15': ['Handgun bullets (9x19 parabellum)', 			   'Ordinary pistol ammunition. You can load 255 of them per inventory slot!', 																				   																									 '0px 446px 0px 57px',  '-166px', '2', '0', '13', '1', '2',    '0px 337px 0px 42px',   '103', '2', true],
 	'16': ['Magnum bullets (.44-caliber)', 					   'Smith & Wesson M629C .44 Magnum Ammo.<br><br>Keep in mind that you won\'t find this type of ammunition that easy, so use it wisely', 																														 '0px 392px 0px 112px', '-277px', '2', '0', '14', '2', '2',    '0px 296px 0px 84px',    '61', '2', true],
 	'17': ['Shotgun shells', 								   'You don\'t find that kind of ammunition that easy, so use them wisely!', 																																													 '0px 335px 0px 168px', '-390px', '2', '0', '15', '3', '2',    '0px 254px 0px 127px',   '19', '2', true],
-	'18': ['Grenade rounds', 								   'Simple damage ammo - Ideal for eliminating common enemies.', 																																							   									 '0px 280px 0px 224px', '-500px', '2', '0', '16', '4', '2',    '0px 211px 0px 168px',  '-23', '2', true],
+	'18': ['Grenade rounds', 								   '\"Simple\" damage ammo - Ideal for eliminating common enemies.', 																																							   								 '0px 280px 0px 224px', '-500px', '2', '0', '16', '4', '2',    '0px 211px 0px 168px',  '-23', '2', true],
 	'19': ['Flame rounds', 									   'Moderate damage ammo - Ideal for eliminating different enemies.', 																							   																								 '0px 227px 0px 280px', '-609px', '2', '0', '17', '5', '2',    '0px 170px 0px 210px',  '-65', '2', true],
 	'1a': ['Acid rounds', 									   'Advance damage ammo - Ideal for fighting the worm in the park\'s cemetery.', 																												   																 '0px 168px 0px 335px', '-722px', '2', '0', '18', '6', '2',    '0px 127px 0px 252px', '-107', '2', true],
 	'1b': ['Freeze rounds', 								   'Extreme damage ammo - Ideal for fighting nemesis.', 																								   																										 '0px 114px 0px 392px', '-833px', '2', '0', '19', '7', '2',    '0px 86px 0px 294px',  '-149', '2', true],
@@ -63,7 +63,7 @@ var ITEM = {
 	'38': ['Brad Vickers\' S.T.A.R.S card',					   'Brad Vickers S.T.A.R.S ID Card<br><br>Used to get the drawer password in the RPD file room.<br><br>Also, the combinations are: 0513, 0131, 4011 or 4312.', 														   											 '0px 168px 0px 335px',   '-722px', '5', '2', '8', '6', '5',   '0px 127px 0px 252px', '-107', '5', false],
 	'39': ['Machine oil', 									   'This item alone has no use. Combine it with Oil Additive to get the item Mixed Oil.', 													   																													 '0px 114px 0px 392px',   '-833px', '5', '2', '9', '7', '5',   '0px 86px 0px 294px',  '-149', '5', false],
 	'3a': ['Mixed oil', 									   'Use this item near the fuse and power cord to make the tram move.', 																				   																										 '0px 58px 0px 446px',   '-943px', '5', '2', '10', '8', '5',   '0px 43px 0px 336px',  '-191', '5', false],
-	'3b': ['(BOTU) Correntes',  							   'BOTU!<br><br>These chains were meant to be where you find bullets in the warehouse.<br><br>Item discarded during the development process.', 																		   										 '0px 0px 0px 501px',   '-1055px', '5', '2', '11', '9', '5',   '0px 0px 0px 378px',   '-233', '5', false],
+	'3b': ['(BOTU) Chains',  							   	   'BOTU!<br><br>These chains were meant to be where you find bullets in the warehouse.<br><br>Item discarded during the development process.', 																		   										 '0px 0px 0px 501px',   '-1055px', '5', '2', '11', '9', '5',   '0px 0px 0px 378px',   '-233', '5', false],
 	'3c': ['Wrench', 										   'Wrench used to remove the fire hose in Uptown and open the door to the gas station.', 																															 											 '0px 502px 0px 0px', '-54px',     '6', '2', '12', '0', '6',   '0px 380px 0px 0px',    '145', '6', false],
 	'3d': ['Iron pipe', 									   'Iron pipe used in a fireplace in a cemetery storeroom after burning all the firewood present.<br><br>Serves to reveal a secret passage.', 																			 										 '0px 446px 0px 57px', '-166px',   '6', '2', '13', '1', '6',   '0px 337px 0px 42px',   '103', '6', false],
 	'3e': ['(BOTU) Fire hose tip', 							   'BOTU!<br><br>Item that is supposed to be used to match the missing fire hose.<br><br>Item discarded during the development process.', 													 																	 '0px 392px 0px 112px', '-277px',  '6', '2', '14', '2', '6',   '0px 296px 0px 84px',    '61', '6', false],
@@ -1365,7 +1365,61 @@ var MEMJS_HEXPOS = {
 	*/
 	'RE3_mode_1_goto_titleScreen':  [0xA5C9C0, 0xA5C9C3]
 }
+var MIX_seekPattern = '00021500000000000003150000000000000d15000000000000051600000000000004170000000000';
+var MIX_function_types = {
+	'00': 'Reloading / Sum',
+	'01': 'Combine',
+	'02': 'Reloading Tool',
+	'03': 'Change Bullet Type (Handgun / Magnum)',
+	'04': 'Change Bullet Type (G. Launcher)',
+	'05': 'Combine Powder with G. Bullets',
+	'06': 'Add Infinite Ammo / Quantity'
+}
 var RANGES = {
+	/*
+		MIX
+		Ingame item combinations
+	*/
+	'MIX_HEX_currentFunction': [0, 2],
+	// 00: Reload / Sum
+	'MIX_ReloadSum_Weapon':    [2, 4],
+	'MIX_ReloadSum_Ammo': 	   [4, 6],
+	'MIX_ReloadSum_Offset':    [6, 16],
+	// 01: Combinations
+	'MIX_Combine_Item_A': 	   [2, 4],
+	'MIX_Combine_Item_B': 	   [4, 6],
+	'MIX_Combine_Value_A': 	   [6, 8],
+	'MIX_Combine_Value_B': 	   [8, 10],
+	'MIX_Combine_Offset': 	   [10, 16],
+	// 02: Reloading Tool
+	'MIX_reload_rTool': 	   [2, 4],
+	'MIX_reload_item': 		   [4, 6],
+	'MIX_reload_result': 	   [6, 8],
+	'MIX_reload_quantity': 	   [8, 10],
+	'MIX_reload_offset': 	   [10, 16],
+	// 03: Change Bullet Type (Handgun / Magnum)
+	'MIX_handMag_Weapon': 	   [2, 4],
+	'MIX_handMag_Ammo': 	   [4, 6],
+	'MIX_handMag_result': 	   [6, 8],
+	'MIX_handMag_offset': 	   [8, 16],
+	// 04: Change Bullet Type (G. Launcher)
+	'MIX_GL_weapon': 		   [2, 4],
+	'MIX_GL_ammo': 			   [4, 6],
+	'MIX_GL_newWeapon': 	   [6, 8],
+	'MIX_GL_newAmmo': 		   [8, 10],
+	'MIX_GL_offset': 		   [10, 16],
+	// 05: Combine G. Powder + G. Rounds
+	'MIX_PowderGR_ammo': 	   [2, 4],
+	'MIX_PowderGR_powder': 	   [4, 6],
+	'MIX_PowderGR_newAmmmo':   [6, 8],
+	'MIX_PowderGR_quantity':   [8, 10],
+	'MIX_PowderGR_offset': 	   [10, 16],
+	// 06: Infinite Ammo / Quantity
+	'MIX_infinite_newInf': 	   [2, 4],
+	'MIX_infinite_infItem':    [4, 6],
+	'MIX_infinite_offset': 	   [6, 16],
+	// EXE Position
+	'MIX_Slice_Pos': 	  	   [2449536, 2451536],
 	/*
 		Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 

@@ -47,7 +47,7 @@ var range_0x2537_0x254B;
 var range_0x2674_0x2674;							
 var range_0x2677_0x28D3;							
 /*
-	Variaveis de Save
+	Save Variables
 */
 // Baú
 var JILL_BAU = [];
@@ -120,11 +120,12 @@ function SAV_GenerateNewSave(){
 			SAVE_arquivoBruto = undefined;
 		} else {
 			addLog('error', 'SAVE - Unable to find blank save file!');
+			addLog('error', 'Path: <font class="user-can-select">' + APP_PATH + '\\App\\tools\\format.r3save</font>');
 		}
 	}
 	scrollLog();
 }
-function MAKE_SAVE(slot){
+function SAV_MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
 		S_HEADER = localStorage.getItem('Save_' + slot).slice(RANGES['save_HEADER'][0], RANGES['save_HEADER'][1]); // 0x2000 - 0x21FF
 		// Gerando Inventário da Jill
@@ -370,7 +371,7 @@ function save_renderBox(s_slot){
 			} else {
 				addLog('log' , 'Adding item to Item Box - Jill - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '">' + ITEM[IT][0] + '</font>, Quantity: ' + parseInt('0x' + QU) + ', Attr.: ' + ATTR[AT][0] + ', Second Var (aka. null): ' + NU);
 			}
-			ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
+			SAV_ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
 			current++;
 		}
 	}
@@ -404,7 +405,7 @@ function save_renderBox(s_slot){
 			} else {
 				addLog('log' , 'Adding item to Item Box - Carlos - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '">' + ITEM[IT][0] + ', Quantity: ' + parseInt('0x' + QU) + ', Attr.: ' + ATTR[AT][0] + ', Second Var (Aka. Null) ' + NU);
 			}
-			ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
+			SAV_ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
 			current++;
 		}
 	}
@@ -619,25 +620,25 @@ function applyItem(mode, person, pos){
 		}
 	}
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyPerson(){
 	var personagemNovo = document.getElementById('ex-person-id').value;
 	cPlayer = personagemNovo;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyDificuldade(){
 	var dificuldadeNova = document.getElementById('ex-dificuldade-id').value;
 	dificuldade = dificuldadeNova;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyRoupa(){
 	var rou = document.getElementById('ex-roupa-id').value;
 	outf = rou;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applySidepack(ppzu){
 	var sdpack = document.getElementById('ex-sidepack-id').value;
@@ -647,7 +648,7 @@ function applySidepack(ppzu){
 		cSide = sdpack;
 	}
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyArma(personzu){
 	var newArma = document.getElementById('ex-arma-id').value;
@@ -657,13 +658,13 @@ function applyArma(personzu){
 		cArmaEquip = newArma;
 	}
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyPoison() {
 	var newPoison = document.getElementById('ex-poison-id').value;
 	veneno = newPoison;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applySaveCount(){
 	var totvezes = document.getElementById('ex-savecount-id').value;
@@ -682,7 +683,7 @@ function applySaveCount(){
 		totalVezesSaves = '0' + totalVezesSaves;
 	}
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyHP(){
 	var newHP = document.getElementById('ex-HP-id').value;
@@ -706,13 +707,13 @@ function applyHP(){
 		life = '3075';
 	}
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function applyEpil(){
 	var newEps = document.getElementById('ex-epilogues-id').value;
 	epil = newEps;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
 function makeHexTime(){
 	var HH = document.getElementById('ex-IGT-HH').value;
@@ -787,9 +788,9 @@ function makeHexTime(){
 	}
 	IGTExtract = hex01 + hex02 + hex03 + hex04;
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }
-function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
+function SAV_ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	var quan = parseInt('0x' + QUANTIDADE);	
 	var atri = ATTR[ATRIBUTO][0];
 	var colo = ATTR[ATRIBUTO][1];
@@ -817,12 +818,12 @@ function ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	'<font class="b-quant-lbl" id="b-' + PERSON + '-q-lbl-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');" style="color: ' + colo + ';text-shadow: ' + cfundo + ';">' + quan + '</font>' + 
 	'<div class="b-label"><font class="' + cssfix + '" id="b-name-' + INDEX + '" onclick="addInfo(' + PERSON + ', \'' + ITEMHEX + '\');">(' + INDEX + ') ' + nome + '</font>' + 
 	'</div><input type="button" class="btn-box ' + cssfixbtn + '" onclick="showModItem(2, ' + PERSON + ', ' + INDEX + ', \'' + ITEMHEX + '\');" value="Modify"></div>';
-	if (PERSON === 0){ // Adicionar item ao baú da jill
+	if (PERSON === 0){
 		$('#JILL-BOX').append(HTMLTEMPLATE);
-	} else {		   // Adicionar item ao baú do carlos
+	} else {
 		$('#CARLOS-BOX').append(HTMLTEMPLATE);
 	}
-	// Fix para porcentagem
+	// Percentage Fix
 	if (ATRIBUTO === '0e' || ATRIBUTO === '06' || ATRIBUTO === '02' || ATRIBUTO === '16'){
 		var vq = document.getElementById('b-' + PERSON + '-q-lbl-' + INDEX).innerHTML;
 		if (vq !== ''){
@@ -898,6 +899,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		quanti = 'Inf.';
 	}
 	// Pixels
+	var p;
 	var s = 0;
 	var fix = 4;
 	var startB = 0;
@@ -914,7 +916,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		finalMargin = finalMargin - marginOffset + fix;
 		s++;
 	}
-	var p;
 	if (person === 0){
 		p = 'Jill';
 	} else {
@@ -1201,5 +1202,5 @@ function resetTimer(){
 function resetIGT(){
 	IGTExtract = '00000000';
 	request_render_save = true;
-	MAKE_SAVE(CURRENT_SAVE_SLOT);
+	SAV_MAKE_SAVE(CURRENT_SAVE_SLOT);
 }

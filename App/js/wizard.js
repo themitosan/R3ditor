@@ -545,22 +545,27 @@ function WZ_loadFiles(file){
 }
 function WZ_APPEND(){
 	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
+	$('#MIX_edit_function').append(MIX_functions);
 	$('#RDT_door-edit-DispTxt').append(RDT_EDIT_DOOR_TEXT);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
-	// Titles
-	document.getElementById('MSG_ADDFUNC_BTN_1').title = '\nUse this command to start a message or change the text speed.';
-	document.getElementById('MSG_ADDFUNC_BTN_2').title = '\nUse this command to finish the message.\n(In doubt, leave args empty!)';
-	document.getElementById('MSG_ADDFUNC_BTN_3').title = 'Use this command to show text, break lines and more';
-	document.getElementById('MSG_ADDFUNC_BTN_4').title = 'Show a special char in the text.\n(Like "&" and another symbols)';
-	document.getElementById('MSG_ADDFUNC_BTN_5').title = 'Use this command to exchange the text color.\n(Green, Wine Red, Dark Blue...)';
-	document.getElementById('MSG_ADDFUNC_BTN_6').title = 'Use this command to write a item name in the text.';
-	document.getElementById('MSG_ADDFUNC_BTN_7').title = '[EXPERIMENTAL]\nCommand used to show more options.\n(Used on R113 - Emblem Key)';
-	document.getElementById('MSG_ADDFUNC_BTN_8').title = 'Use this command to execute a Sound Effect (SE).';
-	document.getElementById('MSG_ADDFUNC_BTN_9').title = 'Use this function to show a diferent angle of current map.';
+	document.getElementById('MIX_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	document.getElementById('MIX_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
+	document.getElementById('MIX_prev_exch_A').src = APP_PATH + '\\App\\Img\\exchange-arrow.png';
+	document.getElementById('MIX_prev_exch_B').src = APP_PATH + '\\App\\Img\\exchange-arrow.png';
+	// MSG Titles
+	document.getElementById('MSG_ADDFUNC_BTN_1').title  = '\nUse this command to start a message or change the text speed.';
+	document.getElementById('MSG_ADDFUNC_BTN_2').title  = '\nUse this command to finish the message.\n(In doubt, leave args empty!)';
+	document.getElementById('MSG_ADDFUNC_BTN_3').title  = 'Use this command to show text, break lines and more';
+	document.getElementById('MSG_ADDFUNC_BTN_4').title  = 'Show a special char in the text.\n(Like \"&\" and another symbols)';
+	document.getElementById('MSG_ADDFUNC_BTN_5').title  = 'Use this command to exchange the text color.\n(Green, Wine Red, Dark Blue...)';
+	document.getElementById('MSG_ADDFUNC_BTN_6').title  = 'Use this command to write a item name in the text.';
+	document.getElementById('MSG_ADDFUNC_BTN_7').title  = '[EXPERIMENTAL]\nCommand used to show more options.\n(Used on R113.RDT - Emblem Key)';
+	document.getElementById('MSG_ADDFUNC_BTN_8').title  = 'Use this command to execute a Sound Effect (SE).';
+	document.getElementById('MSG_ADDFUNC_BTN_9').title  = 'Use this function to show a diferent angle of current map.';
 	document.getElementById('MSG_ADDFUNC_BTN_10').title = 'Use this command to insert hex manually.\nUse one function at once!';
 	document.getElementById('MSG_ADDFUNC_BTN_11').title = 'Click here to open Hex Translator';
-	document.getElementById('MSG_ADDFUNC_BTN_12').title = '[EXPERIMENTAL]\nCommand found in R101.RDT.';
+	document.getElementById('MSG_ADDFUNC_BTN_12').title = '[EXPERIMENTAL]\nCommand found in R101.RDT';
 }
 /*
 	SETTINGS MENU

@@ -1,4 +1,4 @@
-﻿/*
+/*
 	R3ditor - design.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Helpa eu!
@@ -361,11 +361,13 @@ function main_closeFileList(){
 */
 function main_menu(anim){
 	main_closeFileList();
-	localStorage.clear();
-	sessionStorage.clear();
+	if (anim !== 8){
+		localStorage.clear();
+		sessionStorage.clear();
+	}
 	main_currentMenu = anim;
 	RE3_LIVE_closeForm();
-	if (anim === 0){ // Voltar
+	if (anim === 0){ // Back
 		reload();
 	} else {
 		R3ditor_tool_selected = true;
@@ -392,7 +394,7 @@ function main_menu(anim){
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + ' - RDT Editor (*.RDT)';
+		document.title = APP_NAME + ' - RDT Editor (*.RDT, *.ARD)';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
 			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
@@ -452,6 +454,17 @@ function main_menu(anim){
 		$('#menu-topo-settings').css({'display': 'inline'});
 		SETTINGS_showMenu(1);
 	}
+	if (anim === 8){ // MIX Editor
+		document.title = APP_NAME + ' - MIX Editor';
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		$('#menu-topo-mix').css({'display': 'inline'});
+		MIX_showMenu(1);
+	}
 }
 function RDT_checkBKP(){
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
@@ -460,9 +473,11 @@ function RDT_checkBKP(){
 		$('#RDT_restoreLastBackup').css({'display': 'none'});
 	}
 }
-/// Save
+/*
+	Save
+*/
 function SAVE_applyMenuFocus(menuId){
-	var i = 0; // i? why not c?
+	var i = 0;
 	main_closeFileList();
 	SAVE_aba_atual = menuId;
 	if (GAME_PATH !== '' && GAME_PATH !== undefined){
@@ -769,9 +784,11 @@ function showAbout(){
 	$('#menu-topo').css({'display': 'none'});
 	$('#log-programa').css({'display': 'none'});
 	$('#menu-utility').css({'display': 'none'});
+	$('#menu-settings').css({'display': 'none'});
 	$('#menu-topo-MOD').css({'display': 'none'});
 	$('#menu-utility-aba').css({'display': 'none'});
 	$('#menu-utility-aba-2').css({'display': 'none'});
+	$('#menu-utility-aba-3').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#r_logo').fadeIn({duration: 1500, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
@@ -2041,6 +2058,316 @@ function INI_showMenu(menuId){
 	$('#menu-INI').css({'display': 'inline'});
 }
 /*
+	Mix Editor
+*/
+function MIX_showMenu(menuId){
+	$('#menu-mix-editor').css({'display': 'block'});
+	$('#log-programa').css({'top': '626px', 'height': '82px'});
+}
+function MIX_showEdit(mode, combId, combHex){
+	// Mode 0: show, Mode 1: hide
+	if (mode === 0){
+		var funcMode = combHex.slice(0, 2);
+		$('#MIX-holder').css({'width': '728px'});
+		$('#MIX-item-edit').css({'display': 'inline'});
+		if (funcMode !== MIX_currentFunction){
+			document.getElementById('MIX_edit_holder').innerHTML = '';
+		}
+		MIX_currentHex = combHex;
+		document.getElementById('MIX_current_edit_lbl').innerHTML = parseInt(combId + 1);
+		// 00: Reload / Sum
+		if (funcMode === '00'){
+			if (MIX_currentFunction !== '00'){
+				$('#MIX_edit_holder').append(MIX_EDIT_00_RELOADSUM);
+				$('#MIX_edit_Weapon').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_Ammo').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_Ammo').value = combHex.slice(RANGES['MIX_ReloadSum_Ammo'][0], RANGES['MIX_ReloadSum_Ammo'][1]);
+			document.getElementById('MIX_edit_Weapon').value = combHex.slice(RANGES['MIX_ReloadSum_Weapon'][0], RANGES['MIX_ReloadSum_Weapon'][1]);
+			//
+			document.getElementById('MIX_preview_item_a').title = ITEM[combHex.slice(RANGES['MIX_Combine_Item_A'][0], RANGES['MIX_Combine_Item_A'][1])][0];
+			document.getElementById('MIX_preview_item_b').title = ITEM[combHex.slice(RANGES['MIX_Combine_Item_B'][0], RANGES['MIX_Combine_Item_B'][1])][0];
+
+		}
+		// 01: Combine
+		if (funcMode === '01'){
+			if (MIX_currentFunction !== '01'){
+				$('#MIX_edit_holder').append(MIX_EDIT_01_COMBINE);
+				$('#MIX_edit_item_A').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_item_B').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_item_Result').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_item_A').value = combHex.slice(RANGES['MIX_Combine_Item_A'][0], RANGES['MIX_Combine_Item_A'][1]);
+			document.getElementById('MIX_edit_item_B').value = combHex.slice(RANGES['MIX_Combine_Item_B'][0], RANGES['MIX_Combine_Item_B'][1]);
+			document.getElementById('MIX_edit_item_Result').value = combHex.slice(RANGES['MIX_Combine_Value_A'][0], RANGES['MIX_Combine_Value_A'][1]);
+			document.getElementById('MIX_edit_item_Quantity').value = parseInt(combHex.slice(RANGES['MIX_Combine_Value_B'][0], RANGES['MIX_Combine_Value_B'][1]), 16);
+		}
+		// 02: Reloading Tool
+		if (funcMode === '02'){
+			if (MIX_currentFunction !== '02'){
+				$('#MIX_edit_holder').append(MIX_EDIT_02_RELOADING);
+				$('#MIX_edit_reloadingItem').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_item_Result').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_item').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_item').value = combHex.slice(RANGES['MIX_reload_item'][0], RANGES['MIX_reload_item'][1]);
+			document.getElementById('MIX_edit_item_Result').value = combHex.slice(RANGES['MIX_reload_result'][0], RANGES['MIX_reload_result'][1]);
+			document.getElementById('MIX_edit_reloadingItem').value = combHex.slice(RANGES['MIX_reload_rTool'][0], RANGES['MIX_reload_rTool'][1]);
+			document.getElementById('MIX_edit_item_Quantity').value = parseInt(combHex.slice(RANGES['MIX_reload_quantity'][0], RANGES['MIX_reload_quantity'][1]), 16);
+		}
+		// 03: Change Bullet Type (Handgun and magnum)
+		if (funcMode === '03'){
+			if (MIX_currentFunction !== '03'){
+				$('#MIX_edit_holder').append(MIX_EDIT_03_CHANGE_HANDMAG);
+				$('#MIX_edit_handMag_weapon').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_handMag_ammo').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_item_Result').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_handMag_ammo').value = combHex.slice(RANGES['MIX_handMag_Ammo'][0], RANGES['MIX_handMag_Ammo'][1]);
+			document.getElementById('MIX_edit_item_Result').value = combHex.slice(RANGES['MIX_handMag_result'][0], RANGES['MIX_handMag_result'][1]);
+			document.getElementById('MIX_edit_handMag_weapon').value = combHex.slice(RANGES['MIX_handMag_Weapon'][0], RANGES['MIX_handMag_Weapon'][1]);
+		}
+		// 04: Change Bullet Type (G. Launcher)
+		if (funcMode === '04'){
+			if (MIX_currentFunction !== '04'){
+				$('#MIX_edit_holder').append(MIX_EDIT_04_CHANGE_GL);
+				$('#MIX_edit_GL_newWeapon').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_GL_newAmmo').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_GL_weapon').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_GL_ammo').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_GL_ammo').value = combHex.slice(RANGES['MIX_GL_ammo'][0], RANGES['MIX_GL_ammo'][1]);
+			document.getElementById('MIX_edit_GL_weapon').value = combHex.slice(RANGES['MIX_GL_weapon'][0], RANGES['MIX_GL_weapon'][1]);
+			document.getElementById('MIX_edit_GL_newAmmo').value = combHex.slice(RANGES['MIX_GL_newAmmo'][0], RANGES['MIX_GL_newAmmo'][1]);
+			document.getElementById('MIX_edit_GL_newWeapon').value = combHex.slice(RANGES['MIX_GL_newWeapon'][0], RANGES['MIX_GL_newWeapon'][1]);
+		}
+		// 05: Gun Power + G. Rounds
+		if (funcMode === '05'){
+			if (MIX_currentFunction !== '05'){
+				$('#MIX_edit_holder').append(MIX_EDIT_05_GPOWDER_GL);
+				$('#MIX_edit_powderGl_ammo').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_powderGl_powder').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_powderGl_newAmmo').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_powderGl_ammo').value = combHex.slice(RANGES['MIX_PowderGR_ammo'][0], RANGES['MIX_PowderGR_ammo'][1]);
+			document.getElementById('MIX_edit_powderGl_powder').value = combHex.slice(RANGES['MIX_PowderGR_powder'][0], RANGES['MIX_PowderGR_powder'][1]);
+			document.getElementById('MIX_edit_powderGl_newAmmo').value = combHex.slice(RANGES['MIX_PowderGR_newAmmmo'][0], RANGES['MIX_PowderGR_newAmmmo'][1]);
+			document.getElementById('MIX_edit_powderGl_quantity').value = parseInt(combHex.slice(RANGES['MIX_PowderGR_quantity'][0], RANGES['MIX_PowderGR_quantity'][1]), 16);
+		}
+		// 06: Infinite ammo
+		if (funcMode === '06'){
+			if (MIX_currentFunction !== '06'){
+				$('#MIX_edit_holder').append(MIX_EDIT_06_INFINITE);
+				$('#MIX_edit_infinite_item').append(RDT_EDIT_ITEM);
+				$('#MIX_edit_infinite_inf').append(RDT_EDIT_ITEM);
+			}
+			document.getElementById('MIX_edit_infinite_item').value = combHex.slice(RANGES['MIX_infinite_newInf'][0], RANGES['MIX_infinite_newInf'][1]);
+			document.getElementById('MIX_edit_infinite_inf').value = combHex.slice(RANGES['MIX_infinite_infItem'][0], RANGES['MIX_infinite_infItem'][1]);
+		}
+		document.getElementById('MIX_edit_function').value = funcMode;
+		MIX_currentFunction = funcMode;
+		MIX_render_preview();
+		document.getElementById('MIX_btn_convertMix').onclick = function(){
+			MIX_convert(combId);
+		}
+		document.getElementById('MIX_applyBtn').onclick = function(){
+			MIX_applyChanges(combId, funcMode);
+		}
+	} else {
+		$('#MIX-item-edit').css({'display': 'none'});
+		$('#MIX-holder').css({'width': '1297px'});
+	}
+}
+function MIX_render_preview(){
+	var Item_A;
+	var Item_B;
+	var Item_C;
+	var Item_D;
+	var Item_Res;
+	// 00: Reload / Sum
+	if (MIX_currentFunction === '00'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_A = document.getElementById('MIX_edit_Weapon').value;
+		Item_B = document.getElementById('MIX_edit_Ammo').value;
+		if (parseInt(Item_A, 16) > 133){
+			Item_A = '86';
+		}
+		if (parseInt(Item_B, 16) > 133){
+			Item_B = '86';
+		}
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		$('#MIX_preview_equals').css({'display': 'none'});
+		$('#MIX_preview_result').css({'display': 'none'});
+	}
+	// 01: Combine
+	if (MIX_currentFunction === '01'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_A = document.getElementById('MIX_edit_item_A').value;
+		Item_B = document.getElementById('MIX_edit_item_B').value;
+		Item_Res = document.getElementById('MIX_edit_item_Result').value;
+		if (parseInt(Item_A, 16) > 133){
+			Item_A = '86';
+		}
+		if (parseInt(Item_B, 16) > 133){
+			Item_B = '86';
+		}
+		if (parseInt(Item_Res, 16) > 133){
+			Item_Res = '86';
+		}
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_result').title = ITEM[Item_Res][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		document.getElementById('MIX_preview_result').src = APP_PATH + '\\App\\Img\\items\\' + Item_Res + '.png';
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+	}
+	// 02: Reloading Tool
+	if (MIX_currentFunction === '02'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_A = document.getElementById('MIX_edit_reloadingItem').value;
+		Item_Res = document.getElementById('MIX_edit_item_Result').value;
+		Item_B = document.getElementById('MIX_edit_item').value;
+		if (parseInt(Item_A, 16) > 133){
+			Item_A = '86';
+		}
+		if (parseInt(Item_B, 16) > 133){
+			Item_B = '86';
+		}
+		if (parseInt(Item_Res, 16) > 133){
+			Item_Res = '86';
+		}
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_result').title = ITEM[Item_Res][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		document.getElementById('MIX_preview_result').src = APP_PATH + '\\App\\Img\\items\\' + Item_Res + '.png';
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+	}
+	// 03: Change Bullet Type (Handgun / Magnum)
+	if (MIX_currentFunction === '03'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_A = document.getElementById('MIX_edit_handMag_weapon').value;
+		Item_Res = document.getElementById('MIX_edit_item_Result').value;
+		Item_B = document.getElementById('MIX_edit_handMag_ammo').value;
+		if (parseInt(Item_A, 16) > 133){
+			Item_A = '86';
+		}
+		if (parseInt(Item_B, 16) > 133){
+			Item_B = '86';
+		}
+		if (parseInt(Item_Res, 16) > 133){
+			Item_Res = '86';
+		}
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_result').title = ITEM[Item_Res][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		document.getElementById('MIX_preview_result').src = APP_PATH + '\\App\\Img\\items\\' + Item_Res + '.png';
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+	}
+	// 04: Change Bullet Type (G. Launcher)
+	if (MIX_currentFunction === '04'){
+		$('#MIX_preview_canvas').css({'zoom': '2', 'height': '52px'});
+		$('#MIX_preview_plus').css({'display': 'none'});
+		$('#MIX_prev_exch_A').css({'display': 'inline'});
+		$('#MIX_prev_exch_B').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'none'});
+		$('#MIX_preview_result').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'inline'});
+		$('#MIX_preview_item_d').css({'display': 'inline'});
+		Item_B = document.getElementById('MIX_edit_GL_ammo').value;
+		Item_A = document.getElementById('MIX_edit_GL_weapon').value;
+		Item_D = document.getElementById('MIX_edit_GL_newAmmo').value;
+		Item_C = document.getElementById('MIX_edit_GL_newWeapon').value;
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_item_c').title = ITEM[Item_C][0];
+		document.getElementById('MIX_preview_item_d').title = ITEM[Item_D][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		document.getElementById('MIX_preview_item_c').src = APP_PATH + '\\App\\Img\\items\\' + Item_C + '.png';
+		document.getElementById('MIX_preview_item_d').src = APP_PATH + '\\App\\Img\\items\\' + Item_D + '.png';
+	}
+	// 05: Gun Powder + Ammo
+	if (MIX_currentFunction === '05'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_preview_equals').css({'display': 'inline'});
+		$('#MIX_preview_result').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_A = document.getElementById('MIX_edit_powderGl_ammo').value;
+		Item_B = document.getElementById('MIX_edit_powderGl_powder').value;
+		Item_Res = document.getElementById('MIX_edit_powderGl_newAmmo').value;
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_result').title = ITEM[Item_Res][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+		document.getElementById('MIX_preview_result').src = APP_PATH + '\\App\\Img\\items\\' + Item_Res + '.png';
+	}
+	// 06: Infinite Ammo
+	if (MIX_currentFunction === '06'){
+		$('#MIX_preview_canvas').css({'zoom': '2.4', 'height': 'unset'});
+		$('#MIX_prev_exch_A').css({'display': 'none'});
+		$('#MIX_prev_exch_B').css({'display': 'none'});
+		$('#MIX_preview_item_c').css({'display': 'none'});
+		$('#MIX_preview_item_d').css({'display': 'none'});
+		$('#MIX_preview_result').css({'display': 'none'});
+		$('#MIX_preview_equals').css({'display': 'none'});
+		$('#MIX_preview_plus').css({'display': 'inline'});
+		$('#MIX_item_preview_holder').css({'display': 'inline'});
+		Item_B = document.getElementById('MIX_edit_infinite_inf').value;
+		Item_A = document.getElementById('MIX_edit_infinite_item').value;
+		document.getElementById('MIX_preview_item_a').title = ITEM[Item_A][0];
+		document.getElementById('MIX_preview_item_b').title = ITEM[Item_B][0];
+		document.getElementById('MIX_preview_item_a').src = APP_PATH + '\\App\\Img\\items\\' + Item_A + '.png';
+		document.getElementById('MIX_preview_item_b').src = APP_PATH + '\\App\\Img\\items\\' + Item_B + '.png';
+	}
+}
+/*
 	Settings
 */
 function SETTINGS_showMenu(menuId){
@@ -2064,12 +2391,16 @@ function R3DITORshowUpdate(){
 	$('#menu-topo').css({'display': 'none'});
 	$('#menu-utility').css({'display': 'none'});
 	$('#menu-topo-MOD').css({'display': 'none'});
+	$('#menu-settings').css({'display': 'none'});
 	$('#menu-utility-aba').css({'display': 'none'});
+	$('#menu-utility-aba-3').css({'display': 'none'});
 	$('#R3ditor_update').css({'display': 'block'});
 }
 function R3DITORcloseUpdate(){
 	$('#R3ditor_update').css({'display': 'none'});
+	$('#menu-utility-aba-3').css({'display': 'block'});
 	$('#menu-utility-aba').css({'display': 'block'});
+	$('#menu-settings').css({'display': 'block'});
 	$('#menu-utility').css({'display': 'block'});
 	$('#menu-topo').css({'display': 'block'});
 	if (EXEC_BIO3_original !== ''){
@@ -2113,9 +2444,11 @@ function R3DITOR_movePercent(id, percent, status){
 function UTILS_rofs_hideButtons(){
 	$('#menu-topo').css({'display': 'none'});
 	$('#menu-utility').css({'display': 'none'});
+	$('#menu-settings').css({'display': 'none'});
 	$('#menu-topo-MOD').css({'display': 'none'});
 	$('#menu-utility-aba').css({'display': 'none'});
 	$('#menu-utility-aba-2').css({'display': 'none'});
+	$('#menu-utility-aba-3').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeOut({duration: 500, queue: false});
 	} else {

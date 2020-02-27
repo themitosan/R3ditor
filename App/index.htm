@@ -22,6 +22,7 @@
 		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
+		<script type="text/javascript" src="js/MIX.js"></script>
 		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
@@ -29,12 +30,12 @@
 	<body>
 		<!-- Main Menu -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
-		<div class="menu-topo aba-principal-fix none" style="width: 560px;" id="menu-topo">
+		<div class="menu-topo aba-principal-fix none" id="menu-topo">
 			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your save file" onclick="main_menu(1);">
 			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to create / edit messages (FA02FC...)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.RDT, .ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT) files" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="RDT Editor (.RDT, .ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT / ARD) files" onclick="main_menu(3);">
 			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
-			<!--<input type="button" class="botao-menu" value="Mix Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="WIP();"> -->
+			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
 		</div>
 		<!-- Settings Tab -->
 		<input type="button" id="menu-utility-aba-3" class="aba aba-left-fix aba-select aba-utility-fix-2 aba-settings-fix-2" value="Settings">
@@ -81,7 +82,7 @@
 				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font>
 			</div>
 			<!-- Right -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
 			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
@@ -89,58 +90,113 @@
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
-			<input type="button" class="botao-menu" value="Open MSG" onclick="triggerLoad(5);">
-			<input type="button" class="botao-menu none" id="MSG_reload" value="Reload MSG" onclick="MSG_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);">
-			<input type="button" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
-			<input type="button" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
-			<input type="button" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON RDT" onclick="MSG_applyMSGCommand(2);">
+			<input type="button" title="Click here to open a new MSG file" class="botao-menu" value="Open MSG" onclick="triggerLoad(5);">
+			<input type="button" title="Click here to reload this file" class="botao-menu none" id="MSG_reload" value="Reload MSG" onclick="MSG_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);">
+			<input type="button" title="Click here to open this MSG file on Hex Editor" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
+			<input type="button" title="Click here to save this changes to a MSG file" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
+			<input type="button" title="Click here to appy your changes to RDT" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON RDT" onclick="MSG_applyMSGCommand(2);">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
-			<input type="button" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to return to RDT" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
+			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Saves -->
 		<div class="menu-topo none" id="menu-topo-save">
-			<input type="button" class="botao-menu" value="Open Save" onclick="triggerLoad(4);">
-			<input type="button" class="botao-menu" id="SAV_generateSave" value="Generate SAV" onclick="SAV_GenerateNewSave();">
-			<input type="button" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
-			<input type="button" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
+			<input type="button" title="Click here to open a save file" class="botao-menu" value="Open Save" onclick="triggerLoad(4);">
+			<input type="button" title="Click here to generate a new save file!" class="botao-menu" id="SAV_generateSave" value="Generate SAV" onclick="SAV_GenerateNewSave();">
+			<input type="button" title="Click here to reload this save file" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
+			<input type="button" title="Click here to open this save file on Hex Editor" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
-			<input type="button" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
-			<input type="button" class="botao-menu botao-aplicar right none" id="SAV_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to open save list" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
+			<input type="button" title="Click here to delete all saves on this file" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
+			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="SAV_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
-		<!-- Menu File Gen -->
+		<!-- Menu Filegen -->
 		<div class="menu-topo none" id="menu-topo-fileEditor">
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu botao-aplicar right none" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu TIM Patcher -->
 		<div class="menu-topo none" id="menu-topo-TIMPATCHER">
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu botao-aplicar right none" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
 			<input type="button" class="botao-menu" title="Click here to open the config file on Windows Notepad" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" value="Cancel" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to cancel" value="Cancel" onclick="reload();">
 			<input type="button" class="botao-menu right botao-aplicar" title="Click here to to save!" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
 		</div>
 		<!-- Menu INI Editor -->
 		<div class="menu-topo none" id="menu-topo-INI">
 			<input type="button" class="botao-menu" value="Open INI" onclick="triggerLoad(10);">
-			<input type="button" class="botao-menu none" id="INI_makeNewIni" value="Generate INI" onclick="BIO3INI_MAKE_WZINI(2);">
-			<input type="button" class="botao-menu none" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
-			<input type="button" class="botao-menu none" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
+			<input type="button" class="botao-menu none" title="Click here to generate a new configuration file!" id="INI_makeNewIni" value="Generate INI" onclick="BIO3INI_MAKE_WZINI(2);">
+			<input type="button" class="botao-menu none" title="Click here to reload this file!" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
+			<input type="button" class="botao-menu none" title="Click here to open this file on Windows Notepad" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
 			<!-- Right -->
 			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
 		</div>
+		<!-- Menu MIX -->
+		<div class="menu-topo none" id="menu-topo-mix">
+			<input type="button" class="botao-menu botao-aplicar none" id="MIX_btn_SAVE_EXE" title="Click here to save your changes!" value="Save Changes!" onclick="MIX_saveOnExe();">
+			<!-- Right -->
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+		</div>
+
 		<!-- CONTENT -->
 
+		<!-- FORM: MIX Editor -->
+		<div class="none" id="menu-mix-editor" onclick="main_closeFileList();">
+			<input type="button" id="MIX-aba-menu-1" class="aba aba-left-fix aba-select" value="Combinations">
+			<div class="menu">
+				<div class="menu-general-content">
+					<center><font class="titulo">Combinations</font></center>
+					<div class="MIX-combine-holder" id="MIX-holder">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							ID: <font id="MIX_current_edit_lbl">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_render_preview();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas" id="MIX_preview_canvas">
+									<img id="MIX_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_preview_item_b" class="MIX_preview_item_shadow">
+									<img id="MIX_preview_equals" class="MIX_img_equals_fix">
+									<img id="MIX_preview_result" class="MIX_preview_item_shadow">
+									<img id="MIX_preview_item_c" class="MIX_preview_item_shadow">
+									<img id="MIX_preview_item_d" class="MIX_preview_item_shadow">
+									<img id="MIX_prev_exch_A" class="MIX_preview_exchange_A">
+									<img id="MIX_prev_exch_B" class="MIX_preview_exchange_B">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- FORM: Settings -->
 		<div class="none" id="menu-SETTINGS" onclick="main_closeFileList();">
 			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="Settings">
@@ -148,17 +204,15 @@
 			<div class="menu none" id="SETTINGS_menu_1">
 				<div class="menu-general-content" id="SETTINGS_content_1">
 					<center><font class="titulo">Settings</font></center>
-
 					<!-- Update -->
 					<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-1">
 						<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" onclick="WZ_FORCE_UPDATE();" value="Download the last changes on GitHub"></center>
 					</div>
-
 					<!-- Performance -->
 					<input type="button" value="Performance" class="INI_inernalTab SETTINGS_ABA-2">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-2">
-						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - Enable Menu Animations</font><br>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - Enable Animations</font><br>
 						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableRE3_live_toolBar"><font class="font-chkbox-fix"> - Enable RE3 Live Toolbar</font>
 						<div class="menu-separador"></div>
 						<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
@@ -166,7 +220,6 @@
 						Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>
 						Fast causes information to be updated in real time, but may decrease overall performance due to <i>Forced reflow</i> and <i>JS Heap</i>.
 					</div>
-
 					<!-- Remove Options -->
 					<input type="button" value="Remove Options" class="INI_inernalTab SETTINGS_ABA-4">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-4">
@@ -178,7 +231,6 @@
 							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all Assets, RDT Map Files (*.rdtmap), SAV Backups, RDT Backups, Recent Opened lists and all configs!" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
 						</center>
 					</div>
-					
 					<!-- Paths -->
 					<input type="button" value="Paths" class="INI_inernalTab SETTINGS_ABA-5">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-5">
@@ -188,14 +240,12 @@
 						<div class="menu-separador"></div>
 						Hex Editor Path: <font title="???" id="SETTINGS_lvl_path_HEX" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(12);">
 					</div>
-
 					<!-- Onload -->
 					<input type="button" value="Startup" class="INI_inernalTab SETTINGS_ABA-6">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-6">
 						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - Check for updates on Startup / Go Back</font><br>
 						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableMoveTo"><font class="font-chkbox-fix"> - Move window to upper left corner on load / reload</font>
 					</div>
-
 					<!-- Note (Future) -->
 					<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-3">
@@ -205,11 +255,9 @@
 							- TheMitoSan.
 						</div>
 					</div>
-
 				</div>
 			</div>
-		</div>	
-
+		</div>
 		<!-- FORM: INI -->
 		<div class="none" id="menu-INI" onclick="main_closeFileList();">
 			<input type="button" id="INI-aba-menu-1" onclick="INI_showMenu(1);" class="aba aba-left-fix aba-select" value="General">
@@ -1041,14 +1089,14 @@
 			<div class="msg-events" id="text-msg-events">
 				<h2 class="title-eventos"><font id="RDT_MSG_NUMBER" class="none">??? - </font>Script (Total: <font id="msg-lbl-totalCommands">???</font>)</h2>
 				<div class="div-eventos" id="msg-lista-eventos">
-					<!-- lista de eventos vai aqui -->
+					<!-- Event list goes here -->
 				</div>
 			</div>
-			<!-- Dialog: Adicionar Comando -->
+			<!-- Dialog: Add function -->
 			<div class="dialog-addcomando" id="dialog-msg-addcomand">
 				<font class="titulo">Add Function - <font id="msg-addcomand-title">???</font></font>
 				<div class="msg-render" id="dialog-msg-render">
-					<!-- O dialogo serão renderizado aqui -->
+					<!-- Dialog goes here -->
 				</div>
 				<input type="button" value="Cancel" class="botao-menu" onclick="MSG_renderDialog(0);">
 				<input type="button" value="Apply" class="botao-menu" id="msg-addcomand-confirm">
@@ -1058,7 +1106,7 @@
 				Hex - Preview: <font class="right">Message Length: <font id="lbl-msg-length" title="Current Size">0 (Hex: 0)</font></font><br>
 				<div class="menu-separador"></div>
 				<div id="text-msg-raw" class="user-can-select">
-					<!-- Hex vai aqui -->
+					<!-- Hex goes here -->
 				</div>
 			</div>
 			<!-- MSG Preview -->
@@ -1066,7 +1114,7 @@
 				<center>Text Preview</center>
 				<div class="menu-separador"></div>
 				<div id="text-msg-textPrev" class="user-can-select">
-					<!-- Preview vai aqui -->
+					<!-- Preview goes here -->
 				</div>
 			</div>
 			<!-- Block Size -->
@@ -1120,10 +1168,10 @@
 						<div class="menu-separador"></div>
 						Save slots:<br>
 						<div class="save-grid" id="SAV_slots" onclick="main_closeFileList();">
-							<!-- os slots de save estarão aqui -->
+							<!-- Save slots goes here -->
 						</div>
 					</div>
-					<!-- Alterar -->
+					<!-- Modify -->
 					<div id="save-alterar" class="save-alterar-menu" onclick="main_closeFileList();">
 						<center><font class="titulo">Modify</font></center><br>
 						Modify Time: 
@@ -1155,18 +1203,18 @@
 						<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Change"><br>
 					</div>
 				</div>
-				<!-- Menu Jill Valentine -->
+				<!-- Jill Valentine -->
 				<div class="none" id="save-jill" onclick="main_closeFileList();">
 					<div class="menu-general-content">
 						<div class="status-menu" id="JILL-STATUS">
 							<img src="img/JILL-ICON.png" class="img-person-icon">
 							<div class="txt-status">Jill Valentine - Status: <font class="" id="JILL-LIFESTATUS">???</font></div>
 						</div>
-						<!-- Baú -->
+						<!-- Box -->
 						<div class="item-box" id="j_box">
 							<center><font class="title-inv">Item Box</font><center>
 							<div id="JILL-BOX">
-								<!-- os itens do baú estarão aqui -->
+								<!-- Jill's Box Goes Here -->
 							</div>
 						</div>
 						<!-- Info Item -->
@@ -1175,7 +1223,7 @@
 							<div class="info-icon-holder">
 								<img src="img/details-00.png" class="none" id="icon-info-00">
 								<div class="info-details" id="text-info-00">
-									<!-- as infos vão aqui -->
+									<!-- Info's Goes Here -->
 								</div>
 							</div>
 						</div>
@@ -1224,11 +1272,11 @@
 							<img src="img/CARLOS-ICON.png" class="img-person-icon">
 							<div class="txt-status">Carlos Oliveira - Status: <font class="" id="CARLOS-LIFESTATUS">???</font></div>
 						</div>
-						<!-- Baú -->
+						<!-- Box -->
 						<div class="item-box" id="c_box">
 							<center><font class="title-inv">Item Box</font><center>
 							<div id="CARLOS-BOX">
-								<!-- os itens do baú do Carlos vão aqui -->
+								<!-- Carlos's Box Goes Here -->
 							</div>
 						</div>
 						<div class="menu-re3-box" id="c_info">
@@ -1236,7 +1284,7 @@
 							<div class="info-icon-holder">
 								<img src="img/details-00.png" class="none" id="icon-info-01">
 								<div class="info-details" id="text-info-01">
-									<!-- as infos vão aqui -->
+									<!-- Infos Goes Here -->
 								</div>
 							</div>
 						</div>
@@ -1310,6 +1358,7 @@
 					Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
 					<font title="The great master!">Biohazard España</font> - Fix OBJ to RE3MV (OBJ Patcher) and ARD info - <a target="_blank" href="https://twitter.com/biohazardEsp">More Info</a><br>
+					ResidentEvilArtist - Memory Positions, MIX Editor and so much more! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/memberlist.php?mode=viewprofile&u=294">Tapatalk Profile</a><br>
 				</div><br>
 				Special Thanks To:<br><br>
 				<a target="_blank" href="https://twitter.com/biohazardEsp"><u><font title="Saludos, mi querido amigo!">Biohazard España</font> - for teaching me several RE3 tricks!</u></a><br>
@@ -1345,7 +1394,7 @@
 		<div class="wizard none" id="WZ_dialog">
 			<center><font class="titulo" id="WZ_title">???</font></center><br>
 			<div id="WZ_content" class="WZ_info">
-				<!-- dialog goes here-->
+				<!-- Dialog goes here-->
 			</div>
 			<div class="progressBar none" id="WZ_progressbar"></div>
 			<center>
@@ -1357,7 +1406,7 @@
 		<img src="img/logo.png" id="img-logo" alt="R3ditor-Logo" class="appLogo logo-fundo none" onclick="main_closeFileList();forceUpdate();">
 		<!-- Log -->
 		<div class="log-holder" id="log-programa">
-			<!-- log goes here -->
+			<!-- Log goes here -->
 		</div>
 		<!-- File Loader and things - the user don't need to see this -->
 		<div class="none">
@@ -1377,6 +1426,7 @@
 			<input type="file" onchange="setLoadFile(14);" id="loadTilesetBMP" accept=".bmp"/>
 			<input type="file" onchange="setLoadFile(15);" id="loadOBJPatcherFile" accept=".obj"/>
 			<input type="file" onchange="setLoadFile(16);" id="loadRofsFile" accept=".dat"/>
+			<input type="file" onchange="setLoadFile(17);" id="loadMixFile" accept=".exe"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>

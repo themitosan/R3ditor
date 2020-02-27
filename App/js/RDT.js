@@ -2755,7 +2755,7 @@ function RDT_Backup(){
 			fs.writeFileSync(APP_PATH + '\\Backup\\RDT\\' + backup_name, RDT_arquivoBruto, 'hex');
 			log_separador();
 			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\RDT\\' + backup_name);
+			addLog('log', 'Folder - <font class="user-can-select">' + APP_PATH + '\\Backup\\RDT\\' + backup_name + '</font>');
 			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
 			log_separador();
 			WZ_saveConfigs(true);

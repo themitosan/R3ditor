@@ -118,6 +118,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDT');
 	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\EXE') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\EXE');
+	}
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\RDT');
 	}
@@ -858,6 +861,10 @@ function triggerLoad(loadForm){
 	if (loadForm === 16){
 		$('#loadRofsFile').trigger('click');
 	}
+	// Load Mix Editor
+	if (loadForm === 17){
+		$('#loadMixFile').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -1046,6 +1053,17 @@ function setLoadFile(input){
 		} else {
 			UTILS_extract_rofs(cFile.path);
 			document.getElementById('loadRofsFile').value = '';
+		}
+	}
+	// Mix Editor
+	if (input === 17){
+		cFile = document.getElementById('loadMixFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load Mix Editor';
+		} else {
+			MIX_loadExe(cFile.path);
+			document.getElementById('loadMixFile').value = '';
 		}
 	}
 	if (BETA === true){
