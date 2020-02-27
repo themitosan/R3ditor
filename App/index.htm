@@ -70,9 +70,9 @@
 		</div>
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
-			<input type="button" class="botao-menu" value="Open RDT" onclick="triggerLoad(6);">
-			<input type="button" class="botao-menu none" id="RDT_reload" value="Reload RDT" onclick="RDT_openFile(ORIGINAL_FILENAME);">
-			<input type="button" class="botao-menu none" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
+			<input type="button" class="botao-menu" title="Click here to open RDT" value="Open RDT" onclick="triggerLoad(6);">
+			<input type="button" class="botao-menu none" title="Click here to reload this file" id="RDT_reload" value="Reload RDT" onclick="RDT_openFile(ORIGINAL_FILENAME);">
+			<input type="button" class="botao-menu none" title="Click here to open this file on Hex editor" id="RDT_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Live Status -->
 			<div id="RDT_LIVESTATUS_toolBar" class="none">
 				Live Status - Cam: <font id="RDT_LIVESTATUS_toolBar_CAM" class="user-can-select">????</font> - 
@@ -83,10 +83,10 @@
 			</div>
 			<!-- Right -->
 			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
-			<input type="button" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
-			<input type="button" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
-			<input type="button" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" title="Click here to open the RDT list" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
+			<input type="button" title="Click here to restore your last edition on this file" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
+			<input type="button" title="Click here to backup this file" class="botao-menu right none" id="RDT_backupBtn" value="Backup RDT" onclick="RDT_Backup();">
+			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
@@ -131,12 +131,12 @@
 		</div>
 		<!-- Menu INI Editor -->
 		<div class="menu-topo none" id="menu-topo-INI">
-			<input type="button" class="botao-menu" value="Open INI" onclick="triggerLoad(10);">
+			<input type="button" class="botao-menu" title="Click here to open a INI file" value="Open INI" onclick="triggerLoad(10);">
 			<input type="button" class="botao-menu none" title="Click here to generate a new configuration file!" id="INI_makeNewIni" value="Generate INI" onclick="BIO3INI_MAKE_WZINI(2);">
 			<input type="button" class="botao-menu none" title="Click here to reload this file!" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
 			<input type="button" class="botao-menu none" title="Click here to open this file on Windows Notepad" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
 		</div>
@@ -914,14 +914,14 @@
 						</div>
 						<div class="RDT-applyBtn-div" id="RDT_applyDoorCamDiv">
 							<center>
-								<input type="button" class="RDT-btn-apply btn-apply-fix color-white" onclick="RDT_cancelDoorCamEdit();" value="Cancel">
-								<input type="button" class="RDT-btn-apply btn-apply-fix color-green" onclick="RDT_applyDoorCamSelect();" value="Apply Cam">
+								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" onclick="RDT_cancelDoorCamEdit();" value="Cancel">
+								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" onclick="RDT_applyDoorCamSelect();" value="Apply Cam">
 							</center>
 						</div>
 						<!-- APPLY DOOR -->
 						<div class="RDT-applyBtn-div" id="RDT_applyDoorDiv">
-							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
+							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+							<input type="button" title="Click here to appply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>
@@ -965,7 +965,7 @@
 							<input type="button" value="Paste Item Pos." class="botao-menu" onclick="RDT_copyPasteItemPos(1);">
 							<input type="button" value="Use Player Pos." id="RDT_useJillPos_Item" class="botao-menu botao-aplicar none" onclick="RDT_getJillPosToApply(0);">
 						</div><br>
-						<center><input type="button" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
+						<center><input type="button" title="Click here to send your changes!" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
 					</div>
 				</div>
 			</div>
@@ -996,7 +996,7 @@
 					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-tCameras">???</font><br>
 					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
 					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
-					Number of enemies / npc's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
+					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 				</div>
 			</div>
 			<!-- RDT Message Block -->
@@ -1039,7 +1039,7 @@
 						<div id="RDT-edit-map-select" class="none">
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
-						<input type="button" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
+						<input type="button" title="Click here to edit the XYZR Position" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
 						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
 						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
 						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
@@ -1053,11 +1053,11 @@
 							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix no-transform-text" style="width: 60px;">
 								<option value="1">Item</option><option value="2">File</option><option value="3">Map</option>
 							</select>
-							<input type="button" value="Convert!" id="RDT_applyConvertItem" class="botao-menu" style="margin-left: 8px;" onclick="">
+							<input type="button" title="Click here to convert!" value="Convert!" id="RDT_applyConvertItem" class="botao-menu" style="margin-left: 8px;">
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
+							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>
@@ -1128,14 +1128,14 @@
 				Hex Input - Translator:
 				<input type="button" onclick="MSG_hideTranslateInput();" title="Click here to hide this window" class="botao-menu right" value="Hide">
 				<textarea placeholder="Insert the hex values here! (FA 02...)" onfocus="MSG_clearHexTextfield();" id="msg-hex-toTrans" class="msg-txt-edit txtarea-hex-fix"></textarea>
-				<input type="button" class="botao-menu" class="right" value="Translate!" onclick="MSG_translateHexValues();">
+				<input type="button" title="Click here to Translate!" class="botao-menu" class="right" value="Translate!" onclick="MSG_translateHexValues();">
 			</div>
 		</div>
 		<!-- FORM: Save -->
 		<div class="none" id="menu-SAVE" onclick="RE3_LIVE_closeForm();">
-			<input type="button" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
-			<input type="button" id="menu-2" class="aba" value="Jill Valentine" onclick="SAVE_showMenu(1);">
-			<input type="button" id="menu-3" class="aba" value="Carlos Oliveira" onclick="SAVE_showMenu(2);">
+			<input type="button" title="General Tab" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
+			<input type="button" title="Jill Valentine" id="menu-2" class="aba" value="Jill Valentine" onclick="SAVE_showMenu(1);">
+			<input type="button" title="Carlos Oliveira" id="menu-3" class="aba" value="Carlos Oliveira" onclick="SAVE_showMenu(2);">
 			<!-- Menu Geral -->
 			<div class="menu" id="menu-info">
 				<!-- Menu Geral -->
@@ -1175,32 +1175,32 @@
 					<div id="save-alterar" class="save-alterar-menu" onclick="main_closeFileList();">
 						<center><font class="titulo">Modify</font></center><br>
 						Modify Time: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Change"><br>
+						<input type="button" title="Click here to edit IGT" class="botao-menu menu-general-btn" onclick="showModIGT();" value="Change"><br>
 						Modify Game mode:
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Change"><br>
+						<input type="button" title="Click here to edit Game Mode" class="botao-menu menu-general-btn" onclick="showModDificuldade(dificuldade);" value="Change"><br>
 						Modify Current Player:
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Change"><br>
+						<input type="button" title="Click here to modify Current Player" class="botao-menu menu-general-btn" onclick="showModPerson(cPlayer);" value="Change"><br>
 						Modify Outfit:
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Change"><br>
+						<input type="button" title="Click here to edit Outfit" class="botao-menu menu-general-btn" onclick="showModRoupa(outf);" value="Change"><br>
 						Modify Saves:   
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Change"><br>
+						<input type="button" title="Click here to edit Saves" class="botao-menu menu-general-btn" onclick="showModSaveCount(totalVezesSaves);" value="Change"><br>
 						Modify Epilogues:
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Change"><br>
+						<input type="button" title="Click here to edit Epilogues" class="botao-menu menu-general-btn" onclick="showModEpilogos(epil);" value="Change"><br>
 						<div class="menu-separador"></div>
 						Modify HP: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Change"><br>
+						<input type="button" title="Click here to modify your HP" class="botao-menu menu-general-btn" onclick="showModHP(life);" value="Change"><br>
 						Modify Poison Status: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Change"><br>
+						<input type="button" title="Click here to modify your Poison Status" class="botao-menu menu-general-btn" onclick="showModPoison();" value="Change"><br>
 						<div class="menu-separador"></div>
 						Jill - Modify Sidepack: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Change"><br>
+						<input type="button" title="Click here to modify Sidepack" class="botao-menu menu-general-btn" onclick="showModSidepack(1);" value="Change"><br>
 						Jill - Modify Current Weapon: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Change"><br>
+						<input type="button" title="Click here to modify your current weapon" class="botao-menu menu-general-btn" onclick="showModCurrentArma(1);" value="Change"><br>
 						<div class="menu-separador"></div>
 						Carlos - Modify Sidepack: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Change"><br>
+						<input type="button" title="Click here to modify Sidepack" class="botao-menu menu-general-btn" onclick="showModSidepack(2);" value="Change"><br>
 						Carlos - Modify Current Weapon: 
-						<input type="button" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Change"><br>
+						<input type="button" title="Click here to modify your current weapon" class="botao-menu menu-general-btn" onclick="showModCurrentArma(2);" value="Change"><br>
 					</div>
 				</div>
 				<!-- Jill Valentine -->
@@ -1208,7 +1208,7 @@
 					<div class="menu-general-content">
 						<div class="status-menu" id="JILL-STATUS">
 							<img src="img/JILL-ICON.png" class="img-person-icon">
-							<div class="txt-status">Jill Valentine - Status: <font class="" id="JILL-LIFESTATUS">???</font></div>
+							<div class="txt-status">Jill Valentine - Status: <font id="JILL-LIFESTATUS">???</font></div>
 						</div>
 						<!-- Box -->
 						<div class="item-box" id="j_box">
@@ -1270,7 +1270,7 @@
 					<div class="menu-general-content">
 						<div class="status-menu" id="CARLOS-STATUS">
 							<img src="img/CARLOS-ICON.png" class="img-person-icon">
-							<div class="txt-status">Carlos Oliveira - Status: <font class="" id="CARLOS-LIFESTATUS">???</font></div>
+							<div class="txt-status">Carlos Oliveira - Status: <font id="CARLOS-LIFESTATUS">???</font></div>
 						</div>
 						<!-- Box -->
 						<div class="item-box" id="c_box">
@@ -1333,8 +1333,8 @@
 				<div id="dialog_render">
 					<!-- Dialogs goes here -->
 				</div><br/>
-				<input type="button" value="Cancel" class="botao-menu" id="btn-item-cancel" onclick="cancelShowModItem();">
-				<input type="button" value="Apply" class="botao-menu" id="btn-item-apply" onclick="">
+				<input type="button" title="Click here to cancel" value="Cancel" class="botao-menu" id="btn-item-cancel" onclick="cancelShowModItem();">
+				<input type="button" title="Click here to apply" value="Apply" class="botao-menu" id="btn-item-apply">
 			</div>
 		</div>
 		<!-- Sobre -->
@@ -1365,7 +1365,7 @@
 				<a target="_blank" href="https://www.ct-stars.com/"><u>The Entire CT-Stars Team! (Special Mention to <font title="Thank you! <3">Flag-King</font>!)</u></a><br>
 				<u>Kazuhiro Aoyama, Shinji Mikami and <a target="_blank" href="https://twitter.com/dev1_official">Capcom Dev 1 Team</a> - Thanks by creating the game of my life!</u>
 				<br><br>Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.<br><br>
-				<input type="button" class="botao-menu" value="Go Back" onclick="reload();">
+				<input type="button" class="botao-menu" title="Click here to go back" value="Go Back" onclick="reload();">
 			</center>
 		</div>
 		<!-- Update Info -->
