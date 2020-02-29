@@ -258,8 +258,9 @@ input[type='range' i]{
     margin-top: -22px;
 }
 .b-icon{
-    width: 560px;
+    width: 57px;
     cursor: pointer;
+    margin-left: -552px;
 }
 .b-label{
     display: flex;
@@ -269,12 +270,13 @@ input[type='range' i]{
 .inventario{
     width: 218px;
     height: 406px;
+    margin-top: 4px;
     overflow: hidden;
     border-radius: 4px;
     background-color: #000040;
 }
 .invent-principal{
-    width: 1065px;
+    width: 110px;
     cursor: pointer;
     position: fixed;
 }
@@ -333,15 +335,15 @@ input[type='range' i]{
     text-shadow: 0px 0px 4px #bfbfbf85;
 }
 .menu-re3-box{
-    top: 154px;
-    left: 49.2%;
-    width: 31.2%;
+    top: 149px;
+    left: 660px;
+    width: 417px;
     height: 456px;
     position: fixed;
     overflow: hidden;
     padding-top: 10px;
     border-radius: 4px;
-    background-color: #000018;
+    background-image: linear-gradient(to bottom, #000018, #00004d);
 }
 .info-details{
     top: 376px;
@@ -349,28 +351,28 @@ input[type='range' i]{
     color: #fff;
     width: 390px;
     padding: 6px;
-    height: 222px;
+    height: 216px;
     border: solid;
     position: fixed;
     border-color: #e7e7e7;
     text-align: -webkit-left;
-    background-color: #0c0c52;
+    background-image: linear-gradient(to bottom, #0c0c52, #0e0e6f);
 }
 .title-inv{
     font-style: italic;
     font-family: sans-serif;
 }
 .invent-fix{
-    top: 152px;
-    left: 80.5%;
-	width: 16.2%;
+    top: 147px;
+    left: 1078px;
+    width: 225px;
     padding: 10px;
     height: 446px;
     overflow: auto;
     margin-top: 2px;
-	position: fixed;
+    position: fixed;
     border-radius: 4px;
-    background-color: #00001f;
+    background-image: linear-gradient(to bottom, #000018, #04042b);
 }
 .bau-item{
     z-index: 1;
@@ -379,10 +381,11 @@ input[type='range' i]{
     height: 45px;
     margin-top: 4px;
     border-radius: 6px;
-    background-color: #000039;
+    text-shadow: 0 0 10px #7676e5;
+    background-image: linear-gradient(to right, #000040, #0d0d57);
 }
 .item-box{
-    width: 47.6%;
+    width: 618px;
     padding: 10px;
     height: 446px;
     overflow: auto;
@@ -495,7 +498,7 @@ input[type='range' i]{
     height: 51px;
     border-radius: 4px;
     padding-left: 14px;
-    background-color: #000039;
+    background-image: linear-gradient(to right, #000039, #000030);
 }
 .img-person-icon{
     width: 4%;
@@ -641,14 +644,46 @@ input[type='range' i]{
     top: -25px;
 }
 .invent-mod-btn{
-    top: 34px;
-    left: 80px;
+    top: 42px;
+    left: 75px;
     z-index: 99;
     padding: 4px;
     font-size: 10px;
     position: absolute;
     text-decoration: none;
 }
+.invent-mod-fix-2{
+    left: 186px;
+}
+.invent-mod-fix-3{
+    top: 120px;
+}
+.invent-mod-fix-4{
+    left: 186px;
+    top: 120px;
+}
+.invent-mod-fix-5{
+    top: 202px;
+}
+.invent-mod-fix-6{
+    left: 186px;
+    top: 202px;
+}
+.invent-mod-fix-7{
+    top: 282px;
+}
+.invent-mod-fix-8{
+    left: 186px;
+    top: 282px;
+}
+.invent-mod-fix-9{
+    top: 362px;
+}
+.invent-mod-fix-10{
+    left: 186px;
+    top: 362px;
+}
+
 .save-alterar-menu{
     top: 14px;
     left: 968px;

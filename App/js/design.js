@@ -512,9 +512,9 @@ function SAVE_showMenu(menuId){
 	}
 	cancelShowModItem();
 	if (menuId === 0){ // General
-		if (request_render_save == false){
-			addInfo(0, '00');
-			addInfo(1, '00');
+		if (request_render_save === false){
+			SAV_addInfo(0, '00');
+			SAV_addInfo(1, '00');
 			$('#log-programa').css({'height': '54px', 'top': '656px'});
 			SAVE_applyMenuFocus(1);
 			$('#s-menu-general').css({'display': 'block', 'width': '74%'});
@@ -531,24 +531,27 @@ function SAVE_showMenu(menuId){
 		$('#save-geral').css({'height': '530px'});
 		$('#menu-info').css({'height': '530px'});
 	}
-	if (menuId === 1){ // Menu JILL
-		addInfo(0, '00');
+	// JILL
+	if (menuId === 1){
+		SAV_addInfo(0, '00');
 		SAVE_applyMenuFocus(2);
 		$('#save-geral').addClass('none');
 		$('#msg-viewer').addClass('none');
 		$('#save-carlos').addClass('none');
 		$('#save-jill').removeClass('none');
 	}
-	if (menuId === 2){ // Menu Carlos
-		addInfo(1, '00');
+	// Menu Carlos
+	if (menuId === 2){
+		SAV_addInfo(1, '00');
 		SAVE_applyMenuFocus(3);
 		$('#save-jill').addClass('none');
 		$('#save-geral').addClass('none');
 		$('#msg-viewer').addClass('none');
 		$('#save-carlos').removeClass('none');
 	}
-	if (menuId === 3){ // Menu Opções
-		addInfo(1, '00');
+	// Menu Opções
+	if (menuId === 3){
+		SAV_addInfo(1, '00');
 		SAVE_applyMenuFocus(4);
 		$('#save-jill').addClass('none');
 		$('#save-geral').addClass('none');

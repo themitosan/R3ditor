@@ -18,7 +18,7 @@
 		<script type="text/javascript" src="js/update.js"></script>
 		<!-- Modulos -->
 		<script type="text/javascript" src="js/ini.js"></script>
-		<script type="text/javascript" src="js/save.js"></script>
+		<script type="text/javascript" src="js/SAV.js"></script>
 		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
@@ -100,9 +100,9 @@
 			<input type="button" title="Click here to return to RDT" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
 			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
-		<!-- Menu Saves -->
+		<!-- Menu SAV -->
 		<div class="menu-topo none" id="menu-topo-save">
-			<input type="button" title="Click here to open a save file" class="botao-menu" value="Open Save" onclick="triggerLoad(4);">
+			<input type="button" title="Click here to open a save file" class="botao-menu" value="Open SAV" onclick="triggerLoad(4);">
 			<input type="button" title="Click here to generate a new save file!" class="botao-menu" id="SAV_generateSave" value="Generate SAV" onclick="SAV_GenerateNewSave();">
 			<input type="button" title="Click here to reload this save file" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
 			<input type="button" title="Click here to open this save file on Hex Editor" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
@@ -1366,7 +1366,8 @@
 			<!-- Block Size -->
 			<div class="blockUsage" id="MSG_RDT_BLOCKUSAGE">
 				<center>
-					Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
+					Original block size (Hex): <font id="MSG_RDT_lbl_blockSize">???</font> - 
+					Current block size (Hex): <font id="MSG_RDT_lbl_blockUsage">???</font>
 				</center>
 			</div>
 			<!-- MSG: Hex Input -->
@@ -1379,7 +1380,7 @@
 		</div>
 		<!-- FORM: Save -->
 		<div class="none" id="menu-SAVE" onclick="RE3_LIVE_closeForm();">
-			<input type="button" title="General Tab" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
+			<input type="button" title="General info" id="menu-1" class="aba aba-left-fix" value="General" onclick="SAVE_showMenu(0);">
 			<input type="button" title="Jill Valentine" id="menu-2" class="aba" value="Jill Valentine" onclick="SAVE_showMenu(1);">
 			<input type="button" title="Carlos Oliveira" id="menu-3" class="aba" value="Carlos Oliveira" onclick="SAVE_showMenu(2);">
 			<!-- Menu Geral -->
@@ -1465,11 +1466,11 @@
 						</div>
 						<!-- Info Item -->
 						<div class="menu-re3-box" id="j_info">
-							<center><font class="title-inv">Info</font><center>
+							<center><font class="title-inv">Item info</font><center>
 							<div class="info-icon-holder">
 								<img src="img/details-00.png" class="none" id="icon-info-00">
 								<div class="info-details" id="text-info-00">
-									<!-- Info's Goes Here -->
+									<!-- Infos Goes Here -->
 								</div>
 							</div>
 						</div>
@@ -1479,34 +1480,34 @@
 							<div id="JILL-INVE" class="inventario">
 								<a id="btn-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-1" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-1" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-01" id="J-icon-1" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-2" class="botao-menu invent-mod-btn invent-mod-fix-2">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-2" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-2" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-02" id="J-icon-2" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-3" class="botao-menu invent-mod-btn invent-mod-fix-3">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-3" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-3" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-03" id="J-icon-3" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-4" class="botao-menu invent-mod-btn invent-mod-fix-4">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-4" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-4" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-04" id="J-icon-4" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-5" class="botao-menu invent-mod-btn invent-mod-fix-5">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-5" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-5" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-05" id="J-icon-5" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-6" class="botao-menu invent-mod-btn invent-mod-fix-6">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-6" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-6" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-06" id="J-icon-6" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-7" class="botao-menu invent-mod-btn invent-mod-fix-7">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-7" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-7" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-07" id="J-icon-7" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-8" class="botao-menu invent-mod-btn invent-mod-fix-8">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-8" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-8" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-08" id="J-icon-8" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-9" class="botao-menu invent-mod-btn invent-mod-fix-9">Modify</a>
 								<font class="item-counter-invent-1" id="J-LBL-9" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-9" onclick="addInfo(0, '00');">
-								<a id="btn-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-09" id="J-icon-9" onclick="addInfo(0, '00');">
+								<a id="btn-exchange-item-10" class="botao-menu invent-mod-btn invent-mod-fix-10">Modify</a>
 								<font class="item-counter-invent-2" id="J-LBL-10" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="J-icon-10" onclick="addInfo(0, '00');">
+								<img src="img/box-set-0.png" class="invent-principal invent-10" id="J-icon-10" onclick="addInfo(0, '00');">
 							</div>
 						</div>
 					</div>
@@ -1526,7 +1527,7 @@
 							</div>
 						</div>
 						<div class="menu-re3-box" id="c_info">
-							<center><font class="title-inv">Info</font><center>
+							<center><font class="title-inv">Item info</font><center>
 							<div class="info-icon-holder">
 								<img src="img/details-00.png" class="none" id="icon-info-01">
 								<div class="info-details" id="text-info-01">
@@ -1540,34 +1541,34 @@
 							<div id="CARLOS-INVE" class="inventario">
 								<a id="btn-c-exchange-item-1" class="botao-menu invent-mod-btn">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-1" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-01" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-1" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-2" class="botao-menu invent-mod-btn" style="left: 186px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-01" id="C-icon-1" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-2" class="botao-menu invent-mod-btn invent-mod-fix-2">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-2" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-02" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-2" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-3" class="botao-menu invent-mod-btn" style="top: 114px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-02" id="C-icon-2" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-3" class="botao-menu invent-mod-btn invent-mod-fix-3">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-3" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-03" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-3" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-4" class="botao-menu invent-mod-btn" style="left: 186px;top: 114px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-03" id="C-icon-3" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-4" class="botao-menu invent-mod-btn invent-mod-fix-4">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-4" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-04" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-4" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-5" class="botao-menu invent-mod-btn" style="top: 196px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-04" id="C-icon-4" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-5" class="botao-menu invent-mod-btn invent-mod-fix-5">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-5" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-05" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-5" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-6" class="botao-menu invent-mod-btn" style="left: 186px;top: 196px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-05" id="C-icon-5" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-6" class="botao-menu invent-mod-btn invent-mod-fix-6">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-6" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-06" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-6" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-7" class="botao-menu invent-mod-btn" style="top: 276px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-06" id="C-icon-6" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-7" class="botao-menu invent-mod-btn invent-mod-fix-7">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-7" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-07" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-7" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-8" class="botao-menu invent-mod-btn" style="left: 186px;top: 276px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-07" id="C-icon-7" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-8" class="botao-menu invent-mod-btn invent-mod-fix-8">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-8" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-08" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-8" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-9" class="botao-menu invent-mod-btn" style="top: 356px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-08" id="C-icon-8" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-9" class="botao-menu invent-mod-btn invent-mod-fix-9">Modify</a>
 								<font class="item-counter-invent-1" id="C-LBL-9" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-09" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-9" onclick="addInfo(0, '00');">
-								<a id="btn-c-exchange-item-10" class="botao-menu invent-mod-btn" style="left: 186px;top: 356px;">Modify</a>
+								<img src="img/box-set-0.png" class="invent-principal invent-09" id="C-icon-9" onclick="addInfo(0, '00');">
+								<a id="btn-c-exchange-item-10" class="botao-menu invent-mod-btn invent-mod-fix-10">Modify</a>
 								<font class="item-counter-invent-2" id="C-LBL-10" onclick="addInfo(0, '00');"></font>
-								<img src="img/box-set-0.png" class="invent-principal invent-10" style="clip-path: inset(0px 956px 4px 0px);" id="C-icon-10" onclick="addInfo(0, '00');"
+								<img src="img/box-set-0.png" class="invent-principal invent-10" id="C-icon-10" onclick="addInfo(0, '00');"
 								>
 							</div>
 						</div>
