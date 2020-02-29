@@ -144,6 +144,7 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 	*/
 	if (comb_function === '06'){
 		MIX_TOTAL_06++;
+		console.log(comb_item_a + ' - ' + comb_item_b);
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
@@ -164,19 +165,19 @@ function MIX_convertCombination(mix_id, btn){
 			NEW_HEX = '0121212401000000';
 		}
 		if (newType === '02'){
-			NEW_HEX = '028261150F000000';
+			NEW_HEX = '028261150f000000';
 		}
 		if (newType === '03'){
 			NEW_HEX = '0311150200000000';
 		}
 		if (newType === '04'){
-			NEW_HEX = '040918061B000000';
+			NEW_HEX = '040918061b000000';
 		}
 		if (newType === '05'){
-			NEW_HEX = '05186D1B12000000';
+			NEW_HEX = '05186d1b12000000';
 		}
 		if (newType === '06'){
-			NEW_HEX = '06096E0000000000';
+			NEW_HEX = '06096e0000000000';
 		}
 		localStorage.setItem('MIX_ID_' + mix_id, NEW_HEX);
 		$('#MIX_btn_SAVE_EXE').css({'display': 'inline'});

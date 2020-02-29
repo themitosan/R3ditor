@@ -2105,7 +2105,7 @@ function MIX_updateMainTabsTitle(){
 	document.getElementById('MIX-aba-menu-4').title = 'Change Bullet Type: Handgun / Magnum - Total Combinations: ' + MIX_TOTAL_03;
 	document.getElementById('MIX-aba-menu-5').title = 'Change Bullet Type: Granade Launcher Rounds - Total Combinations: ' + MIX_TOTAL_04;
 	document.getElementById('MIX-aba-menu-6').title = 'Gun Powder + Granade Launcher Rounds - Total Combinations: ' + MIX_TOTAL_05;
-	document.getElementById('MIX-aba-menu-7').title = 'Infinite Ammo / Remaining - Total Combinations: ' + MIX_TOTAL_06;
+	document.getElementById('MIX-aba-menu-7').title = 'Infinite Ammo / Quantity - Total Combinations: ' + MIX_TOTAL_06;
 }
 function MIX_showEdit(mode, combId, combHex){
 	// Mode 0: Show, Mode 1: Hide
