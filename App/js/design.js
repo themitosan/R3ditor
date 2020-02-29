@@ -1997,8 +1997,8 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 			}
 		}
 		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).title = itemTitle;
-		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).src = APP_PATH + '\\App\\Img\\box-set-' + spriteId + '.png';
-		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'clip-path': 'inset(' + clipPath + ')', 'left': leftoffset + 'px', 'display': 'inline'});
+		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).src = APP_PATH + '\\App\\Img\\items\\' + itemHex + '.png';
+		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'display': 'inline'});
 	}
 	scrollLog();
 }

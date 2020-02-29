@@ -1191,6 +1191,24 @@ input[type='range' i]{
     position: absolute;
     background-image: linear-gradient(to bottom, #5c6499, #192432);
 }
+.RDT_door_select_width_fix{
+    width: 230px !important;
+}
+.RDT_item_convert_width_fix{
+    width: 60px;
+}
+.RDT_item_convert_btn_margin_fix{
+    margin-left: 8px;
+}
+.RE3_LIVESTATUS_OPENONR3D_margin_fix{
+    margin-top: 2px;
+}
+.FILEGEN_saveImageBtn{
+    left: 806px;
+}
+.RDT_camera_cancel_btn_fix{
+    width: 45%;
+}
 .new_update{
     top: 6px;
     left: 8px;
@@ -1761,6 +1779,7 @@ input[type='range' i]{
     left: 276px;
     width: 174px;
     height: 326px;
+    overflow: hidden;
 }
 .RE3_LIVESTATUS_WINDOW-6{
     top: 468px;
@@ -1792,7 +1811,6 @@ input[type='range' i]{
     left: 28px;
     top: 446px;
 }
-
 .RE3_LIVESTATUS_X_color{
     color: #ffe6e6;
     text-shadow: 0px 0px 10px #4d0000;
@@ -1815,24 +1833,49 @@ input[type='range' i]{
     position: fixed;
     margin-top: -2px;
 }
-.RE3_LIVESTATUS_INVENT_ROW_1{
+.RE3_LIVESTATUS_INVENT_SLOT_1{
     top: 80px;
     margin-top: 0px !important;
 }
-.RE3_LIVESTATUS_INVENT_ROW_2{
+.RE3_LIVESTATUS_INVENT_SLOT_2{
+    top: 80px;
+    left: 188px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_SLOT_3{
     top: 112px;
     margin-top: 0px !important;
 }
-.RE3_LIVESTATUS_INVENT_ROW_3{
+.RE3_LIVESTATUS_INVENT_SLOT_4{
+    top: 112px;
+    left: 188px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_SLOT_5{
     top: 144px;
     margin-top: 0px !important;
 }
-.RE3_LIVESTATUS_INVENT_ROW_4{
+.RE3_LIVESTATUS_INVENT_SLOT_6{
+    top: 144px;
+    left: 188px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_SLOT_7{
     top: 176px;
     margin-top: 0px !important;
 }
-.RE3_LIVESTATUS_INVENT_ROW_5{
+.RE3_LIVESTATUS_INVENT_SLOT_8{
+    top: 176px;
+    left: 188px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_SLOT_9{
     top: 208px;
+    margin-top: 0px !important;
+}
+.RE3_LIVESTATUS_INVENT_SLOT_10{
+    top: 208px;
+    left: 188px;
     margin-top: 0px !important;
 }
 .RE3_LIVESTATUS_LBL_ITEM{
