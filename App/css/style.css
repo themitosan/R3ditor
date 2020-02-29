@@ -1241,7 +1241,7 @@ input[type='range' i]{
     margin-top: 2px;
 }
 .FILEGEN_saveImageBtn{
-    left: 806px;
+    left: 806px !important;
 }
 .RDT_camera_cancel_btn_fix{
     width: 45%;

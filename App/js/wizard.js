@@ -353,6 +353,7 @@ function WZ_loadFiles(file){
 	} else {
 		R3DITOR_check_for_updates = false;
 	}
+	special_day_ff = '?';
 	document.getElementById('SETTINGS_edit_enableUpdates').checked = R3DITOR_check_for_updates;
 	// RE3 Path
 	if (cfgs[1] !== undefined){
