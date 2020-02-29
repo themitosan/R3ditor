@@ -544,15 +544,62 @@ function WZ_loadFiles(file){
 	}
 }
 function WZ_APPEND(){
+	var c = 0;
 	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
-	$('#MIX_edit_function').append(MIX_functions);
 	$('#RDT_door-edit-DispTxt').append(RDT_EDIT_DOOR_TEXT);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
-	document.getElementById('MIX_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
-	document.getElementById('MIX_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
-	document.getElementById('MIX_prev_exch_A').src = APP_PATH + '\\App\\Img\\exchange-arrow.png';
-	document.getElementById('MIX_prev_exch_B').src = APP_PATH + '\\App\\Img\\exchange-arrow.png';
+	// MIX
+	document.getElementById('MIX_edit_holder_00').innerHTML = MIX_EDIT_00_RELOADSUM;
+	document.getElementById('MIX_edit_holder_01').innerHTML = MIX_EDIT_01_COMBINE;
+	document.getElementById('MIX_edit_holder_02').innerHTML = MIX_EDIT_02_RELOADING;
+	document.getElementById('MIX_edit_holder_03').innerHTML = MIX_EDIT_03_CHANGE_HANDMAG;
+	document.getElementById('MIX_edit_holder_04').innerHTML = MIX_EDIT_04_CHANGE_GL;
+	document.getElementById('MIX_edit_holder_05').innerHTML = MIX_EDIT_05_GPOWDER_GL;
+	document.getElementById('MIX_edit_holder_06').innerHTML = MIX_EDIT_06_INFINITE;
+	while (c < 7){
+		$('#MIX_edit_function_0' + c).append(MIX_FUNCTIONS);
+		c++;
+	}
+	// 00
+	$('#MIX_00_edit_Ammo').append(RDT_EDIT_ITEM);
+	$('#MIX_00_edit_Weapon').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_00_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	// 01
+	$('#MIX_01_edit_item_A').append(RDT_EDIT_ITEM);
+	$('#MIX_01_edit_item_B').append(RDT_EDIT_ITEM);
+	$('#MIX_01_edit_item_Result').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_01_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	document.getElementById('MIX_01_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
+	// 02
+	$('#MIX_02_edit_item').append(RDT_EDIT_ITEM);
+	$('#MIX_02_edit_item_Result').append(RDT_EDIT_ITEM);
+	$('#MIX_02_edit_reloadingItem').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_02_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	document.getElementById('MIX_02_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
+	// 03
+	$('#MIX_03_edit_item_Result').append(RDT_EDIT_ITEM);
+	$('#MIX_03_edit_handMag_ammo').append(RDT_EDIT_ITEM);
+	$('#MIX_03_edit_handMag_weapon').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_03_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	document.getElementById('MIX_03_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
+	// 04
+	$('#MIX_04_edit_GL_ammo').append(RDT_EDIT_ITEM);
+	$('#MIX_04_edit_GL_weapon').append(RDT_EDIT_ITEM);
+	$('#MIX_04_edit_GL_newAmmo').append(RDT_EDIT_ITEM);
+	$('#MIX_04_edit_GL_newWeapon').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_04_prev_exch_A').src = APP_PATH + '\\App\\Img\\exchange-arrow.png';
+	document.getElementById('MIX_04_prev_exch_B').src = APP_PATH + '\\App\\Img\\exchange-arrow-2.png';
+	// 05
+	$('#MIX_05_edit_powderGl_ammo').append(RDT_EDIT_ITEM);
+	$('#MIX_05_edit_powderGl_powder').append(RDT_EDIT_ITEM);
+	$('#MIX_05_edit_powderGl_newAmmo').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_05_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	document.getElementById('MIX_05_preview_equals').src = APP_PATH + '\\App\\Img\\MIX_equals.png';
+	// 06
+	$('#MIX_06_edit_infinite_inf').append(RDT_EDIT_ITEM);
+	$('#MIX_06_edit_infinite_item').append(RDT_EDIT_ITEM);
+	document.getElementById('MIX_06_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
 	// MSG Titles
 	document.getElementById('MSG_ADDFUNC_BTN_1').title  = '\nUse this command to start a message or change the text speed.';
 	document.getElementById('MSG_ADDFUNC_BTN_2').title  = '\nUse this command to finish the message.\n(In doubt, leave args empty!)';

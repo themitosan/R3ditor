@@ -535,12 +535,14 @@ input[type='range' i]{
 }
 .aba-select{
     zoom: 1;
+    cursor: auto;
     outline: none;
     text-shadow: 0px 0px 6px #000;
     background-image: linear-gradient(to bottom, #696969, #444);
 }
 .aba-select-2{
     zoom: 1;
+    cursor: auto;
     outline: none;
     text-shadow: 0px 0px 6px #000;
     background-image: linear-gradient(to bottom, #9e9e9e, #626262);
@@ -2286,18 +2288,16 @@ input[type='range' i]{
 }
 .MIX_preview_exchange_A{
     z-index: 1;
-    left: 62px;
-    top: 178px;
-    width: 110px;
-    height: 14px;
+    top: 185px;
+    left: 50px;
+    width: 124px;
     position: absolute;
 }
 .MIX_preview_exchange_B{
     z-index: 0;
-    left: 110px;
-    top: 174px;
-    width: 110px;
-    height: 24px;
+    top: 148px;
+    left: 104px;
+    width: 124px;
     position: absolute;
     filter: hue-rotate(140deg);
 }
@@ -2334,6 +2334,24 @@ input[type='range' i]{
     border-radius: 6px;
     background-color: #000040;
     box-shadow: 0 0 10px #0000403d;
+}
+.MIX-preview-04-img{
+    position: absolute;
+    top: 202px;
+    z-index: 4;
+    zoom: 0.8;
+}
+.MIX_IMG_04_FIX_01{
+    left: 48px;
+}
+.MIX_IMG_04_FIX_02{
+    left: 116px;
+}
+.MIX_IMG_04_FIX_03{
+    left: 189px;
+}
+.MIX_IMG_04_FIX_04{
+    left: 256px;
 }
 .MIX-func-sum-bg{
     background-image: linear-gradient(to bottom, #497d54, #2d5035);

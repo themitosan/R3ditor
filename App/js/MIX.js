@@ -10,6 +10,13 @@
 var MIX_Database;
 var MIX_arquivoBruto;
 var MIX_currentFunction;
+var MIX_TOTAL_00 = 0;
+var MIX_TOTAL_01 = 0;
+var MIX_TOTAL_02 = 0;
+var MIX_TOTAL_03 = 0;
+var MIX_TOTAL_04 = 0;
+var MIX_TOTAL_05 = 0;
+var MIX_TOTAL_06 = 0;
 /*
 	Functions
 */
@@ -20,23 +27,17 @@ function MIX_loadExe(file){
 	var totalMixes = 125;
 	ORIGINAL_FILENAME = file;
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
-	var MIX_startPos = MIX_arquivoBruto.indexOf(MIX_seekPattern);
-	if (MIX_startPos !== -1){
-		document.getElementById('MIX-holder').innerHTML = '';
-		MIX_Database = MIX_arquivoBruto.slice(RANGES['MIX_Slice_Pos'][0], RANGES['MIX_Slice_Pos'][1]);
-		while (c < totalMixes){
-			MIX_decompileMix(c, start_pos, end_pos, false);
-			start_pos = parseInt(start_pos + 16);
-			end_pos = parseInt(end_pos + 16);
-			c++;
-		}
-		addLog('log', 'MIX - File loaded sucessfully!');
-		addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
-		main_menu(8);
-	} else {
-		addLog('warn', 'WARN - Unable to find Items combinations!');
+	MIX_clearHolders();
+	MIX_Database = MIX_arquivoBruto.slice(RANGES['MIX_Slice_Pos'][0], RANGES['MIX_Slice_Pos'][1]);
+	while (c < totalMixes){
+		MIX_decompileMix(c, start_pos, end_pos, false);
+		start_pos = parseInt(start_pos + 16);
+		end_pos = parseInt(end_pos + 16);
+		c++;
 	}
-	scrollLog();
+	addLog('log', 'MIX - File loaded sucessfully!');
+	addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
+	main_menu(8);
 }
 function MIX_decompileMix(id, start, end, useLocalStorage){
 	var hex_temp;
@@ -58,34 +59,37 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 		V1 & V2 Always gonna be 00
 	*/
 	if (comb_function === '00'){
+		MIX_TOTAL_00++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-sum-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-2">' + 
+							  '(' + MIX_TOTAL_00 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-2">' + 
 							  comb_item_a_lbl + '</font><br>Ammo: <font class="MIX_fixLabel-2">' + comb_item_b_lbl + '</font><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
 	// 01: Combine
 	if (comb_function === '01'){
+		MIX_TOTAL_01++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		var comb_value_a_lbl  = ITEM[comb_value_a][0];
 		var comb_value_b_lbl  = parseInt(comb_value_b, 16);
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-comb-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Item A: <font class="MIX_fixLabel">' + 
+							  '(' + MIX_TOTAL_01 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Item A: <font class="MIX_fixLabel">' + 
 							  comb_item_a_lbl + '</font><br>Item B: <font class="MIX_fixLabel">' + comb_item_b_lbl + '</font><br>Result: <font class="MIX_fixLabel">' + comb_value_a_lbl + '</font><br>Quantity: ' + 
 							  '<font class="MIX_fixLabel user-can-select">' + comb_value_b_lbl + '</font><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
 	// 02: Reloading Tool
 	if (comb_function === '02'){
+		MIX_TOTAL_02++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		var comb_value_a_lbl  = ITEM[comb_value_a][0];
 		var comb_value_b_lbl  = parseInt(comb_value_b, 16);
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-reloading-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Item A: <font class="MIX_fixLabel">' + 
+							  '(' + MIX_TOTAL_02 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Item A: <font class="MIX_fixLabel">' + 
 							  comb_item_a_lbl + '</font><br>Item B: <font class="MIX_fixLabel">' + comb_item_b_lbl + '</font><br>Result: <font class="MIX_fixLabel">' + comb_value_a_lbl + '</font><br>Quantity: ' + 
 							  '<font class="MIX_fixLabel user-can-select">' + comb_value_b_lbl + '</font><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
@@ -94,24 +98,26 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 		V2 always gonna be 00
 	*/
 	if (comb_function === '03'){
+		MIX_TOTAL_03++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		var comb_value_a_lbl  = ITEM[comb_value_a][0];
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-bullet-handMag-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-4">' + 
+							  '(' + MIX_TOTAL_03 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-4">' + 
 							  comb_item_a_lbl + '</font><br>Ammo: <font class="MIX_fixLabel-4">' + comb_item_b_lbl + '</font><br>New Weapon: <font class="MIX_fixLabel-4">' + comb_value_a_lbl + '</font><div class="menu-separador">' + 
 							  '</div>Hex: <font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
 	// 04: Change Bullet Function (G. Launcher)
 	if (comb_function === '04'){
+		MIX_TOTAL_04++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		var comb_value_a_lbl  = ITEM[comb_value_a][0];
 		var comb_value_b_lbl  = ITEM[comb_value_b][0];
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-bullet-gLauncher-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-3">' + comb_item_a_lbl + '</font>' + 
+							  '(' + MIX_TOTAL_04 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Weapon: <font class="MIX_fixLabel-3">' + comb_item_a_lbl + '</font>' + 
 							  '<br>Ammo: <font class="MIX_fixLabel-3">' + comb_item_b_lbl + '</font><br>New Weapon: <font class="MIX_fixLabel-3">' + comb_value_a_lbl + '</font><br>New Ammo: <font class="MIX_fixLabel-3">' + comb_value_b_lbl + '</font></font><div class="menu-separador"></div>Hex: ' + 
 							  '<font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
@@ -120,13 +126,14 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 		Item B Always disappears
 	*/
 	if (comb_function === '05'){
+		MIX_TOTAL_05++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		var comb_value_a_lbl  = ITEM[comb_value_a][0];
 		var comb_value_b_lbl  = parseInt(comb_value_b, 16);
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-bullet-powderGL-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Ammo: <font class="MIX_fixLabel-5">' + comb_item_a_lbl + '</font>' + 
+							  '(' + MIX_TOTAL_05 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>Ammo: <font class="MIX_fixLabel-5">' + comb_item_a_lbl + '</font>' + 
 							  '<br>G. Powder: <font class="MIX_fixLabel-5">' + comb_item_b_lbl + '</font><br>New Ammo: <font class="MIX_fixLabel-5">' + comb_value_a_lbl + '</font><br>Quantity: <font class="MIX_fixLabel-5">' + comb_value_b_lbl + '</font></font><div class="menu-separador"></div>Hex: ' + 
 							  '<font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
@@ -136,17 +143,18 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 		V1, V2 = 00
 	*/
 	if (comb_function === '06'){
+		MIX_TOTAL_06++;
 		var comb_function_lbl = MIX_function_types[comb_function];
 		var comb_item_a_lbl   = ITEM[comb_item_a][0];
 		var comb_item_b_lbl   = ITEM[comb_item_b][0];
 		MIX_HTML_TEMPLATE 	  = '<div class="RDT-Item MIX-func-infBullets-bg" id="MIX_combination_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="MIX_editBtn_' + id + '" value="Modify" onclick="MIX_showEdit(0, ' + id + ', \'' + hex_temp + '\');">' + 
-							  '(' + parseInt(id + 1) + ') Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>New Infinite Item: <font class="MIX_fixLabel-6">' + comb_item_a_lbl + '</font>' + 
+							  '(' + MIX_TOTAL_06 + ') Mix ID: ' + id + ' - Function: ' + comb_function_lbl + ' (<font class="user-can-select">' + comb_function + '</font>)<div class="menu-separador"></div>New Infinite Item: <font class="MIX_fixLabel-6">' + comb_item_a_lbl + '</font>' + 
 							  '<br>Infinite Ammo: <font class="MIX_fixLabel-6">' + comb_item_b_lbl + '</font><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hex_temp.toUpperCase() + '</font></div>';
 	}
-	$('#MIX-holder').append(MIX_HTML_TEMPLATE);
+	$('#MIX-holder-' + (parseInt(comb_function) + 1)).append(MIX_HTML_TEMPLATE);
 }
-function MIX_convert(mix_id){
-	var newType = document.getElementById('MIX_edit_function').value;
+function MIX_convertCombination(mix_id, btn){
+	var newType = document.getElementById('MIX_edit_function_' + btn).value;
 	if (newType !== MIX_currentFunction){
 		var NEW_HEX;
 		if (newType === '00'){
@@ -175,18 +183,25 @@ function MIX_convert(mix_id){
 		MIX_updateList();
 		MIX_showEdit(1);
 	} else {
-		addLog('warn', 'WARN - You can\'t convert this mix to current combine type!');
+		addLog('warn', 'WARN - You can\'t convert this mix to current type!');
 	}
 	scrollLog();
 }
 function MIX_updateList(){
 	var c = 0;
-	var total = 125;
-	document.getElementById('MIX-holder').innerHTML = '';
-	while (c < total){
+	MIX_TOTAL_00 = 0;
+	MIX_TOTAL_01 = 0;
+	MIX_TOTAL_02 = 0;
+	MIX_TOTAL_03 = 0;
+	MIX_TOTAL_04 = 0;
+	MIX_TOTAL_05 = 0;
+	MIX_TOTAL_06 = 0;
+	MIX_clearHolders();
+	while (c < 125){
 		MIX_decompileMix(c, 0, 0, true);
 		c++;
 	}
+	MIX_updateMainTabsTitle();
 }
 function MIX_applyChanges(id, funcType){
 	var Item_A;
@@ -197,52 +212,52 @@ function MIX_applyChanges(id, funcType){
 	var MIX_FINAL_HEX;
 	// 00: Reload / Sum
 	if (funcType === '00'){
-		Item_B = document.getElementById('MIX_edit_Ammo').value.toLowerCase();
-		Item_A = document.getElementById('MIX_edit_Weapon').value.toLowerCase();
+		Item_A = document.getElementById('MIX_00_edit_Weapon').value.toLowerCase();
+		Item_B = document.getElementById('MIX_00_edit_Ammo').value.toLowerCase();
 		MIX_FINAL_HEX = '00' + Item_A + Item_B + '0000000000';
 	}
 	// 01: Combine
 	if (funcType === '01'){
-		Item_A = document.getElementById('MIX_edit_item_A').value.toLowerCase();
-		Item_B = document.getElementById('MIX_edit_item_B').value.toLowerCase();
-		Item_C = document.getElementById('MIX_edit_item_Result').value.toLowerCase();
-		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_edit_item_Quantity').value).toString(16), 2);
+		Item_A = document.getElementById('MIX_01_edit_item_A').value.toLowerCase();
+		Item_B = document.getElementById('MIX_01_edit_item_B').value.toLowerCase();
+		Item_C = document.getElementById('MIX_01_edit_item_Result').value.toLowerCase();
+		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_01_edit_item_Quantity').value).toString(16), 2);
 		MIX_FINAL_HEX = '01' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	// 02: Reloading Tool
 	if (funcType === '02'){
-		Item_B = document.getElementById('MIX_edit_item').value.toLowerCase();
-		Item_C = document.getElementById('MIX_edit_item_Result').value.toLowerCase();
-		Item_A = document.getElementById('MIX_edit_reloadingItem').value.toLowerCase();
-		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_edit_item_Quantity').value).toString(16), 2);
+		Item_A = document.getElementById('MIX_02_edit_reloadingItem').value.toLowerCase();
+		Item_B = document.getElementById('MIX_02_edit_item').value.toLowerCase();
+		Item_C = document.getElementById('MIX_02_edit_item_Result').value.toLowerCase();
+		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_02_edit_item_Quantity').value).toString(16), 2);
 		MIX_FINAL_HEX = '02' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	// 03: Change Bullet Type (H.G. / Magnum)
 	if (funcType === '03'){
-		Item_C = document.getElementById('MIX_edit_item_Result').value.toLowerCase();
-		Item_B = document.getElementById('MIX_edit_handMag_ammo').value.toLowerCase();
-		Item_A = document.getElementById('MIX_edit_handMag_weapon').value.toLowerCase();
+		Item_A = document.getElementById('MIX_03_edit_handMag_weapon').value.toLowerCase();
+		Item_B = document.getElementById('MIX_03_edit_handMag_ammo').value.toLowerCase();
+		Item_C = document.getElementById('MIX_03_edit_item_Result').value.toLowerCase();
 		MIX_FINAL_HEX = '03' + Item_A + Item_B + Item_C + '00000000';
 	}
 	// 04: Change Bullet Type (G. Launcher)
 	if (funcType === '04'){
-		Item_B = document.getElementById('MIX_edit_GL_ammo').value.toLowerCase();
-		Item_A = document.getElementById('MIX_edit_GL_weapon').value.toLowerCase();
-		Item_D = document.getElementById('MIX_edit_GL_newAmmo').value.toLowerCase();
-		Item_C = document.getElementById('MIX_edit_GL_newWeapon').value.toLowerCase();
+		Item_A = document.getElementById('MIX_04_edit_GL_weapon').value.toLowerCase();
+		Item_B = document.getElementById('MIX_04_edit_GL_ammo').value.toLowerCase();
+		Item_C = document.getElementById('MIX_04_edit_GL_newWeapon').value.toLowerCase();
+		Item_D = document.getElementById('MIX_04_edit_GL_newAmmo').value.toLowerCase();
 		MIX_FINAL_HEX = '04' + Item_A + Item_B + Item_C + Item_D + '000000';
 	}
 	// 05: Combine Powder + G. Rounds
 	if (funcType === '05'){
-		Item_A = document.getElementById('MIX_edit_powderGl_ammo').value.toLowerCase();
-		Item_B = document.getElementById('MIX_edit_powderGl_powder').value.toLowerCase();
-		Item_C = document.getElementById('MIX_edit_powderGl_newAmmo').value.toLowerCase();
+		Item_A = document.getElementById('MIX_05_edit_powderGl_ammo').value.toLowerCase();
+		Item_B = document.getElementById('MIX_05_edit_powderGl_powder').value.toLowerCase();
+		Item_C = document.getElementById('MIX_05_edit_powderGl_newAmmo').value.toLowerCase();
 		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_edit_powderGl_quantity').value).toString(16), 2);
 		MIX_FINAL_HEX = '05' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	if (funcType === '06'){
-		Item_B = document.getElementById('MIX_edit_infinite_inf').value.toLowerCase();
-		Item_A = document.getElementById('MIX_edit_infinite_item').value.toLowerCase();
+		Item_A = document.getElementById('MIX_06_edit_infinite_item').value.toLowerCase();
+		Item_B = document.getElementById('MIX_06_edit_infinite_inf').value.toLowerCase();
 		MIX_FINAL_HEX = '06' + Item_A + Item_B + '0000000000';
 	}
 	// Finish

@@ -313,7 +313,9 @@ function RE3_LIVE_closeForm(){
 	RE3_LIVE_RENDERTIMER = undefined;
 	if (main_currentMenu === undefined){
 		$('#menu-topo').css({'top': '32px'});
+		$('#menu-settings').css({'top': '32px'});
 		$('#menu-utility-aba-2').css({'display': 'inline-block'});
+		$('#menu-utility-aba-3').css({'display': 'inline-block'});
 	}
 	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
 	window.onkeypress = undefined;
@@ -328,7 +330,9 @@ function RE3_LIVE_openForm(){
 		MEM_JS_canRender = true;
 		if (main_currentMenu === undefined){
 			$('#menu-topo').css({'top': '8px'});
+			$('#menu-settings').css({'top': '8px'});
 			$('#menu-utility-aba-2').css({'display': 'none'});
+			$('#menu-utility-aba-3').css({'display': 'none'});
 		}
 		RE3_LIVE_showHideStageOptions(1);
 		$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'block'});

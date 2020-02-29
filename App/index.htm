@@ -151,25 +151,153 @@
 
 		<!-- FORM: MIX Editor -->
 		<div class="none" id="menu-mix-editor" onclick="main_closeFileList();">
-			<input type="button" id="MIX-aba-menu-1" class="aba aba-left-fix aba-select" value="Combinations">
-			<div class="menu">
+			<input type="button" id="MIX-aba-menu-1" onclick="MIX_showMenu(1);" class="aba aba-left-fix aba-select" value="Reload / Sum">
+			<input type="button" id="MIX-aba-menu-2" onclick="MIX_showMenu(2);" class="aba" value="Combinations">
+			<input type="button" id="MIX-aba-menu-3" onclick="MIX_showMenu(3);" class="aba" value="Reloading Tool">
+			<input type="button" id="MIX-aba-menu-4" onclick="MIX_showMenu(4);" class="aba" value="C. Bullet Type (H.G. / Mag)">
+			<input type="button" id="MIX-aba-menu-5" onclick="MIX_showMenu(5);" class="aba" value="C. Bullet Type (G. Rounds)">
+			<input type="button" id="MIX-aba-menu-6" onclick="MIX_showMenu(6);" class="aba" value="Gun Powder + G. R.">
+			<input type="button" id="MIX-aba-menu-7" onclick="MIX_showMenu(7);" class="aba" value="Infinite Ammo">
+			<!-- 00: Reload / Sum -->
+			<div class="menu" id="MIX-MENU-1">
 				<div class="menu-general-content">
-					<center><font class="titulo">Combinations</font></center>
-					<div class="MIX-combine-holder" id="MIX-holder">
+					<center><font class="titulo">Reload / Sum - Total: <font id="MIX_LBL_TOTAL-1">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-1">
 						<!-- Mix Goes Here -->
 					</div>
 					<!-- Edit -->
-					<div class="RDT-Item-Edit none" id="MIX-item-edit">
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-0">
 						<center>
 							<font class="titulo">Edit Parameters</font><br>
-							ID: <font id="MIX_current_edit_lbl">??</font>
+							Mix ID: <font id="MIX_current_edit_lbl-0">??</font>
 						</center>
 						Function: 
-						<select onchange="MIX_render_preview();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function">
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_00">
 							<!-- Mix Functions Goes Here -->
 						</select>
-						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix" title="Click here to convert this combination!"><br>
-						<div id="MIX_edit_holder">
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-0" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_00">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas">
+									<img id="MIX_00_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_00_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_00_preview_item_b" class="MIX_preview_item_shadow">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-00" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 01: Combinations -->
+			<div class="menu" id="MIX-MENU-2">
+				<div class="menu-general-content">
+					<center><font class="titulo">Combinations - Total: <font id="MIX_LBL_TOTAL-2">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-2">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-1">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-1">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_01">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-1" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_01">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas">
+									<img id="MIX_01_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_01_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_01_preview_item_b" class="MIX_preview_item_shadow">
+									<img id="MIX_01_preview_equals" class="MIX_img_equals_fix">
+									<img id="MIX_01_preview_result" class="MIX_preview_item_shadow">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-01" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 02: Reloading Tool -->
+			<div class="menu" id="MIX-MENU-3">
+				<div class="menu-general-content">
+					<center><font class="titulo">Reloading Tool - Total: <font id="MIX_LBL_TOTAL-3">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-3">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-2">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-2">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_02">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-2" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_02">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas">
+									<img id="MIX_02_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_02_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_02_preview_item_b" class="MIX_preview_item_shadow">
+									<img id="MIX_02_preview_equals" class="MIX_img_equals_fix">
+									<img id="MIX_02_preview_result" class="MIX_preview_item_shadow">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-02" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 03: C. Bullet Type (HandMag) -->
+			<div class="menu" id="MIX-MENU-4">
+				<div class="menu-general-content">
+					<center><font class="titulo">Change Bullet Type (H.G. / Magnum) - Total: <font id="MIX_LBL_TOTAL-4">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-4">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-3">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-3">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_03">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-3" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_03">
 							<!-- Edit goes here -->
 						</div>
 						<div class="menu-separador"></div>
@@ -177,21 +305,139 @@
 							<center>
 								Preview:<br>
 								<div class="MIX_edit_preview_canvas" id="MIX_preview_canvas">
-									<img id="MIX_preview_item_a" class="MIX_preview_item_shadow">
-									<img id="MIX_preview_plus" class="MIX_img_plus_fix">
-									<img id="MIX_preview_item_b" class="MIX_preview_item_shadow">
-									<img id="MIX_preview_equals" class="MIX_img_equals_fix">
-									<img id="MIX_preview_result" class="MIX_preview_item_shadow">
-									<img id="MIX_preview_item_c" class="MIX_preview_item_shadow">
-									<img id="MIX_preview_item_d" class="MIX_preview_item_shadow">
-									<img id="MIX_prev_exch_A" class="MIX_preview_exchange_A">
-									<img id="MIX_prev_exch_B" class="MIX_preview_exchange_B">
+									<img id="MIX_03_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_03_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_03_preview_item_b" class="MIX_preview_item_shadow">
+									<img id="MIX_03_preview_equals" class="MIX_img_equals_fix">
+									<img id="MIX_03_preview_result" class="MIX_preview_item_shadow">
 								</div>
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" id="MIX_applyBtn-03" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 04: C. Bullet Type (G. Rounds) -->
+			<div class="menu" id="MIX-MENU-5">
+				<div class="menu-general-content">
+					<center><font class="titulo">Change Bullet Type (G. Rounds) - Total: <font id="MIX_LBL_TOTAL-5">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-5">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-4">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-4">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_04">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-4" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_04">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas" id="MIX_preview_canvas_04">
+									<img id="MIX_04_preview_item_a" class="MIX-preview-04-img MIX_IMG_04_FIX_01 MIX_preview_item_shadow">
+									<img id="MIX_04_preview_item_b" class="MIX-preview-04-img MIX_IMG_04_FIX_02 MIX_preview_item_shadow">
+									<img id="MIX_04_preview_item_c" class="MIX-preview-04-img MIX_IMG_04_FIX_03 MIX_preview_item_shadow">
+									<img id="MIX_04_preview_item_d" class="MIX-preview-04-img MIX_IMG_04_FIX_04 MIX_preview_item_shadow">
+									<img id="MIX_04_prev_exch_A" class="MIX_preview_exchange_A">
+									<img id="MIX_04_prev_exch_B" class="MIX_preview_exchange_B">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-04" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 05: Gun Powder + G. Rounds -->
+			<div class="menu" id="MIX-MENU-6">
+				<div class="menu-general-content" id="MIX-MENU-6">
+					<center><font class="titulo">Gun Powder + G. Rounds - Total: <font id="MIX_LBL_TOTAL-6">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-6">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-5">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-5">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_05">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-5" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_05">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas" id="MIX_preview_canvas">
+									<img id="MIX_05_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_05_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_05_preview_item_b" class="MIX_preview_item_shadow">
+									<img id="MIX_05_preview_equals" class="MIX_img_equals_fix">
+									<img id="MIX_05_preview_result" class="MIX_preview_item_shadow">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-05" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 06: Infinite Ammo -->
+			<div class="menu" id="MIX-MENU-7">
+				<div class="menu-general-content">
+					<center><font class="titulo">Infinite Ammo - Total: <font id="MIX_LBL_TOTAL-7">??</font></font></center>
+					<div class="MIX-combine-holder" id="MIX-holder-7">
+						<!-- Mix Goes Here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="MIX-item-edit-6">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Mix ID: <font id="MIX_current_edit_lbl-6">??</font>
+						</center>
+						Function: 
+						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_06">
+							<!-- Mix Functions Goes Here -->
+						</select>
+						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-6" title="Click here to convert this combination!"><br>
+						<div id="MIX_edit_holder_06">
+							<!-- Edit goes here -->
+						</div>
+						<div class="menu-separador"></div>
+						<div id="MIX_item_preview_holder">
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas" id="MIX_preview_canvas">
+									<img id="MIX_06_preview_item_a" class="MIX_preview_item_shadow">
+									<img id="MIX_06_preview_plus" class="MIX_img_plus_fix">
+									<img id="MIX_06_preview_item_b" class="MIX_preview_item_shadow">
+								</div>
+							</center>
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" id="MIX_applyBtn-06" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
