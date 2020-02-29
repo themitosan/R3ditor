@@ -62,7 +62,14 @@ function load(){
 	//
 	request_render_save = false;
 	currentTime();
-	MEMORY_JS_verifyNodeJsVer();
+	if (nw.process.arch !== 'ia32'){
+		MEMORY_JS_verifyNodeJsVer();
+	} else {
+		if (fs.existsSync(APP_PATH + '\\R3ditor.exe') === true){
+			fs.unlinkSync(APP_PATH + '\\R3ditor.exe');
+		}
+		addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
+	}
 	try{
 		fs = require('fs');
 		APP_PATH = process.cwd();
@@ -129,7 +136,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
 		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
-	};
+	}
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
 		fs.unlinkSync(APP_PATH + '\\Update\\master.zip');
 	}
@@ -138,7 +145,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true && BETA === false){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
-	};
+	}
 }
 /*
 	Internal Log
