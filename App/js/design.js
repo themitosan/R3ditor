@@ -2524,5 +2524,6 @@ function R3DITOR_RUNGAME(id){
 		}
 	} else {
 		$('#menu-utility-aba-2').css({'display': 'none'});
+		$('#menu-utility-aba-3').css({'display': 'none'});
 	}
 }
