@@ -18,13 +18,13 @@ function reloadJsFile(src){
 }
 function DEBUG_RDT_MSG_END_RANGE(value){
 	BETA = true;
-	reloadJsFile('js/database.js');
+	reloadJsFile('js\\database.js');
 	RDT_MSG_finalLenght = parseInt(value);
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
 function DEBUG_RDT_MSG_START_RANGE(value){
 	BETA = true;
-	reloadJsFile('js/database.js');
+	reloadJsFile('js\\database.js');
 	RDT_MSG_startLength = parseInt(value);
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
@@ -36,9 +36,6 @@ function DEBUG_TESTER(){
 	TESTEVAR = document.getElementById('RDT_slider_TESTE').value;
 	console.log(TESTEVAR);
 	RDT_updateCanvasInfos(0);
-}
-function cls(){
-	console.clear();
 }
 function DEBUG_processHexPositions(hexVar){
 	if (hexVar !== undefined){

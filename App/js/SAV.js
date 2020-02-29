@@ -832,40 +832,13 @@ function SAV_ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 // Render Info
 function SAV_addInfo(person, itemId){
 	main_closeFileList();
-	$('#icon-info-0' + person).css({'display': 'none'});
-	var imgSet = ITEM[itemId][5];
-	var offsetRequest = ITEM[itemId][6];
-	var offsetPx = 279;
-	var startMargin = 75;
-	var startA = 5600;
-	var startB = 0;
-	var finalA = startA;
-	var finalB = startB;
-	var finalMargin = startMargin;
-	var s = 0;
-	var f = parseInt(offsetRequest);
-	var fixR = 1;
-	var fixL = 1;
-	var timer = 0;
-	while(s != f){
-		finalA = finalA - offsetPx - fixL;
-		finalB = finalB + offsetPx + fixL;
-		finalMargin = finalMargin - offsetPx - fixL;
-		timer++;
-		if (timer == 3){
-			fixR = fixR + parseInt(fixR / 2);
-			fixL = fixL + parseInt(fixL / 4);
-			timer = 0;
-		}
-		s++;
-	}
 	if (itemId !== '00'){
 		document.getElementById('text-info-0' + person).innerHTML = '<center>' + ITEM[itemId][0] + '</center><br>' + ITEM[itemId][1];
 	} else {
 		document.getElementById('text-info-0' + person).innerHTML = '<!-- Empty Slot -->';
 	}
-	document.getElementById('icon-info-0' + person).src = 'img/details-0' + imgSet + '.png';
-	$('#icon-info-0' + person).css({display: 'inline', 'clip-path': 'inset(0px ' + finalA + 'px 0px ' + finalB + 'px)', 'margin-left': finalMargin + 'px'});
+	document.getElementById('icon-info-0' + person).src = APP_PATH + '\\App\\Img\\items\\details\\' + itemId + '.png';
+	$('#icon-info-0' + person).css({display: 'inline'});
 }
 function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	// Infos
@@ -900,7 +873,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var startB = 0;
 	var startA = 956;
 	var pushOffset = 106;
-	var marginOffset = 110;
 	// Finais
 	var finalA = startA;
 	var finalB = startB;
@@ -917,7 +889,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		addLog('warn', 'WARN - ' + msg);
 		console.warn('WARN - ' + msg);
 	}
-	if (person == 0){ // Jill inventory
+	// Jill inventory
+	if (person == 0){
 		document.getElementById('J-icon-' + block).src = 'img\\items\\' + itemHex + '.png';
 		document.getElementById('J-icon-' + block).onclick = function(){
 			SAV_addInfo(person, itemHex);
@@ -934,7 +907,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		}
 		document.getElementById('J-LBL-' + block).innerHTML = quanti;
 		$('#J-LBL-' + block).css({'color': cor, 'text-shadow': shad});
-	} else { // Carlos inventory
+	} else {
+		// Carlos inventory
 		document.getElementById('C-icon-' + block).src = 'img\\items\\' + itemHex + '.png';
 		document.getElementById('C-icon-' + block).onclick = function(){
 			SAV_addInfo(person, itemHex);
@@ -949,8 +923,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		quanti = '0';
 	}
 	addLog('log', 'SAV - Inventory: ' + p + ' Slot: ' + block + ' - HEX: <font class="user-can-select">' + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
-		'</font> - Item: ' + itemHex.toUpperCase() + ' (' + titulo + ') - Quantity: ' + quantHex.toUpperCase() + ' (' + parseInt(quantHex, 16) + ') - Attr.: ' + 
-		atrib.toUpperCase() + ' (' + ATTR[atrib][0] + ')');
+		   '</font> - Item: ' + itemHex.toUpperCase() + ' (' + titulo + ') - Quantity: ' + quantHex.toUpperCase() + ' (' + parseInt(quantHex, 16) + ') - Attr.: ' + atrib.toUpperCase() + ' (' + ATTR[atrib][0] + ')');
 }
 function SAVE_clearAllSaves(){
 	if (SAVE_arquivoBruto !== undefined){

@@ -261,6 +261,8 @@ input[type='range' i]{
     width: 57px;
     cursor: pointer;
     margin-left: -552px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 .b-label{
     display: flex;
@@ -498,7 +500,7 @@ input[type='range' i]{
     height: 51px;
     border-radius: 4px;
     padding-left: 14px;
-    background-image: linear-gradient(to right, #000039, #000030);
+    background-image: linear-gradient(to right, #000039, #101051);
 }
 .img-person-icon{
     width: 4%;

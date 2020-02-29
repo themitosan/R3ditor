@@ -83,13 +83,22 @@ function MEMORY_JS_initMemoryJs(){
 	}
 	scrollLog();
 }
-function MEMORY_JS_fixVars(input, v){
+function MEMORY_JS_fixVars(inp, v){
 	var size = parseInt(v);
-	if (input !== '' && input !== null){
+	var input = inp.toString();
+	if (input !== '' && input !== null && input.length < size){
 		while (input.length !== size){
 			input = '0' + input;
 		}
 		return input;
+	} else {
+		if (input.length === v){
+			return input;
+		} else {
+			if (input.toString().length > size){
+				return input.slice(0, v);
+			}
+		}
 	}
 }
 function MEMORY_JS_keyPress(){
