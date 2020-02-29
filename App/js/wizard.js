@@ -25,6 +25,7 @@ function WZ_verifyConfigFile(){
 		WZ_showWizard = true;
 		WZ_showWizardDialog(0);
 		$('#img-logo').css({'display': 'none'});
+		$('#menu-settings').css({'display': 'none'});
 		if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
 			addLog('log', 'Removing Assets for inicial setup...');
 			deleteFolderRecursive(APP_PATH + '\\Assets');
