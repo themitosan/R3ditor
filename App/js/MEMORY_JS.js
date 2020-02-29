@@ -43,8 +43,8 @@ function MEMORY_JS_verifyNodeJsVer(){
 		MEM_JS_requreSucess = true;
 	} else {
 		MEM_JS_requreSucess = false;
-		addLog('warn', 'INFO - Your node-webkit version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
-		addLog('warn', 'INFO - You will not able to use RE3 Live Info!');
+		addLog('warn', 'INFO - Your NW.js (Node-Webkit) version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
+		addLog('warn', 'INFO - You will not able to use RE3 Live Status!');
 	}
 	scrollLog();
 }

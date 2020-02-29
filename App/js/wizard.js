@@ -528,7 +528,9 @@ function WZ_loadFiles(file){
 
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + ' (' + process.arch + ')';
 		// Init Memory JS
-		MEMORY_JS_initMemoryJs();
+		if (MEM_JS_requreSucess === true){
+			MEMORY_JS_initMemoryJs();
+		}
 	}
 	if (EXEC_BIO3_MERCE !== '' || EXEC_BIO3_original !== ''){
 		if (DESIGN_ENABLE_ANIMS === true){

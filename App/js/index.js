@@ -83,8 +83,8 @@ function load(){
 		addLog('error', err);
 	}
 	if (BETA === true){
-		console.warn('WARN - BETA is true! - IDIOT!');
-		console.error('ERROR - BETA is true! - Seu Jumento!');
+		console.warn('WARN - BETA is true!');
+		console.error('ERROR - BETA is true!');
 		addLog('error', 'BETA is true!');
 		addLog('warn', 'BETA is true!');
 		addLog('log', 'BETA is true!');
@@ -94,9 +94,6 @@ function load(){
 	scrollLog();
 }
 function R3DITOR_CHECK_FILES_AND_DIRS(){
-	if (fs.existsSync(APP_PATH + '\\nw.exe') === true){
-		fs.unlinkSync(APP_PATH + '\\nw.exe');
-	}
 	if (fs.existsSync(APP_PATH + '\\Update') === false){
 		fs.mkdirSync(APP_PATH + '\\Update');
 	}
