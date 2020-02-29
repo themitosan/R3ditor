@@ -2173,7 +2173,7 @@ function MIX_showEdit(mode, combId, combHex){
 		var c = 0;
 		while(c < 7){
 			$('#MIX-item-edit-' + c).css({'display': 'none'});
-			$('#MIX-holder-' + c).css({'width': '1297px'});
+			$('#MIX-holder-' + c).css({'width': '1294px'});
 			c++;
 		}
 	}

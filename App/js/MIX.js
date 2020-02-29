@@ -202,6 +202,27 @@ function MIX_updateList(){
 		c++;
 	}
 	MIX_updateMainTabsTitle();
+	if (MIX_TOTAL_00 === 0){
+		$('#MIX-holder-1').append(MIX_404);
+	}
+	if (MIX_TOTAL_01 === 0){
+		$('#MIX-holder-2').append(MIX_404);
+	}
+	if (MIX_TOTAL_02 === 0){
+		$('#MIX-holder-3').append(MIX_404);
+	}
+	if (MIX_TOTAL_03 === 0){
+		$('#MIX-holder-4').append(MIX_404);
+	}
+	if (MIX_TOTAL_04 === 0){
+		$('#MIX-holder-5').append(MIX_404);
+	}
+	if (MIX_TOTAL_05 === 0){
+		$('#MIX-holder-6').append(MIX_404);
+	}
+	if (MIX_TOTAL_06 === 0){
+		$('#MIX-holder-7').append(MIX_404);
+	}
 }
 function MIX_applyChanges(id, funcType){
 	var Item_A;
