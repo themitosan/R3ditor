@@ -10,6 +10,8 @@ R3ditor (it reads REditor) is a editor of files written in JS / NW.js (aka. Node
 - Download the main content from this repository and extract all files in the same folder as you extracted Node-Webkit (the "package.json" file must be in the same folder as the "nw.exe" executable).
 - Open "R3ditor.exe".
 
+<i>(If you have a 32-Bit system, you can use <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-ia32.zip" target="_blank">this version of NW.js</a>. In the end, run "nw.exe" instead of "R3ditor.exe")</i>
+
 ## Requirements
 - OS: Windows 7 or higher
 - To run the inicial setup you will need the visual studio 2005 installed (rofs.exe need this to unpack "Rofsxx.dat" files)
