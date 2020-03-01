@@ -511,17 +511,13 @@ function WZ_loadFiles(file){
 			$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
 			$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
 		} else {
-			$('#menu-topo').css({'top': '32px'});
-			$('#menu-utility').css({'top': '546px'});
-			$('#menu-settings').css({'top': '32px'});
 			$('#img-logo').css({'display': 'inline'});
-			$('#menu-topo').css({'display': 'inline'});
-			$('#menu-utility-aba').css({'top': '472px'});
-			$('#menu-utility').css({'display': 'inline'});
-			$('#menu-utility-aba-2').css({'top': '-44px'});
-			$('#menu-utility-aba').css({'display': 'inline'});
-			$('#menu-utility-aba-2').css({'display': 'inline'});
-			$('#menu-utility-aba-3').css({'display': 'inline'});
+			$('#menu-topo').css({'top': '32px', 'display': 'inline'});
+			$('#menu-settings').css({'display': 'inline','top': '32px'});
+			$('#menu-utility').css({'top': '546px', 'display': 'inline'});
+			$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
+			$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
+			$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
 		}
 
 		$('#RDT-SLD-hold').css({'height': '472px'});
