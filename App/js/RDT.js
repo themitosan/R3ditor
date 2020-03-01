@@ -2350,7 +2350,7 @@ function RDT_lookForRDTConfigFile(){
 					BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 				} else {
 					console.error('Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
-					addLog('error', 'Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
+					addLog('error', 'RDT - Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
 					scrollLog();
 				}
 			}
@@ -2369,7 +2369,7 @@ function RDT_lookForRDTConfigFile(){
 					RDT_renderMessages(parseInt(soma + 1), sta_offset, end_offset);
 				} else {
 					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
-					addLog('warn', 'Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
+					addLog('warn', 'RDT - Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
 					scrollLog();
 				}
 				c = c + 2;
@@ -2384,7 +2384,7 @@ function RDT_lookForRDTConfigFile(){
 		}
 		if (RDT_requestReloadWithFix1 === true && RDT_totalMessages === 0){
 			RDT_requestReloadWithFix1 = false;
-			addLog('log', 'INFO - R3ditor was unable to find any messages on this map!');
+			addLog('log', 'RDT - R3ditor was unable to find any messages on this map!');
 			scrollLog();
 		}
 		if (RDT_requestReloadWithFix0 === true){
@@ -2495,7 +2495,7 @@ function TEMP_GEN_DUMMY_MAPFILE(){
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true){
 		RDT_MAPFILE = APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap';
 	} else {
-		RDT_MAPFILE = 'The map was not generated for this file.';
+		RDT_MAPFILE = 'The map was not generated for this file';
 	}
 	RDT_showMenu(1);
 }

@@ -457,7 +457,6 @@ function main_menu(anim){
 		SETTINGS_showMenu(1);
 	}
 	if (anim === 8){ // MIX Editor
-		document.title = APP_NAME + ' - MIX Editor';
 		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
 			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
 		}
@@ -2086,6 +2085,11 @@ function MIX_showMenu(menuId){
 	$('#MIX-aba-menu-' + menuId).addClass('aba-select');
 	$('#menu-mix-editor').css({'display': 'block'});
 	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	if (MIX_SLUS_MODE === false){
+		document.title = APP_NAME + ' - MIX Editor (EXE Mode) - File: ' + ORIGINAL_FILENAME;
+	} else {
+		document.title = APP_NAME + ' - MIX Editor (SLUS Mode) - File: ' + ORIGINAL_FILENAME;
+	}
 }
 function MIX_updateMainTabsTitle(){
 	document.getElementById('MIX_LBL_TOTAL-1').innerHTML = parseInt(MIX_TOTAL_00);

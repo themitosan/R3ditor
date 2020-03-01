@@ -1439,7 +1439,9 @@ var RANGES = {
 	'MIX_infinite_infItem':    [4, 6],
 	'MIX_infinite_offset': 	   [6, 16],
 	// EXE Position
-	'MIX_Slice_Pos': 	  	   [2449536, 2451536],
+	'MIX_EXE_Slice_Pos': 	   [2449536, 2451536],
+	// SLUS Position
+	'MIX_SLUS_Slice_Pos': 	   [1187720, 1189720],
 	/*
 		Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 
