@@ -48,6 +48,14 @@ This file can (and will be) modified several times!
 - ~~Add 30K Health~~
 - ~~close process~~
 
+## File generator
+- Add a support for saving image as bmp [WIP - html2canvas still buggy!]
+
+## MIX Editor
+- ~~Add support for all items combinations~~
+- ~~Add support for PS1 SLUS~~
+- Add support for other platforms (Like Gamecube)
+
 ## ARD Map File
 - Almost everything!
 
@@ -58,7 +66,6 @@ This file can (and will be) modified several times!
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe~~
-- Add a file generator! [WIP - html2canvas still buggy!]
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
 - Misc: Add support for saves from RE2! ~~(They are very similar! - Also, don't expect this sooner!)~~
