@@ -49,12 +49,14 @@ This file can (and will be) modified several times!
 - ~~close process~~
 
 ## File generator
+- ~~Add option to alternate between diferent image sizes~~
+- ~~Add more text colors~~
 - Add a support for saving image as bmp [WIP - html2canvas still buggy!]
 
 ## MIX Editor
 - ~~Add support for all items combinations~~
 - ~~Add support for PS1 SLUS~~
-- Add support for other platforms (Like Gamecube)
+- Add support for other platforms (Like Gamecube, Dreamcast...)
 
 ## ARD Map File
 - Almost everything!
