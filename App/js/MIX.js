@@ -43,8 +43,8 @@ function MIX_loadExe(file){
 		end_pos = parseInt(end_pos + 16);
 		c++;
 	}
-	addLog('log', 'MIX - File loaded sucessfully!');
-	addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
+	LOG_addLog('log', 'MIX - File loaded sucessfully!');
+	LOG_addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
 	main_menu(8);
 	LOG_scroll();
 }
@@ -192,7 +192,7 @@ function MIX_convertCombination(mix_id, btn){
 		MIX_updateList();
 		MIX_showEdit(1);
 	} else {
-		addLog('warn', 'WARN - You can\'t convert this mix to current type!');
+		LOG_addLog('warn', 'WARN - You can\'t convert this mix to current type!');
 	}
 	LOG_scroll();
 }
@@ -318,17 +318,17 @@ function MIX_saveOnExe(){
 		var NEW_FILE = RE3_FILE_START + MIX_NEW_DATABASE + RE3_FILE_END;
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
-			addLog('log', 'MIX - The file was saved successfull!');
-			addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			LOG_addLog('log', 'MIX - The file was saved successfull!');
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
 			$('#MIX_btn_SAVE_EXE').css({'display': 'none'});
 		} catch (err){
 			if (MIX_SLUS_MODE === false){
-				addLog('error', 'ERROR - Unable to save EXE!');
+				LOG_addLog('error', 'ERROR - Unable to save EXE!');
 			} else {
-				addLog('error', 'ERROR - Unable to save SLUS!');
+				LOG_addLog('error', 'ERROR - Unable to save SLUS!');
 			}
-			addLog('error', 'Info: ' + err);
+			LOG_addLog('error', 'Info: ' + err);
 		}
 	}
 	LOG_scroll();
@@ -345,13 +345,13 @@ function MIX_Backup(){
 				backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + '.23';
 			}
 			LOG_separator();
-			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\EXE\\' + backup_name + '</font>');
+			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\EXE\\' + backup_name + '</font>');
 			LOG_separator();
 		} catch (err){
-			addLog('error', 'ERROR - Unable to make backup! - ' + err);
+			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
 	} else {
-		addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a file yet!');
+		LOG_addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a file yet!');
 	}
 }

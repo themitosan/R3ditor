@@ -27,7 +27,7 @@ function WZ_verifyConfigFile(){
 		$('#img-logo').css({'display': 'none'});
 		$('#menu-settings').css({'display': 'none'});
 		if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
-			addLog('log', 'Removing Assets for inicial setup...');
+			LOG_addLog('log', 'Removing Assets for inicial setup...');
 			deleteFolderRecursive(APP_PATH + '\\Assets');
 		}
 	} else {
@@ -203,7 +203,7 @@ function WZ_showWizardDialog(id){
 		}
 	} else {
 		$('#WZ_dialog').css({'display': 'none'});
-		addLog('log', 'WIZARD - Skipping...');
+		LOG_addLog('log', 'WIZARD - Skipping...');
 	}
 	LOG_scroll();
 }
@@ -229,7 +229,7 @@ function WZ_EXTRACT_ROFS(){
 					LOG_separator();
 					WZ_EXTRACT(current_rofs);
 				} else {
-					addLog('error', 'ERROR - Something went wrong while extracting Rofs' + id + '!');
+					LOG_addLog('error', 'ERROR - Something went wrong while extracting Rofs' + id + '!');
 					clearInterval(timer);
 				}
 			} else {
@@ -320,7 +320,7 @@ function WZ_saveConfigs(justSave){
 			WZ_showWizardDialog(4);
 		} else {
 			if (justSave === true){
-				addLog('log', 'CONFIGS - Configs Saved!');
+				LOG_addLog('log', 'CONFIGS - Configs Saved!');
 				LOG_scroll();
 			} else {
 				clearInternalLog();
@@ -331,7 +331,7 @@ function WZ_saveConfigs(justSave){
 		if (WZ_showWizard === true){
 			WZ_showWizardDialog(5);
 		}
-		addLog('log', 'CONFIGS - Something went wrong! - ' + err);
+		LOG_addLog('log', 'CONFIGS - Something went wrong! - ' + err);
 		console.error(err);
 		LOG_scroll();
 	}
@@ -347,7 +347,7 @@ function WZ_loadFiles(file){
 		EXEC_rofs = APP_PATH + '\\App\\tools\\rofs.exe';
 	} else {
 		$('#UTILS_rofsExtract_btn').css({'display': 'none'});
-		addLog('error', 'ERROR - Unable to find rofs.exe!');
+		LOG_addLog('error', 'ERROR - Unable to find rofs.exe!');
 	}
 	// Update
 	if (cfgs[0] !== undefined){
@@ -365,7 +365,7 @@ function WZ_loadFiles(file){
 			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 		} else {
 			EXEC_BIO3_original = '';
-			addLog('error', 'ERROR - ResidentEvil3.exe was not found!');
+			LOG_addLog('error', 'ERROR - ResidentEvil3.exe was not found!');
 			document.getElementById('SETTINGS_lvl_path_RE3').title = '';
 			document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = 'ResidentEvil3.exe was not found!';
 		}
@@ -379,7 +379,7 @@ function WZ_loadFiles(file){
 		EXEC_BIO3_MERCE = cfgs[2];
 		if (fs.existsSync(EXEC_BIO3_MERCE) === false){
 			EXEC_BIO3_MERCE = '';
-			addLog('error', 'ERROR - RE3_MERCE.exe was not found!');
+			LOG_addLog('error', 'ERROR - RE3_MERCE.exe was not found!');
 			document.getElementById('SETTINGS_lvl_path_merce').innerHTML = 'RE3_MERCE.exe was not found!';
 		} else {
 			document.getElementById('SETTINGS_lvl_path_merce').title = EXEC_BIO3_MERCE;
@@ -414,7 +414,7 @@ function WZ_loadFiles(file){
 			document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
 		} else {
 			document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not found!';
-			addLog('error', 'ERROR - Hex editor was not found!');
+			LOG_addLog('error', 'ERROR - Hex editor was not found!');
 		}
 	} else {
 		HEX_EDITOR = '';
@@ -672,7 +672,7 @@ function SETTINGS_removeFiles(mode){
 		if (confirmAction === true){
 			totFiles = fs.readdirSync(APP_PATH + '\\Backup\\RDT');
 			if (totFiles.length > 0){
-				addLog('log', 'INFO - Removing all RDT Backups...');
+				LOG_addLog('log', 'INFO - Removing all RDT Backups...');
 				deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
 				var timer = setInterval(function(){
 					if (EXTERNAL_APP_RUNNING === false){
@@ -681,7 +681,7 @@ function SETTINGS_removeFiles(mode){
 					}
 				}, 50);
 			} else {
-				addLog('log', 'INFO - There is no backup to remove!');
+				LOG_addLog('log', 'INFO - There is no backup to remove!');
 			}
 		}
 	}
@@ -691,7 +691,7 @@ function SETTINGS_removeFiles(mode){
 		if (confirmAction === true){
 			totFiles = fs.readdirSync(APP_PATH + '\\Backup\\SAV');
 			if (totFiles.length > 0){
-				addLog('log', 'INFO - Removing all SAV Backups...');
+				LOG_addLog('log', 'INFO - Removing all SAV Backups...');
 				deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
 				var timer = setInterval(function(){
 					if (EXTERNAL_APP_RUNNING === false){
@@ -700,7 +700,7 @@ function SETTINGS_removeFiles(mode){
 					}
 				}, 50);
 			} else {
-				addLog('log', 'INFO - There is no backup to remove!');
+				LOG_addLog('log', 'INFO - There is no backup to remove!');
 			}
 		}
 	}
@@ -710,7 +710,7 @@ function SETTINGS_removeFiles(mode){
 		if (confirmAction === true){
 			totFiles = fs.readdirSync(APP_PATH + '\\Configs\\RDT');
 			if (totFiles.length > 0){
-				addLog('log', 'INFO - Removing all RDT Map Files...');
+				LOG_addLog('log', 'INFO - Removing all RDT Map Files...');
 				deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
 				var timer = setInterval(function(){
 					if (EXTERNAL_APP_RUNNING === false){
@@ -719,7 +719,7 @@ function SETTINGS_removeFiles(mode){
 					}
 				}, 50);
 			} else {
-				addLog('log', 'INFO - There is no Map File to remove!');
+				LOG_addLog('log', 'INFO - There is no Map File to remove!');
 			}
 		}
 	}
@@ -773,10 +773,10 @@ function SETTINGS_SET_PATH(mode, path){
 					document.getElementById('SETTINGS_lvl_path_RE3').title = EXEC_BIO3_original;
 					document.getElementById('SETTINGS_lvl_path_RE3').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_original, 50);
 				} else {
-					addLog('warn', 'WARN - Unable to set RE3 Path - this is the wrong executable!');
+					LOG_addLog('warn', 'WARN - Unable to set RE3 Path - this is the wrong executable!');
 				}
 			} else {
-				addLog('warn', 'WARN - Unable to set RE3 Path - You must select ResidentEvil3.exe instead of RE3_MERCE.exe!');
+				LOG_addLog('warn', 'WARN - Unable to set RE3 Path - You must select ResidentEvil3.exe instead of RE3_MERCE.exe!');
 			}
 		}
 		// Hex
@@ -786,7 +786,7 @@ function SETTINGS_SET_PATH(mode, path){
 				document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = R3DITOR_reduceStrings(HEX_EDITOR, 50);
 				document.getElementById('SETTINGS_lvl_path_HEX').title = HEX_EDITOR;
 			} else {
-				addLog('warn', 'WARN - Unable to set Hex editor Path - this is the same path!');
+				LOG_addLog('warn', 'WARN - Unable to set Hex editor Path - this is the same path!');
 			}
 		}
 		// Merce
@@ -797,10 +797,10 @@ function SETTINGS_SET_PATH(mode, path){
 					document.getElementById('SETTINGS_lvl_path_merce').innerHTML = R3DITOR_reduceStrings(EXEC_BIO3_MERCE, 50);
 					document.getElementById('SETTINGS_lvl_path_merce').title = EXEC_BIO3_original;
 				} else {
-					addLog('warn', 'WARN - Unable to set RE3_MERCE Path - this is the wrong executable!');
+					LOG_addLog('warn', 'WARN - Unable to set RE3_MERCE Path - this is the wrong executable!');
 				}
 			} else {
-				addLog('warn', 'WARN - Unable to set RE3 Path - You must select RE3_MERCE.exe instead of ResidentEvil3.exe!');
+				LOG_addLog('warn', 'WARN - Unable to set RE3 Path - You must select RE3_MERCE.exe instead of ResidentEvil3.exe!');
 			}
 		}
 	}

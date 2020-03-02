@@ -50,14 +50,14 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 		sessionStorage.clear();
 		MSG_useSeekCameras = false;
 		ORIGINAL_FILENAME = msgFile;
-		addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
+		LOG_addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
 		MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
 		$('#MSG_openInHex').css({'display': 'inline'});
 		MSG_startMSGDecrypt_Lv2(MSG_arquivoBruto);
 		MSG_hideTranslateInput();
 	} else {
-		addLog('error', 'ERROR - Unable to read ' + getFileName(msgFile) + '!');
-		addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + msgFile + '</font>)');
+		LOG_addLog('error', 'ERROR - Unable to read ' + getFileName(msgFile) + '!');
+		LOG_addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + msgFile + '</font>)');
 	}
 	LOG_scroll();
 }
@@ -76,8 +76,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			}
 		} catch(err){
 			$('#RDT-aba-menu-2').css({'display': 'none'});
-			addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
-			addLog('error', err);
+			LOG_addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
+			LOG_addLog('error', err);
 			console.error(err);
 			LOG_separator();
 			LOG_scroll();
@@ -552,7 +552,7 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 		MSG_applyMSGCommand(0);
 	} else {
 		alert('ERROR: The textbox is empty!');
-		addLog('warn', 'WARNING - The textbox is empty!');
+		LOG_addLog('warn', 'WARNING - The textbox is empty!');
 		LOG_scroll();
 	}
 }
@@ -634,7 +634,7 @@ function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
 		MSG_renderDialog(0);
 	} else {
 		alert('WARN: The textbox is empty!');
-		addLog('warn', 'WARNING - The textbox is empty!');
+		LOG_addLog('warn', 'WARNING - The textbox is empty!');
 		LOG_scroll();
 	}
 }
@@ -709,16 +709,16 @@ function MSG_SAVE_ON_RDT(msgHex){
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');
 			LOG_separator();
-			addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
-			addLog('log', 'Folder: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			LOG_addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
+			LOG_addLog('log', 'Folder: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
 		} catch(err){
 			var msgError = 'ERROR - Something went wrong while saving - ';
-			addLog('error', msgError + err);
+			LOG_addLog('error', msgError + err);
 			console.error(msgError + err);
 		}
 	} else {
-		addLog('error', 'ERROR - Function list are empty or RDT file was not defined!');
+		LOG_addLog('error', 'ERROR - Function list are empty or RDT file was not defined!');
 	}
 	LOG_scroll();
 }
@@ -778,10 +778,10 @@ function MSG_applyMSGCommand(mode){
 			try{
 				R3DITOR_SAVE('MyMessage.msg', newHex, 'hex', 'msg');
 			} catch(err){
-				addLog('error', 'ERROR - Unable to save the MSG File ' + ask + ' - ' + err);
+				LOG_addLog('error', 'ERROR - Unable to save the MSG File ' + ask + ' - ' + err);
 			}
 		} else {
-			addLog('warn', 'WARNING - You can\'t save an empty save file!');
+			LOG_addLog('warn', 'WARNING - You can\'t save an empty save file!');
 		}
 	}
 	if (mode === 2 && MSG_totalComandos !== 0){
@@ -789,7 +789,7 @@ function MSG_applyMSGCommand(mode){
 			MSG_SAVE_ON_RDT(newHex);
 			MSG_goBackToRDT();
 		} else {
-			addLog('warn', 'WARN - Unable to save message: You need insert \"End Message\" function before saving!');
+			LOG_addLog('warn', 'WARN - Unable to save message: You need insert \"End Message\" function before saving!');
 			alert('ERROR - Unable to save message!\nYou need insert \"End Message\" function before saving!');
 		}
 	} else {

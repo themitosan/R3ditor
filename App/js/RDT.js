@@ -230,7 +230,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 			Remove the code above later
 		*/
 	
-		addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+		LOG_addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
 		//
 		RDT_getEnemiesArray();
@@ -239,8 +239,8 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_readItens();
 		RDT_BG_display();
 	} else {
-		addLog('error', 'ERROR - Unable to read ' + getFileName(rdtFile) + '!');
-		addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + rdtFile + '</font>)');
+		LOG_addLog('error', 'ERROR - Unable to read ' + getFileName(rdtFile) + '!');
+		LOG_addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + rdtFile + '</font>)');
 	}
 	LOG_scroll();
 }
@@ -378,7 +378,7 @@ function RDT_SLD_selectMask(){
 		document.getElementById('RDT_SLD_ACTIVE_CAM_TITLE').innerHTML = selectMask;
 		RDT_applySLDBG();
 	} else {
-		addLog('warn', 'ERROR - 404: Mask not found!');
+		LOG_addLog('warn', 'ERROR - 404: Mask not found!');
 	}
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').scrollTop = 0;
 	LOG_scroll();
@@ -397,7 +397,7 @@ function RDT_SLD_layer_setBMP(file){
 		document.getElementById('RDT_SLD_MASK_TILESET_FILENAME').innerHTML = file;
 		var currentCam = document.getElementById('RDT_SLD_SELECT_CAM').value;
 		localStorage.setItem('RDT_CAM_' + currentCam + '_MASK', RDT_SLD_LAYER_TILESET_BMP);
-		addLog('log', 'SLD - Tileset File: ' + RDT_SLD_LAYER_TILESET_BMP);
+		LOG_addLog('log', 'SLD - Tileset File: ' + RDT_SLD_LAYER_TILESET_BMP);
 	}
 	LOG_scroll();
 }
@@ -586,7 +586,7 @@ function RDT_CAMERA_APPLY(id){
 		$('#RDT-aba-menu-9').trigger('click');
 	} else {
 		alert('WARNING - Unable to recompile camera ' + id + ':\n\n' + reason);
-		addLog('warn', 'WARNING - Unable to recompile camera ' + id + ': ' + reason);
+		LOG_addLog('warn', 'WARNING - Unable to recompile camera ' + id + ': ' + reason);
 	}
 	LOG_scroll();
 }
@@ -684,19 +684,19 @@ function RDT_ENEMYNPC_APPLY(id){
 		reason = 'The R value are wrong!';
 	}
 	if (nX.value === '0000'){
-		addLog('warn', 'WARN - To avoid detection problem, the X value will be 0101 instead of 0000 (For now, of course)');
+		LOG_addLog('warn', 'WARN - To avoid detection problem, the X value will be 0101 instead of 0000 (For now, of course)');
 		nX.value = '0101';
 	}
 	if (nY.value === '0000'){
-		addLog('warn', 'WARN - To avoid detection problem, the Y value will be 0101 instead of 0000 (For now, of course)');
+		LOG_addLog('warn', 'WARN - To avoid detection problem, the Y value will be 0101 instead of 0000 (For now, of course)');
 		nY.value = '0101';
 	}
 	if (nZ.value === '0000'){
-		addLog('warn', 'WARN - To avoid detection problem, the Z value will be 0101 instead of 0000 (For now, of course)');
+		LOG_addLog('warn', 'WARN - To avoid detection problem, the Z value will be 0101 instead of 0000 (For now, of course)');
 		nZ.value = '0101';
 	}
 	if (nR.value === '0000'){
-		addLog('warn', 'WARN - To avoid detection problem, the R value will be 0101 instead of 0000 (For now, of course)');
+		LOG_addLog('warn', 'WARN - To avoid detection problem, the R value will be 0101 instead of 0000 (For now, of course)');
 		nR.value = '0101';
 	}
 	if (nTexture.length !== 2){
@@ -725,7 +725,7 @@ function RDT_ENEMYNPC_APPLY(id){
 		$('#RDT-aba-menu-8').trigger('click');
 	} else {
 		alert('WARN - Unable to compile Enemy / NPC!\n\n' + reason);
-		addLog('warn', 'WARN - Unable to compile Enemy / NPC! - ' + reason);
+		LOG_addLog('warn', 'WARN - Unable to compile Enemy / NPC! - ' + reason);
 	}
 	LOG_scroll();
 }
@@ -922,7 +922,7 @@ function RDT_MSGCODE_APPLY(id){
 		$('#RDT-aba-menu-7').trigger('click');
 	} else {
 		alert('WARN - ' + reason);
-		addLog('warn', 'WARN - ' + reason);
+		LOG_addLog('warn', 'WARN - ' + reason);
 		console.warn(reason);
 	}
 	LOG_scroll();
@@ -1102,7 +1102,7 @@ function RDT_decompileDoors(index, location){
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
 		} else {
-			addLog('warn', 'WARN - Unable to add door! - ' + reason);
+			LOG_addLog('warn', 'WARN - Unable to add door! - ' + reason);
 		}
 	}
 	LOG_scroll();
@@ -1248,7 +1248,7 @@ function RDT_DOOR_APPLY(index){
 		$('#RDT-aba-menu-6').trigger('click');
 	} else {
 		alert('WARNING: ' + reason);
-		addLog('warn', 'WARN - ' + reason);
+		LOG_addLog('warn', 'WARN - ' + reason);
 	}
 	LOG_scroll();
 }
@@ -1279,9 +1279,9 @@ function RDT_replaceWavFile(file){
 		fs.unlinkSync(deleteFile);
 		var newWaveFile = fs.readFileSync(file, 'hex');
 		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_A\\VOICE\\' + RDT_currentAudio.toUpperCase(), newWaveFile, 'hex');
-		addLog('log', 'WAV - Replace successfull!');
+		LOG_addLog('log', 'WAV - Replace successfull!');
 	} else {
-		addLog('warn', 'WARN - Operation Canceled!');
+		LOG_addLog('warn', 'WARN - Operation Canceled!');
 	}
 	LOG_scroll();
 }
@@ -1290,10 +1290,10 @@ function RDT_deleteAudio(){
 	var askConfirm = confirm('File: ' + RDT_currentAudio + '\n\nR3ditor will delete this file.\nDo you want to proceed?');
 	if (askConfirm === true){
 		fs.unlinkSync(deleteFile);
-		addLog('log', 'WAV - Done!');
+		LOG_addLog('log', 'WAV - Done!');
 		RDT_openFile(ORIGINAL_FILENAME);
 	} else {
-		addLog('warn', 'WARN - Operation Canceled!');
+		LOG_addLog('warn', 'WARN - Operation Canceled!');
 	}
 	LOG_scroll();
 }
@@ -1361,7 +1361,7 @@ function RDT_decompileItens(id, edit){
 		}
 	} else {
 		console.warn('WARNING: Unable to render item ' + id + ' - ' + RDT_motivo);
-		addLog('warn', 'WARN - Unable to render item ' + id + ' - ' + RDT_motivo);
+		LOG_addLog('warn', 'WARN - Unable to render item ' + id + ' - ' + RDT_motivo);
 	}
 	LOG_scroll();
 }
@@ -1451,7 +1451,7 @@ function RDT_renderItens(index, hex){
 		$('#RDT-item-list').append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = 'RDT - ERROR: Unable to render item ' + id.toUpperCase() + ' - ' + msg;
-		addLog('error', msg);
+		LOG_addLog('error', msg);
 		console.error(msg);
 	}
 	LOG_scroll();
@@ -1586,7 +1586,7 @@ function RDT_ITEM_APPLY(index, type, convert){
 		}
 		RDT_COMPILE_Lv1();
 	} else {
-		addLog('warn', 'WARNING - There was an error while processing: ' + error);
+		LOG_addLog('warn', 'WARNING - There was an error while processing: ' + error);
 		LOG_scroll();
 	}
 }
@@ -1625,7 +1625,7 @@ function RDT_readMessages(){
 	RDT_pickStartMessages('fa09');
 	RDT_pickStartMessages('fa10');
 	if (RDT_messagesArray.length < 1){
-		addLog('warn', 'RDT - R3ditor was unable to find any messages on this file!');
+		LOG_addLog('warn', 'RDT - R3ditor was unable to find any messages on this file!');
 		LOG_scroll();
 	}
 	// Finding the end of every message
@@ -1879,7 +1879,7 @@ function RDT_readMessages(){
 		c++;
 	}
 	LOG_separator();
-	addLog('log', 'RDT - Message scanning completed the test ' + RDT_MSG_CURRENT_TEST + ' and found ' + RDT_totalMessages + ' messages.');
+	LOG_addLog('log', 'RDT - Message scanning completed the test ' + RDT_MSG_CURRENT_TEST + ' and found ' + RDT_totalMessages + ' messages.');
 	LOG_separator();
 	if (RDT_MSG_CURRENT_TEST === 1){
 		RDT_MSG_RESULT_1 = RDT_totalMessages;
@@ -2056,7 +2056,7 @@ function RDT_findPointers(){
 			return [totalVezesPush, parseInt(startFirstMessage - fatorA), parseInt(startFirstMessage - fatorB)];
 		} else {
 			console.error('ERROR - Unable to find pointers on this file!');
-			addLog('error', 'ERROR - Unable to find pointers on this file!');
+			LOG_addLog('error', 'ERROR - Unable to find pointers on this file!');
 			LOG_scroll();
 		}
 	}
@@ -2115,7 +2115,7 @@ function RDT_makeRDTConfigFile(){
 			c++;
 		}
 	} else {
-		addLog('info', 'INFO - R3ditor was unable to find any messages on this file!');
+		LOG_addLog('info', 'INFO - R3ditor was unable to find any messages on this file!');
 		LOG_scroll();
 	}
 	document.title = APP_NAME + ' - Generating File Map (Step 4 / 4)';
@@ -2124,13 +2124,13 @@ function RDT_makeRDTConfigFile(){
 	var FILE_COMPILED = fileHeader + totalMessages + PONTEIRO;
 	try{
 		fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', FILE_COMPILED, 'utf-8');
-		addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
+		LOG_addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
 		LOG_separator();
 		RDT_generateMapFile = false;
 	} catch (err){
 		console.error('ERROR - Something went wrong while saving RDT map!\n' + err);
-		addLog('error', 'ERROR - Something went wrong while saving RDT map!');
-		addLog('error', err);
+		LOG_addLog('error', 'ERROR - Something went wrong while saving RDT map!');
+		LOG_addLog('error', err);
 	}
 	RDT_lookForRDTConfigFile();
 	LOG_scroll();
@@ -2139,13 +2139,13 @@ function RDT_generateDummyMapFile(){
 	var FILE_COMPILED = 'Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '\nGenerated With ' + APP_NAME + '\n\n[POINTERS]\n0';
 	try{
 		fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', FILE_COMPILED, 'utf-8');
-		addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
+		LOG_addLog('log', 'INFO - RDT Map was saved successfully! (' + RDT_getGameMode() + ')');
 		LOG_separator();
 		RDT_generateMapFile = false;
 	} catch (err){
 		console.error('ERROR - Something went wrong while saving RDT map!\n' + err);
-		addLog('error', 'ERROR - Something went wrong while saving RDT map!');
-		addLog('error', err);
+		LOG_addLog('error', 'ERROR - Something went wrong while saving RDT map!');
+		LOG_addLog('error', err);
 	}
 }
 function RDT_requestFix(fix){
@@ -2169,7 +2169,7 @@ function RDT_requestFix(fix){
 		RDT_requestReloadWithFix1 = true;
 	}
 	LOG_separator();
-	addLog('warn', 'WARN - Generating map file using fix ' + fix);
+	LOG_addLog('warn', 'WARN - Generating map file using fix ' + fix);
 	LOG_separator();
 	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
 }
@@ -2189,19 +2189,19 @@ function RDT_finishMessageAnalysis(){
 	}
 	RDT_generateMapFile = true;
 	RDT_readMessages();
-	addLog('log', 'MSG - Analysis Complete!');
+	LOG_addLog('log', 'MSG - Analysis Complete!');
 	LOG_scroll();
 }
 function RDT_startMessageAnalysis(){
 	document.title = APP_NAME + ' - Generating File Map (Step 1 / 4)';
 	RDT_generateMapFile = false;
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	LOG_addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
 	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	LOG_addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
 	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	LOG_addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
 	RDT_readMessages();
-	addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
+	LOG_addLog('log', 'RDT - Running Message Analysis - Test ' + RDT_MSG_CURRENT_TEST);
 	RDT_readMessages();
 	RDT_finishMessageAnalysis();
 }
@@ -2223,8 +2223,8 @@ function RDT_lookForRDTConfigFile(){
 	var fName = getFileName(ORIGINAL_FILENAME);
 	if (fName.slice(parseInt(fName.length - 4), fName.length).toUpperCase() === '.ARD'){
 		RDT_totalCameras = 0;
-		addLog('warn', 'WARN - This is a Playstation RE3 map file (ARD).');
-		addLog('warn', 'Please be aware that for now R3ditor does not fully support this type of file.');
+		LOG_addLog('warn', 'WARN - This is a Playstation RE3 map file (ARD).');
+		LOG_addLog('warn', 'Please be aware that for now R3ditor does not fully support this type of file.');
 		alert('WARN - This is a Playstation RE3 map file (ARD).\n\nPlease be aware that for now R3ditor does not fully support this type of file.');
 		$('#RDT-aba-menu-9').addClass('none');
 	} else {
@@ -2240,7 +2240,7 @@ function RDT_lookForRDTConfigFile(){
 	document.title = APP_NAME + ' - Please wait...';
 	document.getElementById('RDT_MSG-holder').innerHTML = '';
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap') === true && RDT_loop < 4){
-		addLog('log', 'INFO - Loading RDT Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (<font class="user-can-select">' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap</font>)');
+		LOG_addLog('log', 'INFO - Loading RDT Map for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + ' (<font class="user-can-select">' + APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap</font>)');
 		RDT_FILEMAP_MSG = [];
 		RDT_MSG_POINTERS = [];
 		RDT_messagesArray = [];
@@ -2326,7 +2326,7 @@ function RDT_lookForRDTConfigFile(){
 							BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 						} else {
 							console.error('Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
-							addLog('error', 'Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
+							LOG_addLog('error', 'Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
 							LOG_scroll();
 						}
 						c++;
@@ -2350,7 +2350,7 @@ function RDT_lookForRDTConfigFile(){
 					BLOCK_MSGS = BLOCK_MSGS + RDT_arquivoBruto.slice(POS_START, POS_END);
 				} else {
 					console.error('Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
-					addLog('error', 'RDT - Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
+					LOG_addLog('error', 'RDT - Something went wrong on search - Unable to find end of the last message! (Seek Result: ' + SEEK + ')');
 					LOG_scroll();
 				}
 			}
@@ -2369,7 +2369,7 @@ function RDT_lookForRDTConfigFile(){
 					RDT_renderMessages(parseInt(soma + 1), sta_offset, end_offset);
 				} else {
 					console.warn('Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
-					addLog('warn', 'RDT - Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
+					LOG_addLog('warn', 'RDT - Something went wrong on search - Unable to render message ' + soma + ' because the start offset is the same value of end offset! (R203.RDT?)');
 					LOG_scroll();
 				}
 				c = c + 2;
@@ -2384,7 +2384,7 @@ function RDT_lookForRDTConfigFile(){
 		}
 		if (RDT_requestReloadWithFix1 === true && RDT_totalMessages === 0){
 			RDT_requestReloadWithFix1 = false;
-			addLog('log', 'RDT - R3ditor was unable to find any messages on this map!');
+			LOG_addLog('log', 'RDT - R3ditor was unable to find any messages on this map!');
 			LOG_scroll();
 		}
 		if (RDT_requestReloadWithFix0 === true){
@@ -2453,8 +2453,8 @@ function RDT_lookForRDTConfigFile(){
 			try{
 				fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + RDT_getGameMode() + '.rdtmap', BLOCK_SECTOR, 'utf-8');
 			} catch(err) {
-				addLog('error', 'ERROR - Something went wrong while saving mapfile!');
-				addLog('error', err);
+				LOG_addLog('error', 'ERROR - Something went wrong while saving mapfile!');
+				LOG_addLog('error', err);
 				console.error(err);
 			}
 			RDT_requestReload = false;
@@ -2718,7 +2718,7 @@ function RDT_transferMessageToMSG(msgId){
 		MSG_startMSGDecrypt_Lv2(msg_transfer);
 		TRANSFER_RDT_TO_MSG();
 	} else {
-		addLog('error', 'ERROR - Unable to read message because it was not found!');
+		LOG_addLog('error', 'ERROR - Unable to read message because it was not found!');
 		LOG_scroll();
 	}
 }
@@ -2754,17 +2754,17 @@ function RDT_Backup(){
 			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-' + currentTime() + '.rdtbackup';
 			fs.writeFileSync(APP_PATH + '\\Backup\\RDT\\' + backup_name, RDT_arquivoBruto, 'hex');
 			LOG_separator();
-			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			addLog('log', 'Folder - <font class="user-can-select">' + APP_PATH + '\\Backup\\RDT\\' + backup_name + '</font>');
+			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
+			LOG_addLog('log', 'Folder - <font class="user-can-select">' + APP_PATH + '\\Backup\\RDT\\' + backup_name + '</font>');
 			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
 			LOG_separator();
 			WZ_saveConfigs(true);
 			$('#RDT_restoreLastBackup').css({'display': 'inline'});
 		} catch (err){
-			addLog('error', 'ERROR - Unable to make backup! - ' + err);
+			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
 	} else {
-		addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a map yet!');
+		LOG_addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a map yet!');
 	}
 }
 function RDT_restoreLastBackup(){
@@ -2784,13 +2784,13 @@ function RDT_restoreLastBackup(){
 				RDT_restoreLastBackup_1(mName);
 			} catch (err){
 				console.error(err);
-				addLog('error', 'ERROR - Unable to delete RDT!');
-				addLog('error', err);
+				LOG_addLog('error', 'ERROR - Unable to delete RDT!');
+				LOG_addLog('error', err);
 			}
 		}
 	} else {
 		$('#RDT_restoreLastBackup').css({'display': 'none'});
-		addLog('warn', 'WARN - Unable to find backup!');
+		LOG_addLog('warn', 'WARN - Unable to find backup!');
 		LOG_scroll();
 	}
 }
@@ -2804,8 +2804,8 @@ function RDT_restoreLastBackup_1(name){
 		}
 	} catch (err){
 		console.error(err);
-		addLog('error', 'ERROR - Unable to restore backup!');
-		addLog('error', err);
+		LOG_addLog('error', 'ERROR - Unable to restore backup!');
+		LOG_addLog('error', err);
 	}
 }
 function RDT_COMPILE_Lv1(){
@@ -2833,16 +2833,16 @@ function RDT_COMPILE_Lv1(){
 			RDT_WRITEFILE(true, RDT_CLONE);
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
-			addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME);
+			LOG_addLog('log', 'RDT - Reloading File: ' + ORIGINAL_FILENAME);
 			RDT_readItens();
 			$('#RDT-aba-menu-3').trigger('click');
 		} catch(err){
-			addLog('error', 'ERROR - Something went wrong on save process!');
-			addLog('error', err);
+			LOG_addLog('error', 'ERROR - Something went wrong on save process!');
+			LOG_addLog('error', err);
 			console.error(err);
 		}
 	} else {
-		addLog('error', 'ERROR - You cannot save an RDT file if you have not opened it!');
+		LOG_addLog('error', 'ERROR - You cannot save an RDT file if you have not opened it!');
 	}
 	LOG_scroll();
 }
@@ -2860,13 +2860,13 @@ function RDT_WRITEFILE(flag, HEX){
 	if (flag === true){
 		try{
 			fs.writeFileSync(ORIGINAL_FILENAME, HEX, 'hex');
-			addLog('log', 'INFO - The file was saved successfully! - File: <font class="user-can-select">' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT</font>');
-			addLog('log', 'Path: ' + ORIGINAL_FILENAME);
+			LOG_addLog('log', 'INFO - The file was saved successfully! - File: <font class="user-can-select">' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT</font>');
+			LOG_addLog('log', 'Path: ' + ORIGINAL_FILENAME);
 			LOG_separator();
 			RDT_doAfterSave();
 		} catch (err){
-			addLog('error', 'ERROR - Something went wrong while saving RDT!');
-			addLog('error', 'Details: ' + err);
+			LOG_addLog('error', 'ERROR - Something went wrong while saving RDT!');
+			LOG_addLog('error', 'Details: ' + err);
 			alert('ERROR!\nSomething went wrong while saving RDT!\n\n' + err);
 		}
 	}

@@ -124,7 +124,7 @@ function UTILS_OBJ_Patcher_RUN(file){
 			OBJ_arquivoBruto = '# OBJ Converted in R3ditor V.' + APP_VERSION + '\n' + OBJ_arquivoBruto.slice(1, OBJ_arquivoBruto.length);
 			R3DITOR_SAVE(getFileName(file).toLowerCase().replace('.obj', '') + '_converted', OBJ_arquivoBruto, 'utf-8', 'obj');
 		} else {
-			addLog('warn', 'OBJ Patcher - This file doesn\'t need patching!');
+			LOG_addLog('warn', 'OBJ Patcher - This file doesn\'t need patching!');
 		}
 	}
 	LOG_scroll();
@@ -134,14 +134,14 @@ function UTILS_OBJ_Patcher_RUN(file){
 */
 function UTILS_extract_rofs(rofsFile){
 	try{
-		addLog('log', 'ROFS - Extracting file: <font class="user-can-select">' + rofsFile + '</font>');
+		LOG_addLog('log', 'ROFS - Extracting file: <font class="user-can-select">' + rofsFile + '</font>');
 		if (R3ditor_tool_selected === false && rofsFile !== undefined && rofsFile !== '' && EXEC_rofs !== undefined){
 			UTILS_rofs_hideButtons();
 			process.chdir(rofsFile.slice(0, parseInt(rofsFile.length - getFileName(rofsFile).length)));
 			runExternalSoftware(EXEC_rofs, [rofsFile]);
 			var timer = setInterval(function(){
 				if (EXTERNAL_APP_EXITCODE === 0){
-					addLog('log', 'ROFS - Process Complete!');
+					LOG_addLog('log', 'ROFS - Process Complete!');
 					setTimeout(function(){
 						reload();
 					}, 1200);
@@ -151,11 +151,11 @@ function UTILS_extract_rofs(rofsFile){
 		}
 	} catch (err){
 		if (err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
-			addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
-			addLog('error', 'Details: ' + err);
+			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
+			LOG_addLog('error', 'Details: ' + err);
 		} else {
-			addLog('error', 'ERROR - Something went wrong while extracting rofs!');
-			addLog('error', 'ERROR - Details: ' + err);
+			LOG_addLog('error', 'ERROR - Something went wrong while extracting rofs!');
+			LOG_addLog('error', 'ERROR - Details: ' + err);
 		}
 	}
 	LOG_scroll();

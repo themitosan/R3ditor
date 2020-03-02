@@ -26,7 +26,7 @@ function LOG_scroll(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
 function LOG_separator(){
-	addLog('log', LOG_separatorHtml);
+	LOG_addLog('log', LOG_separatorHtml);
 	LOG_scroll();
 }
 /*
@@ -50,7 +50,7 @@ function FILELIST_triggerSearchBox(){
 					$('#fileListHolder_AJ').append(searchResult);
 				}
 			} else {
-				addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
+				LOG_addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
 			}
 			LOG_scroll();
 		} else {
@@ -220,7 +220,7 @@ function main_renderFileList(id, mode){
 				$('#avaliable_fileList').css({'display': 'block', 'border-bottom-right-radius': '2px'});
 			} else {
 				console.warn('WARN - Unable to render FileList!');
-				addLog('warn', 'WARN - Unable to render FileList!');
+				LOG_addLog('warn', 'WARN - Unable to render FileList!');
 			}
 		} else {
 			var fList = [];
@@ -341,7 +341,7 @@ function main_renderFileList(id, mode){
 		} else {
 			if (enable_mod === true){
 				console.warn('WARN - Unable to render FileList!');
-				addLog('warn', 'WARN - Unable to render FileList!');
+				LOG_addLog('warn', 'WARN - Unable to render FileList!');
 			}
 		}
 	}
@@ -1086,7 +1086,7 @@ function MSG_renderCamPreview(){
 			document.getElementById('MSG_camPreview').src = camImg;
 			document.getElementById('MSG_camPreview').title = 'Cam: ' + currentCam + '\nFile: ' + currentFile + currentCam + '.JPG';
 		} else {
-			addLog('warn', 'WARN - Unable to find cam preview: The img file was not found! (404)');
+			LOG_addLog('warn', 'WARN - Unable to find cam preview: The img file was not found! (404)');
 			LOG_scroll();
 		}
 	}
@@ -1281,7 +1281,7 @@ function RDT_showEditMsgCode(index, codeHex){
 		RDT_editItemCancel();
 		var warnMSG = 'This message code contains a WIP header (64)';
 		alert('INFO - Unable to edit this message code! (For now!)\n\n' + warnMSG);
-		addLog('warn', 'WARN - ' + warnMSG);
+		LOG_addLog('warn', 'WARN - ' + warnMSG);
 	}
 	LOG_scroll();
 }
@@ -1441,7 +1441,7 @@ function RDT_renderEditDoorCamPreview(){
 		document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
 		document.getElementById('RDT_doorCamPreviewImg').src = camFile;
 	} else {
-		addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
+		LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
 		document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 		$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
 		LOG_scroll();
@@ -1986,7 +1986,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
  					shad = ATTR[attr][2];
 				} else {
 					var msg = 'Inventory - The item on slot ' + n + ' have an unknown Attr! (Attr: ' + attr + ')';
-					addLog('warn', 'WARN - ' + msg);
+					LOG_addLog('warn', 'WARN - ' + msg);
 				}
 				if (attr === '02' || attr === '06' || attr === '0a' || attr === '0e'){
 					remaining = parseInt(quan, 16) + '%';
@@ -2395,7 +2395,7 @@ function R3DITOR_movePercent(id, percent, status){
 		if (status === '' || status === undefined || status === null){
 			status = 'Message';
 		}
-		addLog('log', 'Process - ' + status);
+		LOG_addLog('log', 'Process - ' + status);
 		document.getElementById('update_status').innerHTML = status;
 		document.getElementById('update_percent').innerHTML = p + '%';
 		$('#update_progressbar').css({'width': p + '%'});

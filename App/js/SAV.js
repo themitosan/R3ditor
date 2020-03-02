@@ -119,8 +119,8 @@ function SAV_GenerateNewSave(){
 			R3DITOR_SAVE('Bu00.sav', SAVE_arquivoBruto, 'hex', 'sav');
 			SAVE_arquivoBruto = undefined;
 		} else {
-			addLog('error', 'SAVE - Unable to find blank save file!');
-			addLog('error', 'Path: <font class="user-can-select">' + APP_PATH + '\\App\\tools\\format.r3save</font>');
+			LOG_addLog('error', 'SAVE - Unable to find blank save file!');
+			LOG_addLog('error', 'Path: <font class="user-can-select">' + APP_PATH + '\\App\\tools\\format.r3save</font>');
 		}
 	}
 	LOG_scroll();
@@ -181,17 +181,17 @@ function SAV_MAKE_SAVE(slot){
 		// Final
 		if (TEMP_SLOT.length === RANGES['slot-offset'][0]){
 			localStorage.setItem('Save_' + slot, TEMP_SLOT);
-			addLog('log', 'The Slot ' + slot + ' was saved successfully!');
+			LOG_addLog('log', 'The Slot ' + slot + ' was saved successfully!');
 			SAV_Backup();
 			finalizeSave();
 		} else {
 			var msg = 'Unable to save current slot because compilation is divergent size: Size Expected: ' + RANGES['slot-offset'][0] + ' - Current Size: ' + TEMP_SLOT.length;
 			console.error('ERROR - ' + msg);
-			addLog('error', msg);
+			LOG_addLog('error', msg);
 		}
 	} else {
 		var msg = 'Unable to save the game save if you haven\'t opened it yet! (File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>)';
-		addLog('error', 'ERROR - ' + msg);
+		LOG_addLog('error', 'ERROR - ' + msg);
 		console.error(msg);
 	}
 }
@@ -209,7 +209,7 @@ function CARREGAR_SAVE(sFile){
 	SAVE_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = sFile;
 	LOG_separator();
-	addLog('log', 'SAV - Loading file: <font class="user-can-select">' + sFile + '</font>');
+	LOG_addLog('log', 'SAV - Loading file: <font class="user-can-select">' + sFile + '</font>');
 	LOG_separator();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente
@@ -342,7 +342,7 @@ function save_renderBox(s_slot){
 	document.getElementById('JILL-BOX').innerHTML = '<!-- Hey, can you give me a cookie? ~wink~ -->';
 	document.getElementById('CARLOS-BOX').innerHTML = '<!-- Hey, can you give me a cookie? ~wink~ -->';
 	// Jill Box
-	addLog('log', 'SAV - Loading Jill Item Box...');
+	LOG_addLog('log', 'SAV - Loading Jill Item Box...');
 	var totalItens = 63; // 63 = Total de slots no baú
 	var current = 0;
 	var position = RANGES['j-box'][0];
@@ -365,10 +365,10 @@ function save_renderBox(s_slot){
 			if (ATTR[AT] === undefined){
 				var msg = '(Item Box) Item ' + current + ' have an unknown attr.: ' + AT;
 				console.warn('WARNING - ' + msg);
-				addLog('warn', 'WARNING - ' + msg);
-				addLog('log' , 'SAV - Adding item to Item Box - Jill - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + AT + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
+				LOG_addLog('warn', 'WARNING - ' + msg);
+				LOG_addLog('log' , 'SAV - Adding item to Item Box - Jill - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + AT + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
 			} else {
-				addLog('log' , 'SAV - Adding item to Item Box - Jill - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + ATTR[AT][0] + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
+				LOG_addLog('log' , 'SAV - Adding item to Item Box - Jill - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + ATTR[AT][0] + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
 			}
 			SAV_ADD_ITEM_BOX(0, current, IT, QU, AT, NU);
 			current++;
@@ -376,7 +376,7 @@ function save_renderBox(s_slot){
 	}
 	// Carlos Box
 	LOG_separator();
-	addLog('log', 'SAVE - Loading Carlos Item Box...');
+	LOG_addLog('log', 'SAVE - Loading Carlos Item Box...');
 	LOG_separator();
 	current = 0;
 	position = RANGES['c-box'][0];
@@ -399,10 +399,10 @@ function save_renderBox(s_slot){
 			if (ATTR[AT] === undefined){
 				var msg = '(Item Box) Item ' + current + ' have unknown attr.: ' + AT;
 				console.warn('WARN - ' + msg);
-				addLog('warn', 'WARN - ' + msg);
-				addLog('log', 'SAV - Adding item to Item Box - Carlos - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + AT + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
+				LOG_addLog('warn', 'WARN - ' + msg);
+				LOG_addLog('log', 'SAV - Adding item to Item Box - Carlos - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + AT + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
 			} else {
-				addLog('log' , 'SAV - Adding item to Item Box - Carlos - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + ATTR[AT][0] + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
+				LOG_addLog('log' , 'SAV - Adding item to Item Box - Carlos - HEX: <font class="user-can-select">' + IT + QU + AT + NU + '</font> - Index: ' + current + ' - Item: <font title="' + IT + '" class="user-can-select">' + ITEM[IT][0] + '</font>, Quantity: <font class="user-can-select">' + parseInt('0x' + QU) + '</font>, Attr.: <font class="user-can-select">' + ATTR[AT][0] + '</font>, Second Var: <font class="user-can-select">' + NU + '</font>');
 			}
 			SAV_ADD_ITEM_BOX(1, current, IT, QU, AT, NU);
 			current++;
@@ -416,8 +416,8 @@ function save_renderInfos(s_slot){
 		// Render Time
 		IGTExtract = localStorage.getItem('Save_' + s_slot).slice(RANGES['IGT'][0], RANGES['IGT'][1]);
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
-		addLog('log', 'IGT (In-Game Time): ' + hora + ':' + minutos + ':' + segundos);
-		addLog('log', 'IGT Complete: ' + dia + ':' + hora + ':' + minutos + ':' + segundos + ':' + decimos + ':' + milesimos);
+		LOG_addLog('log', 'IGT (In-Game Time): ' + hora + ':' + minutos + ':' + segundos);
+		LOG_addLog('log', 'IGT Complete: ' + dia + ':' + hora + ':' + minutos + ':' + segundos + ':' + decimos + ':' + milesimos);
 		LOG_separator();
 		// Dificuldade
 		dificuldade = localStorage.getItem('Save_' + s_slot).slice(RANGES['leveldificuldade'][0], RANGES['leveldificuldade'][1]);
@@ -489,7 +489,7 @@ function save_renderInfos(s_slot){
 		j_files = localStorage.getItem('Save_' + s_slot).slice(RANGES['jill_files'][0], RANGES['jill_files'][1]).toUpperCase();
 	} catch (err){
 		var msg = 'ERROR - There is something wrong here... - \n' + err;
-		addLog('error', msg);
+		LOG_addLog('error', msg);
 		console.error(msg);
 	}
 	save_renderLife(s_slot);
@@ -577,14 +577,14 @@ function SAV_Backup(){
 			var backup_name = gDetails + '-' + getFileName(ORIGINAL_FILENAME) + '-' + currentTime() + '.savbackup';
 			fs.writeFileSync(APP_PATH + '\\Backup\\SAV\\' + backup_name, SAVE_arquivoBruto, 'hex');
 			LOG_separator();
-			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\SAV\\' + backup_name);
+			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
+			LOG_addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\SAV\\' + backup_name);
 			LOG_separator();
 		} catch (err){
-			addLog('error', 'ERROR - Unable to make backup! - ' + err);
+			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
 	} else {
-		addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a save yet!');
+		LOG_addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a save yet!');
 	}
 }
 function applyItem(mode, person, pos){
@@ -886,7 +886,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
  		shad = ATTR[atrib][2];
 	} else {
 		var msg = 'SAV - (' + p + ') Inventory - The item on slot ' + block + ' have an unknown Attr! (Attr: ' + atrib + ')';
-		addLog('warn', 'WARN - ' + msg);
+		LOG_addLog('warn', 'WARN - ' + msg);
 		console.warn('WARN - ' + msg);
 	}
 	// Jill inventory
@@ -922,7 +922,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	if (quanti === ''){
 		quanti = '0';
 	}
-	addLog('log', 'SAV - Inventory: ' + p + ' Slot: ' + block + ' - HEX: <font class="user-can-select">' + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
+	LOG_addLog('log', 'SAV - Inventory: ' + p + ' Slot: ' + block + ' - HEX: <font class="user-can-select">' + itemHex.toUpperCase() + quantHex.toUpperCase() + atrib.toUpperCase() + nulo.toUpperCase() + 
 		   '</font> - Item: ' + itemHex.toUpperCase() + ' (' + titulo + ') - Quantity: ' + quantHex.toUpperCase() + ' (' + parseInt(quantHex, 16) + ') - Attr.: ' + atrib.toUpperCase() + ' (' + ATTR[atrib][0] + ')');
 }
 function SAVE_clearAllSaves(){
@@ -934,7 +934,7 @@ function SAVE_clearAllSaves(){
 				var newFile = fs.readFileSync(APP_PATH + '\\App\\tools\\format.r3save', 'hex');
 				fs.writeFileSync(ORIGINAL_FILENAME, newFile, 'hex');
 				LOG_separator();
-				addLog('log', 'INFO - Process Complete!');
+				LOG_addLog('log', 'INFO - Process Complete!');
 				LOG_separator();
 				LOG_scroll();
 				alert('INFO - Process Complete!');

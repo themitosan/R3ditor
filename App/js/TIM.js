@@ -19,17 +19,17 @@ function TIM_LOAD(timFile){
 		if (tim_status === true){
 			TIM_ORIGINAL_FILENAME = timFile.replace(new RegExp(' ', 'gi'), '_');
 			var BPP = TIM_arquivoBruto.slice(RANGES['TIM_BPP'][0], RANGES['TIM_BPP'][1]);
-			addLog('log', 'INFO - TIM Health: Status OK! - File: ' + timFile);
-			addLog('log', 'INFO - BPP: ' + TIM_BPP[BPP][1]);
+			LOG_addLog('log', 'INFO - TIM Health: Status OK! - File: ' + timFile);
+			LOG_addLog('log', 'INFO - BPP: ' + TIM_BPP[BPP][1]);
 			LOG_separator();
 			ret = true;
 		} else {
-			addLog('WARN', 'INFO - TIM Health: Status FAIL! - File: <font class="user-can-select">' + timFile + '</font>');
-			addLog('warn', 'WARN - There is something wrong with this file!');
-			addLog('warn', 'Maybe the file was not found or the file is broken!');
+			LOG_addLog('WARN', 'INFO - TIM Health: Status FAIL! - File: <font class="user-can-select">' + timFile + '</font>');
+			LOG_addLog('warn', 'WARN - There is something wrong with this file!');
+			LOG_addLog('warn', 'Maybe the file was not found or the file is broken!');
 		}
 	} catch (err){
-		addLog('error', 'ERROR - Something went wrong while loading TIM: ' + err);
+		LOG_addLog('error', 'ERROR - Something went wrong while loading TIM: ' + err);
 	}
 	LOG_scroll();
 	return ret;
@@ -102,12 +102,12 @@ function TIM_seekPattern(){
 			currentPos_B = parseInt(currentPos_B + 4);
 		}
 	}
-	addLog('log', 'INFO - Process Complete!');
+	LOG_addLog('log', 'INFO - Process Complete!');
 	if (TOT_PATCHS !== 0){
-		addLog('log', 'INFO - The process found ' + TOT_PATCHS + ' patches to apply on this TIM!');
+		LOG_addLog('log', 'INFO - The process found ' + TOT_PATCHS + ' patches to apply on this TIM!');
 		TIM_generateMapForPatterns(TOT_PATCHS, current_BPP);
 	} else {
-		addLog('log', 'INFO - The process was unable to find patches for this file!');
+		LOG_addLog('log', 'INFO - The process was unable to find patches for this file!');
 	}
 	LOG_separator();
 	LOG_scroll();
@@ -151,7 +151,7 @@ function TIM_openPatchFile(fileMap){
 		$('#tim_patcher_status').css({'display': 'inline'});
 		$('#TIMPATCHER').css({'top': '194px'});
 	} catch (err){
-		addLog('error', 'ERROR - Something went wrong while loading the map file!');
+		LOG_addLog('error', 'ERROR - Something went wrong while loading the map file!');
 	}
 	LOG_scroll();
 }
@@ -176,15 +176,15 @@ function TIM_verifyToPatchFile(tFile){
 	}
 	//
 	if (canApply === true){
-		addLog('log', 'INFO - TIM Patcher - File: ' + cFileName + ' - Starting Process...');
+		LOG_addLog('log', 'INFO - TIM Patcher - File: ' + cFileName + ' - Starting Process...');
 		document.title = APP_NAME + ' - TIM Patcher - Please wait...';
 		$('#TIMPATCHER').css({'display': 'none'});
 		TIM_APPLY_PATCH();
 	} else {
 		document.title = APP_NAME + ' - TIM Patcher - ERROR!';
 		alert('ERROR - Something went wrong!\n\n' + reason);
-		addLog('error', 'ERROR - Something went wrong!');
-		addLog('error', reason);
+		LOG_addLog('error', 'ERROR - Something went wrong!');
+		LOG_addLog('error', reason);
 		TIM_cancelPatch();
 	}
 	LOG_scroll();
@@ -204,7 +204,7 @@ function TIM_APPLY_PATCH(){
 	var SLICE_POS_START;
 
 	while (c < MAP_TOTAL_PATCHES){
-		addLog('log', 'INFO - TIM Patcher - Applyng Patch - ' + parseInt(c + 1) + ' / ' + MAP_TOTAL_PATCHES + '...');
+		LOG_addLog('log', 'INFO - TIM Patcher - Applyng Patch - ' + parseInt(c + 1) + ' / ' + MAP_TOTAL_PATCHES + '...');
 		
 		SLICE_POS_START = parseInt(TIM_mapFile[startLine].replace('Start=', ''));
 		C_PATCH = TIM_mapFile[parseInt(startLine + 2)].replace('Data=', '').toLowerCase();	
@@ -227,16 +227,16 @@ function TIM_APPLY_PATCH(){
 	LOG_separator();
 	if (SUCESS === true){
 		fs.writeFileSync(TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM', TEMP_FILE, 'hex');
-		addLog('log', 'INFO - Tim Patcher - Patched File: ' + TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM');
+		LOG_addLog('log', 'INFO - Tim Patcher - Patched File: ' + TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM');
 	} else {
 		document.title = APP_NAME + ' - TIM Patcher - ERROR!';
 		alert('ERROR - Something went wrong on TIM Patcher Process!\n\n' + reason);
-		addLog('error', 'ERROR - Something went wrong on TIM Patcher Process!');
-		addLog('error', reason);
+		LOG_addLog('error', 'ERROR - Something went wrong on TIM Patcher Process!');
+		LOG_addLog('error', reason);
 	}
 	LOG_separator();
 	TIM_cancelPatch();
-	addLog('log', 'INFO - Process complete!');
+	LOG_addLog('log', 'INFO - Process complete!');
 	$('#TIMPATCHER').css({'display': 'block'});
 	LOG_scroll();
 }

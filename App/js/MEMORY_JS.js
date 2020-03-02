@@ -43,8 +43,8 @@ function MEMORY_JS_verifyNodeJsVer(){
 		MEM_JS_requreSucess = true;
 	} else {
 		MEM_JS_requreSucess = false;
-		addLog('warn', 'INFO - Your NW.js (Node-Webkit) version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
-		addLog('warn', 'INFO - You will not able to use RE3 Live Status!');
+		LOG_addLog('warn', 'INFO - Your NW.js (Node-Webkit) version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
+		LOG_addLog('warn', 'INFO - You will not able to use RE3 Live Status!');
 	}
 	LOG_scroll();
 }
@@ -55,7 +55,7 @@ function MEMORY_JS_initMemoryJs(){
 	while(c < PROCESSES.length){
 		if (PROCESSES[c]['szExeFile'] === 'ResidentEvil3.exe'){
 			var p_info = PROCESSES[c];
-			addLog('log', 'INFO - MemoryJS - Load Process: Done! (PID: ' + p_info['th32ProcessID'] + ')');
+			LOG_addLog('log', 'INFO - MemoryJS - Load Process: Done! (PID: ' + p_info['th32ProcessID'] + ')');
 			PROCESS_OBJ = MEM_JS.openProcess(p_info['th32ProcessID']);
 			if (RE3_RUNNING === false){
 				EXTERNAL_APP_PID = p_info['th32ProcessID'];
@@ -278,7 +278,7 @@ function RE3_LIVE_APPLY_PLAYER_POS(){
 		}
 		//
 		if (canChange === true){
-			addLog('log', 'INFO - Applying new coordinates - X: <font class="user-can-select">' + newX.toUpperCase() + '</font>, Y: <font class="user-can-select">' + newY.toUpperCase() + '</font>, Z: <font class="user-can-select">' + newZ.toUpperCase() + '</font>, R: <font class="user-can-select">' + newR.toUpperCase() + '</font>');
+			LOG_addLog('log', 'INFO - Applying new coordinates - X: <font class="user-can-select">' + newX.toUpperCase() + '</font>, Y: <font class="user-can-select">' + newY.toUpperCase() + '</font>, Z: <font class="user-can-select">' + newZ.toUpperCase() + '</font>, R: <font class="user-can-select">' + newR.toUpperCase() + '</font>');
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][0], parseInt(newX.slice(0, 2), 16), MEM_JS.BYTE);
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_xPosition'][1], parseInt(newX.slice(2, 4), 16), MEM_JS.BYTE);
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_yPosition'][0], parseInt(newY.slice(0, 2), 16), MEM_JS.BYTE);
@@ -289,8 +289,8 @@ function RE3_LIVE_APPLY_PLAYER_POS(){
 			MEM_JS.writeMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][1], parseInt(newR.slice(2, 4), 16), MEM_JS.BYTE);
 			RE3_LIVE_showHideStageOptions(1);
 		} else {
-			addLog('warn', 'WARN - Unable to set new location!');
-			addLog('warn', reason);
+			LOG_addLog('warn', 'WARN - Unable to set new location!');
+			LOG_addLog('warn', reason);
 		}
 	}
 	LOG_scroll();

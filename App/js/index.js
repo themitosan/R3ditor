@@ -56,7 +56,7 @@ function load(){
 	localStorage.clear();
 	sessionStorage.clear();
 	console.info(APP_NAME);
-	addLog('log', APP_NAME);
+	LOG_addLog('log', APP_NAME);
 	$('#app_version').html(APP_VERSION);
 	LOG_separator();
 	//
@@ -65,7 +65,7 @@ function load(){
 	if (nw.process.arch !== 'ia32'){
 		MEMORY_JS_verifyNodeJsVer();
 	} else {
-		addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
+		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
 		MAIN_32BitMode = true;
 	}
 	try{
@@ -81,19 +81,19 @@ function load(){
 			$('#img-logo').css({'display': 'none'});
 		}
 		document.title = 'Whoops...';
-		addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
-		addLog('error', 'ERROR - This is not Node-Webkit / NW.js! ÒwÓ');
-		addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
+		LOG_addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
+		LOG_addLog('error', 'ERROR - This is not Node-Webkit / NW.js! ÒwÓ');
+		LOG_addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		LOG_separator();
-		addLog('error', err);
+		LOG_addLog('error', err);
 	}
 	if (BETA === true){
 		console.warn('WARN - BETA is true!');
 		console.error('ERROR - BETA is true!');
-		addLog('error', 'BETA is true!');
-		addLog('warn', 'BETA is true!');
-		addLog('log', 'BETA is true!');
-		addLog('error', 'BETA is true!');
+		LOG_addLog('error', 'BETA is true!');
+		LOG_addLog('warn', 'BETA is true!');
+		LOG_addLog('log', 'BETA is true!');
+		LOG_addLog('error', 'BETA is true!');
 		alert('ERROR - BETA IS TRUE!');
 	}
 	LOG_scroll();
@@ -154,7 +154,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 /*
 	Internal Log
 */
-function addLog(type, texto){
+function LOG_addLog(type, texto){
 	var classe = undefined;
 	if (type.toLowerCase() !== 'log' && type.toLowerCase() !== 'warn' && type.toLowerCase() !== 'error'){
 		classe = 'log-text';
@@ -174,7 +174,7 @@ function addLog(type, texto){
 }
 function clearInternalLog(){
 	document.getElementById('log-programa').innerHTML = '';
-	addLog('log', APP_NAME);
+	LOG_addLog('log', APP_NAME);
 	LOG_scroll();
 }
 /// Open in Hex Editor
@@ -185,10 +185,10 @@ function openFileOnHex(file){
 			runExternalSoftware(HEX_EDITOR, [file]);
 			EXTERNAL_APP_RUNNING = false;
 		} else {
-			addLog('error', 'ERROR - You can\'t open a file on hex editor if you don\'t specify it!');
+			LOG_addLog('error', 'ERROR - You can\'t open a file on hex editor if you don\'t specify it!');
 		}
 	} else {
-		addLog('error', 'ERROR - You can\'t open a hex editor if you don\'t specify where it is!');
+		LOG_addLog('error', 'ERROR - You can\'t open a hex editor if you don\'t specify where it is!');
 	}
 	LOG_scroll();
 }
@@ -214,7 +214,7 @@ function showNotify(titulo, texto, tempo){
 	catch(err){
 		if (DEBUG === true){
 			console.error('(Notification) ERROR: ' + err);
-			addLog('error', '(Notification) ERROR: ' + err);
+			LOG_addLog('error', '(Notification) ERROR: ' + err);
 		}
 	}
 }
@@ -249,13 +249,13 @@ function R3DITOR_RECENT_FILES(mode){
 				try{
 					fs.writeFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor', final_list, 'utf-8');
 				} catch (err){
-					addLog('error', 'ERROR - There was an error while saving the recent files list!');
-					addLog('error', err);
+					LOG_addLog('error', 'ERROR - There was an error while saving the recent files list!');
+					LOG_addLog('error', err);
 				}
 			} else {
 				LOG_separator();
-				addLog('warn', 'RECENT FILES - Unable to generate list!');
-				addLog('warn', 'Reason: RDT not present - Try opening a RDT file and try again!');
+				LOG_addLog('warn', 'RECENT FILES - Unable to generate list!');
+				LOG_addLog('warn', 'Reason: RDT not present - Try opening a RDT file and try again!');
 				LOG_separator();
 			}
 		}
@@ -265,9 +265,9 @@ function R3DITOR_RECENT_FILES(mode){
 function R3DITOR_REMOVE_RECENT_FILES(){
 	if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
-		addLog('log', 'INFO - Removing recent files...');
+		LOG_addLog('log', 'INFO - Removing recent files...');
 	} else {
-		addLog('warn', 'WARN - Unable to find recent files list!');
+		LOG_addLog('warn', 'WARN - Unable to find recent files list!');
 	}
 	main_renderFileList(3, 2);
 	main_closeFileList();
@@ -279,7 +279,7 @@ function R3DITOR_REMOVE_RECENT_FILES(){
 function R3DITOR_RUN_RE3(mode){
 	main_closeFileList();
 	if (EXEC_BIO3_original === undefined || EXEC_BIO3_original === '' || GAME_PATH === '' || GAME_PATH === undefined){
-		addLog('error', 'ERROR - The game path is not defined!');
+		LOG_addLog('error', 'ERROR - The game path is not defined!');
 		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
@@ -289,12 +289,12 @@ function R3DITOR_RUN_RE3(mode){
 					$('#WZ_BTN_2').css({'display': 'none'});
 					var msg = 'Testing Resident Evil 3...';
 					document.title = APP_NAME + msg;
-					addLog('log', 'INFO - ' + msg);
+					LOG_addLog('log', 'INFO - ' + msg);
 					LOG_separator();
 				} else {
 					RE3_RUNNING = true;
 					var msg = 'Running Resident Evil 3...';
-					addLog('log', 'INFO - ' + msg);
+					LOG_addLog('log', 'INFO - ' + msg);
 					LOG_separator();
 				}
 				if (mode === 0){
@@ -307,14 +307,14 @@ function R3DITOR_RUN_RE3(mode){
 					MEMORY_JS_initMemoryJs();
 				}, 20);
 			} else {
-				addLog('error', 'Unable to run ResidentEvil3 - The file was not found!');
+				LOG_addLog('error', 'Unable to run ResidentEvil3 - The file was not found!');
 			}
 		} catch (err) {
 			if (WZ_showWizard === true){
 				$('#WZ_BTN_2').css({'display': 'inline'});
 			}
 			console.error('ERROR - Something went wrong! - ' + err);
-			addLog('error', 'ERROR - Something went wrong! - ' + err);
+			LOG_addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
 	LOG_scroll();
@@ -322,7 +322,7 @@ function R3DITOR_RUN_RE3(mode){
 function R3DITOR_RUN_MERCE(mode){
 	main_closeFileList();
 	if (EXEC_BIO3_MERCE === undefined || EXEC_BIO3_MERCE === '' || GAME_PATH === '' || GAME_PATH === undefined){
-		addLog('error', 'ERROR - The game path is not defined!');
+		LOG_addLog('error', 'ERROR - The game path is not defined!');
 		console.error('ERROR - The game path is not defined!');
 	} else {
 		try{
@@ -334,17 +334,17 @@ function R3DITOR_RUN_MERCE(mode){
 				} else {
 					process.chdir(APP_PATH + '\\Assets');
 				}
-				addLog('log', 'INFO - Running Mercenaries...');
+				LOG_addLog('log', 'INFO - Running Mercenaries...');
 				runGame(EXEC_BIO3_MERCE);
 			} else {
-				addLog('error', 'Unable to run RE3_MERCE - The file was not found!');
+				LOG_addLog('error', 'Unable to run RE3_MERCE - The file was not found!');
 			}
 		} catch (err){
 			if (WZ_showWizard === true){
 				$('#WZ_BTN_2').css({'display': 'inline'});
 			}
 			console.error('ERROR - Something went wrong! - ' + err);
-			addLog('error', 'ERROR - Something went wrong! - ' + err);
+			LOG_addLog('error', 'ERROR - Something went wrong! - ' + err);
 		}
 	}
 	LOG_scroll();
@@ -384,7 +384,7 @@ function deleteFolderRecursive(path){
 // Function WIP
 function WIP(){
 	LOG_separator();
-	addLog('warn', 'Sorry buddy... This function / option still #WIP');
+	LOG_addLog('warn', 'Sorry buddy... This function / option still #WIP');
 	LOG_scroll();
 }
 function killExternalSoftware(processID){
@@ -415,11 +415,11 @@ function runGame(exe, args){
 		$('#menu-utility').css({'top': '586px'});
 	}
 	ls.stdout.on('data', (data) => {
-		addLog('log', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		LOG_addLog('log', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		LOG_scroll();
 	});
 	ls.stderr.on('data', (data) => {
-		addLog('warn', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+		LOG_addLog('warn', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
 	ls.on('close', (code) => {
@@ -436,7 +436,7 @@ function runGame(exe, args){
 			clearInterval(MEM_JS_updatePosTimer);
 			MEM_JS.closeProcess(PROCESS_OBJ.handle);
 			LOG_separator();
-			addLog('log', 'INFO - MemoryJS - Process closed!');
+			LOG_addLog('log', 'INFO - MemoryJS - Process closed!');
 			LOG_separator();
 		}
 		if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
@@ -450,7 +450,7 @@ function runGame(exe, args){
 		} else {
 			color = 'green';
 		}
-		addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
+		LOG_addLog('log', 'Resident Evil 3 / Mercenaries - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
 		LOG_scroll();
 		return code;
 	});
@@ -467,11 +467,11 @@ function runExternalSoftware(exe, args){
 		const ls = spawn(exe, args);
 		EXTERNAL_APP_PID = ls.pid;
 		ls.stdout.on('data', (data) => {
-			addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+			LOG_addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 			LOG_scroll();
 		});
 		ls.stderr.on('data', (data) => {
-			addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
+			LOG_addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 			scrollDownLog();
 		});
 		ls.on('close', (code) => {
@@ -488,7 +488,7 @@ function runExternalSoftware(exe, args){
 				color = 'green';
 			}
 			if (exe !== 'cmd'){
-				addLog('log', 'External App - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
+				LOG_addLog('log', 'External App - The application was finished with exit code <font class="' + color + ' user-can-select">' + code + '</font>.');
 				return code;
 				LOG_scroll();
 			}
@@ -496,11 +496,11 @@ function runExternalSoftware(exe, args){
 	} catch (err){
 		LOG_separator();
 		if (WZ_showWizard === true && err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
-			addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
-			addLog('error', 'Details: ' + err);
+			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
+			LOG_addLog('error', 'Details: ' + err);
 		} else {
-			addLog('error', 'Something went wrong while running ' + getFileName(exe) + '!');
-			addLog('error', 'Details: ' + err);
+			LOG_addLog('error', 'Something went wrong while running ' + getFileName(exe) + '!');
+			LOG_addLog('error', 'Details: ' + err);
 		}
 	}
 	LOG_scroll();
@@ -520,11 +520,11 @@ function R3DITOR_PROCESS_SAVE(filename, content, mode){
 	if (location.replace(filename, '') !== ''){
 		try{
 			fs.writeFileSync(location, content, mode);
-			addLog('log', 'File - Save sucessfull!');
-			addLog('log', 'Path: <font class="user-can-select">' + location + '</font>');
+			LOG_addLog('log', 'File - Save sucessfull!');
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + location + '</font>');
 		} catch(err){
-			addLog('error', 'ERROR - Unable to Save File!');
-			addLog('error', err);
+			LOG_addLog('error', 'ERROR - Unable to Save File!');
+			LOG_addLog('error', err);
 		}
 	}
 	LOG_separator();
@@ -545,7 +545,7 @@ function R3DITOR_downloadFile(url, nomedoarquivo){
 		file.on('finish', function(){
 			DOWNLOAD_COMPLETE = true;
 			if (nomedoarquivo !== APP_PATH + '\\App\\check.r3ditor'){
-		  		addLog('log', 'INFO - Download Complete! - ' + nomedoarquivo);
+		  		LOG_addLog('log', 'INFO - Download Complete! - ' + nomedoarquivo);
 		  		LOG_scroll();
 			}
     	});
@@ -578,7 +578,7 @@ function currentTime(){
 	var m = t.getMonth() + 1;
 	if (m === 9 && d === 28 && e_e === 0){
 		e_e++;
-		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
+		LOG_addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#special_msg').fadeIn({duration: 2200, queue: false});
 		} else {
@@ -588,7 +588,7 @@ function currentTime(){
 	}
 	if (m === 10 && d === 1 && e_e === 0){
 		e_e++;
-		addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
+		LOG_addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_01) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_01) + '</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#special_msg').fadeIn({duration: 2200, queue: false});
 		} else {
@@ -623,7 +623,7 @@ function getAllIndexes(arr, val){
     	return indexes;
 	} else {
 		console.error('ERROR - Invalid arguments on getAllIndexes!');
-		addLog('error', 'ERROR - Invalid arguments on getAllIndexes!');
+		LOG_addLog('error', 'ERROR - Invalid arguments on getAllIndexes!');
 	}
 	LOG_scroll();
 }
@@ -1081,7 +1081,7 @@ function setLoadFile(input){
 		BETA = false;
 	}
 	if (loadCancel === true){
-		addLog('warn', 'WARN - Load ' + loadType + ' - Load Cancelled');
+		LOG_addLog('warn', 'WARN - Load ' + loadType + ' - Load Cancelled');
 	}
 	LOG_scroll();
 }

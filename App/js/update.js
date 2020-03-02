@@ -12,7 +12,7 @@ function forceUpdate(){
 	main_closeFileList();
 	if (forceUpdat > 9){
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
-		addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
+		LOG_addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
 			$("#img-logo").fadeOut({duration: 2200, queue: false});
 			$("#hidden_msg").fadeIn({duration: 2200, queue: false});
@@ -33,7 +33,7 @@ function checkForUpdates(){
 			}
 		}, 50);
 	} else {
-		addLog('error', 'ERROR - You are offline!');
+		LOG_addLog('error', 'ERROR - You are offline!');
 		LOG_scroll();
 	}
 }
@@ -41,7 +41,7 @@ function R3DITOR_readUpdate(file){
 	var c = 3;
 	var update_info = [];
 	if (file === undefined || file === null){
-		addLog('warn', 'Unable to read update info!');
+		LOG_addLog('warn', 'Unable to read update info!');
 	} else {
 		fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 			update_info.push(line); 
@@ -68,10 +68,10 @@ function R3DITOR_readUpdate(file){
 			} else {
 				document.getElementById('updates_info').innerHTML = '<ul>' + update_info[3] + '</ul>';
 			}
-			addLog('log', 'INFO - There is a new version of R3ditor avaliable! - Version: ' + update_info[1]);
+			LOG_addLog('log', 'INFO - There is a new version of R3ditor avaliable! - Version: ' + update_info[1]);
 			R3DITORshowUpdate();
 		} else {
-			addLog('log', 'INFO - You are using the latest version of R3ditor. (Version: ' + APP_VERSION + ')');
+			LOG_addLog('log', 'INFO - You are using the latest version of R3ditor. (Version: ' + APP_VERSION + ')');
 			R3DITORcloseUpdate();
 		}
 	}
@@ -95,9 +95,9 @@ function R3DITOR_applyUpdate(){
 		}, 50);
 	} else {
 		document.title = APP_NAME + ' - ERROR!';
-		addLog('error', 'ERROR - You are offline!');
+		LOG_addLog('error', 'ERROR - You are offline!');
 		R3DITOR_movePercent(0, 100, 'ERROR - You are offline!');
-		addLog('error', 'Check your internet status, Reload R3ditor and try again!');
+		LOG_addLog('error', 'Check your internet status, Reload R3ditor and try again!');
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#btn_update_ok').fadeIn({duration: 200, queue: false});
 		} else {
@@ -120,7 +120,7 @@ function R3DITOR_update_0(){
 			}
 		}, 50);
 	} else {
-		addLog('error', 'ERROR: Something went wrong! - The download file was not found!');
+		LOG_addLog('error', 'ERROR: Something went wrong! - The download file was not found!');
 		LOG_scroll();
 		R3DITOR_applyUpdate();
 	}
@@ -149,7 +149,7 @@ function R3DITOR_update_2(){
 			}
 		}, 50);
 	} else {
-		addLog('error', 'UPDATE - Something went wrong! - The old files still there! - let\'s try again...');
+		LOG_addLog('error', 'UPDATE - Something went wrong! - The old files still there! - let\'s try again...');
 		R3DITOR_applyUpdate();
 		LOG_scroll();
 	}
@@ -176,6 +176,6 @@ function R3DITOR_update_4(){
 		$('#btn_update_ok').css({'display': 'inline'});
 	}
 	$('#progress_window').css({'top': '528px', 'height': '74px'});
-	addLog('log', 'INFO - Click on Reload App to apply changes!');
+	LOG_addLog('log', 'INFO - Click on Reload App to apply changes!');
 	LOG_scroll();
 }
