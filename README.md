@@ -81,6 +81,7 @@ Engine:
 
 External JS Plugins:
 - <a href="https://jquery.com/" target="_blank">jQuery</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
+- <a href="https://jqueryui.com/" target="_blank">jQuery UI</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
 
 NW.js Plugins:
 - <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> by <a href="https://github.com/Rob--" target="_blank"> Rob--</a>
