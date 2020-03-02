@@ -14,7 +14,7 @@ R3ditor (it reads REditor) is a editor of files written in JS / NW.js (aka. Node
 
 ## Requirements
 - OS: Windows 7 or higher
-- To run the inicial setup you will need the visual studio 2005 installed (rofs.exe need this to unpack "Rofsxx.dat" files)
+- To run the inicial setup you will need the Visual Studio 2005 installed (rofs.exe need this to unpack "Rofsxx.dat" files)
 
 ## How to update
 - Just click on "Check for updates" and follow the instructions!
