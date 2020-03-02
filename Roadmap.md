@@ -56,7 +56,8 @@ This file can (and will be) modified several times!
 ## MIX Editor
 - ~~Add support for all items combinations~~
 - ~~Add support for PS1 SLUS~~
-- Add support for other platforms (Like Gamecube, Dreamcast...)
+- ~~Add support for Gamecube main.dol~~
+- ~~Add support for Dreamcast 1ST_READ.BIN~~
 
 ## ARD Map File
 - Almost everything!
