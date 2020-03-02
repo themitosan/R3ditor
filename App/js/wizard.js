@@ -559,28 +559,31 @@ function WZ_FIRST_BOOT_MESSAGE(){
 	DESIGN_ENABLE_ANIMS = true;
 	R3ditor_showFirstBootMessage = false;
 	$('#RE2_introEffect').css({'display': 'inline'});
+	document.title = 'Welcome to R3ditor!';
 	setTimeout(function(){
 		WZ_saveConfigs(true);
-		$('#FB_R3ditor_logo').fadeIn(1600);
+		$('#FB_R3ditor_logo').fadeIn({duration: 2000, queue: false});
 	}, 200);
 	setTimeout(function(){
-		document.title = 'Welcome to R3ditor!';
-		$('#R3DITOR_firstMessage').fadeIn({duration: 900, queue: false});
-		$('#R3DITOR_firstMessage').animate({'top': '416px'}, {duration: 4200, queue: false});
+		$('#R3DITOR_firstMessage').fadeIn({duration: 4200, queue: false});
+		$('#FB_R3ditor_logo').animate({'top': '250px'}, {duration: 4200, queue: false});
+		$('#R3DITOR_firstMessage').animate({'top': '450px'}, {duration: 4200, queue: false});
 	}, 810);
 	setTimeout(function(){
-		$('#R3DITOR_firstMessage').fadeOut({duration: 600, queue: false});
+		$('#R3DITOR_firstMessage').fadeOut({duration: 1800, queue: false});
 	}, 6000);
 	setTimeout(function(){
 		document.title = 'Have Fun!';
 		$('#FB_R3ditor_logo').fadeOut({duration: 1400, queue: false});
+		$('#FB_R3ditor_logo').animate({'top': '240px'}, {duration: 1400, queue: false});
+		$('#R3DITOR_firstMessage').animate({'top': '460px'}, {duration: 1400, queue: false});
 		$('#RE2_introEffect').animate({'background-color': '#000'}, {duration: 1800, queue: false});
-	}, 6600);
+	}, 6700);
 	setTimeout(function(){
 		$('#RE2_introEffect').css({'background-color': '#fff', 'display': 'inline'});
 		$('#RE2_introEffect').fadeOut({duration: 80, queue: false});
 		WZ_SHOW_INTERFACE();
-	}, 8700);
+	}, 8680);
 }
 function WZ_APPEND(){
 	var c = 0;
