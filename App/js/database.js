@@ -1396,9 +1396,10 @@ var MIX_function_types = {
 	'06': 'Add Infinite Ammo / Quantity'
 }
 var MIX_fileTypes = {
-	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'],
-	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'],
-	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol']
+	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'], // PC Version
+	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'], // Playstation Version
+	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol'], // GameCube Version
+	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
 }
 var RANGES = {
 	/*
