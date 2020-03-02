@@ -8,10 +8,6 @@
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
 var MIX_Database;
-var MIX_arquivoBruto;
-var MIX_currentFunction;
-var MIX_SLUS_MODE = false;
-//
 var MIX_TOTAL_00 = 0;
 var MIX_TOTAL_01 = 0;
 var MIX_TOTAL_02 = 0;
@@ -19,6 +15,9 @@ var MIX_TOTAL_03 = 0;
 var MIX_TOTAL_04 = 0;
 var MIX_TOTAL_05 = 0;
 var MIX_TOTAL_06 = 0;
+var MIX_arquivoBruto;
+var MIX_currentFunction;
+var MIX_SLUS_MODE = false;
 /*
 	Functions
 */

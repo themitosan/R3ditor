@@ -8,7 +8,7 @@ var DEBUG_LOCKRENDER = false;
 /// Reload js file
 function reloadJsFile(src){
 	console.info('Reloading Script: ' + src);
-	addLog('warn', 'Reloading Script: ' + src);
+	LOG_addLog('warn', 'Reloading Script: ' + src);
     $('script[src="' + src + '"]').remove();
     var head = document.getElementsByTagName('head')[0];
     var script = document.createElement('script');
@@ -63,8 +63,7 @@ function DEBUG_createLine_Lv2(where, lineId, cssClass, ax, ay, bx, by){
      angle = (angle * 180 / Math.PI);
      angle = -angle;
      var length = Math.sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by));
-     var style = 'top: ' + parseInt(ay + 8) + 'px; left: ' + parseInt(ax + 10) + 'px; ' +
-				 'width: ' + length + 'px; -webkit-transform-origin: 0% 0%; ' +
+     var style = 'top: ' + parseInt(ay + 8) + 'px; left: ' + parseInt(ax + 10) + 'px; width: ' + length + 'px; -webkit-transform-origin: 0% 0%; ' +
 				 '-webkit-transform: rotate(' + angle + 'deg);';
      var LINE_HTML_TEMPLATE = '<div id="' + lineId + '" class="' + cssClass + '" style="' + style + '"></div>';
      $('#' + where).append(LINE_HTML_TEMPLATE);
