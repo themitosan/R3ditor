@@ -2085,7 +2085,7 @@ function MIX_showMenu(menuId){
 	$('#MIX-aba-menu-' + menuId).addClass('aba-select');
 	$('#menu-mix-editor').css({'display': 'block'});
 	$('#log-programa').css({'top': '626px', 'height': '82px'});
-	document.title = APP_NAME + ' - MIX Editor (' + MIX_fileTypes[MIX_fName][0] + ') - File: ' + ORIGINAL_FILENAME;
+	document.title = APP_NAME + ' - MIX Editor (' + MIX_fileTypes[MIX_fName][0] + ' Mode) - File: ' + ORIGINAL_FILENAME;
 }
 function MIX_updateMainTabsTitle(){
 	document.getElementById('MIX_LBL_TOTAL-1').innerHTML = parseInt(MIX_TOTAL_00);

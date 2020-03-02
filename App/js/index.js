@@ -123,8 +123,8 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDT');
 	}
-	if (fs.existsSync(APP_PATH + '\\Backup\\EXE') === false){
-		fs.mkdirSync(APP_PATH + '\\Backup\\EXE');
+	if (fs.existsSync(APP_PATH + '\\Backup\\MIX') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\MIX');
 	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\SLUS') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\SLUS');

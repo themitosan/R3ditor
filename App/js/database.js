@@ -1396,9 +1396,9 @@ var MIX_function_types = {
 	'06': 'Add Infinite Ammo / Quantity'
 }
 var MIX_fileTypes = {
-	'residentevil3': ['EXE Mode', 2449536, 2451536, '.exe'],
-	'slus_009.23': 	 ['SLUS Mode', 1187720, 1189720, '.23'],
-	'main.dol': 	 ['DOL Mode', 4376896, 4378896, '.dol']
+	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'],
+	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'],
+	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol']
 }
 var RANGES = {
 	/*

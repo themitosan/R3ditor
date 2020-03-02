@@ -18,7 +18,6 @@ var MIX_TOTAL_05 = 0;
 var MIX_TOTAL_06 = 0;
 var MIX_arquivoBruto;
 var MIX_currentFunction;
-var MIX_openCounter = 0;
 /*
 	Functions
 */
@@ -46,11 +45,8 @@ function MIX_loadExe(file){
 		end_pos = parseInt(end_pos + 16);
 		c++;
 	}
-	if (MIX_openCounter !== 0){
-		LOG_separator();
-	}
-	MIX_openCounter++;
 	LOG_addLog('log', 'MIX - File loaded sucessfully!');
+	LOG_addLog('log', 'MIX - Current mode: ' + MIX_fileTypes[MIX_fName][0]);
 	LOG_addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
 	main_menu(8);
 	LOG_scroll();
@@ -308,19 +304,12 @@ function MIX_saveOnExe(){
 		MIX_Backup();
 		var c = 0;
 		var t = 125;
-		var RE3_FILE_END;
-		var RE3_FILE_START;
+		var RE3_FILE_START = MIX_arquivoBruto.slice(0, MIX_fileTypes[MIX_fName][1]);
+		var RE3_FILE_END = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][2], MIX_arquivoBruto.length);
 		var MIX_NEW_DATABASE = '';
 		while (c < 125){
 			MIX_NEW_DATABASE = MIX_NEW_DATABASE + localStorage.getItem('MIX_ID_' + c);
 			c++;
-		}
-		if (MIX_SLUS_MODE === false){
-			RE3_FILE_START = MIX_arquivoBruto.slice(0, RANGES['MIX_Slice_Pos'][0]);
-			RE3_FILE_END = MIX_arquivoBruto.slice(RANGES['MIX_Slice_Pos'][1], MIX_arquivoBruto.length);
-		} else {
-			RE3_FILE_START = MIX_arquivoBruto.slice(0, RANGES['MIX_SLUS_Slice_Pos'][0]);
-			RE3_FILE_END = MIX_arquivoBruto.slice(RANGES['MIX_SLUS_Slice_Pos'][1], MIX_arquivoBruto.length);
 		}
 		var NEW_FILE = RE3_FILE_START + MIX_NEW_DATABASE + RE3_FILE_END;
 		try {
@@ -343,7 +332,6 @@ function MIX_Backup(){
 			var backup_name;
 			backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + MIX_fileTypes[MIX_fName][3];
 			fs.writeFileSync(APP_PATH + '\\Backup\\MIX\\' + backup_name, MIX_arquivoBruto, 'hex');
-			LOG_separator();
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\MIX\\' + backup_name + '</font>');
 			LOG_separator();
