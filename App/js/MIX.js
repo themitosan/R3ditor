@@ -7,6 +7,7 @@
 	52 41 46 4B 00 4B 00 49 51 4A 40 4B 00 40 4B 00 46 41 45 50 4B 
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
+var MIX_fName;
 var MIX_Database;
 var MIX_TOTAL_00 = 0;
 var MIX_TOTAL_01 = 0;
@@ -17,31 +18,38 @@ var MIX_TOTAL_05 = 0;
 var MIX_TOTAL_06 = 0;
 var MIX_arquivoBruto;
 var MIX_currentFunction;
-var MIX_SLUS_MODE = false;
+var MIX_openCounter = 0;
 /*
 	Functions
 */
 function MIX_loadExe(file){
 	var c = 0;
 	var end_pos = 16;
+	MIX_TOTAL_00 = 0;
+	MIX_TOTAL_01 = 0;
+	MIX_TOTAL_02 = 0;
+	MIX_TOTAL_03 = 0;
+	MIX_TOTAL_04 = 0;
+	MIX_TOTAL_05 = 0;
+	MIX_TOTAL_06 = 0;
 	var start_pos = 0;
 	var totalMixes = 125;
+	localStorage.clear();
 	ORIGINAL_FILENAME = file;
+	MIX_fName = getFileName(ORIGINAL_FILENAME);
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
 	MIX_clearHolders();
-	if (getFileName(ORIGINAL_FILENAME) === 'slus_009.23'){
-		MIX_Database = MIX_arquivoBruto.slice(RANGES['MIX_SLUS_Slice_Pos'][0], RANGES['MIX_SLUS_Slice_Pos'][1]);
-		MIX_SLUS_MODE = true;
-	} else {
-		MIX_Database = MIX_arquivoBruto.slice(RANGES['MIX_EXE_Slice_Pos'][0], RANGES['MIX_EXE_Slice_Pos'][1]);
-		MIX_SLUS_MODE = false;
-	}
+	MIX_Database = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][1], MIX_fileTypes[MIX_fName][2]);
 	while (c < totalMixes){
 		MIX_decompileMix(c, start_pos, end_pos, false);
 		start_pos = parseInt(start_pos + 16);
 		end_pos = parseInt(end_pos + 16);
 		c++;
 	}
+	if (MIX_openCounter !== 0){
+		LOG_separator();
+	}
+	MIX_openCounter++;
 	LOG_addLog('log', 'MIX - File loaded sucessfully!');
 	LOG_addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
 	main_menu(8);
@@ -322,12 +330,8 @@ function MIX_saveOnExe(){
 			LOG_separator();
 			$('#MIX_btn_SAVE_EXE').css({'display': 'none'});
 		} catch (err){
-			if (MIX_SLUS_MODE === false){
-				LOG_addLog('error', 'ERROR - Unable to save EXE!');
-			} else {
-				LOG_addLog('error', 'ERROR - Unable to save SLUS!');
-			}
-			LOG_addLog('error', 'Info: ' + err);
+			LOG_addLog('error', 'ERROR - Unable to save MIX file!');
+			LOG_addLog('error', 'INFO: ' + err);
 		}
 	}
 	LOG_scroll();
@@ -337,15 +341,11 @@ function MIX_Backup(){
 	if (MIX_arquivoBruto !== undefined){
 		try{
 			var backup_name;
-			if (MIX_SLUS_MODE === false){
-				backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + '.exe';
-				fs.writeFileSync(APP_PATH + '\\Backup\\EXE\\' + backup_name, MIX_arquivoBruto, 'hex');
-			} else {
-				backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + '.23';
-			}
+			backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + MIX_fileTypes[MIX_fName][3];
+			fs.writeFileSync(APP_PATH + '\\Backup\\MIX\\' + backup_name, MIX_arquivoBruto, 'hex');
 			LOG_separator();
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\EXE\\' + backup_name + '</font>');
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\MIX\\' + backup_name + '</font>');
 			LOG_separator();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);

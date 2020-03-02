@@ -150,6 +150,7 @@
 		</div>
 		<!-- Menu MIX -->
 		<div class="menu-topo none" id="menu-topo-mix">
+			<input type="button" class="botao-menu" title="Click here to open MIX file" onclick="triggerLoad(17);" value="Open MIX">
 			<input type="button" class="botao-menu botao-aplicar none" id="MIX_btn_SAVE_EXE" title="Click here to save your changes!" value="Save Changes!" onclick="MIX_saveOnExe();">
 			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
@@ -1682,11 +1683,11 @@
 			<input type="file" onchange="setLoadFile(14);" id="loadTilesetBMP" accept=".bmp"/>
 			<input type="file" onchange="setLoadFile(15);" id="loadOBJPatcherFile" accept=".obj"/>
 			<input type="file" onchange="setLoadFile(16);" id="loadRofsFile" accept=".dat"/>
-			<input type="file" onchange="setLoadFile(17);" id="loadMixFile" accept=".exe, .23"/>
+			<input type="file" onchange="setLoadFile(17);" id="loadMixFile" accept=".exe, .23, .dol"/>
 			<!-- TIM Patcher -->
-			<input type="file" onchange="setLoadFile(7);"  id="loadTIMForm" accept=".tim"/>
-			<input type="file" onchange="setLoadFile(8);"  id="loadTimMapForm" accept=".r3timmap"/>
-			<input type="file" onchange="setLoadFile(9);"  id="loadTimForPatchForm" accept=".tim"/>
+			<input type="file" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
+			<input type="file" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
+			<input type="file" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
 		</div>
 	</body>
 </html>

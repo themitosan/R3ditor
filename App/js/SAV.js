@@ -611,7 +611,7 @@ function applyItem(mode, person, pos){
 		} else {
 			CARLOS_INVENT[pos - 1] = item;
 		}
-	} else { // Baú
+	} else { // Box
 		if (person == 0){
 			JILL_BAU[pos] = item;
 		} else {
@@ -889,6 +889,8 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		LOG_addLog('warn', 'WARN - ' + msg);
 		console.warn('WARN - ' + msg);
 	}
+	console.log(itemHex);
+	var IT_css = ATTR[atrib][3];
 	// Jill inventory
 	if (person == 0){
 		document.getElementById('J-icon-' + block).src = 'img\\items\\' + itemHex + '.png';
@@ -906,7 +908,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 			}
 		}
 		document.getElementById('J-LBL-' + block).innerHTML = quanti;
-		$('#J-LBL-' + block).css({'color': cor, 'text-shadow': shad});
+		$('#J-LBL-' + block).css({'color': cor, 'text-shadow': shad, 'display': IT_css});
 	} else {
 		// Carlos inventory
 		document.getElementById('C-icon-' + block).src = 'img\\items\\' + itemHex + '.png';
@@ -917,7 +919,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 			SAV_addInfo(person, itemHex);
 		}
 		document.getElementById('C-LBL-' + block).innerHTML = quanti;
-		$('#C-LBL-' + block).css({'color': cor, 'text-shadow': shad});
+		$('#C-LBL-' + block).css({'color': cor, 'text-shadow': shad, 'display': IT_css});
 	}
 	if (quanti === ''){
 		quanti = '0';
