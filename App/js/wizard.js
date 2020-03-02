@@ -205,7 +205,7 @@ function WZ_showWizardDialog(id){
 		$('#WZ_dialog').css({'display': 'none'});
 		addLog('log', 'WIZARD - Skipping...');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 // Extract game assets process
 function WZ_STARTFINALPROCESS(){
@@ -226,7 +226,7 @@ function WZ_EXTRACT_ROFS(){
 			if (EXTERNAL_APP_RUNNING === false && current_rofs < 16){
 				if (EXTERNAL_APP_EXITCODE === 0){
 					current_rofs++;
-					log_separador();
+					LOG_separator();
 					WZ_EXTRACT(current_rofs);
 				} else {
 					addLog('error', 'ERROR - Something went wrong while extracting Rofs' + id + '!');
@@ -240,7 +240,7 @@ function WZ_EXTRACT_ROFS(){
 			clearInterval(timer);
 		}
 	}, 50);
-	scrollLog();
+	LOG_scroll();
 }
 function WZ_EXTRACT(id){
 	if (fs.existsSync(GAME_PATH + 'Rofs' + id + '.dat') === true){
@@ -321,7 +321,7 @@ function WZ_saveConfigs(justSave){
 		} else {
 			if (justSave === true){
 				addLog('log', 'CONFIGS - Configs Saved!');
-				scrollLog();
+				LOG_scroll();
 			} else {
 				clearInternalLog();
 				reload();
@@ -333,7 +333,7 @@ function WZ_saveConfigs(justSave){
 		}
 		addLog('log', 'CONFIGS - Something went wrong! - ' + err);
 		console.error(err);
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function WZ_loadFiles(file){
@@ -737,7 +737,7 @@ function SETTINGS_removeFiles(mode){
 			R3DITOR_REMOVE_RECENT_FILES();
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function SETTINGS_RESET(){
 	fs.unlinkSync(APP_PATH + '\\Configs\\configs.r3ditor');
@@ -804,7 +804,7 @@ function SETTINGS_SET_PATH(mode, path){
 			}
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function WZ_FORCE_UPDATE(){
 	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be buggy or incomplete.\n\nDo you want to continue anyway?');

@@ -46,7 +46,7 @@ function MIX_loadExe(file){
 	addLog('log', 'MIX - File loaded sucessfully!');
 	addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
 	main_menu(8);
-	scrollLog();
+	LOG_scroll();
 }
 function MIX_decompileMix(id, start, end, useLocalStorage){
 	var hex_temp;
@@ -194,7 +194,7 @@ function MIX_convertCombination(mix_id, btn){
 	} else {
 		addLog('warn', 'WARN - You can\'t convert this mix to current type!');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MIX_updateList(){
 	var c = 0;
@@ -320,7 +320,7 @@ function MIX_saveOnExe(){
 			fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
 			addLog('log', 'MIX - The file was saved successfull!');
 			addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-			log_separador();
+			LOG_separator();
 			$('#MIX_btn_SAVE_EXE').css({'display': 'none'});
 		} catch (err){
 			if (MIX_SLUS_MODE === false){
@@ -331,7 +331,7 @@ function MIX_saveOnExe(){
 			addLog('error', 'Info: ' + err);
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MIX_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
@@ -344,10 +344,10 @@ function MIX_Backup(){
 			} else {
 				backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + '.23';
 			}
-			log_separador();
+			LOG_separator();
 			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\EXE\\' + backup_name + '</font>');
-			log_separador();
+			LOG_separator();
 		} catch (err){
 			addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}

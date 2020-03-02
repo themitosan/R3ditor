@@ -20,7 +20,7 @@ function forceUpdate(){
 			$("#img-logo").css({'display': 'none'});
 			$("#hidden_msg").css({'display': 'inline'});
 		}
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function checkForUpdates(){
@@ -34,7 +34,7 @@ function checkForUpdates(){
 		}, 50);
 	} else {
 		addLog('error', 'ERROR - You are offline!');
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function R3DITOR_readUpdate(file){
@@ -75,7 +75,7 @@ function R3DITOR_readUpdate(file){
 			R3DITORcloseUpdate();
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 /// Apply Update
 function R3DITOR_applyUpdate(){
@@ -104,7 +104,7 @@ function R3DITOR_applyUpdate(){
 			$('#btn_update_ok').css({'display': 'inline'});
 		}
 		$('#progress_window').css({'top': '528px', 'height': '74px'});
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function R3DITOR_update_0(){
@@ -121,7 +121,7 @@ function R3DITOR_update_0(){
 		}, 50);
 	} else {
 		addLog('error', 'ERROR: Something went wrong! - The download file was not found!');
-		scrollLog();
+		LOG_scroll();
 		R3DITOR_applyUpdate();
 	}
 }
@@ -151,7 +151,7 @@ function R3DITOR_update_2(){
 	} else {
 		addLog('error', 'UPDATE - Something went wrong! - The old files still there! - let\'s try again...');
 		R3DITOR_applyUpdate();
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function R3DITOR_update_3(){
@@ -177,5 +177,5 @@ function R3DITOR_update_4(){
 	}
 	$('#progress_window').css({'top': '528px', 'height': '74px'});
 	addLog('log', 'INFO - Click on Reload App to apply changes!');
-	scrollLog();
+	LOG_scroll();
 }

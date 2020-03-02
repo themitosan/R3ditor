@@ -1,7 +1,7 @@
 /*
 	debug.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Me ajuda ae véi!
+	Me ajuda ae véi - nunca te pedi nada... :P
 */
 var DEBUG_TOTAL_LINES = 0;
 var DEBUG_LOCKRENDER = false;
@@ -14,7 +14,7 @@ function reloadJsFile(src){
     var script = document.createElement('script');
     script.src = src;
     head.appendChild(script);
-    scrollLog();
+    LOG_scroll();
 }
 function DEBUG_RDT_MSG_END_RANGE(value){
 	BETA = true;

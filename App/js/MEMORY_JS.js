@@ -46,7 +46,7 @@ function MEMORY_JS_verifyNodeJsVer(){
 		addLog('warn', 'INFO - Your NW.js (Node-Webkit) version are not compatible with Memory JS! (Your version: ' + process.versions['node-webkit'] + ' - Compatible Version: 0.37.4)');
 		addLog('warn', 'INFO - You will not able to use RE3 Live Status!');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MEMORY_JS_initMemoryJs(){
 	var c = 0;
@@ -81,7 +81,7 @@ function MEMORY_JS_initMemoryJs(){
 			c++;
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MEMORY_JS_fixVars(inp, v){
 	var size = parseInt(v);
@@ -293,7 +293,7 @@ function RE3_LIVE_APPLY_PLAYER_POS(){
 			addLog('warn', reason);
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function RE3_LIVE_COPY_PASTE_LOCATION(mode){
 	if (RE3_RUNNING === true && PROCESS_OBJ !== undefined){
@@ -328,7 +328,7 @@ function RE3_LIVE_closeForm(){
 	}
 	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
 	window.onkeypress = undefined;
-	scrollLog();
+	LOG_scroll();
 }
 function RE3_LIVE_openForm(){
 	if (RE3_RUNNING === true){

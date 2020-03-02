@@ -22,12 +22,12 @@ var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
 var R3ditor_showFirstBootMessage = true;
 //
-function scrollLog(){
+function LOG_scroll(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
-function log_separador(){
-	addLog('log', l_separador);
-	scrollLog();
+function LOG_separator(){
+	addLog('log', LOG_separatorHtml);
+	LOG_scroll();
 }
 /*
 	Filelist
@@ -52,7 +52,7 @@ function FILELIST_triggerSearchBox(){
 			} else {
 				addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
 			}
-			scrollLog();
+			LOG_scroll();
 		} else {
 			if (fileList_gameMode === 'DATA_E'){
 				main_renderFileList(3, 2);
@@ -345,7 +345,7 @@ function main_renderFileList(id, mode){
 			}
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function main_openFileList(){
 	$('#avaliable_fileList').css({'display': 'block'});
@@ -489,7 +489,7 @@ function SAVE_applyMenuFocus(menuId){
 		i++;
 	}
 	$('#menu-' + menuId).addClass('aba-select');
-	scrollLog();
+	LOG_scroll();
 }
 function SAVE_showMenu(menuId){
 	main_closeFileList();
@@ -558,7 +558,7 @@ function SAVE_showMenu(menuId){
 		$('#msg-viewer').removeClass('none');
 		$('#o-menu-general').css({'display': 'block'});
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function cleanForSaveLoad(){
 	var cu = 1;
@@ -822,7 +822,7 @@ function MISC_unblurImg(){
 }
 /// MSG
 function MSG_showMenu(id){
-	scrollLog();
+	LOG_scroll();
 	onMSG = true;
 	main_closeFileList();
 	$('#img-logo').css({'display': 'none'});
@@ -1087,7 +1087,7 @@ function MSG_renderCamPreview(){
 			document.getElementById('MSG_camPreview').title = 'Cam: ' + currentCam + '\nFile: ' + currentFile + currentCam + '.JPG';
 		} else {
 			addLog('warn', 'WARN - Unable to find cam preview: The img file was not found! (404)');
-			scrollLog();
+			LOG_scroll();
 		}
 	}
 }
@@ -1227,7 +1227,7 @@ function RDT_showMenu(id){
 		$('#RDT-aba-menu-2').css({'display': 'none'});
 	}
 	RDT_Error_404();
-	scrollLog();
+	LOG_scroll();
 }
 function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
 	var newOpacity = document.getElementById('RDT_SLD_CANVAS_BG_OPACITY').value;
@@ -1283,7 +1283,7 @@ function RDT_showEditMsgCode(index, codeHex){
 		alert('INFO - Unable to edit this message code! (For now!)\n\n' + warnMSG);
 		addLog('warn', 'WARN - ' + warnMSG);
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function RDT_showEditEnemyNPC(index, codeHex){
 	var emd 													   = codeHex.slice(RANGES['RDT_enemy-type'][0], 	   RANGES['RDT_enemy-type'][1]);
@@ -1444,7 +1444,7 @@ function RDT_renderEditDoorCamPreview(){
 		addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
 		document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 		$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
-		scrollLog();
+		LOG_scroll();
 	}
 }
 function RDT_cancelDoorCamEdit(){
@@ -1494,7 +1494,7 @@ function TRANSFER_RDT_TO_MSG(){
 	MSG_showMenu(1);
 	MSG_hideTranslateInput();
 	$('#MSG_ADDFUNC_BTN_11').css({'display': 'none'});
-	scrollLog();
+	LOG_scroll();
 }
 function RDT_BG_display(){
 	if (enable_mod === true){
@@ -1737,7 +1737,7 @@ function RDT_applyMenuFocus(menuId){
 		i++;
 	}
 	$('#RDT-aba-menu-' + menuId).addClass('aba-select');
-	scrollLog();
+	LOG_scroll();
 }
 function RDT_showCanvasTab(){
 	$('#RDT-aba-menu-4').css({'display': 'inline'});
@@ -2002,7 +2002,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).src = APP_PATH + '\\App\\Img\\items\\' + itemHex + '.png';
 		$('#RE3_LIVESTATUS_INVENT_SLOT_' + n).css({'display': 'inline'});
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function RE3_LIVE_enableDisableToolBar(mode){
 	if (PROCESS_OBJ !== undefined && REALTIME_renderToolbar === true && mode === 0){
@@ -2399,7 +2399,7 @@ function R3DITOR_movePercent(id, percent, status){
 		document.getElementById('update_status').innerHTML = status;
 		document.getElementById('update_percent').innerHTML = p + '%';
 		$('#update_progressbar').css({'width': p + '%'});
-		scrollLog();
+		LOG_scroll();
 	}
 	// Wizard
 	if (id === 1){

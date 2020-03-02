@@ -21,7 +21,7 @@ function TIM_LOAD(timFile){
 			var BPP = TIM_arquivoBruto.slice(RANGES['TIM_BPP'][0], RANGES['TIM_BPP'][1]);
 			addLog('log', 'INFO - TIM Health: Status OK! - File: ' + timFile);
 			addLog('log', 'INFO - BPP: ' + TIM_BPP[BPP][1]);
-			log_separador();
+			LOG_separator();
 			ret = true;
 		} else {
 			addLog('WARN', 'INFO - TIM Health: Status FAIL! - File: <font class="user-can-select">' + timFile + '</font>');
@@ -31,7 +31,7 @@ function TIM_LOAD(timFile){
 	} catch (err){
 		addLog('error', 'ERROR - Something went wrong while loading TIM: ' + err);
 	}
-	scrollLog();
+	LOG_scroll();
 	return ret;
 }
 // TIM PATCHER TOOL
@@ -40,7 +40,7 @@ function TIM_loadTimToSeekPattern(timF){
 	if (STATUS === true){
 		TIM_seekPattern();
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function TIM_seekPattern(){
 	if (TIM_arquivoBruto !== undefined){
@@ -109,8 +109,8 @@ function TIM_seekPattern(){
 	} else {
 		addLog('log', 'INFO - The process was unable to find patches for this file!');
 	}
-	log_separador();
-	scrollLog();
+	LOG_separator();
+	LOG_scroll();
 }
 function TIM_generateMapForPatterns(totalPatches, bpp){
 	if (TIM_arquivoBruto !== undefined && parseInt(totalPatches) !== NaN && parseInt(totalPatches) > 0){
@@ -153,7 +153,7 @@ function TIM_openPatchFile(fileMap){
 	} catch (err){
 		addLog('error', 'ERROR - Something went wrong while loading the map file!');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function TIM_verifyToPatchFile(tFile){
 	var reason;
@@ -187,7 +187,7 @@ function TIM_verifyToPatchFile(tFile){
 		addLog('error', reason);
 		TIM_cancelPatch();
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function TIM_APPLY_PATCH(){
 	var c = 0;
@@ -224,7 +224,7 @@ function TIM_APPLY_PATCH(){
 	}
 
 	//
-	log_separador();
+	LOG_separator();
 	if (SUCESS === true){
 		fs.writeFileSync(TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM', TEMP_FILE, 'hex');
 		addLog('log', 'INFO - Tim Patcher - Patched File: ' + TIM_ORIGINAL_FILENAME.replace('.TIM', '') + '_PATCHED.TIM');
@@ -234,11 +234,11 @@ function TIM_APPLY_PATCH(){
 		addLog('error', 'ERROR - Something went wrong on TIM Patcher Process!');
 		addLog('error', reason);
 	}
-	log_separador();
+	LOG_separator();
 	TIM_cancelPatch();
 	addLog('log', 'INFO - Process complete!');
 	$('#TIMPATCHER').css({'display': 'block'});
-	scrollLog();
+	LOG_scroll();
 }
 function TIM_cancelPatch(){
 	TIM_mapFile = [];

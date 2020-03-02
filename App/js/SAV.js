@@ -123,7 +123,7 @@ function SAV_GenerateNewSave(){
 			addLog('error', 'Path: <font class="user-can-select">' + APP_PATH + '\\App\\tools\\format.r3save</font>');
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function SAV_MAKE_SAVE(slot){
 	if (ORIGINAL_FILENAME !== undefined){
@@ -208,9 +208,9 @@ function CARREGAR_SAVE(sFile){
 	sessionStorage.clear();
 	SAVE_arquivoBruto = undefined;
 	ORIGINAL_FILENAME = sFile;
-	log_separador();
+	LOG_separator();
 	addLog('log', 'SAV - Loading file: <font class="user-can-select">' + sFile + '</font>');
-	log_separador();
+	LOG_separator();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente
 	// Essa parte do processo será feita aqui pois essas informações não serão modificadas pelo usuário
@@ -293,7 +293,7 @@ function save_renderSaveSlots(){
 		cu++;
 	}
 	// Final
-	scrollLog();
+	LOG_scroll();
 	SAVE_showMenu(0);
 }
 function save_renderInvent(s_slot, mode){
@@ -317,7 +317,7 @@ function save_renderInvent(s_slot, mode){
 		atual++;
 	}
 	// Inventário do Carlos
-	log_separador();
+	LOG_separator();
 	itens = 11;
 	atual = 1;
 	while(atual !== itens){
@@ -375,9 +375,9 @@ function save_renderBox(s_slot){
 		}
 	}
 	// Carlos Box
-	log_separador();
+	LOG_separator();
 	addLog('log', 'SAVE - Loading Carlos Item Box...');
-	log_separador();
+	LOG_separator();
 	current = 0;
 	position = RANGES['c-box'][0];
 	var hack = totalItens + 1;
@@ -412,13 +412,13 @@ function save_renderBox(s_slot){
 }
 function save_renderInfos(s_slot){
 	try{
-		log_separador();
+		LOG_separator();
 		// Render Time
 		IGTExtract = localStorage.getItem('Save_' + s_slot).slice(RANGES['IGT'][0], RANGES['IGT'][1]);
 		decompileHexTime(IGTExtract.slice(0, 2), IGTExtract.slice(2, 4), IGTExtract.slice(4, 6), IGTExtract.slice(6, 8));
 		addLog('log', 'IGT (In-Game Time): ' + hora + ':' + minutos + ':' + segundos);
 		addLog('log', 'IGT Complete: ' + dia + ':' + hora + ':' + minutos + ':' + segundos + ':' + decimos + ':' + milesimos);
-		log_separador();
+		LOG_separator();
 		// Dificuldade
 		dificuldade = localStorage.getItem('Save_' + s_slot).slice(RANGES['leveldificuldade'][0], RANGES['leveldificuldade'][1]);
 		var diffi = DIFICULDADE[dificuldade][0];
@@ -576,10 +576,10 @@ function SAV_Backup(){
 		try{
 			var backup_name = gDetails + '-' + getFileName(ORIGINAL_FILENAME) + '-' + currentTime() + '.savbackup';
 			fs.writeFileSync(APP_PATH + '\\Backup\\SAV\\' + backup_name, SAVE_arquivoBruto, 'hex');
-			log_separador();
+			LOG_separator();
 			addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			addLog('log', 'Folder - ' + APP_PATH + '\\Backup\\SAV\\' + backup_name);
-			log_separador();
+			LOG_separator();
 		} catch (err){
 			addLog('error', 'ERROR - Unable to make backup! - ' + err);
 		}
@@ -933,10 +933,10 @@ function SAVE_clearAllSaves(){
 				fs.unlinkSync(ORIGINAL_FILENAME);
 				var newFile = fs.readFileSync(APP_PATH + '\\App\\tools\\format.r3save', 'hex');
 				fs.writeFileSync(ORIGINAL_FILENAME, newFile, 'hex');
-				log_separador();
+				LOG_separator();
 				addLog('log', 'INFO - Process Complete!');
-				log_separador();
-				scrollLog();
+				LOG_separator();
+				LOG_scroll();
 				alert('INFO - Process Complete!');
 				reload();
 			}

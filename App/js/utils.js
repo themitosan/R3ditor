@@ -127,7 +127,7 @@ function UTILS_OBJ_Patcher_RUN(file){
 			addLog('warn', 'OBJ Patcher - This file doesn\'t need patching!');
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }
 /*
 	Extract ROFS
@@ -158,5 +158,5 @@ function UTILS_extract_rofs(rofsFile){
 			addLog('error', 'ERROR - Details: ' + err);
 		}
 	}
-	scrollLog();
+	LOG_scroll();
 }

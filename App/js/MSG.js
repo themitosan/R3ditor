@@ -59,7 +59,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 		addLog('error', 'ERROR - Unable to read ' + getFileName(msgFile) + '!');
 		addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + msgFile + '</font>)');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	if (RAW_DATA !== '' && RAW_DATA !== undefined && RAW_DATA !== null){
@@ -79,8 +79,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 			addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
 			addLog('error', err);
 			console.error(err);
-			log_separador();
-			scrollLog();
+			LOG_separator();
+			LOG_scroll();
 		}
 		MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST.slice(0, parseInt(MSG_DECRYPT_LV1_LAST.length - 1));
 		if (RAW_DATA_ARRAY !== null){
@@ -553,7 +553,7 @@ function MSG_COMMAND_ADDTEXT(index, isModify){
 	} else {
 		alert('ERROR: The textbox is empty!');
 		addLog('warn', 'WARNING - The textbox is empty!');
-		scrollLog();
+		LOG_scroll();
 	}
 }
 // Unknown Function F5
@@ -635,7 +635,7 @@ function MSG_COMMAND_INSERTHEXMANUAL(index, isModify){
 	} else {
 		alert('WARN: The textbox is empty!');
 		addLog('warn', 'WARNING - The textbox is empty!');
-		scrollLog();
+		LOG_scroll();
 	}
 }
 /*
@@ -708,10 +708,10 @@ function MSG_SAVE_ON_RDT(msgHex){
 		var RDT_FINAL = RDT_START + N_PONTEIRO + RDT_END;
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');
-			log_separador();
+			LOG_separator();
 			addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
 			addLog('log', 'Folder: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-			log_separador();
+			LOG_separator();
 		} catch(err){
 			var msgError = 'ERROR - Something went wrong while saving - ';
 			addLog('error', msgError + err);
@@ -720,7 +720,7 @@ function MSG_SAVE_ON_RDT(msgHex){
 	} else {
 		addLog('error', 'ERROR - Function list are empty or RDT file was not defined!');
 	}
-	scrollLog();
+	LOG_scroll();
 }
 function MSG_REMOVECOMMAND(comandId, isTxt){
 	MSG_totalComandos--;
@@ -803,5 +803,5 @@ function MSG_applyMSGCommand(mode){
 		document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
 		MSG_startMSGDecrypt_Lv2(newHex);
 	}
-	scrollLog();
+	LOG_scroll();
 }

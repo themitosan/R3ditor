@@ -376,7 +376,7 @@ function INI_CARREGAR_ARQUIVO(file){
 	}
 	INI_displayVarToForm();
 	INI_showMenu(1);
-	scrollLog();
+	LOG_scroll();
 }
 function INI_displayVarToForm(){
 	document.getElementById('INI_lbl_filePath').innerHTML = ORIGINAL_FILENAME;
@@ -858,7 +858,7 @@ function BIO3INI_MAKEFILE(path, mode){
 		'Data03=' + BIO3INI_data_03 + '\n' +
 		'Data10=' + BIO3INI_data_10 + '\n\n';
 	addLog('log', 'Bio3INI - The file was generated sucessfully!');
-	log_separador();
+	LOG_separator();
 	// Saving the file!
 	if (mode === 0){
 		try{
@@ -873,5 +873,5 @@ function BIO3INI_MAKEFILE(path, mode){
 	} else {
 		R3DITOR_SAVE('Bio3.ini', FINAL, 'utf-8', 'ini');
 	}
-	scrollLog();
+	LOG_scroll();
 }
