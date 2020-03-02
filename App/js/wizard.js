@@ -313,7 +313,8 @@ function WZ_makeConfigs(){
 function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
-			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + '\n' + WINDOW_MOVETOLEFT;
+			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + 
+			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage;
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -467,6 +468,9 @@ function WZ_loadFiles(file){
 	} else {
 		RE3SLDE_CANRUN = false;
 	}
+	if (cfgs[13] !== undefined){
+		R3ditor_showFirstBootMessage = JSON.parse(cfgs[13]);
+	}
 	/*
 		Visuals
 	*/
@@ -496,28 +500,10 @@ function WZ_loadFiles(file){
 		R3DITOR_applyUpdate();
 	} else {
 		WZ_APPEND();
-		if (DESIGN_ENABLE_ANIMS === true){
-			$('#img-logo').fadeIn({duration: 2000, queue: false});
-			$('#menu-topo').fadeIn({duration: 200, queue: false});
-			$('#menu-utility').fadeIn({duration: 200, queue: false});
-			$('#menu-settings').fadeIn({duration: 200, queue: false});
-			$('#menu-utility-aba').fadeIn({duration: 200, queue: false});
-			$('#menu-utility-aba-2').fadeIn({duration: 200, queue: false});
-			$('#menu-utility-aba-3').fadeIn({duration: 200, queue: false});
-			$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
-			$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
-			$('#menu-settings').animate({'top': '32px'}, {duration: 100, queue: false});
-			$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
-			$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
-			$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
+		if (R3ditor_showFirstBootMessage === false){
+			WZ_SHOW_INTERFACE();
 		} else {
-			$('#img-logo').css({'display': 'inline'});
-			$('#menu-topo').css({'top': '32px', 'display': 'inline'});
-			$('#menu-settings').css({'display': 'inline','top': '32px'});
-			$('#menu-utility').css({'top': '546px', 'display': 'inline'});
-			$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
-			$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
-			$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
+			WZ_FIRST_BOOT_MESSAGE();
 		}
 
 		$('#RDT-SLD-hold').css({'height': '472px'});
@@ -543,12 +529,66 @@ function WZ_loadFiles(file){
 		checkForUpdates();
 	}
 }
+function WZ_SHOW_INTERFACE(){
+	document.title = APP_NAME;
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#img-logo').fadeIn({duration: 2000, queue: false});
+		$('#menu-topo').fadeIn({duration: 200, queue: false});
+		$('#menu-utility').fadeIn({duration: 200, queue: false});
+		$('#menu-settings').fadeIn({duration: 200, queue: false});
+		$('#menu-utility-aba').fadeIn({duration: 200, queue: false});
+		$('#menu-utility-aba-2').fadeIn({duration: 200, queue: false});
+		$('#menu-utility-aba-3').fadeIn({duration: 200, queue: false});
+		$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
+		$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
+		$('#menu-settings').animate({'top': '32px'}, {duration: 100, queue: false});
+		$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
+	} else {
+		$('#img-logo').css({'display': 'inline'});
+		$('#menu-topo').css({'top': '32px', 'display': 'inline'});
+		$('#menu-settings').css({'display': 'inline','top': '32px'});
+		$('#menu-utility').css({'top': '546px', 'display': 'inline'});
+		$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
+		$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
+		$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
+	}
+}
+function WZ_FIRST_BOOT_MESSAGE(){
+	DESIGN_ENABLE_ANIMS = true;
+	R3ditor_showFirstBootMessage = false;
+	$('#RE2_introEffect').css({'display': 'inline'});
+	setTimeout(function(){
+		WZ_saveConfigs(true);
+		$('#FB_R3ditor_logo').fadeIn(1600);
+	}, 200);
+	setTimeout(function(){
+		document.title = 'Welcome to R3ditor!';
+		$('#R3DITOR_firstMessage').fadeIn({duration: 900, queue: false});
+		$('#R3DITOR_firstMessage').animate({'top': '416px'}, {duration: 4200, queue: false});
+	}, 810);
+	setTimeout(function(){
+		$('#R3DITOR_firstMessage').fadeOut({duration: 600, queue: false});
+	}, 6000);
+	setTimeout(function(){
+		document.title = 'Have Fun!';
+		$('#FB_R3ditor_logo').fadeOut({duration: 1400, queue: false});
+		$('#RE2_introEffect').animate({'background-color': '#000'}, {duration: 1800, queue: false});
+	}, 6600);
+	setTimeout(function(){
+		$('#RE2_introEffect').css({'background-color': '#fff', 'display': 'inline'});
+		$('#RE2_introEffect').fadeOut({duration: 80, queue: false});
+		WZ_SHOW_INTERFACE();
+	}, 8700);
+}
 function WZ_APPEND(){
 	var c = 0;
 	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
 	$('#RDT_door-edit-DispTxt').append(RDT_EDIT_DOOR_TEXT);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
+	document.getElementById('FB_R3ditor_logo').src = APP_PATH + '\\App\\Img\\logo.png';
 	// MIX
 	document.getElementById('MIX_edit_holder_00').innerHTML = MIX_EDIT_00_RELOADSUM;
 	document.getElementById('MIX_edit_holder_01').innerHTML = MIX_EDIT_01_COMBINE;
@@ -695,7 +735,9 @@ function SETTINGS_removeFiles(mode){
 }
 function SETTINGS_RESET(){
 	fs.unlinkSync(APP_PATH + '\\Configs\\configs.r3ditor');
-	fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
+	if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') === true){
+		fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
+	}
 	//
 	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');

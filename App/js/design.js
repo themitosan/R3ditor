@@ -20,7 +20,7 @@ var RE3_LIVE_prevRDT = '';
 var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
-var l_separador = '<div class="menu-separador separador-log-fix"></div>';
+var R3ditor_showFirstBootMessage = true;
 //
 function scrollLog(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
@@ -2374,7 +2374,7 @@ function R3DITORcloseUpdate(){
 	}
 }
 function R3DITORshowUpdateProgress(){
-	document.title = APP_NAME + ' - Updating...';
+	document.title = APP_NAME + ' - Please wait...';
 	$('#R3ditor_update').css({'display': 'none'});
 	$('#progress_window').css({'display': 'block'});
 }

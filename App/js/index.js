@@ -57,7 +57,6 @@ function load(){
 	sessionStorage.clear();
 	console.info(APP_NAME);
 	addLog('log', APP_NAME);
-	document.title = APP_NAME;
 	$('#app_version').html(APP_VERSION);
 	log_separador();
 	//

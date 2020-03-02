@@ -33,6 +33,7 @@ img{
 }
 body{
 	color: #fff;
+    overflow: hidden;
     font-family: 'timesNR', Fallback, times;
     background-image: linear-gradient(to bottom, #020202, #0f0c23);
 }
@@ -55,6 +56,31 @@ input[type='range' i]{
 .fill{
     width: 100%;
     height: 100%;
+}
+.FBOOT_logo{
+    top: 260px;
+    left: 590px;
+    width: 170px;
+    display: none;
+    position: absolute;
+}
+.FBOOT_DIV{
+    top: 410px;
+    left: 584px;
+    display: none;
+    position: absolute;
+    color: #222 !important;
+    text-shadow: 0 0 10px #ffb9b9;
+}
+.fillScreen-white{
+    top: 0px;
+    left: 0px;
+    z-index: 999;
+    width: 1362px;
+    height: 802px;
+    display: none;
+    position: absolute;
+    background-color: #fff;
 }
 .chkbox{
     position: absolute;
