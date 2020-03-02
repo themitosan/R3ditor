@@ -1,7 +1,7 @@
 /*
 	R3ditor - index.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Help me - Por favorzu! '\(UwU )/'
+	Help me - Por favorzu! '\_(UwU )_/'
 */
 var fs;
 var MEM_JS;
@@ -17,7 +17,7 @@ var STATUS = 'Undefined';
 var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
 var RE3SLDE_CANRUN = false;
-var MAIN_removeExec = false;
+var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
@@ -66,7 +66,7 @@ function load(){
 		MEMORY_JS_verifyNodeJsVer();
 	} else {
 		addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
-		MAIN_removeExec = true;
+		MAIN_32BitMode = true;
 	}
 	try{
 		fs = require('fs');
@@ -147,7 +147,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true && BETA === false){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
-	if (fs.existsSync(APP_PATH + '\\R3ditor.exe') === true && MAIN_removeExec === true){
+	if (fs.existsSync(APP_PATH + '\\R3ditor.exe') === true && MAIN_32BitMode === true){
 		fs.unlinkSync(APP_PATH + '\\R3ditor.exe');
 	}
 }

@@ -2342,6 +2342,10 @@ function SETTINGS_showMenu(menuId){
 		$('#SETTINGS-aba-menu-' + c).removeClass('aba-select');
 		c++;
 	}
+	if (MAIN_32BitMode === true){
+		$('#SETTINGS_perfTab').css({'height': '34px'});
+		$('#SETTINGS_RE3_LIVE_PERF_DIV').css({'display': 'none'});
+	}
 	$('#SETTINGS_menu_' + menuId).css({'display': 'block', 'height': '524px'});
 	$('#SETTINGS_content_' + menuId).css({'height': '514px'});
 	$('#SETTINGS-aba-menu-' + menuId).addClass('aba-select');
