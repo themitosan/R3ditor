@@ -255,6 +255,9 @@ function MIX_applyChanges(id, funcType){
 		Item_B = document.getElementById('MIX_01_edit_item_B').value.toLowerCase();
 		Item_C = document.getElementById('MIX_01_edit_item_Result').value.toLowerCase();
 		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_01_edit_item_Quantity').value).toString(16), 2);
+		if (Quanti > 255){
+			Quanti = 250;
+		}
 		MIX_FINAL_HEX = '01' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	// 02: Reloading Tool
@@ -263,6 +266,9 @@ function MIX_applyChanges(id, funcType){
 		Item_B = document.getElementById('MIX_02_edit_item').value.toLowerCase();
 		Item_C = document.getElementById('MIX_02_edit_item_Result').value.toLowerCase();
 		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_02_edit_item_Quantity').value).toString(16), 2);
+		if (Quanti > 255){
+			Quanti = 250;
+		}
 		MIX_FINAL_HEX = '02' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	// 03: Change Bullet Type (H.G. / Magnum)
@@ -286,6 +292,9 @@ function MIX_applyChanges(id, funcType){
 		Item_B = document.getElementById('MIX_05_edit_powderGl_powder').value.toLowerCase();
 		Item_C = document.getElementById('MIX_05_edit_powderGl_newAmmo').value.toLowerCase();
 		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_edit_powderGl_quantity').value).toString(16), 2);
+		if (Quanti > 255){
+			Quanti = 250;
+		}
 		MIX_FINAL_HEX = '05' + Item_A + Item_B + Item_C + Quanti + '000000';
 	}
 	if (funcType === '06'){
@@ -299,11 +308,10 @@ function MIX_applyChanges(id, funcType){
 	MIX_updateList();
 	MIX_showEdit(1);
 }
-function MIX_saveOnExe(){
+function MIX_saveOnFile(){
 	if (MIX_arquivoBruto !== undefined){
 		MIX_Backup();
 		var c = 0;
-		var t = 125;
 		var RE3_FILE_START = MIX_arquivoBruto.slice(0, MIX_fileTypes[MIX_fName][1]);
 		var RE3_FILE_END = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][2], MIX_arquivoBruto.length);
 		var MIX_NEW_DATABASE = '';

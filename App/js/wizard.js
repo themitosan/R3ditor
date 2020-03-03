@@ -595,6 +595,9 @@ function WZ_APPEND(){
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 	document.getElementById('FB_R3ditor_logo').src = APP_PATH + '\\App\\Img\\logo.png';
+	// IEDIT
+	document.getElementById('IEDIT_edit_itemType').innerHTML = IEDIT_HTML_ITEMTYPE;
+	document.getElementById('IEDIT_edit_itemDisplayMode').innerHTML = IEDIT_HTML_DISPLAYMODE;
 	// MIX
 	document.getElementById('MIX_edit_holder_00').innerHTML = MIX_EDIT_00_RELOADSUM;
 	document.getElementById('MIX_edit_holder_01').innerHTML = MIX_EDIT_01_COMBINE;

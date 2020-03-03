@@ -889,7 +889,6 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 		LOG_addLog('warn', 'WARN - ' + msg);
 		console.warn('WARN - ' + msg);
 	}
-	console.log(itemHex);
 	var IT_css = ATTR[atrib][3];
 	// Jill inventory
 	if (person == 0){

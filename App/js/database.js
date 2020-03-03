@@ -1386,6 +1386,7 @@ var MEMJS_HEXPOS = {
 	'RE3_mode_1_goto_titleScreen':  [0xA5C9C0, 0xA5C9C3]
 }
 var MIX_seekPattern = '00021500000000000003150000000000000d15000000000000051600000000000004170000000000';
+var IEDIT_seekPattern = '0000000001010000010f0001010f00010107000101060001';
 var MIX_function_types = {
 	'00': 'Reloading / Sum',
 	'01': 'Combine',
@@ -1395,6 +1396,39 @@ var MIX_function_types = {
 	'05': 'Combine Powder with G. Bullets',
 	'06': 'Add Infinite Ammo / Quantity'
 }
+var IEDIT_itemType = {
+	'00': 'Empty Slot',
+	'01': 'Equipable Weapon',
+	'02': 'Ammo',
+	'03': 'Healing Item',
+	'04': 'Quest / Misc Item A',
+	'05': 'Quest / Misc Item B',
+	'06': 'Ink Ribbon / Reloading Tool / Game Inst.',
+	'07': 'Leftovers A',
+	'08': 'Leftovers B'
+}
+var IEDIT_displayMode = {
+	'00': 'No Display',
+	'01': 'Number in green color',
+	'02': 'Percentage in green color',
+	'03': 'Infinite in green color',
+	'04': 'Transparent',
+	'05': 'Number in red color',
+	'06': 'Percentage in red color',
+	'07': 'Infinite in red color',
+	'09': 'Number in yellow color',
+	'0a': 'Percentage in yellow color',
+	'0b': 'Infinite in yellow color',
+	'0d': 'Number in blue color',
+	'0e': 'Percentage in blue color',
+	'0f': 'Infinite in blue color'
+}
+var IEDIT_fileTypes = {
+	'residentevil3': ['PC EXE', 2448160, 2449232, '.exe'], // PC Version
+	'slus_009.23':   ['PS SLUS', 1186344, 1187416, '.23'], // Playstation
+	'main.dol':      ['GC DOL', 4375520, 4376592, '.dol'], // GameCube
+	'1st_read.bin':  ['DC BIN', 2835856, 2836928, '.BIN']  // Sega Dreamcast
+}
 var MIX_fileTypes = {
 	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'], // PC Version
 	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'], // Playstation Version
@@ -1402,6 +1436,14 @@ var MIX_fileTypes = {
 	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
 }
 var RANGES = {
+	/*
+		IEDIT
+		Item proprieties
+	*/
+	'IEDIT_ITEM_TYPE': 	  [0, 2],
+	'IEDIT_MAX_CAPACITY': [2, 4],
+	'IEDIT_CODE_QUEST':   [4, 6],
+	'IEDIT_DISPLAY_MODE': [6, 8],
 	/*
 		MIX
 		Ingame item combinations

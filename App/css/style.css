@@ -1132,7 +1132,7 @@ input[type='range' i]{
     width: 350px;
 }
 .aba-principal-fix{
-    width: 648px;
+    width: 744px;
 }
 .aba-settings-fix-2{
     top: -44px;
@@ -2479,4 +2479,32 @@ input[type='range' i]{
 }
 .MIX-func-infBullets-bg{
     background-image: linear-gradient(to bottom, #a26e6e, #805370);
+}
+/*
+    IEDIT
+*/
+.IEDIT_lbl_item_sticky{
+    left: 110px;
+    position: sticky;
+}
+.IEDIT_lbl_item_hex_fix{
+    padding-top: 6px;
+}
+.IEDIT_ITEM_heightFix{
+    height: 126px;
+}
+.IEDIT_ITEM_holder{
+    width: 1298px;
+    height: 480px;
+    overflow: auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 6px;
+}
+.IEDIT_edit_stickyFix{
+    position: sticky;
+    left: 854px;
+}
+.IEDIT_edit_select_fix{
+    width: 304px;
 }

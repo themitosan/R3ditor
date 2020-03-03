@@ -363,7 +363,7 @@ function main_closeFileList(){
 */
 function main_menu(anim){
 	main_closeFileList();
-	if (anim !== 8){
+	if (anim !== 8 && anim !== 9){
 		localStorage.clear();
 		sessionStorage.clear();
 	}
@@ -465,6 +465,16 @@ function main_menu(anim){
 		}
 		$('#menu-topo-mix').css({'display': 'inline'});
 		MIX_showMenu(1);
+	}
+	if (anim === 9){ // IEDIT
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		$('#menu-topo-IEDIT').css({'display': 'inline'});
+		IEDIT_showMenu();
 	}
 }
 function RDT_checkBKP(){
@@ -1967,7 +1977,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 		var clipPath   = ITEM[itemHex][9];
 		var leftoffset = ITEM[itemHex][10];
 		var spriteId   = ITEM[itemHex][11];
-		var itemTitle  = ITEM[itemHex][0] + '\nClick to edit this slot';
+		var itemTitle  = '(' + itemHex.toUpperCase() + ') ' + ITEM[itemHex][0] + '\nClick to edit this slot';
 		if (n === 2 || n === 4 || n === 6 || n === 8 || n === 10){
 			leftoffset = parseInt(leftoffset) + 42;
 		}
@@ -1981,6 +1991,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 				var cor;
 				var shad;
 				var remaining = parseInt(quan, 16);
+				var IT_css = ATTR[attr][3];
 				if (ATTR[attr] !== undefined){
 					cor = ATTR[attr][1];
  					shad = ATTR[attr][2];
@@ -1995,7 +2006,7 @@ function RE3_LIVE_RENDER_SLOT(n, itemHx, quan, atribu){
 					remaining = 'Inf.';
 				}
 				document.getElementById('RE3_LIVESTATUS_LBL_ITEM-' + n).innerHTML = remaining;
-				$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': 'inline', 'color': cor, 'text-shadow': shad});
+				$('#RE3_LIVESTATUS_LBL_ITEM-' + n).css({'display': IT_css, 'color': cor, 'text-shadow': shad});
 			}
 		}
 		document.getElementById('RE3_LIVESTATUS_INVENT_SLOT_' + n).title = itemTitle;
@@ -2074,6 +2085,7 @@ function MIX_clearHolders(){
 function MIX_showMenu(menuId){
 	var c = 0;
 	MIX_currentMenu = menuId;
+	$('#img-logo').css({'display': 'none'});
 	while (c < (MIX_totalMenus + 1)){
 		$('#MIX-MENU-' + c).css({'display': 'none'});
 		$('#MIX-aba-menu-' + c).removeClass('aba-select');
@@ -2327,6 +2339,39 @@ function MIX_RENDER_PREVIEW(){
 		document.getElementById('MIX_06_preview_item_b').title = '(' + Item_B.toUpperCase() + ') ' + ITEM[Item_B][0];
 		document.getElementById('MIX_06_preview_item_a').src = APP_PATH + '\\App\\Img\\Items\\' + Item_A + '.png';
 		document.getElementById('MIX_06_preview_item_b').src = APP_PATH + '\\App\\Img\\Items\\' + Item_B + '.png';
+	}
+}
+/*
+	IEDIT
+*/
+function IEDIT_showMenu(){
+	document.title = APP_NAME + ' - IEDIT (Item Editor) - Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0] + ' - File: ' + ORIGINAL_FILENAME;
+	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	$('#menu-IEDIT-editor').css({'display': 'block'});
+	$('#img-logo').css({'display': 'none'});
+	LOG_scroll();
+}
+function IEDIT_showEdit(mode, id, hex){
+	if (mode === 0){
+		var itHex = id.toString(16);
+		if (itHex.length < 2){
+			itHex = '0' + itHex;
+		}
+		document.getElementById('IEDIT_edit_lbl_itemID').innerHTML = id;
+		document.getElementById('IEDIT_edit_lbl_itemName').innerHTML = ITEM[itHex][0];
+		document.getElementById('IEDIT_edit_itemType').value = hex.slice(RANGES['IEDIT_ITEM_TYPE'][0], RANGES['IEDIT_ITEM_TYPE'][1]);
+		document.getElementById('IEDIT_edit_itemQuantity').value = parseInt(hex.slice(RANGES['IEDIT_MAX_CAPACITY'][0], RANGES['IEDIT_MAX_CAPACITY'][1]), 16);
+		document.getElementById('IEDIT_edit_itemCodeQuest').value = hex.slice(RANGES['IEDIT_CODE_QUEST'][0], RANGES['IEDIT_CODE_QUEST'][1]);
+		document.getElementById('IEDIT_edit_itemDisplayMode').value = hex.slice(RANGES['IEDIT_DISPLAY_MODE'][0], RANGES['IEDIT_DISPLAY_MODE'][1]);
+		document.getElementById('IEDIT_editApplyBtn').onclick = function(){
+			IEDIT_applyChanges(id);
+		}
+		//
+		$('#IEDIT-holder').css({'width': '728px'});
+		$('#IEDIT_ITEM_edit').css({'display': 'inline'});
+	} else {
+		$('#IEDIT_ITEM_edit').css({'display': 'none'});
+		$('#IEDIT-holder').css({'width': '1298px'});
 	}
 }
 /*

@@ -17,13 +17,14 @@
 		<script type="text/javascript" src="js/wizard.js"></script>
 		<script type="text/javascript" src="js/index.js"></script>
 		<script type="text/javascript" src="js/update.js"></script>
-		<!-- Modulos -->
-		<script type="text/javascript" src="js/ini.js"></script>
+		<!-- Modules -->
+		<script type="text/javascript" src="js/INI.js"></script>
 		<script type="text/javascript" src="js/SAV.js"></script>
 		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
 		<script type="text/javascript" src="js/MIX.js"></script>
+		<script type="text/javascript" src="js/IEDIT.js"></script>
 		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
@@ -44,6 +45,7 @@
 			<input type="button" class="botao-menu" value="RDT Editor (.RDT, .ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT / ARD) files" onclick="main_menu(3);">
 			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
+			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 		</div>
 		<!-- Settings Tab -->
 		<input type="button" id="menu-utility-aba-3" class="aba aba-left-fix aba-select aba-utility-fix-2 aba-settings-fix-2" value="Settings">
@@ -151,13 +153,54 @@
 		<!-- Menu MIX -->
 		<div class="menu-topo none" id="menu-topo-mix">
 			<input type="button" class="botao-menu" title="Click here to open MIX file" onclick="triggerLoad(17);" value="Open MIX">
-			<input type="button" class="botao-menu botao-aplicar none" id="MIX_btn_SAVE_EXE" title="Click here to save your changes!" value="Save Changes!" onclick="MIX_saveOnExe();">
+			<input type="button" class="botao-menu botao-aplicar none" id="MIX_btn_SAVE_EXE" title="Click here to save your changes!" value="Save Changes!" onclick="MIX_saveOnFile();">
 			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
 		</div>
-
+		<!-- Menu IEDIT -->
+		<div class="menu-topo none" id="menu-topo-IEDIT">
+			<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(18);" value="Open File">
+			<input type="button" class="botao-menu botao-aplicar none" id="IEDIT_btn_SAVE" title="Click here to save your changes!" value="Save Changes!" onclick="IEDIT_saveOnFile();">
+			<!-- Right -->
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+		</div>
 		<!-- CONTENT -->
-
+		<!-- FORM: IEDIT Item Editor -->
+		<div class="none" id="menu-IEDIT-editor" onclick="main_closeFileList();">
+			<input type="button" id="IEDIT-aba-menu-1" class="aba aba-left-fix aba-select" value="Item Editor">
+			<div class="menu">
+				<div class="menu-general-content">
+					<center><font class="titulo">Item Definitions</font></center>
+					<div class="IEDIT_ITEM_holder" id="IEDIT-holder">
+						<!-- IEDIT goes here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="IEDIT_ITEM_edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Item ID: <font id="IEDIT_edit_lbl_itemID">??</font><br><font id="IEDIT_edit_lbl_itemName">??</font>
+						</center>
+						<div class="menu-separador"></div>
+						Type: 
+						<select id="IEDIT_edit_itemType" class="item-select-mod IEDIT_edit_stickyFix no-transform-text IEDIT_edit_select_fix">
+							<!-- Item type goes here -->
+						</select><br>
+						Display mode: 
+						<select id="IEDIT_edit_itemDisplayMode" class="item-select-mod IEDIT_edit_stickyFix no-transform-text IEDIT_edit_select_fix">
+							<!-- Display mode goes here -->
+						</select><br>
+						Max Quantity: 
+						<input type="number" min="0" max="255" step="1" maxlength="3" class="item-select-mod IEDIT_edit_stickyFix RDT-valueEdit-fix" id="IEDIT_edit_itemQuantity"><br>
+						Code Quest: 
+						<input type="text" maxlength="2" class="item-select-mod IEDIT_edit_stickyFix RDT-valueEdit-fix" id="IEDIT_edit_itemCodeQuest">
+						<div class="RDT-applyBtn-div">
+							<input type="button" title="Click here to cancel" onclick="IEDIT_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" title="Click here to apply!" id="IEDIT_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- FORM: MIX Editor -->
 		<div class="none" id="menu-mix-editor" onclick="main_closeFileList();">
 			<input type="button" id="MIX-aba-menu-1" onclick="MIX_showMenu(1);" class="aba aba-left-fix aba-select" value="Reload / Sum">
@@ -172,7 +215,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Reload / Sum - Total: <font id="MIX_LBL_TOTAL-1">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-1">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-0">
@@ -182,7 +225,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_00">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-0" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_00">
@@ -200,8 +243,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-00" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" title="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" title="Click here to apply!" id="MIX_applyBtn-00" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -211,7 +254,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Combine - Total: <font id="MIX_LBL_TOTAL-2">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-2">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-1">
@@ -221,7 +264,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_01">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-1" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_01">
@@ -241,8 +284,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-01" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-01" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -252,7 +295,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Reloading Tool - Total: <font id="MIX_LBL_TOTAL-3">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-3">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-2">
@@ -262,7 +305,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_02">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-2" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_02">
@@ -282,8 +325,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-02" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-02" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -293,7 +336,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Change Bullet Type (H.G. / Magnum) - Total: <font id="MIX_LBL_TOTAL-4">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-4">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-3">
@@ -303,7 +346,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_03">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-3" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_03">
@@ -323,8 +366,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-03" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-03" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -334,7 +377,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Change Bullet Type (G. Rounds) - Total: <font id="MIX_LBL_TOTAL-5">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-5">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-4">
@@ -344,7 +387,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_04">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-4" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_04">
@@ -365,8 +408,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-04" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-04" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -376,7 +419,7 @@
 				<div class="menu-general-content" id="MIX-MENU-6">
 					<center><font class="titulo">Gun Powder + G. Rounds - Total: <font id="MIX_LBL_TOTAL-6">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-6">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-5">
@@ -386,7 +429,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_05">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-5" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_05">
@@ -406,8 +449,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-05" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-05" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -417,7 +460,7 @@
 				<div class="menu-general-content">
 					<center><font class="titulo">Infinite Ammo - Total: <font id="MIX_LBL_TOTAL-7">??</font></font></center>
 					<div class="MIX-combine-holder" id="MIX-holder-7">
-						<!-- Mix Goes Here -->
+						<!-- MIX Goes Here -->
 					</div>
 					<!-- Edit -->
 					<div class="RDT-Item-Edit none" id="MIX-item-edit-6">
@@ -427,7 +470,7 @@
 						</center>
 						Function: 
 						<select onchange="MIX_RENDER_PREVIEW();" class="item-select-mod no-transform-text MIX_select_fix-2" id="MIX_edit_function_06">
-							<!-- Mix Functions Goes Here -->
+							<!-- MIX Functions Goes Here -->
 						</select>
 						<input type="button" class="botao-menu" value="Convert!" id="MIX_btn_convertMix-6" title="Click here to convert this combination!"><br>
 						<div id="MIX_edit_holder_06">
@@ -445,8 +488,8 @@
 							</center>
 						</div>
 						<div class="RDT-applyBtn-div">
-							<input type="button" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" id="MIX_applyBtn-06" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-06" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
 					</div>
 				</div>
@@ -1684,6 +1727,7 @@
 			<input type="file" onchange="setLoadFile(15);" id="loadOBJPatcherFile" accept=".obj"/>
 			<input type="file" onchange="setLoadFile(16);" id="loadRofsFile" accept=".dat"/>
 			<input type="file" onchange="setLoadFile(17);" id="loadMixFile" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(18);" id="loadIEDITFile" accept=".exe, .23, .dol, .BIN"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
