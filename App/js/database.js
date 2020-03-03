@@ -603,7 +603,7 @@ var RDT_EMDNAME = {
 	'21': ['Crow'],
 	'22': ['Hunter'],
 	'23': ['Brain Sucker 1'],
-	'24': ['Frog hunter'],
+	'24': ['Hunter Gamma'],
 	'25': ['Spider'],
 	'26': ['Unknown Enemy 1'],
 	'27': ['Brain Sucker Minion'],
