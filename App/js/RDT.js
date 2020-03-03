@@ -650,6 +650,12 @@ function RDT_copyPasteEnemyNpcInfo(mode){
 		document.getElementById('RDT_enemyNPC-edit-EnF').value = RDT_TEMP_ENEMYNPC_ENEMYFLAG.toUpperCase();
 	}
 }
+function RDT_EMD_USEPLAYERPOS(){
+	document.getElementById('RDT_enemyNPC-edit-X').value = REALTIME_X_Pos;
+	document.getElementById('RDT_enemyNPC-edit-Y').value = REALTIME_Y_Pos;
+	document.getElementById('RDT_enemyNPC-edit-Z').value = REALTIME_Z_Pos;
+	document.getElementById('RDT_enemyNPC-edit-R').value = REALTIME_R_Pos;
+}
 function RDT_ENEMYNPC_APPLY(id){
 	var reason;
 	var canCompile = true;

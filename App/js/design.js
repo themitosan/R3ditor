@@ -1769,6 +1769,7 @@ function R3ditor_enableLiveStatusButton(){
 		$('#MSG_LIVESTATUS').css({'display': 'inline'});
 		$('#SAV_LIVESTATUS').css({'display': 'inline'});
 		// Another Buttons
+		$('#RDT_EMD_usePlayerPosBtn').css({'display': 'inline'});
 		$('#RDT_door_usePlayerPos').css({'display': 'inline'});
 		$('#RDT_useJillPos_Item').css({'display': 'inline'});
 	}
@@ -1781,6 +1782,7 @@ function R3ditor_disableLiveStatusButton(){
 	$('#MSG_LIVESTATUS').css({'display': 'none'});
 	$('#SAV_LIVESTATUS').css({'display': 'none'});
 	// Another Buttons
+	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
 	$('#RDT_door_usePlayerPos').css({'display': 'none'});
 	$('#RDT_useJillPos_Item').css({'display': 'none'});
 	RDT_enableDisableDoorUsePlayerPos(1);
