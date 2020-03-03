@@ -304,8 +304,7 @@ function MIX_applyChanges(id, funcType){
 	}
 	// Finish
 	localStorage.setItem('MIX_ID_' + id, MIX_FINAL_HEX);
-	$('#MIX_btn_SAVE_EXE').css({'display': 'inline'});
-	MIX_updateList();
+	MIX_saveOnFile();
 	MIX_showEdit(1);
 }
 function MIX_saveOnFile(){
@@ -325,7 +324,7 @@ function MIX_saveOnFile(){
 			LOG_addLog('log', 'MIX - The file was saved successfull!');
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
-			$('#MIX_btn_SAVE_EXE').css({'display': 'none'});
+			MIX_updateList();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to save MIX file!');
 			LOG_addLog('error', 'INFO: ' + err);

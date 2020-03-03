@@ -75,8 +75,7 @@ function IEDIT_applyChanges(id){
 	var IEDIT_NEW_HEX = newType + newCapacity + newCodeQuest + newDisplayMode;
 	localStorage.setItem('IEDIT_ITEM_' + id, IEDIT_NEW_HEX);
 	IEDIT_showEdit(1);
-	IEDIT_updateList();
-	$('#IEDIT_btn_SAVE').css({'display': 'inline'});
+	IEDIT_saveOnFile();
 }
 function IEDIT_saveOnFile(){
 	if (IEDIT_arquivoBruto !== undefined){
@@ -95,7 +94,7 @@ function IEDIT_saveOnFile(){
 			LOG_addLog('log', 'IEDIT - The file was saved successfull!');
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
-			$('#IEDIT_btn_SAVE').css({'display': 'none'});
+			IEDIT_updateList();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to save IEDIT file!');
 			LOG_addLog('error', 'INFO: ' + err);

@@ -675,6 +675,7 @@ var RDT_EMDPOS = {
 	'40': ['Normal 5'],
 	'51': ['Lying down moving head'],
 	'60': ['Normal 6'],
+	'80': ['Unknown Pose'],
 	'84': ['Getting Up 4'],
 	'86': ['Slow on fire'],
 	'87': ['Lying down on fire'],

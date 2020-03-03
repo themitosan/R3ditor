@@ -21,7 +21,9 @@ var SETTINGS_totalMenus = 3;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
 var R3ditor_showFirstBootMessage = true;
-//
+/*
+	LOG Functions
+*/
 function LOG_scroll(){
 	document.getElementById('log-programa').scrollTop = document.getElementById('log-programa').scrollHeight;
 }
@@ -2073,7 +2075,7 @@ function INI_showMenu(menuId){
 	$('#menu-INI').css({'display': 'inline'});
 }
 /*
-	Mix Editor
+	MIX Editor
 */
 function MIX_clearHolders(){
 	var c = 1;
