@@ -59,18 +59,26 @@ input[type='range' i]{
 }
 .FBOOT_logo{
     top: 260px;
-    left: 590px;
+    left: 588px;
     width: 170px;
     display: none;
     position: absolute;
 }
 .FBOOT_DIV{
     top: 410px;
-    left: 584px;
+    left: 368px;
     display: none;
     position: absolute;
     color: #222 !important;
     text-shadow: 0 0 10px #ffb9b9;
+}
+.FBOOT_LEGAL_MESSAGE_CSS{
+    top: 680px;
+    left: 360px;
+    color: #000;
+    display: none;
+    position: absolute;
+    text-shadow: 0 0 20px #f00;
 }
 .fillScreen-white{
     top: 0px;
