@@ -2211,7 +2211,7 @@ function MIX_showEdit(mode, combId, combHex){
 		MIX_RENDER_PREVIEW();
 	} else {
 		var c = 0;
-		while(c < 7){
+		while(c < 8){
 			$('#MIX-item-edit-' + c).css({'display': 'none'});
 			$('#MIX-holder-' + c).css({'width': '1294px'});
 			c++;
