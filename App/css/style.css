@@ -150,7 +150,7 @@ input[type='range' i]{
     filter: blur(200px);
 }
 .about-tks{
-    width: 62%;
+    width: 800px;
     height: 108px;
     overflow: auto;
     border-radius: 6px;
