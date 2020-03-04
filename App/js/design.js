@@ -2381,6 +2381,14 @@ function IEDIT_showEdit(mode, id, hex){
 /*
 	Settings Menu
 */
+function UTILS_toggleChkBox(tag){
+	var checked = document.getElementById(tag).checked;
+	if (checked === true){
+		document.getElementById(tag).checked = false;
+	} else {
+		document.getElementById(tag).checked = true;
+	}
+}
 function SETTINGS_showMenu(menuId){
 	var c = 0;
 	while (c < parseInt(SETTINGS_totalMenus + 1)){
