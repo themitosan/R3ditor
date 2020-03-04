@@ -307,9 +307,9 @@ var ATTR = {
 	'05': ['Remaining ammo in red',			            '#840000', '0 0 2px #310000', '-webkit-box'],
 	'06': ['% remaining in red', 			            '#840000', '0 0 2px #310000', '-webkit-box'],
 	'07': ['Inf. ammo in red', 				            '#840000', '0 0 2px #310000', '-webkit-box'],
-	'09': ['Remaining ammo in yellow', 		            '#fff0a3', '0 0 2px #b4b194', '-webkit-box'],
-	'0a': ['%. remaining in yellow',		            '#fff0a3', '0 0 2px #b4b194', '-webkit-box'],
-	'0b': ['Inf. ammo in yellow', 			            '#fff0a3', '0 0 2px #b4b194', '-webkit-box'],
+	'09': ['Remaining ammo in yellow', 		            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
+	'0a': ['%. remaining in yellow',		            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
+	'0b': ['Inf. ammo in yellow', 			            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
 	'0d': ['Remaining ammo in blue', 		            '#9393ff', '0 0 2px #004242', '-webkit-box'],
 	'0e': ['% remaining in blue', 			            '#9393ff', '0 0 2px #004242', '-webkit-box'],
 	'0f': ['Inf. ammo in blue', 	 		   			'#9393ff', '0 0 2px #004242', '-webkit-box'],
@@ -319,7 +319,7 @@ var ATTR = {
 }
 // Segunda variavel
 var VOID = {
-	'00': 'OK!' // Condição normal
+	'00': 'OK!'
 }
 // AKA. STAGE
 var CIDADE = {
@@ -1380,11 +1380,18 @@ var MEMJS_HEXPOS = {
 	'RE3_mode_1_HP': 				[0xA5CE00, 0xA5CE01],
 	// Current Weapon
 	'RE3_mode_1_currentWeapon': 	[0xA623CD],
+	// Current Player
+	'RE3_mode_1_currentPlayer': 	[0x6FA402],
 	/*
 		Title Screen
 		Set 0xA5C9C0 to 28 and 0xA5C9C3 to 00 make the game go to title screen
 	*/
 	'RE3_mode_1_goto_titleScreen':  [0xA5C9C0, 0xA5C9C3]
+}
+var RE3_playerList = {
+	'00': 'No player detected',
+	'01': 'Jill Valentine',
+	'02': 'Carlos Oliveira'
 }
 var MIX_seekPattern = '00021500000000000003150000000000000d15000000000000051600000000000004170000000000';
 var IEDIT_seekPattern = '0000000001010000010f0001010f00010107000101060001';
@@ -1436,6 +1443,37 @@ var MIX_fileTypes = {
 	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol'], // GameCube Version
 	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
 }
+var UTILS_REMOVE_CHARS = [
+	',',
+	'.',
+	';',
+	'~',
+	'^',
+	'´',
+	'`',
+	'_',
+	'-',
+	'+',
+	'-',
+	'*',
+	'%',
+	'$',
+	'#',
+	'!',
+	'¨',
+	'&',
+	'(',
+	')',
+	'[',
+	']',
+	'?',
+	'º',
+	'{',
+	'}',
+	'=',
+	'§',
+	'º'
+];
 var RANGES = {
 	/*
 		IEDIT

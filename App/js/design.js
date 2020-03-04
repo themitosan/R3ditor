@@ -32,6 +32,26 @@ function LOG_separator(){
 	LOG_scroll();
 }
 /*
+	Utils
+*/
+function UTILS_toggleChkBox(tag){
+	var checked = document.getElementById(tag).checked;
+	if (checked === true){
+		document.getElementById(tag).checked = false;
+	} else {
+		document.getElementById(tag).checked = true;
+	}
+}
+function UTILS_removeMiscChars(str){
+	var c = 0;
+	var newChar = '';
+	while(c < UTILS_REMOVE_CHARS.length){
+		newChar = str.replace(UTILS_REMOVE_CHARS[c], '');
+		c++;
+	}
+	return newChar;
+}
+/*
 	Filelist
 */
 function FILELIST_clearTextBox(){
@@ -39,7 +59,7 @@ function FILELIST_clearTextBox(){
 }
 function FILELIST_triggerSearchBox(){
 	if (main_currentMenu === 3){
-		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase().replace('R', '');
+		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = UTILS_removeMiscChars(document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase()).replace(new RegExp('R', 'gi'), '');
 		var searchQuery = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase();
 		if (searchQuery !== '' && searchQuery.length === 3){
 			var searchResult = document.getElementById('RDT_file_' + fileList_gameMode + '_R' + searchQuery);
@@ -54,7 +74,6 @@ function FILELIST_triggerSearchBox(){
 			} else {
 				LOG_addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
 			}
-			LOG_scroll();
 		} else {
 			if (fileList_gameMode === 'DATA_E'){
 				main_renderFileList(3, 2);
@@ -63,6 +82,7 @@ function FILELIST_triggerSearchBox(){
 			}
 		}
 	}
+	LOG_scroll();
 }
 function main_renderFileList(id, mode){
 	var c = 0;
@@ -1878,6 +1898,7 @@ function RE3_LIVE_RENDER(){
 		}
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
+		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentPlayer').innerHTML = RE3_playerList[REALTIME_CurrentPlayer];
 		document.getElementById('RE3_LIVESTATUS_lbl_pHP').innerHTML = processBIO3HP(REALTIME_CurrentHP)[0] + ' (<font class="user-can-select">' + processBIO3HP(REALTIME_CurrentHP)[2].toUpperCase() + '</font>)';
 		RE3_LIVE_RENDER_INVENT();
 	}
@@ -2381,14 +2402,6 @@ function IEDIT_showEdit(mode, id, hex){
 /*
 	Settings Menu
 */
-function UTILS_toggleChkBox(tag){
-	var checked = document.getElementById(tag).checked;
-	if (checked === true){
-		document.getElementById(tag).checked = false;
-	} else {
-		document.getElementById(tag).checked = true;
-	}
-}
 function SETTINGS_showMenu(menuId){
 	var c = 0;
 	while (c < parseInt(SETTINGS_totalMenus + 1)){
