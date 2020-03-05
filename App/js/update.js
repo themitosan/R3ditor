@@ -111,7 +111,16 @@ function R3DITOR_update_0(){
 	clearInterval(timer);
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
 		R3DITOR_movePercent(0, 20, 'Extracting Package...');
-		runExternalSoftware(APP_PATH + '\\App\\tools\\7za.exe', ['x', APP_PATH + '\\Update\\master.zip', '-o' + APP_PATH + '\\Update\\Extract', '-aoa']);
+		try{
+			if (MAIN_32BitMode === false){
+				runExternalSoftware(APP_PATH + '\\App\\tools\\7z\\64\\7za.exe', ['x', APP_PATH + '\\Update\\master.zip', '-o' + APP_PATH + '\\Update\\Extract', '-aoa']);
+			} else {
+				runExternalSoftware(APP_PATH + '\\App\\tools\\7z\\32\\7z.exe', ['x', APP_PATH + '\\Update\\master.zip', '-o' + APP_PATH + '\\Update\\Extract', '-aoa']);
+			}
+		} catch (err){
+			LOG_addLog('error', 'ERROR - Something went wrong while extracting the package!');
+			LOG_addLog('error', 'ERROR - Details: ' + err);
+		}
 		var timer = setInterval(function(){
 			if (EXTERNAL_APP_RUNNING === false){
 				clearInterval(timer);
@@ -121,9 +130,9 @@ function R3DITOR_update_0(){
 		}, 50);
 	} else {
 		LOG_addLog('error', 'ERROR: Something went wrong! - The download file was not found!');
-		LOG_scroll();
 		R3DITOR_applyUpdate();
 	}
+	LOG_scroll();
 }
 function R3DITOR_update_1(){
 	R3DITOR_movePercent(0, 26, 'Removing zip file...');

@@ -147,9 +147,6 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true && BETA === false){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
-	if (fs.existsSync(APP_PATH + '\\R3ditor.exe') === true && MAIN_32BitMode === true){
-		fs.unlinkSync(APP_PATH + '\\R3ditor.exe');
-	}
 }
 /*
 	Internal Log

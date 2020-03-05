@@ -1454,7 +1454,7 @@ function RDT_renderItens(index, hex){
 			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-item-lbl-fix">' + 
 			r.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
 			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc RDT_ITEM_MISC_FIX"><br><br><br>Item flag: ' + 
-			iFlag.toUpperCase() +  '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
+			iFlag.toUpperCase() + '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
 		$('#RDT-item-list').append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = 'RDT - ERROR: Unable to render item ' + id.toUpperCase() + ' - ' + msg;
