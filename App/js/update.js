@@ -90,7 +90,9 @@ function R3DITOR_applyUpdate(){
 			if (DOWNLOAD_COMPLETE === true){
 				clearInterval(timer);
 				R3DITOR_movePercent(0, 15, 'Download Complete!');
-				R3DITOR_update_0();
+				setTimeout(function(){
+					R3DITOR_update_0();
+				}, 100);
 			}
 		}, 50);
 	} else {
