@@ -53,6 +53,7 @@ function reload(){
 	location.reload();
 }
 function load(){
+	alert('HEY - IT\'S WORKING HAHAHAHA!');
 	localStorage.clear();
 	sessionStorage.clear();
 	console.info(APP_NAME);
