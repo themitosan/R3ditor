@@ -23,8 +23,17 @@ function PATCHER_createPatch(executable){
 					  '\nPlatform: ' + PATCHER_platform + '\n\nR3_VER = ' + APP_VERSION + '\nR3_DAT = ' + currentTime() + '\nR3_PLAT = ' + 
 					  PATCHER_platform + '\nR3_MIX = ' + btoa(MIX_Database) + '\nR3_IEDIT = ' + btoa(IEDIT_Database) + 
 					  '\nR3_WIP = WIP! ( Sorry =P )';
-	R3DITOR_SAVE('Patch_' + currentTime() + '_' + PATCHER_platform, PATCH_FILE, 'utf-8', 'r3exepatch');
-	reload();
+	var newFilePath = 'Patch_' + currentTime() + '_' + PATCHER_platform;
+	R3DITOR_SAVE(newFilePath, PATCH_FILE, 'utf-8', 'r3exepatch');
+	PATCHER_patchDecompiled = undefined;
+	PATCHER_arquivoBruto = undefined;
+	PATCHER_platform = undefined;
+	IEDIT_Database = undefined;
+	MIX_Database = undefined;
+	LOG_separator();
+	LOG_addLog('log', 'PATCHER - Patch created successfully!');
+	LOG_addLog('log', 'PATCHER - Path: <font class="user-can-select">' + newFilePath + '.r3exepatch</font>');
+	LOG_scroll();
 }
 function PATCHER_loadPatch(patchFile){
 	PATCHER_patchDecompiled = [];
