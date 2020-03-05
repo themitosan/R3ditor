@@ -1314,6 +1314,7 @@ function RDT_readItens(){
 	RDT_ItensArray = [];
 	RDT_totalItensGeral = 0;
 	$('#RDT-item-list').empty();
+	RDT_generateItemIndexRaw('02210000');
 	RDT_generateItemIndexRaw('02310900');
 	RDT_generateItemIndexRaw('02318000');
 	RDT_generateItemIndexRaw('02310800');
@@ -1399,10 +1400,10 @@ function RDT_renderItens(index, hex){
 		modelId = hex.slice(RANGES['RDT_item-0-modelID'][0],     RANGES['RDT_item-0-modelID'][1]);
 		mp 		= hex.slice(RANGES['RDT_item-0-itemMP'][0],      RANGES['RDT_item-0-itemMP'][1]);
 		hexComp = '<font title="Header">' + header.toUpperCase() + '</font> <font title="Identifier">' + ident.toUpperCase() + '</font> ' + 
-				  localStorage.getItem("RDT_Item-" + index).slice(4, 12).toUpperCase() + ' <font title="X pos.">' +  x.toUpperCase() + '</font> <font title="Y pos.">' 
+				  localStorage.getItem('RDT_Item-' + index).slice(4, 12).toUpperCase() + ' <font title="X pos.">' +  x.toUpperCase() + '</font> <font title="Y pos.">' 
 				  + y.toUpperCase() + '</font> <font title="Z pos.">' + z.toUpperCase() + '</font> <font title="R pos.">' + r.toUpperCase() + '</font> <font title="Item Hex">' + id.toUpperCase() + 
-				  '</font> ' + localStorage.getItem("RDT_Item-" + index).slice(30, 32).toUpperCase() + ' <font title="Quantity">' + quant.toUpperCase() + '</font> ' + 
-				  localStorage.getItem("RDT_Item-" + index).slice(34, 38).toUpperCase() + ' <font title="Item flag">' + iFlag.toUpperCase() + '</font> <font title="Model ID">' + 
+				  '</font> ' + localStorage.getItem('RDT_Item-' + index).slice(30, 32).toUpperCase() + ' <font title="Quantity">' + quant.toUpperCase() + '</font> ' + 
+				  localStorage.getItem('RDT_Item-' + index).slice(34, 38).toUpperCase() + ' <font title="Item flag">' + iFlag.toUpperCase() + '</font> <font title="Model ID">' + 
 				  modelId.toUpperCase() + '</font> <font title="Animation">' + mp.toUpperCase() + '</font>';
 	}
 	if (header === '68'){
@@ -1450,10 +1451,10 @@ function RDT_renderItens(index, hex){
 		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': ' + convert + 
 			' (Hex: <font title="' + convert + '">' + id.toUpperCase() + '</font>)<input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editItemBtn_' + index + '" value="Modify" onclick="RDT_selectPoint(' + index + ');' + 
 			'RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>Quantity: ' + parseInt(quant, 16) + '<br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
-			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-item-lbl-fix">' + r.toUpperCase() + '</font><br>' + 
-			'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
-			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc" style="left: 220px;margin-top: -70px;"><br><br><br>Item flag: ' + iFlag.toUpperCase() +  '</div><div class="menu-separador">' + 
-			'</div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
+			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-item-lbl-fix">' + 
+			r.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
+			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc RDT_ITEM_MISC_FIX"><br><br><br>Item flag: ' + 
+			iFlag.toUpperCase() +  '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
 		$('#RDT-item-list').append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = 'RDT - ERROR: Unable to render item ' + id.toUpperCase() + ' - ' + msg;

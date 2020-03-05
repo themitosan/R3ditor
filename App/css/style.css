@@ -1135,6 +1135,17 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #737373, #545454);
     animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
 }
+.menu-utility-patcher-main{
+    top: 70px;
+    width: 200px;
+    display: none;
+}
+.menu-utility-patcher-tab{
+    top: 40px;
+    display: none;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #737373, #545454);
+}
 .aba-settings-fix{
     left: 970px;
     width: 350px;
@@ -1153,6 +1164,10 @@ input[type='range' i]{
     cursor: unset !important;
     background-image: linear-gradient(to bottom, #737373, #545454);
     animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
+}
+.RDT_ITEM_MISC_FIX{
+    left: 230px !important;
+    margin-top: -70px !important;
 }
 .RDT_editEnemyNPC-misc{
     top: 128px;

@@ -26,6 +26,7 @@
 		<script type="text/javascript" src="js/MIX.js"></script>
 		<script type="text/javascript" src="js/IEDIT.js"></script>
 		<script type="text/javascript" src="js/utils.js"></script>
+		<script type="text/javascript" src="js/PATCHER.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
@@ -62,6 +63,12 @@
 			<input type="button" class="botao-menu right" title="Check if there is a new version of R3ditor" value="Check for updates" onclick="checkForUpdates();">
 			<input type="button" class="botao-menu right" title="Edit R3ditor Settings" value="Settings" onclick="main_menu(7);">
 		</div>
+		<!-- Patcher Menu -->
+		<input type="button" id="menu-utility-aba-4" class="aba aba-left-fix aba-select menu-utility-patcher-tab" value="Patcher">
+		<div class="menu-topo menu-utility-patcher-main" id="mainMenu-patcher-div">
+			<input type="button" class="botao-menu" value="Create Patch" title="Click here to create a patch for RE3!" onclick="WIP();">
+			<input type="button" class="botao-menu" value="Apply Patch" title="Click here to apply a patch on RE3!" onclick="WIP();">
+		</div>
 		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
@@ -73,9 +80,6 @@
 			<input type="button" class="botao-menu botao-aplicar espaco-left right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 			<input type="button" class="botao-menu right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
 			<input type="button" class="botao-menu right none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
-			<!-- (SET FOR FUTURE) WIP -->
-			<input type="button" class="botao-menu right none" title="Apply a patch generated with R3ditor to apply in the game!" value="Apply Patch" onclick="WIP();">
-			<input type="button" class="botao-menu right none" title="Create a patch to apply in the game!" value="Create Patch" onclick="WIP();">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
@@ -85,6 +89,9 @@
 			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Run the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
 			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Run the original game in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
+		<!-- 
+			Tools menu
+		-->
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
 			<input type="button" class="botao-menu" title="Click here to open RDT" value="Open RDT" onclick="triggerLoad(6);">
@@ -1337,7 +1344,7 @@
 					<div id="RDT-item-edit-form">
 						<div id="RDT-edit-item-select" class="none">
 							Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
-							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-Quant" placeholder="15" value="">
+							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-Quant" placeholder="15">
 						</div>
 						<div id="RDT-edit-file-select" class="none">
 							File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
@@ -1346,10 +1353,10 @@
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
 						<input type="button" title="Click here to edit the XYZR Position" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
-						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos" id="RDT_item-edit-X">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos" id="RDT_item-edit-Y">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos" id="RDT_item-edit-Z">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos" id="RDT_item-edit-R">0000</font></div>
+						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-X">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Y">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Z">0000</font></div><br>
+						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-R">0000</font></div>
 						<div class="menu-separador"></div>
 						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
 						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-MI" placeholder="00" value=""></div>

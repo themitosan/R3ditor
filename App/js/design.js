@@ -395,12 +395,14 @@ function main_menu(anim){
 		reload();
 	} else {
 		R3ditor_tool_selected = true;
-		$('#menu-utility-aba-3').css({'display': 'none'});
-		$('#menu-utility-aba-2').css({'display': 'none'});
-		$('#menu-utility-aba').css({'display': 'none'});
-		$('#menu-settings').css({'display': 'none'});
-		$('#menu-utility').css({'display': 'none'});
 		$('#menu-topo').css({'display': 'none'});
+		$('#menu-utility').css({'display': 'none'});
+		$('#menu-settings').css({'display': 'none'});
+		$('#menu-utility-aba').css({'display': 'none'});
+		$('#menu-utility-aba-2').css({'display': 'none'});
+		$('#menu-utility-aba-3').css({'display': 'none'});
+		$('#menu-utility-aba-4').css({'display': 'none'});
+		$('#mainMenu-patcher-div').css({'display': 'none'});
 	}
 	if (anim === 1){ // Save
 		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});

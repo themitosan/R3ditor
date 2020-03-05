@@ -539,20 +539,26 @@ function WZ_SHOW_INTERFACE(){
 		$('#menu-utility-aba').fadeIn({duration: 200, queue: false});
 		$('#menu-utility-aba-2').fadeIn({duration: 200, queue: false});
 		$('#menu-utility-aba-3').fadeIn({duration: 200, queue: false});
+		$('#menu-utility-aba-4').fadeIn({duration: 200, queue: false});
+		$('#mainMenu-patcher-div').fadeIn({duration: 200, queue: false});
 		$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
 		$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
 		$('#menu-settings').animate({'top': '32px'}, {duration: 100, queue: false});
 		$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-4').animate({'top': '26px'}, {duration: 140, queue: false});
 		$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
 		$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
+		$('#mainMenu-patcher-div').animate({'top': '102px'}, {duration: 100, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'inline'});
 		$('#menu-topo').css({'top': '32px', 'display': 'inline'});
 		$('#menu-settings').css({'display': 'inline','top': '32px'});
 		$('#menu-utility').css({'top': '546px', 'display': 'inline'});
 		$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
+		$('#menu-utility-aba-4').css({'top': '26px', 'display': 'inline'});
 		$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
 		$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
+		$('#mainMenu-patcher-div').css({'top': '102px', 'display': 'inline'});
 	}
 }
 function WZ_FIRST_BOOT_MESSAGE(){
