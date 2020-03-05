@@ -69,7 +69,7 @@ function load(){
 		MAIN_32BitMode = true;
 	}
 	try{
-		fs = require('fs');
+		fs = require('fs-extra');
 		APP_PATH = process.cwd();
 		R3DITOR_CHECK_FILES_AND_DIRS();
 		WZ_verifyConfigFile();

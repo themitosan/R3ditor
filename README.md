@@ -85,9 +85,10 @@ External JS Plugins:
 
 NW.js Plugins:
 - <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> by <a href="https://github.com/Rob--" target="_blank"> Rob--</a>
+- <a href="https://github.com/jprichardson/node-fs-extra" target="_blank">fs-extra</a> by <a href="https://github.com/jprichardson" target="_blank"> jprichardson</a>
 
 These files can be found in "App/tools/":
-- <a href="https://www.7-zip.org/" target="_blank">7za.dll, 7zxa.dll and 7za.exe (7zip)</a>
+- <a href="https://www.7-zip.org/" target="_blank">7z.exe, 7-zip.dll, 7za.dll, 7zxa.dll and 7za.exe (7zip)</a>
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
 - <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 

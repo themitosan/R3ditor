@@ -151,28 +151,14 @@ function R3DITOR_update_1(){
 function R3DITOR_update_2(){
 	if (fs.existsSync(APP_PATH + '\\App') === false){
 		fs.mkdirSync(APP_PATH + '\\App');
-		R3DITOR_movePercent(0, 50, 'Moving the new files...');
-		runExternalSoftware('cmd', ['/C', 'xcopy', APP_PATH + '\\Update\\Extract\\R3ditor-master\\App\\*', APP_PATH + '\\App\\', '/h', '/i', '/c', '/k', '/e', '/r', '/y']);
-		var timer = setInterval(function(){
-			if (EXTERNAL_APP_RUNNING === false){
-				clearInterval(timer);
-				R3DITOR_update_3();
-			}
-		}, 50);
+		R3DITOR_movePercent(0, 90, 'Moving the new files...');
+		fs.copy(APP_PATH + '\\Update\\Extract\\R3ditor-master\\App\\', APP_PATH + '\\App\\', function(err){
+			if (err)return console.error(err);
+			reload();
+		});
 	} else {
 		LOG_addLog('error', 'UPDATE - Something went wrong! - The old files still there! - let\'s try again...');
 		R3DITOR_applyUpdate();
 		LOG_scroll();
 	}
-}
-function R3DITOR_update_3(){
-	clearInterval(timer);
-	R3DITOR_movePercent(0, 75, 'Cleaning some files...');
-	deleteFolderRecursive(APP_PATH + '\\Update');
-	var timer = setInterval(function(){
-		if (EXTERNAL_APP_RUNNING === false){
-			clearInterval(timer);
-			reload();
-		}
-	}, 50);
 }
