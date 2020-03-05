@@ -193,7 +193,7 @@ function TIM_APPLY_PATCH(){
 	var c = 0;
 	var reason;
 	var SUCESS = true;
-	var startLine = 19; // Linha Inicial dos patches
+	var startLine = 19; // Patch inicial line
 	var TEMP_FILE = TIM_arquivoBruto.toLowerCase();
 	var MAP_TOTAL_PATCHES = parseInt(TIM_mapFile[4]);
 

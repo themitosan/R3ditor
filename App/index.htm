@@ -66,8 +66,8 @@
 		<!-- Patcher Menu -->
 		<input type="button" id="menu-utility-aba-4" class="aba aba-left-fix aba-select menu-utility-patcher-tab" value="Patcher">
 		<div class="menu-topo menu-utility-patcher-main" id="mainMenu-patcher-div">
-			<input type="button" class="botao-menu" value="Create Patch" title="Click here to create a patch for RE3!" onclick="WIP();">
-			<input type="button" class="botao-menu" value="Apply Patch" title="Click here to apply a patch on RE3!" onclick="WIP();">
+			<input type="button" class="botao-menu" value="Create Patch" title="Click here to create a patch for RE3!" onclick="triggerLoad(19);">
+			<input type="button" class="botao-menu" value="Apply Patch" title="Click here to apply a patch on RE3!" onclick="triggerLoad(20);">
 		</div>
 		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
@@ -89,9 +89,7 @@
 			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Run the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
 			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Run the original game in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
-		<!-- 
-			Tools menu
-		-->
+		<!-- Tools menu -->
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
 			<input type="button" class="botao-menu" title="Click here to open RDT" value="Open RDT" onclick="triggerLoad(6);">
@@ -176,7 +174,28 @@
 			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
 		</div>
+
 		<!-- CONTENT -->
+
+		<!-- FORM: Patcher -->
+		<div class="R3_Patcher_main_menu_css" id="R3_Patcher_main_menu" onclick="main_closeFileList();">
+			<center><font class="titulo">R3ditor Patcher</font></center>
+			<div class="R3_Patcher_details_holder_css" id="R3_Patcher_details_holder">
+				Patch date: <font id="R3_PATCHER_lbl_patchDate">???</font><br>
+				R3ditor Version: <font id="R3_PATCHER_lbl_R3ditorVersion">???</font><br>
+				Original Platform: <font id="R3_PATCHER_lbl_OriginalPlatform">???</font>
+				<div class="menu-separador"></div>
+				<input type="checkbox" checked="true" class="chkbox" id="R3_PATCHER_chkbox_applyItemCombs"><font class="font-chkbox-fix" onclick="UTILS_toggleChkBox('R3_PATCHER_chkbox_applyItemCombs');"> - Apply Item Combinations (MIX)</font><br>
+				<input type="checkbox" checked="true" class="chkbox" id="R3_PATCHER_chkbox_applyItemSettings"><font class="font-chkbox-fix" onclick="UTILS_toggleChkBox('R3_PATCHER_chkbox_applyItemSettings');"> - Apply Item Settings (IEDIT)</font><br>
+				<input type="checkbox" disabled="disabled" class="chkbox" id="R3_PATCHER_chkbox_applyStartItems"><font class="font-chkbox-fix"> - Apply Start Items [WIP]</font>
+			</div>
+			<div id="R3_PATCHER_notice" class="none">
+				<!-- Notice goes here -->
+			</div>
+			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply btn-apply-fix color-green">
+		</div>
+
 		<!-- FORM: IEDIT Item Editor -->
 		<div class="none" id="menu-IEDIT-editor" onclick="main_closeFileList();">
 			<input type="button" id="IEDIT-aba-menu-1" class="aba aba-left-fix aba-select" value="Item Settings">
@@ -1743,6 +1762,9 @@
 			<input type="file" onchange="setLoadFile(16);" id="loadRofsFile" accept=".dat"/>
 			<input type="file" onchange="setLoadFile(17);" id="loadMixFile" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(18);" id="loadIEDITFile" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(19);" id="loadR3PatcherFile" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(20);" id="loadR3PatcherPatch" accept=".r3exepatch"/>
+			<input type="file" onchange="setLoadFile(21);" id="loadR3PatcherFINAL" accept=".exe, .23, .dol, .BIN"/>
 			<!-- TIM Patcher -->
 			<input type="file" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
 			<input type="file" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>

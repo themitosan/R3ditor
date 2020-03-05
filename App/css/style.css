@@ -203,6 +203,9 @@ input[type='range' i]{
     color: #e6ffdc;
     background-image: linear-gradient(to bottom, #264230, #304036);
 }
+.botao-aplicar:hover{
+    box-shadow: 0 0 10px #037f01;
+}
 .info-icon-holder{
     margin-top: 8px;
 }
@@ -542,6 +545,7 @@ input[type='range' i]{
 .titulo{
     font-style: italic;
 	font-size: xx-large;
+    text-shadow: 0 0 10px #131329;
 }
 .none{
 	display: none;
@@ -617,6 +621,12 @@ input[type='range' i]{
     box-shadow: 0px 0px 15px #3d3d3d;
     text-shadow: 0px 0px 10px #939393;
     background-image: linear-gradient(to bottom, #222, #000);
+}
+.RDT-btn-apply:active{
+    background-image: linear-gradient(to bottom, #000, #212121);
+}
+.RDT-btn-apply:hover{
+    box-shadow: 0 0 15px #777;
 }
 .color-green{
     color: #0f0;
@@ -2530,4 +2540,33 @@ input[type='range' i]{
 }
 .IEDIT_edit_select_fix{
     width: 304px;
+}
+/*
+    R3ditor Patcher
+*/
+.R3_Patcher_main_menu_css{
+    top: 124px;
+    left: 450px;
+    color: #fff;
+    padding: 4px;
+    width: 440px;
+    height: 400px;
+    display: none;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 10px #5e3379;
+    background-image: linear-gradient(to bottom, #444, #222);
+}
+.R3_Patcher_details_holder_css{
+    color: #fff;
+    width: 420px;
+    padding: 6px;
+    height: 290px;
+    overflow: auto;
+    margin-top: 4px;
+    margin-left: 4px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 7px #000;
+    background-image: linear-gradient(to bottom, #1100178c, #050417ba);
 }

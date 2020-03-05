@@ -509,7 +509,7 @@ function runExternalSoftware(exe, args){
 function R3DITOR_SAVE(filename, content, mode, extension){
 	// Mode: utf-8, hex...
 	document.getElementById('r3ditorSaveFile').nwsaveas = filename;
-	document.getElementById('r3ditorSaveFile').accept = '.' + extension;
+	document.getElementById('r3ditorSaveFile').accept = '.' + extension.replace('.', '');
 	document.getElementById('r3ditorSaveFile').onchange = function(){
 		R3DITOR_PROCESS_SAVE(filename, content, mode);
 	}
@@ -880,6 +880,18 @@ function triggerLoad(loadForm){
 	if (loadForm === 18){
 		$('#loadIEDITFile').trigger('click');
 	}
+	// Create R3 Patcher
+	if (loadForm === 19){
+		$('#loadR3PatcherFile').trigger('click');
+	}
+	// Load R3 Patcher
+	if (loadForm === 20){
+		$('#loadR3PatcherPatch').trigger('click');
+	}
+	// FINAL R3 Patcher
+	if (loadForm === 21){
+		$('#loadR3PatcherFINAL').trigger('click');
+	}
 }
 function setLoadFile(input){
 	var cFile;
@@ -1077,7 +1089,7 @@ function setLoadFile(input){
 			loadCancel = true;
 			loadType = 'Load MIX Editor';
 		} else {
-			MIX_loadExe(cFile.path);
+			MIX_loadExe(cFile.path, 0);
 			document.getElementById('loadMixFile').value = '';
 		}
 	}
@@ -1088,15 +1100,48 @@ function setLoadFile(input){
 			loadCancel = true;
 			loadType = 'Load ITEM Editor';
 		} else {
-			IEDIT_loadExec(cFile.path);
+			IEDIT_loadExec(cFile.path, 0);
 			document.getElementById('loadIEDITFile').value = '';
+		}
+	}
+	// R3 Patcher - Create Patch
+	if (input === 19){
+		cFile = document.getElementById('loadR3PatcherFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load R3 Patcher - Create Patch';
+		} else {
+			PATCHER_createPatch(cFile.path);
+			document.getElementById('loadR3PatcherFile').value = '';
+		}
+	}
+	// R3 Patcher - Load Patch
+	if (input === 20){
+		cFile = document.getElementById('loadR3PatcherPatch').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load R3 Patcher - Load Patch';
+		} else {
+			PATCHER_loadPatch(cFile.path);
+			document.getElementById('loadR3PatcherPatch').value = '';
+		}
+	}
+	// R3 Patcher - FINAL
+	if (input === 21){
+		cFile = document.getElementById('loadR3PatcherFINAL').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load R3 Patcher - Load Patch';
+		} else {
+			PATCHER_applyOnExec(cFile.path);
+			document.getElementById('loadR3PatcherFINAL').value = '';
 		}
 	}
 	if (BETA === true){
 		BETA = false;
 	}
 	if (loadCancel === true){
-		LOG_addLog('warn', 'WARN - Load ' + loadType + ' - Load Cancelled');
+		LOG_addLog('warn', 'WARN - Load ' + loadType + ' - Load cancelled');
 	}
 	LOG_scroll();
 }

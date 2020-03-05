@@ -500,6 +500,15 @@ function main_menu(anim){
 		$('#menu-topo-IEDIT').css({'display': 'inline'});
 		IEDIT_showMenu();
 	}
+	if (anim === 10){ // R3 Patcher
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		PATCHER_showMenu();
+	}
 }
 function RDT_checkBKP(){
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
@@ -2393,13 +2402,41 @@ function IEDIT_showEdit(mode, id, hex){
 		document.getElementById('IEDIT_editApplyBtn').onclick = function(){
 			IEDIT_applyChanges(id);
 		}
-		//
 		$('#IEDIT-holder').css({'width': '728px'});
 		$('#IEDIT_ITEM_edit').css({'display': 'inline'});
 	} else {
 		$('#IEDIT_ITEM_edit').css({'display': 'none'});
 		$('#IEDIT-holder').css({'width': '1298px'});
 	}
+}
+/*
+	Patcher
+*/
+function PATCHER_showMenu(){
+	$('#img-logo').css({'display': 'none'});
+	$('#menu-topo-MOD').css({'display': 'none'});
+	$('#R3_Patcher_main_menu').css({'display': 'inline'});
+}
+function PATCHER_showNotice(noticeTxt, mode){
+	// Mode 0: Sucess, 1: Error
+	if (mode === 0){
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #00ff003d'});
+	} else {
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #ff00008a'});
+	}
+	$('#R3_Patcher_main_menu').css({'height': '120px', 'top': '270px'});
+	document.getElementById('R3_PATCHER_notice').innerHTML = '<center>' + noticeTxt + '</center>';
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#R3_Patcher_details_holder').slideUp({duration: 200, queue: false});
+		$('#R3_PATCHER_notice').fadeIn({duration: 200, queue: false});
+	} else {
+		$('#R3_Patcher_details_holder').css({'display': 'none'});
+		$('#R3_PATCHER_notice').css({'display': 'inline'});
+	}
+	$('#R3_PATCHER_btn_apply').css({'display': 'none'});
+	$('#R3_PATCHER_btn_cancel').css({'width': '430px', 'margin-top': '8px', 'display': 'inline'});
+	document.getElementById('R3_PATCHER_btn_cancel').title = 'Click on this button to return to main menu';
+	document.getElementById('R3_PATCHER_btn_cancel').value = 'Go Back!';
 }
 /*
 	Settings Menu

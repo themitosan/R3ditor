@@ -21,7 +21,7 @@ var MIX_currentFunction;
 /*
 	Functions
 */
-function MIX_loadExe(file){
+function MIX_loadExe(file, mode){
 	var c = 0;
 	var end_pos = 16;
 	MIX_TOTAL_00 = 0;
@@ -39,16 +39,20 @@ function MIX_loadExe(file){
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
 	MIX_clearHolders();
 	MIX_Database = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][1], MIX_fileTypes[MIX_fName][2]);
-	while (c < totalMixes){
-		MIX_decompileMix(c, start_pos, end_pos, false);
-		start_pos = parseInt(start_pos + 16);
-		end_pos = parseInt(end_pos + 16);
-		c++;
+	if (mode === 0){
+		while (c < totalMixes){
+			MIX_decompileMix(c, start_pos, end_pos, false);
+			start_pos = parseInt(start_pos + 16);
+			end_pos = parseInt(end_pos + 16);
+			c++;
+		}
+		LOG_addLog('log', 'MIX - File loaded sucessfully!');
+		LOG_addLog('log', 'MIX - Current mode: ' + MIX_fileTypes[MIX_fName][0]);
+		LOG_addLog('log', 'MIX - File: <font class="user-can-select">' + file + '</font>');
+		main_menu(8);
+	} else {
+		LOG_addLog('log', 'PATCHER - MIX database was loaded!');
 	}
-	LOG_addLog('log', 'MIX - File loaded sucessfully!');
-	LOG_addLog('log', 'MIX - Current mode: ' + MIX_fileTypes[MIX_fName][0]);
-	LOG_addLog('log', 'File: <font class="user-can-select">' + file + '</font>');
-	main_menu(8);
 	LOG_scroll();
 }
 function MIX_decompileMix(id, start, end, useLocalStorage){

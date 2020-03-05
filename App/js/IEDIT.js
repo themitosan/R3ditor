@@ -1,8 +1,7 @@
 /*
 	R3ditor - IEDIT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-
-	Mais uma vez, obrigado ResidentEvilArtist!
+	Mais uma vez, obrigado Biohazard España / ResidentEvilArtist!
 */
 var IEDIT_Database;
 var IEDIT_fileName;
@@ -10,7 +9,7 @@ var IEDIT_arquivoBruto;
 /*
 	Functions
 */
-function IEDIT_loadExec(file){
+function IEDIT_loadExec(file, mode){
 	var c = 0;
 	var push_end = 8;
 	var push_start = 0;
@@ -20,17 +19,22 @@ function IEDIT_loadExec(file){
 	ORIGINAL_FILENAME = file;
 	IEDIT_fileName = getFileName(ORIGINAL_FILENAME);
 	IEDIT_Database = IEDIT_arquivoBruto.slice(IEDIT_fileTypes[IEDIT_fileName][1], IEDIT_fileTypes[IEDIT_fileName][2]);
-	while (c < totalPushes){
-		var hexSlice = IEDIT_Database.slice(push_start, push_end);
-		IEDIT_decompileItem(false, c, hexSlice);
-		push_start = push_start + 8;
-		push_end = push_end + 8;
-		c++;
+	if (mode === 0){
+		while (c < totalPushes){
+			var hexSlice = IEDIT_Database.slice(push_start, push_end);
+			IEDIT_decompileItem(false, c, hexSlice);
+			push_start = push_start + 8;
+			push_end = push_end + 8;
+			c++;
+		}
+		LOG_addLog('log', 'IEDIT - File loaded sucessfully!');
+		LOG_addLog('log', 'IEDIT - Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0]);
+		LOG_addLog('log', 'IEDIT - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+		main_menu(9);
+	} else {
+		LOG_addLog('log', 'PATCHER - IEDIT database was loaded!');
 	}
-	LOG_addLog('log', 'IEDIT - File loaded sucessfully!');
-	LOG_addLog('log', 'IEDIT - Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0]);
-	LOG_addLog('log', 'IEDIT - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-	main_menu(9);
+	LOG_scroll();
 }
 function IEDIT_decompileItem(useLocalStorage, id, hex){
 	var IEDIT_HEX;
