@@ -312,9 +312,9 @@ function MIX_applyChanges(id, funcType){
 	MIX_showEdit(1);
 }
 function MIX_saveOnFile(){
+	var c = 0;
 	if (MIX_arquivoBruto !== undefined){
 		MIX_Backup();
-		var c = 0;
 		var RE3_FILE_START = MIX_arquivoBruto.slice(0, MIX_fileTypes[MIX_fName][1]);
 		var RE3_FILE_END = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][2], MIX_arquivoBruto.length);
 		var MIX_NEW_DATABASE = '';

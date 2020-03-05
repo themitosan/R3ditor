@@ -2131,11 +2131,11 @@ function MIX_showMenu(menuId){
 	}
 	MIX_showEdit(1);
 	MIX_updateMainTabsTitle();
+	$('#menu-mix-editor').css({'display': 'block'});
 	$('#MIX-MENU-' + menuId).css({'display': 'block'});
 	$('#MIX-aba-menu-' + menuId).addClass('aba-select');
-	$('#menu-mix-editor').css({'display': 'block'});
 	$('#log-programa').css({'top': '626px', 'height': '82px'});
-	document.title = APP_NAME + ' - MIX Editor (' + MIX_fileTypes[MIX_fName][0] + ' Mode) - File: ' + ORIGINAL_FILENAME;
+	document.title = APP_NAME + ' - MIX Editor (Version: ' + MIX_fileTypes[MIX_fName][0] + ') - File: ' + ORIGINAL_FILENAME;
 }
 function MIX_updateMainTabsTitle(){
 	document.getElementById('MIX_LBL_TOTAL-1').innerHTML = parseInt(MIX_TOTAL_00);
@@ -2423,8 +2423,10 @@ function PATCHER_showNotice(noticeTxt, mode){
 	// Mode 0: Sucess, 1: Error
 	if (mode === 0){
 		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #00ff003d'});
+		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #00ff0075'});
 	} else {
 		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #ff00008a'});
+		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #ff000075'});
 	}
 	$('#R3_Patcher_main_menu').css({'height': '120px', 'top': '270px'});
 	document.getElementById('R3_PATCHER_notice').innerHTML = '<center>' + noticeTxt + '</center>';

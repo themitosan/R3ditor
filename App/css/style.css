@@ -247,6 +247,7 @@ input[type='range' i]{
     margin-top: 4px;
     border-radius: 6px;
     position: absolute;
+    box-shadow: 0 0 10px #000;
     background-image: linear-gradient(to bottom, #151515, #191919);
 }
 .menu-general-content{
