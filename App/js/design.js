@@ -836,6 +836,8 @@ function showAbout(){
 	$('#menu-utility-aba').css({'display': 'none'});
 	$('#menu-utility-aba-2').css({'display': 'none'});
 	$('#menu-utility-aba-3').css({'display': 'none'});
+	$('#menu-utility-aba-4').css({'display': 'none'});
+	$('#mainMenu-patcher-div').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#r_logo').fadeIn({duration: 1500, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
