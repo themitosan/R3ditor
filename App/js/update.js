@@ -172,21 +172,7 @@ function R3DITOR_update_3(){
 	var timer = setInterval(function(){
 		if (EXTERNAL_APP_RUNNING === false){
 			clearInterval(timer);
-			R3DITOR_update_4();
+			reload();
 		}
 	}, 50);
-}
-function R3DITOR_update_4(){
-	R3DITOR_movePercent(0, 100, 'Update Ok!');
-	document.title = APP_NAME + ' - Update Ok!';
-	if (DESIGN_ENABLE_ANIMS === true){
-		$('#img-logo').fadeOut({duration: 2000, queue: false});
-		$('#btn_update_ok').fadeIn({duration: 500, queue: false});
-	} else {
-		$('#img-logo').css({'display': 'none'});
-		$('#btn_update_ok').css({'display': 'inline'});
-	}
-	$('#progress_window').css({'top': '528px', 'height': '74px'});
-	LOG_addLog('log', 'INFO - Click on Reload App to apply changes!');
-	LOG_scroll();
 }
