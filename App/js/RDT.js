@@ -1314,7 +1314,9 @@ function RDT_readItens(){
 	RDT_ItensArray = [];
 	RDT_totalItensGeral = 0;
 	$('#RDT-item-list').empty();
-	RDT_generateItemIndexRaw('02210000');
+	if (getFileName(ORIGINAL_FILENAME) !== 'r50d'){
+		RDT_generateItemIndexRaw('02210000');
+	}
 	RDT_generateItemIndexRaw('02310900');
 	RDT_generateItemIndexRaw('02318000');
 	RDT_generateItemIndexRaw('02310800');
