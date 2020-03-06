@@ -1222,7 +1222,7 @@ function RDT_showMenu(id){
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
 	}
-	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true){
+	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true && RE3SLDE_CANRUN === true){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
 	} else {
