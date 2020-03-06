@@ -142,6 +142,8 @@ var ITEM = {
 	/*
 		The values below can be added to inventory as an item, but checking them can make the game crash.
 		If you insert these values in RDT as an item, it will recognize as current map.
+
+		LISTEN TO ME - DO NOT INSERT THIS VALUES ON RDT!
 	*/
 	'ab': ['no item', 	      								   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
 	'ac': ['BOTU', 	  	      								   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
@@ -189,72 +191,6 @@ var WEAPONS = {
 	'12': ['Beretta M92F E'],
 	'13': ['Shotgun B. M3S E'],
 	'14': ['Mine Thrower E']
-}
-// Preciso remover isso depois
-var RDT_mapHack = {
-	'r40c': true,
-	'r410': true,
-	'r413': true,
-	'r415': true,
-	'r714': true,
-	'r712': true,
-	'r70f': true,
-	'r70d': true,
-	'r61c': true
-}
-var RDT_mapHack2 = {
-	'r304': true,
-	'r30d': true,
-	'r311': true,
-	'r415': true,
-	'r501': true,
-	'r50a': true,
-	'r50d': true
-}
-var RDT_FIRSTPOINTERTYPE = {
-	'0000': true,
-	'0100': true,
-	'ffff': true,
-	'ff02': true,
-	'ad04': true,
-	'ff31': true,
-	'10b8': true,
-	'0189': true,
-	'38b8': true,
-	'7810': true
-}
-var RDT_THIRDPOINTERTYPE = {
-	'0800': true,
-	'0100': true,
-	'10b8': true
-}
-var RDT_POINTERTYPE4 = {
-	'1000': true,
-	'2800': true,
-	'3800': true,
-	'4010': true,
-	'1800': true
-}
-var RDT_SECONDPOINTERTYPE = {
-	'0800': true,
-	'2808': true,
-	'4868': true,
-	'81d6': true,
-	'3000': true,
-	'0101': true,
-	'5756': true,
-	'1000': true,
-	'1840': true,
-	'050b': true,
-	'1100': true,
-	'2121': true,
-	'0707': true,
-	'9038': true,
-	'3820': true,
-	'6030': true,
-	'1919': true,
-	'5020': true,
-	'30a0': true
 }
 var FILES = {
 	'86': ['Dario\'s Memo'],
@@ -317,7 +253,7 @@ var ATTR = {
 	'16': ['Attr. used by M4A1 Assault Rifle',   		'#840000', '0 0 2px #310000', '-webkit-box'],
 	'17': ['Attr. used by M4A1 Assault Rifle (Auto)', 	'#840000', '0 0 2px #310000', '-webkit-box']  // Atributo encontrado na shotgun do Carlos?
 }
-// Segunda variavel
+// Second var (used for percentage items)
 var VOID = {
 	'00': 'OK!'
 }
@@ -399,7 +335,7 @@ var EPILOGOS = {
 	'07': ['7'],
 	'08': ['All'],
 	'09': ['All'],
-	'0c': ['All'] // Encontrado esse valor na versão francesa
+	'0c': ['All'] // found this valuue on french version
 }
 var DIFICULDADE = {
 	'01': ['Easy'],
@@ -907,7 +843,7 @@ var MSG_DICIONARIO = {
 	'57': [false, '(Unknown Char / Function Nº 00 - Hex: 57)', true],
 	'58': [false, '(Unknown Char / Function Nº 01 - Hex: 58)', true],
 	'59': [false, '(Unknown Char / Function Nº 02 - Hex: 59)', true],
-	// Formatação
+	// Text format
 	'5a': [false, 'á', false],
 	'5b': [false, 'à', false],
 	'5c': [false, 'â', false],
@@ -1059,7 +995,7 @@ var MSG_DICIONARIO = {
 	'fc': [false, '(Line Break)<br>', false], // Enter
 	'fd': [false, '(Pause)', false],
 	'ff': [false, '(Unknown CHAR)', false],
-	// Comandos especiais (Funções)
+	// Special commands (functions)
 	'70': [true, '(Function: Select Option ', 					   11],
 	'fa': [true, '(Function: Show Message ', 	    	 			1],
 	'fe': [true, '(Function: End Message ',				 			2],
@@ -1096,7 +1032,7 @@ var RDT_camHeaderType = {
 	'3676': [true],
 	'3087': [true],
 	'38f2': [true],
-	'3c68': [true] // RE2?
+	'3c68': [true]
 }
 var ROFS_STATUS = {
 	1:  ['Doors (.DO2)'],
@@ -1278,7 +1214,7 @@ var MSG_DICIONARIO_REVERSO = {
 	'x': '54',
 	'y': '55',
 	'z': '56',
-	// Acentuações
+	// format
 	'ü': '51',
 	'ú': '51',
 	'ù': '51',
@@ -1304,7 +1240,7 @@ var MSG_DICIONARIO_REVERSO = {
 	'ê': '61',
 	'ó': '62',
 	'=': '63',
-	// Funções Especiais
+	// Special functions
 	'#': 'a0', // Climax
 	'~': 'fe', // Segunda alternativa de climax
 	'{': '09', // Aspas Duplas Abrindo
@@ -1341,8 +1277,8 @@ var TIM_BPP = {
 	//  HEX     TYPE       BPP          POS (String)
 	'08000000': [1,			   '4 BPP', 0],    // WIP
 	'09000000': [2,			   '8 BPP', 1084], // WIP
-	'02000000': [3,			  '16 BPP', 0],    // Esse tipo não contém CLUT [WIP]
-	'03000000': [4,			  '24 BPP', 0],    // Esse tipo não contém CLUT [WIP]
+	'02000000': [3,			  '16 BPP', 0],    // This format don't have any CLUT [WIP]
+	'03000000': [4,			  '24 BPP', 0],    // This format don't have any CLUT [WIP]
 	'00000000': [5,  '4 BPP (No CLUT)', 0],    // WIP
 	'01000000': [6,  '8 BPP (No CLUT)', 0]     // WIP
 }
@@ -1351,8 +1287,8 @@ var TIM_EXCLUDEPATTERN = {
 }
 var MEMJS_HEXPOS = {
 	/*
-		Pos. hex para fazer leitura in game.
-		Todas as leituras são feitas em MEM_JS.BYTE e depois convertido para Hex.
+		Memory postions for reading in-game information.
+		All read commands are processed with MEM_JS.BYTE (int) and converted to hex.
 
 		Mode 1 = RE3 Eidos
 	*/
@@ -1393,6 +1329,7 @@ var RE3_playerList = {
 	'01': 'Jill Valentine',
 	'02': 'Carlos Oliveira'
 }
+// Used for debug
 var MIX_seekPattern = '00021500000000000003150000000000000d15000000000000051600000000000004170000000000';
 var IEDIT_seekPattern = '0000000001010000010f0001010f00010107000101060001';
 var MIX_function_types = {
@@ -1526,7 +1463,7 @@ var RANGES = {
 	'MIX_infinite_infItem':    [4, 6],
 	'MIX_infinite_offset': 	   [6, 16],
 	/*
-		Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
+		Game version (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 
 		Devido a essa parte ser semelhante ao código ID de games de PS1 (como "BESLES"), eu acredito que esse seja
 		o indicador da versão do game.

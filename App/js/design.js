@@ -1199,10 +1199,6 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-localCity').innerHTML = 'Unknown';
 	}
 	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
-	var RDT_MSG_P = 'Undefined - This RDT don\'t have any messages!';
-	if (RDT_MSG_POINTERS[0] !== undefined){
-		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
-	}
 	RDT_checkBKP();
 	if (id !== 4){
 		$('#RDT-aba-menu-4').css({'display': 'none'});
@@ -1239,15 +1235,12 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_mapFileName').innerHTML = RDT_MAPFILE;
 	document.getElementById('RDT-file-select').innerHTML = RDT_EDIT_FILE;
 	document.getElementById('RDT-item-select').innerHTML = RDT_EDIT_ITEM;
-	document.getElementById('RDT_lbl-msg_pointer').innerHTML = RDT_MSG_P;
 	document.getElementById('RDT_lbl_totDoors').innerHTML = RDT_totalDoors;
-	document.getElementById('RDT_lbl-totMsg').innerHTML = RDT_totalMessages;
 	document.getElementById('RDT_lbl-totalMaps').innerHTML = RDT_totalMapas;
 	document.getElementById('RDT_lbl-tCameras').innerHTML = RDT_totalCameras;
 	document.getElementById('RDT_lbl-totalDoors').innerHTML = RDT_totalDoors;
 	document.getElementById('RDT_lbl-totalFiles').innerHTML = RDT_totalFiles;
 	document.getElementById('RDT_lbl-totalItens').innerHTML = RDT_totalItens;
-	document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
 	document.getElementById('RDT_lbl-totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT_lbl_totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME;
@@ -1258,10 +1251,6 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-5').value = 'Audios (' + RDT_totalAudios +')';
 	document.getElementById('RDT-aba-menu-9').value = 'Cameras (' + RDT_totalCameras +')';
-	document.getElementById('RDT_lbl_totalmsgCode').innerHTML = RDT_messageCodesArray.length;
-	document.getElementById('RDT-aba-menu-2').value = 'Message Block (' + RDT_totalMessages + ')';
-	document.getElementById('RDT-aba-menu-8').value = 'Enemies / NPC\'s (' + RDT_enemiesArray.length + ')';
-	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
 	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
@@ -1590,11 +1579,6 @@ function RDT_Error_404(){
 		$('#RDT-aba-menu-5').css({'display': 'none'});
 	} else {
 		$('#RDT-aba-menu-5').css({'display': 'inline'});
-	}
-	if (RDT_messageCodesArray.length === 0){
-		$('#RDT-aba-menu-7').css({'display': 'none'});
-	} else {
-		$('#RDT-aba-menu-7').css({'display': 'inline'});
 	}
 	if (RDT_enemiesArray.length === 0){
 		$('#RDT-aba-menu-8').css({'display': 'none'});
