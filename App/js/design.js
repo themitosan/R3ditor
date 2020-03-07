@@ -117,20 +117,20 @@ function main_renderFileList(id, mode){
 		} else {
 			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
-			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
 		} else {
-			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
-				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
+				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
 			} else {
-				mFile = 'There is no Map File for this RDT. Open it to generate!';
+				mFile = 'There is no Mapfile for this file. Open it to generate!';
 			}
 		}
 		if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
 		}
-		if (mFile.length > 44 && mFile !== 'There is no map file for this RDT. Open it to generate!'){
+		if (mFile.length > 44 && mFile !== 'There is no map file for this file. Open it to generate!'){
 			originalMFile = mFile;
 			mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 		}
@@ -183,16 +183,16 @@ function main_renderFileList(id, mode){
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
 					if (gameModePath === 'DATA_AJ'){
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap2';
 						} else {
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
 						} else {
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
 					}
 					if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
@@ -1240,9 +1240,12 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-5').value = 'Audios (' + RDT_totalAudios +')';
 	document.getElementById('RDT-aba-menu-9').value = 'Cameras (' + RDT_totalCameras +')';
+	document.getElementById('RDT_lbl_totalmsgCode').innerHTML = RDT_messageCodesArray.length;
+	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
 	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
+	//
 	$('#RDT_menu-' + id).css({'display': 'block'});
 	$('#menu-RDT').css({'display': 'block'});
 	RDT_applyMenuFocus(id);
@@ -1251,6 +1254,27 @@ function RDT_showMenu(id){
 	}
 	RDT_Error_404();
 	LOG_scroll();
+}
+function RDT_renderMSGInfos(){
+	if (RDT_fm_avaliable === true){
+		$('#RDT-aba-menu-2').css({'display': 'inline'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'block'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'block'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'block'});
+		// Only render this info if the file is avaliable
+		document.getElementById('RDT_mapFileName').innerHTML = RDT_fm_path;
+		document.getElementById('RDT_lbl-totMsg').innerHTML = RDT_totalMessages;
+		document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
+		document.getElementById('RDT-aba-menu-2').value = 'Message Block (' + RDT_totalMessages + ')';
+		document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = RDT_MSGTEXT_POINTERS.toUpperCase().match(/.{4,4}/g);
+	} else {
+		$('#RDT-aba-menu-2').css({'display': 'none'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'none'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'block'});
+	}
 }
 function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
 	var newOpacity = document.getElementById('RDT_SLD_CANVAS_BG_OPACITY').value;
@@ -1551,12 +1575,6 @@ function RDT_BG_display(){
 	}
 }
 function RDT_Error_404(){
-	if (RDT_totalMessages < 1){
-		$('#RDT_MSG-holder').css({'display': 'none'});
-		$('#RDT-aba-menu-2').css({'display': 'none'});
-	} else {
-		$('#RDT_MSG-holder').css({'display': 'block'});
-	}
 	if (RDT_totalItensGeral < 1){
 		$('#RDT-item-list').css({'display': 'none'});
 		$('#RDT-aba-menu-3').css({'display': 'none'});

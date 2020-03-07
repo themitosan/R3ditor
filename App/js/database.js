@@ -1051,6 +1051,10 @@ var ROFS_STATUS = {
 	14: ['Voices (.WAV)'],
 	15: ['Background music (.WAV)']
 }
+var RDT_ARD_tempPointerDatabase = {
+	// Name   RDT      ARD
+	'R100': ['ffff', 'ffff']
+}
 var MSG_TEXTCOLOR = {
 	/* 
 		Text Colors:

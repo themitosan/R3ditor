@@ -530,41 +530,51 @@ function R3DITOR_PROCESS_SAVE(filename, content, mode){
 	LOG_scroll();
 }
 /// Download Files
-function R3DITOR_downloadFile(url, nomedoarquivo){
-	if (fs.existsSync(nomedoarquivo) === true){
-		fs.unlinkSync(nomedoarquivo);
+function R3DITOR_downloadFile(url, downloadFileName){
+	if (fs.existsSync(downloadFileName) === true){
+		fs.unlinkSync(downloadFileName);
 	}
 	DOWNLOAD_COMPLETE = false;
 	const http = require('https');
-	const file = fs.createWriteStream(nomedoarquivo);
+	const file = fs.createWriteStream(downloadFileName);
 	const request = http.get(url, function(response){
 		response.pipe(file);
 		file.on('finish', function(){
 			DOWNLOAD_COMPLETE = true;
-			if (nomedoarquivo !== APP_PATH + '\\App\\check.r3ditor'){
-		  		LOG_addLog('log', 'INFO - Download Complete! - ' + nomedoarquivo);
-		  		LOG_scroll();
+			if (downloadFileName !== APP_PATH + '\\App\\check.r3ditor'){
+		  		LOG_addLog('log', 'R3ditor - Download Complete! - ' + downloadFileName);
 			}
     	});
-	});
+	});	
+	LOG_scroll();
 }
 /* 
 	Utils
 */
 /// Get file names
 function getFileName(file){
-	var fileName = file.toLowerCase();
-	var removePath = fileName.split(/(\\|\/)/g).pop();
-	var filter = removePath.replace('.rdt', '').replace('.txt', '').replace('.msg', '').replace('.sav', '').replace('.exe', '').replace('.ini', '').replace('.r3ditor', '').replace('.rdtmap', '').replace('.tim', '').replace('.r3timmap', '').replace('.sld', '').replace('.rbj', '')
-	return filter;
+	if (file !== '' && file !== undefined){
+		var fileName = file.toLowerCase();
+		var removePath = fileName.split(/(\\|\/)/g).pop();
+		var filter = removePath.replace('.rdt', '').replace('.txt', '').replace('.msg', '').replace('.sav', '').replace('.exe', '').replace('.ini', '').replace('.r3ditor', '').replace('.rdtmap', '').replace('.tim', '').replace('.r3timmap', '').replace('.sld', '').replace('.rbj', '')
+		return filter;
+	}
 }
-/// Formata valores hex para leitura interna
+/// Get file extension
+function getFileExtension(file){
+	if (file !== '' && file !== undefined){
+		return file.slice(file.indexOf(getFileName(file).toUpperCase()), file.length).replace(getFileName(file).toUpperCase() + '.', '');
+	}
+}
+/// Format hex value to internal reading
 function solveHEX(hex){
-	var res = hex.replace(new RegExp(' ', 'g'), '');
-	var fin = res.toLowerCase();
-	return fin;
+	if (hex !== '' && hex !== undefined){
+		var res = hex.replace(new RegExp(' ', 'g'), '');
+		var fin = res.toLowerCase();
+		return fin;
+	}
 }
-/// Obter Dia, Data e Hora
+/// Get current date
 function currentTime(){
 	var t = new Date;
 	var d = t.getDate();

@@ -40,7 +40,6 @@ var RDT_TEMP_ENEMYNPC_SOUNDSET = '';
 var RDT_TEMP_ENEMYNPC_EXTRAFLAG = '';
 var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
 
-var RDT_MSG_END = [];
 var RDT_totalItens = 0;
 var RDT_totalFiles = 0;
 var RDT_totalMapas = 0;
@@ -58,12 +57,21 @@ var RDT_currentAudio = '';
 var RDT_doorsRaw = [];
 var RDT_doorsArray = [];
 
+// MSG vars
+var RDT_fm_path;
+var RDT_fm_avaliable;
+var RDT_totalMessages;
+var RDT_MSGTEXT_POINTERS;
+var RDT_messageSeekPattern;
+
+// MSG Code
+var RDT_messageCodesArray = [];
+
+var RDT_fileType;
 var RDT_totalDoors;
 var RDT_totalAudios;
 var RDT_arquivoBruto;
-var RDT_messasgesRaw;
 var RDT_itemIndexRAW;
-var RDT_totalMessages;
 var RDT_totalItensGeral;
 var RDT_lastBackup = '';
 var RDT_enemiesArray = [];
@@ -81,9 +89,7 @@ var RDT_SLD_SEEK_MULTIMASK = false;
 	Functions
 */
 function RDT_resetVars(){
-	mapfile = [];
 	RDT_loop = 0;
-	RDT_MSG_END = [];
 	RDT_totalDoors = 0;
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
@@ -95,25 +101,22 @@ function RDT_resetVars(){
 	RDT_totalCameras = 0;
 	RDT_cameraArray = [];
 	RDT_enemiesArray = [];
-	RDT_MSG_POINTERS = [];
 	RDT_selectedPoint = 0;
-	RDT_messagesArray = [];
 	RDT_MAPFILE = undefined;
 	RDT_propModelsArray = [];
 	RDT_SLD_totalMasksAva = 0;
 	block_size_hex = undefined;
+	RDT_messageCodesArray = [];
 	RDT_SLD_MASKS_POSITION = [];
 	RDT_arquivoBruto = undefined;
-	RDT_messasgesRaw = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_totalMessages = undefined;
 	RDT_SLD_SEEK_SEMAPHORE = true;
 	RDT_totalItensGeral = undefined;
+	RDT_messageSeekPattern = undefined;
 
 	RDT_SLD_FOUNDPOS = 0;
 	RDT_SLD_LAYER_TILESET_BMP = undefined;
-
-	RDT_skipMsgAnalisys = false;
 }
 function RDT_openFile(file){
 	RDT_loop = 0;
@@ -169,7 +172,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		document.getElementById('RDT_msgCode_holder').innerHTML = '';
 		document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 		document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
-	
 		/*
 			Remove the code below later
 		*/
@@ -181,24 +183,28 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		/*
 			Remove the code above later
 		*/
-	
+		RDT_fileType = getFileExtension(ORIGINAL_FILENAME);
+		RDT_fm_path = APP_PATH + '\\Configs\\RDT\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.rdtmap2';
+		RDT_fm_avaliable = fs.existsSync(RDT_fm_path);
 		LOG_addLog('log', 'RDT - The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
 		//
+		RDT_getTextMessages();
+		RDT_getMessageCodesArray();
 		RDT_getEnemiesArray();
 		RDT_getCameras();
 		RDT_readDoors();
 		RDT_readItens();
 		RDT_BG_display();
 	} else {
-		LOG_addLog('error', 'ERROR - Unable to read ' + getFileName(rdtFile) + '!');
-		LOG_addLog('error', 'Reason: 404 - File not found! (Path: <font class="user-can-select">' + rdtFile + '</font>)');
+		LOG_addLog('error', 'RDT - ERROR - Unable to read ' + getFileName(rdtFile) + '!');
+		LOG_addLog('error', 'RDT - Reason: 404 - File not found! (Path: <font class="user-can-select">' + rdtFile + '</font>)');
 	}
 	LOG_scroll();
 }
 /*
-	SLD Layers
-	This is a beta thing.
+	SLD Layers [WIP]
+	This is a REALLY beta thing!
 
 	This will break!
 	Also this is hidden for now
@@ -1539,7 +1545,7 @@ function RDT_ITEM_APPLY(index, type, convert){
 			localStorage.setItem('RDT_Item-' + index, RDT_ITEM_COMPILADO);
 		} else {
 			// Header 68
-			var offset1 = localStorage.getItem('RDT_Item-' + index).slice(12, 44); // before item id
+			var offset1 = localStorage.getItem('RDT_Item-' + index).slice(12, 44); // Before item id
 			var offset2 = localStorage.getItem('RDT_Item-' + index).slice(46, 48); // 00 between item id and quantity
 			var offset3 = localStorage.getItem('RDT_Item-' + index).slice(50, 58); // Quantity (before anim)
 			RDT_ITEM_COMPILADO = header + offset1 + novaHex + offset2 + quant + offset3 + novaAnim;
@@ -1547,7 +1553,7 @@ function RDT_ITEM_APPLY(index, type, convert){
 		}
 		RDT_COMPILE_Lv1();
 	} else {
-		LOG_addLog('warn', 'WARNING - There was an error while processing: ' + error);
+		LOG_addLog('warn', 'WARNING - There was an error while processing the item ' + id + ': <font class="user-can-select">' + error + '</font>');
 		LOG_scroll();
 	}
 }
@@ -1555,7 +1561,95 @@ function RDT_ITEM_APPLY(index, type, convert){
 	MESSAGES
 	RE-FAC-TOOOOOOOOOOOOR [WIP]
 */
-
+function RDT_getTextMessages(){
+	if (RDT_fm_avaliable === true){
+		var RDT_ARD_FILEMAP_ARRAY = [];
+		fs.readFileSync(RDT_fm_path).toString().split('\n').forEach(function(line){ 
+			RDT_ARD_FILEMAP_ARRAY.push(line);
+		});
+		var checkVersion = atob(RDT_ARD_FILEMAP_ARRAY[3].replace('FORMAT = ', ''));
+		if (checkVersion === RDT_fileType){
+			RDT_totalMessages = parseInt(RDT_ARD_FILEMAP_ARRAY[4].replace('TOT_MSG = ', ''));
+			RDT_MSGTEXT_POINTERS = atob(RDT_ARD_FILEMAP_ARRAY[5].replace('POINTERS = ', ''));
+		} else {
+			LOG_addLog('warn', 'RDT - WARN: The MapFile found is to use only in ' + checkVersion + ' version! (Current Version: ' + RDT_fileType + ')');
+		}
+	}
+	RDT_renderMSGInfos();
+	LOG_scroll();
+}
+function RDT_fileMap_askForSeekPattern(){
+	if (RDT_fm_avaliable === false){
+		var fName = getFileName(ORIGINAL_FILENAME).toUpperCase();
+		var askForFirstMessage = prompt('File: ' + fName + '.RDT\nLocation: ' + RDT_locations[fName][0] + '\nCity Location: ' + RDT_locations[fName][1] + '\n\n' + 
+			'Please insert the first message of RDT.\nIt looks like this:\n\"FA 00 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 01 XX ' + 
+			'XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"\n\"FA 02 XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX FE 00\"');
+		if (askForFirstMessage === undefined || askForFirstMessage === '' || askForFirstMessage === null){
+			RDT_showMenu(1);
+		} else {
+			RDT_messageSeekPattern = solveHEX(askForFirstMessage);
+			if (RDT_arquivoBruto.indexOf(RDT_messageSeekPattern) !== -1){
+				RDT_fileMap_getPointers(RDT_messageSeekPattern);
+			} else {
+				LOG_addLog('warn', 'RDT - Unable to find the pattern!');
+				RDT_showMenu(1);
+			}
+		}
+	} else {
+		LOG_addLog('log', 'RDT - Skipping MapFile generation - this RDT / ARD already have a map!');
+		LOG_addLog('log', 'RDT - MapFile Path: <font class="user-can-select">' + RDT_fm_path + '</font>');
+		RDT_showMenu(1);
+	}
+	LOG_scroll();
+}
+function RDT_fileMap_generateFile(totalMessages, txtPointers, textStart){
+	var mapFile_final = 'RDT MAPFILE\nGenerated with ' + APP_NAME + '\nDate: ' + currentTime() + '\nFORMAT = ' + btoa(RDT_fileType) + '\nTOT_MSG = ' +
+						totalMessages + '\nPOINTERS = ' + btoa(txtPointers) + '\nTXT_START = ' + textStart;
+	try{
+		fs.writeFileSync(RDT_fm_path, mapFile_final, 'utf-8');
+		LOG_addLog('log', 'RDT - The filemap was saved successfully!');
+		LOG_addLog('log', 'RDT - Path: <font class="user-can-select">' + RDT_fm_path + '</font>');
+		RDT_openFile(ORIGINAL_FILENAME);
+	} catch (err){
+		LOG_addLog('error', 'RDT - ERROR: Something went wrong while saving filemap for ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '!');
+		LOG_addLog('error', 'RDT - Details: <font class="user-can-select">' + err + '</font>');
+	}
+}
+function RDT_fileMap_getPointers(pointersHex){
+	if (pointersHex !== ''){
+		var c = 0;
+		var totalPushes = 300; // I need to find where this info are stored inside RDT!
+		var FA_startPosition = RDT_arquivoBruto.indexOf(pointersHex);
+		var crop_start = parseInt(FA_startPosition - 4);;
+		var crop_end = FA_startPosition;
+		var pointersCompiled = '';
+		// Remove this hack later...
+		var readMode;
+		if (RDT_fileType === 'RDT'){
+			readMode = 0;
+		} else {
+			readMode = 0;
+		}
+		if (RDT_fileType === 'ARD'){
+			readMode = 1;
+		}
+		var requiredPointer = RDT_ARD_tempPointerDatabase[getFileName(ORIGINAL_FILENAME).toUpperCase()][readMode];
+		//
+		while(c < totalPushes){
+			var crop_pointer = RDT_arquivoBruto.slice(crop_start, crop_end);
+			if (crop_pointer !== requiredPointer){
+				pointersCompiled = pointersCompiled + crop_pointer;
+				crop_start = parseInt(crop_start - 4);
+				crop_end = parseInt(crop_end - 4);
+				c++;
+			} else {
+				console.log('RDT - Pointer found! ' + pointersCompiled);
+				RDT_fileMap_generateFile(c, pointersCompiled, FA_startPosition);
+				break;
+			}
+		}
+	}
+}
 /*
 	Item Canvas
 */
@@ -1770,31 +1864,6 @@ function RDT_transferMessageToMSG(msgId){
 		LOG_scroll();
 	}
 }
-function RDT_MSGEndMessageFilter(){
-	var d = 0;
-	while(d < RDT_MSG_END.length){
-		if (RDT_MSG_END[d] > RDT_MSG_finalLenght){
-			RDT_MSG_END.splice(d, 1);
-		}
-		d++;
-	}
-}
-function RDT_pickStartMessages(str){
-	var c = 0;
-	RDT_messasgesRaw = getAllIndexes(RDT_arquivoBruto, str);
-	while (c < RDT_messasgesRaw.length){
-		if (RDT_messasgesRaw[c] > RDT_ItensArray[0]){
-			RDT_messagesArray.push(RDT_messasgesRaw[c]);
-		} else {
-			if (RDT_messasgesRaw[c] > RDT_MSG_startLength){
-				RDT_messagesArray.push(RDT_messasgesRaw[c]);
-			} else {
-				RDT_messasgesRaw.splice(c, 1);
-			}
-		}
-		c++;
-	}
-}
 function RDT_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (RDT_arquivoBruto !== undefined){
@@ -1925,14 +1994,11 @@ function RDT_doAfterSave(){
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;
-	RDT_messagesArray = [];
-	RDT_messasgesRaw = [];
 	RDT_totalMessages = 0;
 	RDT_ItensArray = [];
 	RDT_totalItens = 0;
 	RDT_totalFiles = 0;
 	RDT_totalMapas = 0;
-	RDT_MSG_END = [];
 	RDT_editItemCancel();
 	LOG_scroll();
 }

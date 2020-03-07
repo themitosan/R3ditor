@@ -48,10 +48,10 @@
 		<!-- Main Menu -->
 		<input type="button" id="menu-utility-aba-2" class="aba aba-left-fix aba-select aba-utility-fix-2" value="Main Tools">
 		<div class="menu-topo aba-principal-fix none" id="menu-topo">
-			<input type="button" class="botao-menu" value="SAV Editor (.SAV)" title="Click here to edit your save file" onclick="main_menu(1);">
-			<input type="button" class="botao-menu" value="MSG Editor (.MSG)" title="Click here to create / edit messages (FA02FC...)" onclick="main_menu(2);">
-			<input type="button" class="botao-menu" value="RDT Editor (.RDT, .ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT / ARD) files" onclick="main_menu(3);">
-			<input type="button" class="botao-menu" value="INI Editor (.INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
+			<input type="button" class="botao-menu" value="SAV Editor (SAV)" title="Click here to edit your save file" onclick="main_menu(1);">
+			<input type="button" class="botao-menu" value="MSG Editor (MSG)" title="Click here to create / edit messages (FA02FC...)" onclick="main_menu(2);">
+			<input type="button" class="botao-menu" value="RDT Editor (RDT / ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT / ARD) files" onclick="main_menu(3);">
+			<input type="button" class="botao-menu" value="INI Editor (INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
 			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 		</div>
@@ -957,16 +957,54 @@
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
 			<input type="button" id="RDT-aba-menu-9" class="aba" value="Cameras (???)" onclick="RDT_showMenu(9);">
 			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD Masks (???)" onclick="RDT_showMenu(10);">
+			<input type="button" id="RDT-aba-menu-2" class="aba none" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
-			<input type="button" id="RDT-aba-menu-2" class="aba" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
 			<input type="button" id="RDT-aba-menu-4" class="aba none" value="Pos. Edit">
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
 			<!-- WIP -->
-			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="">
-
+			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="WIP();">
+			<!-- RDT: General -->
+			<div class="menu" id="RDT_menu-1">
+				<div class="menu-general-content" id="RDT-geral" onclick="main_closeFileList();">
+					<div id="RDT_BG_1" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">General</font></center>
+					File Name: <font class="RDT-menu-geral-text" id="RDT-lbl-FILENAME">???</font><br>
+					File Size: <font class="RDT-menu-geral-text" id="RDT_lbl_fSize">???</font><br>
+					File Path: <font class="RDT-menu-geral-text user-can-select" id="RDT-lbl-FILE_Path">???</font><br>
+					<div id="RDT_mainMenu_mapFilePath" class="none">
+						Map File: <font class="RDT-menu-geral-text user-can-select" id="RDT_mapFileName">???</font>
+					</div>
+					Original Local Name: <font class="RDT-menu-geral-text" id="RDT_lbl-localName">???</font><br>
+					Original City Location: <font class="RDT-menu-geral-text" id="RDT_lbl-localCity">???</font>
+					<div id="RDT_mainMenu_msgSeekMenu" class="none">
+						<div class="menu-separador"></div>
+						<input type="button" value="Enable message block" onclick="RDT_fileMap_askForSeekPattern();" class="botao-menu">
+					</div>
+					<div id="RDT_mainMenu_msgInfo" class="none">
+						<div class="menu-separador"></div>
+						Pointers: <div class="RDT_lbl_pointers"><font id="RDT_lbl-msg_pointerSplit" class="user-can-select">???</font></div>
+						Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
+						Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
+					</div>
+					<div class="menu-separador"></div>
+					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
+					SLD Avaliable: <font class="RDT-menu-geral-text" id="RDT_lbl-SLD_PRESENT">???</font>
+					<input type="button" id="RDT_btn_openOnRE3SLDE" onclick="RDT_SLD_openOnSLDE();" value="Open SLD on RE3SLDE" class="botao-menu RDT_SLD_OPEN_RE3SLDE_btn none"><br>
+					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
+					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
+					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
+					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
+					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-tCameras">???</font><br>
+					<div id="RDT_mainMenu_totalMsgLbl" class="none">
+						Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font>
+					</div>
+					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
+					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
+				</div>
+			</div>
 			<!-- RDT SLD LAYERS (Masks) -->
 			<div class="menu" id="RDT_menu-10" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-SLD-hold">
@@ -1264,36 +1302,6 @@
 						</div><br>
 						<center><input type="button" title="Click here to send your changes!" class="RDT-btn-apply color-white" id="RDT_canvas_btn_apply" value="COMMIT CHANGES"></center>
 					</div>
-				</div>
-			</div>
-			<!-- RDT: General -->
-			<div class="menu" id="RDT_menu-1">
-				<div class="menu-general-content" id="RDT-geral" onclick="main_closeFileList();">
-					<div id="RDT_BG_1" class="RDT_BG_IMAGE"></div>
-					<center><font class="titulo">General</font></center>
-					File Name: <font class="RDT-menu-geral-text" id="RDT-lbl-FILENAME">???</font><br>
-					File Size: <font class="RDT-menu-geral-text" id="RDT_lbl_fSize">???</font><br>
-					File Path: <font class="RDT-menu-geral-text user-can-select" id="RDT-lbl-FILE_Path">???</font><br>
-					Map File: <font class="RDT-menu-geral-text user-can-select" id="RDT_mapFileName">???</font><br>
-					Original Local Name: <font class="RDT-menu-geral-text" id="RDT_lbl-localName">???</font><br>
-					Original City Location: <font class="RDT-menu-geral-text" id="RDT_lbl-localCity">???</font>
-					<div class="menu-separador"></div>
-					Pointers: <div class="RDT_lbl_pointers"><font id="RDT_lbl-msg_pointerSplit" class="user-can-select">???</font></div>
-					Message First Pointer: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_pointer">???</font><br>
-					Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
-					Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font>
-					<div class="menu-separador"></div>
-					Stage: <font class="RDT-menu-geral-text" id="RDT_lbl-stage">???</font><br>
-					SLD Avaliable: <font class="RDT-menu-geral-text" id="RDT_lbl-SLD_PRESENT">???</font>
-					<input type="button" id="RDT_btn_openOnRE3SLDE" onclick="RDT_SLD_openOnSLDE();" value="Open on RE3SLDE" class="botao-menu RDT_SLD_OPEN_RE3SLDE_btn none"><br>
-					Number of files: <font class="RDT-menu-geral-text" id="RDT_lbl-totalFiles">???</font><br>
-					Number of itens: <font class="RDT-menu-geral-text" id="RDT_lbl-totalItens">???</font><br>
-					Number of maps: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMaps">???</font><br>
-					Number of doors: <font class="RDT-menu-geral-text" id="RDT_lbl-totalDoors">???</font><br>
-					Number of cameras: <font class="RDT-menu-geral-text" id="RDT_lbl-tCameras">???</font><br>
-					Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font><br>
-					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
-					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 				</div>
 			</div>
 			<!-- RDT Message Block -->
