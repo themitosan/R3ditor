@@ -4,7 +4,7 @@ This file can (and will be) modified several times!
 
 ## Room Data Table (RDT)
 - Read items, files and maps! [WIP]
-- Refactor the message reading code! (it makes me feel like a idiot)
+- Refactor the message reading code! (it makes me feel like a idiot) [WIP]
 - Read messages of every single RDT file! (FA 02) [WIP]
 - Read all Doors [WIP]
 - Read Enemies on map
@@ -48,6 +48,9 @@ This file can (and will be) modified several times!
 - ~~Add 30K Health~~
 - ~~close process~~
 
+## TIM Patcher
+- Remake the tool!
+
 ## File generator
 - ~~Add option to alternate between diferent image sizes~~
 - ~~Add more text colors~~
@@ -58,6 +61,16 @@ This file can (and will be) modified several times!
 - ~~Add support for PS1 SLUS~~
 - ~~Add support for Gamecube main.dol~~
 - ~~Add support for Dreamcast 1ST_READ.BIN~~
+
+## IEDIT Editor (Item editor)
+- ~~Add support for all items combinations~~
+- ~~Add support for PS1 SLUS~~
+- ~~Add support for Gamecube main.dol~~
+- ~~Add support for Dreamcast 1ST_READ.BIN~~
+
+## R3 Patcher
+- ~~Add main options (MIX & IEDIT)~~ 
+- Add more options to patch!
 
 ## ARD Map File
 - Almost everything!
@@ -71,4 +84,3 @@ This file can (and will be) modified several times!
 - ~~Create a custom executable for nw.exe~~
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
-- Misc: Add support for saves from RE2! ~~(They are very similar! - Also, don't expect this sooner!)~~
