@@ -73,7 +73,6 @@
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
 		<div class="menu-topo menu-utility-fix none" id="menu-utility">
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
-			<input type="button" class="botao-menu" value="TIM Patcher [WIP]" title="It's a patcher for TIM files extracted with RE3SLDE" onclick="main_menu(5);">
 			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
 			<input type="button" class="botao-menu" value="ROFS Extractor" title="Extract Rofs**.dat files using rofs.exe" id="UTILS_rofsExtract_btn" onclick="triggerLoad(16);">
 			<!-- Right -->
@@ -138,11 +137,6 @@
 		<div class="menu-topo none" id="menu-topo-fileEditor">
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
-		</div>
-		<!-- Menu TIM Patcher -->
-		<div class="menu-topo none" id="menu-topo-TIMPATCHER">
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
-			<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="TIMPatcher_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
@@ -755,35 +749,6 @@
 						<input type="text" class="item-select-mod no-transform-text INI_dataVars" placeholder="Insert KeyE here" id="INI_edit_KeyE">
 					</div>
 				</div>
-			</div>
-		</div>
-
-		<!-- TIM Patcher -->
-		<div class="timPatcher_holder" id="TIMPATCHER" onclick="main_closeFileList();">
-			<center><font class="titulo timPatcher_titulo">TIM Patcher [WIP]</font></center>
-			<!-- Status -->
-			<div class="none" id="tim_patcher_status">
-				File: <font class="timPatcher_infos" id="TIMPATCHER_patchName">???</font><br>
-				Pattern min: <font class="timPatcher_infos" id="TIMPATCHER_lbl_patternMin">???</font><br>
-				Total Patches: <font class="timPatcher_infos" id="TIMPATCHER_totalPatches">???</font>
-				<div class="menu-separador"></div>
-				TIM Required: <font class="timPatcher_infos" id="TIMPATCHER_timName">???</font><br>
-				TIM Size: <font class="timPatcher_infos" id="TIMPATCHER_Size">???</font><br>
-				TIM BPP: <font class="timPatcher_infos" id="TIMPATCHER_BPP">???</font><br><br>
-				<center>Do you want to apply this patch?</center><br>
-				<div class="none" id="TIMPATCHER_applyBtns">
-					<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="NO" onclick="TIM_cancelPatch();">
-					<input type="button" class="RDT-btn-apply btn-apply-fix color-green" value="YES" onclick="triggerLoad(9);">
-				</div>
-			</div>
-			<!-- Start point -->
-			<div class="timPatcher_menu" id="tim_patcher_inicialMenu">
-				<center>
-					<i>A simple tool to fix TIM files extracted with <font title="RE3SLDE - by Leo2236">RE3SLDE</font>!</i><br>
-					Pattern min: <input type="number" min="2" max="20" step="1" maxlength="2" placeholder="2" id="TIMPATCHER_minLength" value="6" class="item-select-mod timPatcher_length">
-				</center><br>
-				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Create Patch" onclick="triggerLoad(7);">
-				<input type="button" class="RDT-btn-apply btn-apply-fix color-white" value="Apply Patch" onclick="triggerLoad(8);">
 			</div>
 		</div>
 
@@ -1765,10 +1730,6 @@
 			<input type="file" onchange="setLoadFile(19);" id="loadR3PatcherFile" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(20);" id="loadR3PatcherPatch" accept=".r3exepatch"/>
 			<input type="file" onchange="setLoadFile(21);" id="loadR3PatcherFINAL" accept=".exe, .23, .dol, .BIN"/>
-			<!-- TIM Patcher -->
-			<input type="file" onchange="setLoadFile(7);" id="loadTIMForm" accept=".tim"/>
-			<input type="file" onchange="setLoadFile(8);" id="loadTimMapForm" accept=".r3timmap"/>
-			<input type="file" onchange="setLoadFile(9);" id="loadTimForPatchForm" accept=".tim"/>
 		</div>
 	</body>
 </html>

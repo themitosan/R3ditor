@@ -829,17 +829,17 @@ function triggerLoad(loadForm){
 	if (loadForm === 6){
 		$('#loadRDTForm').trigger('click');
 	}
-	// TIM - Seek Pattern
+	// Free Slot
 	if (loadForm === 7){
-		$('#loadTIMForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - TIM Map
+	// Free Slot
 	if (loadForm === 8){
-		$('#loadTimMapForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - TIM To Patch
+	// Free Slot
 	if (loadForm === 9){
-		$('#loadTimForPatchForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
 	// INI Load
 	if (loadForm === 10){
@@ -965,41 +965,17 @@ function setLoadFile(input){
 			document.getElementById('loadRDTForm').value = '';
 		}
 	}
-	// TIM - Seek for Patch
+	// Free Slot
 	if (input === 7){
-		cFile = document.getElementById('loadTIMForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - Seek For Patch';
-		} else {
-			TIM_arquivoBruto = undefined;
-			TIM_loadTimToSeekPattern(cFile.path);
-			document.getElementById('loadTIMForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - Map File
+	// Free Slot
 	if (input === 8){
-		cFile = document.getElementById('loadTimMapForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - Map File';
-		} else {
-			TIM_mapFile = [];
-			TIM_openPatchFile(cFile.path);
-			document.getElementById('loadTimMapForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - File to be patched
+	// Free Slot
 	if (input === 9){
-		cFile = document.getElementById('loadTimForPatchForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - File To Patch';
-		} else {
-			TIM_arquivoBruto = undefined;
-			TIM_verifyToPatchFile(cFile.path);
-			document.getElementById('loadTimForPatchForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
 	// INI - INI Editor
 	if (input === 10){

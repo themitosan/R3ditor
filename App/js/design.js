@@ -445,18 +445,7 @@ function main_menu(anim){
 		$('#FILEGEN_menu').css({'height': '484px'});
 	}
 	if (anim === 5){ // TIM Patcher
-		document.title = APP_NAME + ' - TIM Patcher';
-		if (enable_mod === true){
-			$('#menu-topo-MOD').css({'display': 'none'});
-		}
-		$('#menu-topo-TIMPATCHER').css({'display': 'inline'});
-		if (DESIGN_ENABLE_ANIMS === true){
-			$('#img-logo').fadeOut({duration: 100, queue: false});
-			$('#TIMPATCHER').fadeIn({duration: 200, queue: false});
-		} else {
-			$('#img-logo').css({'display': 'none'});
-			$('#TIMPATCHER').css({'display': 'inline'});
-		}
+		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');
 	}
 	if (anim === 6){ // INI Editor
 		document.title = APP_NAME + ' - INI Editor (*.INI)';
@@ -1218,7 +1207,8 @@ function RDT_showMenu(id){
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
 	}
-	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true && RE3SLDE_CANRUN === true){
+	var sldExists = fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD');
+	if (enable_mod === true && sldExists === true && RE3SLDE_CANRUN === true){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
 	} else {
@@ -1232,7 +1222,6 @@ function RDT_showMenu(id){
 	$('#log-programa').css({'height': '86px', 'top': '626px'});
 	document.getElementById('RDT_lbl-stage').innerHTML = RDT_stage;
 	document.getElementById('RDT-map-select').innerHTML = RDT_EDIT_MAP;
-	document.getElementById('RDT_mapFileName').innerHTML = RDT_MAPFILE;
 	document.getElementById('RDT-file-select').innerHTML = RDT_EDIT_FILE;
 	document.getElementById('RDT-item-select').innerHTML = RDT_EDIT_ITEM;
 	document.getElementById('RDT_lbl_totDoors').innerHTML = RDT_totalDoors;
@@ -1779,7 +1768,6 @@ function RDT_showCanvasTab(){
 */
 function R3ditor_enableLiveStatusButton(){
 	if (MEM_JS_requreSucess === true){
-		$('#TIMPatcher_LIVESTATUS').css({'display': 'inline'});
 		$('#fileGen_LIVESTATUS').css({'display': 'inline'});
 		$('#main_LIVESTATUS').css({'display': 'inline'});
 		$('#RDT_LIVESTATUS').css({'display': 'inline'});
@@ -1792,7 +1780,6 @@ function R3ditor_enableLiveStatusButton(){
 	}
 }
 function R3ditor_disableLiveStatusButton(){
-	$('#TIMPatcher_LIVESTATUS').css({'display': 'none'});
 	$('#fileGen_LIVESTATUS').css({'display': 'none'});
 	$('#main_LIVESTATUS').css({'display': 'none'});
 	$('#RDT_LIVESTATUS').css({'display': 'none'});
