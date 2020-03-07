@@ -12,7 +12,6 @@ This file can (and will be) modified several times!
 - Edit every type of item, file or maps! (Header 68)
 - Edit all Doors [WIP]
 - Edit Enemies on map [WIP]
-- Add support for itens, files and maps with header 68
 - Add support for SLD Masks [WIP]
 - Add function to find and extract TIM files
 - ~~Add a Screenshot of map in all tabs (BSS)~~
@@ -23,7 +22,7 @@ This file can (and will be) modified several times!
 - Modify how many (and which one) maps you have
 - Modify how many (and which one) files you have
 - Add the ability to exchange where you are in the game
-- ~~Add God Mode (Add a lot of health to Jill / Carlos)~~
+- ~~Add God Mode (Add a LOT of health to Jill / Carlos)~~
 
 ## Bio3.ini (INI) [WIP]
 - ~~Create this section on App~~
@@ -81,6 +80,7 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Add the option to extract all the Rofs files~~
-- ~~Create a custom executable for nw.exe~~
+- ~~Create a custom executable for nw.exe (64 Bits)~~
+- Create a custom executable for nw.exe (32 Bits)
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
