@@ -38,7 +38,7 @@ This file can (and will be) modified several times!
 ## RE3 Livestatus (WIP)
 - ~~Add reset button~~
 - Add IGT (In-Game Time)
-- Add Current Player
+- ~~Add Current Player~~
 - Add Item Box
 - ~~Add Inventory~~
 - ~~Add Location~~
