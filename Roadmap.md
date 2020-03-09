@@ -30,7 +30,7 @@ This file can (and will be) modified several times!
 - ~~Modify BPP~~
 - ~~Modify Rofs Location~~
 - ~~Modify Volume~~
-- Modify Key Mapping [WIP]
+- Modify Key Mapping
 - ~~Modify Video Options (Texture Fixes, Voodoo...)~~
 - ~~Modify Drivers used on Audio / Video~~
 - Add the NG+ Option
@@ -46,9 +46,6 @@ This file can (and will be) modified several times!
 - ~~Enable Infinite HP~~
 - ~~Add 30K Health~~
 - ~~close process~~
-
-## TIM Patcher
-- Remake the tool!
 
 ## File generator
 - ~~Add option to alternate between diferent image sizes~~
@@ -67,7 +64,7 @@ This file can (and will be) modified several times!
 - ~~Add support for Gamecube main.dol~~
 - ~~Add support for Dreamcast 1ST_READ.BIN~~
 
-## R3 Patcher
+## Patcher
 - ~~Add main options (MIX & IEDIT)~~ 
 - Add more options to patch!
 
@@ -79,6 +76,12 @@ This file can (and will be) modified several times!
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
+- Implement a randomizer!
+- Compress the files for releases!
+- Improve the first boot message info
+- Merge IEDIT on a proper editor for EXE (MIX not inluded)
+- Implement / Improve a proper backup section on all sections
+- Remove all kind of ~~sassy~~ hacks inside all editors!
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe (64 Bits)~~
 - Create a custom executable for nw.exe (32 Bits)

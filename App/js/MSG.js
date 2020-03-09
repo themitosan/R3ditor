@@ -708,8 +708,8 @@ function MSG_SAVE_ON_RDT(msgHex){
 		MSG_updateMapFile(N_PONTEIRO);
 		var P_START = RDT_arquivoBruto.indexOf(localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()));
 		var P_END = parseInt(P_START + N_PONTEIRO.length);
-		
-		console.log(P_START + ' - ' + P_END + ' - ' + N_PONTEIRO);
+
+		console.log('Inicio: ' + P_START + ' - Fim: ' + P_END + ' - Ponteiros: ' + N_PONTEIRO);
 
 		RDT_START = NEW_RDT_0.slice(0, P_START);
 		RDT_END = NEW_RDT_0.slice(P_END, NEW_RDT_0.length);
@@ -734,7 +734,7 @@ function MSG_updateMapFile(pointer){
 	if (pointer !== ''){
 		var c = 0;
 		var temp_fm_file = [];
-		var newLine = 'POINTERS = ' + btoa(pointer);
+		var newLine = 'POINTERS = ' + btoa(pointer.match(/.{4,4}/g).reverse().toString().replace(new RegExp(',', 'gi'), ''));
 		fs.readFileSync(RDT_fm_path).toString().split('\n').forEach(function(line){ 
 			temp_fm_file.push(line);
 		});
@@ -744,6 +744,7 @@ function MSG_updateMapFile(pointer){
 			MapFile_new = MapFile_new + temp_fm_file[c] + '\n';
 			c++;
 		}
+		MapFile_new = MapFile_new.slice(0, parseInt(MapFile_new.length - 1));
 		try{
 			LOG_separator();
 			fs.writeFileSync(RDT_fm_path, MapFile_new, 'utf-8');

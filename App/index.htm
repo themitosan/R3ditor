@@ -104,7 +104,7 @@
 			</div>
 			<!-- Right -->
 			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" title="Click here to open the map list" class="botao-menu right none" id="RDT_openFileList" value="Open RDT List" onclick="main_renderFileList(3, 2);">
+			<input type="button" title="Click here to open the map list" class="botao-menu right none" id="RDT_openFileList" value="Open map list" onclick="main_renderFileList(3, 2);">
 			<input type="button" title="Click here to restore your last edition on this file" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" title="Click here to backup this file" class="botao-menu right none" id="RDT_backupBtn" value="Backup Map" onclick="RDT_Backup();">
 			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
@@ -115,10 +115,10 @@
 			<input type="button" title="Click here to reload this file" class="botao-menu none" id="MSG_reload" value="Reload MSG" onclick="MSG_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);">
 			<input type="button" title="Click here to open this MSG file on Hex Editor" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<input type="button" title="Click here to save this changes to a MSG file" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
-			<input type="button" title="Click here to appy your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
+			<input type="button" title="Click here to apply your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
 			<!-- Right -->
 			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
-			<input type="button" title="Click here to return to RDT" class="botao-menu right none" id="btn-goback-rdt" value="Return to RDT" onclick="MSG_goBackToRDT();">
+			<input type="button" title="Click here to return to map" class="botao-menu right none" id="btn-goback-rdt" value="Return to map" onclick="MSG_goBackToRDT();">
 			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu SAV -->
@@ -975,7 +975,7 @@
 					File Size: <font class="RDT-menu-geral-text" id="RDT_lbl_fSize">???</font><br>
 					File Path: <font class="RDT-menu-geral-text user-can-select" id="RDT-lbl-FILE_Path">???</font><br>
 					<div id="RDT_mainMenu_mapFilePath" class="none">
-						Map File: <font class="RDT-menu-geral-text user-can-select" id="RDT_mapFileName">???</font>
+						MapFile: <font class="RDT-menu-geral-text user-can-select" id="RDT_mapFileName">???</font>
 					</div>
 					Original Local Name: <font class="RDT-menu-geral-text" id="RDT_lbl-localName">???</font><br>
 					Original City Location: <font class="RDT-menu-geral-text" id="RDT_lbl-localCity">???</font>

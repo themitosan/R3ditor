@@ -21,7 +21,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = '0.3.2 [BETA]';
+var APP_VERSION = '0.0.3.2 [ALPHA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 /*
 	Onload
@@ -137,6 +137,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
 		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
+	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\RDTMAP2');
 	}
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
 		fs.unlinkSync(APP_PATH + '\\Update\\master.zip');

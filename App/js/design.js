@@ -117,11 +117,11 @@ function main_renderFileList(id, mode){
 		} else {
 			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
-			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
 		} else {
-			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
-				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
+				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
 			} else {
 				mFile = 'There is no Mapfile for this file. Open it to generate!';
 			}
@@ -146,9 +146,9 @@ function main_renderFileList(id, mode){
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + 
-			'.RDT<br>Path: <font title="' + originalPFile + '">' + pFile +  '</font><br>Map File: <font title="' + originalMFile + '">' + mFile + '</font><br>' + 
-			'<div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
+			'draggable="false" style="width: 134px;"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: <font title="' + originalPFile + 
+			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
+			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
 		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to bottom, #2d2d2d, #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
@@ -159,7 +159,7 @@ function main_renderFileList(id, mode){
 	if (id === 3){
 		fileList_gameMode = gameModePath;
 		$('#fileList_aba_list').css({'display': 'inline'});
-		document.getElementById('fileList_title').innerHTML = 'File List';
+		document.getElementById('fileList_title').innerHTML = 'Map List';
 		if (mode !== 3){
 			if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
 				var listRDT = fs.readdirSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\').filter(fn => fn.endsWith('.RDT'));
@@ -183,14 +183,14 @@ function main_renderFileList(id, mode){
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
 					if (gameModePath === 'DATA_AJ'){
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap2') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap2';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2';
 						} else {
 							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '.rdtmap2';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
 						} else {
 							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
@@ -211,7 +211,7 @@ function main_renderFileList(id, mode){
 					var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + gameModePath + '_' + RDT_name.toUpperCase() + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Game Mode: ' + gMODE + 
-						'<br>Map File: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + 
+						'<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + 
 						'<br>Original City Location: ' + origCity + '<br></div></div>';
 					if (gameModePath === 'DATA_E'){
 						$('#fileListHolder').append(fileList_HTML_template);
@@ -253,7 +253,8 @@ function main_renderFileList(id, mode){
 				fs.readFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor').toString().split('\n').forEach(function(line){ 
 					fList.push(line); 
 				});
-				while (c < fList.length){
+				while (c < parseInt(fList.length - 1)){
+					fList.splice();
 					var mFile;
 					var gMODE;
 					var imgPreview;
@@ -271,16 +272,16 @@ function main_renderFileList(id, mode){
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
 
-					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
+					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2') === true){
 						gMODE = 'Easy';
-						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2';
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
 							gMODE = 'Hard';
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
 						} else {
 							gMODE = 'Unknown';
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no MapFile for this ' + RDT_fileType + '. Open it to generate!';
 						}
 					}
 					if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
@@ -295,7 +296,7 @@ function main_renderFileList(id, mode){
 						var RECENT_FILE_INSIDE_HTML_TEMPLATE = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">(' + parseInt(c + 1) + ') File: ' + RDT_name.toUpperCase() + 
-						'.RDT<br>Game Mode: ' + gMODE + '<br>Map File: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
+						'.RDT<br>Game Mode: ' + gMODE + '<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
 						'</div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 						$('#RDT_lastThreeFiles').append(RECENT_FILE_INSIDE_HTML_TEMPLATE);
 					}
@@ -351,9 +352,9 @@ function main_renderFileList(id, mode){
 			while (c < SAV_list.length){
 				var currentSAV = SAV_list[c];
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_c" id="SAV_file_' + c + '"' + 
-					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
-					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)<div class="menu-separador"></div>' + 
-					'Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
+					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + 
+					'\\App\\img\\SAVICON.png" class="fileList_img" draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)' + 
+					'<div class="menu-separador"></div>Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
 				$('#fileListHolder').append(fileList_HTML_template);
 				c++;
 			}

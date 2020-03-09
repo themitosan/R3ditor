@@ -69,6 +69,7 @@ var RDT_MSGTEXT_currentBlkSize;
 
 // MSG Code
 var RDT_messageCodesArray = [];
+
 //
 var RDT_fileType;
 var RDT_totalDoors;
@@ -187,7 +188,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 			Remove the code above later
 		*/
 		RDT_fileType = getFileExtension(ORIGINAL_FILENAME);
-		RDT_fm_path = APP_PATH + '\\Configs\\RDT\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.rdtmap2';
+		RDT_fm_path = APP_PATH + '\\Configs\\RDT\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '_' + RDT_fileType + '.rdtmap2';
 		RDT_fm_avaliable = fs.existsSync(RDT_fm_path);
 		LOG_addLog('log', 'MAP - INFO: The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
@@ -1601,6 +1602,8 @@ function RDT_removeMapFile(){
 function RDT_MSG_checkBlockHealth(){
 	if (RDT_MSGTEXT_currentBlkSize !== RDT_MSGTEXT_MAXSIZE){
 		var b = parseInt(RDT_MSGTEXT_MAXSIZE, 16);
+		$('#RDT_msgBlock_health').removeClass('red');
+		$('#RDT_msgBlock_health').removeClass('green');
 		var a = parseInt(RDT_MSGTEXT_currentBlkSize, 16);
 		if (a > b){
 			document.getElementById('RDT_msgBlock_health').innerHTML = 'Bad';
@@ -1630,8 +1633,8 @@ function RDT_MSG_checkBlockHealth(){
 		$('#MSG_RDT_lbl_blockUsage').removeClass('green');
 	}
 	document.getElementById('MSG_RDT_lbl_blockSize').innerHTML = RDT_MSGTEXT_MAXSIZE.toUpperCase();
-	document.getElementById('RDT_lbl-msg_blockHex').innerHTML = '(Hex: ' + RDT_MSGTEXT_MAXSIZE.toUpperCase() + ' - String: ' + parseInt(RDT_MSGTEXT_MAXSIZE, 16) + ')';
-	document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = '(Hex: ' + RDT_MSGTEXT_currentBlkSize.toUpperCase() + ' - String: ' + parseInt(RDT_MSGTEXT_currentBlkSize, 16) + ' - ' + parsePercentage(parseInt(RDT_MSGTEXT_currentBlkSize, 16), parseInt(RDT_MSGTEXT_MAXSIZE, 16)) + '%)';
+	document.getElementById('RDT_lbl-msg_blockHex').innerHTML = '(Hex: <font class="user-can-select">' + RDT_MSGTEXT_MAXSIZE.toUpperCase() + '</font> - String: <font class="user-can-select">' + parseInt(RDT_MSGTEXT_MAXSIZE, 16) + '</font>)';
+	document.getElementById('RDT_lbl-msg_c_blockHex').innerHTML = '(Hex: <font class="user-can-select">' + RDT_MSGTEXT_currentBlkSize.toUpperCase() + '</font> - String: <font class="user-can-select">' + parseInt(RDT_MSGTEXT_currentBlkSize, 16) + '</font> - ' + parsePercentage(parseInt(RDT_MSGTEXT_currentBlkSize, 16), parseInt(RDT_MSGTEXT_MAXSIZE, 16)) + '%)';
 	document.getElementById('MSG_RDT_lbl_blockUsage').innerHTML = RDT_MSGTEXT_currentBlkSize.toUpperCase() + ' (' + Math.floor((parseInt(RDT_MSGTEXT_currentBlkSize, 16) / parseInt(RDT_MSGTEXT_MAXSIZE, 16)) * 100) + '%)';
 }
 function RDT_MSG_decryptText(useMode){
@@ -1703,7 +1706,6 @@ function RDT_MSG_transferMessageToMsgEdit(msgId){
 		document.getElementById('RDT_MSG_NUMBER').innerHTML = 'Message ' + parseInt(msgId + 1) + ' - ';
 		MSG_CURRENT_RDT_MESSAGE_END = parseInt(RDT_arquivoBruto.indexOf(sessionStorage.getItem('MESSAGE_HEX_' + msgId)) + sessionStorage.getItem('MESSAGE_HEX_' + msgId).length);
 		MSG_CURRENT_RDT_MESSAGE_START = RDT_arquivoBruto.indexOf(sessionStorage.getItem('MESSAGE_HEX_' + msgId));
-		console.log(MSG_CURRENT_RDT_MESSAGE_START + ' - ' + MSG_CURRENT_RDT_MESSAGE_END);
 		MSG_startMSGDecrypt_Lv2(msg_transfer);
 		TRANSFER_RDT_TO_MSG();
 	} else {
@@ -1714,7 +1716,7 @@ function RDT_MSG_transferMessageToMsgEdit(msgId){
 function RDT_fileMap_getPointers(pointersHex){
 	if (pointersHex !== ''){
 		var c = 0;
-		var totalPushes = 300; // I need to find where this info are stored inside RDT!
+		var totalPushes = 300; // I need to find where this info are stored inside RDT / ARD!
 		var FA_startPosition = RDT_arquivoBruto.indexOf(pointersHex);
 		var crop_start = parseInt(FA_startPosition - 4);;
 		var crop_end = FA_startPosition;
@@ -1739,7 +1741,6 @@ function RDT_fileMap_getPointers(pointersHex){
 				crop_end = parseInt(crop_end - 4);
 				c++;
 			} else {
-				console.log('MAP - Pointer found! ' + pointersCompiled);
 				RDT_fileMap_generateFile(c, pointersCompiled, FA_startPosition);
 				break;
 			}
@@ -1958,6 +1959,25 @@ function RDT_posMoveDiagonal(mode){
 	}
 	RDT_updateCanvasInfos(0);
 }
+/*
+	Backup, Restore & Write files
+*/
+function RDT_fileMap_backup(){
+	if (RDT_fm_avaliable === true){
+		var bckFile = fs.readFileSync(RDT_fm_path, 'hex');
+		var newBckPath = APP_PATH + '\\Backup\\RDTMAP2\\' + getFileName(RDT_lastBackup).replace('backup', '.rdtmap2');
+		try{
+			fs.writeFileSync(newBckPath, bckFile, 'hex');
+			LOG_separator();
+			LOG_addLog('log', 'MAP - The MapFile backup was made successfully!');
+			LOG_addLog('log', 'MAP - Path: <font class="user-can-select">' + newBckPath + '</font>');
+		} catch (err){
+			LOG_addLog('error', 'MAP - ERROR: Something went wrong during backup process!');
+			LOG_addLog('error', 'MAP - Details: ' + err);
+		}
+	}
+	LOG_scroll();
+}
 function RDT_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (RDT_arquivoBruto !== undefined){
@@ -1969,6 +1989,7 @@ function RDT_Backup(){
 			LOG_addLog('log', 'MAP - Folder: <font class="user-can-select">' + APP_PATH + '\\Backup\\RDT\\' + backup_name + '</font>');
 			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
 			LOG_separator();
+			RDT_fileMap_backup();
 			WZ_saveConfigs(true);
 			$('#RDT_restoreLastBackup').css({'display': 'inline'});
 		} catch (err){
@@ -1989,34 +2010,41 @@ function RDT_restoreLastBackup(){
 		var ask = confirm('Restore Last Backup\n\nMap: ' + mName + '\nOriginal Local Name: ' + loc + '\nPath: ' + RDT_lastBackup + '\n\nDo you want to proceed?');
 		if (ask === true){
 			try{
-				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.RDT') === true){
-					fs.unlinkSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.RDT');
+				if (RDT_fm_avaliable === true){
+					fs.unlinkSync(APP_PATH + '\\Configs\\RDT\\' + mName + '_' + RDT_fileType + '.rdtmap2');
+				}
+				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.' + RDT_fileType) === true){
+					fs.unlinkSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.' + RDT_fileType);
 				}
 				RDT_restoreLastBackup_1(mName);
 			} catch (err){
 				console.error(err);
-				LOG_addLog('error', 'MAP - ERROR: Unable to delete RDT!');
+				LOG_addLog('error', 'MAP - ERROR: Unable to delete ' + RDT_fileType + ' file!');
 				LOG_addLog('error', err);
 			}
 		}
 	} else {
 		$('#RDT_restoreLastBackup').css({'display': 'none'});
-		LOG_addLog('warn', 'WARN - Unable to find backup!');
+		LOG_addLog('warn', 'MAP - WARN: Unable to find backup!');
 		LOG_scroll();
 	}
 }
 function RDT_restoreLastBackup_1(name){
 	try{
+		if (RDT_fm_avaliable === true){
+			var fm_bck = fs.readFileSync(APP_PATH + '\\Backup\\RDTMAP2\\' + getFileName(RDT_lastBackup).replace('backup', '.rdtmap2'), 'utf-8');
+			fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + name + '_' + RDT_fileType + '.rdtmap2', fm_bck, 'utf-8');
+		}
 		var BK = fs.readFileSync(RDT_lastBackup, 'hex');
-		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT', BK, 'hex');
-		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
+		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.' + RDT_fileType, BK, 'hex');
+		alert('File: ' + name + '.' + RDT_fileType + '\n\nThe backup was restored successfully!');
 		if (ORIGINAL_FILENAME !== undefined){
-			RDT_CARREGAR_ARQUIVO(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT');
+			RDT_CARREGAR_ARQUIVO(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.' + RDT_fileType);
 		}
 	} catch (err){
-		console.error(err);
 		LOG_addLog('error', 'MAP - ERROR: Unable to restore backup!');
 		LOG_addLog('error', err);
+		console.error(err);
 	}
 }
 function RDT_COMPILE_Lv1(){
@@ -2053,7 +2081,7 @@ function RDT_COMPILE_Lv1(){
 			console.error(err);
 		}
 	} else {
-		LOG_addLog('error', 'MAP - ERROR: You cannot save an RDT file if you have not opened it!');
+		LOG_addLog('error', 'MAP - ERROR: You cannot save an map if you have not opened it!');
 	}
 	LOG_scroll();
 }
