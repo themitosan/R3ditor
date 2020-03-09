@@ -111,7 +111,7 @@ input[type='range' i]{
     text-shadow: 0px 0px 10px #0f0;
 }
 .RDT_lbl_pointers{
-    left: 200px;
+    left: 206px;
     width: 1104px;
     position: sticky;
     margin-top: -18px;
@@ -190,6 +190,8 @@ input[type='range' i]{
 }
 .botao-menu:active{
     color: #0f0;
+    box-shadow: 0 0 4px #222;
+    text-shadow: 0 0 10px #fff;
     background-image: linear-gradient(to bottom, #000, #001c00);
 }
 .botao-aplicar{
@@ -265,7 +267,7 @@ input[type='range' i]{
 	position: sticky;
 }
 .RDT-menu-geral-text{
-    left: 200px;
+    left: 206px;
     position: sticky;
 }
 .menu-general-btn{
@@ -929,6 +931,7 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #fff, #c4c4c4);
 }
 .botao-add-comando:active{
+    box-shadow: 0 0 4px #222;
     text-shadow: 0px 0px 10px #fff;
     background-image: linear-gradient(to bottom, #c1c1c1, #fff);
 }
@@ -2332,7 +2335,7 @@ input[type='range' i]{
     margin-top: -36px;
 }
 .RDT_SLD_OPEN_RE3SLDE_btn{
-    left: 230px;
+    left: 234px;
     position: sticky;
 }
 .RDT_SLD_MASK_IMG_BLOCK{

@@ -998,7 +998,7 @@ var MSG_DICIONARIO = {
 	// Special commands (functions)
 	'70': [true, '(Function: Select Option ', 					   11],
 	'fa': [true, '(Function: Show Message ', 	    	 			1],
-	'fe': [true, '(Function: End Message ',				 			2],
+	'fe': [true, '<br>(Function: End Message ',				 		2],
 	'ea': [true, '(Function: Show Special Char ',				 	4], // (Depende do valor inserido)
 	'f0': [true, '(Function: Show Special Char ',			 		4], // (Depende do valor inserido)
 	'f8': [true, '(Function: Show Item Name ',	 		 			5],

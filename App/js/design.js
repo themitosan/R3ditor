@@ -420,7 +420,7 @@ function main_menu(anim){
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + ' - RDT Editor (*.RDT, *.ARD)';
+		document.title = APP_NAME + ' - Map Editor';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
 			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
@@ -1129,7 +1129,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - RDT Editor (*.RDT) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType;
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1249,9 +1249,6 @@ function RDT_showMenu(id){
 	$('#RDT_menu-' + id).css({'display': 'block'});
 	$('#menu-RDT').css({'display': 'block'});
 	RDT_applyMenuFocus(id);
-	if (getFileName(ORIGINAL_FILENAME) === 'r212' || getFileName(ORIGINAL_FILENAME) === 'r20b' || getFileName(ORIGINAL_FILENAME) === 'r216'){
-		$('#RDT-aba-menu-2').css({'display': 'none'});
-	}
 	RDT_Error_404();
 	LOG_scroll();
 }
@@ -1267,7 +1264,8 @@ function RDT_renderMSGInfos(){
 		document.getElementById('RDT_lbl-totMsg').innerHTML = RDT_totalMessages;
 		document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
 		document.getElementById('RDT-aba-menu-2').value = 'Message Block (' + RDT_totalMessages + ')';
-		document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = RDT_MSGTEXT_POINTERS.toUpperCase().match(/.{4,4}/g);
+		document.getElementById('RDT_lbl-msg_blockHex').innerHTML = '(Hex: ' + RDT_MSGTEXT_MAXSIZE + ' - String: ' + parseInt(RDT_MSGTEXT_MAXSIZE, 16) + ')';
+		document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = RDT_MSGTEXT_POINTERS.match(/.{4,4}/g).reverse().toString().replace(new RegExp(',', 'gi'), ' ').toUpperCase();
 	} else {
 		$('#RDT-aba-menu-2').css({'display': 'none'});
 		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
@@ -1286,6 +1284,17 @@ function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
 		newOpacity = '1.00';
 	}
 	document.getElementById('RDT_SLD_LBL_BG_OPACITY').innerHTML = newOpacity;
+}
+function RDT_canvasResetPos(){
+	document.getElementById('RDT_slider_X').value = 0;
+	document.getElementById('RDT_slider_Y').value = 0;
+	document.getElementById('RDT_slider_Z').value = 0;
+	document.getElementById('RDT_slider_R').value = 0;
+	document.getElementById('RDT_slider_D').value = 0;
+	document.getElementById('RDT_slider_D2').value = 0;
+	document.getElementById('RDT_lbl_pd').innerHTML = '0';
+	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
+	RDT_updateCanvasInfos(0);
 }
 function RDT_showEditCamera(index, camEdit, codeHex){
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;

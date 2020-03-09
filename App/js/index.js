@@ -21,7 +21,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = '0.3.1 [BETA]';
+var APP_VERSION = '0.3.2 [BETA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 /*
 	Onload
@@ -65,7 +65,7 @@ function load(){
 	if (nw.process.arch !== 'ia32'){
 		MEMORY_JS_verifyNodeJsVer();
 	} else {
-		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
+		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
 		MAIN_32BitMode = true;
 	}
 	try{
@@ -551,6 +551,19 @@ function R3DITOR_downloadFile(url, downloadFileName){
 /* 
 	Utils
 */
+/// Calc MSG Pointers
+function processPointers(mode, firstPointer, secondPointer){
+	// Mode 0: Hex, 1: String
+	if (mode === 0){
+		if (firstPointer !== '' && secondPointer !== '' && firstPointer !== undefined && secondPointer !== undefined){
+			return parsePositive((processBIO3Vars(firstPointer) - processBIO3Vars(secondPointer)).toString(16));
+		}
+	} else {
+		if (firstPointer !== '' && secondPointer !== '' && firstPointer !== undefined && secondPointer !== undefined){
+			return parsePositive((processBIO3Vars(firstPointer) - processBIO3Vars(secondPointer)).toString(16)) * 2;
+		}
+	}
+}
 /// Get file names
 function getFileName(file){
 	if (file !== '' && file !== undefined){

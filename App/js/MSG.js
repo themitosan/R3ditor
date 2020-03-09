@@ -1,4 +1,4 @@
-﻿/*
+/*
 	R3ditor - MSG.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Réupi mi!
@@ -34,6 +34,7 @@ function MSG_goBackToRDT(){
 	MSG_CURRENT_RDT_MESSAGE_END = 0;
 	MSG_CURRENT_RDT_MESSAGE_START = 0;
 	document.title = APP_NAME + ' - Please wait...';
+	RDT_MSG_checkBlockHealth();
 	TRANSFER_MSG_TO_RDT();
 	RDT_openFile(ORIGINAL_FILENAME);
 	$('#RDT-aba-menu-2').trigger('click');
@@ -103,7 +104,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				}
 				// Show Item Name
 				if (RAW_DATA_ARRAY[startPoint] === 'f8'){
-					//console.log("Item hex: " + RAW_DATA_ARRAY[startPoint + 1] + " (F8 " + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ")");
+					//console.log('Item hex: ' + RAW_DATA_ARRAY[startPoint + 1] + ' (F8 ' + RAW_DATA_ARRAY[startPoint + 1].toUpperCase() + ')');
 					var checkItem = parseInt(RAW_DATA_ARRAY[startPoint + 1], 16);
 					if (checkItem < 134){
 						COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
@@ -646,8 +647,7 @@ function MSG_renderPreviewBlock(c_msg_hex){
 	if (RDT_arquivoBruto !== undefined){
 		var c = 1;
 		var msgs = '';
-		var t = parseInt(RDT_totalMessages + 1);
-		while(c < t){
+		while(c < RDT_totalMessages){
 			if (c === MSG_ID){
 				c++;
 			} else {
@@ -656,12 +656,15 @@ function MSG_renderPreviewBlock(c_msg_hex){
 			}
 		}
 		msgs = msgs + c_msg_hex;
-		if (msgs.length === parseInt(block_size_hex, 16)){
+		var testResult = parseInt(msgs.length / 2).toString(16);
+		if (testResult === RDT_MSGTEXT_MAXSIZE){
+			$('#MSG_RDT_lbl_blockUsage').removeClass('red');
 			$('#MSG_RDT_lbl_blockUsage').addClass('green');
 		} else {
 			$('#MSG_RDT_lbl_blockUsage').removeClass('green');
+			$('#MSG_RDT_lbl_blockUsage').addClass('red');
 		}
-		return msgs.length.toString(16).toUpperCase() + ' (' + parsePercentage(msgs.length, parseInt(block_size_hex, 16)) + '%)';
+		return '<font class="user-can-select">' + testResult.toUpperCase() + '</font> (' + parsePercentage(parseInt(msgs.length / 2), parseInt(RDT_MSGTEXT_MAXSIZE, 16)) + '%)';
 	}
 }
 function MAKE_NEW_POINTERS(msg_hex){
@@ -669,7 +672,7 @@ function MAKE_NEW_POINTERS(msg_hex){
 	var NEXT_POINTER;
 	var OLD_POINTERS = localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()).match(/.{1,4}/g);
 	var NEW_POINTERS = OLD_POINTERS[0];
-	//console.log('Old pointers: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + "\n" + OLD_POINTERS);
+	//console.log('Old pointers: ' + localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()) + '\n' + OLD_POINTERS);
 	while(c < OLD_POINTERS.length){
 		if (c !== parseInt(OLD_POINTERS.length - 1)){
 			if (c < MSG_ID){
@@ -692,6 +695,7 @@ function MAKE_NEW_POINTERS(msg_hex){
 			break;
 		}
 	}
+	console.log('Novos ponteiros: ' + NEW_POINTERS);
 	return NEW_POINTERS;
 }
 function MSG_SAVE_ON_RDT(msgHex){
@@ -701,24 +705,54 @@ function MSG_SAVE_ON_RDT(msgHex){
 		var RDT_END = RDT_arquivoBruto.slice(parseInt(MSG_CURRENT_RDT_MESSAGE_END), RDT_arquivoBruto.length);
 		var NEW_RDT_0 = RDT_START + msgHex + RDT_END;
 		var N_PONTEIRO = MAKE_NEW_POINTERS(msgHex);
-		var P_START = parseInt(mapfile[5]);
+		MSG_updateMapFile(N_PONTEIRO);
+		var P_START = RDT_arquivoBruto.indexOf(localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()));
 		var P_END = parseInt(P_START + N_PONTEIRO.length);
+		
+		console.log(P_START + ' - ' + P_END + ' - ' + N_PONTEIRO);
+
 		RDT_START = NEW_RDT_0.slice(0, P_START);
 		RDT_END = NEW_RDT_0.slice(P_END, NEW_RDT_0.length);
+
 		var RDT_FINAL = RDT_START + N_PONTEIRO + RDT_END;
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');
 			LOG_separator();
-			LOG_addLog('log', 'INFO - The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT');
-			LOG_addLog('log', 'Folder: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			LOG_addLog('log', 'MSG - INFO: The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType);
+			LOG_addLog('log', 'MSG - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
 		} catch(err){
-			var msgError = 'ERROR - Something went wrong while saving - ';
-			LOG_addLog('error', msgError + err);
-			console.error(msgError + err);
+			LOG_addLog('error', 'MSG - ERROR: Something went wrong while saving!');
+			LOG_addLog('error', 'MSG - Details: ' + err);
 		}
 	} else {
-		LOG_addLog('error', 'ERROR - Function list are empty or RDT file was not defined!');
+		LOG_addLog('error', 'ERROR - Function list are empty or <u>you are not using this software properly!</u>');
+	}
+	LOG_scroll();
+}
+function MSG_updateMapFile(pointer){
+	if (pointer !== ''){
+		var c = 0;
+		var temp_fm_file = [];
+		var newLine = 'POINTERS = ' + btoa(pointer);
+		fs.readFileSync(RDT_fm_path).toString().split('\n').forEach(function(line){ 
+			temp_fm_file.push(line);
+		});
+		temp_fm_file[5] = newLine;
+		var MapFile_new = '';
+		while (c < temp_fm_file.length){
+			MapFile_new = MapFile_new + temp_fm_file[c] + '\n';
+			c++;
+		}
+		try{
+			LOG_separator();
+			fs.writeFileSync(RDT_fm_path, MapFile_new, 'utf-8');
+			LOG_addLog('log', 'MSG - INFO: The MapFile was updated successfully!');
+			LOG_addLog('log', 'MSG - Path: <font class="user-can-select">' + RDT_fm_path + '</font>');
+		} catch(err){
+			LOG_addLog('error', 'MSG - ERROR: Error while updating MapFile!');
+			LOG_addLog('error', 'MSG - Details: ' + err);
+		}
 	}
 	LOG_scroll();
 }
