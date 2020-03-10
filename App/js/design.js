@@ -110,6 +110,7 @@ function main_renderFileList(id, mode){
 		var origCity = 'Unknown';
 		var pFile = RDT_lastFileOpened;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
+		var mapExt = getFileExtension(RDT_lastFileOpened).toUpperCase();
 		if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
 			imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
 		} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
@@ -117,11 +118,11 @@ function main_renderFileList(id, mode){
 		} else {
 			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
-			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 		} else {
-			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
-				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
+				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 			} else {
 				mFile = 'There is no Mapfile for this file. Open it to generate!';
 			}
@@ -263,7 +264,7 @@ function main_renderFileList(id, mode){
 					var origCity = 'Unknown';
 					var currentRDT = fList[c];
 					var RDT_name = getFileName(fList[c]).toUpperCase();
-
+					var mapExt = getFileExtension(fList[c]).toUpperCase();
 					if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
 						imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
 					} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
@@ -271,14 +272,13 @@ function main_renderFileList(id, mode){
 					} else {
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
-
-					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2') === true){
+					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_' + mapExt + '.rdtmap2') === true){
 						gMODE = 'Easy';
-						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2';
+						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_' + mapExt + '.rdtmap2';
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
 							gMODE = 'Hard';
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 						} else {
 							gMODE = 'Unknown';
 							mFile = 'There is no MapFile for this ' + RDT_fileType + '. Open it to generate!';
@@ -296,7 +296,7 @@ function main_renderFileList(id, mode){
 						var RECENT_FILE_INSIDE_HTML_TEMPLATE = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">(' + parseInt(c + 1) + ') File: ' + RDT_name.toUpperCase() + 
-						'.RDT<br>Game Mode: ' + gMODE + '<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
+						'.' + mapExt + '<br>Game Mode: ' + gMODE + '<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
 						'</div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 						$('#RDT_lastThreeFiles').append(RECENT_FILE_INSIDE_HTML_TEMPLATE);
 					}
@@ -1113,7 +1113,7 @@ function MSG_showTranslateInput(){
 	$('#MSG_ADDFUNC_BTN_11').css({'display': 'none'});
 }
 function MSG_renderCamPreview(){
-	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
+	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true && RDT_fileType === 'RDT'){
 		var currentFile = getFileName(ORIGINAL_FILENAME).toUpperCase().slice(0, 4);
 		var currentCam = document.getElementById('msg-selectCam-id').value.toUpperCase();
 		var camImg = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + currentFile + currentCam + '.JPG';
@@ -1208,8 +1208,13 @@ function RDT_showMenu(id){
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
 	}
+	if (RDT_fileType === 'RDT'){
+		document.getElementById('RDT-lbl-fileVersion').innerHTML = 'PC \\ GameCube \\ DreamCast';
+	} else {
+		document.getElementById('RDT-lbl-fileVersion').innerHTML = 'PlayStation (PS1)';
+	}
 	var sldExists = fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD');
-	if (enable_mod === true && sldExists === true && RE3SLDE_CANRUN === true){
+	if (enable_mod === true && sldExists === true && RE3SLDE_CANRUN === true && RDT_fileType === 'RDT'){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
 	} else {
@@ -1236,15 +1241,16 @@ function RDT_showMenu(id){
 	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME;
 	document.getElementById('RDT_lbl-totItens').innerHTML = RDT_totalItensGeral;
 	document.getElementById('RDT_lbl_totalCameras').innerHTML = RDT_totalCameras;
-	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-6').value = 'Doors (' + RDT_totalDoors +')';
+	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-5').value = 'Audios (' + RDT_totalAudios +')';
 	document.getElementById('RDT-aba-menu-9').value = 'Cameras (' + RDT_totalCameras +')';
 	document.getElementById('RDT_lbl_totalmsgCode').innerHTML = RDT_messageCodesArray.length;
+	document.getElementById('RDT-aba-menu-8').value = 'Enemies / NPC\'s (' + RDT_totalEnemies + ')';
 	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
-	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType;
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
 	//
 	$('#RDT_menu-' + id).css({'display': 'block'});
@@ -1415,7 +1421,7 @@ function RDT_showEditDoor(index, id, hex){
 		RDT_renderEditDoorCamPreview();
 	}
 	$('#RDT-door-Edit').css({'display': 'block'});
-	$('#RDT_door_holder').css({'width': '738px'});
+	$('#RDT_door_holder').css({'width': '686px'});
 }
 function RDT_doorValidadeInput(){
 	document.getElementById('RDT_door-edit-X').value      = document.getElementById('RDT_door-edit-X').value.toUpperCase();
@@ -1459,7 +1465,7 @@ function RDT_renderNextRDTLbl(){
 	var nrn = document.getElementById('RDT_door-edit-NRN').value;
 	if (nrn.length === 2 && rst.length === 1){
 		var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
-		document.getElementById('RDT_lbl_door_nextRDT').innerHTML = rComp + '.RDT';
+		document.getElementById('RDT_lbl_door_nextRDT').innerHTML = rComp + '.' + RDT_fileType;
 		var existsRDT = fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + rComp + '.RDT');
 		if (existsRDT === true){
 			document.getElementById('RDT_lbl_door_nextRDT').title = RDT_locations[rComp][0] + ', ' + RDT_locations[rComp][1];

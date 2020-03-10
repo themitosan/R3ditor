@@ -912,8 +912,10 @@ input[type='range' i]{
     background-image: linear-gradient(to right, #a29d00, transparent);
 }
 .camPreview{
+    z-index: 0;
     display: none;
     height: 260px;
+    position: inherit;
     padding-top: 10px;
     box-shadow: 0px 0px 10px #41419c;
 }
@@ -1112,7 +1114,7 @@ input[type='range' i]{
     left: 830px !important;
 }
 .RDT_door_textEditFix_0{
-    left: 844px;
+    left: 792px;
     width: 52px;
     position: sticky;
 }
@@ -1130,13 +1132,12 @@ input[type='range' i]{
     width: 52px;
 }
 .RDT_door_textEditFix_4{
-    left: 840px;
-    width: 462px;
+    width: 380px;
     position: sticky;
 }
 .RDT_door-edit-posFix{
-    left: 766px !important;
-    width: 536px !important;
+    left: 714px !important;
+    width: 586px !important;
 }
 .menu-utility-fix{
     top: 526px;
@@ -1266,8 +1267,8 @@ input[type='range' i]{
     padding-left: 10px;
 }
 .RDT-Item-Misc-3{
-    width: 30%;
     left: 460px;
+    width: 146px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
@@ -1573,6 +1574,10 @@ input[type='range' i]{
     margin-top: 6px;
     margin-bottom: 2px;
 }
+.MSG_editCameraSelectFix{
+    z-index: 3;
+    position: relative;
+}
 /*
     FileGen
 */
@@ -1676,7 +1681,7 @@ input[type='range' i]{
     width: 340px;
 }
 /*
-    File list
+    Filelist
 */
 .fileList_aba_holder{
     position: absolute;

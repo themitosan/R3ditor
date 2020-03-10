@@ -110,7 +110,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 						COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
 					} else {
 						//COMMAND = ITEM[RAW_DATA_ARRAY[startPoint + 1]][0];
-						RDT_requestFix(0);
+						LOG_addLog('error', 'MSG - ERROR: Unknown Hex! (' + checkItem.toString(16) + ')');
 						break;
 					}
 				} else {
@@ -377,7 +377,7 @@ function MSG_translateHexValues(){
 	}
 }
 function MSG_seekCameras(){
-	if (RDT_arquivoBruto !== undefined && enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
+	if (RDT_arquivoBruto !== undefined && enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true && RDT_fileType === 'RDT'){
 		var c = 0;
 		MSG_useSeekCameras = true;
 		$('#msg-cam-id').css({'display': 'none'});
@@ -708,12 +708,8 @@ function MSG_SAVE_ON_RDT(msgHex){
 		MSG_updateMapFile(N_PONTEIRO);
 		var P_START = RDT_arquivoBruto.indexOf(localStorage.getItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase()));
 		var P_END = parseInt(P_START + N_PONTEIRO.length);
-
-		console.log('Inicio: ' + P_START + ' - Fim: ' + P_END + ' - Ponteiros: ' + N_PONTEIRO);
-
 		RDT_START = NEW_RDT_0.slice(0, P_START);
 		RDT_END = NEW_RDT_0.slice(P_END, NEW_RDT_0.length);
-
 		var RDT_FINAL = RDT_START + N_PONTEIRO + RDT_END;
 		try {
 			fs.writeFileSync(ORIGINAL_FILENAME, RDT_FINAL, 'hex');

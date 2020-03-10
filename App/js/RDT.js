@@ -76,6 +76,7 @@ var RDT_totalDoors;
 var RDT_totalAudios;
 var RDT_arquivoBruto;
 var RDT_itemIndexRAW;
+var RDT_totalEnemies;
 var RDT_totalItensGeral;
 var RDT_lastBackup = '';
 var RDT_enemiesArray = [];
@@ -103,6 +104,7 @@ function RDT_resetVars(){
 	RDT_loading = false;
 	RDT_CANCRASH = false;
 	RDT_totalCameras = 0;
+	RDT_totalEnemies = 0;
 	RDT_cameraArray = [];
 	RDT_enemiesArray = [];
 	RDT_selectedPoint = 0;
@@ -139,6 +141,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		localStorage.clear();
 		RDT_editItemCancel();
 		RDT_totalCameras = 0;
+		RDT_totalEnemies = 0;
 		RDT_cameraArray = [];
 		RDT_enemiesArray = [];
 		sessionStorage.clear();
@@ -168,6 +171,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		document.getElementById('RDT_lbl_pd2').innerHTML = '0';
 		document.getElementById('RDT_CANVAS_0').innerHTML = '';
 		document.getElementById('RDT-aba-menu-2').disabled = '';
+		document.getElementById('RDT-item-list').innerHTML = '';
 		document.getElementById('RDT_MSG-holder').innerHTML = '';
 		document.getElementById('RDT_door_holder').innerHTML = '';
 		document.getElementById('RDT_audio_holder').innerHTML = '';
@@ -196,7 +200,12 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_getTextMessages();
 		RDT_getMessageCodesArray();
 		RDT_getEnemiesArray();
-		RDT_getCameras();
+		if (RDT_fileType === 'RDT'){
+			RDT_getCameras();
+			$('#RDT-aba-menu-9').css({'display': 'inline'});
+		} else {
+			$('#RDT-aba-menu-9').css({'display': 'none'});
+		}
 		RDT_readDoors();
 		RDT_readItens();
 		RDT_BG_display();
@@ -579,6 +588,7 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 	var EN_enFlag   = enemyHex.slice(RANGES['RDT_enemy-enemyFlag'][0],	 RANGES['RDT_enemy-enemyFlag'][1]);
 	var EN_numero 	= enemyHex.slice(RANGES['RDT_enemy-enemyNumber'][0], RANGES['RDT_enemy-enemyNumber'][1]);
 	localStorage.setItem('RDT_enemy-' + index, enemyHex);
+	RDT_totalEnemies++;
 	var ENEMY_HTML_TEMPLATE = '<div class="RDT-Item RDT-enemy-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditEnemyNPC(' + index + ', \'' + enemyHex + '\');">' + 
 		'(' + parseInt(index + 1) + ') Enemy / NPC: ' + RDT_EMDNAME[EN_type] + ' (Hex: ' + EN_type.toUpperCase() + ')<div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + EN_xPos.toUpperCase() + '</font><br>' + 
 		'Y Position: <font class="RDT-item-lbl-fix">' + EN_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + EN_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + EN_rPos.toUpperCase() + '</font>' + 
@@ -1039,17 +1049,18 @@ function RDT_decompileDoors(index, location){
 			}
 			if (dr_header === '61'){
 				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.RDT</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
-					'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: ' + 
+					'<font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
 					dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>' + 
 					'Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
 					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
 					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
 					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + 
-					'</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + 
-					'<font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> ' + dr_offset0.toUpperCase() + ' <font id="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + 
-					dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + 
+					dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + '</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() +
+					'</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + '<font title="Next Stage">' + dr_nStage.toUpperCase() + 
+					'</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> ' + dr_offset0.toUpperCase() + ' <font id="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' +
+					dr_openOrient.toUpperCase() + '</font> ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
 			} else {
 				var drType = parseInt(parseInt(dr_type, 16) - 1);
 				if (drType.length < 2){
@@ -1275,8 +1286,7 @@ function RDT_readItens(){
 	RDT_totalMapas = 0;
 	RDT_ItensArray = [];
 	RDT_totalItensGeral = 0;
-	$('#RDT-item-list').empty();
-	if (getFileName(ORIGINAL_FILENAME) !== 'r50d'){
+	if (getFileName(ORIGINAL_FILENAME) === 'r218'){
 		RDT_generateItemIndexRaw('02210000');
 	}
 	RDT_generateItemIndexRaw('02310900');
@@ -1310,29 +1320,47 @@ function RDT_generateItemIndexRaw(str){
 	var c = 0;
 	RDT_itemIndexRAW = getAllIndexes(RDT_arquivoBruto, str);
 	while (c < RDT_itemIndexRAW.length){
-		RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		if (RDT_fm_avaliable === true){
+			// Neat Filter
+			if (RDT_itemIndexRAW[c] < RDT_MSGTEXT_startText){
+				RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+			} else {
+				LOG_addLog('warn', 'MAP - WARN: Unable to add item ' + c + ' because it is out of range!');
+			}
+		} else {
+			RDT_ItensArray.push(RDT_itemIndexRAW[c]);
+		}
 		c++;
 	}
 }
 function RDT_decompileItens(id, edit){
-	var RDT_motivo;
+	var RDT_reason;
 	var RDT_CanRender = true;
-	var currentItem   = localStorage.getItem('RDT_Item-' + id);
-	var header		  = currentItem.slice(RANGES['RDT_item-header'][0], RANGES['RDT_item-header'][1]);
-	if (header === '90' || header === '51' || header === '02' || header === 'c0'){
+	var currentItem = localStorage.getItem('RDT_Item-' + id);
+	console.log(currentItem);
+	var header = currentItem.slice(RANGES['RDT_item-header'][0], RANGES['RDT_item-header'][1]);
+	if (header !== '67' && header !== '68'){
 		RDT_totalItensGeral--;
 		RDT_CanRender = false;
 		RDT_ItensArray.splice(id, 1);
 		localStorage.removeItem('RDT_Item-' + id);
-		RDT_motivo = 'Item, map or file has unknown header (' + header + ')';
+		RDT_reason = 'Item, map or file have unknown header (' + header.toUpperCase() + ')';
+	}
+	if (RDT_arquivoBruto.indexOf(currentItem) > RDT_MSGTEXT_startText && RDT_fm_avaliable === true){
+		RDT_totalItensGeral--;
+		RDT_CanRender = false;
+		RDT_ItensArray.splice(id, 1);
+		localStorage.removeItem('RDT_Item-' + id);
+		RDT_reason = 'Item, map or file is out of location!';
 	}
 	if (RDT_CanRender === true){
 		if (edit === false){
 			RDT_renderItens(id, currentItem);
 		}
 	} else {
-		console.warn('WARNING: Unable to render item ' + id + ' - ' + RDT_motivo);
-		LOG_addLog('warn', 'MAP - WARN: Unable to render item ' + id + ' - ' + RDT_motivo);
+		console.warn('WARNING: Unable to render item ' + id + ' - ' + RDT_reason);
+		LOG_addLog('warn', 'MAP - WARN: Unable to render item ' + id + ' - ' + RDT_reason);
+		LOG_addLog('warn', 'MAP - Wrong Hex: <font class="user-can-select">' + currentItem.toUpperCase() + '</font>');
 	}
 	LOG_scroll();
 }

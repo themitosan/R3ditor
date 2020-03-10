@@ -554,26 +554,16 @@ function R3DITOR_downloadFile(url, downloadFileName){
 /* 
 	Utils
 */
-/// Calc MSG Pointers
-function processPointers(mode, firstPointer, secondPointer){
-	// Mode 0: Hex, 1: String
-	if (mode === 0){
-		if (firstPointer !== '' && secondPointer !== '' && firstPointer !== undefined && secondPointer !== undefined){
-			return parsePositive((processBIO3Vars(firstPointer) - processBIO3Vars(secondPointer)).toString(16));
-		}
-	} else {
-		if (firstPointer !== '' && secondPointer !== '' && firstPointer !== undefined && secondPointer !== undefined){
-			return parsePositive((processBIO3Vars(firstPointer) - processBIO3Vars(secondPointer)).toString(16)) * 2;
-		}
-	}
-}
 /// Get file names
 function getFileName(file){
 	if (file !== '' && file !== undefined){
-		var fileName = file.toLowerCase();
-		var removePath = fileName.split(/(\\|\/)/g).pop();
-		var filter = removePath.replace('.rdt', '').replace('.txt', '').replace('.msg', '').replace('.sav', '').replace('.exe', '').replace('.ini', '').replace('.r3ditor', '').replace('.rdtmap', '').replace('.tim', '').replace('.r3timmap', '').replace('.sld', '').replace('.rbj', '')
-		return filter;
+		var c = 0;
+		var removePath = file.toLowerCase().split(/(\\|\/)/g).pop();
+		while (c < MAIN_exludeFileFormats.length){
+			removePath = removePath.replace(MAIN_exludeFileFormats[c], '');
+			c++;
+		}
+		return removePath;
 	}
 }
 /// Get file extension

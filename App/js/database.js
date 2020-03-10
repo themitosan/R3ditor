@@ -1051,9 +1051,32 @@ var ROFS_STATUS = {
 	14: ['Voices (.WAV)'],
 	15: ['Background music (.WAV)']
 }
+var MAIN_exludeFileFormats = [
+	'.rdt',
+	'.txt',
+	'.msg',
+	'.sav',
+	'.exe',
+	'.ini',
+	'.r3ditor',
+	'.rdtmap2',
+	'.tim',
+	'.sld',
+	'.rbj',
+	'.ard',
+	'.dat'
+]
+// Remove this hack later!
 var RDT_ARD_tempPointerDatabase = {
-	// Name   RDT      ARD
-	'R100': ['ffff', 'ffff']
+	// Name    RDT     ARD
+	'R100': ['ffff', 'ffff'],
+	'R101': ['0100', '0888'],
+	'R102': ['ffff', '0100'],
+	'R103': ['0100', '0100'],
+	'R104': ['0100', '0100'],
+	'R105': ['ff02', 'ff02'],
+	'R106': ['0100', '0100'],
+	'R107': ['ad04', 'ad04']
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -1251,7 +1274,7 @@ var MSG_DICIONARIO_REVERSO = {
 	'}': '0a', // Aspas Duplas Fechando 
 	'*': 'fb', // Yes / No
 	'@': 'fc', // Enter / Break line
-	'|': 'fd', // Pausa no Texto
+	'|': 'fd', // Pause Text
 }
 // :):
 var special_day_00 = 'IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu';
@@ -1767,8 +1790,8 @@ var RANGES = {
 	'RDT_door-0-doorZpos': 		     [20, 24],
 	'RDT_door-0-doorRpos': 		     [24, 28],
 	'RDT_door-0-doorNextXpos': 	     [28, 32],
-	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OWO
-	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OWO
+	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OwO
+	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OwO
 	'RDT_door-0-doorNextRpos': 	     [40, 44],
 	'RDT_door-0-doorNextStage':      [44, 46],
 	'RDT_door-0-doorNextRoomNumber': [46, 48],
@@ -1781,7 +1804,7 @@ var RANGES = {
 	'RDT_door-0-doorKey': 		 	 [60, 62],
 	'RDT_door-0-doorDisplayText': 	 [62, 64], // Display Text
 	/*
-		Header 62 - Hex Length: 28 (80 em String)
+		Header 62 - Hex Length: 28 (String: 80)
 		Organizado por ordem de slice
 	*/
 	'RDT_door-1-doorXpos':           [12, 16], // Precisa verificar

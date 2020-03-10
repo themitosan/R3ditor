@@ -4,8 +4,8 @@ This file can (and will be) modified several times!
 
 ## Room Data Table (RDT)
 - Read items, files and maps! [WIP]
-- Refactor the message reading code! (it makes me feel like a idiot) [WIP]
-- Read messages of every single RDT file! (FA 02) [WIP]
+- Refactor the message reading code! (it makes me feel like a idiot) [Almost there... WIP!]
+- Read messages of every single RDT / ARD file! (FA02) [WIP]
 - Read all Doors [WIP]
 - Read Enemies on map
 - ~~Edit the messages on MSG editor~~
@@ -45,12 +45,12 @@ This file can (and will be) modified several times!
 - Add Map View [WIP]
 - ~~Enable Infinite HP~~
 - ~~Add 30K Health~~
-- ~~close process~~
+- ~~Close process~~
 
 ## File generator
 - ~~Add option to alternate between diferent image sizes~~
 - ~~Add more text colors~~
-- Add a support for saving image as bmp [WIP - html2canvas still buggy!]
+- Add a support for saving image as BMP [WIP - html2canvas still buggy!]
 
 ## MIX Editor
 - ~~Add support for all items combinations~~
