@@ -71,6 +71,7 @@ var RDT_MSGTEXT_currentBlkSize;
 var RDT_messageCodesArray = [];
 
 //
+var RDT_mapName;
 var RDT_fileType;
 var RDT_totalDoors;
 var RDT_totalAudios;
@@ -135,10 +136,10 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_loading = true;
 		RDT_totalDoors = 0;
 		RDT_doorsArray = [];
-		RE3_LIVE_closeForm();
 		RDT_CANCRASH = false;
 		RDT_ERRORMOTIVE = '';
 		localStorage.clear();
+		RE3_LIVE_closeForm();
 		RDT_editItemCancel();
 		RDT_totalCameras = 0;
 		RDT_totalEnemies = 0;
@@ -148,6 +149,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_propModelsArray = [];
 		RDT_SLD_totalMasksAva = 0;
 		block_size_hex = undefined;
+		RDT_messageCodesArray = [];
 		RDT_SLD_MASKS_POSITION = [];
 		RDT_MSGTEXT_MAXSIZE = undefined;
 		ORIGINAL_FILENAME = rdtFile.replace(new RegExp('/', 'gi'), '\\');
@@ -181,7 +183,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 		document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 		/*
-			Remove the code below later
+			Remove the code below later!
 		*/
 		$('#RDT_SLD_seekMasksManualBtn').removeClass('none');
 		$('#SLD_LAYER_CANVAS_BG').css({'background-image': 'url()'});
@@ -189,10 +191,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
 		document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 		/*
-			Remove the code above later
+			Remove the code above later!
 		*/
 		RDT_fileType = getFileExtension(ORIGINAL_FILENAME);
-		RDT_fm_path = APP_PATH + '\\Configs\\RDT\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '_' + RDT_fileType + '.rdtmap2';
+		RDT_mapName = getFileName(ORIGINAL_FILENAME).toUpperCase();
+		RDT_fm_path = APP_PATH + '\\Configs\\RDT\\' + RDT_mapName + '_' + RDT_fileType + '.rdtmap2';
 		RDT_fm_avaliable = fs.existsSync(RDT_fm_path);
 		LOG_addLog('log', 'MAP - INFO: The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
@@ -963,17 +966,14 @@ function RDT_decompileDoors(index, location){
 		var dr_nRoomNumber;
 		var dr_displayText;
 		var EXTREME_MASSIVE_HTML_TEMPLATE;
-
 		var reason 		   = '';
 		var itemTitle 	   = '';
 		var canAdd         = true;
 		var loc 		   = parseInt(location);
 		var DOOR_RAW 	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
-
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES['RDT_door-id'][0], 			    	RANGES['RDT_door-id'][1]);
 		var dr_header 	   = DOOR_RAW.slice(RANGES['RDT_door-header'][0], 		    	RANGES['RDT_door-header'][1]);
 		var dr_ident  	   = DOOR_RAW.slice(RANGES['RDT_door-doorIdentifier'][0],    	RANGES['RDT_door-doorIdentifier'][1]);
-
 		if (dr_header === '61'){
 			dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorXpos'][0], 		    RANGES['RDT_door-0-doorXpos'][1]);
 			dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-0-doorYpos'][0], 		    RANGES['RDT_door-0-doorYpos'][1]);
@@ -1021,6 +1021,18 @@ function RDT_decompileDoors(index, location){
 			canAdd = false;
 			reason = 'Pattern is out of range!';
 		}
+		if (dr_id === 'b1' && dr_displayText === '6d' && dr_xPos === '01d1' && dr_nStage === '81' && dr_nRoomNumber === '31'){
+			canAdd = false;
+			reason = 'Pattern is <i>(way)</i> out of range!';
+		}
+		if (dr_id === '33' && dr_displayText === '20' && dr_xPos === 'f212' && dr_nStage === 'c0' && dr_nRoomNumber === '02' && dr_nCamPos === '50'){
+			canAdd = false;
+			reason = 'Pattern is <i>(way)</i> out of range!';
+		}
+		if (dr_id === '00' && dr_displayText === 'f3' && dr_xPos === 'f000' && dr_nStage === 'b1' && dr_nRoomNumber === 'd2' && dr_nCamPos === '22'){
+			canAdd = false;
+			reason = 'Pattern is <i>(way)</i> out of range!';
+		}
 		//
 		if (canAdd === true){
 			localStorage.setItem('RDT_DOOR-' + index, DOOR_RAW);
@@ -1067,16 +1079,17 @@ function RDT_decompileDoors(index, location){
 					drType = '0' + drType;
 				}
 				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.RDT</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>' +
-					'Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' +
+					dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
 					dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>' + 
 					'Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
 					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
-					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> ' + dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + 
-					' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + ' ' + dr_nStage.toUpperCase() + ' ' + 
-					dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset2.toUpperCase() + ' ' + drType + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>Lock Flag: <font class="RDT-item-lbl-fix-5">' +
+					dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
+					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> ' + 
+					dr_xPos.toUpperCase() + ' ' + dr_yPos.toUpperCase() + ' ' + dr_zPos.toUpperCase() + ' ' + dr_rPos.toUpperCase() + ' ' + dr_offset0.toUpperCase() + ' ' + dr_nXpos.toUpperCase() + ' ' + dr_nZpos.toUpperCase() + ' ' + dr_nYpos.toUpperCase() + ' ' + dr_nRpos.toUpperCase() + 
+					' ' + dr_nStage.toUpperCase() + ' ' + dr_nRoomNumber.toUpperCase() + ' ' + dr_nCamPos.toUpperCase() + ' ' + dr_offset2.toUpperCase() + ' ' + drType + ' ' + dr_openOrient.toUpperCase() + ' ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() +
+					'</font> <font title="Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
 			}
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
@@ -1128,7 +1141,6 @@ function RDT_DOOR_APPLY(index){
 	var DOOR_COMPILED;
 	var canCompile = true;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
-
 	var header 	= ident.slice(RANGES['RDT_door-header'][0], 		  RANGES['RDT_door-doorIdentifier'][1]).toLowerCase();
 	if (header.slice(0, 2) === '61'){
 		offset0 = ident.slice(RANGES['RDT_door-0-doorHexOffset0'][0], RANGES['RDT_door-0-doorHexOffset0'][1]).toLowerCase();
@@ -1138,7 +1150,6 @@ function RDT_DOOR_APPLY(index){
 		offset1 = ident.slice(RANGES['RDT_door-1-doorHexOffset1'][0], RANGES['RDT_door-1-doorHexOffset1'][1]).toLowerCase();
 		offset2 = ident.slice(RANGES['RDT_door-1-doorHexOffset2'][0], RANGES['RDT_door-1-doorHexOffset2'][1]).toLowerCase();
 	}
-
 	var cX 		   = document.getElementById('RDT_door-edit-X').value.toLowerCase();
 	var cY 		   = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
 	var cZ 		   = document.getElementById('RDT_door-edit-Y').value.toLowerCase();
@@ -1155,7 +1166,6 @@ function RDT_DOOR_APPLY(index){
 	var nStage 	   = document.getElementById('RDT_door-edit-NS').value.toLowerCase();
 	var nRN 	   = document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
 	var displayTxt = document.getElementById('RDT_door-edit-DispTxt').value.toLowerCase();
-
 	if (cX.length !== 4){
 		canCompile = false;
 		reason = '(X Pos) The length is wrong!';
@@ -1222,7 +1232,6 @@ function RDT_DOOR_APPLY(index){
 		} else {
 			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nZ + nY + nR + nStage + nRN + nCP + offset2 + nType + nOO + offset1 + nLF + nLK + displayTxt;
 		}
-		//console.log('New Door:\n' + DOOR_COMPILED);
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 		$('#RDT-aba-menu-6').trigger('click');
 	} else {
@@ -1344,7 +1353,7 @@ function RDT_decompileItens(id, edit){
 		RDT_CanRender = false;
 		RDT_ItensArray.splice(id, 1);
 		localStorage.removeItem('RDT_Item-' + id);
-		RDT_reason = 'Item, map or file have unknown header (' + header.toUpperCase() + ')';
+		RDT_reason = 'Item, map or file have unknown header (<font class="user-can-select">' + header.toUpperCase() + '</font>)';
 	}
 	if (RDT_arquivoBruto.indexOf(currentItem) > RDT_MSGTEXT_startText && RDT_fm_avaliable === true){
 		RDT_totalItensGeral--;
@@ -1688,6 +1697,11 @@ function RDT_MSG_decryptText(useMode){
 			HACK_FE00 = RDT_arquivoBruto.slice(TXT_START, RDT_arquivoBruto.length);
 			TXT_END = parseInt(parseInt(getAllIndexes(HACK_FE00, 'fe')[0] + 4) + TXT_START);
 			TXT_HEX_CROP = RDT_arquivoBruto.slice(TXT_START, TXT_END);
+			// Climax Fix
+			if (TXT_HEX_CROP.indexOf('fa00fba0') !== -1){
+				TXT_END = parseInt(parseInt(getAllIndexes(HACK_FE00, 'fe')[1] + 4) + TXT_START);
+				TXT_HEX_CROP = RDT_arquivoBruto.slice(TXT_START, TXT_END);
+			}
 			TXT_BLOCK = TXT_BLOCK + TXT_HEX_CROP;
 		}
 		sessionStorage.setItem('MESSAGE_HEX_' + c, TXT_HEX_CROP);
@@ -1695,7 +1709,6 @@ function RDT_MSG_decryptText(useMode){
 			RDT_MSGTEXT_currentBlkSize = parseInt(TXT_BLOCK.length / 2).toString(16);
 			RDT_MSG_renderMessages(c, TXT_HEX_CROP);
 		}
-		//console.log(c + ' - ' + TXT_START + ' - ' + TXT_END + ' - ' + TXT_HEX_CROP);
 		c++;
 	}
 	if (useMode === 1){

@@ -7,7 +7,7 @@ var DEBUG_TOTAL_LINES = 0;
 var DEBUG_LOCKRENDER = false;
 /// Reload js file
 function reloadJsFile(src){
-	console.info('Reloading Script: ' + src);
+	console.warn('DEBUG: Reloading Script: ' + src);
 	LOG_addLog('warn', 'Reloading Script: ' + src);
     $('script[src="' + src + '"]').remove();
     var head = document.getElementsByTagName('head')[0];
@@ -16,17 +16,8 @@ function reloadJsFile(src){
     head.appendChild(script);
     LOG_scroll();
 }
-function DEBUG_RDT_MSG_END_RANGE(value){
-	BETA = true;
-	reloadJsFile('js\\database.js');
-	RDT_MSG_finalLenght = parseInt(value);
-	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
-}
-function DEBUG_RDT_MSG_START_RANGE(value){
-	BETA = true;
-	reloadJsFile('js\\database.js');
-	RDT_MSG_startLength = parseInt(value);
-	RDT_CARREGAR_ARQUIVO(ORIGINAL_FILENAME);
+function DEBUG_REFRESH_DATABASE(){
+	reloadJsFile(APP_PATH + '\\App\\js\\database.js');
 }
 function DEBUG_TESTUPDATE(){
 	TEST_RELEASE = true;

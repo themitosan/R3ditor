@@ -1232,7 +1232,7 @@ input[type='range' i]{
     width: 78%;
     min-height: 18px;
     margin-top: -18px;
-    margin-left: 88px;
+    margin-left: 96px;
     text-align: -webkit-left;
 }
 .RDT_msgLblErrorAtualLen{
@@ -1478,7 +1478,7 @@ input[type='range' i]{
     box-shadow: 0px 0px 10px #a2a2a247;
 }
 .msg_holder_fix{
-    width: 942px;
+    width: 944px;
 }
 /*
     Item Map

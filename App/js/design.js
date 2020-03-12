@@ -1130,7 +1130,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType;
+	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + RDT_mapName + '.' + RDT_fileType;
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1261,6 +1261,7 @@ function RDT_showMenu(id){
 }
 function RDT_renderMSGInfos(){
 	if (RDT_fm_avaliable === true){
+		$('#RDT-aba-menu-7').css({'display': 'inline'});
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
 		$('#RDT_mainMenu_msgInfo').css({'display': 'block'});
 		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'none'});
@@ -1275,10 +1276,20 @@ function RDT_renderMSGInfos(){
 		document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = RDT_MSGTEXT_POINTERS.match(/.{4,4}/g).reverse().toString().replace(new RegExp(',', 'gi'), ' ').toUpperCase();
 	} else {
 		$('#RDT-aba-menu-2').css({'display': 'none'});
+		$('#RDT-aba-menu-7').css({'display': 'none'});
 		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
 		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'none'});
 		$('#RDT_mainMenu_mapFilePath').css({'display': 'none'});
 		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'block'});
+	}
+	//
+	if (RDT_ARD_tempExclude.indexOf(RDT_mapName) !== -1){
+		$('#RDT-aba-menu-7').css({'display': 'none'});
+		$('#RDT-aba-menu-2').css({'display': 'none'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'none'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'none'});
 	}
 }
 function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
