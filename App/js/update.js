@@ -5,20 +5,20 @@
 */
 var forceUpdat = 0;
 var TEST_RELEASE = false;
-var internal_version = 13;
+var internal_version = 14;
 var R3DITOR_check_for_updates = false;
 function forceUpdate(){
 	forceUpdat++;
 	main_closeFileList();
-	if (forceUpdat > 9){
+	if (forceUpdat > 15){
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		LOG_addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
-			$("#img-logo").fadeOut({duration: 2200, queue: false});
-			$("#hidden_msg").fadeIn({duration: 2200, queue: false});
+			$('#img-logo').fadeOut({duration: 2200, queue: false});
+			$('#hidden_msg').fadeIn({duration: 2200, queue: false});
 		} else {
-			$("#img-logo").css({'display': 'none'});
-			$("#hidden_msg").css({'display': 'inline'});
+			$('#img-logo').css({'display': 'none'});
+			$('#hidden_msg').css({'display': 'inline'});
 		}
 		LOG_scroll();
 	}
@@ -41,7 +41,7 @@ function R3DITOR_readUpdate(file){
 	var c = 3;
 	var update_info = [];
 	if (file === undefined || file === null){
-		LOG_addLog('warn', 'Unable to read update info!');
+		LOG_addLog('warn', 'WARN - Unable to read update info!');
 	} else {
 		fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 			update_info.push(line); 

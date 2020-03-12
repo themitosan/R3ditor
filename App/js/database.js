@@ -142,6 +142,8 @@ var ITEM = {
 	/*
 		The values below can be added to inventory as an item, but checking them can make the game crash.
 		If you insert these values in RDT as an item, it will recognize as current map.
+
+		LISTEN TO ME - DO NOT INSERT THIS VALUES ON RDT!
 	*/
 	'ab': ['no item', 	      								   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
 	'ac': ['BOTU', 	  	      								   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
@@ -189,72 +191,6 @@ var WEAPONS = {
 	'12': ['Beretta M92F E'],
 	'13': ['Shotgun B. M3S E'],
 	'14': ['Mine Thrower E']
-}
-// Preciso remover isso depois
-var RDT_mapHack = {
-	'r40c': true,
-	'r410': true,
-	'r413': true,
-	'r415': true,
-	'r714': true,
-	'r712': true,
-	'r70f': true,
-	'r70d': true,
-	'r61c': true
-}
-var RDT_mapHack2 = {
-	'r304': true,
-	'r30d': true,
-	'r311': true,
-	'r415': true,
-	'r501': true,
-	'r50a': true,
-	'r50d': true
-}
-var RDT_FIRSTPOINTERTYPE = {
-	'0000': true,
-	'0100': true,
-	'ffff': true,
-	'ff02': true,
-	'ad04': true,
-	'ff31': true,
-	'10b8': true,
-	'0189': true,
-	'38b8': true,
-	'7810': true
-}
-var RDT_THIRDPOINTERTYPE = {
-	'0800': true,
-	'0100': true,
-	'10b8': true
-}
-var RDT_POINTERTYPE4 = {
-	'1000': true,
-	'2800': true,
-	'3800': true,
-	'4010': true,
-	'1800': true
-}
-var RDT_SECONDPOINTERTYPE = {
-	'0800': true,
-	'2808': true,
-	'4868': true,
-	'81d6': true,
-	'3000': true,
-	'0101': true,
-	'5756': true,
-	'1000': true,
-	'1840': true,
-	'050b': true,
-	'1100': true,
-	'2121': true,
-	'0707': true,
-	'9038': true,
-	'3820': true,
-	'6030': true,
-	'1919': true,
-	'5020': true,
-	'30a0': true
 }
 var FILES = {
 	'86': ['Dario\'s Memo'],
@@ -317,7 +253,7 @@ var ATTR = {
 	'16': ['Attr. used by M4A1 Assault Rifle',   		'#840000', '0 0 2px #310000', '-webkit-box'],
 	'17': ['Attr. used by M4A1 Assault Rifle (Auto)', 	'#840000', '0 0 2px #310000', '-webkit-box']  // Atributo encontrado na shotgun do Carlos?
 }
-// Segunda variavel
+// Second var (used for percentage items)
 var VOID = {
 	'00': 'OK!'
 }
@@ -399,7 +335,7 @@ var EPILOGOS = {
 	'07': ['7'],
 	'08': ['All'],
 	'09': ['All'],
-	'0c': ['All'] // Encontrado esse valor na versão francesa
+	'0c': ['All'] // found this valuue on french version
 }
 var DIFICULDADE = {
 	'01': ['Easy'],
@@ -907,7 +843,7 @@ var MSG_DICIONARIO = {
 	'57': [false, '(Unknown Char / Function Nº 00 - Hex: 57)', true],
 	'58': [false, '(Unknown Char / Function Nº 01 - Hex: 58)', true],
 	'59': [false, '(Unknown Char / Function Nº 02 - Hex: 59)', true],
-	// Formatação
+	// Text format
 	'5a': [false, 'á', false],
 	'5b': [false, 'à', false],
 	'5c': [false, 'â', false],
@@ -1059,10 +995,10 @@ var MSG_DICIONARIO = {
 	'fc': [false, '(Line Break)<br>', false], // Enter
 	'fd': [false, '(Pause)', false],
 	'ff': [false, '(Unknown CHAR)', false],
-	// Comandos especiais (Funções)
+	// Special commands (functions)
 	'70': [true, '(Function: Select Option ', 					   11],
 	'fa': [true, '(Function: Show Message ', 	    	 			1],
-	'fe': [true, '(Function: End Message ',				 			2],
+	'fe': [true, '<br>(Function: End Message ',				 		2],
 	'ea': [true, '(Function: Show Special Char ',				 	4], // (Depende do valor inserido)
 	'f0': [true, '(Function: Show Special Char ',			 		4], // (Depende do valor inserido)
 	'f8': [true, '(Function: Show Item Name ',	 		 			5],
@@ -1096,7 +1032,7 @@ var RDT_camHeaderType = {
 	'3676': [true],
 	'3087': [true],
 	'38f2': [true],
-	'3c68': [true] // RE2?
+	'3c68': [true]
 }
 var ROFS_STATUS = {
 	1:  ['Doors (.DO2)'],
@@ -1114,6 +1050,173 @@ var ROFS_STATUS = {
 	13: ['DATA_E - Hard mode (.RDT)'],
 	14: ['Voices (.WAV)'],
 	15: ['Background music (.WAV)']
+}
+var MAIN_exludeFileFormats = [
+	'.rdt',
+	'.txt',
+	'.msg',
+	'.sav',
+	'.exe',
+	'.ini',
+	'.r3ditor',
+	'.rdtmap2',
+	'.tim',
+	'.sld',
+	'.rbj',
+	'.ard',
+	'.dat'
+]
+// Remove this hack later!
+var RDT_ARD_tempExclude = [
+	'R10B',
+	'R10C',
+	'R10D',
+	'R10E',
+	'R204',
+	'R20B',
+	'R212',
+	'R213',
+	'R216',
+	'R306',
+	'R30A',
+	'R312',
+	'R40E',
+	'R416',
+	'R50B'
+];
+var RDT_ARD_tempPointerDatabase = {
+	// Name    RDT     ARD
+	'R100': ['ffff', 'ffff'],
+	'R101': ['0100', '0888'],
+	'R102': ['ffff', '0100'],
+	'R103': ['0100', '0100'],
+	'R104': ['0100', '0100'],
+	'R105': ['ff02', 'ff02'],
+	'R106': ['0100', '0100'],
+	'R107': ['ad04', 'ad04'],
+	'R108': ['0100', '0100'],
+	'R109': ['0100', '0100'],
+	'R10A': ['0100', '0100'],
+	'R10B': ['', ''], // This one does not have text!
+	'R10C': ['', ''], // This one does not have text!
+	'R10D': ['', ''], // This one does not have text!
+	'R10E': ['', ''], // This one does not have text!
+	'R10F': ['0800', '0800'],
+	'R110': ['0100', 'bcb2'],
+	'R111': ['ff31', 'ff31'],
+	'R112': ['4868', '4868'],
+	'R113': ['81d6', '81d6'],
+	'R114': ['0100', '0100'],
+	'R115': ['3000', '3000'],
+	'R116': ['0100', '0100'],
+	'R117': ['0101', '0101'],
+	'R118': ['0100', '0100'],
+	'R119': ['0100', '0100'],
+	'R11A': ['0000', '0000'],
+	'R11B': ['0100', '0000'],
+	'R11C': ['5756', '5756'],
+	'R11D': ['ffff', '0100'],
+	'R11E': ['0100', '0100'],
+	'R11F': ['0100', '0100'],
+	'R120': ['1000', '0100'],
+	'R121': ['1840', '1048'],
+	'R122': ['0100', '0100'],
+	'R123': ['0100', '0100'],
+	'R124': ['050b', '050b'],
+	'R125': ['1100', '1100'],
+	'R200': ['0100', '3800'],
+	'R201': ['0100', '0100'],
+	'R202': ['0000', '0000'],
+	'R203': ['2121', '3117'],
+	'R204': ['', ''], // This one does not have text!
+	'R205': ['0707', '0905'],
+	'R206': ['0100', '0100'],
+	'R207': ['0000', '0100'],
+	'R208': ['0100', '0100'],
+	'R209': ['1000', '0100'],
+	'R20A': ['0100', '0100'],
+	'R20B': ['', ''], // Fuck this map - owo
+	'R20C': ['0100', '0100'],
+	'R20D': ['2808', '2808'],
+	'R20E': ['0100', '1800'],
+	'R20F': ['0000', '0000'],
+	'R210': ['0800', '0800'],
+	'R211': ['0100', '0100'],
+	'R212': ['', ''], // This map is very odd!
+	'R213': ['', ''], // This one does not have text!
+	'R214': ['0100', '5078'], 
+	'R215': ['0100', '0100'],
+	'R216': ['', ''], // This one does not have text!
+	'R217': ['0100', '0100'],
+	'R218': ['0100', '0100'],
+	'R219': ['9038', '9038'],
+	'R21A': ['3820', '3820'],
+	'R21B': ['0100', '0100'],
+	'R300': ['0000', '0000'],
+	'R301': ['0000', '0000'],
+	'R302': ['0100', '0100'],
+	'R303': ['6030', '6030'],
+	'R304': ['1000', '1000'],
+	'R305': ['0100', '0100'],
+	'R306': ['', ''], // This one does not have text!
+	'R307': ['1919', '1919'],
+	'R308': ['0100', '0100'],
+	'R309': ['0100', '0100'],
+	'R30A': ['', ''], // This one does not have text!
+	'R30B': ['0000', '0000'],
+	'R30C': ['0100', '0100'],
+	'R30D': ['2800', '2000'],
+	'R30E': ['0100', '0100'],
+	'R30F': ['5020', '5020'],
+	'R310': ['0100', '0100'],
+	'R311': ['3800', '3800'],
+	'R312': ['', ''], // This one does not have text!
+	'R313': ['0100', '0100'],
+	'R314': ['0000', '0000'],
+	'R315': ['0100', '0000'],
+	'R316': ['0000', '0000'],
+	'R317': ['0100', '0100'],
+	'R400': ['0100', '0100'],
+	'R401': ['0100', '0100'],
+	'R402': ['0100', '1800'],
+	'R403': ['0100', '0100'],
+	'R404': ['0100', '0100'],
+	'R405': ['0100', '0100'],
+	'R406': ['0000', '0000'],
+	'R407': ['0000', '0000'],
+	'R408': ['0000', '0000'],
+	'R409': ['30a0', '30a0'],
+	'R40A': ['0100', '0800'],
+	'R40B': ['0100', '0100'],
+	'R40C': ['0100', '0100'],
+	'R40D': ['0100', '0100'],
+	'R40E': ['', ''], // This one does not have text!
+	'R40F': ['0100', '0100'],
+	'R410': ['0100', '0100'],
+	'R411': ['0100', '0100'],
+	'R412': ['0000', '0000'],
+	'R413': ['0100', '0100'],
+	'R414': ['0100', '0100'],
+	'R415': ['2800', '2000'],
+	'R416': ['', ''], // This one... OOF
+	'R417': ['0100', '0100'],
+	'R500': ['0100', '0100'],
+	'R501': ['4010', '4010'],
+	'R502': ['0100', '0100'],
+	'R503': ['10b8', '10b8'],
+	'R504': ['0100', '0505'],
+	'R505': ['ffff', 'ffff'],
+	'R506': ['0100', '0100'],
+	'R507': ['0100', '0100'],
+	'R508': ['0100', '1800'],
+	'R509': ['0000', '0000'],
+	'R50A': ['1800', '1800'],
+	'R50B': ['', ''], // This one does not have text!
+	'R50C': ['0000', '0000'],
+	'R50D': ['1800', '1800'],
+	'R50E': ['0189', '0189'],
+	'R50F': ['0100', '0100'],
+	'R510': ['38b8', '38b8']
 }
 var MSG_TEXTCOLOR = {
 	/* 
@@ -1278,7 +1381,7 @@ var MSG_DICIONARIO_REVERSO = {
 	'x': '54',
 	'y': '55',
 	'z': '56',
-	// Acentuações
+	// format
 	'ü': '51',
 	'ú': '51',
 	'ù': '51',
@@ -1304,14 +1407,14 @@ var MSG_DICIONARIO_REVERSO = {
 	'ê': '61',
 	'ó': '62',
 	'=': '63',
-	// Funções Especiais
+	// Special functions
 	'#': 'a0', // Climax
 	'~': 'fe', // Segunda alternativa de climax
 	'{': '09', // Aspas Duplas Abrindo
 	'}': '0a', // Aspas Duplas Fechando 
 	'*': 'fb', // Yes / No
 	'@': 'fc', // Enter / Break line
-	'|': 'fd', // Pausa no Texto
+	'|': 'fd', // Pause Text
 }
 // :):
 var special_day_00 = 'IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdmUgb3ZlcnRha2VuIHRoZSBjaXR5LiBTb21laG93Li4uIEknbSBzdGlsbCBhbGl2ZSEiIC0gSmlsbCBWYWxlbnRpbmUsIFJlc2lkZW50IEV2aWwgMyAtIE5lbWVzaXMu';
@@ -1341,8 +1444,8 @@ var TIM_BPP = {
 	//  HEX     TYPE       BPP          POS (String)
 	'08000000': [1,			   '4 BPP', 0],    // WIP
 	'09000000': [2,			   '8 BPP', 1084], // WIP
-	'02000000': [3,			  '16 BPP', 0],    // Esse tipo não contém CLUT [WIP]
-	'03000000': [4,			  '24 BPP', 0],    // Esse tipo não contém CLUT [WIP]
+	'02000000': [3,			  '16 BPP', 0],    // This format don't have any CLUT [WIP]
+	'03000000': [4,			  '24 BPP', 0],    // This format don't have any CLUT [WIP]
 	'00000000': [5,  '4 BPP (No CLUT)', 0],    // WIP
 	'01000000': [6,  '8 BPP (No CLUT)', 0]     // WIP
 }
@@ -1351,8 +1454,8 @@ var TIM_EXCLUDEPATTERN = {
 }
 var MEMJS_HEXPOS = {
 	/*
-		Pos. hex para fazer leitura in game.
-		Todas as leituras são feitas em MEM_JS.BYTE e depois convertido para Hex.
+		Memory postions for reading in-game information.
+		All read commands are processed with MEM_JS.BYTE (int) and converted to hex.
 
 		Mode 1 = RE3 Eidos
 	*/
@@ -1393,6 +1496,7 @@ var RE3_playerList = {
 	'01': 'Jill Valentine',
 	'02': 'Carlos Oliveira'
 }
+// Used for debug
 var MIX_seekPattern = '00021500000000000003150000000000000d15000000000000051600000000000004170000000000';
 var IEDIT_seekPattern = '0000000001010000010f0001010f00010107000101060001';
 var MIX_function_types = {
@@ -1526,7 +1630,7 @@ var RANGES = {
 	'MIX_infinite_infItem':    [4, 6],
 	'MIX_infinite_offset': 	   [6, 16],
 	/*
-		Edição do game (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
+		Game version (Baseado no primeiro indicador de save / info na primeira vez que o player salvou)
 
 		Devido a essa parte ser semelhante ao código ID de games de PS1 (como "BESLES"), eu acredito que esse seja
 		o indicador da versão do game.
@@ -1826,8 +1930,8 @@ var RANGES = {
 	'RDT_door-0-doorZpos': 		     [20, 24],
 	'RDT_door-0-doorRpos': 		     [24, 28],
 	'RDT_door-0-doorNextXpos': 	     [28, 32],
-	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OWO
-	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OWO
+	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OwO
+	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OwO
 	'RDT_door-0-doorNextRpos': 	     [40, 44],
 	'RDT_door-0-doorNextStage':      [44, 46],
 	'RDT_door-0-doorNextRoomNumber': [46, 48],
@@ -1840,7 +1944,7 @@ var RANGES = {
 	'RDT_door-0-doorKey': 		 	 [60, 62],
 	'RDT_door-0-doorDisplayText': 	 [62, 64], // Display Text
 	/*
-		Header 62 - Hex Length: 28 (80 em String)
+		Header 62 - Hex Length: 28 (String: 80)
 		Organizado por ordem de slice
 	*/
 	'RDT_door-1-doorXpos':           [12, 16], // Precisa verificar

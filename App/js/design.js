@@ -110,6 +110,7 @@ function main_renderFileList(id, mode){
 		var origCity = 'Unknown';
 		var pFile = RDT_lastFileOpened;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
+		var mapExt = getFileExtension(RDT_lastFileOpened).toUpperCase();
 		if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
 			imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
 		} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
@@ -117,20 +118,20 @@ function main_renderFileList(id, mode){
 		} else {
 			imgPreview = APP_PATH + '\\App\\img\\404.png';
 		}
-		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
-			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+		if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
+			mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 		} else {
-			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
-				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+			if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
+				mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 			} else {
-				mFile = 'There is no Map File for this RDT. Open it to generate!';
+				mFile = 'There is no Mapfile for this file. Open it to generate!';
 			}
 		}
 		if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
 			origName = RDT_locations[RDT_name][0];
 			origCity = RDT_locations[RDT_name][1];
 		}
-		if (mFile.length > 44 && mFile !== 'There is no map file for this RDT. Open it to generate!'){
+		if (mFile.length > 44 && mFile !== 'There is no map file for this file. Open it to generate!'){
 			originalMFile = mFile;
 			mFile = '...' + mFile.slice(parseInt(mFile.length / 3), mFile.length);
 		}
@@ -146,9 +147,9 @@ function main_renderFileList(id, mode){
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
 			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
-			'draggable="false" style="width: 134px;"><div class="fileList_details" style="margin-top: -104px;margin-left: 138px;">File: ' + RDT_name.toUpperCase() + 
-			'.RDT<br>Path: <font title="' + originalPFile + '">' + pFile +  '</font><br>Map File: <font title="' + originalMFile + '">' + mFile + '</font><br>' + 
-			'<div class="menu-separador"></div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
+			'draggable="false" style="width: 134px;"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: <font title="' + originalPFile + 
+			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
+			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
 		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to bottom, #2d2d2d, #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
@@ -159,7 +160,7 @@ function main_renderFileList(id, mode){
 	if (id === 3){
 		fileList_gameMode = gameModePath;
 		$('#fileList_aba_list').css({'display': 'inline'});
-		document.getElementById('fileList_title').innerHTML = 'File List';
+		document.getElementById('fileList_title').innerHTML = 'Map List';
 		if (mode !== 3){
 			if (fs.existsSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\') === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
 				var listRDT = fs.readdirSync(APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\').filter(fn => fn.endsWith('.RDT'));
@@ -183,16 +184,16 @@ function main_renderFileList(id, mode){
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
 					if (gameModePath === 'DATA_AJ'){
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_RDT.rdtmap2';
 						} else {
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2') === true){
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_RDT.rdtmap2';
 						} else {
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no Mapfile for this map. Open it to generate!';
 						}
 					}
 					if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
@@ -211,7 +212,7 @@ function main_renderFileList(id, mode){
 					var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + gameModePath + '_' + RDT_name.toUpperCase() + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Game Mode: ' + gMODE + 
-						'<br>Map File: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + 
+						'<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + origName + 
 						'<br>Original City Location: ' + origCity + '<br></div></div>';
 					if (gameModePath === 'DATA_E'){
 						$('#fileListHolder').append(fileList_HTML_template);
@@ -253,7 +254,8 @@ function main_renderFileList(id, mode){
 				fs.readFileSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor').toString().split('\n').forEach(function(line){ 
 					fList.push(line); 
 				});
-				while (c < fList.length){
+				while (c < parseInt(fList.length - 1)){
+					fList.splice();
 					var mFile;
 					var gMODE;
 					var imgPreview;
@@ -262,7 +264,7 @@ function main_renderFileList(id, mode){
 					var origCity = 'Unknown';
 					var currentRDT = fList[c];
 					var RDT_name = getFileName(fList[c]).toUpperCase();
-
+					var mapExt = getFileExtension(fList[c]).toUpperCase();
 					if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
 						imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG';
 					} else if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '01.JPG') === true){
@@ -270,17 +272,16 @@ function main_renderFileList(id, mode){
 					} else {
 						imgPreview = APP_PATH + '\\App\\img\\404.png';
 					}
-
-					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap') === true){
+					if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_' + mapExt + '.rdtmap2') === true){
 						gMODE = 'Easy';
-						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ.rdtmap';
+						mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_AJ_' + mapExt + '.rdtmap2';
 					} else {
-						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap') === true){
+						if (fs.existsSync(APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2') === true){
 							gMODE = 'Hard';
-							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_E.rdtmap';
+							mFile = APP_PATH + '\\Configs\\RDT\\' + RDT_name.toUpperCase() + '_' + mapExt + '.rdtmap2';
 						} else {
 							gMODE = 'Unknown';
-							mFile = 'There is no Map File for this RDT. Open it to generate!';
+							mFile = 'There is no MapFile for this ' + RDT_fileType + '. Open it to generate!';
 						}
 					}
 					if (RDT_locations[RDT_name] !== undefined && RDT_locations[RDT_name] !== null){
@@ -295,7 +296,7 @@ function main_renderFileList(id, mode){
 						var RECENT_FILE_INSIDE_HTML_TEMPLATE = '<div class="fileList_item fileList_item_color_a" id="RDT_file_' + c + '"' + 
 						' onclick="RDT_openFile(\'' + currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + 
 						'" class="fileList_img" draggable="false"><div class="fileList_details">(' + parseInt(c + 1) + ') File: ' + RDT_name.toUpperCase() + 
-						'.RDT<br>Game Mode: ' + gMODE + '<br>Map File: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
+						'.' + mapExt + '<br>Game Mode: ' + gMODE + '<br>MapFile: <font title="' + nOriginal + '">' + mFile + '</font><br><div class="menu-separador">' + 
 						'</div>Original Local Name: ' + origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 						$('#RDT_lastThreeFiles').append(RECENT_FILE_INSIDE_HTML_TEMPLATE);
 					}
@@ -351,9 +352,9 @@ function main_renderFileList(id, mode){
 			while (c < SAV_list.length){
 				var currentSAV = SAV_list[c];
 				var fileList_HTML_template = '<div class="fileList_item fileList_item_color_c" id="SAV_file_' + c + '"' + 
-					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + '\\App\\img\\SAVICON.png" class="fileList_img" ' + 
-					'draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)<div class="menu-separador"></div>' + 
-					'Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
+					' onclick="CARREGAR_SAVE(\'' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '\');"><img src="' + APP_PATH + 
+					'\\App\\img\\SAVICON.png" class="fileList_img" draggable="false"><div class="fileList_details">File: ' + currentSAV + ' (Original)' + 
+					'<div class="menu-separador"></div>Path: ' + GAME_PATH.replace(new RegExp('\\\\', 'gi'), '/') + currentSAV + '</div>';
 				$('#fileListHolder').append(fileList_HTML_template);
 				c++;
 			}
@@ -420,7 +421,7 @@ function main_menu(anim){
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
-		document.title = APP_NAME + ' - RDT Editor (*.RDT, *.ARD)';
+		document.title = APP_NAME + ' - Map Editor';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
 			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
@@ -445,18 +446,7 @@ function main_menu(anim){
 		$('#FILEGEN_menu').css({'height': '484px'});
 	}
 	if (anim === 5){ // TIM Patcher
-		document.title = APP_NAME + ' - TIM Patcher';
-		if (enable_mod === true){
-			$('#menu-topo-MOD').css({'display': 'none'});
-		}
-		$('#menu-topo-TIMPATCHER').css({'display': 'inline'});
-		if (DESIGN_ENABLE_ANIMS === true){
-			$('#img-logo').fadeOut({duration: 100, queue: false});
-			$('#TIMPATCHER').fadeIn({duration: 200, queue: false});
-		} else {
-			$('#img-logo').css({'display': 'none'});
-			$('#TIMPATCHER').css({'display': 'inline'});
-		}
+		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');
 	}
 	if (anim === 6){ // INI Editor
 		document.title = APP_NAME + ' - INI Editor (*.INI)';
@@ -1123,7 +1113,7 @@ function MSG_showTranslateInput(){
 	$('#MSG_ADDFUNC_BTN_11').css({'display': 'none'});
 }
 function MSG_renderCamPreview(){
-	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true){
+	if (RDT_arquivoBruto !== undefined && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\') === true && RDT_fileType === 'RDT'){
 		var currentFile = getFileName(ORIGINAL_FILENAME).toUpperCase().slice(0, 4);
 		var currentCam = document.getElementById('msg-selectCam-id').value.toUpperCase();
 		var camImg = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + currentFile + currentCam + '.JPG';
@@ -1140,7 +1130,7 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - RDT Editor (*.RDT) - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + RDT_mapName + '.' + RDT_fileType;
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	if (RDT_lastFileOpened !== ''){
@@ -1199,10 +1189,6 @@ function RDT_showMenu(id){
 		document.getElementById('RDT_lbl-localCity').innerHTML = 'Unknown';
 	}
 	var RDT_stage = parseInt(getFileName(ORIGINAL_FILENAME).slice(1, 2)) - 1;
-	var RDT_MSG_P = 'Undefined - This RDT don\'t have any messages!';
-	if (RDT_MSG_POINTERS[0] !== undefined){
-		RDT_MSG_P = RDT_MSG_POINTERS[0].toUpperCase();
-	}
 	RDT_checkBKP();
 	if (id !== 4){
 		$('#RDT-aba-menu-4').css({'display': 'none'});
@@ -1222,7 +1208,13 @@ function RDT_showMenu(id){
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
 	}
-	if (enable_mod === true && fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD') === true && RE3SLDE_CANRUN === true){
+	if (RDT_fileType === 'RDT'){
+		document.getElementById('RDT-lbl-fileVersion').innerHTML = 'PC \\ GameCube \\ DreamCast';
+	} else {
+		document.getElementById('RDT-lbl-fileVersion').innerHTML = 'PlayStation (PS1)';
+	}
+	var sldExists = fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD');
+	if (enable_mod === true && sldExists === true && RE3SLDE_CANRUN === true && RDT_fileType === 'RDT'){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
 	} else {
@@ -1236,43 +1228,69 @@ function RDT_showMenu(id){
 	$('#log-programa').css({'height': '86px', 'top': '626px'});
 	document.getElementById('RDT_lbl-stage').innerHTML = RDT_stage;
 	document.getElementById('RDT-map-select').innerHTML = RDT_EDIT_MAP;
-	document.getElementById('RDT_mapFileName').innerHTML = RDT_MAPFILE;
 	document.getElementById('RDT-file-select').innerHTML = RDT_EDIT_FILE;
 	document.getElementById('RDT-item-select').innerHTML = RDT_EDIT_ITEM;
-	document.getElementById('RDT_lbl-msg_pointer').innerHTML = RDT_MSG_P;
 	document.getElementById('RDT_lbl_totDoors').innerHTML = RDT_totalDoors;
-	document.getElementById('RDT_lbl-totMsg').innerHTML = RDT_totalMessages;
 	document.getElementById('RDT_lbl-totalMaps').innerHTML = RDT_totalMapas;
 	document.getElementById('RDT_lbl-tCameras').innerHTML = RDT_totalCameras;
 	document.getElementById('RDT_lbl-totalDoors').innerHTML = RDT_totalDoors;
 	document.getElementById('RDT_lbl-totalFiles').innerHTML = RDT_totalFiles;
 	document.getElementById('RDT_lbl-totalItens').innerHTML = RDT_totalItens;
-	document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
 	document.getElementById('RDT_lbl-totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT_lbl_totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME;
 	document.getElementById('RDT_lbl-totItens').innerHTML = RDT_totalItensGeral;
 	document.getElementById('RDT_lbl_totalCameras').innerHTML = RDT_totalCameras;
-	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-6').value = 'Doors (' + RDT_totalDoors +')';
+	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT_lbl-totalEnemies').innerHTML = RDT_enemiesArray.length;
 	document.getElementById('RDT-aba-menu-5').value = 'Audios (' + RDT_totalAudios +')';
 	document.getElementById('RDT-aba-menu-9').value = 'Cameras (' + RDT_totalCameras +')';
 	document.getElementById('RDT_lbl_totalmsgCode').innerHTML = RDT_messageCodesArray.length;
-	document.getElementById('RDT-aba-menu-2').value = 'Message Block (' + RDT_totalMessages + ')';
-	document.getElementById('RDT-aba-menu-8').value = 'Enemies / NPC\'s (' + RDT_enemiesArray.length + ')';
+	document.getElementById('RDT-aba-menu-8').value = 'Enemies / NPC\'s (' + RDT_totalEnemies + ')';
 	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
-	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT';
+	document.getElementById('RDT-lbl-FILENAME').innerHTML = getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType;
 	document.getElementById('RDT_lbl_fSize').innerHTML = getFileSize(ORIGINAL_FILENAME, 1) + ' KB (' + getFileSize(ORIGINAL_FILENAME, 0) + ' Bytes)';
+	//
 	$('#RDT_menu-' + id).css({'display': 'block'});
 	$('#menu-RDT').css({'display': 'block'});
 	RDT_applyMenuFocus(id);
-	if (getFileName(ORIGINAL_FILENAME) === 'r212' || getFileName(ORIGINAL_FILENAME) === 'r20b' || getFileName(ORIGINAL_FILENAME) === 'r216'){
-		$('#RDT-aba-menu-2').css({'display': 'none'});
-	}
 	RDT_Error_404();
 	LOG_scroll();
+}
+function RDT_renderMSGInfos(){
+	if (RDT_fm_avaliable === true){
+		$('#RDT-aba-menu-7').css({'display': 'inline'});
+		$('#RDT-aba-menu-2').css({'display': 'inline'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'block'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'block'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'block'});
+		// Only render this info if the file is avaliable
+		document.getElementById('RDT_mapFileName').innerHTML = RDT_fm_path;
+		document.getElementById('RDT_lbl-totMsg').innerHTML = RDT_totalMessages;
+		document.getElementById('RDT_lbl-totalMsg').innerHTML = RDT_totalMessages;
+		document.getElementById('RDT-aba-menu-2').value = 'Message Block (' + RDT_totalMessages + ')';
+		document.getElementById('RDT_lbl-msg_blockHex').innerHTML = '(Hex: ' + RDT_MSGTEXT_MAXSIZE + ' - String: ' + parseInt(RDT_MSGTEXT_MAXSIZE, 16) + ')';
+		document.getElementById('RDT_lbl-msg_pointerSplit').innerHTML = RDT_MSGTEXT_POINTERS.match(/.{4,4}/g).reverse().toString().replace(new RegExp(',', 'gi'), ' ').toUpperCase();
+	} else {
+		$('#RDT-aba-menu-2').css({'display': 'none'});
+		$('#RDT-aba-menu-7').css({'display': 'none'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'none'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'block'});
+	}
+	//
+	if (RDT_ARD_tempExclude.indexOf(RDT_mapName) !== -1){
+		$('#RDT-aba-menu-7').css({'display': 'none'});
+		$('#RDT-aba-menu-2').css({'display': 'none'});
+		$('#RDT_mainMenu_msgInfo').css({'display': 'none'});
+		$('#RDT_mainMenu_totalMsgLbl').css({'display': 'none'});
+		$('#RDT_mainMenu_mapFilePath').css({'display': 'none'});
+		$('#RDT_mainMenu_msgSeekMenu').css({'display': 'none'});
+	}
 }
 function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
 	var newOpacity = document.getElementById('RDT_SLD_CANVAS_BG_OPACITY').value;
@@ -1284,6 +1302,17 @@ function RDT_SLD_CANVAS_BG_CHANGE_OPACITY(){
 		newOpacity = '1.00';
 	}
 	document.getElementById('RDT_SLD_LBL_BG_OPACITY').innerHTML = newOpacity;
+}
+function RDT_canvasResetPos(){
+	document.getElementById('RDT_slider_X').value = 0;
+	document.getElementById('RDT_slider_Y').value = 0;
+	document.getElementById('RDT_slider_Z').value = 0;
+	document.getElementById('RDT_slider_R').value = 0;
+	document.getElementById('RDT_slider_D').value = 0;
+	document.getElementById('RDT_slider_D2').value = 0;
+	document.getElementById('RDT_lbl_pd').innerHTML = '0';
+	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
+	RDT_updateCanvasInfos(0);
 }
 function RDT_showEditCamera(index, camEdit, codeHex){
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
@@ -1403,7 +1432,7 @@ function RDT_showEditDoor(index, id, hex){
 		RDT_renderEditDoorCamPreview();
 	}
 	$('#RDT-door-Edit').css({'display': 'block'});
-	$('#RDT_door_holder').css({'width': '738px'});
+	$('#RDT_door_holder').css({'width': '686px'});
 }
 function RDT_doorValidadeInput(){
 	document.getElementById('RDT_door-edit-X').value      = document.getElementById('RDT_door-edit-X').value.toUpperCase();
@@ -1447,7 +1476,7 @@ function RDT_renderNextRDTLbl(){
 	var nrn = document.getElementById('RDT_door-edit-NRN').value;
 	if (nrn.length === 2 && rst.length === 1){
 		var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
-		document.getElementById('RDT_lbl_door_nextRDT').innerHTML = rComp + '.RDT';
+		document.getElementById('RDT_lbl_door_nextRDT').innerHTML = rComp + '.' + RDT_fileType;
 		var existsRDT = fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + rComp + '.RDT');
 		if (existsRDT === true){
 			document.getElementById('RDT_lbl_door_nextRDT').title = RDT_locations[rComp][0] + ', ' + RDT_locations[rComp][1];
@@ -1573,12 +1602,6 @@ function RDT_BG_display(){
 	}
 }
 function RDT_Error_404(){
-	if (RDT_totalMessages < 1){
-		$('#RDT_MSG-holder').css({'display': 'none'});
-		$('#RDT-aba-menu-2').css({'display': 'none'});
-	} else {
-		$('#RDT_MSG-holder').css({'display': 'block'});
-	}
 	if (RDT_totalItensGeral < 1){
 		$('#RDT-item-list').css({'display': 'none'});
 		$('#RDT-aba-menu-3').css({'display': 'none'});
@@ -1590,11 +1613,6 @@ function RDT_Error_404(){
 		$('#RDT-aba-menu-5').css({'display': 'none'});
 	} else {
 		$('#RDT-aba-menu-5').css({'display': 'inline'});
-	}
-	if (RDT_messageCodesArray.length === 0){
-		$('#RDT-aba-menu-7').css({'display': 'none'});
-	} else {
-		$('#RDT-aba-menu-7').css({'display': 'inline'});
 	}
 	if (RDT_enemiesArray.length === 0){
 		$('#RDT-aba-menu-8').css({'display': 'none'});
@@ -1795,7 +1813,6 @@ function RDT_showCanvasTab(){
 */
 function R3ditor_enableLiveStatusButton(){
 	if (MEM_JS_requreSucess === true){
-		$('#TIMPatcher_LIVESTATUS').css({'display': 'inline'});
 		$('#fileGen_LIVESTATUS').css({'display': 'inline'});
 		$('#main_LIVESTATUS').css({'display': 'inline'});
 		$('#RDT_LIVESTATUS').css({'display': 'inline'});
@@ -1808,7 +1825,6 @@ function R3ditor_enableLiveStatusButton(){
 	}
 }
 function R3ditor_disableLiveStatusButton(){
-	$('#TIMPatcher_LIVESTATUS').css({'display': 'none'});
 	$('#fileGen_LIVESTATUS').css({'display': 'none'});
 	$('#main_LIVESTATUS').css({'display': 'none'});
 	$('#RDT_LIVESTATUS').css({'display': 'none'});

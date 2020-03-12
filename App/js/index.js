@@ -21,7 +21,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = '0.3.1 [BETA]';
+var APP_VERSION = '0.0.3.2 [ALPHA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 /*
 	Onload
@@ -65,7 +65,7 @@ function load(){
 	if (nw.process.arch !== 'ia32'){
 		MEMORY_JS_verifyNodeJsVer();
 	} else {
-		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! RE3 Live Status will be not avaliable!');
+		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
 		MAIN_32BitMode = true;
 	}
 	try{
@@ -137,6 +137,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
 		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
+	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\RDTMAP2');
 	}
 	if (fs.existsSync(APP_PATH + '\\Update\\master.zip') === true){
 		fs.unlinkSync(APP_PATH + '\\Update\\master.zip');
@@ -530,41 +533,54 @@ function R3DITOR_PROCESS_SAVE(filename, content, mode){
 	LOG_scroll();
 }
 /// Download Files
-function R3DITOR_downloadFile(url, nomedoarquivo){
-	if (fs.existsSync(nomedoarquivo) === true){
-		fs.unlinkSync(nomedoarquivo);
+function R3DITOR_downloadFile(url, downloadFileName){
+	if (fs.existsSync(downloadFileName) === true){
+		fs.unlinkSync(downloadFileName);
 	}
 	DOWNLOAD_COMPLETE = false;
 	const http = require('https');
-	const file = fs.createWriteStream(nomedoarquivo);
+	const file = fs.createWriteStream(downloadFileName);
 	const request = http.get(url, function(response){
 		response.pipe(file);
 		file.on('finish', function(){
 			DOWNLOAD_COMPLETE = true;
-			if (nomedoarquivo !== APP_PATH + '\\App\\check.r3ditor'){
-		  		LOG_addLog('log', 'INFO - Download Complete! - ' + nomedoarquivo);
-		  		LOG_scroll();
+			if (downloadFileName !== APP_PATH + '\\App\\check.r3ditor'){
+		  		LOG_addLog('log', 'R3ditor - Download Complete! - ' + downloadFileName);
 			}
     	});
-	});
+	});	
+	LOG_scroll();
 }
 /* 
 	Utils
 */
 /// Get file names
 function getFileName(file){
-	var fileName = file.toLowerCase();
-	var removePath = fileName.split(/(\\|\/)/g).pop();
-	var filter = removePath.replace('.rdt', '').replace('.txt', '').replace('.msg', '').replace('.sav', '').replace('.exe', '').replace('.ini', '').replace('.r3ditor', '').replace('.rdtmap', '').replace('.tim', '').replace('.r3timmap', '').replace('.sld', '').replace('.rbj', '')
-	return filter;
+	if (file !== '' && file !== undefined){
+		var c = 0;
+		var removePath = file.toLowerCase().split(/(\\|\/)/g).pop();
+		while (c < MAIN_exludeFileFormats.length){
+			removePath = removePath.replace(MAIN_exludeFileFormats[c], '');
+			c++;
+		}
+		return removePath;
+	}
 }
-/// Formata valores hex para leitura interna
+/// Get file extension
+function getFileExtension(file){
+	if (file !== '' && file !== undefined){
+		return file.slice(file.indexOf(getFileName(file).toUpperCase()), file.length).replace(getFileName(file).toUpperCase() + '.', '');
+	}
+}
+/// Format hex value to internal reading
 function solveHEX(hex){
-	var res = hex.replace(new RegExp(' ', 'g'), '');
-	var fin = res.toLowerCase();
-	return fin;
+	if (hex !== '' && hex !== undefined){
+		var res = hex.replace(new RegExp(' ', 'g'), '');
+		var fin = res.toLowerCase();
+		return fin;
+	}
 }
-/// Obter Dia, Data e Hora
+/// Get current date
 function currentTime(){
 	var t = new Date;
 	var d = t.getDate();
@@ -829,17 +845,17 @@ function triggerLoad(loadForm){
 	if (loadForm === 6){
 		$('#loadRDTForm').trigger('click');
 	}
-	// TIM - Seek Pattern
+	// Free Slot
 	if (loadForm === 7){
-		$('#loadTIMForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - TIM Map
+	// Free Slot
 	if (loadForm === 8){
-		$('#loadTimMapForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - TIM To Patch
+	// Free Slot
 	if (loadForm === 9){
-		$('#loadTimForPatchForm').trigger('click');
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
 	// INI Load
 	if (loadForm === 10){
@@ -965,41 +981,17 @@ function setLoadFile(input){
 			document.getElementById('loadRDTForm').value = '';
 		}
 	}
-	// TIM - Seek for Patch
+	// Free Slot
 	if (input === 7){
-		cFile = document.getElementById('loadTIMForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - Seek For Patch';
-		} else {
-			TIM_arquivoBruto = undefined;
-			TIM_loadTimToSeekPattern(cFile.path);
-			document.getElementById('loadTIMForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - Map File
+	// Free Slot
 	if (input === 8){
-		cFile = document.getElementById('loadTimMapForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - Map File';
-		} else {
-			TIM_mapFile = [];
-			TIM_openPatchFile(cFile.path);
-			document.getElementById('loadTimMapForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
-	// TIM - File to be patched
+	// Free Slot
 	if (input === 9){
-		cFile = document.getElementById('loadTimForPatchForm').files[0];
-		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
-			loadCancel = true;
-			loadType = 'TIM - File To Patch';
-		} else {
-			TIM_arquivoBruto = undefined;
-			TIM_verifyToPatchFile(cFile.path);
-			document.getElementById('loadTimForPatchForm').value = '';
-		}
+		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
 	}
 	// INI - INI Editor
 	if (input === 10){

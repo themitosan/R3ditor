@@ -111,7 +111,7 @@ input[type='range' i]{
     text-shadow: 0px 0px 10px #0f0;
 }
 .RDT_lbl_pointers{
-    left: 200px;
+    left: 206px;
     width: 1104px;
     position: sticky;
     margin-top: -18px;
@@ -190,6 +190,8 @@ input[type='range' i]{
 }
 .botao-menu:active{
     color: #0f0;
+    box-shadow: 0 0 4px #222;
+    text-shadow: 0 0 10px #fff;
     background-image: linear-gradient(to bottom, #000, #001c00);
 }
 .botao-aplicar{
@@ -265,7 +267,7 @@ input[type='range' i]{
 	position: sticky;
 }
 .RDT-menu-geral-text{
-    left: 200px;
+    left: 206px;
     position: sticky;
 }
 .menu-general-btn{
@@ -910,8 +912,10 @@ input[type='range' i]{
     background-image: linear-gradient(to right, #a29d00, transparent);
 }
 .camPreview{
+    z-index: 0;
     display: none;
     height: 260px;
+    position: inherit;
     padding-top: 10px;
     box-shadow: 0px 0px 10px #41419c;
 }
@@ -929,6 +933,7 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #fff, #c4c4c4);
 }
 .botao-add-comando:active{
+    box-shadow: 0 0 4px #222;
     text-shadow: 0px 0px 10px #fff;
     background-image: linear-gradient(to bottom, #c1c1c1, #fff);
 }
@@ -1109,7 +1114,7 @@ input[type='range' i]{
     left: 830px !important;
 }
 .RDT_door_textEditFix_0{
-    left: 844px;
+    left: 792px;
     width: 52px;
     position: sticky;
 }
@@ -1127,13 +1132,12 @@ input[type='range' i]{
     width: 52px;
 }
 .RDT_door_textEditFix_4{
-    left: 840px;
-    width: 462px;
+    width: 380px;
     position: sticky;
 }
 .RDT_door-edit-posFix{
-    left: 766px !important;
-    width: 536px !important;
+    left: 714px !important;
+    width: 586px !important;
 }
 .menu-utility-fix{
     top: 526px;
@@ -1162,7 +1166,7 @@ input[type='range' i]{
     width: 350px;
 }
 .aba-principal-fix{
-    width: 744px;
+    width: 732px;
 }
 .aba-settings-fix-2{
     top: -44px;
@@ -1228,7 +1232,7 @@ input[type='range' i]{
     width: 78%;
     min-height: 18px;
     margin-top: -18px;
-    margin-left: 88px;
+    margin-left: 96px;
     text-align: -webkit-left;
 }
 .RDT_msgLblErrorAtualLen{
@@ -1263,8 +1267,8 @@ input[type='range' i]{
     padding-left: 10px;
 }
 .RDT-Item-Misc-3{
-    width: 30%;
     left: 460px;
+    width: 146px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
@@ -1474,7 +1478,7 @@ input[type='range' i]{
     box-shadow: 0px 0px 10px #a2a2a247;
 }
 .msg_holder_fix{
-    width: 942px;
+    width: 944px;
 }
 /*
     Item Map
@@ -1569,6 +1573,10 @@ input[type='range' i]{
 .RDT_door_cameraCopyPasteFix{
     margin-top: 6px;
     margin-bottom: 2px;
+}
+.MSG_editCameraSelectFix{
+    z-index: 3;
+    position: relative;
 }
 /*
     FileGen
@@ -1673,38 +1681,11 @@ input[type='range' i]{
     width: 340px;
 }
 /*
-    File list
+    Filelist
 */
 .fileList_aba_holder{
     position: absolute;
     top: -6px;
-}
-/*
-    TIM Patcher
-*/
-.timPatcher_length{
-    width: 34px;
-}
-.timPatcher_titulo{
-    text-shadow: 0px 0px 10px #9d40a9;
-}
-.timPatcher_infos{
-    position: sticky;
-    left: 482px;
-}
-.timPatcher_menu{
-    margin-top: 10px;
-}
-.timPatcher_holder{
-    top: 254px;
-    left: 370px;
-    color: #fff;
-    width: 560px;
-    padding: 10px;
-    display: none;
-    position: absolute;
-    border-radius: 6px;
-    background-image: linear-gradient(to bottom, #666, #222);
 }
 /*
     RE3 LIVE STATUS
@@ -2359,7 +2340,7 @@ input[type='range' i]{
     margin-top: -36px;
 }
 .RDT_SLD_OPEN_RE3SLDE_btn{
-    left: 230px;
+    left: 234px;
     position: sticky;
 }
 .RDT_SLD_MASK_IMG_BLOCK{
