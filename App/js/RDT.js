@@ -843,7 +843,6 @@ function RDT_decompileMessageCode(index, hex){
 			fHex			 = hex.slice(RANGES['RDT_msgCode-header'][0],		   RANGES['RDT_msgCode-1-readMode'][1]);
 		}
 		localStorage.setItem('RDT_MSGBLOCK-' + index, fHex);
-		//console.log(MC_HEADER.toUpperCase() + ' ' + MC_ID.toUpperCase() + ' ' + MC_IDENT.toUpperCase() + " " + MC_XPOS.toUpperCase() + " " + MC_ZPOS.toUpperCase() + " " + MC_XWIDTHTRIGGER.toUpperCase() + " " + MC_ZWIDTHTRIGGER.toUpperCase() + " " + MC_OFFSET0.toUpperCase() + " " + MC_JAPCHARS.toUpperCase() + " " + MC_OFFSET1.toUpperCase() + " " + MC_SPECIALPROP.toUpperCase() + " " + MC_READMODE.toUpperCase());
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
 			'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditMsgCode(' + index + ', \'' + fHex + '\');">(' + parseInt(index + 1) + ') Message ID: ' + MC_ID.toUpperCase() + 
 			'<br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
@@ -1346,7 +1345,6 @@ function RDT_decompileItens(id, edit){
 	var RDT_reason;
 	var RDT_CanRender = true;
 	var currentItem = localStorage.getItem('RDT_Item-' + id);
-	console.log(currentItem);
 	var header = currentItem.slice(RANGES['RDT_item-header'][0], RANGES['RDT_item-header'][1]);
 	if (header !== '67' && header !== '68'){
 		RDT_totalItensGeral--;
@@ -2114,7 +2112,7 @@ function RDT_COMPILE_Lv1(){
 			RDT_arquivoBruto = RDT_CLONE;
 			document.getElementById('RDT_CANVAS_0').innerHTML = '';
 			LOG_addLog('log', 'MAP - INFO: Reloading File: ' + ORIGINAL_FILENAME);
-			RDT_readItens();
+			RDT_openFile(ORIGINAL_FILENAME);
 			$('#RDT-aba-menu-3').trigger('click');
 		} catch(err){
 			LOG_addLog('error', 'MAP - ERROR: Something went wrong on save process!');
