@@ -2,7 +2,7 @@
 
 # R3ditor
 R3ditor (it reads REditor) is a editor of files written in JS / NW.js (aka. Node-Webkit) to perform reverse engineering studies on Resident Evil 3.<br>
-<p align="center"><img src="https://i.imgur.com/bV0ljHH.png" width="680" height="360"></p>
+<p align="center"><img src="https://i.imgur.com/FB8Tx6j.png" width="680" height="360"></p>
 
 ## How to install
 - Download NW.js (Node-Webkit) V. 0.37.4 and extract it into a folder of your choice!<br>(Click <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" target="_blank">here</a> to download)
