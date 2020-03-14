@@ -1600,9 +1600,10 @@ input[type='range' i]{
     overflow: hidden;
     position: absolute;
     background-color: #000;
-    box-shadow: 0px 0px 10px #14141450;
+    box-shadow: 0px 0px 10px #33ff0050;
 }
 .FG_TEXT{
+    top: 74px;
     z-index: 9;
     color: #0f0;
     border: 2px;
@@ -1623,14 +1624,25 @@ input[type='range' i]{
 }
 .FG_FILE_Options{
     z-index: 1;
-    top: 250px;
+    top: 290px;
     color: #fff;
     width: 760px;
-    height: 140px;
+    height: 94px;
     padding: 10px;
     border-radius: 6px;
     position: absolute;
-    background-image: linear-gradient(to bottom, #444, #222);
+    background-image: linear-gradient(to bottom, #545454, #333);
+}
+.FG_ruler{
+    top: 50px;
+    width: 5px;
+    left: 257px;
+    z-index: 10;
+    height: 215px;
+    display: none;
+    border-radius: 6px;
+    position: absolute;
+    background-color: #64ff69;
 }
 /*
     RDT Door Edit Prev

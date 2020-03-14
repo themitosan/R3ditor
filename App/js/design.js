@@ -444,6 +444,12 @@ function main_menu(anim){
 		$('#menu-FILEGEN').css({'display': 'inline'});
 		$('#FILEGEN_holder').css({'height': '474px'});
 		$('#FILEGEN_menu').css({'height': '484px'});
+		if (DESIGN_ENABLE_ANIMS === true){
+			$('#FILEGEN_ruler').fadeIn({duration: 1000, queue: false});
+			$('#FILEGEN_ruler').animate({'top': '60px', 'width': '2px', 'height': '218px'}, {duration: 1000, queue: false});
+		} else {
+			$('#FILEGEN_ruler').css({'top': '60px', 'width': '2px', 'height': '218px', 'display': 'block'});
+		}
 	}
 	if (anim === 5){ // TIM Patcher
 		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');

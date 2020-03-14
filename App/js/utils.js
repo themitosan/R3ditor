@@ -2,15 +2,14 @@
 	utils.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me? Pliiiiz!
-*/
-/*
+
 	FILEGEN
 	File Generator Code
 
-	html2canvas pertence a Niklas von Hertzen.
+	html2canvas was made by Niklas von Hertzen.
 	https://html2canvas.hertzen.com/
 
-	Canvas2Image pertence a hongru
+	Canvas2Image was made by hongru
 	https://github.com/hongru/canvas2image
 */
 var FILEGEN_TOGGLE = false;
@@ -42,7 +41,7 @@ function FG_RENDER(){
 		var text = document.getElementById('FILEGEN_text').value.toString().replace(new RegExp('\n', 'gi'), '@').match(/.{1,1}/g);
 		while(c < text.length){
 			if (FG_DICIONARIO[text[c]] !== undefined){
-				if (text[c] === '@' || text[c] === '\n'){
+				if (text[c] === '\n'){
 					y_offset = y_offset + 15;
 					x_offset = 0;
 					c++;
@@ -86,7 +85,7 @@ function FG_clearAllRadioButtons(){
 }
 /*
 	OBJ Patcher
-	Fix created by Biohazard España - You are amazing!
+	Fix created by Biohazard España - You are amazing!!!
 */
 var OBJ_arquivoBruto;
 function UTILS_OBJ_Patcher_load(){
