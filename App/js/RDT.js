@@ -375,15 +375,21 @@ function RDT_SLD_layer_setBMP(file){
 	}
 	LOG_scroll();
 }
-function RDT_SLD_openOnSLDE(){
-	if (RE3SLDE_CANRUN === true && enable_mod === true){
-		var sld_file_path = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD';
-		runExternalSoftware(APP_PATH + '\\App\\tools\\RE3SLDE.exe', [sld_file_path]);
+function RDT_SLD_openOnRE3SLDE(){
+	var CURRENT_SLD_FILE = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD';
+	if (RE3SLDE_CANRUN === true && enable_mod === true && fs.existsSync(CURRENT_SLD_FILE) === true){
+		runExternalSoftware(APP_PATH + '\\App\\tools\\RE3SLDE.exe', [CURRENT_SLD_FILE]);
+	}
+}
+function RDT_SLD_openSldOnHex(){
+	var CURRENT_SLD_FILE = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.SLD';
+	if (RE3SLDE_CANRUN === true && enable_mod === true && fs.existsSync(CURRENT_SLD_FILE) === true){
+		openFileOnHex(CURRENT_SLD_FILE);
 	}
 }
 /*
 	Cameras
-	This will have a different way to retrive the infos!
+	This will have a different way to retrive the infos... for now!
 	
 	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
 */

@@ -2299,6 +2299,10 @@ input[type='range' i]{
 /*
     SLD Layer
 */
+.RDT_SLD_mainMenuLeftFix{
+    position: sticky;
+    left: 403px !important;
+}
 .RDT_SLD_selectFix{
     width: 120px;
 }

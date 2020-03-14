@@ -150,7 +150,7 @@ function UTILS_extract_rofs(rofsFile){
 		}
 	} catch (err){
 		if (err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
-			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
+			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software');
 			LOG_addLog('error', 'Details: ' + err);
 		} else {
 			LOG_addLog('error', 'ERROR - Something went wrong while extracting rofs!');

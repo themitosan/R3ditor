@@ -1223,9 +1223,11 @@ function RDT_showMenu(id){
 	if (enable_mod === true && sldExists === true && RE3SLDE_CANRUN === true && RDT_fileType === 'RDT'){
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'Yes';
 		$('#RDT_btn_openOnRE3SLDE').removeClass('none');
+		$('#RDT_btn_openOnHexSld').removeClass('none');
 	} else {
 		document.getElementById('RDT_lbl-SLD_PRESENT').innerHTML = 'No';
 		$('#RDT_btn_openOnRE3SLDE').addClass('none');
+		$('#RDT_btn_openOnHexSld').addClass('none');
 	}
 	RDT_SLD_CANVAS_BG_CHANGE_OPACITY();
 	$('#RDT_backupBtn').css({'display': 'inline'});
