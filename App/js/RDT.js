@@ -929,6 +929,7 @@ function RDT_readDoors(){
 	RDT_getDoorsArray('012108');
 	RDT_getDoorsArray('012109');
 	RDT_getDoorsArray('012110');
+	RDT_getDoorsArray('01210c');
 	if (RDT_doorsArray.length !== 0){
 		while(c < RDT_doorsArray.length){
 			RDT_decompileDoors(c, RDT_doorsArray[c]);
@@ -1001,25 +1002,29 @@ function RDT_decompileDoors(index, location){
 		} else {
 			// Header 62
 			DOOR_RAW	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 80));
-			dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorXpos'][0], 		    		 RANGES['RDT_door-1-doorXpos'][1]);
-			dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorYpos'][0], 		    		 RANGES['RDT_door-1-doorYpos'][1]);
-			dr_zPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorZpos'][0], 		    		 RANGES['RDT_door-1-doorZpos'][1]);
-			dr_rPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorRpos'][0], 		    		 RANGES['RDT_door-1-doorRpos'][1]);
-			dr_offset0	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset0'][0], 			 RANGES['RDT_door-1-doorHexOffset0'][1]);
-			dr_nXpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextXpos'][0], 	    		 RANGES['RDT_door-1-doorNextXpos'][1]);
-			dr_nYpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextYpos'][0], 	    		 RANGES['RDT_door-1-doorNextYpos'][1]);
-			dr_nZpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextZpos'][0], 	    		 RANGES['RDT_door-1-doorNextZpos'][1]);
-			dr_nRpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRpos'][0], 	    		 RANGES['RDT_door-1-doorNextRpos'][1]);
-			dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextStage'][0], 	    		 RANGES['RDT_door-1-doorNextStage'][1]);
-			dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRoomNumber'][0], 		 RANGES['RDT_door-1-doorNextRoomNumber'][1]);
-			dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextCamNumber'][0],  		 RANGES['RDT_door-1-doorNextCamNumber'][1]);
-			dr_offset2 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset2'][0], 			 RANGES['RDT_door-1-doorHexOffset2'][1]);
-			dr_type		   = parseInt(parseInt(DOOR_RAW.slice(RANGES['RDT_door-1-doorType'][0],  RANGES['RDT_door-1-doorType'][1]), 16) + 1).toString(16).toUpperCase();			
-			dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-1-doorOpenOrient'][0], 			 RANGES['RDT_door-1-doorOpenOrient'][1]);
-			dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorLockedFlag'][0], 			 RANGES['RDT_door-1-doorLockedFlag'][1]);
-			dr_key 		   = DOOR_RAW.slice(RANGES['RDT_door-1-doorKey'][0], 		    		 RANGES['RDT_door-1-doorKey'][1]);
-			dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset1'][0], 			 RANGES['RDT_door-1-doorHexOffset1'][1]);
-			dr_displayText = DOOR_RAW.slice(RANGES['RDT_door-1-doorDisplayText'][0], 			 RANGES['RDT_door-1-doorDisplayText'][1]);
+			dr_xPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorXpos'][0], 		    		RANGES['RDT_door-1-doorXpos'][1]);
+			dr_yPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorYpos'][0], 		    		RANGES['RDT_door-1-doorYpos'][1]);
+			dr_zPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorZpos'][0], 		    		RANGES['RDT_door-1-doorZpos'][1]);
+			dr_rPos   	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorRpos'][0], 		    		RANGES['RDT_door-1-doorRpos'][1]);
+			dr_offset0	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset0'][0], 			RANGES['RDT_door-1-doorHexOffset0'][1]);
+			dr_nXpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextXpos'][0], 	    		RANGES['RDT_door-1-doorNextXpos'][1]);
+			dr_nYpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextYpos'][0], 	    		RANGES['RDT_door-1-doorNextYpos'][1]);
+			dr_nZpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextZpos'][0], 	    		RANGES['RDT_door-1-doorNextZpos'][1]);
+			dr_nRpos  	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRpos'][0], 	    		RANGES['RDT_door-1-doorNextRpos'][1]);
+			dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextStage'][0], 	    		RANGES['RDT_door-1-doorNextStage'][1]);
+			dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRoomNumber'][0], 		RANGES['RDT_door-1-doorNextRoomNumber'][1]);
+			dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextCamNumber'][0],  		RANGES['RDT_door-1-doorNextCamNumber'][1]);
+			dr_offset2 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset2'][0], 			RANGES['RDT_door-1-doorHexOffset2'][1]);
+			dr_type		   = parseInt(parseInt(DOOR_RAW.slice(RANGES['RDT_door-1-doorType'][0], RANGES['RDT_door-1-doorType'][1]), 16) + 1).toString(16).toUpperCase();			
+			dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-1-doorOpenOrient'][0], 			RANGES['RDT_door-1-doorOpenOrient'][1]);
+			dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorLockedFlag'][0], 			RANGES['RDT_door-1-doorLockedFlag'][1]);
+			dr_key 		   = DOOR_RAW.slice(RANGES['RDT_door-1-doorKey'][0], 		    		RANGES['RDT_door-1-doorKey'][1]);
+			dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset1'][0], 			RANGES['RDT_door-1-doorHexOffset1'][1]);
+			dr_displayText = DOOR_RAW.slice(RANGES['RDT_door-1-doorDisplayText'][0], 			RANGES['RDT_door-1-doorDisplayText'][1]);
+		}
+		if (DOOR_RAW === '6121012101419141414121219141212112327281f12102927100f11110f0c060'){
+			canAdd = false;
+			reason = 'Pattern is out of range!';
 		}
 		// Too bad :(
 		if (dr_key === '53' && dr_openOrient === '53' && dr_key === '53' && dr_type === '53' && dr_xPos === 'b1b1' && dr_yPos === 'b1b1' && dr_zPos === '31b1'){
