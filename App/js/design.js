@@ -835,12 +835,12 @@ function showAbout(){
 	$('#menu-utility-aba-4').css({'display': 'none'});
 	$('#mainMenu-patcher-div').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
-		$('#r_logo').fadeIn({duration: 1500, queue: false});
+		$('#ABOUT_R3ditorLogo').fadeIn({duration: 1500, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
 		$('#about-r3ditor').fadeIn({duration: 500, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'none'});
-		$('#r_logo').css({'display': 'inline'});
+		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 		$('#about-r3ditor').css({'display': 'inline'});
 	}
 	MISC_unblurImg();
@@ -852,13 +852,28 @@ function MISC_unblurImg(){
 		var imgTimer = setInterval(function(){
 			if (c > 0){
 				c--;
-				$('#r_logo').css({'filter': 'blur(' + c + 'px)'});
+				$('#ABOUT_R3ditorLogo').css({'filter': 'blur(' + c + 'px)'});
 			} else {
 				clearInterval(imgTimer);
+				setTimeout(function(){
+					ABOUT_hueEffect();
+				}, 50);
 			}
 		}, 100);
 	} else {
-		$('#r_logo').css({'filter': 'blur(0px)'});
+		$('#ABOUT_R3ditorLogo').css({'filter': 'blur(0px)'});
+	}
+}
+function ABOUT_hueEffect(){
+	if (DESIGN_ENABLE_ANIMS === true){
+		var c = 0;
+		var imgHueTimer = setInterval(function(){
+			if (c > 359){
+				c = 0;
+			}
+			$('#ABOUT_R3ditorLogo').css({'filter': 'hue-rotate(' + c + 'deg)'});
+			c++;
+		}, 200);
 	}
 }
 /// MSG
