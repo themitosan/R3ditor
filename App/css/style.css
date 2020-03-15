@@ -68,10 +68,10 @@ input[type='range' i]{
     position: absolute;
 }
 .ABOUT_main{
-    top: 32px;
+    top: 40px;
     left: 140px;
     width: 992px;
-    height: 600px;
+    height: 582px;
     padding: 34px;
     overflow: hidden;
     position: absolute;
