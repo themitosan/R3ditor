@@ -57,6 +57,79 @@ input[type='range' i]{
     width: 100%;
     height: 100%;
 }
+/*
+    About
+*/
+.ABOUT_appLogo{
+    top: 148px;
+    position: absolute;
+}
+.ABOUT_right{
+    position: absolute;
+}
+.ABOUT_main{
+    top: 32px;
+    left: 140px;
+    width: 992px;
+    height: 600px;
+    padding: 34px;
+    overflow: hidden;
+    position: absolute;
+    border-radius: 50px;
+    box-shadow: 0px 0px 30px #5d46727a;
+    background-image: linear-gradient(to bottom, #5f4774, #17163f);
+}
+.appLogo{
+    width: 200px;
+    filter: blur(200px);
+}
+.ABOUT_separador{
+    top: 76px;
+    width: 2px;
+    left: 244px;
+    color: #fff;
+    height: 500px;
+    border-radius: 6px;
+    position: absolute;
+    background-image: linear-gradient(#ffffff00, #fff, #ffffff00);
+}
+.ABOUT_LEGAL_INFO{
+    top: 500px;
+    left: 276px;
+    width: 720px;
+    position: absolute;
+}
+.ABOUT_manyThanksDiv{
+    top: 62px;
+    left: 256px;
+    width: 776px;
+    height: 290px;
+    overflow: auto;
+    position: absolute;
+    border-radius: 6px;
+    text-align: -webkit-left;
+}
+.ABOUT_specialThanks{
+    top: 360px;
+    left: 300px;
+    position: absolute;
+    text-align: -webkit-center;
+}
+.ABOUT_goBackBtn{
+    left: 4px;
+    top: 316px;
+    position: absolute;
+    width: 180px !important;
+    border-radius: 6px !important;
+}
+/*
+
+*/
+.textLOGO{
+    color: #fff;
+    font-size: xx-large;
+    text-shadow: 0px 0px 30px #f00;
+}
 .FBOOT_logo{
     top: 260px;
     left: 588px;
@@ -130,35 +203,6 @@ input[type='range' i]{
     font-size: x-large;
     text-decoration: underline;
     text-shadow: 0px 0px 10px #555;
-}
-.about{
-    top: 12px;
-    width: 80%;
-    left: 110px;
-    padding: 34px;
-    overflow: hidden;
-    position: absolute;
-    border-top-right-radius: 70px;
-    border-top-left-radius: 160px;
-    border-bottom-left-radius: 70px;
-    border-bottom-right-radius: 160px;
-    box-shadow: 0px 0px 30px #5d46727a;
-    background-image: linear-gradient(to bottom, #5f4774, #1b163f);
-}
-.appLogo{
-    width: 200px;
-    filter: blur(200px);
-}
-.about-tks{
-    width: 800px;
-    height: 108px;
-    overflow: auto;
-    border-radius: 6px;
-}
-.textLOGO{
-    color: #fff;
-    font-size: xx-large;
-    text-shadow: 0px 0px 30px #f00;
 }
 .msg-legenda-sticky{
     left: 50px;
