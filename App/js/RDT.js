@@ -75,6 +75,7 @@ var RDT_mapName;
 var RDT_fileType;
 var RDT_totalDoors;
 var RDT_totalAudios;
+var RDT_total3DProps;
 var RDT_arquivoBruto;
 var RDT_itemIndexRAW;
 var RDT_totalEnemies;
@@ -143,6 +144,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_editItemCancel();
 		RDT_totalCameras = 0;
 		RDT_totalEnemies = 0;
+		RDT_total3DProps = 0;
 		RDT_cameraArray = [];
 		RDT_enemiesArray = [];
 		sessionStorage.clear();
@@ -180,6 +182,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		document.getElementById('RDT_enemy_holder').innerHTML = '';
 		document.getElementById('RDT_camera_holder').innerHTML = '';
 		document.getElementById('RDT_msgCode_holder').innerHTML = '';
+		document.getElementById('RDT_3DProps_holder').innerHTML = '';
 		document.getElementById('RDT_SLD_SELECT_CAM').innerHTML = '';
 		document.getElementById('RDT_lbl_selectedPoint').innerHTML = '';
 		/*
@@ -209,6 +212,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		} else {
 			$('#RDT-aba-menu-9').css({'display': 'none'});
 		}
+		RDT_getPropModelsArray();
 		RDT_readDoors();
 		RDT_readItens();
 		RDT_BG_display();
@@ -740,7 +744,7 @@ function RDT_getEnemies(hx){
 	}
 }
 /*
-	Props [UBER-EXTREME WIP]
+	3D Props WIP!
 */
 function RDT_getPropModelsArray(){
 	if (RDT_arquivoBruto !== undefined){
@@ -750,6 +754,7 @@ function RDT_getPropModelsArray(){
 			console.log(RDT_propModelsArray[c].toUpperCase());
 			c++;
 		}
+		RDT_total3DProps--;
 	}
 }
 function RDT_getpropModels(hx){
@@ -760,11 +765,40 @@ function RDT_getpropModels(hx){
 		var check_1 = RDT_arquivoBruto.slice(parseInt(propRaw[c] + 74), parseInt(propRaw[c] + 76));
 		var check_2 = getAllIndexes(RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] + 76)), '0');
 		if (check_0 === '7f' && check_1 === '00' && check_2.length < 74){
-			RDT_propModelsArray.push(RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] + 76)));
+			localStorage.setItem('RDT_3D_PROP_' + c, RDT_arquivoBruto.slice(parseInt(propRaw[c] - 4), parseInt(propRaw[c] + 76)));
+			RDT_decompile3DProp(c);
+			RDT_total3DProps++;
 			c++;
 		} else {
 			propRaw.splice(c, 1);
 		}
+	}
+}
+function RDT_decompile3DProp(id){
+	if (id !== undefined){
+		var PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
+
+		var PROP_HEADER = PROP_RAW.slice(0, 2);
+		var PROP_ID = PROP_RAW.slice(2, 4);
+		var PROP_OFFSET_0 = PROP_RAW.slice(4, 16);
+		var PROP_OFFSET_1 = PROP_RAW.slice(16, 18);
+		var PROP_OFFSET_2 = PROP_RAW.slice(18, 28);
+		var PROP_ITEMLINK = PROP_RAW.slice(28, 30);
+		var PROP_OFFSET_3 = PROP_RAW.slice(30, 32);
+		var PROP_XPOS = PROP_RAW.slice(32, 36);
+		var PROP_ZPOS = PROP_RAW.slice(36, 40);
+		var PROP_YPOS = PROP_RAW.slice(40, 44);
+		var PROP_RPOS = PROP_RAW.slice(44, 48);
+		var PROP_EXTRA = PROP_RAW.slice(48, 52);
+		var PROP_FINAL = PROP_RAW.slice(52, PROP_RAW.length);
+
+		var PROP_HTML_TEMPLATE = '<div class="RDT-Item RDT-3DProp-bg" id="RDT-3D_Item-0" onclick="main_closeFileList();">' + 
+				'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_edit3D_ItemBtn_0" value="Modify" onclick="RDT_show3DPropEdit(0, ' + id + ')">' + 
+				'(' + id + ') ID: ' + PROP_ID.toUpperCase() + '<div class="menu-separador"></div>X Pos: ' + PROP_XPOS.toUpperCase() + '<br>Y Pos: ' + 
+				PROP_YPOS.toUpperCase() + '<br>Z Pos: ' + PROP_ZPOS.toUpperCase() + '<br>R Pos: ' + PROP_RPOS.toUpperCase() + '<div class="RDT-Item-Misc">Item Link: ' + 
+				PROP_ITEMLINK.toUpperCase() + '<br>Extra: ' + PROP_EXTRA.toUpperCase() + '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + 
+				PROP_RAW.toUpperCase() + '</font></div>';
+		$('#RDT_3DProps_holder').append(PROP_HTML_TEMPLATE);
 	}
 }
 /*

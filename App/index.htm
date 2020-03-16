@@ -874,10 +874,10 @@
 						</div>
 						<!-- Edit XYZR -->
 						<div id="RE3_LIVESTATUS_edit_XYZR_div" class="none">
-							<font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_X" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu" value="Copy Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(0);"><br>
-							<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_Y" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu none" id="RE3_LIVESTATUS_stageOptions_pastePos" value="Paste Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(1);"><br>
-							<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_Z" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><br>
-							<font class="RE3_LIVESTATUS_R_color">R Position</font>: <input type="text" placeholder="0000" id="RE3_LIVESTATUS_edit_R" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4">
+							<font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="0000" placeholder="XXXX" id="RE3_LIVESTATUS_edit_X" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu" value="Copy Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(0);"><br>
+							<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="0000" placeholder="YYYY" id="RE3_LIVESTATUS_edit_Y" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><input type="button" class="botao-menu none" id="RE3_LIVESTATUS_stageOptions_pastePos" value="Paste Current Pos." onclick="RE3_LIVE_COPY_PASTE_LOCATION(1);"><br>
+							<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="0000" placeholder="ZZZZ" id="RE3_LIVESTATUS_edit_Z" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4"><br>
+							<font class="RE3_LIVESTATUS_R_color">R Position</font>: <input type="text" placeholder="0000" placeholder="RRRR" id="RE3_LIVESTATUS_edit_R" class="item-select-mod RE3_live_edit_xyzr_fix" maxlength="4">
 						</div>
 						<div class="menu-separador"></div>
 						<center>Current Camera: <font id="RE3_LIVESTATUS_lbl_CurrentCamera">???</font><br>
@@ -962,12 +962,11 @@
 			<input type="button" id="RDT-aba-menu-2" class="aba none" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
+			<input type="button" id="RDT-aba-menu-11" class="aba" value="3D Props (???)" onclick="RDT_showMenu(11);">
 			<input type="button" id="RDT-aba-menu-4" class="aba none" value="Pos. Edit">
 			<input type="button" id="RDT-aba-menu-8" class="aba" value="Enemies / NPC's (???)" onclick="RDT_showMenu(8);">
 			<input type="button" id="RDT-aba-menu-6" class="aba" value="Doors (???)" onclick="RDT_showMenu(6);">
 			<input type="button" id="RDT-aba-menu-5" class="aba" value="Audios (???)" onclick="RDT_showMenu(5);">
-			<!-- WIP -->
-			<input type="button" id="RDT-aba-menu-11" class="aba none" value="TIM (WIP)" onclick="WIP();">
 			<!-- RDT: General -->
 			<div class="menu" id="RDT_menu-1">
 				<div class="menu-general-content" id="RDT-geral" onclick="main_closeFileList();">
@@ -1007,6 +1006,7 @@
 					<div id="RDT_mainMenu_totalMsgLbl" class="none">
 						Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font>
 					</div>
+					Number of 3D Props: <font class="RDT-menu-geral-text" id="RDT_lbl-total3DProps">???</font><br>
 					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
 					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 				</div>
@@ -1100,6 +1100,37 @@
 					</div>
 				</div>
 			</div>
+			<!-- RDT: Prop code -->
+			<div class="menu none" id="RDT_menu-11">
+				<div class="menu-general-content" id="RDT-3D_props" onclick="main_closeFileList();">
+					<div id="RDT_BG_11" class="RDT_BG_IMAGE"></div>
+					<center><font class="titulo">3D Props - Total: <font id="RDT_lbl_total3DProps">???</font></font></center>
+					<div id="RDT_3DProps_holder" class="RDT-holder">
+						<!-- Props goes here -->
+					</div>
+					<div class="RDT-Item-Edit none" id="RDT-3D_props-Edit">
+						<center><font class="titulo">Edit Parameters</font><br>3D Prop ID: <font id="RDT-lbl-3DPropID-edit">???</font></center>
+						<font class="RE3_LIVESTATUS_X_color">X Pos:</font><input type="text" id="RDT_edit_3DProp_X" class="item-select-mod RDT_3DProps_XYZR_fix" maxlength="4" placeholder="XXXX"><br>
+						<font class="RE3_LIVESTATUS_Y_color">Y Pos:</font><input type="text" id="RDT_edit_3DProp_Y" class="item-select-mod RDT_3DProps_XYZR_fix" maxlength="4" placeholder="YYYY"><br>
+						<font class="RE3_LIVESTATUS_Z_color">Z Pos:</font><input type="text" id="RDT_edit_3DProp_Z" class="item-select-mod RDT_3DProps_XYZR_fix" maxlength="4" placeholder="ZZZZ"><br>
+						<font class="RE3_LIVESTATUS_R_color">R Pos:</font><input type="text" id="RDT_edit_3DProp_R" class="item-select-mod RDT_3DProps_XYZR_fix" maxlength="4" placeholder="RRRR">
+						<div class="RDT_3DProps_extraDivFix">
+							Item Link: <input type="text" id="RDT_edit_3DProp_iLink" maxlength="2" class="item-select-mod RDT_3DProps_extraTextValueFix"><br>
+							Extra: <input type="text" id="RDT_edit_3DProp_Extra" maxlength="4" class="item-select-mod RDT_3DProps_extraTextValueFix">
+						</div>
+						<div class="menu-separador"></div>
+						<center>
+							<input type="button" onclick="WIP();" class="botao-menu" value="Copy Position">
+							<input type="button" onclick="WIP();" class="botao-menu" value="Paste Position">
+							<input type="button" onclick="WIP();" id="RDT_useJillPos_3DProp" class="botao-menu botao-aplicar none" value="Use Player Position">
+						</center>
+						<div class="RDT-applyBtn-div">
+							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_show3DPropEdit(1);">
+							<input type="button" title="Click here to apply!" onclick="WIP();" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicar3DProp" value="APPLY CHANGES!">
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- RDT Enemy / NPC's -->
 			<div class="menu" id="RDT_menu-8" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-enemy-hold">
@@ -1122,10 +1153,10 @@
 									<!-- Options goes here -->
 								</select>
 							</div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" id="RDT_enemyNPC-edit-X" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" id="RDT_enemyNPC-edit-Y" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" id="RDT_enemyNPC-edit-Z" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" id="RDT_enemyNPC-edit-R" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="XXXX" id="RDT_enemyNPC-edit-X" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="YYYY" id="RDT_enemyNPC-edit-Y" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="ZZZZ" id="RDT_enemyNPC-edit-Z" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" id="RDT_enemyNPC-edit-R" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Pose: 
 								<select id="RDT_enemyNPC-edit-PO" class="item-select-mod RDT-item-lbl-fix-9 RDT_editSelectEnemyNPC-fix no-transform-text" onchange="RDT_enemyNPCValidateInput();">
@@ -1196,15 +1227,15 @@
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
-							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>

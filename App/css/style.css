@@ -1049,6 +1049,9 @@ input[type='range' i]{
 .RDT_coordsHolder_C{
     margin-top: 5px;
 }
+.RDT-3DProp-bg{
+    background-image: linear-gradient(to bottom, #017792, #14325c);
+}
 .RDT-item-bg{
     background-image: linear-gradient(to bottom, #5755bd, #3a397d);
 }
@@ -2611,4 +2614,23 @@ input[type='range' i]{
     margin-bottom: 10px;
     box-shadow: 0 0 7px #000;
     background-image: linear-gradient(to bottom, #1100178c, #050417ba);
+}
+/*
+    3D props
+*/
+.RDT_3DProps_XYZR_fix{
+    left: 800px;
+    position: sticky;
+    margin-left: 6px;
+    width: 42px !important;
+}
+.RDT_3DProps_extraDivFix{
+    top: 61px;
+    left: 120px;
+    position: absolute;
+}
+.RDT_3DProps_extraTextValueFix{
+    left: 938px;
+    width: 60px;
+    position: sticky;
 }

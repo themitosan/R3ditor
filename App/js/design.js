@@ -8,7 +8,7 @@ var RDT_aba_atual;
 var SAVE_aba_atual;
 var main_currentMenu;
 var fileList_gameMode;
-var RDT_totalMenus = 10;
+var RDT_totalMenus = 11;
 var INI_totalMenus = 3;
 var MIX_totalMenus = 7;
 var MIX_currentMenu = 0;
@@ -1216,6 +1216,7 @@ function RDT_showMenu(id){
 	}
 	$('#RDT_reload').css({'display': 'inline'});
 	if (RE3_RUNNING === false && enable_mod === true){
+		$('#RDT-3D_props').css({'height': '472px'});
 		$('#RDT-door-Edit').css({'height': '417px'});
 		$('#RDT-door-hold').css({'height': '472px'});
 		$('#RDT-enemy-hold').css({'height': '472px'});
@@ -1226,8 +1227,10 @@ function RDT_showMenu(id){
 		$('#RDT_MSGBLOCKINFO').css({'height': '449px'});
 		$('#RDT_audio_holder').css({'height': '430px'});
 		$('#RDT_enemy_holder').css({'height': '430px'});
+		$('#RDT-3D_props-Edit').css({'height': '418px'});
 		$('#RDT_camera_holder').css({'height': '430px'});
 		$('#RDT_msgCode_holder').css({'height': '430px'});
+		$('#RDT_3DProps_holder').css({'height': '428px'});
 	}
 	if (RDT_fileType === 'RDT'){
 		document.getElementById('RDT-lbl-fileVersion').innerHTML = 'PC \\ GameCube \\ DreamCast';
@@ -1263,6 +1266,8 @@ function RDT_showMenu(id){
 	document.getElementById('RDT_lbl_totalAudios').innerHTML = RDT_totalAudios;
 	document.getElementById('RDT-lbl-FILE_Path').innerHTML = ORIGINAL_FILENAME;
 	document.getElementById('RDT_lbl-totItens').innerHTML = RDT_totalItensGeral;
+	document.getElementById('RDT_lbl-total3DProps').innerHTML = RDT_total3DProps;
+	document.getElementById('RDT_lbl_total3DProps').innerHTML = RDT_total3DProps;
 	document.getElementById('RDT_lbl_totalCameras').innerHTML = RDT_totalCameras;
 	document.getElementById('RDT-aba-menu-6').value = 'Doors (' + RDT_totalDoors +')';
 	document.getElementById('RDT_lbl_totalEnemy').innerHTML = RDT_enemiesArray.length;
@@ -1270,6 +1275,7 @@ function RDT_showMenu(id){
 	document.getElementById('RDT-aba-menu-5').value = 'Audios (' + RDT_totalAudios +')';
 	document.getElementById('RDT-aba-menu-9').value = 'Cameras (' + RDT_totalCameras +')';
 	document.getElementById('RDT_lbl_totalmsgCode').innerHTML = RDT_messageCodesArray.length;
+	document.getElementById('RDT-aba-menu-11').value = '3D Props (' + RDT_total3DProps + ')';
 	document.getElementById('RDT-aba-menu-8').value = 'Enemies / NPC\'s (' + RDT_totalEnemies + ')';
 	document.getElementById('RDT-aba-menu-7').value = 'Message Code (' + RDT_messageCodesArray.length + ')';
 	document.getElementById('RDT-aba-menu-3').value = 'Items, Files and Maps (' + RDT_totalItensGeral + ')';
@@ -1282,6 +1288,45 @@ function RDT_showMenu(id){
 	RDT_Error_404();
 	LOG_scroll();
 }
+// 3D Props
+function RDT_show3DPropEdit(mode, id){
+	// Mode 0: show, Mode 1: Hide
+	main_closeFileList();
+	if (mode === 0){
+		if (id !== undefined){
+			var PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
+
+			var PROP_HEADER = PROP_RAW.slice(0, 2);
+			var PROP_ID = PROP_RAW.slice(2, 4);
+			var PROP_OFFSET_0 = PROP_RAW.slice(4, 16);
+			var PROP_OFFSET_1 = PROP_RAW.slice(16, 18);
+			var PROP_OFFSET_2 = PROP_RAW.slice(18, 28);
+			var PROP_ITEMLINK = PROP_RAW.slice(28, 30);
+			var PROP_OFFSET_3 = PROP_RAW.slice(30, 32);
+			var PROP_XPOS = PROP_RAW.slice(32, 36);
+			var PROP_ZPOS = PROP_RAW.slice(36, 40);
+			var PROP_YPOS = PROP_RAW.slice(40, 44);
+			var PROP_RPOS = PROP_RAW.slice(44, 48);
+			var PROP_EXTRA = PROP_RAW.slice(48, 52);
+			var PROP_FINAL = PROP_RAW.slice(52, PROP_RAW.length);
+			//
+			document.getElementById('RDT-lbl-3DPropID-edit').innerHTML = PROP_ID;
+			document.getElementById('RDT_edit_3DProp_X').value = PROP_XPOS;
+			document.getElementById('RDT_edit_3DProp_Y').value = PROP_ZPOS;
+			document.getElementById('RDT_edit_3DProp_Z').value = PROP_YPOS;
+			document.getElementById('RDT_edit_3DProp_R').value = PROP_RPOS;
+			document.getElementById('RDT_edit_3DProp_iLink').value = PROP_ITEMLINK.toUpperCase();
+			document.getElementById('RDT_edit_3DProp_Extra').value = PROP_EXTRA.toUpperCase();
+			//
+			$('#RDT-3D_props-Edit').css({'display': 'inline'});
+			$('#RDT_3DProps_holder').css({'width': '722px'});
+		}
+	} else {
+		$('#RDT_3DProps_holder').css({'width': '1288px'});
+		$('#RDT-3D_props-Edit').css({'display': 'none'});
+	}
+}
+// MSGS
 function RDT_renderMSGInfos(){
 	if (RDT_fm_avaliable === true){
 		$('#RDT-aba-menu-7').css({'display': 'inline'});
@@ -1844,6 +1889,7 @@ function R3ditor_enableLiveStatusButton(){
 		// Another Buttons
 		$('#RDT_EMD_usePlayerPosBtn').css({'display': 'inline'});
 		$('#RDT_door_usePlayerPos').css({'display': 'inline'});
+		$('#RDT_useJillPos_3DProp').css({'display': 'inline'})
 		$('#RDT_useJillPos_Item').css({'display': 'inline'});
 	}
 }
@@ -1857,6 +1903,7 @@ function R3ditor_disableLiveStatusButton(){
 	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
 	$('#RDT_door_usePlayerPos').css({'display': 'none'});
 	$('#RDT_useJillPos_Item').css({'display': 'none'});
+	$('#RDT_useJillPos_3DProp').css({'display': 'none'})
 	RDT_enableDisableDoorUsePlayerPos(1);
 }
 function RDT_enableDisableDoorUsePlayerPos(mode){
@@ -2590,8 +2637,10 @@ function R3DITOR_RUNGAME(id){
 					c++;
 				}
 				$('#RDT_msgCode_holder').css({'height': '474px'});
+				$('#RDT_3DProps_holder').css({'height': '474px'});
 				$('#RDT-enemyNPC-Edit').css({'height': '458px'});
 				$('#RDT_camera_holder').css({'height': '474px'});
+				$('#RDT-3D_props-Edit').css({'height': '463px'});
 				$('#RDT_enemy_holder').css({'height': '474px'});
 				$('#RDT-MSGCODE-Edit').css({'height': '463px'});
 				$('#RDT-msgCode-hold').css({'height': '516px'});
@@ -2612,6 +2661,7 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT-Item-Edit').css({'height': '458px'});
 				$('#RDT-door-Edit').css({'height': '463px'});
 				$('#FILEGEN_menu').css({'height': '526px'});
+				$('#RDT-3D_props').css({'height': '518px'});
 				$('#RDT-geral').css({'height': '516px'});
 				$('#RDT-msgs').css({'height': '516px'});
 				$('#RDT-ifm').css({'height': '516px'});
@@ -2636,9 +2686,11 @@ function R3DITOR_RUNGAME(id){
 						c++;
 					}
 					$('#RDT_msgCode_holder').css({'height': '430px'});
+					$('#RDT_3DProps_holder').css({'height': '428px'});
 					$('#RDT-enemyNPC-Edit').css({'height': '418px'});
 					$('#RDT_camera_holder').css({'height': '430px'});
 					$('#RRDT-camera-Edit').css({'height': '418px'});
+					$('#RDT-3D_props-Edit').css({'height': '418px'});
 					$('#RDT_enemy_holder').css({'height': '430px'});
 					$('#RDT-msgCode-hold').css({'height': '472px'});
 					$('#FILEGEN_contents').css({'height': '434px'});
@@ -2658,10 +2710,11 @@ function R3DITOR_RUNGAME(id){
 					$('#RDT-item-list').css({'height': '428px'});
 					$('#RDT-Item-Edit').css({'height': '418px'});
 					$('#FILEGEN_menu').css({'height': '484px'});
+					$('#RDT-3D_props').css({'height': '472px'});
 					$('#RDT-geral').css({'height': '472px'});
 					$('#RDT-msgs').css({'height': '472px'});
 					$('#RDT-ifm').css({'height': '472px'});
-	
+
 					$('#RDT-SLD-hold').css({'height': '472px'});
 					$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
 					$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
