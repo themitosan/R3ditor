@@ -626,6 +626,7 @@ var RDT_EMDPOS = {
 var FG_DICIONARIO = {
 	'.': ['0px 1106px 0px 8px',      '-8', 8],
 	' ': ['0px 1077px 0px 33px',    '-33', 7],
+	'§': ['0px 1077px 0px 33px',    '-33', 7],
 	'@': ['0px 1045px 0px 62px',    '-62', 10],
 	'(': ['0px 1068px 0px 43px',    '-44', 6],
 	')': ['0px 1063px 0px 48px',    '-50', 6],

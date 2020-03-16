@@ -38,10 +38,10 @@ function FG_RENDER(){
 	var y_offset = 0;
 	document.getElementById('FILEGEN_CANVAS').innerHTML = '';
 	if (document.getElementById('FILEGEN_text').value !== ''){
-		var text = document.getElementById('FILEGEN_text').value.toString().replace(new RegExp('\n', 'gi'), '@').match(/.{1,1}/g);
+		var text = document.getElementById('FILEGEN_text').value.toString().replace(new RegExp('\n', 'gi'), '§').match(/.{1,1}/g);
 		while(c < text.length){
 			if (FG_DICIONARIO[text[c]] !== undefined){
-				if (text[c] === '\n'){
+				if (text[c] === '\n' || text[c] === '§'){
 					y_offset = y_offset + 15;
 					x_offset = 0;
 					c++;
