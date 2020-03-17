@@ -4,21 +4,9 @@
 	Sorry. For real.
 */
 
-// Copy-Paste Door
-var RDT_CURRENT_X = '';
-var RDT_CURRENT_Y = '';
-var RDT_CURRENT_Z = '';
-var RDT_CURRENT_R = '';
-var RDT_TEMP_NEXTX = '';
-var RDT_TEMP_NEXTY = '';
-var RDT_TEMP_NEXTZ = '';
-var RDT_TEMP_NEXTR = '';
-var RDT_selectedPoint = 0;
-var RDT_TEMP_NEXT_ROOM = '';
-var RDT_TEMP_NEXT_STAGE = '';
-var RDT_TEMP_NEXT_CAMERA = '';
-
-// Copy-Paste Camera
+// Cameras
+var RDT_cameraArray = [];
+var RDT_totalCameras = 0;
 var RDT_TEMP_CAMERA_ORIG_X_1 = '';
 var RDT_TEMP_CAMERA_ORIG_X_2 = '';
 var RDT_TEMP_CAMERA_ORIG_Y_1 = '';
@@ -31,31 +19,6 @@ var RDT_TEMP_CAMERA_DIREC_Y_1 = '';
 var RDT_TEMP_CAMERA_DIREC_Y_2 = '';
 var RDT_TEMP_CAMERA_DIREC_Z_1 = '';
 var RDT_TEMP_CAMERA_DIREC_Z_2 = '';
-
-// Copy-Paste Enemy & NPC
-var RDT_TEMP_ENEMYNPC_TYPE = '';
-var RDT_TEMP_ENEMYNPC_POSE = '';
-var RDT_TEMP_ENEMYNPC_TEXTURE = '';
-var RDT_TEMP_ENEMYNPC_SOUNDSET = '';
-var RDT_TEMP_ENEMYNPC_EXTRAFLAG = '';
-var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
-
-var RDT_totalItens = 0;
-var RDT_totalFiles = 0;
-var RDT_totalMapas = 0;
-var RDT_ItensArray = [];
-
-var RDT_cameraArray = [];
-var RDT_totalCameras = 0;
-
-var RDT_loop = 0;
-var RDT_loading = false;
-var RDT_CANCRASH = false;
-var RDT_ERRORMOTIVE = '';
-var RDT_currentAudio = '';
-
-var RDT_doorsRaw = [];
-var RDT_doorsArray = [];
 
 // MSG vars
 var RDT_fm_path;
@@ -70,21 +33,65 @@ var RDT_MSGTEXT_currentBlkSize;
 // MSG Code
 var RDT_messageCodesArray = [];
 
-//
-var RDT_mapName;
-var RDT_fileType;
-var RDT_totalDoors;
-var RDT_totalAudios;
+// PROPS
 var RDT_total3DProps;
-var RDT_arquivoBruto;
-var RDT_itemIndexRAW;
-var RDT_totalEnemies;
-var RDT_totalItensGeral;
-var RDT_lastBackup = '';
-var RDT_enemiesArray = [];
-var RDT_lastFileOpened = '';
+var TEMP_PROP_X_POS = '';
+var TEMP_PROP_Y_POS = '';
+var TEMP_PROP_Z_POS = '';
+var TEMP_PROP_R_POS = '';
 var RDT_propModelsArray = [];
 
+// DOORS
+var RDT_totalDoors;
+var RDT_doorsRaw = [];
+var RDT_CURRENT_X = '';
+var RDT_CURRENT_Y = '';
+var RDT_CURRENT_Z = '';
+var RDT_CURRENT_R = '';
+var RDT_doorsArray = [];
+var RDT_TEMP_NEXTX = '';
+var RDT_TEMP_NEXTY = '';
+var RDT_TEMP_NEXTZ = '';
+var RDT_TEMP_NEXTR = '';
+var RDT_selectedPoint = 0;
+var RDT_TEMP_NEXT_ROOM = '';
+var RDT_TEMP_NEXT_STAGE = '';
+var RDT_TEMP_NEXT_CAMERA = '';
+
+// Items
+var RDT_itemIndexRAW;
+var RDT_totalFiles = 0;
+var RDT_totalMapas = 0;
+var RDT_totalItens = 0;
+var RDT_ItensArray = [];
+var RDT_totalItensGeral;
+
+// Enemy / NPC'S
+var RDT_totalEnemies;
+var RDT_enemiesArray = [];
+var RDT_TEMP_ENEMYNPC_TYPE = '';
+var RDT_TEMP_ENEMYNPC_POSE = '';
+var RDT_TEMP_ENEMYNPC_TEXTURE = '';
+var RDT_TEMP_ENEMYNPC_SOUNDSET = '';
+var RDT_TEMP_ENEMYNPC_EXTRAFLAG = '';
+var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
+
+// AUDIOS
+var RDT_totalAudios;
+
+// Utils
+var RDT_mapName;
+var RDT_fileType;
+var RDT_loop = 0;
+var RDT_arquivoBruto;
+var RDT_lastBackup = '';
+var RDT_loading = false;
+var RDT_CANCRASH = false;
+var RDT_ERRORMOTIVE = '';
+var RDT_currentAudio = '';
+var RDT_lastFileOpened = '';
+
+// MASKS
 var RDT_SLD_FOUNDPOS;
 var RDT_SLD_LAYER_TILESET_BMP;
 var RDT_SLD_totalMasksAva = 0;
@@ -792,14 +799,99 @@ function RDT_decompile3DProp(id){
 		var PROP_EXTRA = PROP_RAW.slice(48, 52);
 		var PROP_FINAL = PROP_RAW.slice(52, PROP_RAW.length);
 
-		var PROP_HTML_TEMPLATE = '<div class="RDT-Item RDT-3DProp-bg" id="RDT-3D_Item-0" onclick="main_closeFileList();">' + 
-				'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_edit3D_ItemBtn_0" value="Modify" onclick="RDT_show3DPropEdit(0, ' + id + ')">' + 
-				'(' + id + ') ID: ' + PROP_ID.toUpperCase() + '<div class="menu-separador"></div>X Pos: ' + PROP_XPOS.toUpperCase() + '<br>Y Pos: ' + 
-				PROP_YPOS.toUpperCase() + '<br>Z Pos: ' + PROP_ZPOS.toUpperCase() + '<br>R Pos: ' + PROP_RPOS.toUpperCase() + '<div class="RDT-Item-Misc">Item Link: ' + 
-				PROP_ITEMLINK.toUpperCase() + '<br>Extra: ' + PROP_EXTRA.toUpperCase() + '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + 
-				PROP_RAW.toUpperCase() + '</font></div>';
+		var PROP_HTML_TEMPLATE = '<div class="RDT-Item RDT-3DProp-bg" id="RDT-3D_Item-0" onclick="main_closeFileList();"><input type="button" class="btn-remover-comando ' +
+				'RDT_modifyBtnFix" id="RDT_edit3D_ItemBtn_0" value="Modify" onclick="RDT_show3DPropEdit(0, ' + id + ')">(' + id + ') ID: ' + PROP_ID.toUpperCase() +
+				'<div class="menu-separador"></div>X Pos: ' + PROP_XPOS.toUpperCase() + '<br>Y Pos: ' + PROP_YPOS.toUpperCase() + '<br>Z Pos: ' + PROP_ZPOS.toUpperCase() +
+				'<br>R Pos: ' + PROP_RPOS.toUpperCase() + '<div class="RDT-Item-Misc">Item Link: ' + PROP_ITEMLINK.toUpperCase() + '<br>Extra: ' + PROP_EXTRA.toUpperCase() +
+				'</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + PROP_RAW.toUpperCase() + '</font></div>';
 		$('#RDT_3DProps_holder').append(PROP_HTML_TEMPLATE);
 	}
+}
+function RDT_3D_PROP_APPLY(id){
+	if (id !== undefined){
+		var OLD_PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
+		if (OLD_PROP_RAW !== null){
+			var reason;
+			var canCompile = true;
+			var PROP_HEADER = OLD_PROP_RAW.slice(0, 2);
+			var PROP_ID = OLD_PROP_RAW.slice(2, 4);
+			var PROP_OFFSET_0 = OLD_PROP_RAW.slice(4, 16);
+			var PROP_OFFSET_1 = OLD_PROP_RAW.slice(16, 18);
+			var PROP_OFFSET_2 = OLD_PROP_RAW.slice(18, 28);
+			var PROP_OFFSET_3 = OLD_PROP_RAW.slice(30, 32);
+			var PROP_FINAL = OLD_PROP_RAW.slice(52, OLD_PROP_RAW.length);
+			//
+			var NEW_XPOS = document.getElementById('RDT_edit_3DProp_X').value.toLowerCase();
+			var NEW_YPOS = document.getElementById('RDT_edit_3DProp_Y').value.toLowerCase();
+			var NEW_ZPOS = document.getElementById('RDT_edit_3DProp_Z').value.toLowerCase();
+			var NEW_RPOS = document.getElementById('RDT_edit_3DProp_R').value.toLowerCase();
+			var NEW_LINK = document.getElementById('RDT_edit_3DProp_iLink').value.toLowerCase();
+			var NEW_EXTRA = document.getElementById('RDT_edit_3DProp_Extra').value.toLowerCase();
+			//
+			if (NEW_XPOS.length !== 4){
+				canCompile = false;
+				reason = 'X have wrong length!';
+			}
+			if (NEW_YPOS.length !== 4){
+				canCompile = false;
+				reason = 'Y have wrong length!';
+			}
+			if (NEW_ZPOS.length !== 4){
+				canCompile = false;
+				reason = 'Z have wrong length!';
+			}
+			if (NEW_RPOS.length !== 4){
+				canCompile = false;
+				reason = 'R have wrong length!';
+			}
+			if (NEW_LINK.length !== 2){
+				canCompile = false;
+				reason = 'Item Link have wrong length!';
+			}
+			if (NEW_EXTRA.length !== 4){
+				canCompile = false;
+				reason = 'Extra have wrong length!';
+			}
+			//
+			if (canCompile === true){
+				var NEW_PROP_HEX = PROP_HEADER + PROP_ID + PROP_OFFSET_0 + PROP_OFFSET_1 + PROP_OFFSET_2 + NEW_LINK + PROP_OFFSET_3 +
+					NEW_XPOS + NEW_YPOS + NEW_ZPOS + NEW_RPOS + NEW_EXTRA + PROP_FINAL;
+				RDT_COMPILE_Lv2(OLD_PROP_RAW, NEW_PROP_HEX);
+				$('#RDT-aba-menu-11').trigger('click');
+			} else {
+				LOG_addLog('warn', 'MAP - WARN: Unable to compile 3D Prop!');
+				LOG_addLog('warn', 'MAP - Details: ' + reason);
+			}
+		} else {
+			LOG_addLog('warn', 'MAP - WARN: Unable to compile 3D Prop!');
+			LOG_addLog('warn', 'MAP - Details: Unable to find 3D Prop info on R3ditor!');
+		}
+	}
+	LOG_scroll();
+}
+function RDT_copyPastePropsPos(mode){
+	if (mode === 0){
+		TEMP_PROP_X_POS = document.getElementById('RDT_edit_3DProp_X').value;
+		TEMP_PROP_Y_POS = document.getElementById('RDT_edit_3DProp_Y').value;
+		TEMP_PROP_Z_POS = document.getElementById('RDT_edit_3DProp_Z').value;
+		TEMP_PROP_R_POS = document.getElementById('RDT_edit_3DProp_R').value;
+		var TEXT_FOR_CP = '[3D Props]\nX Pos: ' + TEMP_PROP_X_POS.toUpperCase() + '\nY Pos: ' + TEMP_PROP_Y_POS.toUpperCase() + '\nZ Pos: ' + TEMP_PROP_Z_POS.toUpperCase() + '\nR Pos: ' + TEMP_PROP_R_POS.toUpperCase();
+		R3DITOR_COPY(TEXT_FOR_CP);
+	}
+	if (mode === 1 && TEMP_PROP_X_POS !== '' && TEMP_PROP_Y_POS !== '' && TEMP_PROP_Z_POS !== '' && TEMP_PROP_R_POS !== ''){
+		document.getElementById('RDT_edit_3DProp_X').value = TEMP_PROP_X_POS;
+		document.getElementById('RDT_edit_3DProp_Y').value = TEMP_PROP_Y_POS;
+		document.getElementById('RDT_edit_3DProp_Z').value = TEMP_PROP_Z_POS;
+		document.getElementById('RDT_edit_3DProp_R').value = TEMP_PROP_R_POS;
+	}
+	if (mode === 2 && RE3_RUNNING === true && PROCESS_OBJ !== undefined){
+		document.getElementById('RDT_edit_3DProp_X').value = REALTIME_X_Pos;
+		document.getElementById('RDT_edit_3DProp_Y').value = REALTIME_Y_Pos;
+		document.getElementById('RDT_edit_3DProp_Z').value = REALTIME_Z_Pos;
+		//document.getElementById('RDT_edit_3DProp_R').value = REALTIME_R_Pos;
+		LOG_addLog('warn', 'MAP - WARN: R Pos will not be set because it need some testing!');
+	}
+	LOG_scroll();
 }
 /*
 	Message Code (63 ID 04 31 00 00)
@@ -2072,7 +2164,6 @@ function RDT_Backup(){
 			LOG_addLog('log', 'MAP - INFO: The backup was made successfully! - File: ' + backup_name);
 			LOG_addLog('log', 'MAP - Folder: <font class="user-can-select">' + APP_PATH + '\\Backup\\RDT\\' + backup_name + '</font>');
 			RDT_lastBackup = APP_PATH + '\\Backup\\RDT\\' + backup_name;
-			LOG_separator();
 			RDT_fileMap_backup();
 			WZ_saveConfigs(true);
 			$('#RDT_restoreLastBackup').css({'display': 'inline'});

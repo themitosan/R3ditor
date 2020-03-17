@@ -734,7 +734,7 @@ function SETTINGS_removeFiles(mode){
 					}
 				}, 50);
 			} else {
-				LOG_addLog('log', 'INFO - There is no Map File to remove!');
+				LOG_addLog('log', 'INFO - There is no MapFile to remove!');
 			}
 		}
 	}
@@ -760,14 +760,20 @@ function SETTINGS_RESET(){
 		fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
 	}
 	//
-	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\MIX');
+	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\IEDIT');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\RDTMAP2');
 	var delInterval = setInterval(function(){
 		var check_1 = fs.existsSync(APP_PATH + '\\Configs\\RDT');
 		var check_2 = fs.existsSync(APP_PATH + '\\Backup\\RDT');
 		var check_3 = fs.existsSync(APP_PATH + '\\Backup\\SAV');
-		if (check_1 === false && check_2 === false && check_3 === false){
+		var check_4 = fs.existsSync(APP_PATH + '\\Backup\\MIX');
+		var check_5 = fs.existsSync(APP_PATH + '\\Backup\\IEDIT');
+		var check_6 = fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2');
+		if (check_1 === false && check_2 === false && check_3 === false && check_4 === false && check_5 === false && check_6 === false){
 			clearInterval(delInterval);
 			reload();
 		}
@@ -794,7 +800,7 @@ function SETTINGS_SET_PATH(mode, path){
 				LOG_addLog('warn', 'WARN - Unable to set RE3 Path - You must select ResidentEvil3.exe instead of RE3_MERCE.exe!');
 			}
 		}
-		// Hex
+		// HEX
 		if (mode === 1){
 			if (path !== HEX_EDITOR){
 				HEX_EDITOR = path;
@@ -822,7 +828,8 @@ function SETTINGS_SET_PATH(mode, path){
 	LOG_scroll();
 }
 function WZ_FORCE_UPDATE(){
-	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be buggy or incomplete.\n\nDo you want to continue anyway?');
+	var ask = confirm('WARNING:\nBecause this is not a common update method, the code currently present in github may be ' + 
+					  'buggy or incomplete.\n\nDo you want to continue anyway?');
 	if (ask === true){
 		var c = 0;
 		while (c < parseInt(SETTINGS_totalMenus + 1)){

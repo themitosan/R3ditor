@@ -973,7 +973,7 @@ function MSG_renderDialog(id, args, index, isMod){
 		$('#MSG_applyMessageRDT').css({'display': 'none'});
 		$('#dialog-msg-addcomand').css({'display': 'block'});
 	}
-	// Iniciar Mensagem
+	// Start Message
 	if (id === 1){
 		$('#dialog-msg-addcomand').css({'top': '192px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Start Message / Text Speed';
@@ -984,7 +984,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Finalizar Mensagem
+	// End Message
 	if (id === 2){
 		$('#dialog-msg-addcomand').css({'top': '200px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'End Message';
@@ -995,7 +995,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Exibir Texto
+	// Show Text
 	if (id === 3){ 
 		var correcao = '';
 		$('#dialog-msg-addcomand').css({'top': '48px'});
@@ -1010,7 +1010,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_COMMAND_ADDTEXT(index, isMod);
 		}
 	}
-	// Exibir Caracter Especial
+	// Show Special Char
 	if (id === 4){ 
 		if (args === ''){
 			args = 'ea10';
@@ -1024,7 +1024,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Exibir Nome de Item
+	// Show Item Name
 	if (id === 5){ 
 		if (args === ''){
 			args = '00';
@@ -1038,7 +1038,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Reproduzir SE
+	// Exec SE
 	if (id === 6){ 
 		$('#dialog-msg-addcomand').css({'top': '200px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Play SE';
@@ -1049,7 +1049,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Trocar Camera
+	// Show Camera
 	if (id === 7){
 		if (args === ''){
 			args = '00';
@@ -1066,7 +1066,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Comando desconhecido usado em R101.RDT
+	// Unknown Command used on R101.RDT (F5)
 	if (id === 8){ 
 		$('#dialog-msg-addcomand').css({'top': '200px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Unknown Function (F5)';
@@ -1077,7 +1077,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Trocar cor do texto
+	// Change Text Color
 	if (id === 9){
 		var splitColor;
 		if (args === ''){
@@ -1094,7 +1094,7 @@ function MSG_renderDialog(id, args, index, isMod){
 			MSG_renderDialog(0);
 		}
 	}
-	// Inserir Hex Manual
+	// Insert Hex
 	if (id === 10){
 		var msgHex;
 		if (localStorage.getItem('MSG_comando-' + index) !== null){
@@ -1112,7 +1112,7 @@ function MSG_renderDialog(id, args, index, isMod){
 		}
 		MSG_checkHexLength();
 	}
-	// Selecionar Opção
+	// Select Option
 	if (id === 11){
 		$('#dialog-msg-addcomand').css({'top': '200px'});
 		document.getElementById('msg-addcomand-title').innerHTML = 'Select Option';
@@ -1194,6 +1194,7 @@ function RDT_showMenu(id){
 		c++;
 	}
 	RDT_editItemCancel();
+	RDT_show3DPropEdit(1);
 	if (RDT_totalItensGeral < 0){
 		RDT_totalItensGeral = 0;
 	}
@@ -1294,6 +1295,7 @@ function RDT_show3DPropEdit(mode, id){
 	main_closeFileList();
 	if (mode === 0){
 		if (id !== undefined){
+			$('#RDT_openFileList').css({'display': 'none'});
 			var PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
 
 			var PROP_HEADER = PROP_RAW.slice(0, 2);
@@ -1318,11 +1320,15 @@ function RDT_show3DPropEdit(mode, id){
 			document.getElementById('RDT_edit_3DProp_iLink').value = PROP_ITEMLINK.toUpperCase();
 			document.getElementById('RDT_edit_3DProp_Extra').value = PROP_EXTRA.toUpperCase();
 			//
+			document.getElementById('RDT-btn-aplicar3DProp').onclick = function(){
+				RDT_3D_PROP_APPLY(id);
+			}
 			$('#RDT-3D_props-Edit').css({'display': 'inline'});
 			$('#RDT_3DProps_holder').css({'width': '722px'});
 		}
 	} else {
-		$('#RDT_3DProps_holder').css({'width': '1288px'});
+		$('#RDT_openFileList').css({'display': 'inline'});
+		$('#RDT_3DProps_holder').css({'width': '1293px'});
 		$('#RDT-3D_props-Edit').css({'display': 'none'});
 	}
 }
@@ -1383,6 +1389,7 @@ function RDT_canvasResetPos(){
 	RDT_updateCanvasInfos(0);
 }
 function RDT_showEditCamera(index, camEdit, codeHex){
+	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
 	document.getElementById('RDT-lbl-CAMERA-edit').innerHTML  = camEdit;
 	document.getElementById('RDT_X1_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cX-1'][0], RANGES['RDT_cam-0-cX-1'][1]).toUpperCase();
@@ -1404,6 +1411,7 @@ function RDT_showEditCamera(index, camEdit, codeHex){
 	$('#RDT_camera_holder').css({'width': '932px'});
 }
 function RDT_showEditMsgCode(index, codeHex){
+	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
 	var header = codeHex.slice(RANGES['RDT_msgCode-header'][0], RANGES['RDT_msgCode-header'][1]);
 	if (header !== '64'){
@@ -1457,6 +1465,7 @@ function RDT_showEditDoor(index, id, hex){
 	var DOOR_READ_MODE;
 	main_closeFileList();
 	RDT_doorShowCamPreview(1);
+	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
 	document.getElementById('RDT-lbl-doorEdit-id').innerHTML  = id;
 	document.getElementById('RDT-lbl-door-index').innerHTML   = index;

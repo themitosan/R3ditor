@@ -1058,7 +1058,6 @@
 					</div>
 				</div>
 			</div>
-
 			<!-- RDT Cameras -->
 			<div class="menu" id="RDT_menu-9" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-camera-hold">
@@ -1120,13 +1119,13 @@
 						</div>
 						<div class="menu-separador"></div>
 						<center>
-							<input type="button" onclick="WIP();" class="botao-menu" value="Copy Position">
-							<input type="button" onclick="WIP();" class="botao-menu" value="Paste Position">
-							<input type="button" onclick="WIP();" id="RDT_useJillPos_3DProp" class="botao-menu botao-aplicar none" value="Use Player Position">
+							<input type="button" onclick="RDT_copyPastePropsPos(0);" class="botao-menu" value="Copy Position">
+							<input type="button" onclick="RDT_copyPastePropsPos(1);" class="botao-menu" value="Paste Position">
+							<input type="button" onclick="RDT_copyPastePropsPos(2);" id="RDT_useJillPos_3DProp" class="botao-menu botao-aplicar none" value="Use Player Position">
 						</center>
 						<div class="RDT-applyBtn-div">
 							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_show3DPropEdit(1);">
-							<input type="button" title="Click here to apply!" onclick="WIP();" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicar3DProp" value="APPLY CHANGES!">
+							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicar3DProp" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>

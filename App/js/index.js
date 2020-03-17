@@ -384,7 +384,7 @@ function deleteFolderRecursive(path){
 // Function WIP
 function WIP(){
 	LOG_separator();
-	LOG_addLog('warn', 'Sorry buddy... This function / option still #WIP');
+	LOG_addLog('warn', 'R3DITOR - Sorry buddy... This Function / Option still #WIP!');
 	LOG_scroll();
 }
 function killExternalSoftware(processID){
