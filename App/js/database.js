@@ -1929,56 +1929,53 @@ var RANGES = {
 	'RDT_door-id':                     [2, 4],
 	'RDT_door-doorIdentifier':        [4, 12],
 	// Header 61
-	'RDT_door-0-doorXpos':           [12, 16],
-	'RDT_door-0-doorYpos': 		     [16, 20],
-	'RDT_door-0-doorZpos': 		     [20, 24],
-	'RDT_door-0-doorRpos': 		     [24, 28],
-	'RDT_door-0-doorNextXpos': 	     [28, 32],
-	'RDT_door-0-doorNextYpos': 	     [36, 40], // ONE THING... WHY? OwO
-	'RDT_door-0-doorNextZpos': 	     [32, 36], // ONE THING... WHY? OwO
-	'RDT_door-0-doorNextRpos': 	     [40, 44],
-	'RDT_door-0-doorNextStage':      [44, 46],
-	'RDT_door-0-doorNextRoomNumber': [46, 48],
-	'RDT_door-0-doorNextCamNumber':  [48, 50],
-	'RDT_door-0-zIndex': 	 		 [50, 52], // Adjust this value to fix jill pos (avoid colision break)
-	'RDT_door-0-doorType': 			 [52, 54],
-	'RDT_door-0-doorOpenOrient': 	 [54, 56], // 00: Handle Left, 01: Handle Right
-	'RDT_door-0-doorHexOffset1': 	 [56, 58], // Unk. Flag B
-	'RDT_door-0-doorLockedFlag': 	 [58, 60],
-	'RDT_door-0-doorKey': 		 	 [60, 62],
-	'RDT_door-0-doorDisplayText': 	 [62, 64], // Display Text
+	'RDT_door-0-doorXpos':           [12, 16], // OK
+	'RDT_door-0-doorYpos': 		     [16, 20], // OK
+	'RDT_door-0-doorZpos': 		     [20, 24], // OK
+	'RDT_door-0-doorRpos': 		     [24, 28], // OK
+	'RDT_door-0-doorNextXpos': 	     [28, 32], // OK
+	'RDT_door-0-doorNextYpos': 	     [36, 40], // OK
+	'RDT_door-0-doorNextZpos': 	     [32, 36], // OK
+	'RDT_door-0-doorNextRpos': 	     [40, 44], // OK
+	'RDT_door-0-doorNextStage':      [44, 46], // OK
+	'RDT_door-0-doorNextRoomNumber': [46, 48], // OK
+	'RDT_door-0-doorNextCamNumber':  [48, 50], // OK
+	'RDT_door-0-zIndex': 	 		 [50, 52], // OK
+	'RDT_door-0-doorType': 			 [52, 54], // OK
+	'RDT_door-0-doorOpenOrient': 	 [54, 56], // OK
+	'RDT_door-0-doorHexOffset1': 	 [56, 58], // Unk. Flag
+	'RDT_door-0-doorLockedFlag': 	 [58, 60], // OK
+	'RDT_door-0-doorKey': 		 	 [60, 62], // OK
+	'RDT_door-0-doorDisplayText': 	 [62, 64], // OK
 	/*
 		Header 62 - Hex Length: 28 (String: 80)
 		Sorted in slice order
 	*/
-	'RDT_door-1-doorXpos':           [12, 16], // Precisa verificar
-	'RDT_door-1-doorYpos': 		     [16, 20], // Precisa verificar
-	'RDT_door-1-doorZpos': 		     [20, 24], // Precisa verificar
-	'RDT_door-1-doorRpos': 		     [24, 28], // Precisa verificar
-
-	'RDT_door-1-doorHexOffset0': 	 [28, 44], // Precisa verificar
-
+	'RDT_door-1-doorXpos':           [12, 16], // OK 
+	'RDT_door-1-doorYpos': 		     [16, 20], // OK 
+	'RDT_door-1-doorZpos': 		     [20, 24], // OK 
+	'RDT_door-1-doorRpos': 		     [24, 28], // OK 
+	'RDT_door-1-doorHexOffset0': 	 [28, 44], // Strange Values...
 	'RDT_door-1-doorNextXpos': 	     [44, 48], // OK
 	'RDT_door-1-doorNextZpos': 	     [48, 52], // OK
 	'RDT_door-1-doorNextYpos': 	     [52, 56], // OK
 	'RDT_door-1-doorNextRpos': 	     [56, 60], // OK
-	'RDT_door-1-doorNextStage':      [60, 62],
-	'RDT_door-1-doorNextRoomNumber': [62, 64],
-	'RDT_door-1-doorNextCamNumber':  [64, 66],
-	'RDT_door-1-zIndex':  	 		 [66, 68], // Needs Testing (Z Index)
-	'RDT_door-1-doorType': 			 [68, 70],
-	'RDT_door-1-doorOpenOrient': 	 [70, 72], // 00: Handle Left, 01: Handle Right
-
-	'RDT_door-1-doorHexOffset1': 	 [72, 74], // Unk. Flag B?
+	'RDT_door-1-doorNextStage':      [60, 62], // OK
+	'RDT_door-1-doorNextRoomNumber': [62, 64], // OK
+	'RDT_door-1-doorNextCamNumber':  [64, 66], // OK
+	'RDT_door-1-zIndex':  	 		 [66, 68], // OK
+	'RDT_door-1-doorType': 			 [68, 70], // OK
+	'RDT_door-1-doorOpenOrient': 	 [70, 72], // OK
+	'RDT_door-1-doorHexOffset1': 	 [72, 74], // Unk. Flag
 	'RDT_door-1-doorLockedFlag':  	 [74, 76], // OK
 	'RDT_door-1-doorKey': 	 		 [76, 78], // OK
-	'RDT_door-1-doorDisplayText': 	 [78, 80], // Display Text - If you set 40, it will show "Go down the ladder?"
+	'RDT_door-1-doorDisplayText': 	 [78, 80], // OK
 	/*
 		SLD Layers (PRI Masks)
 		Header
 		(É aqui que o F. King Pira!)
 	*/
-	'SLD_LAYER_relativeOffsets': [0, 2], // PRIedit Relative Offsets
+	'SLD_LAYER_relativeOffsets': [0, 2], // "PRIedit" Relative Offsets
 	'SLD_LAYER_offset_1': 		 [2, 4], //
 	'SLD_LAYER_count_offsets':   [4, 8], // Alterar esses valores faz alguns blocos desaparecer
 	'SLD_LAYER_crp_offset_2':   [8, 12], // Offsets (Block Ammount)

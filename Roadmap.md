@@ -10,9 +10,9 @@ This file can (and will be) modified several times!
 - Read Enemies on map
 - ~~Edit the messages on MSG editor~~
 - Edit every type of item, file or maps! (Header 68)
-- Edit all Doors [WIP]
+- Edit all Doors [50% WIP]
 - Edit Enemies on map [WIP]
-- Add support for SLD Masks [WIP]
+- Add support for SLD (PRI) Masks [WIP]
 - Add function to find and extract TIM files
 - ~~Add a Screenshot of map in all tabs (BSS)~~
 
