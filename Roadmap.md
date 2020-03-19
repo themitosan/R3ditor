@@ -84,6 +84,6 @@ This file can (and will be) modified several times!
 - Remove all kind of ~~sassy~~ hacks inside all editors!
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe (64 Bits)~~
-- Create a custom executable for nw.exe (32 Bits)
+- ~~Create a custom executable for nw.exe (32 Bits)~~
 - ~~Add restore backup function on RDT~~
 - ~~Misc: Add support for RE3SLDE in RDT section~~
