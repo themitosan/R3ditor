@@ -1940,7 +1940,7 @@ var RANGES = {
 	'RDT_door-0-doorNextStage':      [44, 46],
 	'RDT_door-0-doorNextRoomNumber': [46, 48],
 	'RDT_door-0-doorNextCamNumber':  [48, 50],
-	'RDT_door-0-zIndex': 	 		 [50, 52], // Set this to fix jill pos to avoid colision break
+	'RDT_door-0-zIndex': 	 		 [50, 52], // Adjust this value to fix jill pos (avoid colision break)
 	'RDT_door-0-doorType': 			 [52, 54],
 	'RDT_door-0-doorOpenOrient': 	 [54, 56], // 00: Handle Left, 01: Handle Right
 	'RDT_door-0-doorHexOffset1': 	 [56, 58], // Unk. Flag B
