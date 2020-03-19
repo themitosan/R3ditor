@@ -138,7 +138,10 @@ var ITEM = {
 	'83': ['Game inst. A', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180° Rotation, Emergency Escape, Emergency Bypass, and more.'],
 	'84': ['Game inst. B', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.'],
 	'85': ['(BOTU) Recipient with liquid inside',			   'BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.'],
+	/* Shenanigans! */
 	'86': ['DO NOT USE THIS ITEM - YOU WILL BREAK THE GAME!',  'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
+	/* Door Related Code */
+	'ff': ['Locked in other side',							   'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
 	/*
 		The values below can be added to inventory as an item, but checking them can make the game crash.
 		If you insert these values in RDT as an item, it will recognize as current map.
@@ -1918,9 +1921,9 @@ var RANGES = {
 	/*
 		Doors
 
-		Length:
-			Header 61 = 
-			Header 62 = 28h
+		Length (Hex):
+			Header 61 = 20
+			Header 62 = 28
 	*/
 	'RDT_door-header':         	       [0, 2], // RE2 = 3B, RE3 = 61 || 62
 	'RDT_door-id':                     [2, 4],
@@ -1937,16 +1940,16 @@ var RANGES = {
 	'RDT_door-0-doorNextStage':      [44, 46],
 	'RDT_door-0-doorNextRoomNumber': [46, 48],
 	'RDT_door-0-doorNextCamNumber':  [48, 50],
-	'RDT_door-0-doorHexOffset0': 	 [50, 52],
+	'RDT_door-0-zIndex': 	 		 [50, 52], // Set this to fix jill pos to avoid colision break
 	'RDT_door-0-doorType': 			 [52, 54],
 	'RDT_door-0-doorOpenOrient': 	 [54, 56], // 00: Handle Left, 01: Handle Right
-	'RDT_door-0-doorHexOffset1': 	 [56, 58],
+	'RDT_door-0-doorHexOffset1': 	 [56, 58], // Unk. Flag B
 	'RDT_door-0-doorLockedFlag': 	 [58, 60],
 	'RDT_door-0-doorKey': 		 	 [60, 62],
 	'RDT_door-0-doorDisplayText': 	 [62, 64], // Display Text
 	/*
 		Header 62 - Hex Length: 28 (String: 80)
-		Organizado por ordem de slice
+		Sorted in slice order
 	*/
 	'RDT_door-1-doorXpos':           [12, 16], // Precisa verificar
 	'RDT_door-1-doorYpos': 		     [16, 20], // Precisa verificar

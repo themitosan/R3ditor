@@ -1161,30 +1161,36 @@ input[type='range' i]{
     left: 830px !important;
 }
 .RDT_door_textEditFix_0{
-    left: 792px;
-    width: 52px;
+    left: 884px;
+    width: 36px;
     position: sticky;
 }
 .RDT_door_textEditFix_1{
-    width: 52px;
-    left: 1036px;
+    width: 36px;
+    left: 1066px;
     position: sticky;
 }
 .RDT_door_textEditFix_2{
-    width: 52px;
-    left: 1238px;
+    width: 16px;
+    left: 1258px;
     position: sticky;
 }
 .RDT_door_textEditFix_3{
-    width: 52px;
+    width: 16px;
 }
 .RDT_door_textEditFix_4{
-    width: 380px;
+    left: 882px;
+    width: 416px;
+    position: sticky;
+}
+.RDT_door_textEditFix_5{
+    width: 18px;
+    left: 1056px;
     position: sticky;
 }
 .RDT_door-edit-posFix{
-    left: 714px !important;
-    width: 586px !important;
+    left: 808px !important;
+    width: 492px !important;
 }
 .menu-utility-fix{
     top: 526px;
@@ -1239,7 +1245,7 @@ input[type='range' i]{
 }
 .RDT_doorNextPosFix{
     position: absolute;
-    left: 148px;
+    left: 130px;
     top: 45px;
 }
 .RDT_enemyNPC_editForm-fix{
@@ -1248,8 +1254,12 @@ input[type='range' i]{
 }
 .RDT_doorOtherFix{
     top: 45px;
-    left: 338px;
+    left: 302px;
     position: absolute;
+}
+.RDT_doorUnkValFix{
+    width: 16px !important;
+    margin-top: 0px !important;
 }
 .RDT_modifyBtnFix{
     margin-top: 0px;
@@ -1478,6 +1488,17 @@ input[type='range' i]{
     position: absolute;
     border-radius: 4px;
     background-image: linear-gradient(to bottom, #626262, #0c0827);
+}
+.filelist_loadingFilesDiv{
+    top: 260px;
+    left: 240px;
+    z-index: 20;
+    color: #fff;
+    padding: 10px;
+    position: absolute;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #222;
+    background-image: linear-gradient(to bottom, #494949, #626262);
 }
 .fileList_img{
     width: 134px;

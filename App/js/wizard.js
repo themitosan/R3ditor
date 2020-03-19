@@ -40,6 +40,7 @@ function WZ_showWizardDialog(id){
 	if (WZ_showWizard === true){
 		$('#WZ_dialog').css({'display': 'block'});
 		if (id === 0){
+			document.title = 'R3ditor - Wizard';
 			document.getElementById('WZ_title').innerHTML = 'Welcome to R3ditor!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_0;
 			document.getElementById('WZ_BTN_1').value = 'No';
@@ -603,6 +604,7 @@ function WZ_FIRST_BOOT_MESSAGE(){
 function WZ_APPEND(){
 	var c = 0;
 	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
+	$('#RDT_door-edit-LK').append(RDT_EDIT_DOOR_KEYFF);
 	$('#RDT_door-edit-DispTxt').append(RDT_EDIT_DOOR_TEXT);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);

@@ -803,10 +803,18 @@ function processBIO3PosNumbers(number, mode){
 	}
 }
 function parsePercentage(current, maximum){
-	return Math.floor((current / maximum) * 100);
+	if (current !== undefined && maximum !== undefined && current !== '' && maximum !== ''){
+		return Math.floor((current / maximum) * 100);
+	} else {
+		return 0;
+	}
 }
 function parsePercentageReverse(percent, maximum){
-	return parseFloat((percent * maximum) / 100);
+	if (current !== undefined && maximum !== undefined && current !== '' && maximum !== ''){
+		return parseFloat((percent * maximum) / 100);
+	} else {
+		return 0;
+	}
 }
 function R3DITOR_reduceStrings(str, size){
 	if (str !== '' && parseInt(size) !== NaN){

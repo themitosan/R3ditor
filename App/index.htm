@@ -103,7 +103,7 @@
 				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font>
 			</div>
 			<!-- Right -->
-			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 			<input type="button" title="Click here to open the map list" class="botao-menu right none" id="RDT_openFileList" value="Open Map List" onclick="main_renderFileList(3, 2);">
 			<input type="button" title="Click here to restore your last edition on this file" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" title="Click here to backup this file" class="botao-menu right none" id="RDT_backupBtn" value="Backup Map" onclick="RDT_Backup();">
@@ -117,7 +117,7 @@
 			<input type="button" title="Click here to save this changes to a MSG file" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
 			<input type="button" title="Click here to apply your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
 			<!-- Right -->
-			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 			<input type="button" title="Click here to return to map" class="botao-menu right none" id="btn-goback-rdt" value="Return to Map" onclick="MSG_goBackToRDT();">
 			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
@@ -128,7 +128,7 @@
 			<input type="button" title="Click here to reload this save file" class="botao-menu none" id="SAV_reload" value="Reload SAV" onclick="CARREGAR_SAVE(ORIGINAL_FILENAME);">
 			<input type="button" title="Click here to open this save file on Hex Editor" class="botao-menu none" id="SAV_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 			<!-- Right -->
-			<input type="button" title="Click here to go back" class="botao-menu right" value="Go Back" onclick="reload();">
+			<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 			<input type="button" title="Click here to open save list" class="botao-menu right none" id="SAV_openFileList" value="Open SAV List" onclick="main_openFileList();">
 			<input type="button" title="Click here to delete all saves on this file" class="botao-menu right none" id="SAV_clearFile" value="Clear Saves" onclick="SAVE_clearAllSaves();">
 			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="SAV_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
@@ -136,14 +136,14 @@
 		<!-- Menu Filegen -->
 		<div class="menu-topo none" id="menu-topo-fileEditor">
 			<!--<input type="button" class="botao-menu botao-aplicar" onclick="DEBUG_REFRESH_DATABASE();" value="Refresh Database">-->
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu Settings -->
 		<div class="menu-topo none" id="menu-topo-settings">
 			<input type="button" class="botao-menu" title="Click here to open the config file on Windows Notepad" value="Open Settings File On Notepad" onclick="SETTINGS_openConfigFile();">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 			<input type="button" class="botao-menu right botao-aplicar" title="Click here to to save!" value="Save Settings" onclick="WZ_APPLY_R3DITOR_SETTINGS();">
 		</div>
 		<!-- Menu INI Editor -->
@@ -153,7 +153,7 @@
 			<input type="button" class="botao-menu none" title="Click here to reload this file!" id="INI_reloadFile" value="Reload INI" onclick="INI_reload();">
 			<input type="button" class="botao-menu none" title="Click here to open this file on Windows Notepad" id="INI_openOnNotepad" value="Open on Notepad" onclick="BIO3INI_OPEN_NOTEPAD();">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Ask where to save your current changes" id="INI_applyBtn_ask" value="Save to..." onclick="BIO3INI_SAVE(1);">
 			<input type="button" class="botao-menu botao-aplicar right none" title="Save your changes to the current file" id="INI_applyBtn" value="Save Settings" onclick="BIO3INI_SAVE(0);">
 		</div>
@@ -161,13 +161,13 @@
 		<div class="menu-topo none" id="menu-topo-mix">
 			<input type="button" class="botao-menu" title="Click here to open MIX file" onclick="triggerLoad(17);" value="Open MIX">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 		</div>
 		<!-- Menu IEDIT -->
 		<div class="menu-topo none" id="menu-topo-IEDIT">
 			<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(18);" value="Open File">
 			<!-- Right -->
-			<input type="button" class="botao-menu right" title="Click here to go back" value="Go Back" onclick="reload();">
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 		</div>
 
 		<!-- CONTENT -->
@@ -190,7 +190,6 @@
 			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply btn-apply-fix color-green">
 		</div>
-
 		<!-- FORM: IEDIT Item Editor -->
 		<div class="none" id="menu-IEDIT-editor" onclick="main_closeFileList();">
 			<input type="button" id="IEDIT-aba-menu-1" class="aba aba-left-fix aba-select" value="Item Settings">
@@ -913,6 +912,14 @@
 				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">
 				<input type="button" id="fileList_aba_recent" value="Recent Files" class="aba" onclick="main_renderFileList(3, 3);">
 			</div>
+			<!-- Loading List -->
+			<div class="filelist_loadingFilesDiv none" id="FILELIST_loadingMessage">
+				<center>
+					Loading Files - Please Wait...
+				</center>
+				<div class="progressBar" id="filelist_progressBar_files"></div>
+			</div>
+			<!-- Lists -->
 			<div id="fileListHolder" class="fileList_files none">
 				<!-- A lista de arquivos vai aqui -->
 			</div>
@@ -1224,17 +1231,39 @@
 					</div>
 					<!-- RDT: Doors - Edit -->
 					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
-						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
+						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Header: <font id="RDT_lbl_door_header">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
-							<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
+							<div class="RDT_coordsHolder_A">
+								<font class="RE3_LIVESTATUS_X_color">X Position</font>: 
+								<input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4">
+							</div>
+							<div class="RDT_coordsHolder_B">
+								<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: 
+								<input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4">
+							</div>
+							<div class="RDT_coordsHolder_B">
+								<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: 
+								<input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4">
+							</div>
+							<div class="RDT_coordsHolder_B">
+								<font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
 							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A"><font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4"></div>
-								<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4"></div>
+								<div class="RDT_coordsHolder_A">
+									<font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									<font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									<font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									<font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4">
+								</div>
+								<div id="RDT_DOOR_UNK_DIV_A" style="margin-top: -4px;" class="none">
+									<font class="RE3_LIVESTATUS_Z_color">Z-Index</font>: 
+									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_5" id="RDT_door-edit-zIndex" placeholder="00" maxlength="2">
+								</div>
 							</div>
 							<div class="RDT_doorOtherFix">
 								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>
@@ -1258,20 +1287,26 @@
 								</center>	
 							</div>
 							<div class="menu-separador"></div>
+								Next Cam: <font id="RDT_lbl_door_editCam">???</font> 
+								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 								Display Message: 
 								<select class="item-select-mod RDT_fixForSeparador no-transform-text RDT_door_select_width_fix" id="RDT_door-edit-DispTxt">
 									<!-- Door display text options goes here -->
 								</select>
-							<div class="menu-separador"></div>
-								Next Cam: <font id="RDT_lbl_door_editCam">???</font> 
-								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Lock Key: 
 								<select class="item-select-mod RDT_door_textEditFix_4 no-transform-text" id="RDT_door-edit-LK">
 									<!-- Items goes here -->
 								</select>
 							</div>
-							<div class="RDT_coordsHolder_B">Lock Flag: <input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00"></div>
+							<div class="RDT_coordsHolder_B">
+								Lock Flag: 
+								<input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00">
+								<div id="RDT_DOOR_UNK_DIV_B" class="none">
+									Unk. Flag B: 
+									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
+								</div>
+							</div>
 						</div>
 						<!-- Cam Preview -->
 						<div id="RDT_doorCamPrevewDiv" class="none">
