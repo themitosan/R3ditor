@@ -53,6 +53,7 @@ var RDT_TEMP_NEXTX = '';
 var RDT_TEMP_NEXTY = '';
 var RDT_TEMP_NEXTZ = '';
 var RDT_TEMP_NEXTR = '';
+var RDT_TEMP_ZINDEX = '';
 var RDT_selectedPoint = 0;
 var RDT_TEMP_NEXT_ROOM = '';
 var RDT_TEMP_NEXT_STAGE = '';
@@ -1094,11 +1095,11 @@ function RDT_decompileDoors(index, location){
 		var dr_nCamPos;
 		var dr_offset0;
 		var dr_offset1;
-		var dr_offset2;
 		var dr_lockFlag;
 		var dr_openOrient;
 		var dr_nRoomNumber;
 		var dr_displayText;
+		var doorLeadsTo_title;
 		var EXTREME_MASSIVE_HTML_TEMPLATE;
 		var reason 		   = '';
 		var itemTitle 	   = '';
@@ -1142,7 +1143,7 @@ function RDT_decompileDoors(index, location){
 			dr_nStage 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextStage'][0], 	    		RANGES['RDT_door-1-doorNextStage'][1]);
 			dr_nRoomNumber = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextRoomNumber'][0], 		RANGES['RDT_door-1-doorNextRoomNumber'][1]);
 			dr_nCamPos	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorNextCamNumber'][0],  		RANGES['RDT_door-1-doorNextCamNumber'][1]);
-			dr_offset2 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset2'][0], 			RANGES['RDT_door-1-doorHexOffset2'][1]);
+			dr_zIndex 	   = DOOR_RAW.slice(RANGES['RDT_door-1-zIndex'][0], 					RANGES['RDT_door-1-zIndex'][1]);
 			dr_type		   = parseInt(parseInt(DOOR_RAW.slice(RANGES['RDT_door-1-doorType'][0], RANGES['RDT_door-1-doorType'][1]), 16) + 1).toString(16).toUpperCase();			
 			dr_openOrient  = DOOR_RAW.slice(RANGES['RDT_door-1-doorOpenOrient'][0], 			RANGES['RDT_door-1-doorOpenOrient'][1]);
 			dr_lockFlag	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorLockedFlag'][0], 			RANGES['RDT_door-1-doorLockedFlag'][1]);
@@ -1152,7 +1153,7 @@ function RDT_decompileDoors(index, location){
 		}
 		if (DOOR_RAW === '6121012101419141414121219141212112327281f12102927100f11110f0c060'){
 			canAdd = false;
-			reason = 'Pattern is out of range!';
+			reason = 'Pattern is <i>(way)</i> out of range!';
 		}
 		// Too bad :(
 		if (dr_key === '53' && dr_openOrient === '53' && dr_key === '53' && dr_type === '53' && dr_xPos === 'b1b1' && dr_yPos === 'b1b1' && dr_zPos === '31b1'){
@@ -1193,7 +1194,6 @@ function RDT_decompileDoors(index, location){
 			if (dr_key.toLowerCase() === 'ff'){
 				itemTitle = 'Door locked in other side';
 			}
-			var doorLeadsTo_title;
 			var doorLeadsTo = 'R' + parseInt(parseInt(dr_nStage, 16) + 1) + dr_nRoomNumber.toUpperCase();
 			if (RDT_locations[doorLeadsTo.toUpperCase()] !== undefined){
 				doorLeadsTo_title = RDT_locations[doorLeadsTo.toUpperCase()][0] + ', ' + RDT_locations[doorLeadsTo.toUpperCase()][1];
@@ -1202,18 +1202,17 @@ function RDT_decompileDoors(index, location){
 			}
 			if (dr_header === '61'){
 				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-' + index + '" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: ' + 
-					'<font class="RDT-item-lbl-fix">' + dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + 
-					dr_rPos.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>' + 
-					'Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + '</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: ' + 
-					'<font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() + '</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>' + 
-					'Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
-					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + 
-					'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + 
-					dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + '</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() +
-					'</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + '<font title="Next Stage">' + dr_nStage.toUpperCase() + 
-					'</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> <font title="Z Index">' + dr_zIndex.toUpperCase() + '</font> <font title="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' +
-					dr_openOrient.toUpperCase() + '</font> <font title="Unk. Flag B">' + dr_offset1.toUpperCase() + '</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + 
+					dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + dr_rPos.toUpperCase() + '</font><br>' + 
+					'<div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + 
+					'</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: <font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() +
+					'</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() + '</font><br>' + 
+					'Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + '</font></div><div class="menu-separador">' + 
+					'</div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + dr_xPos.toUpperCase() + '</font> <font title="Y Pos.">' + dr_yPos.toUpperCase() + 
+					'</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> ' + 
+					'<font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + '<font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> <font title="Z Index">' + dr_zIndex.toUpperCase() +
+					'</font> <font title="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> <font title="Unk. Flag">' + dr_offset1.toUpperCase() + '</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + 
+					'</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
 			} else {
 				var drType = parseInt(parseInt(dr_type, 16) - 1).toString();
 				if (drType.length !== 2){
@@ -1227,10 +1226,10 @@ function RDT_decompileDoors(index, location){
 					'</font><br>Next Camera: <font class="RDT-item-lbl-fix-4">' + dr_nCamPos.toUpperCase() + '</font><br>Next Room Number: <font class="RDT-item-lbl-fix-4">' + dr_nRoomNumber.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-3">Header: <font class="RDT-item-lbl-fix-5">' + dr_header.toUpperCase() +
 					'</font><br>Lock Flag: <font class="RDT-item-lbl-fix-5">' + dr_lockFlag.toUpperCase() + '</font><br>Key: <font class="RDT-item-lbl-fix-5" title="' + itemTitle + '">' + dr_key.toUpperCase() + '</font><br>Open Orientation: <font class="RDT-item-lbl-fix-5">' + dr_openOrient.toUpperCase() + '</font></div>' + 
 					'<div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + dr_header.toUpperCase() + '</font> <font title="ID">' + dr_id.toUpperCase() + '</font> <font title="Identifier">' + dr_ident.toUpperCase() + '</font> <font title="X Pos.">' + 	dr_xPos.toUpperCase() + '</font> ' + 
-					'<font title="Y Pos.">' + dr_yPos.toUpperCase() + '</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> ' + dr_offset0.toUpperCase() + ' <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + 
-					'</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> <font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + 
-					'</font> ' + dr_offset2.toUpperCase() + ' <font title="Door Type">' + drType.toString().toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> ' + dr_offset1.toUpperCase() + ' <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + 
-					'</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'<font title="Y Pos.">' + dr_yPos.toUpperCase() + '</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Unknown Values">' + dr_offset0.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> ' + 
+					'<font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> <font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Room Number">' + dr_nRoomNumber.toUpperCase() + 
+					'</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> <font title="Z Index">' + dr_zIndex.toUpperCase() + '</font> <font title="Door Type">' + drType.toString().toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> <font title="Unk. Flag">' + dr_offset1.toUpperCase() + 
+					'</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
 			}
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
@@ -1249,6 +1248,7 @@ function RDT_copyPastePos(mode){
 		RDT_TEMP_NEXTR 		 = document.getElementById('RDT_door-edit-NR').value.toUpperCase();
 		RDT_TEMP_NEXT_STAGE  = document.getElementById('RDT_door-edit-NS').value.toUpperCase();
 		RDT_TEMP_NEXT_ROOM   = document.getElementById('RDT_door-edit-NRN').value.toUpperCase();
+		RDT_TEMP_ZINDEX      = document.getElementById('RDT_door-edit-zIndex').value.toUpperCase();
 		if (enable_mod === true){
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC').value.toUpperCase();
 		} else {
@@ -1256,7 +1256,7 @@ function RDT_copyPastePos(mode){
 		}
 		var TEXT_FOR_CP = '[Door]\nCurrent Map: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.RDT\nNext Map: R' + (parseInt(RDT_TEMP_NEXT_STAGE) + 1) + RDT_TEMP_NEXT_ROOM + 
 			'.' + RDT_fileType + '\nX Pos: ' + RDT_TEMP_NEXTX + '\nY Pos: ' + RDT_TEMP_NEXTY + '\nZ Pos: ' + RDT_TEMP_NEXTZ + '\nR Pos: ' + RDT_TEMP_NEXTR + '\nNext Stage: ' + 
-			RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA;
+			RDT_TEMP_NEXT_STAGE + '\nNext Room Number: ' + RDT_TEMP_NEXT_ROOM + '\nNext Camera: ' + RDT_TEMP_NEXT_CAMERA + '\nZ Index: ' + RDT_TEMP_ZINDEX;
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste Next
@@ -1265,6 +1265,7 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NY').value 		  = RDT_TEMP_NEXTY;
 		document.getElementById('RDT_door-edit-NZ').value 		  = RDT_TEMP_NEXTZ;
 		document.getElementById('RDT_door-edit-NR').value 		  = RDT_TEMP_NEXTR;
+		document.getElementById('RDT_door-edit-zIndex').value     = RDT_TEMP_ZINDEX;
 		document.getElementById('RDT_door-edit-NRN').value 		  = RDT_TEMP_NEXT_ROOM;
 		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NC').value 	  	  = RDT_TEMP_NEXT_CAMERA;
@@ -1276,20 +1277,14 @@ function RDT_copyPastePos(mode){
 }
 function RDT_DOOR_APPLY(index){
 	var offset0;
-	var offset1;
-	var offset2;
 	var reason = '';
 	var DOOR_COMPILED;
 	var canCompile = true;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
-	var header 	= ident.slice(RANGES['RDT_door-header'][0], 		  RANGES['RDT_door-doorIdentifier'][1]).toLowerCase();
+	var header 	= ident.slice(RANGES['RDT_door-header'][0], RANGES['RDT_door-doorIdentifier'][1]).toLowerCase();
 	var hexType = header.slice(0, 2);
-	if (hexType === '61'){
-		offset1 = document.getElementById('RDT_door-edit-UNKFLAG_B').value.toLowerCase();
-	} else {
-		offset0 = ident.slice(RANGES['RDT_door-1-doorHexOffset0'][0], RANGES['RDT_door-1-doorHexOffset0'][1]).toLowerCase();
-		offset1 = ident.slice(RANGES['RDT_door-1-doorHexOffset1'][0], RANGES['RDT_door-1-doorHexOffset1'][1]).toLowerCase();
-		offset2 = ident.slice(RANGES['RDT_door-1-doorHexOffset2'][0], RANGES['RDT_door-1-doorHexOffset2'][1]).toLowerCase();
+	if (hexType === '62'){
+		offset0    = ident.slice(RANGES['RDT_door-1-doorHexOffset0'][0], RANGES['RDT_door-1-doorHexOffset0'][1]).toLowerCase();	
 	}
 	var cX 		   = document.getElementById('RDT_door-edit-X').value.toLowerCase();
 	var cY 		   = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
@@ -1308,6 +1303,7 @@ function RDT_DOOR_APPLY(index){
 	var nRN 	   = document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
 	var zIndex	   = document.getElementById('RDT_door-edit-zIndex').value.toLowerCase();
 	var displayTxt = document.getElementById('RDT_door-edit-DispTxt').value.toLowerCase();
+	var UnkFlag    = document.getElementById('RDT_door-edit-UNKFLAG_B').value.toLowerCase();
 	if (cX.length !== 4){
 		canCompile = false;
 		reason = '(X Pos) The length is wrong!';
@@ -1368,21 +1364,20 @@ function RDT_DOOR_APPLY(index){
 		canCompile = false;
 		reason = '(Stage) The length is wrong!';
 	}
-	if (hexType === '61'){
-		if (zIndex.length !== 2){
-			canCompile = false;
-			reason = '(Position) Z-Index length is wrong!';
-		}
-		if (offset1.length !== 2){
-			canCompile = false;
-			reason = '(Unk. Flag) Unk. Flag B length is wrong!';
-		}
+	//
+	if (zIndex.length !== 2){
+		canCompile = false;
+		reason = '(Position) Z-Index length is wrong!';
+	}
+	if (UnkFlag.length !== 2){
+		canCompile = false;
+		reason = '(Unk. Flag) Unk. Flag length is wrong!';
 	}
 	if (canCompile === true){
 		if (hexType === '61'){
-			DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nZ + nY + nR + nStage + nRN + nCP + zIndex + nType + nOO + offset1 + nLF + nLK + displayTxt;
+			DOOR_COMPILED = header + cX + cY + cZ + cR + nX + nZ + nY + nR + nStage + nRN + nCP + zIndex + nType + nOO + UnkFlag + nLF + nLK + displayTxt;
 		} else {
-			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nZ + nY + nR + nStage + nRN + nCP + offset2 + nType + nOO + offset1 + nLF + nLK + displayTxt;
+			DOOR_COMPILED = header + cX + cY + cZ + cR + offset0 + nX + nZ + nY + nR + nStage + nRN + nCP + zIndex + nType + nOO + UnkFlag + nLF + nLK + displayTxt;
 		}
 		RDT_COMPILE_Lv2(ident, DOOR_COMPILED);
 		$('#RDT-aba-menu-6').trigger('click');

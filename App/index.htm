@@ -965,7 +965,7 @@
 		<div class="none" id="menu-RDT">
 			<input type="button" id="RDT-aba-menu-1" class="aba aba-left-fix" value="General" onclick="RDT_showMenu(1);">
 			<input type="button" id="RDT-aba-menu-9" class="aba" value="Cameras (???)" onclick="RDT_showMenu(9);">
-			<input type="button" id="RDT-aba-menu-10" class="aba none" value="SLD Masks (???)" onclick="RDT_showMenu(10);">
+			<input type="button" id="RDT-aba-menu-10" class="aba none" value="PRI Masks (???)" onclick="RDT_showMenu(10);">
 			<input type="button" id="RDT-aba-menu-2" class="aba none" value="Message Block (???)" onclick="RDT_showMenu(2);">
 			<input type="button" id="RDT-aba-menu-7" class="aba" value="Message Code (???)" onclick="RDT_showMenu(7);">
 			<input type="button" id="RDT-aba-menu-3" class="aba" value="Itens, Files and Maps (???)" onclick="RDT_showMenu(3);">
@@ -1018,7 +1018,7 @@
 					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 				</div>
 			</div>
-			<!-- RDT SLD LAYERS (Masks) -->
+			<!-- RDT PRI LAYERS (Masks) -->
 			<div class="menu" id="RDT_menu-10" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-SLD-hold">
 					<div id="RDT_BG_10" class="RDT_BG_IMAGE"></div>
@@ -1033,7 +1033,7 @@
 							<select id="RDT_SLD_SELECT_LAYER" oninput="RDT_SLD_selectMask();" class="item-select-mod no-transform-text espaco-right RDT_SLD_selectFix">
 								<!-- Masks Goes Here -->
 							</select>
-							<input type="button" value="Seek SLD Masks on RDT" id="RDT_SLD_seekMasksManualBtn" onclick="RDT_getSLDPosition();" class="botao-menu none">
+							<input type="button" value="Seek PRI Masks on RDT" id="RDT_SLD_seekMasksManualBtn" onclick="RDT_getSLDPosition();" class="botao-menu none">
 							<div class="menu-separador"></div>
 							Tileset: <input type="button" class="botao-menu" value="Load BMP" onclick="triggerLoad(14);"> - File: <font id="RDT_SLD_MASK_TILESET_FILENAME" class="user-can-select">No file selected</font>
 							<div class="menu-separador"></div>
@@ -1260,7 +1260,7 @@
 								<div class="RDT_coordsHolder_B">
 									<font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4">
 								</div>
-								<div id="RDT_DOOR_UNK_DIV_A" style="margin-top: -4px;" class="none">
+								<div id="RDT_DOOR_UNK_DIV_A" class="RDT_doorEdit_zIndexFix">
 									<font class="RE3_LIVESTATUS_Z_color">Z-Index</font>: 
 									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_5" id="RDT_door-edit-zIndex" placeholder="00" maxlength="2">
 								</div>
@@ -1302,10 +1302,8 @@
 							<div class="RDT_coordsHolder_B">
 								Lock Flag: 
 								<input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00">
-								<div id="RDT_DOOR_UNK_DIV_B" class="none">
-									Unk. Flag B: 
-									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
-								</div>
+								Unk. Flag: 
+								<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
 							</div>
 						</div>
 						<!-- Cam Preview -->
@@ -1327,7 +1325,7 @@
 						<!-- APPLY DOOR -->
 						<div class="RDT-applyBtn-div" id="RDT_applyDoorDiv">
 							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" title="Click here to appply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
+							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarDoor" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>

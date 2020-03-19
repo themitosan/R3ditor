@@ -1171,12 +1171,12 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT_door_textEditFix_2{
-    width: 16px;
+    width: 20px;
     left: 1258px;
     position: sticky;
 }
 .RDT_door_textEditFix_3{
-    width: 16px;
+    width: 20px;
 }
 .RDT_door_textEditFix_4{
     left: 882px;
@@ -1191,6 +1191,9 @@ input[type='range' i]{
 .RDT_door-edit-posFix{
     left: 808px !important;
     width: 492px !important;
+}
+.RDT_doorEdit_zIndexFix{
+    margin-top: -4px !important;
 }
 .menu-utility-fix{
     top: 526px;
@@ -1258,7 +1261,7 @@ input[type='range' i]{
     position: absolute;
 }
 .RDT_doorUnkValFix{
-    width: 16px !important;
+    width: 20px !important;
     margin-top: 0px !important;
 }
 .RDT_modifyBtnFix{

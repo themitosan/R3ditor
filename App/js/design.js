@@ -1482,7 +1482,9 @@ function RDT_showEditDoor(index, id, hex){
 	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
 	document.getElementById('RDT-lbl-doorEdit-id').innerHTML  = id;
+	$('#RDT_door_edit_usePlayerPos_div').css({'margin-top': '32px'});
 	document.getElementById('RDT-lbl-door-index').innerHTML   = index;
+	$('#RDT_door_edit_copyPasteOptions_div').css({'margin-top': '32px'});
 	// Check if header === 61 || 62
 	var header = hex.slice(0, 2);
 	if (header === '61'){
@@ -1510,19 +1512,8 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-LF').value 	      = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][0],  				RANGES['RDT_door-' + DOOR_READ_MODE + '-doorLockedFlag'][1]).toUpperCase();
 	document.getElementById('RDT_door-edit-DispTxt').value	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][0], 				RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][1]).toUpperCase();
 	// Unk Flags
-	if (DOOR_READ_MODE === 0){
-		$('#RDT_DOOR_UNK_DIV_A').css({'display': 'block'});
-		$('#RDT_DOOR_UNK_DIV_B').css({'display': 'inline'});
-		$('#RDT_door_edit_usePlayerPos_div').css({'margin-top': '32px'});
-		$('#RDT_door_edit_copyPasteOptions_div').css({'margin-top': '32px'});
-		document.getElementById('RDT_door-edit-zIndex').value = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][1]);
-		document.getElementById('RDT_door-edit-UNKFLAG_B').value = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][1]);
-	} else {
-		$('#RDT_DOOR_UNK_DIV_A').css({'display': 'none'});
-		$('#RDT_DOOR_UNK_DIV_B').css({'display': 'none'});
-		$('#RDT_door_edit_usePlayerPos_div').css({'margin-top': '32px'});
-		$('#RDT_door_edit_copyPasteOptions_div').css({'margin-top': '0px'});
-	}
+	document.getElementById('RDT_door-edit-zIndex').value = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][1]);
+	document.getElementById('RDT_door-edit-UNKFLAG_B').value = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][0], RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][1]);
 	//
 	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;
@@ -1911,11 +1902,11 @@ function R3ditor_enableLiveStatusButton(){
 	}
 }
 function R3ditor_disableLiveStatusButton(){
-	$('#fileGen_LIVESTATUS').css({'display': 'none'});
-	$('#main_LIVESTATUS').css({'display': 'none'});
 	$('#RDT_LIVESTATUS').css({'display': 'none'});
 	$('#MSG_LIVESTATUS').css({'display': 'none'});
 	$('#SAV_LIVESTATUS').css({'display': 'none'});
+	$('#main_LIVESTATUS').css({'display': 'none'});
+	$('#fileGen_LIVESTATUS').css({'display': 'none'});
 	// Another Buttons
 	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
 	$('#RDT_door_usePlayerPos').css({'display': 'none'});

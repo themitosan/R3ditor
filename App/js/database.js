@@ -1965,17 +1965,18 @@ var RANGES = {
 	'RDT_door-1-doorNextStage':      [60, 62],
 	'RDT_door-1-doorNextRoomNumber': [62, 64],
 	'RDT_door-1-doorNextCamNumber':  [64, 66],
-	'RDT_door-1-doorHexOffset2':  	 [66, 68], // Always 00...?
+	'RDT_door-1-zIndex':  	 		 [66, 68], // Needs Testing (Z Index)
 	'RDT_door-1-doorType': 			 [68, 70],
 	'RDT_door-1-doorOpenOrient': 	 [70, 72], // 00: Handle Left, 01: Handle Right
 
-	'RDT_door-1-doorHexOffset1': 	 [72, 74], 
+	'RDT_door-1-doorHexOffset1': 	 [72, 74], // Unk. Flag B?
 	'RDT_door-1-doorLockedFlag':  	 [74, 76], // OK
 	'RDT_door-1-doorKey': 	 		 [76, 78], // OK
-	'RDT_door-1-doorDisplayText': 	 [78, 80], // Display Text - If you set 40, it will show (You want do go down the ladder?)
+	'RDT_door-1-doorDisplayText': 	 [78, 80], // Display Text - If you set 40, it will show "Go down the ladder?"
 	/*
-		SLD Layers (Masks)
+		SLD Layers (PRI Masks)
 		Header
+		(É aqui que o F. King Pira!)
 	*/
 	'SLD_LAYER_relativeOffsets': [0, 2], // PRIedit Relative Offsets
 	'SLD_LAYER_offset_1': 		 [2, 4], //
