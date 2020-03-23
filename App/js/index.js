@@ -825,6 +825,18 @@ function R3DITOR_reduceStrings(str, size){
 		}
 	}
 }
+function parseEndian(str){
+	var final = '';
+	if (str !== undefined && str !== ''){
+		var c = 0;
+		var prse = str.toString().match(/.{2,2}/g).reverse();
+		while (c < prse.length){
+			final = final + prse[c];
+			c++;
+		}	
+	}
+	return final;
+}
 /*
 	Triggers & Load Files
 */

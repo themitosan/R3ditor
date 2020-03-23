@@ -1074,34 +1074,41 @@
 						<!-- CAMERA Goes Here -->
 					</div>
 					<!-- RDT CAMERA - Edit -->
-					<div class="RDT-Item-Edit RDT_camEditFixForm none" id="RDT-camera-Edit">
-						<center><font class="titulo">Edit Parameters</font><br>Camera: <font id="RDT-lbl-CAMERA-edit">???</font> - ID: <font id="RDT-lbl-CAMERA-index">???</font></center>
-						<div id="RDT-camera-edit-form">
-							<div class="RDT_coordsHolder_B">(1) X Origin: <input type="text" id="RDT_X1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">(2) X Origin: <input type="text" id="RDT_X2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">(1) Y Origin: <input type="text" id="RDT_Y1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">(2) Y Origin: <input type="text" id="RDT_Y2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">(1) Z Origin: <input type="text" id="RDT_Z1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_B">(2) Z Origin: <input type="text" id="RDT_Z2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="menu-separador"></div>
+					<div class="RDT-Item-Edit none" id="RDT-camera-Edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>Camera: <font id="RDT-lbl-CAMERA-edit">???</font> - ID: <font id="RDT-lbl-CAMERA-index">???</font>
+						</center>
+						<div id="RDT-camera-edit-camPrev" class="RDT_editCamera_iconPreviewDiv">
+							<img id="RDT_editCamera_iconPreviewImg" class="RDT_editCamera_iconPreview"><br>
 							<center>
-								<input type="button" title="Click here to copy the camera position" value="Copy Camera Pos." onclick="RDT_copyPasteCameraInfo(1);" class="botao-menu"> 
-								<input type="button" title="Click here to paste the camera position" value="Paste Camera Pos." onclick="RDT_copyPasteCameraInfo(2);" class="botao-menu">
+								Cam Preview<br>
+								File name: <font id="RDT_lbl_camEdit_camName">???</font>
 							</center>
+						</div>
+						<div id="RDT-camera-edit-form" class="RDT_camEdit_holder">
+							<div class="RDT_coordsHolder_D">(1) X Origin: <input type="text" id="RDT_X1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D">(2) X Origin: <input type="text" id="RDT_X2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_D">(1) Y Origin: <input type="text" id="RDT_Y1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D">(2) Y Origin: <input type="text" id="RDT_Y2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="menu-separador"></div>
+							<div class="RDT_coordsHolder_D">(1) Z Origin: <input type="text" id="RDT_Z1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D">(2) Z Origin: <input type="text" id="RDT_Z2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
 							<div class="RDT_camEditXYZDirection">
-								<div class="RDT_coordsHolder_B">(1) X Direction: <input type="text" id="RDT_X1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">(2) X Direction: <input type="text" id="RDT_X2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D">(1) X Direction: <input type="text" id="RDT_X1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D">(2) X Direction: <input type="text" id="RDT_X2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
 								<div class="RDT_coordsHolder_C">(1) Y Direction: <input type="text" id="RDT_Y1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">(2) Y Direction: <input type="text" id="RDT_Y2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D">(2) Y Direction: <input type="text" id="RDT_Y2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
 								<div class="RDT_coordsHolder_C">(1) Z Direction: <input type="text" id="RDT_Z1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_B">(2) Z Direction: <input type="text" id="RDT_Z2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D">(2) Z Direction: <input type="text" id="RDT_Z2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
 							</div>
-							<div class="RDT-applyBtn-div">
-								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white RDT_camera_cancel_btn_fix" value="Cancel" onclick="RDT_editItemCancel();">
-								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarCAMERA" value="APPLY CHANGES!">
-							</div>
+							<div class="menu-separador"></div>
+							<input type="button" title="Click here to copy the camera position" value="Copy Camera Pos." onclick="RDT_copyPasteCameraInfo(1);" class="botao-menu"> 
+							<input type="button" title="Click here to paste the camera position" value="Paste Camera Pos." onclick="RDT_copyPasteCameraInfo(2);" class="botao-menu">
+						</div>
+						<div class="RDT-applyBtn-div">
+							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white RDT_camera_cancel_btn_fix" value="Cancel" onclick="RDT_editItemCancel();">
+							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarCAMERA" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>
@@ -1125,11 +1132,9 @@
 							Extra: <input type="text" id="RDT_edit_3DProp_Extra" maxlength="4" class="item-select-mod RDT_3DProps_extraTextValueFix">
 						</div>
 						<div class="menu-separador"></div>
-						<center>
-							<input type="button" onclick="RDT_copyPastePropsPos(0);" class="botao-menu" value="Copy Position">
-							<input type="button" onclick="RDT_copyPastePropsPos(1);" class="botao-menu" value="Paste Position">
-							<input type="button" onclick="RDT_copyPastePropsPos(2);" id="RDT_useJillPos_3DProp" class="botao-menu botao-aplicar none" value="Use Player Position">
-						</center>
+						<input type="button" onclick="RDT_copyPastePropsPos(0);" class="botao-menu" value="Copy Position">
+						<input type="button" onclick="RDT_copyPastePropsPos(1);" class="botao-menu" value="Paste Position">
+						<input type="button" onclick="RDT_copyPastePropsPos(2);" id="RDT_useJillPos_3DProp" class="botao-menu botao-aplicar none" value="Use Player Position">
 						<div class="RDT-applyBtn-div">
 							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_show3DPropEdit(1);">
 							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicar3DProp" value="APPLY CHANGES!">
@@ -1146,17 +1151,20 @@
 						<!-- Enemy / NPC goes here -->
 					</div>
 					<!-- RDT: Enemy / NPC - Editar -->
-					<div class="RDT-Item-Edit RDT_enemyNPC_editForm-fix" id="RDT-enemyNPC-Edit">
+					<div class="RDT-Item-Edit none" id="RDT-enemyNPC-Edit">
 						<center>
 							<font class="titulo">Edit Parameters</font><br>
-							Current ID: <font id="RDT_lbl_enemyNPC_ID">???</font><br>
-							Enemy / NPC: <font id="RDT-lbl-enemyNPC-edit">???</font> - EMD / TIM: <font id="RDT_lbl_enemyNPC_edit_EMD">???</font>
+							Current ID: <font id="RDT_lbl_enemyNPC_ID">???</font> - Enemy / NPC: <font id="RDT-lbl-enemyNPC-edit">???</font> - EMD / TIM: <font id="RDT_lbl_enemyNPC_edit_EMD">???</font>
 						</center>
 						<div id="RDT-enemyNPC-edit-form">
-							<div class="RDT_coordsHolder_A">
-								Enemy / NPC: 
+							<div>
+								Type: 
 								<select class="item-select-mod RDT_editSelectEnemyNPC-fix no-transform-text" id="RDT_selectEnemyNPC" onchange="RDT_enemyNPCValidateInput();">
 									<!-- Options goes here -->
+								</select><br>
+								Pose: 
+								<select id="RDT_enemyNPC-edit-PO" class="item-select-mod RDT-item-lbl-fix-9 RDT_editSelectEnemyNPC-fix no-transform-text" onchange="RDT_enemyNPCValidateInput();">
+									<!-- Pos. goes here -->
 								</select>
 							</div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_X_color">X Position</font>: <input type="text" placeholder="XXXX" id="RDT_enemyNPC-edit-X" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
@@ -1164,21 +1172,25 @@
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_Z_color">Z Position</font>: <input type="text" placeholder="ZZZZ" id="RDT_enemyNPC-edit-Z" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
 							<div class="RDT_coordsHolder_B"><font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" id="RDT_enemyNPC-edit-R" maxlength="4" class="item-select-mod RDT-item-lbl-fix-9" placeholder="0000"></div>
 							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">Pose: 
-								<select id="RDT_enemyNPC-edit-PO" class="item-select-mod RDT-item-lbl-fix-9 RDT_editSelectEnemyNPC-fix no-transform-text" onchange="RDT_enemyNPCValidateInput();">
-									<!-- Pos. goes here -->
-								</select>
-							</div>
-							<div class="RDT_coordsHolder_B">Texture: <input type="text" id="RDT_enemyNPC-edit-TX" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
-							<div class="RDT_coordsHolder_B">Sound Set: <input type="text" id="RDT_enemyNPC-edit-SS" class="item-select-mod RDT-item-lbl-fix-9" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
+							<div class="RDT_coordsHolder_F">
+								Sound Set: <input type="text" id="RDT_enemyNPC-edit-SS" class="item-select-mod RDT-item-lbl-fix-11" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
 							<div class="RDT_editEnemyNPC-misc">
-								<div class="RDT_coordsHolder_B">Enemy Flag: <input type="text" id="RDT_enemyNPC-edit-EnF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
-								<div class="RDT_coordsHolder_B">Extra Flag: <input type="text" id="RDT_enemyNPC-edit-ExF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
-								<div class="RDT_coordsHolder_B">Enemy Number: <input type="text" id="RDT_enemyNPC-edit-EN" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();"></div>
-								<input type="button" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy info" onclick="RDT_copyPasteEnemyNpcInfo(1);">
-								<input type="button" class="botao-menu" value="Paste info" onclick="RDT_copyPasteEnemyNpcInfo(2);">
-								<input type="button" class="botao-menu botao-aplicar none" id="RDT_EMD_usePlayerPosBtn" value="Use Player Pos." onclick="RDT_EMD_USEPLAYERPOS();">
+								<div class="RDT_coordsHolder_B">
+									Enemy Number: <input type="text" id="RDT_enemyNPC-edit-EN" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									Enemy Flag: <input type="text" id="RDT_enemyNPC-edit-EnF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									<font title='This is also known as "@@"'>Extra Flag</font>: <input type="text" id="RDT_enemyNPC-edit-ExF" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();">
+								</div>
+								<div class="RDT_coordsHolder_B">
+									Texture: <input type="text" id="RDT_enemyNPC-edit-TX" class="item-select-mod RDT-item-lbl-fix-10" placeholder="00" maxlength="2" oninput="RDT_enemyNPCValidateInput();">
+								</div>
 							</div>
+							<input type="button" class="botao-menu" value="Copy info" onclick="RDT_copyPasteEnemyNpcInfo(1);">
+							<input type="button" class="botao-menu" value="Paste info" onclick="RDT_copyPasteEnemyNpcInfo(2);">
+							<input type="button" class="botao-menu botao-aplicar none" id="RDT_EMD_usePlayerPosBtn" value="Use Player Pos." onclick="RDT_EMD_USEPLAYERPOS();">
 							<div class="RDT-applyBtn-div">
 								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
 								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarEnemyNPC" value="APPLY CHANGES!">
@@ -1196,7 +1208,7 @@
 						<!-- MSGCODE goes here -->
 					</div>
 					<!-- RDT: MSGCODE - Editar -->
-					<div class="RDT-Item-Edit RDT_editParamMSGCODE" id="RDT-MSGCODE-Edit">
+					<div class="RDT-Item-Edit none" id="RDT-MSGCODE-Edit">
 						<center>
 							<font class="titulo">Edit Parameters</font><br>Message: <font id="RDT-lbl-MSGCODE-edit">???</font> - ID: <font id="RDT-lbl-MSGCODE-index">???</font>
 						</center>
@@ -1207,7 +1219,7 @@
 							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color">R Position: <input type="text" id="RDT_MSGCODE-edit-radiusZ" class="item-select-mod RDT-item-lbl-fix-7" maxlength="4" placeholder="0000"></div>
 							<div class="menu-separador"></div>
 							<div class="RDT_coordsHolder_B">Special: <input type="text" id="RDT_MSGCODE-edit-special" class="item-select-mod RDT-item-lbl-fix-7" placeholder="00" maxlength="2"></div>
-							<div class="RDT_coordsHolder_B">
+							<div>
 								Display mode:
 								<select id="RDT_MSGCODE-edit-display" class="item-select-mod no-transform-text RDT_MSGCODE-eDisplay">
 									<!-- Options goes here -->
@@ -1230,7 +1242,7 @@
 						<!-- Doors goes here -->
 					</div>
 					<!-- RDT: Doors - Edit -->
-					<div class="RDT-Item-Edit RDT_door-edit-posFix" id="RDT-door-Edit">
+					<div class="RDT-Item-Edit none" id="RDT-door-Edit">
 						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Header: <font id="RDT_lbl_door_header">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
 						<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
 							<div class="RDT_coordsHolder_A">
@@ -1272,11 +1284,9 @@
 								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
 							</div>
 							<div id="RDT_door_edit_copyPasteOptions_div">
-								<center>
-									<input type="button" title="Click here to copy spawn path" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
-									<input type="button" title="Click here to paste spawn path" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
-									<input type="button" title="Click here to use Player Position" onclick="RDT_enableDisableDoorUsePlayerPos(0);" class="botao-menu botao-aplicar none" id="RDT_door_usePlayerPos" value="Use Player Pos.">
-								</center>	
+								<input type="button" title="Click here to copy spawn path" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
+								<input type="button" title="Click here to paste spawn path" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
+								<input type="button" title="Click here to use Player Position" onclick="RDT_enableDisableDoorUsePlayerPos(0);" class="botao-menu botao-aplicar none" id="RDT_door_usePlayerPos" value="Use Player Pos.">
 							</div>
 							<div id="RDT_door_edit_usePlayerPos_div" class="none">
 								<center>
@@ -1294,12 +1304,10 @@
 									<!-- Door display text options goes here -->
 								</select>
 							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_B">Lock Key: 
-								<select class="item-select-mod RDT_door_textEditFix_4 no-transform-text" id="RDT_door-edit-LK">
+							<div class="RDT_coordsHolder_E">Lock Key: 
+								<select class="item-select-mod RDT_door_selectLockKeyFix no-transform-text" id="RDT_door-edit-LK">
 									<!-- Items goes here -->
 								</select>
-							</div>
-							<div class="RDT_coordsHolder_B">
 								Lock Flag: 
 								<input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00">
 								Unk. Flag: 
@@ -1404,8 +1412,9 @@
 					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - Identfier: <font id="RDT-lbl-edit-index">???</font> - ID: <font id="RDT_lbl_item_id">???</font></center>
 					<div id="RDT-item-edit-form">
 						<div id="RDT-edit-item-select" class="none">
-							Item: <select class="RDT-item-select item-select-mod" id="RDT-item-select"></select>
-							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_itemValidadeInput();" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-Quant" placeholder="15">
+							Item: <select class="RDT-item-select item-select-mod RDT_editItem_selectFix" value="00" oninput="RDT_editItem_renderIconPreview();" id="RDT-item-select"></select>
+							<img id="RDT_editItem_itemIconPreview" class="RDT_editItem_iconPrevew"><br>
+							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_editItem_renderIconPreview();" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15">
 						</div>
 						<div id="RDT-edit-file-select" class="none">
 							File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
@@ -1413,19 +1422,22 @@
 						<div id="RDT-edit-map-select" class="none">
 							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
 						</div>
+						<div class="menu-separador"></div>
 						<input type="button" title="Click here to edit the XYZR Position" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
 						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-X">0000</font></div><br>
 						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Y">0000</font></div><br>
 						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Z">0000</font></div><br>
 						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-R">0000</font></div>
 						<div class="menu-separador"></div>
-						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
-						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos RDT-valueEdit-fix" id="RDT_item-edit-MI" placeholder="00" value=""></div>
-						<div class="RDT-item-editOtherFix"l id="RDT-iEditOther">
-							<div>Item flag: <input type="text" class="item-select-mod RDT_itemEditOtherLeftFix RDT-valueEdit-fix" id="RDT_item-edit-IF" placeholder="00"></div>
+						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
+						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-MI" placeholder="00" value=""></div>
+						<div class="RDT-item-editOtherFix" id="RDT-iEditOther">
+							<div>
+								Item flag: <input type="text" class="item-select-mod RDT_itemEdit_IF_fix" id="RDT_item-edit-IF" placeholder="00">
+							</div>
 							Convert to: 
 							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix no-transform-text RDT_item_convert_width_fix">
-								<option value="1">Item</option><option value="2">File</option><option value="3">Map</option>
+								<!-- Convert Goes here -->
 							</select>
 							<input type="button" title="Click here to convert!" value="Convert!" id="RDT_applyConvertItem" class="botao-menu RDT_item_convert_btn_margin_fix">
 						</div>

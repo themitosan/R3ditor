@@ -1722,7 +1722,9 @@ var RANGES = {
     /*
 		Espaços não mapeados:
 
-		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas através de engenharia reversa.
+		Esses espaços contém posições hex com outras variaveis que não foram mapeadas / desobertas 
+		através de engenharia reversa.
+		
 		Eles serão preservados para poder reconstruir o arquivo de save inteiro novamente.
     */
     '0x2204-0x2207': 	[1032, 1040], // Offset entre IGT e Dificuldade
@@ -1790,8 +1792,11 @@ var RANGES = {
 	'TIM_header': 					   [0, 8], // Header
 	'TIM_BPP': 						  [8, 16], // Bit Per Pixel (BPP)
 	/*
-		RDT Ranges
+		RDT Ranges [WIP]
 	*/
+	'RDT_FILE_MAP_HEADER':			 [0, 192],
+	// Header
+	'RDT_HEADER_CAM_TOTAL':	     	 [0, 4],
 	////////////////////////////////////////////////////////////////////////////////////////
 	/*
 		Item, File or Map

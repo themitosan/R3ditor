@@ -1403,7 +1403,28 @@ function RDT_canvasResetPos(){
 	RDT_updateCanvasInfos(0);
 }
 function RDT_showEditCamera(index, camEdit, codeHex){
+	var CAM_IMG;
+	var titleFileName;
+	var CAM_lbl_fileName;
+	var CAM_ID = index.toString(16).toUpperCase();
+	if (CAM_ID.length < 2){
+		CAM_ID = '0' + CAM_ID;
+	}
 	$('#RDT_openFileList').css({'display': 'none'});
+	var camFile = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_mapName + CAM_ID + '.JPG';
+	if (fs.existsSync(camFile) === true){
+		CAM_IMG = camFile;
+		CAM_lbl_fileName = getFileName(camFile).toUpperCase();
+		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + RDT_mapName + CAM_ID + '.JPG';
+	} else {
+		CAM_lbl_fileName = 'Unknown';
+		CAM_IMG = APP_PATH + '\\App\\Img\\404.png';
+		titleFileName = 'Unable to render cam preview!\nFile not found (404)';
+	}
+	document.getElementById('RDT_editCamera_iconPreviewImg').src = CAM_IMG;
+	document.getElementById('RDT_editCamera_iconPreviewImg').title = titleFileName;
+	document.getElementById('RDT_lbl_camEdit_camName').innerHTML = CAM_lbl_fileName;
+	//
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
 	document.getElementById('RDT-lbl-CAMERA-edit').innerHTML  = camEdit;
 	document.getElementById('RDT_X1_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cX-1'][0], RANGES['RDT_cam-0-cX-1'][1]).toUpperCase();
@@ -1422,10 +1443,11 @@ function RDT_showEditCamera(index, camEdit, codeHex){
 		RDT_CAMERA_APPLY(index);
 	}
 	$('#RDT-camera-Edit').css({'display': 'inline'});
-	$('#RDT_camera_holder').css({'width': '932px'});
+	$('#RDT_camera_holder').css({'display': 'none'});
 }
 function RDT_showEditMsgCode(index, codeHex){
 	$('#RDT_openFileList').css({'display': 'none'});
+	$('#RDT_msgCode_holder').css({'display': 'none'});
 	document.getElementById('RDT-lbl-MSGCODE-edit').innerHTML = index;
 	var header = codeHex.slice(RANGES['RDT_msgCode-header'][0], RANGES['RDT_msgCode-header'][1]);
 	if (header !== '64'){
@@ -1436,7 +1458,6 @@ function RDT_showEditMsgCode(index, codeHex){
 		document.getElementById('RDT_MSGCODE-edit-radiusZ').value  = codeHex.slice(RANGES['RDT_msgCode-0-zWidthTrigger'][0], RANGES['RDT_msgCode-0-zWidthTrigger'][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-special').value  = codeHex.slice(RANGES['RDT_msgCode-0-specialProp'][0], 	 RANGES['RDT_msgCode-0-specialProp'][1]).toUpperCase();
 		document.getElementById('RDT_MSGCODE-edit-display').value  = codeHex.slice(RANGES['RDT_msgCode-0-readMode'][0], 	 RANGES['RDT_msgCode-0-readMode'][1]).toLowerCase();
-		$('#RDT_msgCode_holder').css({'width': '802px'});
 		$('#RDT-MSGCODE-Edit').css({'display': 'inline'});
 		document.getElementById('RDT-btn-aplicarMSGCODE').onclick = function(){
 			RDT_MSGCODE_APPLY(index);
@@ -1445,7 +1466,7 @@ function RDT_showEditMsgCode(index, codeHex){
 		RDT_editItemCancel();
 		var warnMSG = 'This message code contains a WIP header (64)';
 		alert('INFO - Unable to edit this message code! (For now!)\n\n' + warnMSG);
-		LOG_addLog('warn', 'WARN - ' + warnMSG);
+		LOG_addLog('warn', 'MAP - WARN: ' + warnMSG);
 	}
 	LOG_scroll();
 }
@@ -1470,7 +1491,7 @@ function RDT_showEditEnemyNPC(index, codeHex){
 		RDT_ENEMYNPC_APPLY(index);
 	}
 	$('#RDT-enemyNPC-Edit').css({'display': 'inline'});
-	$('#RDT_enemy_holder').css({'width': '780px'});
+	$('#RDT_enemy_holder').css({'display': 'none'});
 }
 function RDT_showEditDoor(index, id, hex){
 	var nextCam;
@@ -1523,26 +1544,13 @@ function RDT_showEditDoor(index, id, hex){
 		RDT_renderEditDoorCamPreview();
 	}
 	$('#RDT-door-Edit').css({'display': 'block'});
-	$('#RDT_door_holder').css({'width': '780px'});
-}
-function RDT_itemValidadeInput(){
-	document.getElementById('RDT_item-edit-A').value     = document.getElementById('RDT_item-edit-A').value.toUpperCase();
-	document.getElementById('RDT_item-edit-MI').value    = document.getElementById('RDT_item-edit-MI').value.toUpperCase();
-	document.getElementById('RDT_item-edit-IF').value    = document.getElementById('RDT_item-edit-IF').value.toUpperCase();
-	document.getElementById('RDT_item-edit-Quant').value = document.getElementById('RDT_item-edit-Quant').value.toUpperCase();
+	$('#RDT_door_holder').css({'display': 'none'});
 }
 function RDT_enemyNPCValidateInput(){
 	var emd = document.getElementById('RDT_selectEnemyNPC').value;
 	var emdName = 'EM' + emd.toUpperCase();
 	document.getElementById('RDT_lbl_enemyNPC_edit_EMD').innerHTML = emdName;
 	document.getElementById('RDT-lbl-enemyNPC-edit').innerHTML = RDT_EMDNAME[emd];
-}
-function RDT_MSGBLOCKValidadeInput(){
-	document.getElementById('RDT_MSGCODE-edit-X').value 	  = document.getElementById('RDT_MSGCODE-edit-X').value.toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-Z').value 	  = document.getElementById('RDT_MSGCODE-edit-Z').value.toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-radiusX').value = document.getElementById('RDT_MSGCODE-edit-radiusX').value.toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-radiusZ').value = document.getElementById('RDT_MSGCODE-edit-radiusZ').value.toUpperCase();
-	document.getElementById('RDT_MSGCODE-edit-special').value = document.getElementById('RDT_MSGCODE-edit-special').value.toUpperCase();
 }
 function RDT_renderNextRDTLbl(){
 	var c = 0;
@@ -1579,6 +1587,11 @@ function RDT_renderNextRDTLbl(){
 			RDT_renderEditDoorCamPreview();
 		}
 	}
+}
+function RDT_editItem_renderIconPreview(){
+	var IC = document.getElementById('RDT-item-select').value;
+	document.getElementById('RDT_editItem_itemIconPreview').title = '(' + IC.toUpperCase() + ') ' + ITEM[IC][0];
+	document.getElementById('RDT_editItem_itemIconPreview').src = APP_PATH + '\\App\\Img\\items\\' + IC.toLowerCase() + '.png';
 }
 function RDT_renderEditDoorCamPreview(){
 	var rst = parseInt(parseInt(document.getElementById('RDT_door-edit-NS').value, 16) + 1).toString();
@@ -1755,11 +1768,11 @@ function RDT_displayItemEdit(id, idx, itemHx){
 		$('#RDT-edit-item-select').removeClass('none');
 		$('#RDT-edit-file-select').addClass('none');
 		$('#RDT-edit-map-select').addClass('none');
-		$('#RDT_btnEditPos').css({'top': '174px'});
-		$('#RDT-iEditOther').css({'top': '266px'});
+		$('#RDT_btnEditPos').css({'top': '182px'});
+		$('#RDT-iEditOther').css({'top': '273px'});
 	} else {
-		$('#RDT-iEditOther').css({'top': '228px'});
-		$('#RDT_btnEditPos').css({'top': '140px'});
+		$('#RDT_btnEditPos').css({'top': '146px'});
+		$('#RDT-iEditOther').css({'top': '235px'});
 	}
 	// File
 	if (id === 2){
@@ -1802,29 +1815,30 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	$('#RDT_item_Y').css({'display': 'block'});
 	$('#RDT_item_Z').css({'display': 'block'});
 	$('#RDT_item_R').css({'display': 'block'});
-	$('#RDT-item-list').css({'width': '722px'});
-	$('#RDT-Item-Edit').css({'display': 'block'});
+	$('#RDT-Item-Edit').css({'display': 'inline', 'margin-left': '4px'});
 	if (header === '68'){
 		$('#RDT_btnEditPos').css({'display': 'none'});
 	} else {
 		$('#RDT_btnEditPos').css({'display': 'block'});
 	}
+	RDT_editItem_renderIconPreview();
 }
 function RDT_editItemCancel(){
 	main_closeFileList();
 	if (enable_mod === true){
 		$('#RDT_openFileList').css({'display': 'inline'});
 	}
-	$('#RDT-item-list').css({'width': 'auto'});
 	$('#RDT-Item-Edit').css({'display': 'none'});
 	$('#RDT-door-Edit').css({'display': 'none'});
-	$('#RDT_door_holder').css({'width': 'auto'});
 	$('#RDT-camera-Edit').css({'display': 'none'});
 	$('#RDT-MSGCODE-Edit').css({'display': 'none'});
-	$('#RDT_enemy_holder').css({'width': '1288px'});
-	$('#RDT_camera_holder').css({'width': '1288px'});
 	$('#RDT-enemyNPC-Edit').css({'display': 'none'});
-	$('#RDT_msgCode_holder').css({'width': '1288px'});
+	//
+	$('#RDT-item-list').css({'display': 'block'});
+	$('#RDT_door_holder').css({'display': 'block'});
+	$('#RDT_enemy_holder').css({'display': 'block'});
+	$('#RDT_camera_holder').css({'display': 'block'});
+	$('#RDT_msgCode_holder').css({'display': 'block'});
 	document.getElementById('RDT_item-edit-A').value = '';
 	document.getElementById('RDT_door-edit-X').value = '';
 	document.getElementById('RDT_door-edit-Y').value = '';

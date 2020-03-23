@@ -1,4 +1,4 @@
-﻿/*
+/*
 	R3ditor - RDT.js
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Sorry. For real.
@@ -230,17 +230,42 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	}
 	LOG_scroll();
 }
+// This is a really buggy attempt!
+var RDT_MAP_HEADER;
+//							  Hx     Hx
+var RDT_HEADER_CAM_TOTAL;  // 00 --> 02: Nº Total Cameras
+var RDT_HEADER_UNK_0;      // 08 --> 09: ???
+var RDT_HEADER_BOUNDARIES; // 20 --> 21: Boundaries
+var RDT_HEADER_CAM_POS;    // 24 --> 25: Camera Position (Start)
+var RDT_HEADER_COLISION;   // 28 --> 29: Camera Colision
+var RDT_HEADER_TIM; 	   // 30 --> 31: Total Objects? (TIM)
+var RDT_HEADER_LIGHTS;     // 2C --> 2D: Lights (LIT)
+var RDT_HEADER_UNK_1;      // 38 --> 39: ???
+var RDT_HEADER_MSG;        // 3C --> 3D: Text Pointers (if 0000 = no text)
+var RDT_HEADER_ITEM;	   // 48 --> 49: Items, files, enemies, doors and etc.
+var RDT_HEADER_PRI;        //
+var RDT_HEADER_UNK_2;      // 58 --> 59: ??? - Nemesis drop? (Sometimes it points to file end)
+function RDT_setHeaderPointers(){
+	if (RDT_arquivoBruto !== undefined){
+		RDT_MAP_HEADER = RDT_arquivoBruto.slice(RANGES['RDT_FILE_MAP_HEADER'][0], RANGES['RDT_FILE_MAP_HEADER'][1]);
+		// In Hex Order
+		RDT_HEADER_CAM_TOTAL = parseEndian(RDT_MAP_HEADER.slice(RANGES['RDT_HEADER_CAM_TOTAL'][0], RANGES['RDT_HEADER_CAM_TOTAL'][1]));
+	}
+}
+function RDT_decompileMapHeader(){
+
+}
 /*
 	SLD Layers [WIP]
 	This is a REALLY beta thing!
 
 	This will break!
-	Also this is hidden for now
+	Also this is hidden for now.
 */
 function RDT_getSLDPosition(){
-	$('#RDT_SLD_seekMasksManualBtn').addClass('none');
 	var c = 0;
 	var totalSlots = RDT_totalCameras;
+	$('#RDT_SLD_seekMasksManualBtn').addClass('none');
 	document.getElementById('SLD_LAYER_CANVAS').innerHTML = '';
 	document.getElementById('RDT_SLD_SELECT_LAYER').innerHTML = '';
 	/*
@@ -447,24 +472,26 @@ function RDT_decompileCameras(id){
 	if (CAM_ID.length < 2){
 		CAM_ID = '0' + CAM_ID;
 	}
-	if (fs.existsSync(APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG') === true){
-		CAM_IMG = APP_PATH + '/Assets/DATA_A/BSS/' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
-		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + CAM_ID + '.JPG';
+	if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_mapName + CAM_ID + '.JPG') === true){
+		CAM_IMG = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_mapName + CAM_ID + '.JPG';
+		titleFileName = 'Cam: ' +  CAM_ID + '\nFile name: ' + RDT_mapName + CAM_ID + '.JPG';
 	} else {
-		CAM_IMG = APP_PATH + '/App/Img/404.png';
-		titleFileName = '';
+		CAM_IMG = APP_PATH + '\\App\\Img\\404.png';
+		titleFileName = 'Unable to render cam preview!\nFile not found (404)';
 	}
+	// WIP
 	$('#RDT_SLD_SELECT_CAM').append('<option value="' + CAM_ID + '">Camera ' + CAM_ID + '</option>');
+	//
 	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg" id="RDT_CAM_ID_' + id + '"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
-		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + 
-		'<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + '<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + 
-		'</font><br>(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + '</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font>' + 
-		'<br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + '</font><div class="RDT_editCam_direction">(1) X Direction: ' + CAM_directionX_1.toUpperCase() + '<br>(2) X Direction: ' + CAM_directionX_2.toUpperCase() + '<br>(1) Y Direction: ' + CAM_directionY_1.toUpperCase() + 
-		'<br>(2) Y Direction: ' + CAM_directionY_2.toUpperCase() + '<br>(1) Z Direction: ' + CAM_directionZ_1.toUpperCase() + '<br>(2) Z Direction: ' + CAM_directionZ_2.toUpperCase() + '</div><div class="RDT_camShowMisc">Header: <font class="RDT_camFutureFix">' + CAM_header.toUpperCase() + 
-		'</font><br>Other info: <font class="RDT_camFutureFix">' + CAM_future.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + CAM_header.toUpperCase() + '</font> <font title="(1) X Origin">' + CAM_originX_1.toUpperCase() + '</font> ' + 
-		'<font title="(2) X Origin">' + CAM_originX_2.toUpperCase() + '</font> <font title="(1) Y Origin">' + CAM_originY_1.toUpperCase() + '</font> <font title="(2) Y Origin">' + CAM_originY_2.toUpperCase() + '</font> <font title="(1) Z Origin">' + CAM_originZ_1.toUpperCase() + '</font> <font title="(2) Z Origin">' + 
-		CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + '</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + 
-		CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> <font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
+		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + '<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + 
+		'<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + '</font><br>(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + 
+		'</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font>' + '<br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + 
+		'</font><div class="RDT_editCam_direction">(1) X Direction: ' + CAM_directionX_1.toUpperCase() + '<br>(2) X Direction: ' + CAM_directionX_2.toUpperCase() + '<br>(1) Y Direction: ' + CAM_directionY_1.toUpperCase() + '<br>(2) Y Direction: ' + CAM_directionY_2.toUpperCase() + '<br>(1) Z Direction: ' + 
+		CAM_directionZ_1.toUpperCase() + '<br>(2) Z Direction: ' + CAM_directionZ_2.toUpperCase() + '</div><div class="RDT_camShowMisc">Header: <font class="RDT_camFutureFix">' + CAM_header.toUpperCase() + '</font><br>Other info: <font class="RDT_camFutureFix">' + CAM_future.toUpperCase() + '</font></div>' + 
+		'<div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + CAM_header.toUpperCase() + '</font> <font title="(1) X Origin">' + CAM_originX_1.toUpperCase() + '</font> <font title="(2) X Origin">' + CAM_originX_2.toUpperCase() + '</font> <font title="(1) Y Origin">' + 
+		CAM_originY_1.toUpperCase() + '</font> <font title="(2) Y Origin">' + CAM_originY_2.toUpperCase() + '</font> <font title="(1) Z Origin">' + CAM_originZ_1.toUpperCase() + '</font> <font title="(2) Z Origin">' + CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + 
+		'</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> ' + 
+		'<font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
 	$('#RDT_camera_holder').append(MASSIVE_HTML_RDT_CAMERA_TEMPLATE);
 }
 function RDT_copyPasteCameraInfo(mode){

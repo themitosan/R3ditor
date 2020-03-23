@@ -644,22 +644,33 @@ input[type='range' i]{
     margin-left: 6px;
 }
 .RDT-item-select{
-    left: 740px;
-    position: sticky;
     width: 510px !important;
     text-transform: none !important;
+}
+.RDT_editItem_selectFix{
+    left: 52px;
+    position: sticky;
+}
+.RDT_editItem_iconPrevew{
+    top: 71px;
+    left: 566px;
+    width: 38px;
+    border-radius: 2px;
+    position: absolute;
+    -webkit-user-drag: none;
+    box-shadow: 0px 0px 10px #00285087;
 }
 .no-transform-text{
     text-transform: none !important;
 }
 .RDT-item-pos{
-    left: 832px;
-    width: 560px;
+    left: 90px;
     position: sticky;
+    width: 30px !important;
 }
 .RDT-btn-apply{
     border: 1px;
-    width: 48.5%;
+    width: 250px;
     padding: 16px;
     cursor: pointer;
     margin-left: 4px;
@@ -683,8 +694,10 @@ input[type='range' i]{
 }
 .RDT-applyBtn-div{
     top: 88%;
-    width: 98%;
+    left: 684px;
+    width: 612px;
     position: absolute;
+    text-align: -webkit-right;
 }
 .menu-alterar-item{
     top: 40%;
@@ -1041,13 +1054,29 @@ input[type='range' i]{
     margin-bottom: 6px;
 }
 .RDT_coordsHolder_A{
+    width: 172px;
     margin-top: 8px;
 }
 .RDT_coordsHolder_B{
+    width: 172px;
     margin-top: -5px;
 }
 .RDT_coordsHolder_C{
     margin-top: 5px;
+}
+.RDT_coordsHolder_D{
+    width: 300px;
+    margin-top: -5px;
+}
+.RDT_coordsHolder_E{
+    margin-top: -5px;
+}
+.RDT_coordsHolder_F{
+    z-index: 2;
+    top: 132px;
+    left: 310px;
+    width: 180px;
+    position: absolute;
 }
 .RDT-3DProp-bg{
     background-image: linear-gradient(to bottom, #017792, #14325c);
@@ -1090,16 +1119,18 @@ input[type='range' i]{
     margin-top: 8px;
 }
 .RDT-item-editOtherFix{
-    top: 266px;
-    left: 154px;
+    top: 273px;
+    left: 132px;
     position: absolute;
 }
 .RDT_itemEditOtherLeftFix{
     position: sticky;
-    left: 980px !important;
+    left: 218px !important;
 }
-.RDT-valueEdit-fix{
-    width: 50px !important;
+.RDT_itemEdit_IF_fix{
+    width: 20px;
+    left: 218px;
+    position: sticky;
 }
 .user-can-select{
     user-select: all;
@@ -1129,8 +1160,8 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT-item-lbl-fix-7{
-    left: 928px;
-    width: 56px;
+    left: 108px;
+    width: 36px;
     position: sticky;
 }
 .RDT-item-lbl-fix-8{
@@ -1138,13 +1169,19 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT-item-lbl-fix-9{
-    width: 56px;
-    left: 910px;
+    left: 94px;
+    width: 34px;
     position: sticky;
 }
 .RDT-item-lbl-fix-10{
-    width: 56px;
-    left: 1096px;
+    left: 280px;
+    width: 20px;
+    position: sticky;
+}
+.RDT-item-lbl-fix-11{
+    left: 446px;
+    width: 20px;
+    margin-top: 4px;
     position: sticky;
 }
 .RDT_doorEditHolderFix{
@@ -1152,18 +1189,17 @@ input[type='range' i]{
     margin-top: -16px;
 }
 .RDT_editSelectEnemyNPC-fix{
+    left: 94px;
+    margin-top: 6px;
     margin-left: 5px;
     position: sticky;
     width: 380px !important;
 }
-.RDT_editParamMSGCODE{
-    left: 830px !important;
-    width: 470px !important;
+.RDT_door_selectLockKeyFix{
+    width: 416px;
 }
 .RDT_door_textEditFix_0{
-    left: 884px;
     width: 36px;
-    position: sticky;
 }
 .RDT_door_textEditFix_1{
     width: 36px;
@@ -1187,10 +1223,6 @@ input[type='range' i]{
     width: 18px;
     left: 1056px;
     position: sticky;
-}
-.RDT_door-edit-posFix{
-    left: 808px !important;
-    width: 492px !important;
 }
 .RDT_doorEdit_zIndexFix{
     margin-top: -4px !important;
@@ -1241,8 +1273,9 @@ input[type='range' i]{
     margin-top: -70px !important;
 }
 .RDT_editEnemyNPC-misc{
-    top: 128px;
-    left: 182px;
+    z-index: 0;
+    top: 132px;
+    left: 140px;
     width: 300px;
     position: absolute;
 }
@@ -1251,13 +1284,9 @@ input[type='range' i]{
     left: 130px;
     top: 45px;
 }
-.RDT_enemyNPC_editForm-fix{
-    left: 808px !important;
-    width: 490px !important;
-}
 .RDT_doorOtherFix{
     top: 45px;
-    left: 302px;
+    left: 312px;
     position: absolute;
 }
 .RDT_doorUnkValFix{
@@ -1280,7 +1309,7 @@ input[type='range' i]{
 }
 .RDT_btn_fix1{
     top: 174px;
-    left: 166px;
+    left: 160px;
     padding: 16px;
     position: absolute;
 }
@@ -1308,6 +1337,7 @@ input[type='range' i]{
     position: absolute;
 }
 .RDT_MSGCODE-eDisplay{
+    margin-top: 6px;
     width: 318px !important;
 }
 .RDT-Item-Misc{
@@ -1344,9 +1374,8 @@ input[type='range' i]{
 }
 .RDT-Item-Edit{
     top: 53px;
-    left: 750px;
     padding: 6px;
-    width: 550px;
+    width: 1290px;
     height: 468px;
     border-radius: 6px;
     position: absolute;
@@ -1363,12 +1392,6 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_OPENONR3D_margin_fix{
     margin-top: 2px;
-}
-.FILEGEN_saveImageBtn{
-    left: 806px !important;
-}
-.RDT_camera_cancel_btn_fix{
-    width: 45%;
 }
 .new_update{
     top: 6px;
@@ -1641,10 +1664,6 @@ input[type='range' i]{
     overflow: auto;
     padding-right: 10px;
 }
-.RDT_door_cameraCopyPasteFix{
-    margin-top: 6px;
-    margin-bottom: 2px;
-}
 .MSG_editCameraSelectFix{
     z-index: 3;
     position: relative;
@@ -1654,6 +1673,9 @@ input[type='range' i]{
 */
 .CURSOR_POINTER{
     cursor: pointer;
+}
+.FILEGEN_saveImageBtn{
+    left: 806px !important;
 }
 .FG_selectColor_space_0{
     position: sticky;
@@ -1752,16 +1774,30 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT_camEditXYZOrigin{
-    width: 56px;
+    width: 38px;
 }
 .RDT_camEditXYZDirection{
-    top: 61px;
-    left: 168px;
+    top: 0px;
+    left: 140px;
     position: absolute;
 }
-.RDT_camEditFixForm{
-    left: 960px;
-    width: 340px;
+.RDT_camEdit_holder{
+    left: 200px;
+    width: 1000px;
+    position: absolute;
+}
+.RDT_editCamera_iconPreviewDiv{
+    top: 66px;
+    width: 186px;
+    height: 360px;
+    border-radius: 4px;
+    position: absolute;
+    box-shadow: 0 0 10px #00002000;
+    background-image: linear-gradient(to bottom, #000b25, #212b3e00);
+}
+.RDT_editCamera_iconPreview{
+    width: 186px;
+    border-radius: 4px;
 }
 /*
     Filelist
@@ -2643,18 +2679,20 @@ input[type='range' i]{
     3D props
 */
 .RDT_3DProps_XYZR_fix{
-    left: 800px;
-    position: sticky;
+    left: 60px;
+    margin-top: 4px;
     margin-left: 6px;
+    position: sticky;
     width: 42px !important;
 }
 .RDT_3DProps_extraDivFix{
     top: 61px;
     left: 120px;
+    margin-top: 4px;
     position: absolute;
 }
 .RDT_3DProps_extraTextValueFix{
     left: 938px;
-    width: 60px;
+    width: 34px;
     position: sticky;
 }
