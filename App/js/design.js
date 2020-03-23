@@ -1502,10 +1502,10 @@ function RDT_showEditDoor(index, id, hex){
 	RDT_doorShowCamPreview(1);
 	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
-	document.getElementById('RDT-lbl-doorEdit-id').innerHTML  = id;
+	document.getElementById('RDT-lbl-doorEdit-id').innerHTML = id;
+	document.getElementById('RDT-lbl-door-index').innerHTML	= index;
 	$('#RDT_door_edit_usePlayerPos_div').css({'margin-top': '40px'});
-	document.getElementById('RDT-lbl-door-index').innerHTML   = index;
-	$('#RDT_door_edit_copyPasteOptions_div').css({'margin-top': '32px'});
+	$('#RDT_door_edit_copyPasteOptions_div').css({'margin-top': '40px'});
 	// Check if header === 61 || 62
 	var header = hex.slice(0, 2);
 	if (header === '61'){
