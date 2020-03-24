@@ -91,4 +91,23 @@ These files can be found in "App/tools/":
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
 - <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 
+## Credits:
+I would like to thank everyone who helped me with this project - since without your help none of this would be possible!
+
+Many thanks to:
+ - Rob-- - memoryjs - <a target="_blank" href="https://github.com/Rob--/memoryjs">GitHub</a><br>
+ - MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
+ - hongru - Canvas2Image - <a target="_blank" href="https://github.com/hongru/canvas2image">GitHub</a><br>
+ - pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
+ - jprichardson - fs-extra plugin - <a target="_blank" href="https://github.com/jprichardson/node-fs-extra">GitHub</a><br>
+ - Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
+ - The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
+ - <font title="The true legend!">Leo2236 - RE3SLDE Software Creator</font> - <a target="_blank" href="http://lgt.createaforum.com/">LGT Forum</a><br>
+ - The Mortican - BIO3GPS and Memory Address - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
+ - Khaled SA - RDT / ARD Header Infos - Beta-testing - <a target="_blank" href="https://twitter.com/khaleed681">Twitter</a><br>
+ - Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
+ - "Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
+ - ResidentEvilArtist - Memory Positions, IEDIT Editor, MIX Editor and so much more! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/memberlist.php?mode=viewprofile&u=294">Tapatalk Profile</a><br>
+ - <font title="The great master!">Biohazard España</font> - Fix OBJ to RE3MV (OBJ Patcher), Beta-testing, SLUS / ARD info and even more! - <a target="_blank" href="https://twitter.com/biohazardEsp">Profile</a><br>
+ 
 <p align="center"><i>Important: Biohazard and Resident Evil are trademarks of ©CAPCOM CO., LTD. ALL RIGHTS RESERVED.</i></p>
