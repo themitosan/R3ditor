@@ -1859,6 +1859,23 @@ input[type='range' i]{
     box-shadow: 0px 0px 10px #222;
     background-image: linear-gradient(to bottom, #424242, #333);
 }
+.RE3_LIVESTATUS_currentPlayerImgDiv{
+    z-index: 0;
+    position: absolute;
+}
+.RE3_LIVESTATUS_statusDiv{
+    z-index: 2;
+    position: absolute;
+}
+.RE3_LIVESTATUS_PERSON_IMG{
+    left: 140px;
+    width: 160px;
+    opacity: 0.4;
+    display: none;
+    filter: blur(2px);
+    position: absolute;
+    clip-path: inset(0px 60px 0px 0px);
+}
 .RE3_LIVESTATUS_CLOSEBTN{
     top: 14px;
     left: 1256px;

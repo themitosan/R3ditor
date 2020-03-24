@@ -25,27 +25,27 @@ var INDICADOR_15;
 /*
 	Ranges
 */
-var SAVE_INDICADOR_HEADER;		  // Header completa
-var SAVE_INDICADOR_HEADER_START;  // 0x0000 até 0x2000
+var SAVE_INDICADOR_HEADER;		  // Header
+var SAVE_INDICADOR_HEADER_START;  // 0x0000 to 0x2000
 var SAVE_INDICADOR_HEADER_MIDDLE;						
 var SAVE_INDICADOR_HEADER_END;
-var S_HEADER;					  // Cabeçalho de cada slot de save
-var S_END;						  // Final de cada slot de save
-var range_0x2204_0x2207;							
-var range_0x2209_0x220D;							
-var range_0x2210_0x2211;							
-var range_0x2217_0x2217;							
-var range_0x2219_0x2219;							
-var range_0x221C_0x224D;							
-var range_0x224F_0x224F;							
-var range_0x2251_0x225D;							
-var range_0x225F_0x23FE;							
-var range_0x2400_0x2402;							
-var range_0x240A_0x240B;							
-var range_0x2534_0x2534;							
-var range_0x2537_0x254B;							
-var range_0x2674_0x2674;							
-var range_0x2677_0x28D3;							
+var S_HEADER;
+var S_END;
+var range_0x2204_0x2207;
+var range_0x2209_0x220D;
+var range_0x2210_0x2211;
+var range_0x2217_0x2217;
+var range_0x2219_0x2219;
+var range_0x221C_0x224D;
+var range_0x224F_0x224F;
+var range_0x2251_0x225D;
+var range_0x225F_0x23FE;
+var range_0x2400_0x2402;
+var range_0x240A_0x240B;
+var range_0x2534_0x2534;
+var range_0x2537_0x254B;
+var range_0x2674_0x2674;
+var range_0x2677_0x28D3;
 /*
 	Save Variables
 */
@@ -103,12 +103,12 @@ var h_0x2203;
 	Misc.
 */
 // Time vars
+var dia = 0;
+var hora = 0;
+var minutos = 0;
+var decimos = 0;
+var segundos = 0;
 var milesimos = 0;
-var segundos  = 0;
-var decimos   = 0;
-var minutos   = 0;
-var hora      = 0;
-var dia       = 0;
 /*
 	Functions
 */
@@ -232,14 +232,12 @@ function CARREGAR_SAVE(sFile){
 	SAVE_INDICADOR_HEADER_START  = SAVE_arquivoBruto.slice(RANGES['he-esp-incial'][0], RANGES['he-esp-incial'][1]);
 	SAVE_INDICADOR_HEADER_MIDDLE = SAVE_arquivoBruto.slice(RANGES['he-esp-meio'][0],   RANGES['he-esp-meio'][1]);
 	SAVE_INDICADOR_HEADER_END 	 = SAVE_arquivoBruto.slice(RANGES['he-esp-final'][0],  RANGES['he-esp-final'][1]);
-	
 	SAVE_INDICADOR_HEADER 		 = SAVE_INDICADOR_HEADER_START + INDICADOR_01 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_02 + SAVE_INDICADOR_HEADER_MIDDLE + 
 	INDICADOR_03 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_04 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_05 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_06 + 
 	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_07 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_08 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_09 + 
 	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_10 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_11 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_12 + 
 	SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_13 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_14 + SAVE_INDICADOR_HEADER_MIDDLE + INDICADOR_15 + 
 	SAVE_INDICADOR_HEADER_END;
-
 	localStorage.setItem('Save_1',  SAVE_arquivoBruto.slice(RANGES['slot-offset'][0],  	   RANGES['slot-offset'][0] * 2));
 	localStorage.setItem('Save_2',  SAVE_arquivoBruto.slice(RANGES['slot-offset'][0] * 2,  RANGES['slot-offset'][0] * 3));
 	localStorage.setItem('Save_3',  SAVE_arquivoBruto.slice(RANGES['slot-offset'][0] * 3,  RANGES['slot-offset'][0] * 4));
@@ -280,13 +278,13 @@ function save_renderSaveSlots(){
 		tmpSaveSlot = SAVE_arquivoBruto.slice(RANGES['he-indicador-' + cu][0], RANGES['he-indicador-' + cu][1]);
 		checker = tmpSaveSlot.slice(0, 4);
 		if (checker === '5100'){ 
-			// Save presente
+			// Have save
 			var totVSave = localStorage.getItem('Save_' + cu).slice(RANGES['totalSaves'][0], RANGES['totalSaves'][1]);
 			var locSave  = localStorage.getItem('Save_' + cu).slice(RANGES['localSave'][0],  RANGES['localSave'][1]);
 			document.getElementById('slt-save-' + cu).innerHTML = '(' + parseInt(totVSave, 16) + ') ' + LOCAIS[locSave][0];
 			$('#slt-save-' + cu).addClass('slot-presente');
 		} else {
-			// Save Vazio
+			// No save
 			document.getElementById('slt-save-' + cu).innerHTML = 'Empty';
 			$('#slt-save-' + cu).addClass('slot-ausente');
 		}

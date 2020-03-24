@@ -777,20 +777,25 @@
 					<!-- Status -->
 					<input type="button" value="Status" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-2">
 					<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-2">
-						Current Player: <font id="RE3_LIVESTATUS_lbl_pCurrentPlayer">???</font>
-						<div class="menu-separador"></div>
-						Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
-						HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
-						<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
-						<font class="font-chkbox-fix" onclick="RE3_LIVE_cheatInfiniteLifeTrigger();">- Enable Infinite HP</font><br>
-						<center>
-							<input type="button" class="botao-menu" title="Click here to gain 30000 HP!" value="Add 30K Health" onclick="RE3_LIVE_ADDGODHP();">
-							<input type="button" class="botao-menu" title="Click here to go to main title screen" value="Goto Title" onclick="RE3_LIVE_gotoTitleScreen();">
-						</center>
-						<div class="menu-separador"></div>
-						<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
-						<div class="menu-separador"></div>
-						Current Weapon: <font id="RE3_LIVESTATUS_lbl_pCurrentWeapon">???</font>
+						<div class="RE3_LIVESTATUS_currentPlayerImgDiv">
+							<img src="F:\Xampp\htdocs\PORTLAND\Backup\R3ditor\App\Img\JILL-ICON.png" class="RE3_LIVESTATUS_PERSON_IMG" id="RE3_LIVESTATUS_currentPlayerIcon">
+						</div>
+						<div class="RE3_LIVESTATUS_statusDiv">
+							Current Player: <font id="RE3_LIVESTATUS_lbl_pCurrentPlayer">???</font>
+							<div class="menu-separador"></div>
+							Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
+							HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
+							<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
+							<font class="font-chkbox-fix" onclick="RE3_LIVE_cheatInfiniteLifeTrigger();">- Enable Infinite HP</font><br>
+							<center>
+								<input type="button" class="botao-menu" title="Click here to gain 30000 HP!" value="Add 30K Health" onclick="RE3_LIVE_ADDGODHP();">
+								<input type="button" class="botao-menu" title="Click here to go to main title screen" value="Goto Title" onclick="RE3_LIVE_gotoTitleScreen();">
+							</center>
+							<div class="menu-separador"></div>
+							<font title="In-Game Time">IGT</font>: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_IGT">[WIP]</font>
+							<div class="menu-separador"></div>
+							Current Weapon: <font id="RE3_LIVESTATUS_lbl_pCurrentWeapon">???</font>
+						</div>
 					</div>
 					<!-- Inventory View -->
 					<input type="button" value="Inventory" class="RE3_LIVESTATUS_inernalTab RE3_LIVESTATUS_tabPos-5">

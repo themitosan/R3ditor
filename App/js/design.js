@@ -2019,6 +2019,23 @@ function RE3_LIVE_RENDER(){
 		if (enableInfiniteLife === true){
 			RE3_LIVE_cheatInfiniteLife();
 		}
+		// Player Icon
+		var currentPlayer = REALTIME_CurrentPlayer;
+		if (currentPlayer !== PREV_PLAYER){
+			if (currentPlayer !== '01' && currentPlayer !== '02'){
+				$('#RE3_LIVESTATUS_currentPlayerIcon').css({'display': 'none'});
+			} else {
+				$('#RE3_LIVESTATUS_currentPlayerIcon').css({'display': 'inline'});
+			}
+			if (currentPlayer === '01'){
+				document.getElementById('RE3_LIVESTATUS_currentPlayerIcon').src = APP_PATH + '\\App\\Img\\JILL-ICON.png';
+			}
+			if (currentPlayer === '02'){
+				document.getElementById('RE3_LIVESTATUS_currentPlayerIcon').src = APP_PATH + '\\App\\Img\\CARLOS-ICON.png';
+			}
+			PREV_PLAYER = REALTIME_CurrentPlayer;
+		}
+		// End
 		document.getElementById('RE3_LIVESTATUS_lbl_pStatus').innerHTML = processBIO3HP(REALTIME_CurrentHP)[1];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentWeapon').innerHTML = WEAPONS[REALTIME_CurrentWeapon][0];
 		document.getElementById('RE3_LIVESTATUS_lbl_pCurrentPlayer').innerHTML = RE3_playerList[REALTIME_CurrentPlayer];
