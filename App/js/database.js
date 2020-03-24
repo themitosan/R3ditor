@@ -1582,6 +1582,10 @@ var UTILS_REMOVE_CHARS = [
 	'§',
 	'º'
 ];
+var RDT_CAMERAS_CAMTYPES = {
+	'0000': 'Normal',
+	'0100': 'Cutscene?'
+}
 var RANGES = {
 	/*
 		IEDIT
@@ -1877,33 +1881,31 @@ var RANGES = {
 	'RDT_msgCode-1-readMode': 		 [52, 56], // OK
 	/*
 		Cameras
-		Length (Hex): 20h
+		Length (Hex): 20h - 64 String
+		New reading based on REArtist Post:
+		(https://www.tapatalk.com/groups/residentevil123/cheat-engine-codes-camera-and-character-position-t1030.html)
 	*/
-	'RDT_cam-0-Header': 			   [0, 4], // RE2 = 3C 68 || B7 73, RE3 = B7 73 || B2 80 || 2D 91...
-	'RDT_cam-0-cX-1': 			   	   [4, 8],
-	'RDT_cam-0-cX-2': 			   	  [8, 12], // Look like it is ALWAYS FF FF
-	'RDT_cam-0-cY-1': 			   	 [12, 16],
-	'RDT_cam-0-cY-2': 			   	 [16, 20], // Look like it is ALWAYS FF FF
-	'RDT_cam-0-cZ-1': 			   	 [20, 24],
-	'RDT_cam-0-cZ-2': 			   	 [24, 28],
-	'RDT_cam-0-nX-1': 			   	 [28, 32],
-	'RDT_cam-0-nX-2': 			   	 [32, 36],
-	'RDT_cam-0-nY-1': 			   	 [36, 40],
-	'RDT_cam-0-nY-2': 			   	 [40, 44],
-	'RDT_cam-0-nZ-1': 			   	 [44, 48],
-	'RDT_cam-0-nZ-2': 			   	 [48, 52],
-	'RDT_cam-0-misc': 				 [52, 64], // Due the fact RE3 don't have roomcut.bin, i will try figure out how it deal with the background images
+	'RDT_cam-0-type': 			   	   [0, 4], // 0000 = Normal, 0100 = Cutscene?
+	'RDT_cam-0-ident': 			   	   [4, 8], // B773..
+	'RDT_cam-0-XPos': 			   	  [8, 12],
+	'RDT_cam-0-XPos-Sig': 			 [12, 16],
+	'RDT_cam-0-YPos': 			   	 [16, 20],
+	'RDT_cam-0-YPos-Sig': 			 [20, 24],
+	'RDT_cam-0-ZPos': 			   	 [24, 28],
+	'RDT_cam-0-ZPos-Sig': 			 [28, 32],
+	'RDT_cam-0-XDir': 			   	 [32, 36],
+	'RDT_cam-0-XDir-Sig': 		   	 [36, 40],
+	'RDT_cam-0-YDir': 			   	 [40, 44],
+	'RDT_cam-0-YDir-Sig': 		   	 [44, 48],
+	'RDT_cam-0-ZDir': 			   	 [48, 52],
+	'RDT_cam-0-ZDir-Sig': 			 [52, 56],
+	'RDT_cam-0-RDir': 				 [56, 60],
+	'RDT_cam-0-RDir-Sig': 			 [60, 64],
 	/*
-		Cameras Hitbox
+		Camera Hitbox
 		Length (Hex): 14h
 		
 		Anotações:
-
-		A hitbox de troca de câmera na maioria sempre começa com 01 08.
-		Elas estão sempre depois das câmeras ("B7 73", tamanho 20h) mas
-		existe um padrão de 8 Blocos hex que sempre vem antes.  No caso 
-		de R101, eles começam com "7C F9" antes das hitboxes (cameras).
-
 		Para verificar, procure por "7C F9 00 00 3C 81 00 00" no 
 		arquivo R101.RDT
 		

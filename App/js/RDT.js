@@ -7,18 +7,22 @@
 // Cameras
 var RDT_cameraArray = [];
 var RDT_totalCameras = 0;
-var RDT_TEMP_CAMERA_ORIG_X_1 = '';
-var RDT_TEMP_CAMERA_ORIG_X_2 = '';
-var RDT_TEMP_CAMERA_ORIG_Y_1 = '';
-var RDT_TEMP_CAMERA_ORIG_Y_2 = '';
-var RDT_TEMP_CAMERA_ORIG_Z_1 = '';
-var RDT_TEMP_CAMERA_ORIG_Z_2 = '';
-var RDT_TEMP_CAMERA_DIREC_X_1 = '';
-var RDT_TEMP_CAMERA_DIREC_X_2 = '';
-var RDT_TEMP_CAMERA_DIREC_Y_1 = '';
-var RDT_TEMP_CAMERA_DIREC_Y_2 = '';
-var RDT_TEMP_CAMERA_DIREC_Z_1 = '';
-var RDT_TEMP_CAMERA_DIREC_Z_2 = '';
+var TEMP_RDT_editCamera_camType = '';
+var TEMP_RDT_editCam_ident = '';
+var TEMP_RDT_XP_Origin = '';
+var TEMP_RDT_XPS_Origin = '';
+var TEMP_RDT_YP_Origin = '';
+var TEMP_RDT_YPS_Origin = '';
+var TEMP_RDT_ZP_Origin = '';
+var TEMP_RDT_ZPS_Origin = '';
+var TEMP_RDT_XD_Direction = '';
+var TEMP_RDT_XDS_Direction = '';
+var TEMP_RDT_YD_Direction = '';
+var TEMP_RDT_YDS_Direction = '';
+var TEMP_RDT_ZD_Direction = '';
+var TEMP_RDT_ZDS_Direction = '';
+var TEMP_RDT_RD_Direction = '';
+var TEMP_RDT_RDS_Direction = '';
 
 // MSG vars
 var RDT_fm_path;
@@ -433,7 +437,7 @@ function RDT_SLD_openSldOnHex(){
 function RDT_getCameras(){
 	var c = 0;
 	if (RDT_arquivoBruto !== undefined){
-		var start = 196;
+		var start = 192;
 		var offset = 64;
 		var extractTotCams = parseInt(RDT_arquivoBruto.slice(2, 4), 16);
 		var extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
@@ -453,21 +457,6 @@ function RDT_getCameras(){
 function RDT_decompileCameras(id){
 	var CAM_IMG;
 	var titleFileName;
-	var CAMERA_RAW 		 = localStorage.getItem('RDT_Camera-' + id);
-	var CAM_header		 = CAMERA_RAW.slice(RANGES['RDT_cam-0-Header'][0], RANGES['RDT_cam-0-Header'][1]);
-	var CAM_originX_1	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cX-1'][0],   RANGES['RDT_cam-0-cX-1'][1]);
-	var CAM_originX_2	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cX-2'][0],   RANGES['RDT_cam-0-cX-2'][1]);
-	var CAM_originY_1	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cY-1'][0],   RANGES['RDT_cam-0-cY-1'][1]);
-	var CAM_originY_2	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cY-2'][0],   RANGES['RDT_cam-0-cY-2'][1]);
-	var CAM_originZ_1	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cZ-1'][0],   RANGES['RDT_cam-0-cZ-1'][1]);
-	var CAM_originZ_2	 = CAMERA_RAW.slice(RANGES['RDT_cam-0-cZ-2'][0],   RANGES['RDT_cam-0-cZ-2'][1]);
-	var CAM_directionX_1 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nX-1'][0],   RANGES['RDT_cam-0-nX-1'][1]);
-	var CAM_directionX_2 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nX-2'][0],   RANGES['RDT_cam-0-nX-2'][1]);
-	var CAM_directionY_1 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nY-1'][0],   RANGES['RDT_cam-0-nY-1'][1]);
-	var CAM_directionY_2 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nY-2'][0],   RANGES['RDT_cam-0-nY-2'][1]);
-	var CAM_directionZ_1 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nZ-1'][0],   RANGES['RDT_cam-0-nZ-1'][1]);
-	var CAM_directionZ_2 = CAMERA_RAW.slice(RANGES['RDT_cam-0-nZ-2'][0],   RANGES['RDT_cam-0-nZ-2'][1]);
-	var CAM_future		 = CAMERA_RAW.slice(RANGES['RDT_cam-0-misc'][0],   RANGES['RDT_cam-0-misc'][1]);
 	var CAM_ID = id.toString(16).toUpperCase();
 	if (CAM_ID.length < 2){
 		CAM_ID = '0' + CAM_ID;
@@ -479,133 +468,175 @@ function RDT_decompileCameras(id){
 		CAM_IMG = APP_PATH + '\\App\\Img\\404.png';
 		titleFileName = 'Unable to render cam preview!\nFile not found (404)';
 	}
-	// WIP
-	$('#RDT_SLD_SELECT_CAM').append('<option value="' + CAM_ID + '">Camera ' + CAM_ID + '</option>');
-	//
-	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg" id="RDT_CAM_ID_' + id + '"><div style="margin-bottom: -168px;"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
-		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(' + id + ', \'' + CAM_ID + '\', \'' + CAMERA_RAW + '\');">' + '<div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + CAM_ID + 
-		'<div class="menu-separador"></div>(1) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_1.toUpperCase() + '</font><br>(2) X Origin: <font class="RDT-item-lbl-fix">' + CAM_originX_2.toUpperCase() + '</font><br>(1) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_1.toUpperCase() + 
-		'</font><br>(2) Y Origin: <font class="RDT-item-lbl-fix">' + CAM_originY_2.toUpperCase() + '</font><br>(1) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_1.toUpperCase() + '</font>' + '<br>(2) Z Origin: <font class="RDT-item-lbl-fix">' + CAM_originZ_2.toUpperCase() + 
-		'</font><div class="RDT_editCam_direction">(1) X Direction: ' + CAM_directionX_1.toUpperCase() + '<br>(2) X Direction: ' + CAM_directionX_2.toUpperCase() + '<br>(1) Y Direction: ' + CAM_directionY_1.toUpperCase() + '<br>(2) Y Direction: ' + CAM_directionY_2.toUpperCase() + '<br>(1) Z Direction: ' + 
-		CAM_directionZ_1.toUpperCase() + '<br>(2) Z Direction: ' + CAM_directionZ_2.toUpperCase() + '</div><div class="RDT_camShowMisc">Header: <font class="RDT_camFutureFix">' + CAM_header.toUpperCase() + '</font><br>Other info: <font class="RDT_camFutureFix">' + CAM_future.toUpperCase() + '</font></div>' + 
-		'<div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + CAM_header.toUpperCase() + '</font> <font title="(1) X Origin">' + CAM_originX_1.toUpperCase() + '</font> <font title="(2) X Origin">' + CAM_originX_2.toUpperCase() + '</font> <font title="(1) Y Origin">' + 
-		CAM_originY_1.toUpperCase() + '</font> <font title="(2) Y Origin">' + CAM_originY_2.toUpperCase() + '</font> <font title="(1) Z Origin">' + CAM_originZ_1.toUpperCase() + '</font> <font title="(2) Z Origin">' + CAM_originZ_2.toUpperCase() + '</font> <font title="(1) X Direction">' + CAM_directionX_1.toUpperCase() + 
-		'</font> <font title="(2) X Direction">' + CAM_directionX_2.toUpperCase() + '</font> <font title="(1) Y Direction">' + CAM_directionY_1.toUpperCase() + '</font> <font title="(2) Y Direction">' + CAM_directionY_2.toUpperCase() + '</font> <font title="(1) Z Direction">' + CAM_directionZ_1.toUpperCase() + '</font> ' + 
-		'<font title="(2) Z Direction">' + CAM_directionZ_2.toUpperCase() + '</font> <font title="Other info">' + CAM_future.toUpperCase() + '</font></font></div></div>';
+	// WIP Thing
+	// $('#RDT_SLD_SELECT_CAM').append('<option value="' + CAM_ID + '">Camera ' + CAM_ID + '</option>');
+	var CAM_HEX = localStorage.getItem('RDT_Camera-' + id);
+	var CAM_TYPE     = CAM_HEX.slice(RANGES['RDT_cam-0-type'][0],     RANGES['RDT_cam-0-type'][1]);
+	var CAM_IDENT    = CAM_HEX.slice(RANGES['RDT_cam-0-ident'][0],	  RANGES['RDT_cam-0-ident'][1]);
+	var CAM_XPOS     = CAM_HEX.slice(RANGES['RDT_cam-0-XPos'][0],     RANGES['RDT_cam-0-XPos'][1]);
+	var CAM_XPOS_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-XPos-Sig'][0], RANGES['RDT_cam-0-XPos-Sig'][1]);
+	var CAM_YPOS 	 = CAM_HEX.slice(RANGES['RDT_cam-0-YPos'][0], 	  RANGES['RDT_cam-0-YPos'][1]);
+	var CAM_YPOS_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-YPos-Sig'][0], RANGES['RDT_cam-0-YPos-Sig'][1]);
+	var CAM_ZPOS 	 = CAM_HEX.slice(RANGES['RDT_cam-0-ZPos'][0], 	  RANGES['RDT_cam-0-ZPos'][1]);
+	var CAM_ZPOS_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-ZPos-Sig'][0], RANGES['RDT_cam-0-ZPos-Sig'][1]);
+	var CAM_XDIR 	 = CAM_HEX.slice(RANGES['RDT_cam-0-XDir'][0], 	  RANGES['RDT_cam-0-XDir'][1]);
+	var CAM_XDIR_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-XDir-Sig'][0], RANGES['RDT_cam-0-XDir-Sig'][1]);
+	var CAM_YDIR 	 = CAM_HEX.slice(RANGES['RDT_cam-0-YDir'][0], 	  RANGES['RDT_cam-0-YDir'][1]);
+	var CAM_YDIR_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-YDir-Sig'][0], RANGES['RDT_cam-0-YDir-Sig'][1]);
+	var CAM_ZDIR 	 = CAM_HEX.slice(RANGES['RDT_cam-0-ZDir'][0], 	  RANGES['RDT_cam-0-ZDir'][1]);
+	var CAM_ZDIR_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-ZDir-Sig'][0], RANGES['RDT_cam-0-ZDir-Sig'][1]);
+	var CAM_RDIR 	 = CAM_HEX.slice(RANGES['RDT_cam-0-RDir'][0], 	  RANGES['RDT_cam-0-RDir'][1]);
+	var CAM_RDIR_SIG = CAM_HEX.slice(RANGES['RDT_cam-0-RDir-Sig'][0], RANGES['RDT_cam-0-RDir-Sig'][1]);
+	var MASSIVE_HTML_RDT_CAMERA_TEMPLATE = '<div class="RDT-Item RDT-camera-bg" id="RDT_CAM_ID_' + id + '"><div class="RDT_cam_imgFix"><img src="' + CAM_IMG + '" title="' + titleFileName + '" class="RDT_camImgItem"></div>' + 
+		'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditCamera(\'' + id + '\', \'' + CAM_ID + '\');"><div class="RDT_cam_holderInfos">(' + parseInt(id + 1) + ') Cam: ' + 
+		CAM_ID + '<div class="menu-separador"></div>X Pos: <font class="RDT_cam_lbl_fix_0">' + CAM_XPOS.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_0">' + CAM_XPOS_SIG.toUpperCase() + '</font><br>' + 
+		'Y Pos: ' + '<font class="RDT_cam_lbl_fix_0">' + CAM_YPOS.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_0">' + CAM_YPOS_SIG.toUpperCase() + '</font><br>Z Pos: <font class="RDT_cam_lbl_fix_0">' + 
+		CAM_ZPOS.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_0">' + CAM_ZPOS_SIG.toUpperCase() + '</font><div class="RDT_cam_dirHolder">X Direction: <font class="RDT_cam_lbl_fix_1">' + CAM_XDIR.toUpperCase() + 
+		'</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_1">' + CAM_XDIR_SIG.toUpperCase() + '</font><br>Y Direction: <font class="RDT_cam_lbl_fix_1">' + CAM_YDIR.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_1">' + 
+		CAM_YDIR_SIG.toUpperCase() + '</font><br>Z Direction: <font class="RDT_cam_lbl_fix_1">' + CAM_ZDIR.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_1">' + CAM_ZDIR_SIG.toUpperCase() + '</font></div><div class="RDT_cam_otherValues">' + 
+		'Rotation: <font class="RDT_cam_lbl_fix_2">' + CAM_RDIR.toUpperCase() + '</font><br><i>Signal</i>: <font class="RDT_cam_lbl_fix_2">' + CAM_RDIR_SIG.toUpperCase() + '</font><br>Cam Type: <font class="RDT_cam_lbl_fix_2" title="' + RDT_CAMERAS_CAMTYPES[CAM_TYPE] + '">' + 
+		CAM_TYPE.toUpperCase() + '</font><br>Identifier: <font class="RDT_cam_lbl_fix_2">' + CAM_IDENT.toUpperCase() + '</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Cam Type">' + CAM_TYPE.toUpperCase() + '</font> <font title="Identifier">' + 
+		CAM_IDENT.toUpperCase() + '</font> <font title="X Pos.">' + CAM_XPOS.toUpperCase() + '</font> <font title="X Sig.">' + CAM_XPOS_SIG.toUpperCase() + '</font> <font title="Y Pos.">' + CAM_YPOS.toUpperCase() + '</font> <font title="Y Sig.">' + CAM_YPOS_SIG.toUpperCase() + '</font> <font title="Z Pos.">' + 
+		CAM_ZPOS.toUpperCase() + '</font> <font title="Z Sig.">' + CAM_ZPOS_SIG.toUpperCase() + '</font> <font title="X Direction">' + CAM_XDIR.toUpperCase() + '</font> <font title="X Dir. Sig.">' + CAM_XDIR_SIG.toUpperCase() + '</font> <font title="Y Direction">' + CAM_YDIR.toUpperCase() + '</font> <font title="Y Dir. Sig.">' + 
+		CAM_YDIR_SIG.toUpperCase() + '</font> <font title="Z Direction">' + CAM_ZDIR.toUpperCase() + '</font> <font title="Z Dir. Sig.">' + CAM_ZDIR_SIG.toUpperCase() + '</font> <font title="Rotation">' + CAM_RDIR.toUpperCase() + '</font> <font title="Rotarion Sig.">' + 
+		CAM_RDIR_SIG.toUpperCase() + '</font></font></div></div>';
+	
 	$('#RDT_camera_holder').append(MASSIVE_HTML_RDT_CAMERA_TEMPLATE);
 }
 function RDT_copyPasteCameraInfo(mode){
 	// Copy
 	if (mode === 1){
-		RDT_TEMP_CAMERA_ORIG_X_1  = document.getElementById('RDT_X1_Origin-edit').value;
-		RDT_TEMP_CAMERA_ORIG_X_2  = document.getElementById('RDT_X2_Origin-edit').value;
-		RDT_TEMP_CAMERA_ORIG_Y_1  = document.getElementById('RDT_Y1_Origin-edit').value;
-		RDT_TEMP_CAMERA_ORIG_Y_2  = document.getElementById('RDT_Y2_Origin-edit').value;
-		RDT_TEMP_CAMERA_ORIG_Z_1  = document.getElementById('RDT_Z1_Origin-edit').value;
-		RDT_TEMP_CAMERA_ORIG_Z_2  = document.getElementById('RDT_Z2_Origin-edit').value;
-		RDT_TEMP_CAMERA_DIREC_X_1 = document.getElementById('RDT_X1_Direction-edit').value;
-		RDT_TEMP_CAMERA_DIREC_X_2 = document.getElementById('RDT_X2_Direction-edit').value;
-		RDT_TEMP_CAMERA_DIREC_Y_1 = document.getElementById('RDT_Y1_Direction-edit').value;
-		RDT_TEMP_CAMERA_DIREC_Y_2 = document.getElementById('RDT_Y2_Direction-edit').value;
-		RDT_TEMP_CAMERA_DIREC_Z_1 = document.getElementById('RDT_Z1_Direction-edit').value;
-		RDT_TEMP_CAMERA_DIREC_Z_2 = document.getElementById('RDT_Z2_Direction-edit').value;
-		var currentCam 			  = document.getElementById('RDT-lbl-CAMERA-edit').innerHTML;
-		var TEXT_FOR_CP = '[CAMERA POS]\nCam: ' + currentCam.toUpperCase() + '\n(1) X Origin: ' + RDT_TEMP_CAMERA_ORIG_X_1 + '\n(2) X Origin: ' + RDT_TEMP_CAMERA_ORIG_X_2 + '\n(1) Y Origin: ' + RDT_TEMP_CAMERA_ORIG_Y_1 + 
-			'\n(2) Y Origin: ' + RDT_TEMP_CAMERA_ORIG_Y_2 + '\n(1) Z Origin: ' + RDT_TEMP_CAMERA_ORIG_Z_1 + '\n(2) Z Origin: ' + RDT_TEMP_CAMERA_ORIG_Z_2 + '\n(1) X Direction: ' + RDT_TEMP_CAMERA_DIREC_X_1 + 
-			'\n(2) X Direction: ' + RDT_TEMP_CAMERA_DIREC_X_2 + '\n(1) Y Direction: ' + RDT_TEMP_CAMERA_DIREC_Y_1 + '\n(2) Y Direction: ' + RDT_TEMP_CAMERA_DIREC_Y_2 + '\n(1) Z Direction: ' + RDT_TEMP_CAMERA_DIREC_Z_1 + 
-			'\n(2) Z Direction: ' + RDT_TEMP_CAMERA_DIREC_Z_2;
+		TEMP_RDT_editCamera_camType = document.getElementById('RDT_editCamera_camType').value;
+		TEMP_RDT_editCam_ident = document.getElementById('RDT_editCam_ident').value;
+		TEMP_RDT_XP_Origin = document.getElementById('RDT_XP_Origin-edit').value;
+		TEMP_RDT_XPS_Origin = document.getElementById('RDT_XPS_Origin-edit').value;
+		TEMP_RDT_YP_Origin = document.getElementById('RDT_YP_Origin-edit').value;
+		TEMP_RDT_YPS_Origin = document.getElementById('RDT_YPS_Origin-edit').value;
+		TEMP_RDT_ZP_Origin = document.getElementById('RDT_ZP_Origin-edit').value;
+		TEMP_RDT_ZPS_Origin = document.getElementById('RDT_ZPS_Origin-edit').value;
+		TEMP_RDT_XD_Direction = document.getElementById('RDT_XD_Direction-edit').value;
+		TEMP_RDT_XDS_Direction = document.getElementById('RDT_XDS_Direction-edit').value;
+		TEMP_RDT_YD_Direction = document.getElementById('RDT_YD_Direction-edit').value;
+		TEMP_RDT_YDS_Direction = document.getElementById('RDT_YDS_Direction-edit').value;
+		TEMP_RDT_ZD_Direction = document.getElementById('RDT_ZD_Direction-edit').value;
+		TEMP_RDT_ZDS_Direction = document.getElementById('RDT_ZDS_Direction-edit').value;
+		TEMP_RDT_RD_Direction = document.getElementById('RDT_RD_Direction-edit').value;
+		TEMP_RDT_RDS_Direction = document.getElementById('RDT_RDS_Direction-edit').value;
+		var currentCam = document.getElementById('RDT-lbl-CAMERA-edit').innerHTML;
+		var TEXT_FOR_CP = '[CAMERA POS]\nCurrent Cam: ' + currentCam.toUpperCase() + '\nCamera Type: ' + TEMP_RDT_editCamera_camType.toUpperCase() + '\nX Pos: ' + TEMP_RDT_XP_Origin.toUpperCase() + '\nSignal: ' + TEMP_RDT_XPS_Origin.toUpperCase() + '\nY Pos: ' + TEMP_RDT_YP_Origin.toUpperCase() + '\nSignal: ' + 
+						  TEMP_RDT_YPS_Origin.toUpperCase() + '\nZ Pos: ' + TEMP_RDT_ZP_Origin.toUpperCase() + '\nSignal: ' + TEMP_RDT_ZPS_Origin.toUpperCase() + '\nX Direction: ' + TEMP_RDT_XD_Direction.toUpperCase() + 
+						  '\nSignal: ' + TEMP_RDT_XDS_Direction.toUpperCase() + '\nY Direction: ' + TEMP_RDT_YD_Direction.toUpperCase() + '\nSignal: ' + TEMP_RDT_YDS_Direction.toUpperCase() + '\nZ Direction: ' + 
+						  TEMP_RDT_ZD_Direction.toUpperCase() + '\nSignal: ' + TEMP_RDT_ZDS_Direction.toUpperCase() + '\nR Direction: ' + TEMP_RDT_RD_Direction.toUpperCase() + '\nSignal: ' + TEMP_RDT_RDS_Direction.toUpperCase();
 		R3DITOR_COPY(TEXT_FOR_CP);
 	}
 	// Paste
-	if (mode === 2 && RDT_TEMP_CAMERA_ORIG_X_1 !== '' && RDT_TEMP_CAMERA_ORIG_X_2 !== '' && RDT_TEMP_CAMERA_ORIG_Y_1 !== '' && RDT_TEMP_CAMERA_ORIG_Y_2 !== '' && RDT_TEMP_CAMERA_ORIG_Z_1 !== '' && RDT_TEMP_CAMERA_ORIG_Z_2 !== '' && RDT_TEMP_CAMERA_DIREC_X_1 !== '' && RDT_TEMP_CAMERA_DIREC_X_2 !== '' && RDT_TEMP_CAMERA_DIREC_Y_1 !== '' && RDT_TEMP_CAMERA_DIREC_Y_2 !== '' && RDT_TEMP_CAMERA_DIREC_Z_1 !== '' && RDT_TEMP_CAMERA_DIREC_Z_2 !== ''){
-		document.getElementById('RDT_X1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_X_1.toUpperCase();
-		document.getElementById('RDT_X2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_X_2.toUpperCase();
-		document.getElementById('RDT_Y1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Y_1.toUpperCase();
-		document.getElementById('RDT_Y2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Y_2.toUpperCase();
-		document.getElementById('RDT_Z1_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Z_1.toUpperCase();
-		document.getElementById('RDT_Z2_Origin-edit').value = RDT_TEMP_CAMERA_ORIG_Z_2.toUpperCase();
-		document.getElementById('RDT_X1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_X_1.toUpperCase();
-		document.getElementById('RDT_X2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_X_2.toUpperCase();
-		document.getElementById('RDT_Y1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Y_1.toUpperCase();
-		document.getElementById('RDT_Y2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Y_2.toUpperCase();
-		document.getElementById('RDT_Z1_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Z_1.toUpperCase();
-		document.getElementById('RDT_Z2_Direction-edit').value = RDT_TEMP_CAMERA_DIREC_Z_2.toUpperCase();
+	if (mode === 2){
+		document.getElementById('RDT_editCamera_camType').value = TEMP_RDT_editCamera_camType.toUpperCase();
+		document.getElementById('RDT_editCam_ident').value = TEMP_RDT_editCam_ident.toUpperCase();
+		document.getElementById('RDT_XP_Origin-edit').value = TEMP_RDT_XP_Origin.toUpperCase();
+		document.getElementById('RDT_XPS_Origin-edit').value = TEMP_RDT_XPS_Origin.toUpperCase();
+		document.getElementById('RDT_YP_Origin-edit').value = TEMP_RDT_YP_Origin.toUpperCase();
+		document.getElementById('RDT_YPS_Origin-edit').value = TEMP_RDT_YPS_Origin.toUpperCase();
+		document.getElementById('RDT_ZP_Origin-edit').value = TEMP_RDT_ZP_Origin.toUpperCase();
+		document.getElementById('RDT_ZPS_Origin-edit').value = TEMP_RDT_ZPS_Origin.toUpperCase();
+		document.getElementById('RDT_XD_Direction-edit').value = TEMP_RDT_XD_Direction.toUpperCase();
+		document.getElementById('RDT_XDS_Direction-edit').value = TEMP_RDT_XDS_Direction.toUpperCase();
+		document.getElementById('RDT_YD_Direction-edit').value = TEMP_RDT_YD_Direction.toUpperCase();
+		document.getElementById('RDT_YDS_Direction-edit').value = TEMP_RDT_YDS_Direction.toUpperCase();
+		document.getElementById('RDT_ZD_Direction-edit').value = TEMP_RDT_ZD_Direction.toUpperCase();
+		document.getElementById('RDT_ZDS_Direction-edit').value = TEMP_RDT_ZDS_Direction.toUpperCase();
+		document.getElementById('RDT_RD_Direction-edit').value = TEMP_RDT_RD_Direction.toUpperCase();
+		document.getElementById('RDT_RDS_Direction-edit').value = TEMP_RDT_RDS_Direction.toUpperCase();
 	}
 }
 function RDT_CAMERA_APPLY(id){
 	var reason;
 	var canCompile = true;
-	var ORIGINAL_CM 		 = localStorage.getItem('RDT_Camera-' + id);
-	var header 				 = ORIGINAL_CM.slice(0, 4);
-	var CM_NEW_Origin_X_1 	 = document.getElementById('RDT_X1_Origin-edit').value.toLowerCase();
-	var CM_NEW_Origin_X_2 	 = document.getElementById('RDT_X2_Origin-edit').value.toLowerCase();
-	var CM_NEW_Origin_Y_1 	 = document.getElementById('RDT_Y1_Origin-edit').value.toLowerCase();
-	var CM_NEW_Origin_Y_2 	 = document.getElementById('RDT_Y2_Origin-edit').value.toLowerCase();
-	var CM_NEW_Origin_Z_1 	 = document.getElementById('RDT_Z1_Origin-edit').value.toLowerCase();
-	var CM_NEW_Origin_Z_2 	 = document.getElementById('RDT_Z2_Origin-edit').value.toLowerCase();
-	var CM_NEW_Direction_X_1 = document.getElementById('RDT_X1_Direction-edit').value.toLowerCase();
-	var CM_NEW_Direction_X_2 = document.getElementById('RDT_X2_Direction-edit').value.toLowerCase();
-	var CM_NEW_Direction_Y_1 = document.getElementById('RDT_Y1_Direction-edit').value.toLowerCase();
-	var CM_NEW_Direction_Y_2 = document.getElementById('RDT_Y2_Direction-edit').value.toLowerCase();
-	var CM_NEW_Direction_Z_1 = document.getElementById('RDT_Z1_Direction-edit').value.toLowerCase();
-	var CM_NEW_Direction_Z_2 = document.getElementById('RDT_Z2_Direction-edit').value.toLowerCase();
-	var future 				 = ORIGINAL_CM.slice(RANGES['RDT_cam-0-misc'][0], RANGES['RDT_cam-0-misc'][0]);
-	if (CM_NEW_Origin_X_1.length !== 4){
+	var ORIGINAL_CM = localStorage.getItem('RDT_Camera-' + id);
+	var CAM_NEW_CI  = document.getElementById('RDT_editCam_ident').value.toLowerCase();
+	var CAM_NEW_CT  = parseEndian(document.getElementById('RDT_editCamera_camType').value.toLowerCase());
+	var CAM_NEW_XP  = parseEndian(document.getElementById('RDT_XP_Origin-edit').value.toLowerCase());
+	var CAM_NEW_XPS = parseEndian(document.getElementById('RDT_XPS_Origin-edit').value.toLowerCase());
+	var CAM_NEW_YP  = parseEndian(document.getElementById('RDT_YP_Origin-edit').value.toLowerCase());
+	var CAM_NEW_YPS = parseEndian(document.getElementById('RDT_YPS_Origin-edit').value.toLowerCase());
+	var CAM_NEW_ZP  = parseEndian(document.getElementById('RDT_ZP_Origin-edit').value.toLowerCase());
+	var CAM_NEW_ZPS = parseEndian(document.getElementById('RDT_ZPS_Origin-edit').value.toLowerCase());
+	var CAM_NEW_XD  = parseEndian(document.getElementById('RDT_XD_Direction-edit').value.toLowerCase());
+	var CAM_NEW_XDS = parseEndian(document.getElementById('RDT_XDS_Direction-edit').value.toLowerCase());
+	var CAM_NEW_YD  = parseEndian(document.getElementById('RDT_YD_Direction-edit').value.toLowerCase());
+	var CAM_NEW_YDS = parseEndian(document.getElementById('RDT_YDS_Direction-edit').value.toLowerCase());
+	var CAM_NEW_ZD  = parseEndian(document.getElementById('RDT_ZD_Direction-edit').value.toLowerCase());
+	var CAM_NEW_ZDS = parseEndian(document.getElementById('RDT_ZDS_Direction-edit').value.toLowerCase());
+	var CAM_NEW_RD  = parseEndian(document.getElementById('RDT_RD_Direction-edit').value.toLowerCase());
+	var CAM_NEW_RDS = parseEndian(document.getElementById('RDT_RDS_Direction-edit').value.toLowerCase());
+	if (CAM_NEW_CI.length !== 4){
 		canCompile = false;
-		reason = 'The (1) X Origin value are wrong!';
+		reason = 'Cam Identifier have wrong size!';
 	}
-	if (CM_NEW_Origin_X_2.length !== 4){
+	if (CAM_NEW_XP.length !== 4){
 		canCompile = false;
-		reason = 'The (2) X Origin value are wrong!';
+		reason = 'X Pos. have wrong size!';
 	}
-	if (CM_NEW_Origin_Y_1.length !== 4){
+	if (CAM_NEW_XPS.length !== 4){
 		canCompile = false;
-		reason = 'The (1) Y Origin value are wrong!';
+		reason = 'X Pos. (Signal) have wrong size!';
 	}
-	if (CM_NEW_Origin_Y_2.length !== 4){
+	if (CAM_NEW_YP.length !== 4){
 		canCompile = false;
-		reason = 'The (2) Y Origin value are wrong!';
+		reason = 'Y Pos. have wrong size!';
 	}
-	if (CM_NEW_Origin_Z_1.length !== 4){
+	if (CAM_NEW_YPS.length !== 4){
 		canCompile = false;
-		reason = 'The (1) Z Origin value are wrong!';
+		reason = 'Y Pos. (Signal) have wrong size!';
 	}
-	if (CM_NEW_Origin_Z_2.length !== 4){
+	if (CAM_NEW_ZP.length !== 4){
 		canCompile = false;
-		reason = 'The (2) Z Origin value are wrong!';
+		reason = 'Z Pos. have wrong size!';
 	}
-	if (CM_NEW_Direction_X_1.length !== 4){
+	if (CAM_NEW_ZPS.length !== 4){
 		canCompile = false;
-		reason = 'The (1) X Direction value are wrong!';
+		reason = 'Z Pos. (Signal) have wrong size!';
 	}
-	if (CM_NEW_Direction_X_2.length !== 4){
+	if (CAM_NEW_XD.length !== 4){
 		canCompile = false;
-		reason = 'The (2) X Direction value are wrong!';
+		reason = 'X Direction have wrong size!';
 	}
-	if (CM_NEW_Direction_Y_1.length !== 4){
+	if (CAM_NEW_XDS.length !== 4){
 		canCompile = false;
-		reason = 'The (1) Y Direction value are wrong!';
+		reason = 'X Direction (Signal) have wrong size!';
 	}
-	if (CM_NEW_Direction_Y_2.length !== 4){
+	if (CAM_NEW_YD.length !== 4){
 		canCompile = false;
-		reason = 'The (2) Y Direction value are wrong!';
+		reason = 'Y Direction have wrong size!';
 	}
-	if (CM_NEW_Direction_Z_1.length !== 4){
+	if (CAM_NEW_YDS.length !== 4){
 		canCompile = false;
-		reason = 'The (1) Z Direction value are wrong!';
+		reason = 'Y Direction (Signal) have wrong size!';
 	}
-	if (CM_NEW_Direction_Z_2.length !== 4){
+	if (CAM_NEW_ZD.length !== 4){
 		canCompile = false;
-		reason = 'The (2) Z Direction value are wrong!';
+		reason = 'Z Direction have wrong size!';
+	}
+	if (CAM_NEW_ZDS.length !== 4){
+		canCompile = false;
+		reason = 'Z Direction (Signal) have wrong size!';
+	}
+	if (CAM_NEW_RD.length !== 4){
+		canCompile = false;
+		reason = 'R Direction have wrong size!';
+	}
+	if (CAM_NEW_RDS.length !== 4){
+		canCompile = false;
+		reason = 'R Direction (Signal) have wrong size!';
 	}
 	if (canCompile === true){
-		var NEW_CAMERA_HEX = header + CM_NEW_Origin_X_1 + CM_NEW_Origin_X_2 + CM_NEW_Origin_Y_1 + CM_NEW_Origin_Y_2 + CM_NEW_Origin_Z_1 + CM_NEW_Origin_Z_2 + 
-			CM_NEW_Direction_X_1 + CM_NEW_Direction_X_2 + CM_NEW_Direction_Y_1 + CM_NEW_Direction_Y_2 + CM_NEW_Direction_Z_1 + CM_NEW_Direction_Z_2 + future;
+		var NEW_CAMERA_HEX = CAM_NEW_CT + CAM_NEW_CI + CAM_NEW_XP + CAM_NEW_XPS + CAM_NEW_YP + CAM_NEW_YPS + CAM_NEW_ZP + CAM_NEW_ZPS + 
+							 CAM_NEW_XD + CAM_NEW_XDS + CAM_NEW_YD + CAM_NEW_YDS + CAM_NEW_ZD + CAM_NEW_ZDS + CAM_NEW_RD + CAM_NEW_RDS;
 		RDT_COMPILE_Lv2(ORIGINAL_CM, NEW_CAMERA_HEX);
 		$('#RDT-aba-menu-9').trigger('click');
 	} else {
-		alert('WARNING - Unable to recompile camera ' + id + ':\n\n' + reason);
-		LOG_addLog('warn', 'MAP - WARN: Unable to recompile camera ' + id + ': ' + reason);
+		alert('WARNING - Unable to recompile camera!\n\nReason: ' + reason);
+		LOG_addLog('warn', 'MAP - WARN: Unable to recompile camera! - ' + reason);
 	}
 	LOG_scroll();
 }

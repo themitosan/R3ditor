@@ -751,7 +751,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!-- RE3 Live Status -->
 		<div class="RE3_LIVESTATUS none" id="R3DITOR_RE3_LIVESTATUS" onclick="main_closeFileList();">
 			<center><font class="titulo">RE3 Live Status</font></center>
@@ -1086,29 +1085,37 @@
 							</center>
 						</div>
 						<div id="RDT-camera-edit-form" class="RDT_camEdit_holder">
-							<div class="RDT_coordsHolder_D">(1) X Origin: <input type="text" id="RDT_X1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_D">(2) X Origin: <input type="text" id="RDT_X2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_D">(1) Y Origin: <input type="text" id="RDT_Y1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_D">(2) Y Origin: <input type="text" id="RDT_Y2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_D">(1) Z Origin: <input type="text" id="RDT_Z1_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_coordsHolder_D">(2) Z Origin: <input type="text" id="RDT_Z2_Origin-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-							<div class="RDT_camEditXYZDirection">
-								<div class="RDT_coordsHolder_D">(1) X Direction: <input type="text" id="RDT_X1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_D">(2) X Direction: <input type="text" id="RDT_X2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_C">(1) Y Direction: <input type="text" id="RDT_Y1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_D">(2) Y Direction: <input type="text" id="RDT_Y2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_C">(1) Z Direction: <input type="text" id="RDT_Z1_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
-								<div class="RDT_coordsHolder_D">(2) Z Direction: <input type="text" id="RDT_Z2_Direction-edit" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_X_color">X Pos</font>: <input type="text" id="RDT_XP_Origin-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_X_color"><i>Signal</i></font>: <input type="text" id="RDT_XPS_Origin-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Y_color">Y Pos</font>: <input type="text" id="RDT_YP_Origin-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Y_color"><i>Signal</i></font>: <input type="text" id="RDT_YPS_Origin-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Z_color">Z Pos</font>: <input type="text" id="RDT_ZP_Origin-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Z_color"><i>Signal</i></font>: <input type="text" id="RDT_ZPS_Origin-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZOrigin" placeholder="0000"></div>
+							<div class="RDT_camEditXYZDirectionDiv">
+								<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_X_color">X Direction</font>: <input type="text" id="RDT_XD_Direction-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_X_color"><i>Signal</i></font>: <input type="text" id="RDT_XDS_Direction-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_E"><font class="RE3_LIVESTATUS_Y_color">Y Direction</font>: <input type="text" id="RDT_YD_Direction-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Y_color"><i>Signal</i></font>: <input type="text" id="RDT_YDS_Direction-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_E"><font class="RE3_LIVESTATUS_Z_color">Z Direction</font>: <input type="text" id="RDT_ZD_Direction-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_Z_color"><i>Signal</i></font>: <input type="text" id="RDT_ZDS_Direction-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_E"><font class="RE3_LIVESTATUS_R_color">Rotation</font>: <input type="text" id="RDT_RD_Direction-edit" placeholder="0000" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
+								<div class="RDT_coordsHolder_D"><font class="RE3_LIVESTATUS_R_color"><i>Signal</i></font>: <input type="text" id="RDT_RDS_Direction-edit" placeholder="FFFF" maxlength="4" class="item-select-mod RDT_camEditXYZDirection" placeholder="0000"></div>
 							</div>
-							<div class="menu-separador"></div>
-							<input type="button" title="Click here to copy the camera position" value="Copy Camera Pos." onclick="RDT_copyPasteCameraInfo(1);" class="botao-menu"> 
-							<input type="button" title="Click here to paste the camera position" value="Paste Camera Pos." onclick="RDT_copyPasteCameraInfo(2);" class="botao-menu">
+							<div class="RDT_camEditOtherInfo_holder">
+								Camera Type: 
+								<select id="RDT_editCamera_camType" class="item-select-mod no-transform-text margin-fix" value="0000">
+									<!-- Cam type goes here -->
+								</select>
+								Identifier:
+								<input type="text" placeholder="B773" id="RDT_editCam_ident" class="item-select-mod RDT_camEditXYZOrigin margin-fix" maxlength="4">
+								<div class="menu-separador"></div>
+								<input type="button" title="Click here to copy camera position" value="Copy Camera Pos." onclick="RDT_copyPasteCameraInfo(1);" class="botao-menu"> 
+								<input type="button" title="Click here to paste camera position" value="Paste Camera Pos." onclick="RDT_copyPasteCameraInfo(2);" class="botao-menu">
+							</div>
 						</div>
 						<div class="RDT-applyBtn-div">
 							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white RDT_camera_cancel_btn_fix" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarCAMERA" value="APPLY CHANGES!">
+							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-applyCam" value="APPLY CHANGES!">
 						</div>
 					</div>
 				</div>

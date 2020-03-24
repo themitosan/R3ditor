@@ -152,7 +152,7 @@ function main_renderFileList(id, mode){
 			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
 			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
-		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to bottom, #2d2d2d, #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
+		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
 		document.getElementById('fileListHolder').innerHTML = '';
 		document.getElementById('fileListHolder_AJ').innerHTML = '';
@@ -1402,7 +1402,7 @@ function RDT_canvasResetPos(){
 	document.getElementById('RDT_lbl_pd2').innerHTML = '0';
 	RDT_updateCanvasInfos(0);
 }
-function RDT_showEditCamera(index, camEdit, codeHex){
+function RDT_showEditCamera(index, camEdit){
 	var CAM_IMG;
 	var titleFileName;
 	var CAM_lbl_fileName;
@@ -1424,22 +1424,26 @@ function RDT_showEditCamera(index, camEdit, codeHex){
 	document.getElementById('RDT_editCamera_iconPreviewImg').src = CAM_IMG;
 	document.getElementById('RDT_editCamera_iconPreviewImg').title = titleFileName;
 	document.getElementById('RDT_lbl_camEdit_camName').innerHTML = CAM_lbl_fileName;
-	//
+	var codeHex = localStorage.getItem('RDT_Camera-' + index.toString());
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
 	document.getElementById('RDT-lbl-CAMERA-edit').innerHTML  = camEdit;
-	document.getElementById('RDT_X1_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cX-1'][0], RANGES['RDT_cam-0-cX-1'][1]).toUpperCase();
-	document.getElementById('RDT_X2_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cX-2'][0], RANGES['RDT_cam-0-cX-2'][1]).toUpperCase();
-	document.getElementById('RDT_Y1_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cY-1'][0], RANGES['RDT_cam-0-cY-1'][1]).toUpperCase();
-	document.getElementById('RDT_Y2_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cY-2'][0], RANGES['RDT_cam-0-cY-2'][1]).toUpperCase();
-	document.getElementById('RDT_Z1_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cZ-1'][0], RANGES['RDT_cam-0-cZ-1'][1]).toUpperCase();
-	document.getElementById('RDT_Z2_Origin-edit').value    	  = codeHex.slice(RANGES['RDT_cam-0-cZ-2'][0], RANGES['RDT_cam-0-cZ-2'][1]).toUpperCase();
-	document.getElementById('RDT_X1_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nX-1'][0], RANGES['RDT_cam-0-nX-1'][1]).toUpperCase();
-	document.getElementById('RDT_X2_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nX-2'][0], RANGES['RDT_cam-0-nX-2'][1]).toUpperCase();
-	document.getElementById('RDT_Y1_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nY-1'][0], RANGES['RDT_cam-0-nY-1'][1]).toUpperCase();
-	document.getElementById('RDT_Y2_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nY-2'][0], RANGES['RDT_cam-0-nY-2'][1]).toUpperCase();
-	document.getElementById('RDT_Z1_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nZ-1'][0], RANGES['RDT_cam-0-nZ-1'][1]).toUpperCase();
-	document.getElementById('RDT_Z2_Direction-edit').value 	  = codeHex.slice(RANGES['RDT_cam-0-nZ-2'][0], RANGES['RDT_cam-0-nZ-2'][1]).toUpperCase();
-	document.getElementById('RDT-btn-aplicarCAMERA').onclick = function(){
+	document.getElementById('RDT_editCamera_camType').value = codeHex.slice(RANGES['RDT_cam-0-type'][0],     RANGES['RDT_cam-0-type'][1]);
+	document.getElementById('RDT_editCam_ident').value      = codeHex.slice(RANGES['RDT_cam-0-ident'][0],    RANGES['RDT_cam-0-ident'][1]);
+	document.getElementById('RDT_XP_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-XPos'][0],     RANGES['RDT_cam-0-XPos'][1]));
+	document.getElementById('RDT_XPS_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-XPos-Sig'][0], RANGES['RDT_cam-0-XPos-Sig'][1]));
+	document.getElementById('RDT_YP_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-YPos'][0], 	 RANGES['RDT_cam-0-YPos'][1]));
+	document.getElementById('RDT_YPS_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-YPos-Sig'][0], RANGES['RDT_cam-0-YPos-Sig'][1]));
+	document.getElementById('RDT_ZP_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-ZPos'][0], 	 RANGES['RDT_cam-0-ZPos'][1]));
+	document.getElementById('RDT_ZPS_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-ZPos-Sig'][0], RANGES['RDT_cam-0-ZPos-Sig'][1]));
+	document.getElementById('RDT_XD_Direction-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-XDir'][0], 	 RANGES['RDT_cam-0-XDir'][1]));
+	document.getElementById('RDT_XDS_Direction-edit').value = parseEndian(codeHex.slice(RANGES['RDT_cam-0-XDir-Sig'][0], RANGES['RDT_cam-0-XDir-Sig'][1]));
+	document.getElementById('RDT_YD_Direction-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-YDir'][0], 	 RANGES['RDT_cam-0-YDir'][1]));
+	document.getElementById('RDT_YDS_Direction-edit').value = parseEndian(codeHex.slice(RANGES['RDT_cam-0-YDir-Sig'][0], RANGES['RDT_cam-0-YDir-Sig'][1]));
+	document.getElementById('RDT_ZD_Direction-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-ZDir'][0], 	 RANGES['RDT_cam-0-ZDir'][1]));
+	document.getElementById('RDT_ZDS_Direction-edit').value	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-ZDir-Sig'][0], RANGES['RDT_cam-0-ZDir-Sig'][1]));
+	document.getElementById('RDT_RD_Direction-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-RDir'][0], 	 RANGES['RDT_cam-0-RDir'][1]));
+	document.getElementById('RDT_RDS_Direction-edit').value = parseEndian(codeHex.slice(RANGES['RDT_cam-0-RDir-Sig'][0], RANGES['RDT_cam-0-RDir-Sig'][1]));
+	document.getElementById('RDT-btn-applyCam').onclick = function(){
 		RDT_CAMERA_APPLY(index);
 	}
 	$('#RDT-camera-Edit').css({'display': 'inline'});
@@ -2690,7 +2694,7 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
 				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
 	
-				console.log('Open RE3');
+				//console.log('Open RE3');
 	
 			} else {
 				if (EXEC_BIO3_original !== ''){
@@ -2739,7 +2743,7 @@ function R3DITOR_RUNGAME(id){
 					$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
 					$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
 	
-					console.log('Close RE3');
+					//console.log('Close RE3');
 	
 					if (main_currentMenu !== 6){
 						if (DESIGN_ENABLE_ANIMS === true){

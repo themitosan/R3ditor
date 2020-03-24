@@ -680,6 +680,9 @@ input[type='range' i]{
     text-shadow: 0px 0px 10px #939393;
     background-image: linear-gradient(to bottom, #222, #000);
 }
+.margin-fix{
+    margin-top: 0px !important;
+}
 .RDT-btn-apply:active{
     background-image: linear-gradient(to bottom, #000, #212121);
 }
@@ -1060,9 +1063,6 @@ input[type='range' i]{
 .RDT_coordsHolder_B{
     width: 172px;
     margin-top: -5px;
-}
-.RDT_coordsHolder_C{
-    margin-top: 5px;
 }
 .RDT_coordsHolder_D{
     width: 300px;
@@ -1774,30 +1774,69 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT_camEditXYZOrigin{
+    left: 258px;
     width: 38px;
+    position: sticky;
 }
 .RDT_camEditXYZDirection{
+    left: 400px;
+    width: 38px;
+    position: sticky;
+}
+.RDT_camEditXYZDirectionDiv{
     top: 0px;
-    left: 140px;
+    left: 110px;
+    position: absolute;
+}
+.RDT_camEditOtherInfo_holder{
+    top: 4px;
+    left: 250px;
     position: absolute;
 }
 .RDT_camEdit_holder{
     left: 200px;
-    width: 1000px;
+    width: 1092px;
     position: absolute;
 }
 .RDT_editCamera_iconPreviewDiv{
     top: 66px;
     width: 186px;
     height: 360px;
-    border-radius: 4px;
     position: absolute;
-    box-shadow: 0 0 10px #00002000;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00002030;
     background-image: linear-gradient(to bottom, #000b25, #212b3e00);
 }
 .RDT_editCamera_iconPreview{
     width: 186px;
     border-radius: 4px;
+}
+.RDT_cam_dirHolder{
+    top: 28px;
+    left: 100px;
+    width: 144px;
+    position: absolute;
+}
+.RDT_cam_otherValues{
+    top: 64px;
+    left: 240px;
+    width: 140px;
+    position: absolute;
+}
+.RDT_cam_lbl_fix_0{
+    left: 283px;
+    position: sticky;
+}
+.RDT_cam_lbl_fix_1{
+    left: 418px;
+    position: sticky;
+}
+.RDT_cam_lbl_fix_2{
+    left: 558px;
+    position: sticky;
+}
+.RDT_cam_imgFix{
+    margin-bottom: -168px !important;
 }
 /*
     Filelist
