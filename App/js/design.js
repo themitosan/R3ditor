@@ -2024,8 +2024,10 @@ function RE3_LIVE_RENDER(){
 		if (currentPlayer !== PREV_PLAYER){
 			if (currentPlayer !== '01' && currentPlayer !== '02'){
 				$('#RE3_LIVESTATUS_currentPlayerIcon').css({'display': 'none'});
+				$('#RE3_LIVESTATUS_currentPlayerImgDiv').css({'background-image': 'linear-gradient(to right, #00000000, #00000000)'});
 			} else {
 				$('#RE3_LIVESTATUS_currentPlayerIcon').css({'display': 'inline'});
+				$('#RE3_LIVESTATUS_currentPlayerImgDiv').css({'background-image': 'linear-gradient(to right, #00000000, #00005d1f)'});
 			}
 			if (currentPlayer === '01'){
 				document.getElementById('RE3_LIVESTATUS_currentPlayerIcon').src = APP_PATH + '\\App\\Img\\JILL-ICON.png';
