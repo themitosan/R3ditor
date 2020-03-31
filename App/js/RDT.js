@@ -1209,6 +1209,10 @@ function RDT_decompileDoors(index, location){
 			dr_offset1 	   = DOOR_RAW.slice(RANGES['RDT_door-1-doorHexOffset1'][0], 			RANGES['RDT_door-1-doorHexOffset1'][1]);
 			dr_displayText = DOOR_RAW.slice(RANGES['RDT_door-1-doorDisplayText'][0], 			RANGES['RDT_door-1-doorDisplayText'][1]);
 		}
+		if (DOOR_RAW === '62670121013000e2ff01eff030000fdf0eed00ffe3cd0ced6004cc10300f301effffeefeed1dece1'){
+			canAdd = false;
+			reason = 'This is a ARD madness - Sorry about that!';
+		}
 		if (DOOR_RAW === '6121012101419141414121219141212112327281f12102927100f11110f0c060'){
 			canAdd = false;
 			reason = 'Pattern is <i>(way)</i> out of range!';
