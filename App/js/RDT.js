@@ -81,7 +81,7 @@ var RDT_TEMP_ENEMYNPC_SOUNDSET = '';
 var RDT_TEMP_ENEMYNPC_EXTRAFLAG = '';
 var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
 
-// AUDIOS
+// Audios
 var RDT_totalAudios;
 
 // Utils
@@ -215,49 +215,28 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		LOG_addLog('log', 'MAP - INFO: The file was loaded successfully! - File: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
 		//
-		RDT_getTextMessages();
-		RDT_getMessageCodesArray();
-		RDT_getEnemiesArray();
-		if (RDT_fileType === 'RDT'){
-			RDT_getCameras();
-			$('#RDT-aba-menu-9').css({'display': 'inline'});
+		if (RDT_USE_DECOMPILER_WIP === false){
+			RDT_getTextMessages();
+			RDT_getMessageCodesArray();
+			RDT_getEnemiesArray();
+			if (RDT_fileType === 'RDT'){
+				RDT_getCameras();
+				$('#RDT-aba-menu-9').css({'display': 'inline'});
+			} else {
+				$('#RDT-aba-menu-9').css({'display': 'none'});
+			}
+			RDT_getPropModelsArray();
+			RDT_readDoors();
+			RDT_readItens();
+			RDT_BG_display();
 		} else {
-			$('#RDT-aba-menu-9').css({'display': 'none'});
+			RDT_setHeaderPointers();
 		}
-		RDT_getPropModelsArray();
-		RDT_readDoors();
-		RDT_readItens();
-		RDT_BG_display();
 	} else {
 		LOG_addLog('error', 'MAP - ERROR: Unable to read ' + getFileName(rdtFile) + '!');
 		LOG_addLog('error', 'MAP - Reason: 404 - File not found! (Path: <font class="user-can-select">' + rdtFile + '</font>)');
 	}
 	LOG_scroll();
-}
-// This is a really buggy attempt!
-var RDT_MAP_HEADER;
-//							  Hx     Hx
-var RDT_HEADER_CAM_TOTAL;  // 00 --> 02: Nº Total Cameras
-var RDT_HEADER_UNK_0;      // 08 --> 09: ???
-var RDT_HEADER_BOUNDARIES; // 20 --> 21: Boundaries
-var RDT_HEADER_CAM_POS;    // 24 --> 25: Camera Position (Start)
-var RDT_HEADER_COLISION;   // 28 --> 29: Camera Colision
-var RDT_HEADER_TIM; 	   // 30 --> 31: Total Objects? (TIM)
-var RDT_HEADER_LIGHTS;     // 2C --> 2D: Lights (LIT)
-var RDT_HEADER_UNK_1;      // 38 --> 39: ???
-var RDT_HEADER_MSG;        // 3C --> 3D: Text Pointers (if 0000 = no text)
-var RDT_HEADER_ITEM;	   // 48 --> 49: Items, files, enemies, doors and etc.
-var RDT_HEADER_PRI;        //
-var RDT_HEADER_UNK_2;      // 58 --> 59: ??? - Nemesis drop? (Sometimes it points to file end)
-function RDT_setHeaderPointers(){
-	if (RDT_arquivoBruto !== undefined){
-		RDT_MAP_HEADER = RDT_arquivoBruto.slice(RANGES['RDT_FILE_MAP_HEADER'][0], RANGES['RDT_FILE_MAP_HEADER'][1]);
-		// In Hex Order
-		RDT_HEADER_CAM_TOTAL = parseEndian(RDT_MAP_HEADER.slice(RANGES['RDT_HEADER_CAM_TOTAL'][0], RANGES['RDT_HEADER_CAM_TOTAL'][1]));
-	}
-}
-function RDT_decompileMapHeader(){
-
 }
 /*
 	SLD Layers [WIP]

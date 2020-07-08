@@ -28,6 +28,7 @@
 		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/PATCHER.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
+		<script type="text/javascript" src="js/RDT_Experiment.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
 	<body>
@@ -568,8 +569,13 @@
 					<!-- Onload -->
 					<input type="button" value="Startup" class="INI_inernalTab SETTINGS_ABA-6">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-6">
-						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableUpdates')">Check for updates on Startup / Go Back</font></font><br>
-						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableMoveTo"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableMoveTo')">Move window to upper left corner on load / reload</font></font>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableUpdates"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableUpdates');">Check for updates on Startup / Go Back</font></font><br>
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableMoveTo"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableMoveTo');">Move window to upper left corner on load / reload</font></font>
+					</div>
+					<!-- RDT Load -->
+					<input type="button" value="RDT Options" class="INI_inernalTab SETTINGS_ABA-7">
+					<div class="INI_MINIWINDOW SETTINGS_WINDOW-7">
+						<input type="checkbox" class="chkbox" id="SETTINGS_edit_RDT_ExpMode"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_RDT_ExpMode');">Decompile using experimental mode (WIP)</font></font><br>
 					</div>
 					<!-- Note (Future) -->
 					<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">

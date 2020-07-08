@@ -2414,7 +2414,11 @@ input[type='range' i]{
     left: 24px;
 }
 .SETTINGS_ABA-6{
-    top: 332px;
+    top: 232px;
+    left: 858px;
+}
+.SETTINGS_ABA-7{
+    top: 312px;
     left: 858px;
 }
 .SETTINGS_WINDOW-1{
@@ -2432,8 +2436,8 @@ input[type='range' i]{
 .SETTINGS_WINDOW-3{
     top: 78px;
     left: 848px;
-    width: 374px;
-    height: 236px;
+    width: 300px;
+    height: 134px;
 }
 .SETTINGS_WINDOW-4{
     top: 168px;
@@ -2448,14 +2452,20 @@ input[type='range' i]{
     height: 79px;
 }
 .SETTINGS_WINDOW-6{
-    top: 354px;
+    top: 254px;
     left: 848px;
     width: 364px;
     height: 38px;
 }
+.SETTINGS_WINDOW-7{
+    top: 334px;
+    left: 848px;
+    width: 316px;
+    height: 20px;
+}
 .SETTINGS_FUTURE{
-    top: 54px;
-    left: 40px;
+    top: 10px;
+    left: 10px;
     width: 300px;
     position: absolute;
 }

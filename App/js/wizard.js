@@ -1,7 +1,7 @@
 /*
 	R3ditor - wizard.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Eu já te falei hoje que você é demais?
+	Eu já te falei que você é demais?
 */
 var EXEC_rofs;
 var TEMP_APP_PATH;
@@ -16,6 +16,7 @@ var WZ_skipRofs = false;
 var WZ_EXTRACTLIST = [];
 var WZ_showWizard = true;
 var WINDOW_MOVETOLEFT = false;
+var RDT_USE_DECOMPILER_WIP = false;
 /*
 	Functions
 */
@@ -315,7 +316,7 @@ function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
 			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + 
-			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage;
+			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage + '\n' + RDT_USE_DECOMPILER_WIP;
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -472,6 +473,13 @@ function WZ_loadFiles(file){
 	if (cfgs[13] !== undefined){
 		R3ditor_showFirstBootMessage = JSON.parse(cfgs[13]);
 	}
+	// RDT EXPERIMENT
+	if (cfgs[14] !== undefined){
+		RDT_USE_DECOMPILER_WIP = JSON.parse(cfgs[14]);
+	} else {
+		RDT_USE_DECOMPILER_WIP = false;
+	}
+	document.getElementById('SETTINGS_edit_RDT_ExpMode').checked = RDT_USE_DECOMPILER_WIP;
 	/*
 		Visuals
 	*/
@@ -850,6 +858,7 @@ function WZ_APPLY_R3DITOR_SETTINGS(){
 	REALTIME_renderToolbar = document.getElementById('SETTINGS_edit_enableRE3_live_toolBar').checked;
 	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
 	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
+	RDT_USE_DECOMPILER_WIP = document.getElementById('SETTINGS_edit_RDT_ExpMode').checked;
 	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
 	WINDOW_MOVETOLEFT = document.getElementById('SETTINGS_edit_enableMoveTo').checked;
 	//
