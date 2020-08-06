@@ -330,6 +330,14 @@ input[type='range' i]{
 	margin-bottom: 4px;
 	background-image: linear-gradient(to right, #fff, #fff0);
 }
+.menu-separador-2{
+    color: #fff;
+    height: 2px;
+    margin-top: 4px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    background-image: linear-gradient(90deg, #0000, #ffff, #0000);   
+}
 .separador-log-fix{
     width: 88%;
     margin-top: 8px;
@@ -1027,8 +1035,7 @@ input[type='range' i]{
 }
 .dialog-addcomando{
     top: 208px;
-    left: 66px;
-    width: 58%;
+    width: 906px;
     height: auto;
     display: none;
     padding-top: 4px;
