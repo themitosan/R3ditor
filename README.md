@@ -65,6 +65,7 @@ R3ditor also can do:
 - Write texts using RE3 font with File Generator (WIP)
 - Extract all Rofs (.dat) files (Wizard)
 - Edit items combinations
+- Edit nemesis item drops
 
 <i>¹ - Only avaliable in x64 NW.js version</i>
 
