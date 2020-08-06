@@ -79,12 +79,12 @@ function load(){
 		} else {
 			$('#img-logo').css({'display': 'none'});
 		}
-		document.title = 'Whoops...';
-		LOG_addLog('warn', 'WARN - Unable to use \"require\" or \"process\"... Wait... This is Chrome or Firefox?');
-		LOG_addLog('error', 'ERROR - This is not Node-Webkit / NW.js! ÒwÓ');
-		LOG_addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
-		LOG_separator();
+		document.title = 'R3ditor - Whoops...';
+		window.alert('ERROR - Unable to startup!\nReason: ' + err);
 		LOG_addLog('error', err);
+		LOG_separator();
+		LOG_addLog('warn', 'WARN - Question: You are using this on Chrome or Firefox?');
+		LOG_addLog('error', 'WARN - If this is true, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 	}
 	LOG_scroll();
 }
