@@ -76,6 +76,7 @@ This file can (and will be) modified several times!
 - ~~Upgrade the updater design! (I know, this hurts my eyes too!)~~
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
+- ~~Modify nemesis item drops~~
 - Implement a randomizer!
 - Compress the files for releases!
 - Improve the first boot message info
