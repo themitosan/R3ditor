@@ -135,8 +135,8 @@ var ITEM = {
 	'80': ['Boutique key', 									   'Boutique key, where you can change clothes during gameplay.<br><br>This Function is only available in Playstation and Gamecube version.'],
 	'81': ['Ink ribbon', 									   'By far, it is one of the most classic items in the entire Resident Evil / Biohazard franchise.<br><br>When in inventory, you can use it on the typewriter to saving your progress.'],
 	'82': ['Reloading tool', 								   'With this item, you can create ammo combining with gunpowder.'],
-	'83': ['Game inst. A', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about explosive objects, The 180° Rotation, Emergency Escape, Emergency Bypass, and more.'],
-	'84': ['Game inst. B', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.'],
+	'83': ['Game inst. A', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br><br>With this manual, you learn about explosive objects, The 180° Rotation, Emergency Escape, Emergency Bypass, and more.'],
+	'84': ['Game inst. B', 									   'This is a manual of how to play Resident Evil 3 / Biohazard 3.<br><br>With this manual, you learn about the Reloading Tool, Gunpowder and its combinations.'],
 	'85': ['(BOTU) Recipient with liquid inside',			   'BOT... Wait a sec...<br><br>With the internal name of \"Game inst. A\", this item can be used as many times as you like - it does not change anything in the game.'],
 	/* Shenanigans! */
 	'86': ['DO NOT USE THIS ITEM - YOU WILL BREAK THE GAME!',  'This item is not supposed to be accessed!<br>It can make the game malfunction and maybe even corrupt your save data.'],
