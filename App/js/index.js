@@ -74,6 +74,7 @@ function load(){
 		WZ_verifyConfigFile();
 	} catch (err) {
 		console.error(err);
+		$('#log-programa').css({'top': '2px', 'height': '200px'});
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#img-logo').fadeOut({duration: 5600, queue: false});
 		} else {
@@ -140,7 +141,7 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\App\\Update\\check.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\App\\Update\\check.r3ditor');
 	}
-	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true && BETA === false){
+	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
 }
