@@ -46,8 +46,7 @@ function MIX_loadExe(file, mode){
 			end_pos = parseInt(end_pos + 16);
 			c++;
 		}
-		LOG_addLog('log', 'MIX - File loaded sucessfully!');
-		LOG_addLog('log', 'MIX - Current mode: ' + MIX_fileTypes[MIX_fName][0]);
+		LOG_addLog('log', 'MIX - File loaded sucessfully! (Mode: ' + MIX_fileTypes[MIX_fName][0] + ')');
 		LOG_addLog('log', 'MIX - File: <font class="user-can-select">' + file + '</font>');
 		main_menu(8);
 	} else {

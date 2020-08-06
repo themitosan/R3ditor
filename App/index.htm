@@ -24,6 +24,7 @@
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
 		<script type="text/javascript" src="js/MIX.js"></script>
+		<script type="text/javascript" src="js/DROP.js"></script>
 		<script type="text/javascript" src="js/IEDIT.js"></script>
 		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/PATCHER.js"></script>
@@ -55,6 +56,7 @@
 			<input type="button" class="botao-menu" value="Map Editor (RDT / ARD)" title="Click here to edit Resident Evil 3 Room Data Table (RDT / ARD) files" onclick="main_menu(3);">
 			<input type="button" class="botao-menu" value="INI Editor (INI)" title="Click here to edit Resident Evil 3 Settings File" onclick="main_menu(6);">
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
+			<input type="button" class="botao-menu" value="DROP Editor" title="Click here to edit Resident Evil 3 Nemesis item drops" onclick="triggerLoad(7);">
 			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 		</div>
 		<!-- Settings Tab -->
@@ -171,9 +173,44 @@
 			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 		</div>
+		<!-- Menu DROP -->
+		<div class="menu-topo none" id="menu-topo-DROP">
+			<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(7);" value="Open File">
+			<!-- Right -->
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
+		</div>
 
 		<!-- CONTENT -->
 
+		<!-- FORM: DROP Editor -->
+		<div class="none" id="menu-DROP-editor" onclick="main_closeFileList();">
+			<input type="button" id="DROP-aba-menu-1" class="aba aba-left-fix aba-select" value="Nemesis Drops">
+			<div class="menu">
+				<div class="menu-general-content">
+					<center><font class="titulo">Nemesis Drops</font></center>
+					<div class="IEDIT_ITEM_holder" id="DROP-holder">
+						<!-- DROP items goes here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="DROP_ITEM_edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Item ID: <font id="DROP_edit_lbl_itemID">??</font><br><font id="DROP_edit_lbl_itemName">??</font>
+						</center>
+						<div class="menu-separador"></div>
+						Item: 
+						<select id="DROP_EDIT_ITEM" class="item-select-mod RDT_door_selectLockKeyFix no-transform-text DROP_stickyFix">
+							<!-- DROP select items goes here -->
+						</select><br>
+						Quantity: <input type="number" min="0" max="255" step="1" id="DROP_EDIT_QUANT" class="item-select-mod user-can-select RDT-valueEdit-fix DROP_stickyFix">
+						<div class="RDT-applyBtn-div_2">
+							<input type="button" title="Click here to cancel" onclick="DROP_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" title="Click here to apply!" id="DROP_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- FORM: Patcher -->
 		<div class="R3_Patcher_main_menu_css" id="R3_Patcher_main_menu" onclick="main_closeFileList();">
 			<center><font class="titulo">R3ditor Patcher</font></center>
@@ -220,7 +257,7 @@
 						<input type="number" min="0" max="255" step="1" maxlength="3" class="item-select-mod IEDIT_edit_stickyFix RDT-valueEdit-fix" id="IEDIT_edit_itemQuantity"><br>
 						Code Quest: 
 						<input type="text" maxlength="2" class="item-select-mod IEDIT_edit_stickyFix RDT-valueEdit-fix" id="IEDIT_edit_itemCodeQuest">
-						<div class="RDT-applyBtn-div">
+						<div id="DIV_APPLY_IEDIT" class="RDT-applyBtn-div_2">
 							<input type="button" title="Click here to cancel" onclick="IEDIT_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" title="Click here to apply!" id="IEDIT_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -269,7 +306,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" title="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" title="Click here to apply!" id="MIX_applyBtn-00" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -310,7 +347,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-01" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -351,7 +388,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-02" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -392,7 +429,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-03" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -434,7 +471,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-04" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -475,7 +512,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-05" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -514,7 +551,7 @@
 								</div>
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div">
+						<div class="RDT-applyBtn-div_2">
 							<input type="button" itle="Click here to cancel" onclick="MIX_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 							<input type="button" itle="Click here to apply!" id="MIX_applyBtn-06" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
 						</div>
@@ -1005,7 +1042,7 @@
 					</div>
 					<div id="RDT_mainMenu_msgInfo" class="none">
 						<div class="menu-separador"></div>
-						Pointers: <div class="RDT_lbl_pointers"><font id="RDT_lbl-msg_pointerSplit" class="user-can-select">???</font></div>
+						Message Pointers: <div class="RDT_lbl_pointers"><font id="RDT_lbl-msg_pointerSplit" class="user-can-select">???</font></div>
 						Current Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_c_blockHex">???</font><br>
 						Original Message Block Size: <font class="RDT-menu-geral-text" id="RDT_lbl-msg_blockHex">???</font> 
 						<input type="button" value="Remove MapFile" onclick="RDT_removeMapFile();" class="botao-menu espaco-left">
@@ -1341,7 +1378,7 @@
 								<img id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
 							</center>
 						</div>
-						<div class="RDT-applyBtn-div" id="RDT_applyDoorCamDiv">
+						<div class="RDT-applyBtn-div RDT_door_img_applyBtnFix" id="RDT_applyDoorCamDiv">
 							<center>
 								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" onclick="RDT_cancelDoorCamEdit();" value="Cancel">
 								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" onclick="RDT_applyDoorCamSelect();" value="Apply Cam">
@@ -1832,6 +1869,7 @@
 			<input type="file" onchange="setLoadFile(4);"  id="loadSaveForm" accept=".sav"/>
 			<input type="file" onchange="setLoadFile(5);"  id="loadMSGForm" accept=".msg"/>
 			<input type="file" onchange="setLoadFile(6);"  id="loadRDTForm" accept=".rdt, .ard"/>
+			<input type="file" onchange="setLoadFile(7);"  id="loadDROPFile" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>

@@ -5,6 +5,7 @@
 */
 function R3_START_KEYPRESS(){
 	window.onkeyup = function(key){
+		//console.info(key);
 		if (RE3_LIVE_keyPress_enable === true){
 			// Keys
 			if (MEM_JS_requreSucess === true){
@@ -13,6 +14,10 @@ function R3_START_KEYPRESS(){
 					RE3_LIVE_gotoTitleScreen();
 				}
 			}
+		}
+		// (F1) Open RE3 Livestatus
+		if (key.keyCode === 112){
+			RE3_LIVE_openForm();
 		}
 		// (F5) Run RE3 (Mod)
 		if (key.keyCode === 116){

@@ -710,6 +710,12 @@ input[type='range' i]{
     position: absolute;
     text-align: -webkit-right;
 }
+.RDT-applyBtn-div_2{
+    top: 88%;
+    width: 98%;
+    position: absolute;
+    text-align: -webkit-center;
+}
 .menu-alterar-item{
     top: 40%;
     width: 70%;
@@ -1267,7 +1273,7 @@ input[type='range' i]{
     width: 350px;
 }
 .aba-principal-fix{
-    width: 732px;
+    width: 832px;
 }
 .aba-settings-fix-2{
     top: -44px;
@@ -1754,9 +1760,12 @@ input[type='range' i]{
     RDT Door Edit Prev
 */
 .imgPreviewCamSpawn{
-    width: 352px;
+    width: 340px;
     margin-top: 6px;
     box-shadow: 0px 0px 10px #858dbfa3;
+}
+.RDT_door_img_applyBtnFix{
+    left: 350px;
 }
 .RDT_cam_holderInfos{
     width: 63.2%;
@@ -2696,6 +2705,25 @@ input[type='range' i]{
 }
 .MIX-func-infBullets-bg{
     background-image: linear-gradient(to bottom, #a26e6e, #805370);
+}
+/*
+    DROP
+*/
+.DROP-func-comb-bg{
+    background-image: linear-gradient(to bottom, #497188, #2f4a5a);
+}
+.DROP_imgPrev{
+    width: 60px;
+    border-radius: 4px;
+    box-shadow: 0 0 6px #002;
+}
+.DROP_divLeft{
+    margin-top: -50px;
+    margin-left: 66px;
+}
+.DROP_stickyFix{
+    left: 820px;
+    position: sticky;
 }
 /*
     IEDIT

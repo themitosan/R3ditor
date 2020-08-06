@@ -27,8 +27,7 @@ function IEDIT_loadExec(file, mode){
 			push_end = push_end + 8;
 			c++;
 		}
-		LOG_addLog('log', 'IEDIT - File loaded sucessfully!');
-		LOG_addLog('log', 'IEDIT - Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0]);
+		LOG_addLog('log', 'IEDIT - File loaded sucessfully! (Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0] + ')');
 		LOG_addLog('log', 'IEDIT - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		main_menu(9);
 	} else {

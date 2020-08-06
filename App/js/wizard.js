@@ -673,6 +673,8 @@ function WZ_APPEND(){
 	$('#MIX_06_edit_infinite_inf').append(RDT_EDIT_ITEM);
 	$('#MIX_06_edit_infinite_item').append(RDT_EDIT_ITEM);
 	document.getElementById('MIX_06_preview_plus').src = APP_PATH + '\\App\\Img\\MIX_plus.png';
+	// DROP
+	$('#DROP_EDIT_ITEM').append(RDT_EDIT_ITEM);
 	// MSG Titles
 	document.getElementById('MSG_ADDFUNC_BTN_1').title  = '\nUse this command to start a message or change the text speed.';
 	document.getElementById('MSG_ADDFUNC_BTN_2').title  = '\nUse this command to finish the message.\n(In doubt, leave args empty!)';

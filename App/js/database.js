@@ -93,10 +93,10 @@ var ITEM = {
 	'56': ['Unknown Sigpro SP 2009 handgun', 				   'Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don\'t have any ingame utility.'],
 	'57': ['Unknown Sigpro SP 2009 handgun', 				   'Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don\'t have any ingame utility.'],
 	'58': ['Medium base', 									   'Solution used to create the item Vaccine medium.<br>It is used in the laboratory at raccoon hospital, B3.'],
-	'59': ['Eagle parts A', 								   'First part of the weapon STI Eagle 6.0.<br>Combine with item Eagle parts B to form the same.'],
-	'5a': ['Eagle parts B', 								   'Second part of the weapon STI Eagle 6.0.<br>Combine with item Eagle parts A to form the same.'],
-	'5b': ['M37 parts A', 									   'First part of weapon Western Custom M37. <br> Combine with item M37 parts B to form it.'],
-	'5c': ['M37 parts B', 									   'Second part of weapon Western Custom M37. <br> Combine with item M37 parts B to form it.'],
+	'59': ['Eagle Parts A', 								   'First part of the weapon STI Eagle 6.0.<br>Combine with item Eagle parts B to form the same.'],
+	'5a': ['Eagle Parts B', 								   'Second part of the weapon STI Eagle 6.0.<br>Combine with item Eagle parts A to form the same.'],
+	'5b': ['M37 Parts A', 									   'First part of weapon Western Custom M37. <br> Combine with item M37 parts B to form it.'],
+	'5c': ['M37 Parts B', 									   'Second part of weapon Western Custom M37. <br> Combine with item M37 parts B to form it.'],
 	'5d': ['Unknown Sigpro SP 2009 handgun', 				   'Aka: Forgotten Pistol!<br><br>I think the Devs decided to put these pistols here just to fill the space, because they don\'t have any ingame utility.'],
 	'5e': ['Chronos chain', 								   'A key that apparently has no use until you combine it with the Clock tower (winder) key to form the Chronos key.'],
 	'5f': ['Rusted crank', 									   'A rusty handle used to (try) open the gas station door.'],
@@ -1552,18 +1552,6 @@ var IEDIT_displayMode = {
 	'0e': 'Percentage in blue color',
 	'0f': 'Infinite in blue color'
 }
-var IEDIT_fileTypes = {
-	'residentevil3': ['PC EXE', 2448160, 2449232, '.exe'], // PC Version
-	'slus_009.23':   ['PS SLUS', 1186344, 1187416, '.23'], // Playstation
-	'main.dol':      ['GC DOL', 4375520, 4376592, '.dol'], // GameCube
-	'1st_read.bin':  ['DC BIN', 2835856, 2836928, '.BIN']  // Sega Dreamcast
-}
-var MIX_fileTypes = {
-	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'], // PC Version
-	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'], // Playstation Version
-	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
-}
 var UTILS_REMOVE_CHARS = [
 	',',
 	'.',
@@ -1599,7 +1587,44 @@ var RDT_CAMERAS_CAMTYPES = {
 	'0000': 'Normal',
 	'0100': 'Cutscene?'
 }
+/*
+	File Types
+*/
+var IEDIT_fileTypes = {
+	'residentevil3': ['PC EXE', 2448160, 2449232, '.exe'], // PC Version
+	'slus_009.23':   ['PS SLUS', 1186344, 1187416, '.23'], // Playstation Version
+	'main.dol':      ['GC DOL', 4375520, 4376592, '.dol'], // GameCube Version
+	'1st_read.bin':  ['DC BIN', 2835856, 2836928, '.BIN']  // Sega Dreamcast Version
+}
+var MIX_fileTypes = {
+	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'], // PC Version
+	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'], // Playstation Version
+	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol'], // GameCube Version
+	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
+}
+var DROP_fileTypes = {
+	'residentevil3': ['PC EXE',  0, '.exe'], 			   // PC Version
+	'slus_009.23': 	 ['PS SLUS', 1,  '.23'], 			   // Playstation Version
+	'main.dol': 	 ['GC DOL',  2, '.dol'], 			   // GameCube Version
+	'1st_read.bin':  ['DC BIN',  3, '.BIN']  			   // Sega Dreamcast Version
+}
 var RANGES = {
+	/*
+		DROP
+		Nemesis Item Drops
+	*/
+	// PC
+	'DROP_0_itemIds': 	[2453680, 2453696],
+	'DROP_0_itemQuant': [2453696, 2453712],
+	// PS
+	'DROP_1_itemIds': 	[1169792, 1169808],
+	'DROP_1_itemQuant': [1169808, 1169824],
+	// GC
+	'DROP_2_itemIds': 	[4592272, 4592288],
+	'DROP_2_itemQuant': [4592288, 4592304],
+	// DC
+	'DROP_3_itemIds': 	[2813296, 2813312],
+	'DROP_3_itemQuant': [2813312, 2813328],
 	/*
 		IEDIT
 		Item proprieties
@@ -1813,7 +1838,7 @@ var RANGES = {
 	*/
 	'RDT_FILE_MAP_HEADER':			 [0, 192],
 	// Header
-	'RDT_HEADER_CAM_TOTAL':	     	 [0, 4],
+	'RDT_HEADER_CAM_TOTAL':	     	   [0, 4],
 	////////////////////////////////////////////////////////////////////////////////////////
 	/*
 		Item, File or Map

@@ -519,6 +519,16 @@ function main_menu(anim){
 		}
 		PATCHER_showMenu();
 	}
+	if (anim === 11){ // DROP
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		$('#menu-topo-DROP').css({'display': 'inline'});
+		DROP_showMenu();
+	}
 }
 function RDT_checkBKP(){
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
@@ -2349,7 +2359,7 @@ function MIX_showEdit(mode, combId, combHex){
 		document.getElementById('MIX_applyBtn-' + funcMode).onclick = function(){
 			MIX_applyChanges(combId, funcMode);
 		}
-		$('#MIX-item-edit-' + parseInt(funcMode)).css({'display': 'block'});
+		$('#MIX-item-edit-' + parseInt(funcMode)).css({'display': 'block', 'width': '553px', 'left': '750px'});
 		MIX_RENDER_PREVIEW();
 	} else {
 		var c = 0;
@@ -2509,7 +2519,33 @@ function MIX_RENDER_PREVIEW(){
 	}
 }
 /*
-	IEDIT
+	DROP Editor
+*/
+function DROP_showMenu(){
+	document.title = APP_NAME + ' - DROP (Nemesis Item Drop Editor) - Mode: ' + DROP_fileTypes[DROP_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
+	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	$('#menu-DROP-editor').css({'display': 'block'});
+	$('#img-logo').css({'display': 'none'});
+	LOG_scroll();
+}
+function DROP_showEdit(mode, id, hex, quant){
+	if (mode === 0){
+		$('#DROP-holder').css({'width': '728px'});
+		document.getElementById('DROP_EDIT_ITEM').value = hex;
+		document.getElementById('DROP_edit_lbl_itemID').innerHTML = id;
+		document.getElementById('DROP_EDIT_QUANT').value = parseInt(quant, 16);
+		document.getElementById('DROP_edit_lbl_itemName').innerHTML = ITEM[hex][0];
+		$('#DROP_ITEM_edit').css({'display': 'inline', 'width': '550px', 'left': '750px', 'top': '49px'});
+		document.getElementById('DROP_editApplyBtn').onclick = function(){
+			DROP_checkValues(id);
+		}
+	} else {
+		$('#DROP_ITEM_edit').css({'display': 'none'});
+		$('#DROP-holder').css({'width': '1298px'});
+	}
+}
+/*
+	IEDIT Editor
 */
 function IEDIT_showMenu(){
 	document.title = APP_NAME + ' - IEDIT (Item Editor) - Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0] + ' - File: ' + ORIGINAL_FILENAME;
@@ -2534,7 +2570,7 @@ function IEDIT_showEdit(mode, id, hex){
 			IEDIT_applyChanges(id);
 		}
 		$('#IEDIT-holder').css({'width': '728px'});
-		$('#IEDIT_ITEM_edit').css({'display': 'inline'});
+		$('#IEDIT_ITEM_edit').css({'display': 'inline', 'left': '750px', 'width': '550px', 'top': '50px'});
 	} else {
 		$('#IEDIT_ITEM_edit').css({'display': 'none'});
 		$('#IEDIT-holder').css({'width': '1298px'});

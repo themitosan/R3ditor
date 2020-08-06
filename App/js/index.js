@@ -10,7 +10,6 @@ var APP_PATH;
 var HEX_EDITOR;
 var PROCESS_OBJ;
 var RE3_PID = 0;
-var BETA = false;
 var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
 var STATUS = 'Undefined';
@@ -21,7 +20,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = '0.0.3.2 [ALPHA]';
+var APP_VERSION = '0.0.3.3 [ALPHA]';
 var APP_NAME = 'R3ditor V. ' + APP_VERSION;
 /*
 	Onload
@@ -65,15 +64,15 @@ function load(){
 	if (nw.process.arch !== 'ia32'){
 		MEMORY_JS_verifyNodeJsVer();
 	} else {
-		LOG_addLog('warn', 'WARN - You are using a 32 bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
+		LOG_addLog('warn', 'WARN - You are using a 32-bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
 		MAIN_32BitMode = true;
 	}
-	try{
+	try {
 		fs = require('fs-extra');
 		APP_PATH = process.cwd();
 		R3DITOR_CHECK_FILES_AND_DIRS();
 		WZ_verifyConfigFile();
-	} catch(err){
+	} catch (err) {
 		console.error(err);
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#img-logo').fadeOut({duration: 5600, queue: false});
@@ -86,15 +85,6 @@ function load(){
 		LOG_addLog('error', 'ERROR - To run this software properly, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
 		LOG_separator();
 		LOG_addLog('error', err);
-	}
-	if (BETA === true){
-		console.warn('WARN - BETA is true!');
-		console.error('ERROR - BETA is true!');
-		LOG_addLog('error', 'BETA is true!');
-		LOG_addLog('warn', 'BETA is true!');
-		LOG_addLog('log', 'BETA is true!');
-		LOG_addLog('error', 'BETA is true!');
-		alert('ERROR - BETA IS TRUE!');
 	}
 	LOG_scroll();
 }
@@ -128,6 +118,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\Configs\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\RDT');
+	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\DROP') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\DROP');
 	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\IEDIT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\IEDIT');
@@ -861,13 +854,13 @@ function triggerLoad(loadForm){
 	if (loadForm === 5){
 		$('#loadMSGForm').trigger('click');
 	}
-	// RDT
+	// RDT Menu
 	if (loadForm === 6){
 		$('#loadRDTForm').trigger('click');
 	}
-	// Free Slot
+	// DROP
 	if (loadForm === 7){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		$('#loadDROPFile').trigger('click');
 	}
 	// Free Slot
 	if (loadForm === 8){
@@ -1001,9 +994,16 @@ function setLoadFile(input){
 			document.getElementById('loadRDTForm').value = '';
 		}
 	}
-	// Free Slot
+	// DROP Editor
 	if (input === 7){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		cFile = document.getElementById('loadDROPFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load DROP';
+		} else {
+			DROP_loadFile(cFile.path);
+			document.getElementById('loadDROPFile').value = '';
+		}
 	}
 	// Free Slot
 	if (input === 8){
@@ -1107,7 +1107,7 @@ function setLoadFile(input){
 		cFile = document.getElementById('loadIEDITFile').files[0];
 		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
 			loadCancel = true;
-			loadType = 'Load ITEM Editor';
+			loadType = 'Load IEDIT (Item Editor)';
 		} else {
 			IEDIT_loadExec(cFile.path, 0);
 			document.getElementById('loadIEDITFile').value = '';
@@ -1145,9 +1145,6 @@ function setLoadFile(input){
 			PATCHER_applyOnExec(cFile.path);
 			document.getElementById('loadR3PatcherFINAL').value = '';
 		}
-	}
-	if (BETA === true){
-		BETA = false;
 	}
 	if (loadCancel === true){
 		LOG_addLog('warn', 'WARN - Load ' + loadType + ' - Load cancelled');
