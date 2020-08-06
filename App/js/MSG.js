@@ -368,9 +368,6 @@ function MSG_translateHexValues(){
 	var hValues = document.getElementById('msg-hex-toTrans').value;
 	if (hValues !== ''){
 		var solved = solveHEX(hValues);
-		if (BETA === true){
-			console.log(solved);
-		}
 		MSG_startMSGDecrypt_Lv2(solved);
 	} else {
 		cleanMSGFields();
