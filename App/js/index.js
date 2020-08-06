@@ -61,13 +61,13 @@ function load(){
 	//
 	request_render_save = false;
 	currentTime();
-	if (nw.process.arch !== 'ia32'){
-		MEMORY_JS_verifyNodeJsVer();
-	} else {
-		LOG_addLog('warn', 'WARN - You are using a 32-bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
-		MAIN_32BitMode = true;
-	}
 	try {
+		if (nw.process.arch !== 'ia32'){
+			MEMORY_JS_verifyNodeJsVer();
+		} else {
+			LOG_addLog('warn', 'WARN - You are using a 32-bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
+			MAIN_32BitMode = true;
+		}
 		fs = require('fs-extra');
 		APP_PATH = process.cwd();
 		R3DITOR_CHECK_FILES_AND_DIRS();
