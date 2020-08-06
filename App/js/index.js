@@ -85,7 +85,7 @@ function load(){
 		LOG_addLog('error', err);
 		LOG_separator();
 		LOG_addLog('warn', 'WARN - Question: You are using this on Chrome or Firefox?');
-		LOG_addLog('error', 'WARN - If this is true, download <a href="http://nwjs.io/" class="code" target="_blank">Node-Webkit</a> and place all the files on extracted folder!');
+		LOG_addLog('error', 'WARN - If this is true, download <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" class="code" target="_blank">Node-Webkit</a> (<a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-ia32.zip" target="_blank">32-Bit version</a>) and place all the files on extracted folder!');
 	}
 	LOG_scroll();
 }
