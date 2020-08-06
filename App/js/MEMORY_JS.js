@@ -12,7 +12,7 @@ var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;
 var MEM_JS_requreSucess = false;
 var REALTIME_renderToolbar = false;
-
+//
 var TEMP_X_Pos;
 var TEMP_Y_Pos;
 var TEMP_Z_Pos;
@@ -32,6 +32,47 @@ var REALTIME_CurrentRoomNumber = '00';
 //
 var PREV_INVENT = '';
 var PREV_PLAYER = '';
+// Invent Slots
+var SLOT_1_ITEM_HEX;
+var SLOT_1_ITEM_QNT;
+var SLOT_1_ITEM_ATR;
+var SLOT_1_ITEM_NUL;
+var SLOT_2_ITEM_HEX;
+var SLOT_2_ITEM_QNT;
+var SLOT_2_ITEM_ATR;
+var SLOT_2_ITEM_NUL;
+var SLOT_3_ITEM_HEX;
+var SLOT_3_ITEM_QNT;
+var SLOT_3_ITEM_ATR;
+var SLOT_3_ITEM_NUL;
+var SLOT_4_ITEM_HEX;
+var SLOT_4_ITEM_QNT;
+var SLOT_4_ITEM_ATR;
+var SLOT_4_ITEM_NUL;
+var SLOT_5_ITEM_HEX;
+var SLOT_5_ITEM_QNT;
+var SLOT_5_ITEM_ATR;
+var SLOT_5_ITEM_NUL;
+var SLOT_6_ITEM_HEX;
+var SLOT_6_ITEM_QNT;
+var SLOT_6_ITEM_ATR;
+var SLOT_6_ITEM_NUL;
+var SLOT_7_ITEM_HEX;
+var SLOT_7_ITEM_QNT;
+var SLOT_7_ITEM_ATR;
+var SLOT_7_ITEM_NUL;
+var SLOT_8_ITEM_HEX;
+var SLOT_8_ITEM_QNT;
+var SLOT_8_ITEM_ATR;
+var SLOT_8_ITEM_NUL;
+var SLOT_9_ITEM_HEX;
+var SLOT_9_ITEM_QNT;
+var SLOT_9_ITEM_ATR;
+var SLOT_9_ITEM_NUL;
+var SLOT_10_ITEM_HEX;
+var SLOT_10_ITEM_QNT;
+var SLOT_10_ITEM_ATR;
+var SLOT_10_ITEM_NUL;
 /*
 	Current mod is the version of the game.
 	To add support to other versions, increase this number and add the vars in database.js
@@ -103,18 +144,6 @@ function MEMORY_JS_fixVars(inp, v){
 		}
 	}
 }
-function MEMORY_JS_keyPress(){
-	if (MEM_JS_requreSucess === true){
-			window.onkeypress = function(key){
-			if (RE3_LIVE_keyPress_enable === true){
-				// Keys
-				if (key.keyCode === 114 || key.keyCode === 82){ // R = to go title
-					RE3_LIVE_gotoTitleScreen();
-				}
-			}
-		} 
-	}
-}
 function MEMORY_JS_getPosition(){
 	if (MEM_JS_requreSucess === true && PROCESS_OBJ !== undefined && RE3_RUNNING === true){
 		// Stage
@@ -146,46 +175,6 @@ function MEMORY_JS_getPosition(){
 function MEMORY_JS_renderInfo(){
 	if (MEM_JS_requreSucess === true && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
 		var cPlayer;
-		var SLOT_1_ITEM_HEX;
-		var SLOT_1_ITEM_QNT;
-		var SLOT_1_ITEM_ATR;
-		var SLOT_1_ITEM_NUL;
-		var SLOT_2_ITEM_HEX;
-		var SLOT_2_ITEM_QNT;
-		var SLOT_2_ITEM_ATR;
-		var SLOT_2_ITEM_NUL;
-		var SLOT_3_ITEM_HEX;
-		var SLOT_3_ITEM_QNT;
-		var SLOT_3_ITEM_ATR;
-		var SLOT_3_ITEM_NUL;
-		var SLOT_4_ITEM_HEX;
-		var SLOT_4_ITEM_QNT;
-		var SLOT_4_ITEM_ATR;
-		var SLOT_4_ITEM_NUL;
-		var SLOT_5_ITEM_HEX;
-		var SLOT_5_ITEM_QNT;
-		var SLOT_5_ITEM_ATR;
-		var SLOT_5_ITEM_NUL;
-		var SLOT_6_ITEM_HEX;
-		var SLOT_6_ITEM_QNT;
-		var SLOT_6_ITEM_ATR;
-		var SLOT_6_ITEM_NUL;
-		var SLOT_7_ITEM_HEX;
-		var SLOT_7_ITEM_QNT;
-		var SLOT_7_ITEM_ATR;
-		var SLOT_7_ITEM_NUL;
-		var SLOT_8_ITEM_HEX;
-		var SLOT_8_ITEM_QNT;
-		var SLOT_8_ITEM_ATR;
-		var SLOT_8_ITEM_NUL;
-		var SLOT_9_ITEM_HEX;
-		var SLOT_9_ITEM_QNT;
-		var SLOT_9_ITEM_ATR;
-		var SLOT_9_ITEM_NUL;
-		var SLOT_10_ITEM_HEX;
-		var SLOT_10_ITEM_QNT;
-		var SLOT_10_ITEM_ATR;
-		var SLOT_10_ITEM_NUL;
 		REALTIME_CurrentPlayer = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_currentPlayer'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		// Inventory
 		if (REALTIME_CurrentPlayer === '02'){

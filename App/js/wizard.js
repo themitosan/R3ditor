@@ -502,7 +502,7 @@ function WZ_loadFiles(file){
 	if (WINDOW_MOVETOLEFT === true){
 		window.moveTo(0, 0);
 	}
-	MEMORY_JS_keyPress();
+	R3_START_KEYPRESS();
 	if (fs.existsSync(APP_PATH + '\\forceupdate.txt') == true){
 		fs.unlinkSync(APP_PATH + '\\forceupdate.txt');
 		$('#menu-topo').css({'display': 'none'});

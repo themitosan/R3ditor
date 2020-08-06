@@ -1868,8 +1868,8 @@ input[type='range' i]{
     position: absolute;
 }
 .RE3_LIVESTATUS_PERSON_IMG{
-    left: 140px;
-    width: 160px;
+    left: 138px;
+    width: 162px;
     opacity: 0.4;
     display: none;
     filter: blur(2px);
@@ -2436,7 +2436,7 @@ input[type='range' i]{
 .SETTINGS_WINDOW-3{
     top: 78px;
     left: 848px;
-    width: 300px;
+    width: 450px;
     height: 134px;
 }
 .SETTINGS_WINDOW-4{
@@ -2454,19 +2454,19 @@ input[type='range' i]{
 .SETTINGS_WINDOW-6{
     top: 254px;
     left: 848px;
-    width: 364px;
+    width: 450px;
     height: 38px;
 }
 .SETTINGS_WINDOW-7{
     top: 334px;
     left: 848px;
-    width: 316px;
+    width: 450px;
     height: 20px;
 }
 .SETTINGS_FUTURE{
-    top: 10px;
+    top: 38px;
     left: 10px;
-    width: 300px;
+    width: 442px;
     position: absolute;
 }
 /*
