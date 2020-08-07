@@ -417,7 +417,9 @@ function main_menu(anim){
 		$('#menu-utility-aba-2').css({'display': 'none'});
 		$('#menu-utility-aba-3').css({'display': 'none'});
 		$('#menu-utility-aba-4').css({'display': 'none'});
+		$('#menu-utility-aba-5').css({'display': 'none'});
 		$('#mainMenu-patcher-div').css({'display': 'none'});
+		$('#mainMenu-exeEdit-div').css({'display': 'none'});
 	}
 	if (anim === 1){ // Save
 		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});

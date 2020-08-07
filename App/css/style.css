@@ -1270,12 +1270,26 @@ input[type='range' i]{
     position: absolute;
     background-image: linear-gradient(to bottom, #737373, #545454);
 }
+.menu-utility-exeEdit-main{
+    top: 102px;
+    left: 230px;
+    width: 287px;
+    display: none;
+}
+.menu-utility-exeEdit-tab{
+    top: 26px;
+    left: 230px;
+    cursor: auto;
+    display: none;
+    position: absolute;
+    background-image: linear-gradient(to bottom, #737373, #545454);
+}
 .aba-settings-fix{
     left: 970px;
     width: 350px;
 }
 .aba-principal-fix{
-    width: 832px;
+    width: 546px;
 }
 .aba-settings-fix-2{
     top: -44px;

@@ -27,10 +27,10 @@ function WZ_verifyConfigFile(){
 		WZ_showWizardDialog(0);
 		$('#img-logo').css({'display': 'none'});
 		$('#menu-settings').css({'display': 'none'});
-		if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
-			LOG_addLog('log', 'Removing Assets for inicial setup...');
-			deleteFolderRecursive(APP_PATH + '\\Assets');
-		}
+		//if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
+		//	LOG_addLog('log', 'Removing Assets for inicial setup...');
+		//	deleteFolderRecursive(APP_PATH + '\\Assets');
+		//}
 	} else {
 		WZ_showWizard = false;
 		WZ_loadFiles(APP_PATH + '\\Configs\\configs.r3ditor');
@@ -41,7 +41,7 @@ function WZ_showWizardDialog(id){
 	if (WZ_showWizard === true){
 		$('#WZ_dialog').css({'display': 'block'});
 		if (id === 0){
-			document.title = 'R3ditor - Wizard';
+			document.title = 'R3ditor - Wizard Setup';
 			document.getElementById('WZ_title').innerHTML = 'Welcome to R3ditor!';
 			document.getElementById('WZ_content').innerHTML = WZ_DIALOG_0;
 			document.getElementById('WZ_BTN_1').value = 'No';
@@ -547,25 +547,31 @@ function WZ_SHOW_INTERFACE(){
 		$('#menu-utility-aba-2').fadeIn({duration: 200, queue: false});
 		$('#menu-utility-aba-3').fadeIn({duration: 200, queue: false});
 		$('#menu-utility-aba-4').fadeIn({duration: 200, queue: false});
+		$('#menu-utility-aba-5').fadeIn({duration: 200, queue: false});
 		$('#mainMenu-patcher-div').fadeIn({duration: 200, queue: false});
+		$('#mainMenu-exeEdit-div').fadeIn({duration: 200, queue: false});
 		$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
 		$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
 		$('#menu-settings').animate({'top': '32px'}, {duration: 100, queue: false});
 		$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-5').animate({'top': '26px'}, {duration: 140, queue: false});
 		$('#menu-utility-aba-4').animate({'top': '26px'}, {duration: 140, queue: false});
-		$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
 		$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
 		$('#mainMenu-patcher-div').animate({'top': '102px'}, {duration: 100, queue: false});
+		$('#mainMenu-exeEdit-div').animate({'top': '102px'}, {duration: 100, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'inline'});
 		$('#menu-topo').css({'top': '32px', 'display': 'inline'});
 		$('#menu-settings').css({'display': 'inline','top': '32px'});
 		$('#menu-utility').css({'top': '546px', 'display': 'inline'});
 		$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
+		$('#menu-utility-aba-5').css({'top': '26px', 'display': 'inline'});
 		$('#menu-utility-aba-4').css({'top': '26px', 'display': 'inline'});
-		$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
 		$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
+		$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
 		$('#mainMenu-patcher-div').css({'top': '102px', 'display': 'inline'});
+		$('#mainMenu-exeEdit-div').css({'top': '102px', 'display': 'inline'});
 	}
 }
 function WZ_FIRST_BOOT_MESSAGE(){
