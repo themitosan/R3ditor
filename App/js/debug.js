@@ -36,6 +36,33 @@ function DEBUG_processHexPositions(hexVar){
 	}
 }
 /*
+    Item Identify
+*/
+function DEBUG_translateItemHex(hexValue){
+    var c = 0;
+    var hex = '';
+    var listItems = solveHEX(hexValue).match(/.{8,8}/g);
+    while (c < listItems.length){
+        hex = listItems[c];
+        if (hex !== '' && hex !== undefined && hex.length === 8){
+            var hxItem = ITEM[hex.slice(0, 2)][0];
+            var hxQuan = parseInt(hex.slice(2, 4), 16);
+            var hxAttr = ATTR[hex.slice(4, 6)][0];
+            var hexPor = hex.slice(6, 8);
+            // Results
+            var results = '(' + (c + 1) + ') Item: ' + hxItem + '\nQuantity: ' + hxQuan + '\nAttr: ' + hxAttr + '\nPercentage Value: ' + hexPor;
+            LOG_addLog('log', '(' + (c + 1) + ') Query Result: ' + hxItem);
+            LOG_addLog('log', 'Quantity: ' + hxQuan + ' - Attr: ' + hxAttr + ' - Percentage value: ' + hexPor);
+            console.info(results);
+            LOG_separator();
+            LOG_scroll();
+        } else {
+            return 'ERROR - Unable to identify item ' + c + '!';
+        }
+        c++;
+    }
+}
+/*
 	Draw Lines
 	
 	Thanks Amarnath Balasubramanian 

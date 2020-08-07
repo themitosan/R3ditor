@@ -239,22 +239,22 @@ var RDT_MAPAS = {
 	'aa': ['Hospital Map']
 }
 var ATTR = {
-	'00': ['None',								 		  '#fff0',  '0 0 10px #fff0', 'none'], 		  // Use this for puzzle items that don't have the ammo display.
-	'01': ['Remaining ammo in green',		            '#008400', '0 0 2px #004200', '-webkit-box'],
-	'02': ['% remaining in green', 			            '#008400', '0 0 2px #004200', '-webkit-box'],
-	'03': ['Inf. ammo in green', 			            '#008400', '0 0 2px #004200', '-webkit-box'],
-	'05': ['Remaining ammo in red',			            '#840000', '0 0 2px #310000', '-webkit-box'],
-	'06': ['% remaining in red', 			            '#840000', '0 0 2px #310000', '-webkit-box'],
-	'07': ['Inf. ammo in red', 				            '#840000', '0 0 2px #310000', '-webkit-box'],
-	'09': ['Remaining ammo in yellow', 		            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
-	'0a': ['%. remaining in yellow',		            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
-	'0b': ['Inf. ammo in yellow', 			            '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
-	'0d': ['Remaining ammo in blue', 		            '#9393ff', '0 0 2px #004242', '-webkit-box'],
-	'0e': ['% remaining in blue', 			            '#9393ff', '0 0 2px #004242', '-webkit-box'],
-	'0f': ['Inf. ammo in blue', 	 		   			'#9393ff', '0 0 2px #004242', '-webkit-box'],
-	'13': ['Attr. used by M4A1 Assault Rifle (Manual)', '#008400', '0 0 2px #004200', '-webkit-box'],
-	'16': ['Attr. used by M4A1 Assault Rifle',   		'#840000', '0 0 2px #310000', '-webkit-box'],
-	'17': ['Attr. used by M4A1 Assault Rifle (Auto)', 	'#840000', '0 0 2px #310000', '-webkit-box']  // Atributo encontrado na shotgun do Carlos?
+	'00': ['None',								 		  	 '#fff0',  '0 0 10px #fff0', 'none'], 		   // Use this for puzzle items that don't have the ammo display.
+	'01': ['Remaining ammo in green',		            	 '#008400', '0 0 2px #004200', '-webkit-box'],
+	'02': ['% remaining in green', 			           		 '#008400', '0 0 2px #004200', '-webkit-box'],
+	'03': ['Inf. ammo in green', 			           		 '#008400', '0 0 2px #004200', '-webkit-box'],
+	'05': ['Remaining ammo in red',			           		 '#840000', '0 0 2px #310000', '-webkit-box'],
+	'06': ['% remaining in red', 			           		 '#840000', '0 0 2px #310000', '-webkit-box'],
+	'07': ['Inf. ammo in red', 				           		 '#840000', '0 0 2px #310000', '-webkit-box'],
+	'09': ['Remaining ammo in yellow', 		           		 '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
+	'0a': ['%. remaining in yellow',		           		 '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
+	'0b': ['Inf. ammo in yellow', 			           		 '#ffeb00', '0 0 2px #b4b194', '-webkit-box'],
+	'0d': ['Remaining ammo in blue', 		           		 '#9393ff', '0 0 2px #004242', '-webkit-box'],
+	'0e': ['% remaining in blue', 			           		 '#9393ff', '0 0 2px #004242', '-webkit-box'],
+	'0f': ['Inf. ammo in blue', 	 		   				 '#9393ff', '0 0 2px #004242', '-webkit-box'],
+	'13': ['Percentage used by M4A1 Assault Rifle (Manual)', '#008400', '0 0 2px #004200', '-webkit-box'],
+	'16': ['Percentage used by M4A1 Assault Rifle',   		 '#840000', '0 0 2px #310000', '-webkit-box'],
+	'17': ['Infinite used by M4A1 Assault Rifle (Auto)',	 '#840000', '0 0 2px #310000', '-webkit-box']  // Atributo encontrado na shotgun do Carlos?
 }
 // Second var (used for percentage items)
 var VOID = {
@@ -1609,6 +1609,14 @@ var DROP_fileTypes = {
 	'1st_read.bin':  ['DC BIN',  3, '.BIN']  			   // Sega Dreamcast Version
 }
 var RANGES = {
+	/*
+		ISTART
+		Starting Items (WIP)
+	*/
+	'ISTART_0_jillHard':   [2441496, 2441528],
+	'ISTART_0_carlosHard': [2441536, 2441560],
+	'ISTART_0_jillEasy':   [2441576, 2441616],
+	'ISTART_0_carlosEasy': [2441624, 2441656],
 	/*
 		DROP
 		Nemesis Item Drops
