@@ -27,10 +27,10 @@ function WZ_verifyConfigFile(){
 		WZ_showWizardDialog(0);
 		$('#img-logo').css({'display': 'none'});
 		$('#menu-settings').css({'display': 'none'});
-		//if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
-		//	LOG_addLog('log', 'Removing Assets for inicial setup...');
-		//	deleteFolderRecursive(APP_PATH + '\\Assets');
-		//}
+		if (fs.existsSync(APP_PATH + '\\Assets') === true && fs.readdirSync(APP_PATH + '\\Assets').length !== 0){
+			LOG_addLog('log', 'Removing Assets for inicial setup...');
+			deleteFolderRecursive(APP_PATH + '\\Assets');
+		}
 	} else {
 		WZ_showWizard = false;
 		WZ_loadFiles(APP_PATH + '\\Configs\\configs.r3ditor');
