@@ -2582,7 +2582,12 @@ function IEDIT_showEdit(mode, id, hex){
 function PATCHER_showMenu(){
 	$('#img-logo').css({'display': 'none'});
 	$('#menu-topo-MOD').css({'display': 'none'});
-	$('#R3_Patcher_main_menu').css({'display': 'inline'});
+	if (DESIGN_ENABLE_ANIMS === false){
+		$('#R3_Patcher_main_menu').css({'display': 'inline', 'height': '400px', 'top': '124px'});
+	} else {
+		$('#R3_Patcher_main_menu').fadeIn({duration: 200, queue: false});
+		$('#R3_Patcher_main_menu').animate({'top': '124px', 'height': '400px'}, {duration: 240, queue: false});
+	}
 }
 function PATCHER_showNotice(noticeTxt, mode){
 	// Mode 0: Sucess, 1: Error

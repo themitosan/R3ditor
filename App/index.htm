@@ -183,35 +183,6 @@
 
 		<!-- CONTENT -->
 
-		<!-- FORM: DROP Editor -->
-		<div class="none" id="menu-DROP-editor" onclick="main_closeFileList();">
-			<input type="button" id="DROP-aba-menu-1" class="aba aba-left-fix aba-select" value="Nemesis Drops">
-			<div class="menu">
-				<div class="menu-general-content">
-					<center><font class="titulo">Nemesis Drops</font></center>
-					<div class="IEDIT_ITEM_holder" id="DROP-holder">
-						<!-- DROP items goes here -->
-					</div>
-					<!-- Edit -->
-					<div class="RDT-Item-Edit none" id="DROP_ITEM_edit">
-						<center>
-							<font class="titulo">Edit Parameters</font><br>
-							Item ID: <font id="DROP_edit_lbl_itemID">??</font><br><font id="DROP_edit_lbl_itemName">??</font>
-						</center>
-						<div class="menu-separador"></div>
-						Item: 
-						<select id="DROP_EDIT_ITEM" class="item-select-mod RDT_door_selectLockKeyFix no-transform-text DROP_stickyFix">
-							<!-- DROP select items goes here -->
-						</select><br>
-						Quantity: <input type="number" min="0" max="255" step="1" id="DROP_EDIT_QUANT" class="item-select-mod user-can-select RDT-valueEdit-fix DROP_stickyFix">
-						<div class="RDT-applyBtn-div_2">
-							<input type="button" title="Click here to cancel" onclick="DROP_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-							<input type="button" title="Click here to apply!" id="DROP_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- FORM: Patcher -->
 		<div class="R3_Patcher_main_menu_css" id="R3_Patcher_main_menu" onclick="main_closeFileList();">
 			<center><font class="titulo">R3ditor Patcher</font></center>
@@ -222,13 +193,14 @@
 				<div class="menu-separador"></div>
 				<input type="checkbox" checked="true" class="chkbox" id="R3_PATCHER_chkbox_applyItemCombs"><font class="font-chkbox-fix" onclick="UTILS_toggleChkBox('R3_PATCHER_chkbox_applyItemCombs');"> - Apply Item Combinations (MIX)</font><br>
 				<input type="checkbox" checked="true" class="chkbox" id="R3_PATCHER_chkbox_applyItemSettings"><font class="font-chkbox-fix" onclick="UTILS_toggleChkBox('R3_PATCHER_chkbox_applyItemSettings');"> - Apply Item Settings (IEDIT)</font><br>
+				<input type="checkbox" checked="true" class="chkbox" id="R3_PATCHER_chkbox_applyDROP"><font class="font-chkbox-fix" onclick="UTILS_toggleChkBox('R3_PATCHER_chkbox_applyDROP');"> - Apply Nemesis Item Drops (DROP)</font><br>
 				<input type="checkbox" disabled="disabled" class="chkbox" id="R3_PATCHER_chkbox_applyStartItems"><font class="font-chkbox-fix"> - Apply Start Items [WIP]</font>
 			</div>
 			<div id="R3_PATCHER_notice" class="none">
 				<!-- Notice goes here -->
 			</div>
-			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
-			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply btn-apply-fix color-green">
+			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply R3_Patcher_btnFix color-white">
+			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply R3_Patcher_btnFix color-green">
 		</div>
 		<!-- FORM: IEDIT Item Editor -->
 		<div class="none" id="menu-IEDIT-editor" onclick="main_closeFileList();">
@@ -560,6 +532,35 @@
 				</div>
 			</div>
 		</div>
+		<!-- FORM: DROP Editor -->
+		<div class="none" id="menu-DROP-editor" onclick="main_closeFileList();">
+			<input type="button" id="DROP-aba-menu-1" class="aba aba-left-fix aba-select" value="Nemesis Drops">
+			<div class="menu">
+				<div class="menu-general-content">
+					<center><font class="titulo">Nemesis Drops</font></center>
+					<div class="IEDIT_ITEM_holder" id="DROP-holder">
+						<!-- DROP items goes here -->
+					</div>
+					<!-- Edit -->
+					<div class="RDT-Item-Edit none" id="DROP_ITEM_edit">
+						<center>
+							<font class="titulo">Edit Parameters</font><br>
+							Item ID: <font id="DROP_edit_lbl_itemID">??</font><br><font id="DROP_edit_lbl_itemName">??</font>
+						</center>
+						<div class="menu-separador"></div>
+						Item: 
+						<select id="DROP_EDIT_ITEM" class="item-select-mod RDT_door_selectLockKeyFix no-transform-text DROP_stickyFix">
+							<!-- DROP select items goes here -->
+						</select><br>
+						Quantity: <input type="number" min="0" max="255" step="1" id="DROP_EDIT_QUANT" class="item-select-mod user-can-select RDT-valueEdit-fix DROP_stickyFix">
+						<div class="RDT-applyBtn-div_2">
+							<input type="button" title="Click here to cancel" onclick="DROP_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
+							<input type="button" title="Click here to apply!" id="DROP_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- FORM: Settings -->
 		<div class="none" id="menu-SETTINGS" onclick="main_closeFileList();">
 			<input type="button" id="SETTINGS-aba-menu-1" class="aba aba-left-fix aba-select" value="Settings">
@@ -596,8 +597,8 @@
 							<input type="button" class="botao-menu SETTINGS_MENUBTNFIX" title="This option will delete all Assets, RDT Map Files (*.rdtmap), SAV Backups, RDT Backups, Recent Opened lists and all configs!" value="Remove Assets & Reset R3ditor Configs" onclick="SETTINGS_removeFiles(3);">
 						</center>
 					</div>
-					<!-- Paths -->
-					<input type="button" value="Paths" class="INI_inernalTab SETTINGS_ABA-5">
+					<!-- R3ditor Paths -->
+					<input type="button" value="R3ditor Paths" class="INI_inernalTab SETTINGS_ABA-5">
 					<div class="INI_MINIWINDOW SETTINGS_WINDOW-5">
 						RE3 EXE Path: <font title="???" id="SETTINGS_lvl_path_RE3" class="user-can-select">???</font><input type="button" class="botao-menu right" value="Change Path" onclick="triggerLoad(11);"><br>
 						<div class="menu-separador"></div>

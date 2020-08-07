@@ -420,8 +420,8 @@ function WZ_loadFiles(file){
 		}
 	} else {
 		HEX_EDITOR = '';
-		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not defined!';
 		document.getElementById('SETTINGS_lvl_path_HEX').title = '';
+		document.getElementById('SETTINGS_lvl_path_HEX').innerHTML = 'Hex editor was not defined!';
 	}
 	// Last file open path
 	if (cfgs[7] !== undefined){
@@ -514,10 +514,8 @@ function WZ_loadFiles(file){
 		} else {
 			WZ_FIRST_BOOT_MESSAGE();
 		}
-
 		$('#RDT-SLD-hold').css({'height': '472px'});
 		$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
-
 		document.getElementById('app_nwjs_version').innerHTML = process.versions['node-webkit'] + ' (' + process.arch + ')';
 		// Init Memory JS
 		if (MEM_JS_requreSucess === true){
@@ -778,6 +776,7 @@ function SETTINGS_RESET(){
 	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\MIX');
 	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
+	deleteFolderRecursive(APP_PATH + '\\Backup\\DROP');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\IEDIT');
 	deleteFolderRecursive(APP_PATH + '\\Backup\\RDTMAP2');
 	var delInterval = setInterval(function(){
@@ -787,7 +786,8 @@ function SETTINGS_RESET(){
 		var check_4 = fs.existsSync(APP_PATH + '\\Backup\\MIX');
 		var check_5 = fs.existsSync(APP_PATH + '\\Backup\\IEDIT');
 		var check_6 = fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2');
-		if (check_1 === false && check_2 === false && check_3 === false && check_4 === false && check_5 === false && check_6 === false){
+		var check_7 = fs.existsSync(APP_PATH + '\\Backup\\DROP');
+		if (check_1 === false && check_2 === false && check_3 === false && check_4 === false && check_5 === false && check_6 === false && check_7 === false){
 			clearInterval(delInterval);
 			reload();
 		}

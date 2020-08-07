@@ -10,10 +10,11 @@ var DROP_arquivoBruto;
 var DROP_databaseItems;
 var DROP_databaseQuant;
 var DROP_totalItems = 8;
+var DROP_databaseCompiled;
 /*
 	Functions
 */
-function DROP_loadFile(exeFile){
+function DROP_loadFile(exeFile, mode){
 	DROP_showEdit(1);
 	ORIGINAL_FILENAME = exeFile;
 	DROP_fName = getFileName(ORIGINAL_FILENAME);
@@ -23,7 +24,9 @@ function DROP_loadFile(exeFile){
 	// Read Values
 	DROP_databaseItems = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemIds'][0], RANGES['DROP_' + DROP_gameVersion + '_itemIds'][1]);
 	DROP_databaseQuant = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][0], RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][1]);
-	main_menu(11);
+	if (mode === 0){
+		main_menu(11);
+	}
 	DROP_decompileItems();
 	// End
 	LOG_addLog('log', 'DROP - File loaded sucessfully! (Mode: ' + DROP_fileTypes[DROP_fName][0] + ')');
@@ -96,7 +99,7 @@ function DROP_saveFile(hexValue){
 		LOG_addLog('log', 'DROP - The file was saved successfull!');
 		LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		LOG_separator();
-		DROP_loadFile(ORIGINAL_FILENAME);
+		DROP_loadFile(ORIGINAL_FILENAME, 0);
 	} catch (err) {
 		LOG_addLog('error', 'Unable to save file!');
 		LOG_addLog('error', 'Reason: ' + err);

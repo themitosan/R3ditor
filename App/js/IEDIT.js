@@ -100,7 +100,7 @@ function IEDIT_saveOnFile(){
 			IEDIT_updateList();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to save IEDIT file!');
-			LOG_addLog('error', 'INFO: ' + err);
+			LOG_addLog('error', 'ERROR - Reason: ' + err);
 		}
 	}
 	LOG_scroll();

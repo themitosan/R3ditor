@@ -17,23 +17,31 @@ function PATCHER_createPatch(executable){
 	MIX_loadExe(executable, 1);
 	LOG_addLog('log', 'PATCHER - Loading IEDIT settings...');
 	IEDIT_loadExec(executable, 1);
+	LOG_addLog('log', 'PATCHER - Loading DROP settings...');
+	DROP_loadFile(executable, 1);
 	LOG_separator();
 	LOG_addLog('log', 'PATCHER - Generating Patch...');
 	var PATCH_FILE =  'R3 PATCHER\nCreated on ' + APP_NAME + '\nPatch File: ' + ORIGINAL_FILENAME + '\nPatch date: ' + currentTime() +
 					  '\nPlatform: ' + PATCHER_platform + '\n\nR3_VER = ' + APP_VERSION + '\nR3_DAT = ' + currentTime() + '\nR3_PLAT = ' + 
 					  PATCHER_platform + '\nR3_MIX = ' + btoa(MIX_Database) + '\nR3_IEDIT = ' + btoa(IEDIT_Database) + 
-					  '\nR3_WIP = WIP! ( Sorry =P )';
+					  '\nR3_DROP = ' + btoa(DROP_databaseItems + DROP_databaseQuant);
 	var newFilePath = 'Patch_' + currentTime() + '_' + PATCHER_platform;
 	R3DITOR_SAVE(newFilePath, PATCH_FILE, 'utf-8', 'r3exepatch');
-	PATCHER_patchDecompiled = undefined;
-	PATCHER_arquivoBruto = undefined;
-	PATCHER_platform = undefined;
-	IEDIT_Database = undefined;
-	MIX_Database = undefined;
-	LOG_separator();
+	PATCHER_cleanVars();
 	LOG_addLog('log', 'PATCHER - Patch created successfully!');
 	LOG_addLog('log', 'PATCHER - Path: <font class="user-can-select">' + newFilePath + '.r3exepatch</font>');
 	LOG_scroll();
+}
+function PATCHER_cleanVars(){
+	MIX_Database = undefined;
+	IEDIT_Database = undefined;
+	PATCHER_platform = undefined;
+	ORIGINAL_FILENAME = undefined;
+	DROP_databaseItems = undefined;
+	DROP_databaseQuant = undefined;
+	PATCHER_arquivoBruto = undefined;
+	DROP_databaseCompiled = undefined;
+	PATCHER_patchDecompiled = undefined;
 }
 function PATCHER_loadPatch(patchFile){
 	PATCHER_patchDecompiled = [];
@@ -53,14 +61,16 @@ function PATCHER_loadPatch(patchFile){
 	// Set variables ready!
 	MIX_Database  = atob(PATCHER_patchDecompiled[9].replace('R3_MIX = ', ''));
 	IEDIT_Database = atob(PATCHER_patchDecompiled[10].replace('R3_IEDIT = ', ''));
+	DROP_databaseCompiled = atob(PATCHER_patchDecompiled[11].replace('R3_DROP = ', ''));
 	// Final
 	main_menu(10);
 	LOG_scroll();
 }
 function PATCHER_applyOnExec(targetExec){
+	var USE_DROP = document.getElementById('R3_PATCHER_chkbox_applyDROP').checked;
 	var USE_MIX = document.getElementById('R3_PATCHER_chkbox_applyItemCombs').checked;
 	var USE_IEDIT = document.getElementById('R3_PATCHER_chkbox_applyItemSettings').checked;
-	if (USE_MIX === false && USE_IEDIT === false){
+	if (USE_MIX === false && USE_IEDIT === false && USE_DROP === false){
 		LOG_addLog('warn', 'WARN - You need to select one of the options above to apply!');
 	} else {
 		if (PATCHER_patchDecompiled !== undefined && fs.existsSync(targetExec) !== false){
@@ -85,6 +95,13 @@ function PATCHER_applyOnExec(targetExec){
 				RE3_FILE_START = PATCHER_FINAL_FILE.slice(0, IEDIT_fileTypes[PATCHER_platform][1]);
 				RE3_FILE_END = PATCHER_FINAL_FILE.slice(IEDIT_fileTypes[PATCHER_platform][2], PATCHER_FINAL_FILE.length);
 				PATCHER_FINAL_FILE = RE3_FILE_START + IEDIT_Database + RE3_FILE_END;
+			}
+			if (USE_DROP === true){
+				LOG_addLog('log', 'PATCHER - Applying DROP...');
+				var DROP_VERSION = DROP_fileTypes[getFileName(ORIGINAL_FILENAME)][1];
+				RE3_FILE_START = PATCHER_FINAL_FILE.slice(0, RANGES['DROP_' + DROP_VERSION + '_itemIds'][0]);
+				RE3_FILE_END = PATCHER_FINAL_FILE.slice(RANGES['DROP_' + DROP_VERSION + '_itemQuant'][1], PATCHER_FINAL_FILE.length);
+				PATCHER_FINAL_FILE = RE3_FILE_START + DROP_databaseCompiled + RE3_FILE_END;
 			}
 			try{
 				fs.writeFileSync(ORIGINAL_FILENAME, PATCHER_FINAL_FILE, 'hex');

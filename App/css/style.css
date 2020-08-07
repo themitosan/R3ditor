@@ -167,6 +167,7 @@ input[type='range' i]{
     position: absolute;
 }
 .font-chkbox-fix{
+    cursor: pointer;
     margin-left: 22px;
 }
 .updater_title_holder, li{
@@ -2436,11 +2437,11 @@ input[type='range' i]{
     left: 24px;
 }
 .SETTINGS_ABA-6{
-    top: 232px;
+    top: 254px;
     left: 858px;
 }
 .SETTINGS_ABA-7{
-    top: 312px;
+    top: 332px;
     left: 858px;
 }
 .SETTINGS_WINDOW-1{
@@ -2474,13 +2475,13 @@ input[type='range' i]{
     height: 79px;
 }
 .SETTINGS_WINDOW-6{
-    top: 254px;
+    top: 276px;
     left: 848px;
     width: 450px;
     height: 38px;
 }
 .SETTINGS_WINDOW-7{
-    top: 334px;
+    top: 354px;
     left: 848px;
     width: 450px;
     height: 20px;
@@ -2757,16 +2758,17 @@ input[type='range' i]{
     R3ditor Patcher
 */
 .R3_Patcher_main_menu_css{
-    top: 124px;
+    top: 120px;
     left: 450px;
     color: #fff;
     padding: 4px;
     width: 440px;
-    height: 400px;
+    height: 344px;
     display: none;
+    overflow: hidden;
     border-radius: 6px;
     position: absolute;
-    box-shadow: 0 0 10px #5e3379;
+    box-shadow: 0 0 50px #5e337963;
     background-image: linear-gradient(to bottom, #444, #222);
 }
 .R3_Patcher_details_holder_css{
@@ -2781,6 +2783,11 @@ input[type='range' i]{
     margin-bottom: 10px;
     box-shadow: 0 0 7px #000;
     background-image: linear-gradient(to bottom, #1100178c, #050417ba);
+}
+.R3_Patcher_btnFix{
+    width: 212px;
+    margin-top: -4px;
+    border-radius: 2px;
 }
 /*
     3D props

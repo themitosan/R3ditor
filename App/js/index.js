@@ -12,6 +12,7 @@ var PROCESS_OBJ;
 var RE3_PID = 0;
 var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
+var APP_NAME = 'R3ditor';
 var STATUS = 'Undefined';
 var EXTERNAL_APP_PID = 0;
 var SHOW_EDITONHEX = false;
@@ -20,13 +21,12 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = '0.0.3.3 [ALPHA]';
-var APP_NAME = 'R3ditor V. ' + APP_VERSION;
+var APP_VERSION = 'V. 0.0.3.3 [ALPHA]';
 /*
 	Onload
 */
 window.onload = function(){
-	load();
+	R3_startLoad();
 }
 window.onclose = function(){
 	localStorage.clear();
@@ -51,30 +51,34 @@ function reload(){
 	localStorage.clear();
 	location.reload();
 }
-function load(){
+function R3_startLoad(){
 	localStorage.clear();
 	sessionStorage.clear();
-	console.info(APP_NAME);
-	LOG_addLog('log', APP_NAME);
-	$('#app_version').html(APP_VERSION);
-	LOG_separator();
-	//
 	request_render_save = false;
 	currentTime();
+	var oldAppVer = APP_VERSION;
 	try {
 		if (nw.process.arch !== 'ia32'){
 			MEMORY_JS_verifyNodeJsVer();
+			APP_VERSION = APP_VERSION + ' (x64)';
 		} else {
-			LOG_addLog('warn', 'WARN - You are using a 32-bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
+			APP_VERSION = APP_VERSION + ' (x86)';
 			MAIN_32BitMode = true;
+			LOG_addLog('warn', 'WARN - You are using a 32-bit version of NW.js! <font title="A tool to view and edit some variables while the game is running">RE3 Live Status</font> will be not avaliable!');
 		}
+		APP_NAME = APP_NAME + ' ' + APP_VERSION;
+		$('#app_version').html(oldAppVer);
+		LOG_addLog('log', APP_NAME);
+		LOG_separator();
+		//
 		fs = require('fs-extra');
 		APP_PATH = process.cwd();
+		console.info(APP_NAME);
 		R3DITOR_CHECK_FILES_AND_DIRS();
 		WZ_verifyConfigFile();
 	} catch (err) {
 		console.error(err);
-		$('#log-programa').css({'top': '2px', 'height': '200px'});
+		$('#log-programa').css({'top': '2px', 'height': '100px'});
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#img-logo').fadeOut({duration: 5600, queue: false});
 		} else {
@@ -85,7 +89,7 @@ function load(){
 		LOG_addLog('error', err);
 		LOG_separator();
 		LOG_addLog('warn', 'WARN - Question: You are using this on Chrome or Firefox?');
-		LOG_addLog('error', 'WARN - If this is true, download <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" class="code" target="_blank">Node-Webkit</a> (<a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-ia32.zip" target="_blank">32-Bit version</a>) and place all the files on extracted folder!');
+		LOG_addLog('error', 'WARN - If this is true, download <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" class="code" target="_blank">NW.js</a> (<a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-ia32.zip" target="_blank">32-Bit version</a>) and place all the files on extracted folder!');
 	}
 	LOG_scroll();
 }
@@ -126,11 +130,14 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Backup\\IEDIT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\IEDIT');
 	}
+	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
+		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
+	}
 	if (fs.existsSync(APP_PATH + '\\Update\\Extract') === true){
 		deleteFolderRecursive(APP_PATH + '\\Update\\Extract');
 	}
-	if (fs.existsSync(APP_PATH + '\\CONTRIBUTING.md') === true){
-		fs.unlinkSync(APP_PATH + '\\CONTRIBUTING.md');
+	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
+		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDTMAP2');
@@ -140,9 +147,6 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\App\\Update\\check.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\App\\Update\\check.r3ditor');
-	}
-	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
-		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
 }
 /*
@@ -208,7 +212,7 @@ function showNotify(titulo, texto, tempo){
 	catch(err){
 		if (DEBUG === true){
 			console.error('(Notification) ERROR: ' + err);
-			LOG_addLog('error', '(Notification) ERROR: ' + err);
+			LOG_addLog('error', '(Notification) ERROR - ' + err);
 		}
 	}
 }
@@ -1002,7 +1006,7 @@ function setLoadFile(input){
 			loadCancel = true;
 			loadType = 'Load DROP';
 		} else {
-			DROP_loadFile(cFile.path);
+			DROP_loadFile(cFile.path, 0);
 			document.getElementById('loadDROPFile').value = '';
 		}
 	}
