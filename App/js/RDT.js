@@ -95,6 +95,7 @@ var RDT_CANCRASH = false;
 var RDT_ERRORMOTIVE = '';
 var RDT_currentAudio = '';
 var RDT_lastFileOpened = '';
+var RDT_ARD_compatMode = false;
 
 // MASKS
 var RDT_SLD_FOUNDPOS;
@@ -126,6 +127,7 @@ function RDT_resetVars(){
 	RDT_propModelsArray = [];
 	RDT_SLD_totalMasksAva = 0;
 	block_size_hex = undefined;
+	RDT_ARD_compatMode = false;
 	RDT_messageCodesArray = [];
 	RDT_SLD_MASKS_POSITION = [];
 	RDT_arquivoBruto = undefined;
@@ -223,6 +225,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 				RDT_getCameras();
 				$('#RDT-aba-menu-9').css({'display': 'inline'});
 			} else {
+				RDT_ARD_compatMode = true;
 				$('#RDT-aba-menu-9').css({'display': 'none'});
 			}
 			RDT_getPropModelsArray();
@@ -1327,6 +1330,7 @@ function RDT_DOOR_APPLY(index){
 	if (hexType === '62'){
 		offset0    = ident.slice(RANGES['RDT_door-1-doorHexOffset0'][0], RANGES['RDT_door-1-doorHexOffset0'][1]).toLowerCase();	
 	}
+	var nCP;
 	var cX 		   = document.getElementById('RDT_door-edit-X').value.toLowerCase();
 	var cY 		   = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
 	var cZ 		   = document.getElementById('RDT_door-edit-Y').value.toLowerCase();
@@ -1335,7 +1339,11 @@ function RDT_DOOR_APPLY(index){
 	var nY 		   = document.getElementById('RDT_door-edit-NY').value.toLowerCase();
 	var nZ 		   = document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
 	var nR 		   = document.getElementById('RDT_door-edit-NR').value.toLowerCase();
-	var nCP 	   = document.getElementById('RDT_door-edit-NC').value.toLowerCase();
+	if (RDT_ARD_compatMode === false){
+		nCP 	   	   = document.getElementById('RDT_door-edit-NC').value.toLowerCase();
+	} else {
+		nCP 	   	   = document.getElementById('RDT_door-edit-NC-TXT').value.toLowerCase();
+	}
 	var nOO 	   = document.getElementById('RDT_door-edit-OO').value.toLowerCase();
 	var nLF 	   = document.getElementById('RDT_door-edit-LF').value.toLowerCase();
 	var nLK 	   = document.getElementById('RDT_door-edit-LK').value.toLowerCase();

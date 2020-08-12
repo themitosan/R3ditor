@@ -1559,10 +1559,16 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-DispTxt').value	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][0], 				RANGES['RDT_door-' + DOOR_READ_MODE + '-doorDisplayText'][1]).toUpperCase();
 	document.getElementById('RDT_door-edit-zIndex').value 	  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][0], 							RANGES['RDT_door-' + DOOR_READ_MODE + '-zIndex'][1]);
 	document.getElementById('RDT_door-edit-UNKFLAG_B').value  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][0], 					RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][1]);
+	document.getElementById('RDT_door-edit-NC-TXT').value 	  = nextCam.toUpperCase();
 	//
 	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;
 	RDT_renderNextRDTLbl();
+	if (RDT_ARD_compatMode === true){
+		$('#RDT_door-edit-NC').css({'display': 'none'});
+		$('#RDT_doorCamPreviewImg').css({'display': 'none'});
+		$('#RDT_door-edit-NC-TXT').css({'display': 'inline'});
+	}
 	document.getElementById('RDT-btn-aplicarDoor').onclick = function(){
 		RDT_DOOR_APPLY(index);
 	}
@@ -1641,7 +1647,7 @@ function RDT_cancelDoorCamEdit(){
 	RDT_doorShowCamPreview(1);
 }
 function RDT_applyDoorCamSelect(){
-	if (enable_mod === true){
+	if (enable_mod === true && RDT_ARD_compatMode === false){
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC').value;
 	} else {
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC-TXT').value;
