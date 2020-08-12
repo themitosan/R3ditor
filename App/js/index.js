@@ -21,7 +21,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = 'V. 0.0.3.3 [ALPHA]';
+var APP_VERSION = 'V. 0.0.3.4 [ALPHA]';
 /*
 	Onload
 */
@@ -867,9 +867,9 @@ function triggerLoad(loadForm){
 	if (loadForm === 7){
 		$('#loadDROPFile').trigger('click');
 	}
-	// Free Slot
+	// RE3SET
 	if (loadForm === 8){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		$('#loadRE3SET').trigger('click');
 	}
 	// Free Slot
 	if (loadForm === 9){
@@ -1010,9 +1010,16 @@ function setLoadFile(input){
 			document.getElementById('loadDROPFile').value = '';
 		}
 	}
-	// Free Slot
+	// RE3SET Editor
 	if (input === 8){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		cFile = document.getElementById('loadRE3SET').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load RE3SETTINGS';
+		} else {
+			RE3SET_loadFile(cFile.path, 0);
+			document.getElementById('loadRE3SET').value = '';
+		}
 	}
 	// Free Slot
 	if (input === 9){

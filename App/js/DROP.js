@@ -44,8 +44,8 @@ function DROP_decompileItems(){
 		//console.info('Current Item: ' + c + ' - Item Hex: ' + ITEM[DROP_itemId][0] + ' - Quant: ' + DROP_itemQu);
 		var DROP_HTML_TEMPLATE = '<div class="RDT-Item DROP-func-comb-bg" id="DROP_item_' + (c + 1) + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="DROP_editBtn_' + 
 								 c + '" value="Modify" onclick="DROP_showEdit(0, ' + c + ', \'' + DROP_itemId + '\', \'' + DROP_itemQu + '\');"><img src="' + APP_PATH + '\\App\\Img\\items\\' + 
-								 DROP_itemId + '.png" class="DROP_imgPrev"><div class="DROP_divLeft">(' + (c + 1) + ') Item <font class="user-can-select">' + DROP_itemId.toUpperCase() + '</font> - ' + 
-								 ITEM[DROP_itemId][0] + '<div class="menu-separador"></div>Quantity: ' + parseInt(DROP_itemQu, 16) + '</div></div>';
+								 DROP_itemId + '.png" title="' + ITEM[DROP_itemId][0] + '" class="DROP_imgPrev"><div class="DROP_divLeft">(' + (c + 1) + ') Item <font class="user-can-select">' + 
+								 DROP_itemId.toUpperCase() + '</font> - ' + ITEM[DROP_itemId][0] + '<div class="menu-separador"></div>Quantity: ' + parseInt(DROP_itemQu, 16) + '</div></div>';
 		$('#DROP-holder').append(DROP_HTML_TEMPLATE);
 		//
 		currentItem = (currentItem + 2);

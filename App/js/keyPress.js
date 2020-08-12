@@ -5,12 +5,12 @@
 */
 function R3_START_KEYPRESS(){
 	window.onkeyup = function(key){
-		//console.info(key);
+		console.info(key);
 		if (RE3_LIVE_keyPress_enable === true){
 			// Keys
 			if (MEM_JS_requreSucess === true){
-				// R = to go title
-				if (key.keyCode === 82){
+				// F2 = to go title
+				if (key.keyCode === 113){
 					RE3_LIVE_gotoTitleScreen();
 				}
 			}
@@ -34,6 +34,11 @@ function R3_START_KEYPRESS(){
 		// (F8) Run MERCE
 		if (key.keyCode === 119){
 			checkCanPlay(0, 0);
+		}
+		// (F9) Run RE3 Mod + Open Livestatus
+		if (key.keyCode === 120){
+			checkCanPlay(1, 1);
+			RE3_LIVE_openForm();
 		}
 	}
 }

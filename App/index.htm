@@ -24,13 +24,16 @@
 		<script type="text/javascript" src="js/TIM.js"></script>
 		<script type="text/javascript" src="js/MSG.js"></script>
 		<script type="text/javascript" src="js/RDT.js"></script>
+		<script type="text/javascript" src="js/RDT_Experiment.js"></script>
+		<!-- EXE Editing -->
 		<script type="text/javascript" src="js/MIX.js"></script>
 		<script type="text/javascript" src="js/DROP.js"></script>
 		<script type="text/javascript" src="js/IEDIT.js"></script>
+		<script type="text/javascript" src="js/RE3SET.js"></script>
+		<!-- Utils -->
 		<script type="text/javascript" src="js/utils.js"></script>
 		<script type="text/javascript" src="js/PATCHER.js"></script>
 		<script type="text/javascript" src="js/MEMORY_JS.js"></script>
-		<script type="text/javascript" src="js/RDT_Experiment.js"></script>
 		<script type="text/javascript" src="js/keyPress.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
@@ -77,6 +80,7 @@
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
 			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 			<input type="button" class="botao-menu" value="DROP Editor" title="Click here to edit Resident Evil 3 Nemesis item drops" onclick="triggerLoad(7);">
+			<!--<input type="button" class="botao-menu" value="RE3SET Editor" title="Click here to edit Resident Evil 3 Nemesis General Settings" onclick="triggerLoad(8);">-->
 		</div>
 		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
@@ -184,6 +188,12 @@
 			<!-- Right -->
 			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 		</div>
+		<!-- Menu RE3SET -->
+		<div class="menu-topo none" id="menu-topo-RE3SET">
+			<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(8);" value="Open File">
+			<!-- Right -->
+			<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
+		</div>
 
 		<!-- CONTENT -->
 
@@ -206,6 +216,121 @@
 			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply R3_Patcher_btnFix color-white">
 			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply R3_Patcher_btnFix color-green">
 		</div>
+
+		<!-- FORM: RE3SET (RE3 Settings) -->
+		<div class="none" id="menu-RE3SET-editor" onclick="main_closeFileList();">
+			<input type="button" id="RE3SET-aba-menu-1" class="aba aba-left-fix aba-select" value="Start Items">
+			<div class="menu">
+				<div class="menu-general-content">
+					<center><font class="titulo">Start Items</font></center>
+					<div class="IEDIT_ITEM_holder">
+						<div class="RE3SET_DIV_itemsAllHolder" id="RE3SET_DIV_itemsAllHolder">
+							<input type="button" class="RE3SET_TAB_itemEasy" value="Easy Mode">
+							<!-- Easy -->
+							<div class="RE3SET_DIV_itemEasy_Holder">
+								<input type="button" value="Jill Valentine" class="RE3SET_TAB_jillItems">
+								<div class="RE3SET_DIV_itemEasy_jillHolder">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_1">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_1" class="RE3SET_IMG_item_1">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_2">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_2" class="RE3SET_IMG_item_2">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_3">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_3" class="RE3SET_IMG_item_3">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_4">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_4" class="RE3SET_IMG_item_4">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_5">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_5" class="RE3SET_IMG_item_5">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_6">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_6" class="RE3SET_IMG_item_6">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_7">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_7" class="RE3SET_IMG_item_7">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_8">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_8" class="RE3SET_IMG_item_8">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_9">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_9" class="RE3SET_IMG_item_9">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_10">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_JILL_10" class="RE3SET_IMG_item_10">
+								</div>
+								<input type="button" value="Carlos Oliveira" class="RE3SET_TAB_carlosItems">
+								<div class="RE3SET_DIV_itemEasy_carlosHolder">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_1">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_1" class="RE3SET_IMG_item_1">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_2">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_2" class="RE3SET_IMG_item_2">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_3">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_3" class="RE3SET_IMG_item_3">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_4">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_4" class="RE3SET_IMG_item_4">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_5">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_5" class="RE3SET_IMG_item_5">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_6">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_6" class="RE3SET_IMG_item_6">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_7">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_7" class="RE3SET_IMG_item_7">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_8">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_8" class="RE3SET_IMG_item_8">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_9">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_9" class="RE3SET_IMG_item_9">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_10">0</font>
+									<img src="img/items/13.png" id="RE3SET_IMG_EASY_CARLOS_10" class="RE3SET_IMG_item_10">
+								</div>
+							</div>
+							<!-- Hard -->
+							<input type="button" class="RE3SET_TAB_itemHard" value="Hard Mode">
+							<div class="RE3SET_DIV_itemHard_Holder">
+								<input type="button" value="Jill Valentine" class="RE3SET_TAB_jillItems">
+								<div class="RE3SET_DIV_itemEasy_jillHolder">
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_1" class="RE3SET_IMG_item_1">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_1">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_2" class="RE3SET_IMG_item_2">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_2">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_3" class="RE3SET_IMG_item_3">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_3">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_4" class="RE3SET_IMG_item_4">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_4">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_5" class="RE3SET_IMG_item_5">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_5">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_6" class="RE3SET_IMG_item_6">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_6">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_7" class="RE3SET_IMG_item_7">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_7">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_8" class="RE3SET_IMG_item_8">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_8">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_9" class="RE3SET_IMG_item_9">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_9">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_10" class="RE3SET_IMG_item_10">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_10">0</font>
+								</div>
+								<input type="button" value="Carlos Oliveira" class="RE3SET_TAB_carlosItems">
+								<div class="RE3SET_DIV_itemEasy_carlosHolder">
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_1" class="RE3SET_IMG_item_1">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_1">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_2" class="RE3SET_IMG_item_2">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_2">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_3" class="RE3SET_IMG_item_3">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_3">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_4" class="RE3SET_IMG_item_4">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_4">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_5" class="RE3SET_IMG_item_5">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_5">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_6" class="RE3SET_IMG_item_6">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_6">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_7" class="RE3SET_IMG_item_7">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_7">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_8" class="RE3SET_IMG_item_8">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_8">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_9" class="RE3SET_IMG_item_9">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_9">0</font>
+									<img src="img/items/00.png" id="RE3SET_IMG_HARD_CARLOS_10" class="RE3SET_IMG_item_10">
+									<font class="RE3SET_LBL_inventItem RE3SET_LBL_inventAjust_10">0</font>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<!-- FORM: IEDIT Item Editor -->
 		<div class="none" id="menu-IEDIT-editor" onclick="main_closeFileList();">
 			<input type="button" id="IEDIT-aba-menu-1" class="aba aba-left-fix aba-select" value="Item Settings">
@@ -1124,8 +1249,10 @@
 				<div class="menu-general-content" id="RDT-camera-hold">
 					<div id="RDT_BG_9" class="RDT_BG_IMAGE"></div>
 					<center><font class="titulo">Cameras - Total: <font id="RDT_lbl_totalCameras">???</font></font></center>
-					<div id="RDT_camera_holder" class="RDT-holder">						
-						<!-- CAMERA Goes Here -->
+					<div class="RDT_cameraHolderFix">
+						<div id="RDT_camera_holder" class="RDT-holder RDT_cameraHolderFix_2">						
+							<!-- CAMERA Goes Here -->
+						</div>
 					</div>
 					<!-- RDT CAMERA - Edit -->
 					<div class="RDT-Item-Edit none" id="RDT-camera-Edit">
@@ -1877,6 +2004,7 @@
 			<input type="file" onchange="setLoadFile(5);"  id="loadMSGForm" accept=".msg"/>
 			<input type="file" onchange="setLoadFile(6);"  id="loadRDTForm" accept=".rdt, .ard"/>
 			<input type="file" onchange="setLoadFile(7);"  id="loadDROPFile" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(8);"  id="loadRE3SET" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>

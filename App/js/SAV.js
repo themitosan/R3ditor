@@ -1,4 +1,4 @@
-﻿/*
+/*
 	R3ditor - SAV.js
 	By mitosan/mscore/misto_quente/mscorehdr
 	Help me - please!
@@ -25,12 +25,12 @@ var INDICADOR_15;
 /*
 	Ranges
 */
+var S_END;
+var S_HEADER;
 var SAVE_INDICADOR_HEADER;		  // Header
+var SAVE_INDICADOR_HEADER_END;
 var SAVE_INDICADOR_HEADER_START;  // 0x0000 to 0x2000
 var SAVE_INDICADOR_HEADER_MIDDLE;						
-var SAVE_INDICADOR_HEADER_END;
-var S_HEADER;
-var S_END;
 var range_0x2204_0x2207;
 var range_0x2209_0x220D;
 var range_0x2210_0x2211;

@@ -531,6 +531,16 @@ function main_menu(anim){
 		$('#menu-topo-DROP').css({'display': 'inline'});
 		DROP_showMenu();
 	}
+	if (anim === 12){ // RE3SET
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		$('#menu-topo-RE3SET').css({'display': 'inline'});
+		RE3SET_showMenu();
+	}
 }
 function RDT_checkBKP(){
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
@@ -2521,6 +2531,16 @@ function MIX_RENDER_PREVIEW(){
 	}
 }
 /*
+	RE3SETTINGS Editor
+*/
+function RE3SET_showMenu(){
+	document.title = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
+	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	$('#menu-RE3SET-editor').css({'display': 'block'});
+	$('#img-logo').css({'display': 'none'});
+	LOG_scroll();
+}
+/*
 	DROP Editor
 */
 function DROP_showMenu(){
@@ -2534,7 +2554,7 @@ function DROP_showEdit(mode, id, hex, quant){
 	if (mode === 0){
 		$('#DROP-holder').css({'width': '728px'});
 		document.getElementById('DROP_EDIT_ITEM').value = hex;
-		document.getElementById('DROP_edit_lbl_itemID').innerHTML = id;
+		document.getElementById('DROP_edit_lbl_itemID').innerHTML = (id + 1);
 		document.getElementById('DROP_EDIT_QUANT').value = parseInt(quant, 16);
 		document.getElementById('DROP_edit_lbl_itemName').innerHTML = ITEM[hex][0];
 		$('#DROP_ITEM_edit').css({'display': 'inline', 'width': '550px', 'left': '750px', 'top': '49px'});

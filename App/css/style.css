@@ -224,6 +224,7 @@ input[type='range' i]{
 .botao-menu{
 	color: #0e0;
 	border: none;
+    outline: none;
     cursor: pointer;
 	margin-left: 2px;
 	padding-top: 4px;
@@ -236,12 +237,14 @@ input[type='range' i]{
 }
 .botao-menu:active{
     color: #0f0;
+    outline: none;
     box-shadow: 0 0 4px #222;
     text-shadow: 0 0 10px #fff;
     background-image: linear-gradient(to bottom, #000, #001c00);
 }
 .botao-aplicar{
     color: #fff;
+    outline: none;
     margin-right: 2px;
     box-shadow: 0px 0px 4px #002808;
     text-shadow: 0px 0px 10px #1cff00;
@@ -682,6 +685,7 @@ input[type='range' i]{
     border: 1px;
     width: 250px;
     padding: 16px;
+    outline: none;
     cursor: pointer;
     margin-left: 4px;
     border-radius: 0px;
@@ -998,6 +1002,7 @@ input[type='range' i]{
 .botao-add-comando{
     width: 99%;
     border: none;
+    outline: none;
     cursor: pointer;
     margin-top: 2px;
     padding-top: 4px;
@@ -1018,6 +1023,7 @@ input[type='range' i]{
     float: right;
     border: none;
     width: 100px;
+    outline: none;
     cursor: pointer;
     margin-top: 5px;
     padding-top: 5px;
@@ -1273,7 +1279,7 @@ input[type='range' i]{
 .menu-utility-exeEdit-main{
     top: 102px;
     left: 230px;
-    width: 287px;
+    width: 286px; /* 402px */
     display: none;
 }
 .menu-utility-exeEdit-tab{
@@ -1843,6 +1849,14 @@ input[type='range' i]{
     width: 1092px;
     position: absolute;
 }
+.RDT_cameraHolderFix{
+    z-index: 2;
+    display: flex;
+    overflow: hidden;
+}
+.RDT_cameraHolderFix_2{
+    z-index: 1;
+}
 .RDT_editCamera_iconPreviewDiv{
     top: 66px;
     width: 186px;
@@ -1997,7 +2011,7 @@ input[type='range' i]{
 .RE3_LIVESTATUS_INVENT_BG{
     color: #fff;
     height: 326px;
-    border-radius: 2px;
+    border-radius: 6px;
     background-color: #000041;
 }
 .RE3_LIVESTATUS_INPUTNUM{
@@ -2134,11 +2148,13 @@ input[type='range' i]{
 .RE3_LIVESTATUS_INVENT_SLOT_1{
     top: 80px;
     margin-top: 0px !important;
+    border-top-left-radius: 6px;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_2{
     top: 80px;
     left: 188px;
     margin-top: 0px !important;
+    border-top-right-radius: 6px;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_3{
     top: 112px;
@@ -2170,11 +2186,13 @@ input[type='range' i]{
 .RE3_LIVESTATUS_INVENT_SLOT_9{
     top: 208px;
     margin-top: 0px !important;
+    border-bottom-left-radius: 6px;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_10{
     top: 208px;
     left: 188px;
     margin-top: 0px !important;
+    border-bottom-right-radius: 6px;
 }
 .RE3_LIVESTATUS_LBL_ITEM{
     z-index: 1;
@@ -2728,6 +2746,250 @@ input[type='range' i]{
 }
 .MIX-func-infBullets-bg{
     background-image: linear-gradient(to bottom, #a26e6e, #805370);
+}
+/*
+    RE3SET
+*/
+.RE3SET_DIV_itemsAllHolder{
+    top: 0px;
+    left: 12px;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+.RE3SET_TAB_itemEasy{
+    top: 53px;
+    z-index: 2;
+    left: 14px;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding-top: 2px;
+    position: absolute;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-image: linear-gradient(to bottom, #7d67c9, #5842a2);
+}
+.RE3SET_TAB_itemHard{
+    top: 53px;
+    z-index: 2;
+    left: 454px;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding-top: 2px;
+    position: absolute;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 2px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-image: linear-gradient(to bottom, #4710ff, #2700ab);
+}
+.RE3SET_DIV_itemEasy_Holder{
+    top: 72px;
+    z-index: 1;
+    color: #fff;
+    width: 432px;
+    height: 434px;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 10px #222;
+    background-image: linear-gradient(to bottom, #5842a2, #423471);
+}
+.RE3SET_DIV_itemHard_Holder{
+    top: 72px;
+    z-index: 1;
+    left: 440px;
+    color: #fff;
+    width: 432px;
+    height: 434px;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 10px #222;
+    background-image: linear-gradient(to bottom, #2700ab, #1d066d);
+}
+.RE3SET_TAB_jillItems{
+    top: 7px;
+    left: 16px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: inherit;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 0 10px #07004061;
+    background-image: linear-gradient(to bottom, #2a2a65, #000040);
+}
+.RE3SET_DIV_itemEasy_jillHolder{
+    top: 30px;
+    left: 4px;
+    width: 208px;
+    height: 400px;
+    border-radius: 6px;
+    position: absolute;
+    background-color: #00002b;
+    box-shadow: 0 0 10px #07004061;
+}
+.RE3SET_TAB_carlosItems{
+    top: 7px;
+    left: 232px;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: inherit;
+    padding-top: 4px;
+    padding-left: 8px;
+    position: absolute;
+    padding-right: 8px;
+    padding-bottom: 4px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 0 10px #07004061;
+    background-image: linear-gradient(to bottom, #2a2a65, #000040);
+}
+.RE3SET_DIV_itemEasy_carlosHolder{
+    top: 30px;
+    left: 220px;
+    width: 208px;
+    height: 400px;
+    border-radius: 6px;
+    position: absolute;
+    background-color: #00002b;
+    box-shadow: 0 0 10px #07004061;
+}
+/* Items Labels*/
+.RE3SET_LBL_inventItem{
+    z-index: 3;
+    color: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    position: absolute;
+    display: -webkit-box;
+}
+.RE3SET_LBL_inventAjust_1{
+    top: 48px;
+    left: 10px;
+}
+.RE3SET_LBL_inventAjust_2{
+    top: 48px;
+    left: 114px;
+}
+.RE3SET_LBL_inventAjust_3{
+    top: 128px;
+    left: 10px;
+}
+.RE3SET_LBL_inventAjust_4{
+    top: 128px;
+    left: 114px;
+}
+.RE3SET_LBL_inventAjust_5{
+    top: 208px;
+    left: 10px;
+}
+.RE3SET_LBL_inventAjust_6{
+    top: 208px;
+    left: 114px;
+}
+.RE3SET_LBL_inventAjust_7{
+    top: 288px;
+    left: 10px;
+}
+.RE3SET_LBL_inventAjust_8{
+    top: 288px;
+    left: 114px;
+}
+.RE3SET_LBL_inventAjust_9{
+    top: 368px;
+    left: 10px;
+}
+.RE3SET_LBL_inventAjust_10{
+    top: 368px;
+    left: 114px;
+}
+/* Items Imgs */
+.RE3SET_IMG_item_1{
+    width: 104px;
+    z-index: 2;
+    cursor: pointer;
+    border-top-left-radius: 10px;
+}
+.RE3SET_IMG_item_2{
+    width: 104px;
+    z-index: 2;
+    cursor: pointer;
+    position: absolute;
+    border-top-right-radius: 10px;
+}
+.RE3SET_IMG_item_3{
+    top: 80px;
+    z-index: 2;
+    left: 0px;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_4{
+    top: 80px;
+    z-index: 2;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_5{
+    left: 0px;
+    z-index: 2;
+    top: 160px;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_6{
+    top: 160px;
+    z-index: 2;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_7{
+    left: 0px;
+    z-index: 2;
+    top: 240px;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_8{
+    top: 240px;
+    z-index: 2;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+}
+.RE3SET_IMG_item_9{
+    left: 0px;
+    z-index: 2;
+    top: 320px;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+    border-bottom-left-radius: 10px;
+}
+.RE3SET_IMG_item_10{
+    top: 320px;
+    z-index: 2;
+    width: 104px;
+    cursor: pointer;
+    position: absolute;
+    border-bottom-right-radius: 10px;
 }
 /*
     DROP
