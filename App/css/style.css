@@ -714,6 +714,7 @@ input[type='range' i]{
     left: 684px;
     width: 612px;
     position: absolute;
+    z-index: 1 !important;
     text-align: -webkit-right;
 }
 .RDT-applyBtn-div_2{
@@ -1083,6 +1084,9 @@ input[type='range' i]{
     border-radius: 6px;
     margin-bottom: 6px;
 }
+.RDT_doorPosHolder{
+    margin-top: 14px;
+}
 .RDT_coordsHolder_A{
     width: 172px;
     margin-top: 8px;
@@ -1092,9 +1096,9 @@ input[type='range' i]{
     margin-top: -5px;
 }
 .RDT_coordsHolder_C{
-    top: 18px;
+    top: 12px;
     left: 180px;
-    width: 220px;
+    width: 230px;
     position: absolute;
 }
 .RDT_coordsHolder_D{
@@ -1799,8 +1803,27 @@ input[type='range' i]{
 /*
     RDT Door Edit Prev
 */
+.RDT_doorEdit_holderZFix{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1 !important;
+}
+.RDT_doorEditCamBg{
+    top: 0px;
+    z-index: 0;
+    height: 100%;
+    position: absolute;
+    border-radius: 4px;
+    background-size: cover;
+    background-color: #000;
+    width: calc(100% - 6px);
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to left, #0000007d, #0000);
+}
 .imgPreviewCamSpawn{
-    width: 210px;
+    width: 220px;
     margin-top: 6px;
     border-radius: 4px;
     box-shadow: 0px 0px 10px #858dbfa3;

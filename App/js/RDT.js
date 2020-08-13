@@ -1941,7 +1941,7 @@ function RDT_MSG_transferMessageToMsgEdit(msgId){
 		MSG_CURRENT_RDT_MESSAGE_END = parseInt(RDT_arquivoBruto.indexOf(sessionStorage.getItem('MESSAGE_HEX_' + msgId)) + sessionStorage.getItem('MESSAGE_HEX_' + msgId).length);
 		MSG_CURRENT_RDT_MESSAGE_START = RDT_arquivoBruto.indexOf(sessionStorage.getItem('MESSAGE_HEX_' + msgId));
 		MSG_startMSGDecrypt_Lv2(msg_transfer);
-		TRANSFER_RDT_TO_MSG();
+		RDT_TRANSFER_RDT_TO_MSG();
 	} else {
 		LOG_addLog('error', 'MAP - ERROR: Unable to read message because it was not found!');
 		LOG_scroll();

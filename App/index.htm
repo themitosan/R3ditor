@@ -1432,82 +1432,88 @@
 					</div>
 					<!-- RDT: Doors - Edit -->
 					<div class="RDT-Item-Edit none" id="RDT-door-Edit">
-						<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Header: <font id="RDT_lbl_door_header">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
-						<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
-							<div class="RDT_coordsHolder_A">
-								<font class="RE3_LIVESTATUS_X_color">X Position</font>: 
-								<input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4">
-							</div>
-							<div class="RDT_coordsHolder_B">
-								<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: 
-								<input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4">
-							</div>
-							<div class="RDT_coordsHolder_B">
-								<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: 
-								<input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4">
-							</div>
-							<div class="RDT_coordsHolder_B">
-								<font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4"></div>
-							<div class="RDT_doorNextPosFix">
-								<div class="RDT_coordsHolder_A">
-									<font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4">
+						<div id="RDT_doorEdit_bgCam" class="RDT_doorEditCamBg"></div>
+						<div class="RDT_doorEdit_holderZFix">
+							<center><font class="titulo">Edit Parameters</font><br>Door: <font id="RDT-lbl-door-index">??</font> - ID: <font id="RDT-lbl-doorEdit-id">??</font> - Header: <font id="RDT_lbl_door_header">??</font> - Leads to: <font id="RDT_lbl_door_nextRDT">???</font></center>
+							<div id="RDT-door-edit-form" class="RDT_doorEditHolderFix">
+								<div class="RDT_doorPosHolder">
+									<div class="RDT_coordsHolder_A">
+										<font class="RE3_LIVESTATUS_X_color">X Position</font>: 
+										<input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-X" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_Y_color">Y Position</font>: 
+										<input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Z" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_Z_color">Z Position</font>: 
+										<input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-Y" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_R_color" title="Rotation">R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_0" id="RDT_door-edit-R" placeholder="0000" maxlength="4">
+									</div>
 								</div>
-								<div class="RDT_coordsHolder_B">
-									<font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4">
+								<div class="RDT_doorNextPosFix">
+									<div class="RDT_coordsHolder_A">
+										<font class="RE3_LIVESTATUS_X_color">Spawn X Position</font>: <input type="text" placeholder="XXXX" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NX" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_Y_color">Spawn Y Position</font>: <input type="text" placeholder="YYYY" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NY" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4">
+									</div>
+									<div class="RDT_coordsHolder_B">
+										<font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4">
+									</div>
+									<div id="RDT_DOOR_UNK_DIV_A" class="RDT_doorEdit_zIndexFix">
+										<font class="RE3_LIVESTATUS_Z_color">Z-Index</font>: 
+										<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_5" id="RDT_door-edit-zIndex" placeholder="00" maxlength="2">
+									</div>
 								</div>
-								<div class="RDT_coordsHolder_B">
-									<font class="RE3_LIVESTATUS_Z_color">Spawn Z Position</font>: <input type="text" placeholder="ZZZZ" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NZ" placeholder="0000" maxlength="4">
+								<div class="RDT_doorOtherFix">
+									<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>
+									<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00" maxlength="2"></div>
+									<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00" maxlength="2"></div>
+									<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
+									<div class="RDT_coordsHolder_B">
+										Next Cam: <input type="text" onkeyup="RDT_renderEditDoorCamPreview();" class="item-select-mod RDT_door_textEditFix_2 none" placeholder="00" id="RDT_door-edit-NC-TXT" maxlength="2">
+										<select class="item-select-mod no-transform-text RDT_door_editCamSelectFix" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
+											<!-- Cam goes here -->			
+										</select>
+									</div>
+									<div class="RDT_coordsHolder_C">
+										<center>
+											Next Cam Preview: <img id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
+										</center>
+									</div>
 								</div>
-								<div class="RDT_coordsHolder_B">
-									<font class="RE3_LIVESTATUS_R_color" title="Rotation">Spawn R Position</font>: <input type="text" placeholder="RRRR" class="item-select-mod RDT_door_textEditFix_1" id="RDT_door-edit-NR" placeholder="0000" maxlength="4">
+								<div id="RDT_door_edit_copyPasteOptions_div">
+									<input type="button" title="Click here to copy spawn path" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
+									<input type="button" title="Click here to paste spawn path" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
+									<input type="button" title="Click here to use Player Position" onclick="RDT_enableDisableDoorUsePlayerPos(0);" class="botao-menu botao-aplicar none" id="RDT_door_usePlayerPos" value="Use Player Pos.">
 								</div>
-								<div id="RDT_DOOR_UNK_DIV_A" class="RDT_doorEdit_zIndexFix">
-									<font class="RE3_LIVESTATUS_Z_color">Z-Index</font>: 
-									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_5" id="RDT_door-edit-zIndex" placeholder="00" maxlength="2">
+								<div id="RDT_door_edit_usePlayerPos_div" class="none">
+									Use Player Pos. In: 
+									<input type="button" onclick="RDT_applyDoorUsePlayerPos(0);" title="Set the door location with Player Pos." class="botao-menu botao-aplicar RDT_door_cameraCopyPasteFix" value="On Door Pos.">
+									<input type="button" onclick="RDT_applyDoorUsePlayerPos(1);" title="Set spawn location with Player Pos." class="botao-menu botao-aplicar" value="On Spawn Pos.">
+									<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(1);" class="botao-menu" value="Cancel">	
 								</div>
-							</div>
-							<div class="RDT_doorOtherFix">
-								<div class="RDT_coordsHolder_A">Door Type: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-DT" placeholder="00" maxlength="2"></div>
-								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00" maxlength="2"></div>
-								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00" maxlength="2"></div>
-								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
-								<div class="RDT_coordsHolder_B">
-									Next Cam: <input type="text" onkeyup="RDT_renderEditDoorCamPreview();" class="item-select-mod RDT_door_textEditFix_2 none" placeholder="00" id="RDT_door-edit-NC-TXT" maxlength="2">
-									<select class="item-select-mod no-transform-text RDT_door_editCamSelectFix" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
-										<!-- Cam goes here -->			
+								<div class="menu-separador"></div>
+									Display Message: 
+									<select class="item-select-mod RDT_fixForSeparador no-transform-text RDT_door_select_width_fix" id="RDT_door-edit-DispTxt">
+										<!-- Door display text options goes here -->
 									</select>
+								<div class="menu-separador"></div>
+								<div class="RDT_coordsHolder_E">Lock Key: 
+									<select class="item-select-mod RDT_door_selectLockKeyFix no-transform-text" id="RDT_door-edit-LK">
+										<!-- Items goes here -->
+									</select>
+									Lock Flag: 
+									<input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00">
+									Unk. Flag: 
+									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
 								</div>
-								<div class="RDT_coordsHolder_C">
-									<center>
-										Next Cam Preview: <img id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
-									</center>
-								</div>
-							</div>
-							<div id="RDT_door_edit_copyPasteOptions_div">
-								<input type="button" title="Click here to copy spawn path" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
-								<input type="button" title="Click here to paste spawn path" onclick="RDT_copyPastePos(1);" class="botao-menu" value="Paste Spawn Path">
-								<input type="button" title="Click here to use Player Position" onclick="RDT_enableDisableDoorUsePlayerPos(0);" class="botao-menu botao-aplicar none" id="RDT_door_usePlayerPos" value="Use Player Pos.">
-							</div>
-							<div id="RDT_door_edit_usePlayerPos_div" class="none">
-								Use Player Pos. In: 
-								<input type="button" onclick="RDT_applyDoorUsePlayerPos(0);" title="Set the door location with Player Pos." class="botao-menu botao-aplicar RDT_door_cameraCopyPasteFix" value="On Door Pos.">
-								<input type="button" onclick="RDT_applyDoorUsePlayerPos(1);" title="Set spawn location with Player Pos." class="botao-menu botao-aplicar" value="On Spawn Pos.">
-								<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(1);" class="botao-menu" value="Cancel">	
-							</div>
-							<div class="menu-separador"></div>
-								Display Message: 
-								<select class="item-select-mod RDT_fixForSeparador no-transform-text RDT_door_select_width_fix" id="RDT_door-edit-DispTxt">
-									<!-- Door display text options goes here -->
-								</select>
-							<div class="menu-separador"></div>
-							<div class="RDT_coordsHolder_E">Lock Key: 
-								<select class="item-select-mod RDT_door_selectLockKeyFix no-transform-text" id="RDT_door-edit-LK">
-									<!-- Items goes here -->
-								</select>
-								Lock Flag: 
-								<input type="text" class="item-select-mod RDT_door_textEditFix_3" id="RDT_door-edit-LF" placeholder="00">
-								Unk. Flag: 
-								<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
 							</div>
 						</div>
 						<!-- APPLY DOOR -->

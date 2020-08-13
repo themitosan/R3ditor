@@ -1628,27 +1628,35 @@ function RDT_editItem_renderIconPreview(){
 	document.getElementById('RDT_editItem_itemIconPreview').src = APP_PATH + '\\App\\Img\\items\\' + IC.toLowerCase() + '.png';
 }
 function RDT_renderEditDoorCamPreview(){
-	var rst = parseInt(parseInt(document.getElementById('RDT_door-edit-NS').value, 16) + 1).toString();
 	var nrn = document.getElementById('RDT_door-edit-NRN').value;
+	var rst = parseInt(parseInt(document.getElementById('RDT_door-edit-NS').value, 16) + 1).toString();
 	var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
-	var camFile = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + '.JPG';
-	if (fs.existsSync(camFile) === true){
-		if (RDT_ARD_compatMode === true){
-			document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
-		} else {
+	var nCam = document.getElementById('RDT_door-edit-NC-TXT').value.toString();
+	if (nCam.length === 2){
+		var camFileCss = '../Assets/DATA_A/BSS/' + rComp + nCam + '.JPG';
+		var camFile = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + rComp + nCam + '.JPG';
+		if (fs.existsSync(camFile) === true){
 			document.getElementById('RDT_doorCamPreviewImg').src = camFile;
-			document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
+			$('#RDT_doorEdit_bgCam').css({'background-image': 'url("' + camFileCss + '")'});
+			if (RDT_ARD_compatMode !== true){
+				document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
+			}
+		} else {
+			if (RDT_ARD_compatMode !== true){
+				LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
+				LOG_scroll();
+			}
+			$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
+			$('#RDT_doorEdit_bgCam').css({'background-image': 'url("../img/404.png")'});
+			document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 		}
 	} else {
-		if (RDT_ARD_compatMode !== true){
-			LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
-		}
-		document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 		$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
+		$('#RDT_doorEdit_bgCam').css({'background-image': 'url("../img/404.png")'});
+		document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 	}
-	LOG_scroll();
 }
-function TRANSFER_RDT_TO_MSG(){
+function RDT_TRANSFER_RDT_TO_MSG(){
 	main_closeFileList();
 	document.title = APP_NAME + ' - Transfering message...';
 	$('#menu-RDT').css({'display': 'none'});
