@@ -1963,13 +1963,13 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-NR').value  = REALTIME_R_Pos;
 		document.getElementById('RDT_door-edit-NRN').value = REALTIME_CurrentRoomNumber;
 		document.getElementById('RDT_door-edit-NS').value  = '0' + (parseInt(REALTIME_CurrentStage) - 1);
-	}
-	document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
-	if (enable_mod === true){
-		document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
+		document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
+		if (enable_mod === true){
+			document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
+		}
+		RDT_renderEditDoorCamPreview();
 	}
 	RDT_enableDisableDoorUsePlayerPos(1);
-	RDT_renderEditDoorCamPreview();
 }
 function RE3_LIVE_RENDER(){
 	if (MEM_JS_canRender === true){
