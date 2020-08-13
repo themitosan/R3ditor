@@ -223,6 +223,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 			RDT_getEnemiesArray();
 			if (RDT_fileType === 'RDT'){
 				RDT_getCameras();
+				RDT_ARD_compatMode = false;
 				$('#RDT-aba-menu-9').css({'display': 'inline'});
 			} else {
 				RDT_ARD_compatMode = true;
@@ -1330,7 +1331,6 @@ function RDT_DOOR_APPLY(index){
 	if (hexType === '62'){
 		offset0    = ident.slice(RANGES['RDT_door-1-doorHexOffset0'][0], RANGES['RDT_door-1-doorHexOffset0'][1]).toLowerCase();	
 	}
-	var nCP;
 	var cX 		   = document.getElementById('RDT_door-edit-X').value.toLowerCase();
 	var cY 		   = document.getElementById('RDT_door-edit-Z').value.toLowerCase();
 	var cZ 		   = document.getElementById('RDT_door-edit-Y').value.toLowerCase();
@@ -1339,17 +1339,13 @@ function RDT_DOOR_APPLY(index){
 	var nY 		   = document.getElementById('RDT_door-edit-NY').value.toLowerCase();
 	var nZ 		   = document.getElementById('RDT_door-edit-NZ').value.toLowerCase();
 	var nR 		   = document.getElementById('RDT_door-edit-NR').value.toLowerCase();
-	if (RDT_ARD_compatMode === false){
-		nCP 	   	   = document.getElementById('RDT_door-edit-NC').value.toLowerCase();
-	} else {
-		nCP 	   	   = document.getElementById('RDT_door-edit-NC-TXT').value.toLowerCase();
-	}
 	var nOO 	   = document.getElementById('RDT_door-edit-OO').value.toLowerCase();
 	var nLF 	   = document.getElementById('RDT_door-edit-LF').value.toLowerCase();
 	var nLK 	   = document.getElementById('RDT_door-edit-LK').value.toLowerCase();
 	var nType	   = document.getElementById('RDT_door-edit-DT').value.toLowerCase();
 	var nStage 	   = document.getElementById('RDT_door-edit-NS').value.toLowerCase();
 	var nRN 	   = document.getElementById('RDT_door-edit-NRN').value.toLowerCase();
+	var nCP 	   = document.getElementById('RDT_door-edit-NC-TXT').value.toLowerCase();
 	var zIndex	   = document.getElementById('RDT_door-edit-zIndex').value.toLowerCase();
 	var displayTxt = document.getElementById('RDT_door-edit-DispTxt').value.toLowerCase();
 	var UnkFlag    = document.getElementById('RDT_door-edit-UNKFLAG_B').value.toLowerCase();

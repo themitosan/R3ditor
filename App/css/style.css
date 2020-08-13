@@ -1091,6 +1091,12 @@ input[type='range' i]{
     width: 172px;
     margin-top: -5px;
 }
+.RDT_coordsHolder_C{
+    top: 18px;
+    left: 180px;
+    width: 220px;
+    position: absolute;
+}
 .RDT_coordsHolder_D{
     width: 300px;
     margin-top: -5px;
@@ -1279,7 +1285,7 @@ input[type='range' i]{
 .menu-utility-exeEdit-main{
     top: 102px;
     left: 230px;
-    width: 286px; /* 402px */
+    width: 402px; /* 402px */
     display: none;
 }
 .menu-utility-exeEdit-tab{
@@ -1591,9 +1597,14 @@ input[type='range' i]{
     left: 406px;
     padding: 4px;
     width: 262px;
+    outline: none;
     position: absolute;
     text-transform: none;
+    background-color: #0000;
     box-shadow: 0px 0px 0px #000;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-image: linear-gradient(to right, #000, #0000);
 }
 .fileList_details{
     margin-top: -104px;
@@ -1789,12 +1800,10 @@ input[type='range' i]{
     RDT Door Edit Prev
 */
 .imgPreviewCamSpawn{
-    width: 340px;
+    width: 210px;
     margin-top: 6px;
+    border-radius: 4px;
     box-shadow: 0px 0px 10px #858dbfa3;
-}
-.RDT_door_img_applyBtnFix{
-    left: 350px;
 }
 .RDT_cam_holderInfos{
     width: 63.2%;
@@ -1896,6 +1905,9 @@ input[type='range' i]{
 }
 .RDT_cam_imgFix{
     margin-bottom: -168px !important;
+}
+.RDT_door_editCamSelectFix{
+    width: 98px;
 }
 /*
     Filelist

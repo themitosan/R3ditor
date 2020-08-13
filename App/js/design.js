@@ -1525,7 +1525,6 @@ function RDT_showEditDoor(index, id, hex){
 	var roomNumber;
 	var DOOR_READ_MODE;
 	main_closeFileList();
-	RDT_doorShowCamPreview(1);
 	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
 	document.getElementById('RDT-lbl-doorEdit-id').innerHTML = id;
@@ -1561,16 +1560,20 @@ function RDT_showEditDoor(index, id, hex){
 	document.getElementById('RDT_door-edit-UNKFLAG_B').value  = hex.slice(RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][0], 					RANGES['RDT_door-' + DOOR_READ_MODE + '-doorHexOffset1'][1]);
 	document.getElementById('RDT_door-edit-NC-TXT').value 	  = nextCam.toUpperCase();
 	//
-	document.getElementById('RDT_lbl_door_editCam').innerHTML = nextCam.toUpperCase();
 	document.getElementById('RDT_door-edit-NRN').value = roomNumber;
 	RDT_renderNextRDTLbl();
 	if (RDT_ARD_compatMode === true){
 		$('#RDT_door-edit-NC').css({'display': 'none'});
-		$('#RDT_doorCamPreviewImg').css({'display': 'none'});
 		$('#RDT_door-edit-NC-TXT').css({'display': 'inline'});
+	} else {
+		$('#RDT_door-edit-NC').css({'display': 'inline'});
+		$('#RDT_door-edit-NC-TXT').css({'display': 'none'});
 	}
 	document.getElementById('RDT-btn-aplicarDoor').onclick = function(){
 		RDT_DOOR_APPLY(index);
+	}
+	if (RDT_ARD_compatMode === false){
+		document.getElementById('RDT_door-edit-NC').value = nextCam.toUpperCase();
 	}
 	if (enable_mod === true){
 		RDT_renderEditDoorCamPreview();
@@ -1610,7 +1613,6 @@ function RDT_renderNextRDTLbl(){
 						c++;
 					}
 				}
-				document.getElementById('RDT_door-edit-NC').value = document.getElementById('RDT_lbl_door_editCam').innerHTML;
 				$('#RDT_doorCamPreviewImg').css({'display': 'inline'});
 			} else {
 				document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
@@ -1631,41 +1633,20 @@ function RDT_renderEditDoorCamPreview(){
 	var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
 	var camFile = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + rComp + document.getElementById('RDT_door-edit-NC').value.toString() + '.JPG';
 	if (fs.existsSync(camFile) === true){
-		document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
-		document.getElementById('RDT_doorCamPreviewImg').src = camFile;
+		if (RDT_ARD_compatMode === true){
+			document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
+		} else {
+			document.getElementById('RDT_doorCamPreviewImg').src = camFile;
+			document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
+		}
 	} else {
-		LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
+		if (RDT_ARD_compatMode !== true){
+			LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
+		}
 		document.getElementById('RDT_doorCamPreviewImg').src = APP_PATH + '/App/img/404.png';
 		$('#RDT_door-edit-NC').append('<option disabled>No Cam Avaliable</option>');
-		LOG_scroll();
 	}
-}
-function RDT_cancelDoorCamEdit(){
-	var pCam = document.getElementById('RDT_lbl_door_editCam').innerHTML;
-	document.getElementById('RDT_door-edit-NC-TXT').value = pCam;
-	document.getElementById('RDT_door-edit-NC').value = pCam;
-	RDT_doorShowCamPreview(1);
-}
-function RDT_applyDoorCamSelect(){
-	if (enable_mod === true && RDT_ARD_compatMode === false){
-		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC').value;
-	} else {
-		document.getElementById('RDT_lbl_door_editCam').innerHTML = document.getElementById('RDT_door-edit-NC-TXT').value;
-	}
-	RDT_doorShowCamPreview(1);
-}
-function RDT_doorShowCamPreview(mode){
-	if (mode === 0){
-		$('#RDT_applyDoorDiv').css({'display': 'none'});
-		$('#RDT-door-edit-form').css({'display': 'none'});
-		$('#RDT_applyDoorCamDiv').css({'display': 'block'});
-		$('#RDT_doorCamPrevewDiv').css({'display': 'block'});
-	} else {
-		$('#RDT_doorCamPrevewDiv').css({'display': 'none'});
-		$('#RDT_applyDoorCamDiv').css({'display': 'none'});
-		$('#RDT-door-edit-form').css({'display': 'block'});
-		$('#RDT_applyDoorDiv').css({'display': 'block'});
-	}
+	LOG_scroll();
 }
 function TRANSFER_RDT_TO_MSG(){
 	main_closeFileList();
@@ -1954,8 +1935,8 @@ function R3ditor_disableLiveStatusButton(){
 	// Another Buttons
 	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
 	$('#RDT_door_usePlayerPos').css({'display': 'none'});
+	$('#RDT_useJillPos_3DProp').css({'display': 'none'});
 	$('#RDT_useJillPos_Item').css({'display': 'none'});
-	$('#RDT_useJillPos_3DProp').css({'display': 'none'})
 	RDT_enableDisableDoorUsePlayerPos(1);
 }
 function RDT_enableDisableDoorUsePlayerPos(mode){
@@ -1969,6 +1950,8 @@ function RDT_enableDisableDoorUsePlayerPos(mode){
 	}
 }
 function RDT_applyDoorUsePlayerPos(mode){
+	document.getElementById('RDT_door-edit-NRN').value = REALTIME_CurrentRoomNumber;
+	document.getElementById('RDT_door-edit-NS').value = '0' + (parseInt(REALTIME_CurrentStage) - 1);
 	if (mode === 0){
 		document.getElementById('RDT_door-edit-X').value = REALTIME_X_Pos;
 		document.getElementById('RDT_door-edit-Y').value = REALTIME_Z_Pos;
@@ -1981,12 +1964,10 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-NZ').value = REALTIME_Z_Pos;
 		document.getElementById('RDT_door-edit-NR').value = REALTIME_R_Pos;
 	}
+	document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
 	if (enable_mod === true){
 		document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
-	} else {
-		document.getElementById('RDT_door-edit-NC-TXT').vaue = REALTIME_CurrentCam.toUpperCase();
 	}
-	document.getElementById('RDT_lbl_door_editCam').innerHTML = REALTIME_CurrentCam.toUpperCase();
 	RDT_enableDisableDoorUsePlayerPos(1);
 	RDT_renderEditDoorCamPreview();
 }
@@ -2035,10 +2016,10 @@ function RE3_LIVE_RENDER(){
 		}
 		// Stage
 		var cRDT = REALTIME_CurrentRDT + '.RDT';
-		if (cRDT !== RE3_LIVE_prevRDT){
+		if (cRDT !== RE3_LIVE_prevRDT && REALTIME_CurrentRDT !== undefined){
 			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').innerHTML = REALTIME_CurrentRDT + '.RDT';
-			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
 			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRDT').title = RDT_locations[REALTIME_CurrentRDT][0];
+			document.getElementById('RE3_LIVESTATUS_lbl_CurrentRoomNumber').innerHTML = REALTIME_CurrentRoomNumber;
 			document.getElementById('RE3_LIVESTATUS_lbl_OriginalLocalName').innerHTML = RDT_locations[REALTIME_CurrentRDT][0];
 			document.getElementById('RE3_LIVESTATUS_lbl_OriginalCityLocation').innerHTML = CIDADE[MEMORY_JS_fixVars(parseInt(REALTIME_CurrentStage - 1), 2)][1];
 			RE3_LIVE_prevRDT = cRDT;

@@ -381,8 +381,7 @@ function deleteFolderRecursive(path){
 	runExternalSoftware('cmd', ['/C', 'rd', '/s', '/q', path]);
 };
 // Function WIP
-function WIP(){
-	LOG_separator();
+function R3_WIP(){
 	LOG_addLog('warn', 'R3DITOR - Sorry buddy... This Function / Option still #WIP!');
 	LOG_scroll();
 }
@@ -1018,7 +1017,8 @@ function setLoadFile(input){
 			loadCancel = true;
 			loadType = 'Load RE3SETTINGS';
 		} else {
-			RE3SET_loadFile(cFile.path, 0);
+			R3_WIP();
+			//RE3SET_loadFile(cFile.path, 0);
 			document.getElementById('loadRE3SET').value = '';
 		}
 	}

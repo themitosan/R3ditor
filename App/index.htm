@@ -80,7 +80,7 @@
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
 			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 			<input type="button" class="botao-menu" value="DROP Editor" title="Click here to edit Resident Evil 3 Nemesis item drops" onclick="triggerLoad(7);">
-			<!-- <input type="button" class="botao-menu" value="RE3SET Editor" title="Click here to edit Resident Evil 3 Nemesis General Settings" onclick="triggerLoad(8);"> -->
+			<input type="button" class="botao-menu" value="RE3SET Editor" title="Click here to edit Resident Evil 3 Nemesis General Settings" onclick="triggerLoad(8);">
 		</div>
 		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
@@ -1084,7 +1084,7 @@
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
 			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
 			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();"/>
-			<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" onclick="FILELIST_clearTextBox();" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" placeholder="Search RDT... (11A for R11A.RDT)">
+			<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" onclick="FILELIST_clearTextBox();" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" placeholder="Search RDT (11A = R11A.RDT)">
 			<!-- Lists -->
 			<div class="fileList_aba_holder" id="fileList_aba_list">
 				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
@@ -1471,6 +1471,17 @@
 								<div class="RDT_coordsHolder_B">Next Stage: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NS" placeholder="00" maxlength="2"></div>
 								<div class="RDT_coordsHolder_B">Open Orientation: <input type="text" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-OO" placeholder="00" maxlength="2"></div>
 								<div class="RDT_coordsHolder_B">Next Room Number: <input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_door_textEditFix_2" id="RDT_door-edit-NRN" placeholder="00" maxlength="2"></div>
+								<div class="RDT_coordsHolder_B">
+									Next Cam: <input type="text" onkeyup="RDT_renderEditDoorCamPreview();" class="item-select-mod RDT_door_textEditFix_2 none" placeholder="00" id="RDT_door-edit-NC-TXT" maxlength="2">
+									<select class="item-select-mod no-transform-text RDT_door_editCamSelectFix" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
+										<!-- Cam goes here -->			
+									</select>
+								</div>
+								<div class="RDT_coordsHolder_C">
+									<center>
+										Next Cam Preview: <img id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
+									</center>
+								</div>
 							</div>
 							<div id="RDT_door_edit_copyPasteOptions_div">
 								<input type="button" title="Click here to copy spawn path" onclick="RDT_copyPastePos(0);" id="RDT_DOOR_BTN_CPPATH" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Spawn Path">
@@ -1484,8 +1495,6 @@
 								<input type="button" onclick="RDT_enableDisableDoorUsePlayerPos(1);" class="botao-menu" value="Cancel">	
 							</div>
 							<div class="menu-separador"></div>
-								Next Cam: <font id="RDT_lbl_door_editCam">???</font> 
-								<input type="button" onclick="RDT_doorShowCamPreview(0);" class="botao-menu" value="Edit">
 								Display Message: 
 								<select class="item-select-mod RDT_fixForSeparador no-transform-text RDT_door_select_width_fix" id="RDT_door-edit-DispTxt">
 									<!-- Door display text options goes here -->
@@ -1500,22 +1509,6 @@
 								Unk. Flag: 
 								<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
 							</div>
-						</div>
-						<!-- Cam Preview -->
-						<div id="RDT_doorCamPrevewDiv" class="none">
-							<center>Next Camera: 
-								<input type="text" class="item-select-mod none" placeholder="00" id="RDT_door-edit-NC-TXT" maxlength="2">
-									<select class="item-select-mod no-transform-text" id="RDT_door-edit-NC" onchange="RDT_renderEditDoorCamPreview();">
-										<!-- Cam goes here -->			
-									</select><br>
-								<img id="RDT_doorCamPreviewImg" class="imgPreviewCamSpawn">
-							</center>
-						</div>
-						<div class="RDT-applyBtn-div RDT_door_img_applyBtnFix" id="RDT_applyDoorCamDiv">
-							<center>
-								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" onclick="RDT_cancelDoorCamEdit();" value="Cancel">
-								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" onclick="RDT_applyDoorCamSelect();" value="Apply Cam">
-							</center>
 						</div>
 						<!-- APPLY DOOR -->
 						<div class="RDT-applyBtn-div" id="RDT_applyDoorDiv">
