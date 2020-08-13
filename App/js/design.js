@@ -1950,8 +1950,6 @@ function RDT_enableDisableDoorUsePlayerPos(mode){
 	}
 }
 function RDT_applyDoorUsePlayerPos(mode){
-	document.getElementById('RDT_door-edit-NRN').value = REALTIME_CurrentRoomNumber;
-	document.getElementById('RDT_door-edit-NS').value = '0' + (parseInt(REALTIME_CurrentStage) - 1);
 	if (mode === 0){
 		document.getElementById('RDT_door-edit-X').value = REALTIME_X_Pos;
 		document.getElementById('RDT_door-edit-Y').value = REALTIME_Z_Pos;
@@ -1959,10 +1957,12 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-R').value = REALTIME_R_Pos;
 	}
 	if (mode === 1){
-		document.getElementById('RDT_door-edit-NX').value = REALTIME_X_Pos;
-		document.getElementById('RDT_door-edit-NY').value = REALTIME_Y_Pos;
-		document.getElementById('RDT_door-edit-NZ').value = REALTIME_Z_Pos;
-		document.getElementById('RDT_door-edit-NR').value = REALTIME_R_Pos;
+		document.getElementById('RDT_door-edit-NX').value  = REALTIME_X_Pos;
+		document.getElementById('RDT_door-edit-NY').value  = REALTIME_Y_Pos;
+		document.getElementById('RDT_door-edit-NZ').value  = REALTIME_Z_Pos;
+		document.getElementById('RDT_door-edit-NR').value  = REALTIME_R_Pos;
+		document.getElementById('RDT_door-edit-NRN').value = REALTIME_CurrentRoomNumber;
+		document.getElementById('RDT_door-edit-NS').value  = '0' + (parseInt(REALTIME_CurrentStage) - 1);
 	}
 	document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
 	if (enable_mod === true){
