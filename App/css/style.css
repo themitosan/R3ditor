@@ -1264,6 +1264,9 @@ input[type='range' i]{
 .RDT_doorEdit_zIndexFix{
     margin-top: -4px !important;
 }
+.RDT_doorKeyCopyDivFix{
+    margin-top: 4px;
+}
 .menu-utility-fix{
     top: 526px;
 }

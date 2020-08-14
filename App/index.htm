@@ -1514,6 +1514,10 @@
 									Unk. Flag: 
 									<input type="text" oninput="RDT_renderNextRDTLbl();" onchange="RDT_renderNextRDTLbl();" class="item-select-mod RDT_doorUnkValFix" id="RDT_door-edit-UNKFLAG_B" placeholder="00" maxlength="2">
 								</div>
+								<div id="RDT_door_edit_copyPasteKey_div" class="RDT_doorKeyCopyDivFix">
+									<input type="button" title="Click here to copy key settings" onclick="RDT_DOOR_copyPasteLockKey(0);" class="botao-menu RDT_door_cameraCopyPasteFix" value="Copy Key Settings">
+									<input type="button" title="Click here to paste key settings" onclick="RDT_DOOR_copyPasteLockKey(1);" id="RDT_btn_doorPasteKey" class="botao-menu none" value="Paste Key Settings">
+								</div>
 							</div>
 						</div>
 						<!-- APPLY DOOR -->

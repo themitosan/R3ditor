@@ -62,6 +62,10 @@ var RDT_selectedPoint = 0;
 var RDT_TEMP_NEXT_ROOM = '';
 var RDT_TEMP_NEXT_STAGE = '';
 var RDT_TEMP_NEXT_CAMERA = '';
+// Door Key
+var RDT_TEMP_DOORKEY_ITEM = '';
+var RDT_TEMP_DOORKEY_FLAG = '';
+var RDT_TEMP_DOORKEY_UNKF = '';
 
 // Items
 var RDT_itemIndexRAW;
@@ -1318,6 +1322,18 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
 		RDT_renderNextRDTLbl();
 		RDT_renderEditDoorCamPreview();
+	}
+}
+function RDT_DOOR_copyPasteLockKey(mode){
+	if (mode === 0){
+		RDT_TEMP_DOORKEY_ITEM = document.getElementById('RDT_door-edit-LK').value;
+		RDT_TEMP_DOORKEY_FLAG = document.getElementById('RDT_door-edit-LF').value;
+		RDT_TEMP_DOORKEY_UNKF = document.getElementById('RDT_door-edit-UNKFLAG_B').value;
+		$('#RDT_btn_doorPasteKey').css({'display': 'inline'});
+	} else {
+		document.getElementById('RDT_door-edit-LK').value = RDT_TEMP_DOORKEY_ITEM;
+		document.getElementById('RDT_door-edit-LF').value = RDT_TEMP_DOORKEY_FLAG;
+		document.getElementById('RDT_door-edit-UNKFLAG_B').value = RDT_TEMP_DOORKEY_UNKF;
 	}
 }
 function RDT_DOOR_APPLY(index){
