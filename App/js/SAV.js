@@ -7,98 +7,20 @@ var SAVE_arquivoBruto;
 var CURRENT_SAVE_SLOT = 1;
 
 // Mapa dos Saves
-var INDICADOR_01;
-var INDICADOR_02;
-var INDICADOR_03;
-var INDICADOR_04;
-var INDICADOR_05;
-var INDICADOR_06;
-var INDICADOR_07;
-var INDICADOR_08;
-var INDICADOR_09;
-var INDICADOR_10;
-var INDICADOR_11;
-var INDICADOR_12;
-var INDICADOR_13;
-var INDICADOR_14;
-var INDICADOR_15;
+var INDICADOR_01, INDICADOR_02, INDICADOR_03, INDICADOR_04, INDICADOR_05, INDICADOR_06, INDICADOR_07, INDICADOR_08, INDICADOR_09, INDICADOR_10, INDICADOR_11, INDICADOR_12, INDICADOR_13, INDICADOR_14, INDICADOR_15;
 /*
 	Ranges
 */
-var S_END;
-var S_HEADER;
-var SAVE_INDICADOR_HEADER;		  // Header
-var SAVE_INDICADOR_HEADER_END;
-var SAVE_INDICADOR_HEADER_START;  // 0x0000 to 0x2000
-var SAVE_INDICADOR_HEADER_MIDDLE;						
-var range_0x2204_0x2207;
-var range_0x2209_0x220D;
-var range_0x2210_0x2211;
-var range_0x2217_0x2217;
-var range_0x2219_0x2219;
-var range_0x221C_0x224D;
-var range_0x224F_0x224F;
-var range_0x2251_0x225D;
-var range_0x225F_0x23FE;
-var range_0x2400_0x2402;
-var range_0x240A_0x240B;
-var range_0x2534_0x2534;
-var range_0x2537_0x254B;
-var range_0x2674_0x2674;
-var range_0x2677_0x28D3;
+var S_END, S_HEADER, SAVE_INDICADOR_HEADER, SAVE_INDICADOR_HEADER_END, SAVE_INDICADOR_HEADER_START, SAVE_INDICADOR_HEADER_MIDDLE, range_0x2204_0x2207, range_0x2209_0x220D, range_0x2210_0x2211, range_0x2217_0x2217, range_0x2219_0x2219, range_0x221C_0x224D, range_0x224F_0x224F, range_0x2251_0x225D, range_0x225F_0x23FE, range_0x2400_0x2402, range_0x240A_0x240B, range_0x2534_0x2534, range_0x2537_0x254B, range_0x2674_0x2674, range_0x2677_0x28D3;
 /*
 	Save Variables
 */
-// Box
 var JILL_BAU = [];
 var CARLOS_BAU = [];
-// Inventory
 var JILL_INVENT = [];
 var CARLOS_INVENT = [];
-// Game mode
-var dificuldade;
-// Total Saves
-var totalVezesSaves;
-// Save place
-var localSave;
-// City Location
-var lCidade;
-// Clothes
-var outf;
-// Current Player
-var cPlayer;
-// Jill - Current Weapon
-var jArmaEquip;
-// Carlos - Current Weapon
-var cArmaEquip;
-// Jill e Carlos - Sidepack
-var jSide;
-var cSide;
-// XY Positions
-var xPos;
-var yPos;
-// Room / Event
-var rEvent;
-// Epilogues
-var epil;
-// Files
-var j_files;
-// Game Version
-var gVersion;
-var gDetails;
-// Mapas Obtidos - WIP
-var mapExtractA;
-var mapExtractB;
-// Life and Poison
-var life;
-var veneno;
 var SAV_godMode = false;
-// Time
-var IGTExtract;
-var h_0x2200;
-var h_0x2201;
-var h_0x2202;
-var h_0x2203;
+var dificuldade, totalVezesSaves, localSave, lCidade, outf, cPlayer, jArmaEquip, cArmaEquip, jSide, cSide, xPos, yPos, rEvent, epil, j_files, gVersion, gDetails, mapExtractA, mapExtractB, life, veneno, IGTExtract, h_0x2200, h_0x2201, h_0x2202, h_0x2203;
 /* 
 	Misc.
 */
@@ -271,8 +193,7 @@ function save_renderSlot(slotID){
 function save_renderSaveSlots(){
 	var cu = 1;
 	var to = 16;
-	var checker;
-	var tmpSaveSlot;
+	var checker, tmpSaveSlot;
 	main_closeFileList();
 	while(cu < to){
 		tmpSaveSlot = SAVE_arquivoBruto.slice(RANGES['he-indicador-' + cu][0], RANGES['he-indicador-' + cu][1]);
@@ -295,11 +216,11 @@ function save_renderSaveSlots(){
 	SAVE_showMenu(0);
 }
 function save_renderInvent(s_slot, mode){
+	var atual = 1;
+	var itens = 11;
 	JILL_INVENT = [];
 	CARLOS_INVENT = [];
 	// Inventário da Jill
-	var itens = 11;
-	var atual = 1;
 	while(atual !== itens){
 		var slt = localStorage.getItem('Save_' + s_slot).slice(RANGES['jillInvent-' + atual][0], RANGES['jillInvent-' + atual][1]);
 		JILL_INVENT.push(slt);
@@ -316,8 +237,8 @@ function save_renderInvent(s_slot, mode){
 	}
 	// Inventário do Carlos
 	LOG_separator();
-	itens = 11;
 	atual = 1;
+	itens = 11;
 	while(atual !== itens){
 		var slt = localStorage.getItem('Save_' + s_slot).slice(RANGES['carlosInvent-' + atual][0], RANGES['carlosInvent-' + atual][1]);
 		CARLOS_INVENT.push(slt);
@@ -494,11 +415,11 @@ function save_renderInfos(s_slot){
 }
 function save_renderLife(s_slot){
 	// HP (Vida do personagem atual)
+	var HP;
 	life = localStorage.getItem('Save_' + s_slot).slice(RANGES['characterHP'][0], RANGES['characterHP'][1]);
 	veneno = localStorage.getItem('Save_' + s_slot).slice(RANGES['characterPoison'][0], RANGES['characterPoison'][1]);
 	var chkA = life.slice(0, 2);
 	var chkB = life.slice(2, 4);
-	var HP;
 	if (POISON[veneno][0] === 'Yes'){
 		STATUS = 'Poison';
 		co = 'txt-poison';
@@ -586,8 +507,8 @@ function SAV_Backup(){
 	}
 }
 function applyItem(mode, person, pos){
-	var itemId = document.getElementById('ex-item-id').value;
 	var attr = document.getElementById('ex-item-attr').value;
+	var itemId = document.getElementById('ex-item-id').value;
 	var quant = document.getElementById('ex-item-quant').value;
 	if (quant == ''){
 		quant = '0';

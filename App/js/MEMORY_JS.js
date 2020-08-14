@@ -6,21 +6,12 @@
 	Plugin para Node.js escrito por Rob-- (https://github.com/Rob--)
 	Pagina oficial do memoryjs: https://github.com/Rob--/memoryjs
 */
-var RE3_LIVE_POS;
-var MEM_JS_updatePosTimer;
 var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;
 var MEM_JS_requreSucess = false;
 var REALTIME_renderToolbar = false;
+var RE3_LIVE_POS, MEM_JS_updatePosTimer;
 //
-var TEMP_X_Pos;
-var TEMP_Y_Pos;
-var TEMP_Z_Pos;
-var TEMP_R_Pos;
-var REALTIME_X_Pos;
-var REALTIME_Y_Pos;
-var REALTIME_Z_Pos;
-var REALTIME_R_Pos;
 var REALTIME_CurrentCam = '00';
 var REALTIME_CurrentHP = '0000';
 var REALTIME_CurrentStage = '00';
@@ -29,50 +20,12 @@ var REALTIME_CurrentWeapon = '00';
 var REALTIME_CurrentPlayer = '00';
 var RE3_LIVE_keyPress_enable = false;
 var REALTIME_CurrentRoomNumber = '00';
+var TEMP_X_Pos, TEMP_Y_Pos, TEMP_Z_Pos, TEMP_R_Pos, REALTIME_X_Pos, REALTIME_Y_Pos, REALTIME_Z_Pos, REALTIME_R_Pos;
 //
 var PREV_INVENT = '';
 var PREV_PLAYER = '';
 // Invent Slots
-var SLOT_1_ITEM_HEX;
-var SLOT_1_ITEM_QNT;
-var SLOT_1_ITEM_ATR;
-var SLOT_1_ITEM_NUL;
-var SLOT_2_ITEM_HEX;
-var SLOT_2_ITEM_QNT;
-var SLOT_2_ITEM_ATR;
-var SLOT_2_ITEM_NUL;
-var SLOT_3_ITEM_HEX;
-var SLOT_3_ITEM_QNT;
-var SLOT_3_ITEM_ATR;
-var SLOT_3_ITEM_NUL;
-var SLOT_4_ITEM_HEX;
-var SLOT_4_ITEM_QNT;
-var SLOT_4_ITEM_ATR;
-var SLOT_4_ITEM_NUL;
-var SLOT_5_ITEM_HEX;
-var SLOT_5_ITEM_QNT;
-var SLOT_5_ITEM_ATR;
-var SLOT_5_ITEM_NUL;
-var SLOT_6_ITEM_HEX;
-var SLOT_6_ITEM_QNT;
-var SLOT_6_ITEM_ATR;
-var SLOT_6_ITEM_NUL;
-var SLOT_7_ITEM_HEX;
-var SLOT_7_ITEM_QNT;
-var SLOT_7_ITEM_ATR;
-var SLOT_7_ITEM_NUL;
-var SLOT_8_ITEM_HEX;
-var SLOT_8_ITEM_QNT;
-var SLOT_8_ITEM_ATR;
-var SLOT_8_ITEM_NUL;
-var SLOT_9_ITEM_HEX;
-var SLOT_9_ITEM_QNT;
-var SLOT_9_ITEM_ATR;
-var SLOT_9_ITEM_NUL;
-var SLOT_10_ITEM_HEX;
-var SLOT_10_ITEM_QNT;
-var SLOT_10_ITEM_ATR;
-var SLOT_10_ITEM_NUL;
+var SLOT_1_ITEM_HEX, SLOT_1_ITEM_QNT, SLOT_1_ITEM_ATR, SLOT_1_ITEM_NUL, SLOT_2_ITEM_HEX, SLOT_2_ITEM_QNT, SLOT_2_ITEM_ATR, SLOT_2_ITEM_NUL, SLOT_3_ITEM_HEX, SLOT_3_ITEM_QNT, SLOT_3_ITEM_ATR, SLOT_3_ITEM_NUL, SLOT_4_ITEM_HEX, SLOT_4_ITEM_QNT, SLOT_4_ITEM_ATR, SLOT_4_ITEM_NUL, SLOT_5_ITEM_HEX, SLOT_5_ITEM_QNT, SLOT_5_ITEM_ATR, SLOT_5_ITEM_NUL, SLOT_6_ITEM_HEX, SLOT_6_ITEM_QNT, SLOT_6_ITEM_ATR, SLOT_6_ITEM_NUL, SLOT_7_ITEM_HEX, SLOT_7_ITEM_QNT, SLOT_7_ITEM_ATR, SLOT_7_ITEM_NUL, SLOT_8_ITEM_HEX, SLOT_8_ITEM_QNT, SLOT_8_ITEM_ATR, SLOT_8_ITEM_NUL, SLOT_9_ITEM_HEX, SLOT_9_ITEM_QNT, SLOT_9_ITEM_ATR, SLOT_9_ITEM_NUL, SLOT_10_ITEM_HEX, SLOT_10_ITEM_QNT, SLOT_10_ITEM_ATR, SLOT_10_ITEM_NUL;
 /*
 	Current mod is the version of the game.
 	To add support to other versions, increase this number and add the vars in database.js

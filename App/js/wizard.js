@@ -3,20 +3,18 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Eu já te falei que você é demais?
 */
-var EXEC_rofs;
-var TEMP_APP_PATH;
 var GAME_PATH = '';
-var EXEC_BIO3_MERCE;
+var EXEC_rofs;
 var WZ_lastMenu = 0;
 var progressbar_0 = 0;
 var progressbar_1 = 65;
-var EXEC_BIO3_original;
 var enable_mod = false;
 var WZ_skipRofs = false;
 var WZ_EXTRACTLIST = [];
 var WZ_showWizard = true;
 var WINDOW_MOVETOLEFT = false;
 var RDT_USE_DECOMPILER_WIP = false;
+var TEMP_APP_PATH, EXEC_BIO3_MERCE, EXEC_BIO3_original;
 /*
 	Functions
 */

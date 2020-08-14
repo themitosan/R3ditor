@@ -7,8 +7,6 @@
 	52 41 46 4B 00 4B 00 49 51 4A 40 4B 00 40 4B 00 46 41 45 50 4B 
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
-var MIX_fName;
-var MIX_Database;
 var MIX_TOTAL_00 = 0;
 var MIX_TOTAL_01 = 0;
 var MIX_TOTAL_02 = 0;
@@ -16,8 +14,7 @@ var MIX_TOTAL_03 = 0;
 var MIX_TOTAL_04 = 0;
 var MIX_TOTAL_05 = 0;
 var MIX_TOTAL_06 = 0;
-var MIX_arquivoBruto;
-var MIX_currentFunction;
+var MIX_fName, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
 /*
 	Functions
 */
@@ -55,8 +52,7 @@ function MIX_loadExe(file, mode){
 	LOG_scroll();
 }
 function MIX_decompileMix(id, start, end, useLocalStorage){
-	var hex_temp;
-	var MIX_HTML_TEMPLATE;
+	var hex_temp, MIX_HTML_TEMPLATE;
 	if (useLocalStorage === false){
 		hex_temp = MIX_Database.slice(start, end);
 		localStorage.setItem('MIX_ID_' + id, hex_temp);
@@ -240,12 +236,7 @@ function MIX_updateList(){
 	}
 }
 function MIX_applyChanges(id, funcType){
-	var Item_A;
-	var Item_B;
-	var Item_C;
-	var Item_D;
-	var Quanti;
-	var MIX_FINAL_HEX;
+	var Item_A, Item_B, Item_C, Item_D, Quanti, MIX_FINAL_HEX;
 	// 00: Reload / Sum
 	if (funcType === '00'){
 		Item_A = document.getElementById('MIX_00_edit_Weapon').value.toLowerCase();

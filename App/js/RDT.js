@@ -7,32 +7,25 @@
 // Cameras
 var RDT_cameraArray = [];
 var RDT_totalCameras = 0;
-var TEMP_RDT_editCamera_camType = '';
-var TEMP_RDT_editCam_ident = '';
 var TEMP_RDT_XP_Origin = '';
-var TEMP_RDT_XPS_Origin = '';
 var TEMP_RDT_YP_Origin = '';
-var TEMP_RDT_YPS_Origin = '';
 var TEMP_RDT_ZP_Origin = '';
+var TEMP_RDT_XPS_Origin = '';
+var TEMP_RDT_YPS_Origin = '';
 var TEMP_RDT_ZPS_Origin = '';
 var TEMP_RDT_XD_Direction = '';
-var TEMP_RDT_XDS_Direction = '';
 var TEMP_RDT_YD_Direction = '';
-var TEMP_RDT_YDS_Direction = '';
 var TEMP_RDT_ZD_Direction = '';
-var TEMP_RDT_ZDS_Direction = '';
 var TEMP_RDT_RD_Direction = '';
+var TEMP_RDT_XDS_Direction = '';
+var TEMP_RDT_YDS_Direction = '';
+var TEMP_RDT_editCam_ident = '';
+var TEMP_RDT_ZDS_Direction = '';
 var TEMP_RDT_RDS_Direction = '';
+var TEMP_RDT_editCamera_camType = '';
 
 // MSG vars
-var RDT_fm_path;
-var RDT_fm_avaliable;
-var RDT_totalMessages;
-var RDT_MSGTEXT_MAXSIZE;
-var RDT_MSGTEXT_POINTERS;
-var RDT_MSGTEXT_startText;
-var RDT_messageSeekPattern;
-var RDT_MSGTEXT_currentBlkSize;
+var RDT_fm_path, RDT_fm_avaliable, RDT_totalMessages, RDT_MSGTEXT_MAXSIZE, RDT_MSGTEXT_POINTERS, RDT_MSGTEXT_startText, RDT_messageSeekPattern, RDT_MSGTEXT_currentBlkSize;
 
 // MSG Code
 var RDT_messageCodesArray = [];
@@ -68,12 +61,11 @@ var RDT_TEMP_DOORKEY_FLAG = '';
 var RDT_TEMP_DOORKEY_UNKF = '';
 
 // Items
-var RDT_itemIndexRAW;
 var RDT_totalFiles = 0;
 var RDT_totalMapas = 0;
 var RDT_totalItens = 0;
 var RDT_ItensArray = [];
-var RDT_totalItensGeral;
+var RDT_itemIndexRAW, RDT_totalItensGeral;
 
 // Enemy / NPC'S
 var RDT_totalEnemies;
@@ -89,10 +81,7 @@ var RDT_TEMP_ENEMYNPC_ENEMYFLAG = '';
 var RDT_totalAudios;
 
 // Utils
-var RDT_mapName;
-var RDT_fileType;
 var RDT_loop = 0;
-var RDT_arquivoBruto;
 var RDT_lastBackup = '';
 var RDT_loading = false;
 var RDT_CANCRASH = false;
@@ -100,15 +89,15 @@ var RDT_ERRORMOTIVE = '';
 var RDT_currentAudio = '';
 var RDT_lastFileOpened = '';
 var RDT_ARD_compatMode = false;
+var RDT_mapName, RDT_fileType, RDT_arquivoBruto;
 
 // MASKS
-var RDT_SLD_FOUNDPOS;
-var RDT_SLD_LAYER_TILESET_BMP;
 var RDT_SLD_totalMasksAva = 0;
 var RDT_SLD_MASKS_POSITION = [];
 var RDT_SLD_relativeOffsets = 0;
 var RDT_SLD_SEEK_SEMAPHORE = true;
 var RDT_SLD_SEEK_MULTIMASK = false;
+var RDT_SLD_FOUNDPOS, RDT_SLD_LAYER_TILESET_BMP;
 /*
 	Functions
 */
@@ -442,8 +431,7 @@ function RDT_getCameras(){
 	}
 }
 function RDT_decompileCameras(id){
-	var CAM_IMG;
-	var titleFileName;
+	var CAM_IMG, titleFileName;
 	var CAM_ID = id.toString(16).toUpperCase();
 	if (CAM_ID.length < 2){
 		CAM_ID = '0' + CAM_ID;
@@ -983,17 +971,7 @@ function RDT_getMessageCodes(hx){
 }
 function RDT_decompileMessageCode(index, hex){
 	if (RDT_arquivoBruto !== undefined && hex !== undefined){
-		var fHex;
-		var MC_XPOS;
-		var MC_ZPOS;
-		var MC_OFFSET0;
-		var MC_OFFSET1;
-		var MC_JAPCHARS;
-		var MC_READMODE;
-		var MC_SPECIALPROP;
-		var MC_XWIDTHTRIGGER;
-		var MC_ZWIDTHTRIGGER;
-
+		var fHex, MC_XPOS, MC_ZPOS, MC_OFFSET0, MC_OFFSET1, MC_JAPCHARS, MC_READMODE, MC_SPECIALPROP, MC_XWIDTHTRIGGER, MC_ZWIDTHTRIGGER;
 		var MC_ID 			 = hex.slice(RANGES['RDT_msgCode-id'][0],              RANGES['RDT_msgCode-id'][1]);
 		var MC_HEADER 		 = hex.slice(RANGES['RDT_msgCode-header'][0],          RANGES['RDT_msgCode-header'][1]);
 		var MC_IDENT 		 = hex.slice(RANGES['RDT_msgCode-identifier'][0],      RANGES['RDT_msgCode-identifier'][1]);
@@ -1034,8 +1012,7 @@ function RDT_decompileMessageCode(index, hex){
 	}
 }
 function RDT_MSGCODE_APPLY(id){
-	var reason;
-	var offset;
+	var reason, offset;
 	var canCompile  = true;
 	var readMode 	= document.getElementById('RDT_MSGCODE-edit-display').value;
 	var novaX		= document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
@@ -1125,27 +1102,7 @@ function RDT_getDoorsArray(str){
 }
 function RDT_decompileDoors(index, location){
 	if (location !== undefined && location !== null){
-		var dr_key;
-		var dr_xPos;
-		var dr_yPos;
-		var dr_zPos;
-		var dr_rPos;
-		var dr_type;
-		var dr_nXpos;
-		var dr_nYpos;
-		var dr_nZpos;
-		var dr_nRpos;
-		var dr_nStage;
-		var dr_zIndex;
-		var dr_nCamPos;
-		var dr_offset0;
-		var dr_offset1;
-		var dr_lockFlag;
-		var dr_openOrient;
-		var dr_nRoomNumber;
-		var dr_displayText;
-		var doorLeadsTo_title;
-		var EXTREME_MASSIVE_HTML_TEMPLATE;
+		var dr_key, dr_xPos, dr_yPos, dr_zPos, dr_rPos, dr_type, dr_nXpos, dr_nYpos, dr_nZpos, dr_nRpos, dr_nStage, dr_zIndex, dr_nCamPos, dr_offset0, dr_offset1, dr_lockFlag, dr_openOrient, dr_nRoomNumber, dr_displayText, doorLeadsTo_title, EXTREME_MASSIVE_HTML_TEMPLATE;
 		var reason 		   = '';
 		var itemTitle 	   = '';
 		var canAdd         = true;
@@ -1337,10 +1294,9 @@ function RDT_DOOR_copyPasteLockKey(mode){
 	}
 }
 function RDT_DOOR_APPLY(index){
-	var offset0;
 	var reason = '';
-	var DOOR_COMPILED;
 	var canCompile = true;
+	var offset0, DOOR_COMPILED;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
 	var header 	= ident.slice(RANGES['RDT_door-header'][0], RANGES['RDT_door-doorIdentifier'][1]).toLowerCase();
 	var hexType = header.slice(0, 2);
@@ -1583,20 +1539,7 @@ function RDT_decompileItens(id, edit){
 	LOG_scroll();
 }
 function RDT_renderItens(index, hex){
-	var x;
-	var y;
-	var z;
-	var r;
-	var mp;
-	var id;
-	var tipo;
-	var quant;
-	var iFlag;
-	var cssFix;
-	var typeId;
-	var convert;
-	var modelId;
-	var hexComp;
+	var x, y, z, r, mp, id, tipo, quant, iFlag, cssFix, typeId, convert, modelId, hexComp;
 	var header  = hex.slice(RANGES['RDT_item-header'][0],        RANGES['RDT_item-header'][1]);
 	var ident   = hex.slice(RANGES['RDT_item-itemIdetifier'][0], RANGES['RDT_item-itemIdetifier'][1]);
 	if (header === '67'){
@@ -1691,10 +1634,8 @@ function RDT_copyPasteItemPos(mode){
 	}
 }
 function RDT_ITEM_APPLY(index, type, convert){
-	var error;
-	var nQuant;
-	var novaHex;
 	var canBuild = true;
+	var error, nQuant, novaHex;
 	if (convert === false && convert !== undefined && convert !== null){
 		if (type === 1){
 			novaHex = document.getElementById('RDT-item-select').value;
@@ -1889,10 +1830,9 @@ function RDT_MSG_decryptText(useMode){
 		Mode 1: Decrypt to see the message block size
 	*/
 	var c = 0;
-	var HACK_FE00;
 	var TXT_END = 0;
-	var TXT_HEX_CROP;
 	var TXT_BLOCK = '';
+	var HACK_FE00, TXT_HEX_CROP;
 	var TXT_START = RDT_MSGTEXT_startText;
 	var RDT_POINTERS = RDT_MSGTEXT_POINTERS.match(/.{4,4}/g).reverse();
 	while (c < RDT_POINTERS.length){
@@ -2103,8 +2043,7 @@ function RDT_selectPoint(id){
 	}
 }
 function RDT_addIconToCanvas(type, id, x, y, z, r, hex){
-	var tipo;
-	var nome;
+	var tipo, nome;
 	if (parseInt(hex, 16) < 134 || parseInt(hex, 16) > 170){
 		tipo = 'Item';
 		nome = '(' + hex + ') ' + ITEM[hex][0];
@@ -2289,7 +2228,7 @@ function RDT_restoreLastBackup_1(name){
 		if (ORIGINAL_FILENAME !== undefined){
 			RDT_CARREGAR_ARQUIVO(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.' + RDT_fileType);
 		}
-	} catch (err){
+	} catch (err) {
 		LOG_addLog('error', 'MAP - ERROR: Unable to restore backup!');
 		LOG_addLog('error', err);
 		console.error(err);
@@ -2299,7 +2238,7 @@ function RDT_COMPILE_Lv1(){
 	var c = 0;
 	if (ORIGINAL_FILENAME !== undefined){
 		RDT_Backup();
-		try{
+		try {
 			LOG_separator();
 			var RDT_CLONE = RDT_arquivoBruto;
 			// Apply Itens, Maps and Files

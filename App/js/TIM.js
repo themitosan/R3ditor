@@ -3,13 +3,11 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help the manolo brow!
 */
-var TIM_SIZE;
-var TIM_required;
 var TIM_mapFile = [];
-var TIM_arquivoBruto;
-var TIM_seekPattern_MIN;
-var TIM_ORIGINAL_FILENAME;
-
+var TIM_SIZE, TIM_required, TIM_arquivoBruto, TIM_seekPattern_MIN, TIM_ORIGINAL_FILENAME;
+/*
+	Functions
+*/
 function TIM_LOAD(timFile){
 	var ret = false;
 	RE3_LIVE_closeForm();

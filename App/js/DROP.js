@@ -4,13 +4,8 @@
 
 	Running short...
 */
-var DROP_fName;
-var DROP_gameVersion;
-var DROP_arquivoBruto;
-var DROP_databaseItems;
-var DROP_databaseQuant;
 var DROP_totalItems = 8;
-var DROP_databaseCompiled;
+var DROP_fName, DROP_gameVersion, DROP_arquivoBruto, DROP_databaseItems, DROP_databaseQuant, DROP_databaseCompiled;
 /*
 	Functions
 */

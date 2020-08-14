@@ -264,12 +264,13 @@ input[type='range' i]{
     top: 84px;
     width: 98%;
     z-index: 1;
+    color: #fff;
     padding: 6px;
     height: 530px;
     overflow: auto;
     position: absolute;
     border-radius: 6px;
-    background-color: #444;
+    background-image: linear-gradient(to bottom, #444, #333);
 }
 .log-text{
     width: 99%;

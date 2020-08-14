@@ -9,47 +9,30 @@ var BIO3INI_MAX_WIDTH = 7680;
 var BIO3INI_MAX_HEIGHT = 5760;
 
 // General
-var BIO3INI_Save;
-var BIO3INI_Movie;
-var BIO3INI_Regist;
-var BIO3INI_Rofs1;
-var BIO3INI_Rofs2;
-var BIO3INI_Rofs3;
-var BIO3INI_Rofs4;
-var BIO3INI_Rofs5;
-var BIO3INI_Rofs6;
-var BIO3INI_Rofs7;
-var BIO3INI_Rofs8;
-var BIO3INI_Rofs9;
-var BIO3INI_Rofs10;
-var BIO3INI_Rofs11;
-var BIO3INI_Rofs12;
-var BIO3INI_Rofs13;
-var BIO3INI_Rofs14;
-var BIO3INI_Rofs15;
+var BIO3INI_Save, BIO3INI_Movie, BIO3INI_Regist, BIO3INI_Rofs1, BIO3INI_Rofs2, BIO3INI_Rofs3, BIO3INI_Rofs4, BIO3INI_Rofs5, BIO3INI_Rofs6, BIO3INI_Rofs7, BIO3INI_Rofs8, BIO3INI_Rofs9, BIO3INI_Rofs10, BIO3INI_Rofs11, BIO3INI_Rofs12, BIO3INI_Rofs13, BIO3INI_Rofs14, BIO3INI_Rofs15;
 /*
 	Video Config
 	Variaveis usadas para obter as configs de vídeo
 */
 // True == On || False == Off
+var BIO3INI_v_mode = 'Windowed';
 var BIO3INI_v_disableMovie = true;
 var BIO3INI_v_disableAlpha = false;
 var BIO3INI_v_disableLinear = false;
 var BIO3INI_v_textureAdjust = false;
 var BIO3INI_v_disableSpecular = true;
-var BIO3INI_v_mode = 'Windowed';
 // Windowed
 var BIO3INI_w_BPP = 32;
 var BIO3INI_w_width = 800;
 var BIO3INI_w_height = 600;
 var BIO3INI_w_driver = 'NULL';
-var BIO3INI_w_device = '0ed36e48aa64fc1118f600000c0251e6'; // this is my gtx!
+var BIO3INI_w_device = '0ed36e48aa64fc1118f600000c0251e6'; // this is my GTX!
 // FullScreen
 var BIO3INI_f_BPP = 32;
 var BIO3INI_f_width = 800;
 var BIO3INI_f_height = 600;
 var BIO3INI_f_driver = 'NULL';
-var BIO3INI_f_device = '0ed36e48aa64fc1118f600000c0251e6'; // this is my gtx!
+var BIO3INI_f_device = '0ed36e48aa64fc1118f600000c0251e6'; // this is my GTX!
 // Keyboard
 var BIO3INI_kb_key1 = ''; // Up
 var BIO3INI_kb_key2 = ''; // Down

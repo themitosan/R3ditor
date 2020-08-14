@@ -3,14 +3,8 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Help me - Por favorzu! '\_(UwU )_/'
 */
-var fs;
-var MEM_JS;
 var e_e = 0;
-var APP_PATH;
-var HEX_EDITOR;
-var PROCESS_OBJ;
 var RE3_PID = 0;
-var ORIGINAL_FILENAME;
 var RE3_RUNNING = false;
 var APP_NAME = 'R3ditor';
 var STATUS = 'Undefined';
@@ -22,6 +16,7 @@ var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
 var APP_VERSION = 'V. 0.0.3.4 [ALPHA]';
+var fs, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
 	Onload
 */

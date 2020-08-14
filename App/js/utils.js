@@ -12,7 +12,12 @@
 	Canvas2Image was made by hongru
 	https://github.com/hongru/canvas2image
 */
+var OBJ_arquivoBruto;
+var FG_file_color = '';
 var FILEGEN_TOGGLE = false;
+/*
+	Functions
+*/
 function FILEGEN_TOGGLE_RES(){
 	if (FILEGEN_TOGGLE === false){
 		$('#FILEGEN_CANVAS').css({'zoom': '1', 'left': '926px'});
@@ -31,7 +36,6 @@ function FILEGEN_saveImage(){
 	});
 	$('#FILEGEN_CANVAS').css({'zoom': '2', 'left': '400px'});
 }
-var FG_file_color = '';
 function FG_RENDER(){
 	var c = 0;
 	var x_offset = 0;
@@ -87,7 +91,6 @@ function FG_clearAllRadioButtons(){
 	OBJ Patcher
 	Fix created by Biohazard España - You are amazing!!!
 */
-var OBJ_arquivoBruto;
 function UTILS_OBJ_Patcher_load(){
 	if (R3ditor_tool_selected === false){
 		OBJ_arquivoBruto = '';

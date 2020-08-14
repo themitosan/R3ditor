@@ -4,17 +4,11 @@
 	Helpa eu!
 */
 var onMSG = false;
-var RDT_aba_atual;
-var SAVE_aba_atual;
-var main_currentMenu;
-var fileList_gameMode;
-var RDT_totalMenus = 11;
 var INI_totalMenus = 3;
 var MIX_totalMenus = 7;
+var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 4;
-var request_render_save;
-var RE3_LIVE_RENDERTIMER;
 var RE3_LIVE_prevCam = '';
 var RE3_LIVE_prevRDT = '';
 var SETTINGS_totalMenus = 3;
@@ -22,6 +16,7 @@ var FILELIST_totalReloads = 0;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
 var R3ditor_showFirstBootMessage = true;
+var RDT_aba_atual, SAVE_aba_atual, main_currentMenu, fileList_gameMode, request_render_save, RE3_LIVE_RENDERTIMER;
 /*
 	LOG Functions
 */
@@ -1736,35 +1731,26 @@ function RDT_Error_404(){
 function RDT_displayItemEdit(id, idx, itemHx){
 	$('#RDT_openFileList').css({'display': 'none'});
 	main_closeFileList();
-	var hex;
-	var nome;
-	var posX;
-	var posY;
-	var posZ;
-	var posR;
-	var anim;
-	var quant;
-	var iFlag;
-	var modelId;
+	var hex, nome, posX, posY, posZ, posR, anim, quant, iFlag, modelId;
 	//
-	var header  = itemHx.slice(RANGES['RDT_item-header'][0], 			   RANGES['RDT_item-header'][1]);
-	var index   = itemHx.slice(RANGES['RDT_item-itemIdetifier'][0], 	   RANGES['RDT_item-itemIdetifier'][1]);
+	var header  = itemHx.slice(RANGES['RDT_item-header'][0], 			    RANGES['RDT_item-header'][1]);
+	var index   = itemHx.slice(RANGES['RDT_item-itemIdetifier'][0], 	    RANGES['RDT_item-itemIdetifier'][1]);
 	if (header === '67'){
-		posX    = itemHx.slice(RANGES['RDT_item-0-itemXX'][0],   		   RANGES['RDT_item-0-itemXX'][1]);
-		posY    = itemHx.slice(RANGES['RDT_item-0-itemYY'][0],   		   RANGES['RDT_item-0-itemYY'][1]);
-		posZ    = itemHx.slice(RANGES['RDT_item-0-itemZZ'][0],   		   RANGES['RDT_item-0-itemZZ'][1]);
-		posR    = itemHx.slice(RANGES['RDT_item-0-itemRR'][0],   		   RANGES['RDT_item-0-itemRR'][1]);
-		hex     = itemHx.slice(RANGES['RDT_item-0-itemID'][0],   		   RANGES['RDT_item-0-itemID'][1]);
-		quant   = parseInt(itemHx.slice(RANGES['RDT_item-0-itemQuant'][0], RANGES['RDT_item-0-itemQuant'][1]), 16);
-		iFlag   = itemHx.slice(RANGES['RDT_item-0-itemFlag'][0], 		   RANGES['RDT_item-0-itemFlag'][1]);
-		modelId = itemHx.slice(RANGES['RDT_item-0-modelID'][0],  		   RANGES['RDT_item-0-modelID'][1]);
-		anim    = itemHx.slice(RANGES['RDT_item-0-itemMP'][0],   		   RANGES['RDT_item-0-itemMP'][1]);
+		posX    = itemHx.slice(RANGES['RDT_item-0-itemXX'][0],   		    RANGES['RDT_item-0-itemXX'][1]);
+		posY    = itemHx.slice(RANGES['RDT_item-0-itemYY'][0],   		    RANGES['RDT_item-0-itemYY'][1]);
+		posZ    = itemHx.slice(RANGES['RDT_item-0-itemZZ'][0],   		    RANGES['RDT_item-0-itemZZ'][1]);
+		posR    = itemHx.slice(RANGES['RDT_item-0-itemRR'][0],   		    RANGES['RDT_item-0-itemRR'][1]);
+		hex     = itemHx.slice(RANGES['RDT_item-0-itemID'][0],   		    RANGES['RDT_item-0-itemID'][1]);
+		quant   = parseInt(itemHx.slice(RANGES['RDT_item-0-itemQuant'][0],  RANGES['RDT_item-0-itemQuant'][1]), 16);
+		iFlag   = itemHx.slice(RANGES['RDT_item-0-itemFlag'][0], 		    RANGES['RDT_item-0-itemFlag'][1]);
+		modelId = itemHx.slice(RANGES['RDT_item-0-modelID'][0],  		    RANGES['RDT_item-0-modelID'][1]);
+		anim    = itemHx.slice(RANGES['RDT_item-0-itemMP'][0],   		    RANGES['RDT_item-0-itemMP'][1]);
 	}
 	if (header === '68'){
-		posX    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemXX'][0], RANGES['RDT_item-1-itemXX'][1]);
-		posY    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemYY'][0], RANGES['RDT_item-1-itemYY'][1]);
-		posZ    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemZZ'][0], RANGES['RDT_item-1-itemZZ'][1]);
-		posR    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemRR'][0], RANGES['RDT_item-1-itemRR'][1]);
+		posX    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemXX'][0],   RANGES['RDT_item-1-itemXX'][1]);
+		posY    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemYY'][0],   RANGES['RDT_item-1-itemYY'][1]);
+		posZ    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemZZ'][0],   RANGES['RDT_item-1-itemZZ'][1]);
+		posR    = '[WIP]'; //itemHx.slice(RANGES['RDT_item-1-itemRR'][0],   RANGES['RDT_item-1-itemRR'][1]);
 		hex     = itemHx.slice(RANGES['RDT_item-1-itemID'][0], 				RANGES['RDT_item-1-itemID'][1]);
 		quant   = parseInt(itemHx.slice(RANGES['RDT_item-1-itemQuant'][0],  RANGES['RDT_item-1-itemQuant'][1]), 16);
 		iFlag   = '[WIP]';

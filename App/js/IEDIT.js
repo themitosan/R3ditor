@@ -3,9 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Mais uma vez, obrigado Biohazard España / ResidentEvilArtist!
 */
-var IEDIT_Database;
-var IEDIT_fileName;
-var IEDIT_arquivoBruto;
+var IEDIT_Database, IEDIT_fileName, IEDIT_arquivoBruto;
 /*
 	Functions
 */
@@ -14,10 +12,10 @@ function IEDIT_loadExec(file, mode){
 	var push_end = 8;
 	var push_start = 0;
 	var totalPushes = 134;
-	document.getElementById('IEDIT-holder').innerHTML = '';
-	IEDIT_arquivoBruto = fs.readFileSync(file, 'hex');
 	ORIGINAL_FILENAME = file;
 	IEDIT_fileName = getFileName(ORIGINAL_FILENAME);
+	IEDIT_arquivoBruto = fs.readFileSync(file, 'hex');
+	document.getElementById('IEDIT-holder').innerHTML = '';
 	IEDIT_Database = IEDIT_arquivoBruto.slice(IEDIT_fileTypes[IEDIT_fileName][1], IEDIT_fileTypes[IEDIT_fileName][2]);
 	if (mode === 0){
 		while (c < totalPushes){

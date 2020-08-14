@@ -3,15 +3,13 @@
 	By mitosan/mscore/misto_quente/mscorehdr
 	Sabia que eu queria fazer isso faz tempo?
 */
-var PATCHER_platform;
-var PATCHER_arquivoBruto;
-var PATCHER_patchDecompiled;
+var PATCHER_platform, PATCHER_arquivoBruto, PATCHER_patchDecompiled;
 /*
 	Functions
 */
 function PATCHER_createPatch(executable){
-	PATCHER_arquivoBruto = fs.readFileSync(executable, 'hex');
 	ORIGINAL_FILENAME = executable;
+	PATCHER_arquivoBruto = fs.readFileSync(executable, 'hex');
 	PATCHER_platform = MIX_fileTypes[getFileName(ORIGINAL_FILENAME)][0];
 	LOG_addLog('log', 'PATCHER - Loading MIX settings...');
 	MIX_loadExe(executable, 1);

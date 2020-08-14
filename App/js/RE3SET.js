@@ -3,9 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Can you give me a tea? Pleeeeeease! ~wink~ ;)
 */
-var RE3SET_fName;
-var RE3SET_gameVersion;
-var RE3SET_arquivoBruto;
+var RE3SET_fName, RE3SET_gameVersion, RE3SET_arquivoBruto;
 /*
 	Functions
 */

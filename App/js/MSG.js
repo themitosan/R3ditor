@@ -3,11 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Réupi mi!
 */
-var MSG_ID;
-var MSG_Commands;
-var MSG_FILL_PASS;
 var MSG_LENGTH = 0;
-var MSG_arquivoBruto;
 var MSG_useSlice = false;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
@@ -17,6 +13,7 @@ var MSG_DECRYPT_LV1_LAST = '';
 var MSG_useSeekCameras = false;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
+var MSG_ID, MSG_Commands, MSG_FILL_PASS, MSG_arquivoBruto;
 function MSG_goBackToRDT(){
 	localStorage.clear();
 	sessionStorage.clear();
@@ -167,22 +164,19 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	document.getElementById('msg-lista-eventos').innerHTML = '';
 	document.getElementById('lbl-msg-length').innerHTML = RAW_DATA.length + ' (Hex: ' + parseHex(RAW_DATA.length).toUpperCase() + ')';
-	var t;
+	var c = 0;
+	var t, COMMAND, COMMAND_HEX, COMMAND_ATTR;
 	if (RAW_DATA_ARRAY !== null){
 		t = RAW_DATA_ARRAY.length;
 	} else {
 		t = 0;
 	}
 	var finalArray = '';
-	var c = 0;
 	while(c < t){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + ' ';
 		c++;
 	}
-	var COMMAND;
 	var cAtual = 0;
-	var COMMAND_HEX;
-	var COMMAND_ATTR;
 	var textoHex = '';
 	var startPoint = 0;
 	var textoTraduzido = '';
