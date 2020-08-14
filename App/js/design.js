@@ -1631,6 +1631,9 @@ function RDT_renderEditDoorCamPreview(){
 	var nrn = document.getElementById('RDT_door-edit-NRN').value;
 	var rst = parseInt(parseInt(document.getElementById('RDT_door-edit-NS').value, 16) + 1).toString();
 	var rComp = 'R' + rst.toUpperCase() + nrn.toUpperCase();
+	if (RDT_ARD_compatMode !== true){
+		document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
+	}
 	var nCam = document.getElementById('RDT_door-edit-NC-TXT').value.toString();
 	if (nCam.length === 2){
 		var camFileCss = '../Assets/DATA_A/BSS/' + rComp + nCam + '.JPG';
@@ -1638,9 +1641,6 @@ function RDT_renderEditDoorCamPreview(){
 		if (fs.existsSync(camFile) === true){
 			document.getElementById('RDT_doorCamPreviewImg').src = camFile;
 			$('#RDT_doorEdit_bgCam').css({'background-image': 'url("' + camFileCss + '")'});
-			if (RDT_ARD_compatMode !== true){
-				document.getElementById('RDT_door-edit-NC-TXT').value = document.getElementById('RDT_door-edit-NC').value.toString();
-			}
 		} else {
 			if (RDT_ARD_compatMode !== true){
 				LOG_addLog('warn', 'WARN - Unable to render Next Cam: The img file was not found! (ERROR 404 - File: ' + camFile + ')');
