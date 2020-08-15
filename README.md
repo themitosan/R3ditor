@@ -68,7 +68,7 @@ R3ditor also can do:
 - Edit nemesis item drops
 - Extract RDT files from PS ARD files²
 
-<i>¹ - Only avaliable in x64 NW.js version</i>
+<i>¹ - Only avaliable in x64 NW.js version</i><br>
 <i>² - You need extract PC version before extracting ARD files</i>
 
 ### Important
