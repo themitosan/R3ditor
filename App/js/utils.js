@@ -315,10 +315,14 @@ function UTILS_ARDEnabler_compileARD(mapName){
 			var FINAL_ARD = NEWARD_START + NEWARD_RDT + NEWARD_END;
 			if (FINAL_ARD.length === NEWARD_SIZECHECK){
 				R3DITOR_SAVE(mapName.toUpperCase() + '.ARD', FINAL_ARD, 'hex', 'ARD');
+			} else {
+				LOG_addLog('warn', 'WARN - Unable to generate ARD File!');
+				LOG_addLog('warn', 'WARN - Reason: The final file does not match with original ARD file!');
 			}
 		} else {
 			LOG_addLog('warn', 'WARN - Unable to generate ARD File!');
 			LOG_addLog('warn', 'WARN - Reason: Unable to find ARDMAP for ' + mapName);
 		}
 	}
+	LOG_scroll();
 }
