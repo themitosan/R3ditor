@@ -15,7 +15,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = 'V. 0.0.3.4 [ALPHA]';
+var APP_VERSION = 'V. 0.0.3.5 [ALPHA]';
 var fs, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
 	Onload
@@ -131,6 +131,12 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	}
 	if (fs.existsSync(APP_PATH + '\\Update\\Extract') === true){
 		deleteFolderRecursive(APP_PATH + '\\Update\\Extract');
+	}
+	if (fs.existsSync(APP_PATH + '\\Configs\\ARDRDT') === false){
+		fs.mkdirSync(APP_PATH + '\\Configs\\ARDRDT');
+	}
+	if (fs.existsSync(APP_PATH + '\\Configs\\ARDMAP') === false){
+		fs.mkdirSync(APP_PATH + '\\Configs\\ARDMAP');
 	}
 	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
@@ -354,22 +360,27 @@ function R3DITOR_COPY(cpText){
 }
 // Look for ERRORS before running the game
 function checkCanPlay(runArgs, gameId){
+	var RE3_CAN_RUN = true;
 	if (RDT_CANCRASH === true){
 		var ask = confirm('BEWARE: The current map is stating that it is defective, so it may close the game unexpectedly.\n\nDo you want to continue anyway?');
-		if (ask === true){
-			if (gameId === '' || gameId === 1 || gameId === undefined){
-				R3DITOR_RUN_RE3(runArgs);
-			} else {
-				R3DITOR_RUN_MERCE(runArgs);
-			}
+		if (ask === false){
+			RE3_CAN_RUN = false;
+		} else {
+			LOG_addLog('warn', 'WARN - RE3: The game will run with broken RDT files (be careful!)');
 		}
-	} else {
+	}
+	if (R3_PROCESS_ARDENABLER === true){
+		RE3_CAN_RUN = false;
+		LOG_addLog('warn', 'WARN - Unable to run RE3: ARD Enabler is running!');
+	}
+	if (RE3_CAN_RUN === true){
 		if (gameId === '' || gameId === 1 || gameId === undefined){
 			R3DITOR_RUN_RE3(runArgs);
 		} else {
 			R3DITOR_RUN_MERCE(runArgs);
 		}
 	}
+	LOG_scroll();
 }
 // Remover pastas recursivamente
 function deleteFolderRecursive(path){

@@ -4,17 +4,16 @@
 	Eu já te falei que você é demais?
 */
 var GAME_PATH = '';
-var EXEC_rofs;
 var WZ_lastMenu = 0;
 var progressbar_0 = 0;
 var progressbar_1 = 65;
 var enable_mod = false;
-var WZ_skipRofs = false;
 var WZ_EXTRACTLIST = [];
+var WZ_skipRofs = false;
 var WZ_showWizard = true;
 var WINDOW_MOVETOLEFT = false;
-var RDT_USE_DECOMPILER_WIP = false;
-var TEMP_APP_PATH, EXEC_BIO3_MERCE, EXEC_BIO3_original;
+var R3_ARDENABLER_ENABLED = false;
+var TEMP_APP_PATH, EXEC_BIO3_MERCE, EXEC_BIO3_original, EXEC_rofs;
 /*
 	Functions
 */
@@ -314,7 +313,7 @@ function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
 			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + 
-			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage + '\n' + RDT_USE_DECOMPILER_WIP;
+			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage + '\n' + RDT_USE_DECOMPILER_WIP + '\n' + R3_ARDENABLER_ENABLED;
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -478,9 +477,20 @@ function WZ_loadFiles(file){
 		RDT_USE_DECOMPILER_WIP = false;
 	}
 	document.getElementById('SETTINGS_edit_RDT_ExpMode').checked = RDT_USE_DECOMPILER_WIP;
+	// ARD Enabler
+	if (cfgs[15] !== undefined){
+		R3_ARDENABLER_ENABLED = JSON.parse(cfgs[15]);
+	} else {
+		R3_ARDENABLER_ENABLED = false;
+	}
 	/*
 		Visuals
 	*/
+	if (enable_mod === true && R3_ARDENABLER_ENABLED === false){
+		$('#UTILS_enableR3ARD').css({'display': 'inline'});
+	} else {
+		$('#UTILS_enableR3ARD').css({'display': 'none'});
+	}
 	if (EXEC_BIO3_original !== ''){
 		$('#btn_run_bio3').css({'display': 'inline'});
 		if (HEX_EDITOR !== ''){

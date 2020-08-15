@@ -12,9 +12,12 @@
 	Canvas2Image was made by hongru
 	https://github.com/hongru/canvas2image
 */
-var OBJ_arquivoBruto;
 var FG_file_color = '';
+var ARD_LIST_ENABLE = [];
 var FILEGEN_TOGGLE = false;
+var ARD_ENABLE_RUNNING = false;
+var R3_PROCESS_ARDENABLER = false;
+var OBJ_arquivoBruto, ARD_arquivoBruto, UTILS_ARD_INTERVAL, ARD_DECOMP_INTERVAL;
 /*
 	Functions
 */
@@ -151,14 +154,171 @@ function UTILS_extract_rofs(rofsFile){
 				}
 			}, 50);
 		}
-	} catch (err){
+	} catch (err) {
 		if (err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
 			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software');
-			LOG_addLog('error', 'Details: ' + err);
+			LOG_addLog('error', 'ERROR - Details: ' + err);
 		} else {
 			LOG_addLog('error', 'ERROR - Something went wrong while extracting rofs!');
 			LOG_addLog('error', 'ERROR - Details: ' + err);
 		}
 	}
 	LOG_scroll();
+}
+/* 
+	ARD Enabler
+*/
+function UTILS_ARDEnabler(){
+	if (enable_mod === true){
+		R3_PROCESS_ARDENABLER = true;
+		var psStagePaths = prompt('ARD Enabler\nPlease insert the path where STAGE folders are located below:\n\n(Example: C:\\RE3_EXTRACT\\CD_DATA)');
+		if (psStagePaths !== null && fs.existsSync(psStagePaths) !== false){
+			var cStage = 0;
+			ARD_LIST_ENABLE = [];
+			DESIGN_prepareForARDEnabler();
+			UTILS_ARD_INTERVAL = setInterval(function(){
+				if (cStage < 6){
+					if (ARD_ENABLE_RUNNING !== true){
+						cStage++;
+						UTILS_ARDEnabler_generateFiles(psStagePaths, cStage);
+					} else {
+						console.info('Adding STAGE ' + cStage);
+					}
+				} else {
+					UTILS_ARDEnabler_startEnableProcess();
+				}
+			}, 500);
+		}
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to run ARD Enabler!');
+		LOG_addLog('warn', 'WARN - You need to have all data decompiled from Resident Evil 3 (PC Version)');
+	}
+	LOG_scroll();
+}
+function UTILS_ARDEnabler_generateFiles(stagePath, stageNumber){
+	var c = 0;
+	ARD_ENABLE_RUNNING = true;
+	var ARD_FS_FILELIST = fs.readdirSync(stagePath + '\\STAGE' + stageNumber);
+	var ardList = ARD_FS_FILELIST.filter(ardFile => /\.ARD$/.test(ardFile));
+	while (c < ardList.length){
+		ARD_LIST_ENABLE.push(stagePath + '\\STAGE' + stageNumber + '\\' + ardList[c]);
+		c++;
+	}
+	ARD_ENABLE_RUNNING = false;
+}
+function UTILS_ARDEnabler_startEnableProcess(){
+	clearInterval(UTILS_ARD_INTERVAL);
+	if (ARD_LIST_ENABLE.length !== 0){
+		var c = 0;
+		UTILS_ARD_INTERVAL = setInterval(function(){
+			if (c < ARD_LIST_ENABLE.length){
+				if (ARD_ENABLE_RUNNING !== true){
+					UTILS_ARDEnabler_seekValues(c, ARD_LIST_ENABLE[c]);
+					c++;
+					if (DESIGN_ENABLE_ANIMS === true){
+						$('#img-logo').css({'filter': 'blur(' + c + 'px)'});
+					}
+				} else {
+					console.log('(' + c + ' / ' + ARD_LIST_ENABLE.length + ') Enabling file: ' + ARD_LIST_ENABLE[c]);
+				}
+			} else {
+				UTILS_ARDEnabler_finish();
+			}
+		}, 500);
+	}
+}
+function UTILS_ARDEnabler_seekValues(currentArd, filePath){
+	var ARD_CAN_MAKE = true;
+	ARD_ENABLE_RUNNING = true;
+	if (fs.existsSync(filePath) !== false){
+		var ardName = getFileName(filePath).toUpperCase();
+		var rdtName = APP_PATH + '\\Assets\\DATA_E\\RDT\\' + ardName + '.RDT';
+		LOG_addLog('log', 'INFO - Enabling file: ' + ardName + ' <div class="log-ARDENABLER-counter">(' + currentArd + ' / ' + ARD_LIST_ENABLE.length + ')</div>');
+		if (fs.existsSync(rdtName) !== false){
+			RDT_arquivoBruto = fs.readFileSync(rdtName, 'hex');
+			ARD_arquivoBruto = fs.readFileSync(filePath, 'hex');
+			var rdtHeader = RDT_arquivoBruto.slice(0, 192); // RDT Header
+			var ardExists = ARD_arquivoBruto.indexOf(rdtHeader);
+			// Checks
+			if (ardExists === -1){
+				// Header is different from RDT
+				LOG_separator();
+				LOG_addLog('warn', 'WARN - ' + ardName + ' Header is different from PC version!');
+				LOG_addLog('warn', 'WARN - R3ditor will try capture RDT using the first camera angle...');
+				LOG_separator();
+				rdtHeader = RDT_arquivoBruto.slice(192, 256); // First Camera
+				ardExists = ARD_arquivoBruto.indexOf(rdtHeader);
+				// Finds the cam
+				if (ardExists !== -1){
+					ardExists = (ardExists - 192);
+					//console.info(ardName + ' - ' + ardExists);
+				} else {
+					ARD_CAN_MAKE = false;
+					LOG_addLog('warn', 'WARN - Unable to generate ' + ardName + '!');
+					LOG_addLog('warn', 'WARN - Reason: RDT Header was not found inside ARD file!)');
+				}
+			}
+			// END
+			if (ARD_CAN_MAKE === true){
+				UTILS_ARDEnabler_genFiles(ardName, ardExists);
+			} else {
+				ARD_ENABLE_RUNNING = false;
+			}
+		} else {
+			LOG_addLog('warn', 'WARN - Unable to generate ' + ardName + '!');
+			LOG_addLog('warn', 'WARN - Reason: RDT file was not found! (<font class="user-can-select">' + rdtName + '</font>)');
+		}
+	}
+	LOG_scroll();
+}
+function UTILS_ARDEnabler_genFiles(ardName, ardExists){
+	var ARD_START = ARD_arquivoBruto.slice(0, ardExists);
+	var RDT_EXTRACT = ARD_arquivoBruto.slice(ardExists, (ardExists + RDT_arquivoBruto.length));
+	var ARD_END = ARD_arquivoBruto.slice((ardExists + RDT_arquivoBruto.length), ARD_arquivoBruto.length);
+	// console.info('RDT slice: ' + ardExists + ' - ' + (ardExists + RDT_arquivoBruto.length) + ' (ARD length: ' + ARD_arquivoBruto.length + ')');
+	//
+	var ARDMAP_FILE = 'ARDMAP\nGenerated with ' + APP_NAME + '\nFile: ' + ardName + '\n\nARDSIZE = ' + ARD_arquivoBruto.length + 
+					  '\nARDSTART = ' + btoa(ARD_START) + '\nARDEND = ' + btoa(ARD_END);
+	try {
+		fs.writeFileSync(APP_PATH + '\\Configs\\ARDRDT\\' + ardName + '.RDT', RDT_EXTRACT, 'hex');
+		fs.writeFileSync(APP_PATH + '\\Configs\\ARDMAP\\' + ardName + '.ARDMAP', ARDMAP_FILE, 'utf-8');
+		ARD_ENABLE_RUNNING = false;
+	} catch (err) {
+		LOG_addLog('error', 'ERROR - Unable to generate ' + ardName + '.ARDMAP!');
+		LOG_addLog('error', 'ERROR - Reason: ' + err);
+		ARD_ENABLE_RUNNING = false;
+	}
+}
+function UTILS_ARDEnabler_finish(){
+	clearInterval(UTILS_ARD_INTERVAL);
+	LOG_separator();
+	LOG_addLog('log', 'INFO - ARD Enabler: Process complete!');
+	R3_PROCESS_ARDENABLER = false;
+	R3_ARDENABLER_ENABLED = true;
+	WZ_saveConfigs(true);
+	reload();
+}
+function UTILS_ARDEnabler_compileARD(mapName){
+	if (mapName !== undefined && mapName !== ''){
+		var ARDMap_path = APP_PATH + '\\Configs\\ARDMAP\\' + mapName.toUpperCase() + '.ARDMAP';
+		if (fs.existsSync(ARDMap_path) !== false){
+			var ARDMAP_RECOMP_FILE = [];
+			fs.readFileSync(ARDMap_path).toString().split('\n').forEach(function(line){ 
+				ARDMAP_RECOMP_FILE.push(line); 
+			});
+			//
+			var NEWARD_END = atob(ARDMAP_RECOMP_FILE[6].replace('ARDEND = ', ''));
+			var NEWARD_START = atob(ARDMAP_RECOMP_FILE[5].replace('ARDSTART = ', ''));
+			var NEWARD_SIZECHECK = parseInt(ARDMAP_RECOMP_FILE[4].replace('ARDSIZE = ', ''));
+			var NEWARD_RDT = fs.readFileSync(APP_PATH + '\\Configs\\ARDRDT\\' + mapName.toUpperCase() + '.RDT', 'hex');
+			//
+			var FINAL_ARD = NEWARD_START + NEWARD_RDT + NEWARD_END;
+			if (FINAL_ARD.length === NEWARD_SIZECHECK){
+				R3DITOR_SAVE(mapName.toUpperCase() + '.ARD', FINAL_ARD, 'hex', 'ARD');
+			}
+		} else {
+			LOG_addLog('warn', 'WARN - Unable to generate ARD File!');
+			LOG_addLog('warn', 'WARN - Reason: Unable to find ARDMAP for ' + mapName);
+		}
+	}
 }

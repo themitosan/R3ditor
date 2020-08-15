@@ -191,6 +191,13 @@ input[type='range' i]{
     position: sticky;
     margin-top: -18px;
 }
+.RDT_saveAsARD-btn{
+    left: 374px;
+    color: #0f0;
+    display: none;
+    margin-top: -4px;
+    position: absolute;
+}
 .blockUsage{
     top: 596px;
     width: 934px;
@@ -288,6 +295,11 @@ input[type='range' i]{
     margin-top: 4px;
     margin-bottom: 4px;
     text-shadow: 0px 0px 5px #793636;
+}
+.log-ARDENABLER-counter{
+    position: sticky;
+    margin-top: -18px;
+    margin-left: 190px;
 }
 .log-holder{
     top: 622px;
@@ -3132,4 +3144,19 @@ input[type='range' i]{
     left: 938px;
     width: 34px;
     position: sticky;
+}
+/*
+    ARD Enabler
+*/
+.UTILS_ARDEnabler_divHolder{
+    top: 310px;
+    left: 450px;
+    display: none;
+    position: absolute;
+}
+.FILELIST_ARDEnabler_warnDiv{
+    top: 180px;
+    left: 172px;
+    position: absolute;
+    text-shadow: 0 0 20px #009 !important;
 }

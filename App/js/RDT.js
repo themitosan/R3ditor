@@ -4,6 +4,9 @@
 	Sorry. For real.
 */
 
+// Other
+var RDT_USE_DECOMPILER_WIP = false;
+
 // Cameras
 var RDT_cameraArray = [];
 var RDT_totalCameras = 0;
@@ -225,6 +228,15 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 			RDT_getPropModelsArray();
 			RDT_readDoors();
 			RDT_readItens();
+			var rdtARDEnablerPath = APP_PATH + '\\Configs\\ARDRDT\\' + RDT_mapName + '.RDT';
+			if (rdtARDEnablerPath !== ORIGINAL_FILENAME){
+				$('#RDT-btn-saveAsARD').css({'display': 'none'});
+			} else {
+				$('#RDT-btn-saveAsARD').css({'display': 'inline'});
+				document.getElementById('RDT-btn-saveAsARD').onclick = function(){
+					UTILS_ARDEnabler_compileARD(RDT_mapName);
+				}
+			}
 			RDT_BG_display();
 		} else {
 			RDT_setHeaderPointers();

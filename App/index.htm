@@ -88,6 +88,7 @@
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
 			<input type="button" class="botao-menu" value="ROFS Extractor" title="Extract Rofs**.dat files using rofs.exe" id="UTILS_rofsExtract_btn" onclick="triggerLoad(16);">
+			<input type="button" class="botao-menu" value="ARD Enabler" title="Extract RDT Files from PS ARD and enable R3ditor edit / save / compile them back to ARD!" id="UTILS_enableR3ARD" onclick="UTILS_ARDEnabler();">
 			<!-- Right -->
 			<input type="button" class="botao-menu botao-aplicar espaco-left right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 			<input type="button" class="botao-menu right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
@@ -101,7 +102,9 @@
 			<input type="button" class="botao-menu right none" id="btn_run_merce-mod" title="Run the mercenaries minigame in a modified enviroment, with modded content and more." value="Run Mercenaries (Mod)" onclick="checkCanPlay(1, 0);">
 			<input type="button" class="botao-menu right none" id="btn_run_bio3-mod" title="Run the original game in a modified enviroment, with modded content and more." value="Run Resident Evil 3 / Bio 3 (Mod)" onclick="checkCanPlay(1, 1);">
 		</div>
+
 		<!-- Tools menu -->
+		
 		<!-- Menu RDT -->
 		<div class="menu-topo none" id="menu-topo-RDT">
 			<input type="button" class="botao-menu" title="Click here to open a map" value="Open Map" onclick="triggerLoad(6);">
@@ -1084,11 +1087,12 @@
 			<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
 			<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
 			<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();"/>
-			<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" onclick="FILELIST_clearTextBox();" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" placeholder="Search RDT (11A = R11A.RDT)">
+			<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" onclick="FILELIST_clearTextBox();" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" placeholder="Search RDT...">
 			<!-- Lists -->
 			<div class="fileList_aba_holder" id="fileList_aba_list">
 				<input type="button" id="fileList_aba_easy" value="Easy (DATA_AJ) [WIP]" class="aba aba-left-fix aba-select-2" onclick="main_renderFileList(3, 1);">
 				<input type="button" id="fileList_aba_hard" value="Hard (DATA_E)" class="aba" onclick="main_renderFileList(3, 2);">
+				<input type="button" id="fileList_aba_ARD" value="ARD Enabler" class="aba" onclick="main_renderFileList(3, 4);">
 				<input type="button" id="fileList_aba_recent" value="Recent Files" class="aba" onclick="main_renderFileList(3, 3);">
 			</div>
 			<!-- Loading List -->
@@ -1104,6 +1108,9 @@
 			</div>
 			<div id="fileListHolder_AJ" class="fileList_files none">
 				<!-- A lista de arquivos (Data_AJ) vai aqui -->
+			</div>
+			<div id="fileListHolder_ardConvert" class="fileList_files none">
+				<!-- A lista de arquivos (ARD convertidos) vai aqui -->
 			</div>
 			<div id="RDT_lastThreeFiles" class="fileList_files none">
 				<!-- A lista de arquivos recentes dentro de (filelist) vai aqui -->
@@ -1195,6 +1202,9 @@
 					Number of 3D Props: <font class="RDT-menu-geral-text" id="RDT_lbl-total3DProps">???</font><br>
 					Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
 					Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
+				</div>
+				<div class="RDT-applyBtn-div">
+					<input type="button" title="Click here save this map as PS ARD file!" class="RDT-btn-apply RDT_saveAsARD-btn" id="RDT-btn-saveAsARD" value="Save as ARD">
 				</div>
 			</div>
 			<!-- RDT PRI LAYERS (Masks) -->
@@ -1986,6 +1996,13 @@
 			<center>
 				<input type="button" id="WZ_BTN_1" class="botao-menu" value="???">
 				<input type="button" id="WZ_BTN_2" class="botao-menu" value="???">
+			</center>
+		</div>
+		<!-- ARD Enabler -->
+		<div id="UTILS_ARDEnabler_holder" class="UTILS_ARDEnabler_divHolder">
+			<center>
+				<font class="titulo">ARD Enabler</font><br>
+				Please wait while R3ditor extracts RDT Files from PS ARD Files<br>
 			</center>
 		</div>
 		<!-- AppLogo -->

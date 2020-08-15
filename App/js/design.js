@@ -57,24 +57,38 @@ function FILELIST_triggerSearchBox(){
 	if (main_currentMenu === 3){
 		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = UTILS_removeMiscChars(document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase()).replace(new RegExp('R', 'gi'), '');
 		var searchQuery = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase();
+		var searchResult;
 		if (searchQuery !== '' && searchQuery.length === 3){
-			var searchResult = document.getElementById('RDT_file_' + fileList_gameMode + '_R' + searchQuery);
+			if (fileList_gameMode === 'DATA_E' || fileList_gameMode === 'DATA_AJ'){
+				searchResult = document.getElementById('RDT_file_' + fileList_gameMode + '_R' + searchQuery);
+			} else {
+				searchResult = document.getElementById('RDT_file_ARDENABLER_R' + searchQuery);
+			}
 			if (searchResult !== null){
 				if (fileList_gameMode === 'DATA_E'){
 					document.getElementById('fileListHolder').innerHTML = '';
 					$('#fileListHolder').append(searchResult);
-				} else {
+				}
+				if (fileList_gameMode === 'DATA_AJ'){
 					document.getElementById('fileListHolder_AJ').innerHTML = '';
 					$('#fileListHolder_AJ').append(searchResult);
 				}
+				if (fileList_gameMode === 'ARDENABLER'){
+					document.getElementById('fileListHolder_ardConvert').innerHTML = '';
+					$('#fileListHolder_ardConvert').append(searchResult);
+				}
 			} else {
-				LOG_addLog('warn', 'INFO - Unable to find R' + searchQuery + '.RDT');
+				LOG_addLog('warn', 'WARN - Unable to find R' + searchQuery + '.RDT');
 			}
 		} else {
 			if (fileList_gameMode === 'DATA_E'){
 				main_renderFileList(3, 2);
-			} else {
+			}
+			if (fileList_gameMode === 'DATA_AJ'){
 				main_renderFileList(3, 1);
+			}
+			if (fileList_gameMode === 'ARDENABLER'){
+				main_renderFileList(3, 4);
 			}
 		}
 	}
@@ -89,22 +103,27 @@ function main_renderFileList(id, mode){
 	} else {
 		if (mode === 1){
 			gameModePath = 'DATA_AJ';
-			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '410px', 'width': '258px'});
+			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '512px', 'width': '160px'});
 		}
 		if (mode === 2){
 			gameModePath = 'DATA_E';
-			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '406px', 'width': '262px'});
+			$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '508px', 'width': '160px'});
+		}
+		if (mode === 4){
+			if (R3_ARDENABLER_ENABLED === true){
+				gameModePath = 'ARDENABLER';
+				$('#fileList_RDT_SEARCH_TEXTBOX').css({'left': '507px', 'width': '160px', 'display': 'inline'});
+			} else {
+				$('#fileList_RDT_SEARCH_TEXTBOX').css({'display': 'none'});
+			}
 		}
 	}
 	// RDT Recent
 	if (id === 1 && RDT_lastFileOpened !== ''){
-		var mFile;
-		var imgPreview;
-		var originalMFile;
-		var originalPFile;
 		var origName = 'Unknown';
 		var origCity = 'Unknown';
 		var pFile = RDT_lastFileOpened;
+		var mFile, imgPreview, originalMFile, originalPFile;
 		var RDT_name = getFileName(RDT_lastFileOpened).toUpperCase();
 		var mapExt = getFileExtension(RDT_lastFileOpened).toUpperCase();
 		if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
@@ -230,9 +249,11 @@ function main_renderFileList(id, mode){
 				}
 				$('#fileListHolder').css({'filter': 'blur(0px)'});
 				$('#RDT_lastThreeFiles').css({'display': 'none'});
+				$('#fileList_aba_ARD').removeClass('aba-select-2');
 				$('#filelist_progressBar_files').css({'width': '0%'});
 				$('#fileList_aba_recent').removeClass('aba-select-2');
 				$('#FILELIST_loadingMessage').css({'display': 'none'});
+				$('#fileListHolder_ardConvert').css({'display': 'none'});
 				$('#FILELIST_removeRecentFiles').css({'display': 'none'});
 				$('#fileList_RDT_SEARCH_TEXTBOX').css({'display': 'inline'});
 				if (gameModePath === 'DATA_E'){
@@ -251,8 +272,52 @@ function main_renderFileList(id, mode){
 				}
 				$('#avaliable_fileList').css({'display': 'block', 'border-bottom-right-radius': '2px'});
 			} else {
-				console.warn('WARN - Unable to render FileList!');
-				LOG_addLog('warn', 'WARN - Unable to render FileList!');
+				if (mode !== 4){
+					console.warn('WARN - Unable to render FileList!');
+					LOG_addLog('warn', 'WARN - Unable to render FileList!');
+				} else {
+					// ARD Enabler
+					var tms = 0;
+					$('#fileListHolder').css({'display': 'none'});
+					$('#fileList_aba_ARD').addClass('aba-select-2');
+					$('#fileListHolder_AJ').css({'display': 'none'});
+					$('#RDT_lastThreeFiles').css({'display': 'none'});
+					$('#fileList_aba_easy').removeClass('aba-select-2');
+					$('#fileList_aba_hard').removeClass('aba-select-2');
+					$('#fileList_aba_recent').removeClass('aba-select-2');
+					document.getElementById('fileListHolder_ardConvert').innerHTML = '';
+					//
+					if (R3_ARDENABLER_ENABLED === true){
+						var fileList_HTML_template, currentRDT, origName, origCity, imgPreview, shortFilePath;
+						var listRDT = fs.readdirSync(APP_PATH + '\\Configs\\ARDRDT\\').filter(fn => fn.endsWith('.RDT'));
+						while (tms < listRDT.length){
+							RDT_name = listRDT[tms];
+							currentRDT = APP_PATH + '\\Configs\\ARDRDT\\' + RDT_name;
+							imgPreview = APP_PATH + '\\Assets\\DATA_A\\BSS\\' + getFileName(listRDT[tms]).toUpperCase() + '00.JPG';
+							if (fs.existsSync(imgPreview) !== true){
+								imgPreview = '\\App\\Img\\404.png';
+							}
+							origName = RDT_locations[getFileName(listRDT[tms]).toUpperCase()][0];
+							origCity = RDT_locations[getFileName(listRDT[tms]).toUpperCase()][1];
+							if (currentRDT.length > 58){
+								shortFilePath = '...' + currentRDT.slice(parseInt(currentRDT.length / 3), currentRDT.length);
+							} else {
+								shortFilePath = currentRDT;
+							}
+							fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" id="RDT_file_ARDENABLER_' + getFileName(listRDT[tms]).toUpperCase() + '" onclick="RDT_openFile(\'' + 
+													 currentRDT.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + '" class="fileList_img" draggable="false"><div class="fileList_details">' + 
+													 'File: ' + RDT_name + '<br>RDT Extracted from PS ARD File<br>Path: ' + shortFilePath + '<br><div class="menu-separador"></div>Original Local Name: ' + origName + 
+													 '<br>Original City Location: ' + origCity + '<br></div></div>';
+							$('#fileListHolder_ardConvert').append(fileList_HTML_template);
+							tms++;
+						}
+					} else {
+						document.getElementById('fileListHolder_ardConvert').innerHTML = ARDEnabler_HTML_filelist_error;
+						LOG_addLog('warn', 'WARN - You must run ARD Enabler before using this tab!');
+					}
+					// End
+					$('#fileListHolder_ardConvert').css({'display': 'block', 'height': '440px'});
+				}
 			}
 		} else {
 			var fList = [];
@@ -323,6 +388,7 @@ function main_renderFileList(id, mode){
 			$('#fileListHolder').css({'display': 'none'});
 			$('#fileListHolder_AJ').css({'display': 'none'});
 			$('#fileList_aba_recent').addClass('aba-select-2');
+			$('#fileList_aba_ARD').removeClass('aba-select-2');
 			$('#fileList_aba_hard').removeClass('aba-select-2');
 			$('#fileList_aba_easy').removeClass('aba-select-2');
 			$('#fileList_aba_recent').css({'display': 'inline'});
@@ -2694,17 +2760,68 @@ function R3DITOR_movePercent(id, percent, status){
 }
 // Utils - Extract Rofs
 function UTILS_rofs_hideButtons(){
-	$('#menu-topo').css({'display': 'none'});
-	$('#menu-utility').css({'display': 'none'});
-	$('#menu-settings').css({'display': 'none'});
-	$('#menu-topo-MOD').css({'display': 'none'});
-	$('#menu-utility-aba').css({'display': 'none'});
-	$('#menu-utility-aba-2').css({'display': 'none'});
-	$('#menu-utility-aba-3').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeOut({duration: 500, queue: false});
+		$('#menu-topo').fadeOut({duration: 500, queue: false});
+		$('#menu-utility').fadeOut({duration: 500, queue: false});
+		$('#menu-settings').fadeOut({duration: 500, queue: false});
+		$('#menu-topo-MOD').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-2').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-3').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-4').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-5').fadeOut({duration: 500, queue: false});
+		$('#mainMenu-patcher-div').fadeOut({duration: 500, queue: false});
+		$('#mainMenu-exeEdit-div').fadeOut({duration: 500, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'none'});
+		$('#menu-topo').css({'display': 'none'});
+		$('#menu-utility').css({'display': 'none'});
+		$('#menu-settings').css({'display': 'none'});
+		$('#menu-topo-MOD').css({'display': 'none'});
+		$('#menu-utility-aba').css({'display': 'none'});
+		$('#menu-utility-aba-2').css({'display': 'none'});
+		$('#menu-utility-aba-3').css({'display': 'none'});
+		$('#menu-utility-aba-4').css({'display': 'none'});
+		$('#menu-utility-aba-5').css({'display': 'none'});
+		$('#mainMenu-patcher-div').css({'display': 'none'});
+		$('#mainMenu-exeEdit-div').css({'display': 'none'});
+	}
+}
+/*
+	Utils
+	ARD Enabler
+*/
+function DESIGN_prepareForARDEnabler(){
+	document.title = APP_NAME + ' - ARD Enabler - Please wait...';
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#menu-topo').fadeOut({duration: 500, queue: false});
+		$('#menu-utility').fadeOut({duration: 500, queue: false});
+		$('#menu-settings').fadeOut({duration: 500, queue: false});
+		$('#menu-topo-MOD').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-2').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-3').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-4').fadeOut({duration: 500, queue: false});
+		$('#menu-utility-aba-5').fadeOut({duration: 500, queue: false});
+		$('#mainMenu-patcher-div').fadeOut({duration: 500, queue: false});
+		$('#mainMenu-exeEdit-div').fadeOut({duration: 500, queue: false});
+		$('#UTILS_ARDEnabler_holder').fadeIn({duration: 1500, queue: false});
+		$('#img-logo').animate({'opacity': '0.42'}, {duration: 1500, queue: false});
+	} else {
+		$('#img-logo').css({'opacity': '0.42'});
+		$('#menu-topo').css({'display': 'none'});
+		$('#menu-utility').css({'display': 'none'});
+		$('#menu-settings').css({'display': 'none'});
+		$('#menu-topo-MOD').css({'display': 'none'});
+		$('#menu-utility-aba').css({'display': 'none'});
+		$('#menu-utility-aba-2').css({'display': 'none'});
+		$('#menu-utility-aba-3').css({'display': 'none'});
+		$('#menu-utility-aba-4').css({'display': 'none'});
+		$('#menu-utility-aba-5').css({'display': 'none'});
+		$('#mainMenu-patcher-div').css({'display': 'none'});
+		$('#mainMenu-exeEdit-div').css({'display': 'none'});
+		$('#UTILS_ARDEnabler_holder').css({'display': 'inline'});
 	}
 }
 /// Run game
