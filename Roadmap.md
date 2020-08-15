@@ -77,6 +77,7 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Modify nemesis item drops~~
+- ~~Create a tool to extract RDT from ARD files~~
 - Implement a randomizer!
 - Compress the files for releases!
 - Improve the first boot message info
