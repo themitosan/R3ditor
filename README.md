@@ -67,6 +67,7 @@ R3ditor also can do:
 - Edit items combinations
 - Edit nemesis item drops
 - Extract RDT files from PS ARD files²
+- Apply Xdelta patches
 
 <i>¹ - Only avaliable in x64 NW.js version</i><br>
 <i>² - You need extract PC version before extracting ARD files</i>
@@ -90,9 +91,10 @@ NW.js Plugins:
 - <a href="https://github.com/jprichardson/node-fs-extra" target="_blank">fs-extra</a> by <a href="https://github.com/jprichardson" target="_blank"> jprichardson</a>
 
 These files can be found in "App/tools/":
+- <a href="http://xdelta.org/" target="_blank">xdelta.exe (Xdelta patcher)</a>
+- <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 - <a href="https://www.7-zip.org/" target="_blank">7z.exe, 7-zip.dll, 7za.dll, 7zxa.dll and 7za.exe (7zip)</a>
 - <a href="https://github.com/pmandin/reevengi-tools" target="_blank">rofs.exe (Reevengi-tools - Rofs Unpacker Compiled)</a>
-- <a href="https://www.libsdl.org/" target="_blank">SDL.dll (Required for rofs.exe)</a>
 
 ## Credits:
 I would like to thank everyone who helped me with this project - since without your help none of this would be possible!
@@ -102,6 +104,7 @@ Many thanks to:
  - MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
  - hongru - Canvas2Image - <a target="_blank" href="https://github.com/hongru/canvas2image">GitHub</a><br>
  - pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
+ - Joshua MacDonald - Xdelta - <a target="_blank" href="https://github.com/jmacd/xdelta">GitHub</a><br>
  - jprichardson - fs-extra plugin - <a target="_blank" href="https://github.com/jprichardson/node-fs-extra">GitHub</a><br>
  - Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
  - The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
