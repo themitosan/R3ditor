@@ -332,7 +332,7 @@ function UTILS_ARDEnabler_compileARD(mapName){
 	LOG_scroll();
 }
 /*
-	XDelta
+	XDelta Patcher
 */
 function UTILS_XDELTA_setXdeltafile(path, mode){
 	if (path !== ''){
@@ -343,7 +343,6 @@ function UTILS_XDELTA_setXdeltafile(path, mode){
 			reduceLabel = path;
 		}
 		if (mode === 0){
-			// XDelta file
 			XDELTAPatch_arquivoBruto = path;
 			document.getElementById('R3_Patcher_Xdelta_lbl_Xfile').innerHTML = reduceLabel;
 			LOG_addLog('log', 'XDELTA - Patch file loaded!');
@@ -378,6 +377,7 @@ function UTILS_XDELTA_VERIFY(){
 }
 function UTILS_XDELTA_APPLY(){
 	LOG_separator();
+	$('body').css({'cursor': 'progress'});
 	LOG_addLog('log', 'XDELTA - Starting process...');
 	DESIGN_XDELTA_showInfo('Creating File - Please wait...', false);
 	document.getElementById('R3_XDELTA_finalFileName').disabled = 'disabled';
@@ -403,7 +403,7 @@ function UTILS_XDELTA_APPLY(){
 function UTILS_XDELTA_FINISH(saveFileName){
 	clearInterval(XDELTA_interval);
 	process.chdir(TEMP_APP_PATH);
-	DESIGN_XDELTA_showInfo();
+	$('body').css({'cursor': 'unset'});
 	if (EXTERNAL_APP_EXITCODE === 0){
 		LOG_addLog('log', 'XDELTA - Patch created sucessfully!');
 		if (fs.existsSync(APP_PATH + '\\App\\tools\\XDELTA_PATCH_FILE.bin') === true){
