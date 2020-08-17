@@ -11,13 +11,17 @@
 
 	Canvas2Image was made by hongru
 	https://github.com/hongru/canvas2image
+
+	Xdelta created by Joshua MacDonald
+	https://github.com/jmacd/xdelta
+	http://xdelta.org/
 */
 var FG_file_color = '';
 var ARD_LIST_ENABLE = [];
 var FILEGEN_TOGGLE = false;
 var ARD_ENABLE_RUNNING = false;
 var R3_PROCESS_ARDENABLER = false;
-var OBJ_arquivoBruto, ARD_arquivoBruto, UTILS_ARD_INTERVAL, ARD_DECOMP_INTERVAL;
+var OBJ_arquivoBruto, ARD_arquivoBruto, UTILS_ARD_INTERVAL, ARD_DECOMP_INTERVAL, XDELTAPatch_arquivoBruto, XDELTAOrigin_arquivoBruto, XDELTA_interval;
 /*
 	Functions
 */
@@ -176,6 +180,7 @@ function UTILS_ARDEnabler(){
 			var cStage = 0;
 			ARD_LIST_ENABLE = [];
 			DESIGN_prepareForARDEnabler();
+			$('body').css({'cursor': 'wait'});
 			UTILS_ARD_INTERVAL = setInterval(function(){
 				if (cStage < 6){
 					if (ARD_ENABLE_RUNNING !== true){
@@ -323,6 +328,93 @@ function UTILS_ARDEnabler_compileARD(mapName){
 			LOG_addLog('warn', 'WARN - Unable to generate ARD File!');
 			LOG_addLog('warn', 'WARN - Reason: Unable to find ARDMAP for ' + mapName);
 		}
+	}
+	LOG_scroll();
+}
+/*
+	XDelta
+*/
+function UTILS_XDELTA_setXdeltafile(path, mode){
+	if (path !== ''){
+		var reduceLabel = '';
+		if (path.length > 60){
+			reduceLabel = '...' + path.slice((path.length - 84), path.length);
+		} else {
+			reduceLabel = path;
+		}
+		if (mode === 0){
+			// XDelta file
+			XDELTAPatch_arquivoBruto = path;
+			document.getElementById('R3_Patcher_Xdelta_lbl_Xfile').innerHTML = reduceLabel;
+			LOG_addLog('log', 'XDELTA - Patch file loaded!');
+			LOG_addLog('log', 'XDELTA - Path: <font class="user-can-select">' + path + '</font>');
+		} else {
+			XDELTAOrigin_arquivoBruto = path;
+			document.getElementById('R3_Patcher_Xdelta_lbl_origFile').innerHTML = reduceLabel;
+			LOG_addLog('log', 'XDELTA - Original file loaded!');
+			LOG_addLog('log', 'XDELTA - Path: <font class="user-can-select">' + path + '</font>');
+		}
+	}
+	LOG_scroll();
+}
+function UTILS_XDELTA_VERIFY(){
+	var reason = '';
+	var UTILS_XDELTA_CANAPPLY = true;
+	if (XDELTAOrigin_arquivoBruto === undefined){
+		UTILS_XDELTA_CANAPPLY = false;
+		reason = 'The origin file was not set!';
+	}
+	if (XDELTAPatch_arquivoBruto === undefined){
+		UTILS_XDELTA_CANAPPLY = false;
+		reason = 'The patch file was not set!';
+	}
+	if (UTILS_XDELTA_CANAPPLY === true){
+		UTILS_XDELTA_APPLY();
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to start patch process!');
+		LOG_addLog('warn', 'WARN - Reason: ' + reason);
+		LOG_scroll();
+	}
+}
+function UTILS_XDELTA_APPLY(){
+	LOG_separator();
+	LOG_addLog('log', 'XDELTA - Starting process...');
+	DESIGN_XDELTA_showInfo('Creating File - Please wait...', false);
+	document.getElementById('R3_XDELTA_finalFileName').disabled = 'disabled';
+	var finalFileName = document.getElementById('R3_XDELTA_finalFileName').value;
+	document.getElementById('R3_XDELTA_PATCHER_btn_apply').disabled = 'disabled';
+	document.getElementById('R3_XDELTA_PATCHER_btn_cancel').disabled = 'disabled';
+	document.getElementById('R3_XDELTA_PATCHER_btn_openPatchFile').disabled = 'disabled';
+	document.getElementById('R3_XDELTA_PATCHER_btn_openOriginFile').disabled = 'disabled';
+	if (finalFileName === ''){
+		finalFileName = 'NEW_BIN_FILE.BIN';
+	}
+	process.chdir(APP_PATH + '\\App\\tools');
+	runExternalSoftware(APP_PATH + '\\App\\tools\\xdelta.exe', ['-d', '-s', XDELTAOrigin_arquivoBruto, XDELTAPatch_arquivoBruto , 'XDELTA_PATCH_FILE.bin']);
+	XDELTA_interval = setInterval(function(){
+		if (EXTERNAL_APP_RUNNING === false){
+			UTILS_XDELTA_FINISH(finalFileName);
+		} else {
+			console.info('Waiting Xdelta...');
+		}
+	}, 1000);
+	LOG_scroll();
+}
+function UTILS_XDELTA_FINISH(saveFileName){
+	clearInterval(XDELTA_interval);
+	process.chdir(TEMP_APP_PATH);
+	DESIGN_XDELTA_showInfo();
+	if (EXTERNAL_APP_EXITCODE === 0){
+		LOG_addLog('log', 'XDELTA - Patch created sucessfully!');
+		if (fs.existsSync(APP_PATH + '\\App\\tools\\XDELTA_PATCH_FILE.bin') === true){
+			var TEMP_arquivoBruto = fs.readFileSync(APP_PATH + '\\App\\tools\\XDELTA_PATCH_FILE.bin', 'hex');
+			DESIGN_XDELTA_showInfo('Patch created sucessfully!', true);
+			R3DITOR_SAVE(saveFileName, TEMP_arquivoBruto, 'hex', 'bin');
+		}
+	} else {
+		LOG_separator();
+		DESIGN_XDELTA_showInfo('Something went wrong while creating patch!', true);
+		LOG_addLog('warn', 'XDELTA - Something went wrong while creating patch!');
 	}
 	LOG_scroll();
 }

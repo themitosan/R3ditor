@@ -602,6 +602,15 @@ function main_menu(anim){
 		$('#menu-topo-RE3SET').css({'display': 'inline'});
 		RE3SET_showMenu();
 	}
+	if (anim === 13){ // XDELTA Patcher
+		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
+			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
+		}
+		if (enable_mod === true){
+			$('#menu-topo-MOD').css({'display': 'none'});
+		}
+		DESIGN_XDELTA_showMenu();
+	}
 }
 function RDT_checkBKP(){
 	if (RDT_lastBackup !== '' && fs.existsSync(RDT_lastBackup) === true){
@@ -2661,25 +2670,25 @@ function PATCHER_showMenu(){
 function PATCHER_showNotice(noticeTxt, mode){
 	// Mode 0: Sucess, 1: Error
 	if (mode === 0){
-		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #00ff003d'});
 		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #00ff0075'});
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #00ff003d'});
 	} else {
-		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #ff00008a'});
 		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #ff000075'});
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #ff00008a'});
 	}
 	$('#R3_Patcher_main_menu').css({'height': '120px', 'top': '270px'});
 	document.getElementById('R3_PATCHER_notice').innerHTML = '<center>' + noticeTxt + '</center>';
 	if (DESIGN_ENABLE_ANIMS === true){
-		$('#R3_Patcher_details_holder').slideUp({duration: 200, queue: false});
 		$('#R3_PATCHER_notice').fadeIn({duration: 200, queue: false});
+		$('#R3_Patcher_details_holder').slideUp({duration: 200, queue: false});
 	} else {
-		$('#R3_Patcher_details_holder').css({'display': 'none'});
 		$('#R3_PATCHER_notice').css({'display': 'inline'});
+		$('#R3_Patcher_details_holder').css({'display': 'none'});
 	}
 	$('#R3_PATCHER_btn_apply').css({'display': 'none'});
+	document.getElementById('R3_PATCHER_btn_cancel').value = 'Go Back!';
 	$('#R3_PATCHER_btn_cancel').css({'width': '430px', 'margin-top': '8px', 'display': 'inline'});
 	document.getElementById('R3_PATCHER_btn_cancel').title = 'Click on this button to return to main menu';
-	document.getElementById('R3_PATCHER_btn_cancel').value = 'Go Back!';
 }
 /*
 	Settings Menu
@@ -2758,7 +2767,10 @@ function R3DITOR_movePercent(id, percent, status){
 		}
 	}
 }
-// Utils - Extract Rofs
+/*
+	Utils
+	Extract Rofs
+*/
 function UTILS_rofs_hideButtons(){
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeOut({duration: 500, queue: false});
@@ -2824,7 +2836,65 @@ function DESIGN_prepareForARDEnabler(){
 		$('#UTILS_ARDEnabler_holder').css({'display': 'inline'});
 	}
 }
-/// Run game
+/*
+	Utils
+	XDELTA Patcher
+*/
+function DESIGN_XDELTA_showMenu(){
+	if (fs.existsSync(APP_PATH + '\\App\\tools\\xdelta.exe') !== true){
+		LOG_addLog('error', 'ERROR - Unable to find Xdelta executable!');
+		window.alert('ERROR - Unable to find Xdelta executable!');
+		reload();		
+	} else {
+		$('#img-logo').css({'display': 'none'});
+		$('#menu-topo-MOD').css({'display': 'none'});
+		document.title = APP_NAME + ' - Xdelta Patcher';
+		if (DESIGN_ENABLE_ANIMS === false){
+			$('#R3_Patcher_Xdelta_menu').css({'display': 'inline', 'top': '124px'});
+		} else {
+			$('#R3_Patcher_Xdelta_menu').fadeIn({duration: 200, queue: false});
+			$('#R3_Patcher_Xdelta_menu').animate({'top': '124px'}, {duration: 240, queue: false});
+		}
+	}
+}
+function DESIGN_XDELTA_showInfo(message, showReload){
+	if (DESIGN_ENABLE_ANIMS === true){
+		$('#R3_Patcher_Xdelta_menu').fadeOut({duration: 120, queue: false});
+		setTimeout(function(){
+			document.getElementById('R3_XDELTA_notice').innerHTML = message;
+			$('#R3_Patcher_XDELTA_details_holder').css({'display': 'none'});
+			$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'margin-top': '10px'});
+			$('#R3_Patcher_Xdelta_menu').removeClass('R3_Patcher_Xdelta_holderFix');
+			if (showReload !== true){
+				$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'display': 'none'});
+				$('#R3_XDELTA_PATCHER_notice').css({'width': '792px', 'height': '22px', 'display': 'block'});
+				$('#R3_Patcher_Xdelta_menu').css({'width': '812px', 'height': '84px', 'top': '304px', 'left': '280px'});
+			} else {
+				$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'display': 'inline'});
+				$('#R3_XDELTA_PATCHER_notice').css({'width': '792px', 'height': '82px', 'display': 'block'});
+				$('#R3_Patcher_Xdelta_menu').css({'width': '812px', 'height': '144px', 'top': '274px', 'left': '280px'});
+			}
+			$('#R3_Patcher_Xdelta_menu').fadeIn({duration: 120, queue: false});
+		}, 150);
+	} else {
+		$('#R3_Patcher_Xdelta_menu').removeClass('R3_Patcher_Xdelta_holderFix');
+		document.getElementById('R3_XDELTA_notice').innerHTML = message;
+		$('#R3_Patcher_XDELTA_details_holder').css({'display': 'none'});
+		$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'margin-top': '10px'});
+		if (showReload !== true){
+			$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'display': 'none'});
+			$('#R3_XDELTA_PATCHER_notice').css({'width': '792px', 'height': '22px', 'display': 'block'});
+			$('#R3_Patcher_Xdelta_menu').css({'width': '812px', 'height': '84px', 'top': '304px', 'left': '280px'});
+		} else {
+			$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'display': 'inline'});
+			$('#R3_XDELTA_PATCHER_notice').css({'width': '792px', 'height': '82px', 'display': 'block'});
+			$('#R3_Patcher_Xdelta_menu').css({'width': '812px', 'height': '144px', 'top': '274px', 'left': '280px'});
+		}
+	}
+}
+/*
+	Run game
+*/
 function R3DITOR_RUNGAME(id){
 	if (WZ_showWizard === false){
 		var c = 0;
@@ -2869,13 +2939,13 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT-geral').css({'height': '516px'});
 				$('#RDT-msgs').css({'height': '516px'});
 				$('#RDT-ifm').css({'height': '516px'});
-	
+
 				$('#RDT-SLD-hold').css({'height': '516px'});
 				$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
 				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
-	
+
 				//console.log('Open RE3');
-	
+
 			} else {
 				if (EXEC_BIO3_original !== ''){
 					$('#btn_run_bio3').css({'display': 'inline'});
@@ -2922,9 +2992,9 @@ function R3DITOR_RUNGAME(id){
 					$('#RDT-SLD-hold').css({'height': '472px'});
 					$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
 					$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
-	
+
 					//console.log('Close RE3');
-	
+
 					if (main_currentMenu !== 6){
 						if (DESIGN_ENABLE_ANIMS === true){
 							$('#menu-topo-MOD').fadeIn({duration: 120, queue: false});

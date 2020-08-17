@@ -88,11 +88,12 @@
 			<input type="button" class="botao-menu" value="File Generator" title="A simple tool to make files!" onclick="main_menu(4);">
 			<input type="button" class="botao-menu" value="OBJ Patcher" title="Patch OBJ files generated with Blender to RE3MV" onclick="UTILS_OBJ_Patcher_load();">
 			<input type="button" class="botao-menu" value="ROFS Extractor" title="Extract Rofs**.dat files using rofs.exe" id="UTILS_rofsExtract_btn" onclick="triggerLoad(16);">
+			<input type="button" class="botao-menu" value="Apply Xdelta Patch" title="Apply patches using Xdelta!" id="UTILS_applyXdeltaPatch" onclick="main_menu(13);">
 			<input type="button" class="botao-menu" value="ARD Enabler" title="Extract RDT Files from PS ARD and enable R3ditor edit / save / compile them back to ARD!" id="UTILS_enableR3ARD" onclick="UTILS_ARDEnabler();">
 			<!-- Right -->
 			<input type="button" class="botao-menu botao-aplicar espaco-left right none" id="main_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
-			<input type="button" class="botao-menu right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor." value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
-			<input type="button" class="botao-menu right none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor." value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
+			<input type="button" class="botao-menu right none" id="main_openBio3MerceOnHex" title="Opens the Mercenaries executable on your hex editor" value="Open Mercenaries On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_MERCE);">
+			<input type="button" class="botao-menu right none" id="main_openBio3OnHex" title="Opens the main game executable on your hex editor" value="Open Resident Evil 3 On Hex Editor" onclick="openFileOnHex(EXEC_BIO3_original);">
 		</div>
 		<!-- Menu MOD -->
 		<div class="menu-topo mod_menu none" id="menu-topo-MOD" onclick="main_closeFileList();">
@@ -218,6 +219,30 @@
 			</div>
 			<input type="button" id="R3_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply R3_Patcher_btnFix color-white">
 			<input type="button" id="R3_PATCHER_btn_apply" title="Click here to apply!" onclick="triggerLoad(21);" id="IEDIT_editApplyBtn" value="APPLY PATCH" class="RDT-btn-apply R3_Patcher_btnFix color-green">
+		</div>
+
+		<!-- XDELTA Patcher -->
+		<div class="R3_Patcher_main_menu_css R3_Patcher_Xdelta_holderFix" id="R3_Patcher_Xdelta_menu" onclick="main_closeFileList();">
+			<center><font class="titulo">Xdelta Patcher</font></center>
+			<div class="R3_Patcher_details_holder_css R3_Patcher_Xdelta_infoFix" id="R3_Patcher_XDELTA_details_holder">
+				Xdelta File: <div class="R3_Patcher_Xdelta_lbl" id="R3_Patcher_Xdelta_lbl_Xfile">No File Selected</div><input type="button" id="R3_XDELTA_PATCHER_btn_openPatchFile" class="botao-menu R3_Patcher_Xdelta_openBtnFix" onclick="triggerLoad(9);" value="Open File" title="Click here to select Xdelta patch file"><br>
+				Original File: <div class="R3_Patcher_Xdelta_lbl" id="R3_Patcher_Xdelta_lbl_origFile">No File Selected</div><input type="button" id="R3_XDELTA_PATCHER_btn_openOriginFile" class="botao-menu R3_Patcher_Xdelta_openBtnFix" onclick="triggerLoad(22);" value="Open File" title="Click here to select the file to be patched"><br>
+				New File Name: <input type="text" placeholder="NEW_BIN_FILE.BIN" id="R3_XDELTA_finalFileName" class="item-select-mod  R3_Patcher_Xdelta_inputFinalNameFix">
+				<div class="R3_Patcher_Xdelta_applyBtnDiv">
+					<center>
+						<input type="button" id="R3_XDELTA_PATCHER_btn_cancel" title="Click here to cancel" onclick="reload();" value="Cancel" class="RDT-btn-apply R3_Patcher_btnFix color-white">
+						<input type="button" id="R3_XDELTA_PATCHER_btn_apply" title="Click here to apply!" onclick="UTILS_XDELTA_VERIFY();" value="APPLY PATCH" class="RDT-btn-apply R3_Patcher_btnFix color-green">
+					</center>
+				</div>
+			</div>
+			<div id="R3_XDELTA_PATCHER_notice" class="R3_Patcher_details_holder_css none">
+				<center>
+					<font id="R3_XDELTA_notice">
+					<!-- Notice goes here -->
+					</font><br>
+					<input type="button" title="Click here to go back" onclick="reload();" id="R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL" value="Go Back" class="RDT-btn-apply R3_Patcher_btnFix color-white none">
+				</center>
+			</div>
 		</div>
 
 		<!-- FORM: RE3SET (RE3 Settings) -->
@@ -1935,12 +1960,15 @@
 					<input type="button" class="RDT-btn-apply color-white ABOUT_goBackBtn" title="Click here to go back" value="Go Back" onclick="reload();">
 				</div>
 				<div class="ABOUT_separador"></div>
+				<div class="ABOUT_manyThanksLbl">
+					<u>Many Thanks to:</u>
+				</div><br><br>
 				<div class="ABOUT_manyThanksDiv">
-					<u>Many Thanks to:</u><br><br>
 					Rob-- - memoryjs - <a target="_blank" href="https://github.com/Rob--/memoryjs">GitHub</a><br>
-					MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
 					hongru - Canvas2Image - <a target="_blank" href="https://github.com/hongru/canvas2image">GitHub</a><br>
+					MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>
 					pmandin - reevengi-tools - <a target="_blank" href="https://github.com/pmandin/reevengi-tools">GitHub</a><br>
+					Joshua MacDonald - Xdelta - <a target="_blank" href="https://github.com/jmacd/xdelta">GitHub</a><br>
 					jprichardson - fs-extra plugin - <a target="_blank" href="https://github.com/jprichardson/node-fs-extra">GitHub</a><br>
 					Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
 					The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
@@ -1949,7 +1977,7 @@
 					Khaled SA - RDT / ARD Header Infos - Beta-testing - <a target="_blank" href="https://twitter.com/khaleed681">Twitter</a><br>
 					Klarth - TIM Graphic Formats (PSX 2D Graphics) - <a target="_blank" href="http://www.romhacking.net/documents/31/">More Info</a><br>
 					"Shockproof" Jamo Koivisto - BIO 3 Hex Chest Modding - <a target="_blank" href="https://gamefaqs.gamespot.com/pc/431704-resident-evil-3-nemesis/faqs/36465">More Info</a><br>
-					ResidentEvilArtist - Memory Positions, IEDIT Editor, MIX Editor and so much more! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/memberlist.php?mode=viewprofile&u=294">Tapatalk Profile</a><br>
+					ResidentEvilArtist - Memory Positions, IEDIT Editor, MIX Editor and <u>so much more</u>! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/memberlist.php?mode=viewprofile&u=294">Tapatalk Profile</a><br>
 					<font title="The great master!">Biohazard España</font> - Fix OBJ to RE3MV (OBJ Patcher), Beta-testing, SLUS / ARD info and even more! - <a target="_blank" href="https://twitter.com/biohazardEsp">More Info</a><br>
 				</div><br>
 				<div class="ABOUT_specialThanks">
@@ -2025,6 +2053,7 @@
 			<input type="file" onchange="setLoadFile(6);"  id="loadRDTForm" accept=".rdt, .ard"/>
 			<input type="file" onchange="setLoadFile(7);"  id="loadDROPFile" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(8);"  id="loadRE3SET" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(9);"  id="loadXdeltaPatch" accept=".xdelta"/>
 			<input type="file" onchange="setLoadFile(10);" id="loadINIForm" accept=".ini"/>
 			<input type="file" onchange="setLoadFile(11);" id="loadSETTINGS_RE3" accept=".exe"/>
 			<input type="file" onchange="setLoadFile(12);" id="loadSETTINGS_HEX" accept=".exe"/>
@@ -2037,6 +2066,7 @@
 			<input type="file" onchange="setLoadFile(19);" id="loadR3PatcherFile" accept=".exe, .23, .dol, .BIN"/>
 			<input type="file" onchange="setLoadFile(20);" id="loadR3PatcherPatch" accept=".r3exepatch"/>
 			<input type="file" onchange="setLoadFile(21);" id="loadR3PatcherFINAL" accept=".exe, .23, .dol, .BIN"/>
+			<input type="file" onchange="setLoadFile(22);" id="loadXdeltaBinFile" accept=".bin, .iso"/>
 		</div>
 	</body>
 </html>

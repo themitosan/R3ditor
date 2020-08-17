@@ -100,14 +100,19 @@ input[type='range' i]{
     width: 720px;
     position: absolute;
 }
+.ABOUT_manyThanksLbl{
+    top: 68px;
+    left: 246px;
+    width: 130px;
+    position: absolute;
+}
 .ABOUT_manyThanksDiv{
-    top: 62px;
+    top: 100px;
     left: 256px;
     width: 776px;
-    height: 290px;
+    height: 252px;
     overflow: auto;
     position: absolute;
-    border-radius: 6px;
     text-align: -webkit-left;
 }
 .ABOUT_specialThanks{
@@ -3159,4 +3164,44 @@ input[type='range' i]{
     left: 172px;
     position: absolute;
     text-shadow: 0 0 20px #009 !important;
+}
+/*
+    XDELTA
+*/
+.R3_Patcher_Xdelta_holderFix{
+    top: 244px !important;
+    left: 284px !important;
+    width: 812px !important;
+    height: 188px !important;
+}
+.R3_Patcher_Xdelta_infoFix{
+    overflow: hidden;
+    width: 794px !important;
+    height: 132px !important;
+}
+.R3_Patcher_Xdelta_openBtnFix{
+    left: 724px;
+    position: sticky;
+}
+.R3_Patcher_Xdelta_inputFinalNameFix{
+    width: 594px;
+    outline: none;
+    margin-top: 0px;
+    box-shadow: none;
+    background-color: #0000;
+    text-transform: none !important;
+    background-image: linear-gradient(to right, #000, #0000) !important;
+}
+.R3_Patcher_Xdelta_applyBtnDiv{
+    top: 136px;
+    width: 98%;
+    position: absolute;
+    background-color: #0000 !important;
+}
+.R3_Patcher_Xdelta_lbl{
+    position: fixed;
+    overflow: hidden;
+    max-width: 596px;
+    margin-top: -21px;
+    margin-left: 112px;
 }

@@ -467,6 +467,7 @@ function WZ_loadFiles(file){
 	} else {
 		RE3SLDE_CANRUN = false;
 	}
+	// R3ditor Intro Animation (Line 14)
 	if (cfgs[13] !== undefined){
 		R3ditor_showFirstBootMessage = JSON.parse(cfgs[13]);
 	}
@@ -486,6 +487,9 @@ function WZ_loadFiles(file){
 	/*
 		Visuals
 	*/
+	if (fs.existsSync(APP_PATH + '\\App\\tools\\xdelta.exe') !== true){
+		$('#UTILS_applyXdeltaPatch').css({'display': 'none'});
+	}
 	if (enable_mod === true && R3_ARDENABLER_ENABLED === false){
 		$('#UTILS_enableR3ARD').css({'display': 'inline'});
 	} else {

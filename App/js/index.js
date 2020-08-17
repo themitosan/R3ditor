@@ -150,6 +150,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\App\\Update\\check.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\App\\Update\\check.r3ditor');
 	}
+	if (fs.existsSync(APP_PATH + '\\App\\tools\\XDELTA_PATCH_FILE.bin') === true){
+		fs.unlinkSync(APP_PATH + '\\App\\tools\\XDELTA_PATCH_FILE.bin');
+	}
 }
 /*
 	Internal Log
@@ -415,8 +418,8 @@ function runGame(exe, args){
 	const ls = spawn(exe, args);
 	RE3_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
-		$('#menu-utility-aba').css({'top': '512px'});
 		$('#menu-utility').css({'top': '586px'});
+		$('#menu-utility-aba').css({'top': '512px'});
 	}
 	ls.stdout.on('data', (data) => {
 		LOG_addLog('log', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
@@ -471,12 +474,14 @@ function runExternalSoftware(exe, args){
 		const ls = spawn(exe, args);
 		EXTERNAL_APP_PID = ls.pid;
 		ls.stdout.on('data', (data) => {
+			console.info('External App: ' + data);
 			LOG_addLog('log', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 			LOG_scroll();
 		});
 		ls.stderr.on('data', (data) => {
+			console.info('External App: ' + data);
 			LOG_addLog('warn', 'External App: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
-			scrollDownLog();
+			LOG_scroll();
 		});
 		ls.on('close', (code) => {
 			EXTERNAL_APP_PID = 0;
@@ -877,9 +882,9 @@ function triggerLoad(loadForm){
 	if (loadForm === 8){
 		$('#loadRE3SET').trigger('click');
 	}
-	// Free Slot
+	// Xdelta Patch
 	if (loadForm === 9){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		$('#loadXdeltaPatch').trigger('click');
 	}
 	// INI Load
 	if (loadForm === 10){
@@ -928,6 +933,10 @@ function triggerLoad(loadForm){
 	// FINAL R3 Patcher
 	if (loadForm === 21){
 		$('#loadR3PatcherFINAL').trigger('click');
+	}
+	// Xdelta Origin File
+	if (loadForm === 22){
+		$('#loadXdeltaBinFile').trigger('click');
 	}
 }
 function setLoadFile(input){
@@ -1028,9 +1037,16 @@ function setLoadFile(input){
 			document.getElementById('loadRE3SET').value = '';
 		}
 	}
-	// Free Slot
+	// Xdelta Patch File
 	if (input === 9){
-		LOG_addLog('warn', 'HEY - this function are not avaliable yet - try again later!');
+		cFile = document.getElementById('loadXdeltaPatch').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load Xdelta Patch';
+		} else {
+			UTILS_XDELTA_setXdeltafile(cFile.path, 0);
+			document.getElementById('loadXdeltaPatch').value = '';
+		}
 	}
 	// INI - INI Editor
 	if (input === 10){
@@ -1163,6 +1179,17 @@ function setLoadFile(input){
 		} else {
 			PATCHER_applyOnExec(cFile.path);
 			document.getElementById('loadR3PatcherFINAL').value = '';
+		}
+	}
+	// Xdelta Original File
+	if (input === 22){
+		cFile = document.getElementById('loadXdeltaBinFile').files[0];
+		if (cFile.path === null || cFile.path === undefined || cFile.path === ''){
+			loadCancel = true;
+			loadType = 'Load Xdelta Original File';
+		} else {
+			UTILS_XDELTA_setXdeltafile(cFile.path, 1);
+			document.getElementById('loadXdeltaBinFile').value = '';
 		}
 	}
 	if (loadCancel === true){
