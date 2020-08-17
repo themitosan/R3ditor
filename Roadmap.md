@@ -84,6 +84,7 @@ This file can (and will be) modified several times!
 - Merge IEDIT on a proper editor for EXE (MIX not inluded)
 - Implement / Improve a proper backup section on all sections
 - Remove all kind of ~~sassy~~ hacks inside all editors!
+- ~~Create a xdelta patch section~~
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe (64 Bits)~~
 - ~~Create a custom executable for nw.exe (32 Bits)~~
