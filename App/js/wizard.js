@@ -630,8 +630,10 @@ function WZ_APPEND(){
 	$('#RDT_door-edit-LK').append(RDT_EDIT_ITEM);
 	$('#RDT_door-edit-LK').append(RDT_EDIT_DOOR_KEYFF);
 	$('#RDT_convertItemTo').append(RDT_EDIT_ITEMCONVERT);
+	$('#RE3SET_EDIT_ITEMSTART_IT').append(RDT_EDIT_ITEM);
 	$('#RDT_editCamera_camType').append(RDT_EDIT_CAMTYPE);
 	$('#RDT_door-edit-DispTxt').append(RDT_EDIT_DOOR_TEXT);
+	$('#RE3SET_EDIT_ITEMSTART_AT').append(RDT_EDIT_ITEMATTR);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_HEX').append(RDT_EDIT_ITEM);
 	$('#RE3_LIVESTATUS_CHANGE_ITEM_ATTR').append(RDT_EDIT_ITEMATTR);
 	document.getElementById('FB_R3ditor_logo').src = APP_PATH + '\\App\\Img\\logo.png';

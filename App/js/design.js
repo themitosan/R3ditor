@@ -461,7 +461,7 @@ function main_closeFileList(){
 */
 function main_menu(anim){
 	main_closeFileList();
-	if (anim !== 8 && anim !== 9){
+	if (anim !== 8 && anim !== 9 && anim !== 12){
 		localStorage.clear();
 		sessionStorage.clear();
 	}
@@ -2439,11 +2439,7 @@ function MIX_showEdit(mode, combId, combHex){
 	}
 }
 function MIX_RENDER_PREVIEW(){
-	var Item_A;
-	var Item_B;
-	var Item_C;
-	var Item_D;
-	var Item_Res;
+	var Item_A, Item_B, Item_C, Item_D, Item_Res;
 	// 00: Reload / Sum
 	if (MIX_currentFunction === '00'){
 		Item_A = document.getElementById('MIX_00_edit_Weapon').value;
@@ -2587,7 +2583,7 @@ function MIX_RENDER_PREVIEW(){
 	}
 }
 /*
-	RE3SETTINGS Editor
+	RE3SET Editor
 */
 function RE3SET_showMenu(){
 	document.title = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
@@ -2595,6 +2591,26 @@ function RE3SET_showMenu(){
 	$('#menu-RE3SET-editor').css({'display': 'block'});
 	$('#img-logo').css({'display': 'none'});
 	LOG_scroll();
+}
+function RE3SET_itemStart_showEdit(mode){
+	// 0: Show, 1: Hide
+	if (mode === 0){
+		if (DESIGN_ENABLE_ANIMS !== true){
+			$('#RE3SET_DIV_itemsAllHolder').css({'left': '12px'});
+			$('#RE3SET_EDIT_ITEMSTART_HOLDER').css({'display': 'block'});
+		} else {
+			$('#RE3SET_EDIT_ITEMSTART_HOLDER').fadeIn({duration: 200, queue: false});
+			$('#RE3SET_DIV_itemsAllHolder').animate({'left': '12px'}, {duration: 180, queue: false});
+		}
+	} else {
+		if (DESIGN_ENABLE_ANIMS !== true){
+			$('#RE3SET_DIV_itemsAllHolder').css({'left': '222px'});
+			$('#RE3SET_EDIT_ITEMSTART_HOLDER').css({'display': 'none'});
+		} else {
+			$('#RE3SET_EDIT_ITEMSTART_HOLDER').fadeOut({duration: 200, queue: false});
+			$('#RE3SET_DIV_itemsAllHolder').animate({'left': '222px'}, {duration: 180, queue: false});
+		}
+	}
 }
 /*
 	DROP Editor
@@ -2655,7 +2671,7 @@ function IEDIT_showEdit(mode, id, hex){
 	}
 }
 /*
-	Patcher
+	R3 Patcher
 */
 function PATCHER_showMenu(){
 	$('#img-logo').css({'display': 'none'});

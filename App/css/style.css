@@ -59,6 +59,15 @@ input[type='range' i]{
     height: 100%;
 }
 /*
+    Cursor
+*/
+.CURSOR_NO{
+    cursor: no-drop !important;
+}
+.CURSOR_POINTER{
+    cursor: pointer !important;
+}
+/*
     About
 */
 .ABOUT_appLogo{
@@ -129,7 +138,7 @@ input[type='range' i]{
     border-radius: 6px !important;
 }
 /*
-
+    FBoot
 */
 .textLOGO{
     color: #fff;
@@ -2805,10 +2814,38 @@ input[type='range' i]{
 }
 /*
     RE3SET
+    RE3 Settings Editor
 */
+.RE3SET_EDIT_selectItemStart{
+    width: 360px;
+    text-transform: none !important;
+}
+.RE3SET_EDIT_startItemQuant{
+    width: 40px !important;
+}
+.RE3SET_DIV_startItemsApply{
+    top: 396px;
+    width: 100%;
+    position: absolute;
+}
+.RE3SET_BTN_APPLYSTARTITEM{
+    width: 194px;
+}
+.RE3SET_editStartItemHolder{
+    top: 72px;
+    z-index: 0;
+    left: 890px;
+    color: #fff;
+    width: 403px;
+    height: 438px;
+    padding: 10px;
+    position: absolute;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom, #4067a8, #1a2f49);
+}
 .RE3SET_DIV_itemsAllHolder{
-    top: 0px;
-    left: 12px;
+    top: 14px;
+    left: 222px;
     width: auto;
     height: auto;
     position: absolute;
