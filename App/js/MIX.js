@@ -7,27 +7,13 @@
 	52 41 46 4B 00 4B 00 49 51 4A 40 4B 00 40 4B 00 46 41 45 50 4B 
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
-var MIX_TOTAL_00 = 0;
-var MIX_TOTAL_01 = 0;
-var MIX_TOTAL_02 = 0;
-var MIX_TOTAL_03 = 0;
-var MIX_TOTAL_04 = 0;
-var MIX_TOTAL_05 = 0;
-var MIX_TOTAL_06 = 0;
-var MIX_fName, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
+var MIX_TOTAL_00, MIX_TOTAL_01, MIX_TOTAL_02, MIX_TOTAL_03, MIX_TOTAL_04, MIX_TOTAL_05, MIX_TOTAL_06, MIX_fName, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
 /*
 	Functions
 */
 function MIX_loadExe(file, mode){
 	var c = 0;
 	var end_pos = 16;
-	MIX_TOTAL_00 = 0;
-	MIX_TOTAL_01 = 0;
-	MIX_TOTAL_02 = 0;
-	MIX_TOTAL_03 = 0;
-	MIX_TOTAL_04 = 0;
-	MIX_TOTAL_05 = 0;
-	MIX_TOTAL_06 = 0;
 	var start_pos = 0;
 	var totalMixes = 125;
 	localStorage.clear();
@@ -36,6 +22,7 @@ function MIX_loadExe(file, mode){
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
 	MIX_clearHolders();
 	MIX_Database = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][1], MIX_fileTypes[MIX_fName][2]);
+	MIX_TOTAL_00 = MIX_TOTAL_01 = MIX_TOTAL_02 = MIX_TOTAL_03 = MIX_TOTAL_04 = MIX_TOTAL_05 = MIX_TOTAL_06 = 0;
 	if (mode === 0){
 		while (c < totalMixes){
 			MIX_decompileMix(c, start_pos, end_pos, false);
@@ -302,27 +289,32 @@ function MIX_applyChanges(id, funcType){
 	MIX_showEdit(1);
 }
 function MIX_saveOnFile(){
-	var c = 0;
-	if (MIX_arquivoBruto !== undefined){
-		MIX_Backup();
-		var RE3_FILE_START = MIX_arquivoBruto.slice(0, MIX_fileTypes[MIX_fName][1]);
-		var RE3_FILE_END = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][2], MIX_arquivoBruto.length);
-		var MIX_NEW_DATABASE = '';
-		while (c < 125){
-			MIX_NEW_DATABASE = MIX_NEW_DATABASE + localStorage.getItem('MIX_ID_' + c);
-			c++;
+	if (RE3_RUNNING !== true){
+		if (MIX_arquivoBruto !== undefined){
+			var c = 0;
+			MIX_Backup();
+			var RE3_FILE_START = MIX_arquivoBruto.slice(0, MIX_fileTypes[MIX_fName][1]);
+			var RE3_FILE_END = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][2], MIX_arquivoBruto.length);
+			var MIX_NEW_DATABASE = '';
+			while (c < 125){
+				MIX_NEW_DATABASE = MIX_NEW_DATABASE + localStorage.getItem('MIX_ID_' + c);
+				c++;
+			}
+			var NEW_FILE = RE3_FILE_START + MIX_NEW_DATABASE + RE3_FILE_END;
+			try {
+				fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				LOG_addLog('log', 'MIX - The file was saved successfull!');
+				LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+				LOG_separator();
+				MIX_updateList();
+			} catch (err) {
+				LOG_addLog('error', 'ERROR - Unable to save MIX file!');
+				LOG_addLog('error', 'ERROR - Reason: ' + err);
+			}
 		}
-		var NEW_FILE = RE3_FILE_START + MIX_NEW_DATABASE + RE3_FILE_END;
-		try {
-			fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
-			LOG_addLog('log', 'MIX - The file was saved successfull!');
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-			LOG_separator();
-			MIX_updateList();
-		} catch (err){
-			LOG_addLog('error', 'ERROR - Unable to save MIX file!');
-			LOG_addLog('error', 'INFO: ' + err);
-		}
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to save file!');
+		LOG_addLog('warn', 'WARN - Reason: Resident Evil 3 is Running!');
 	}
 	LOG_scroll();
 }
@@ -330,8 +322,7 @@ function MIX_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (MIX_arquivoBruto !== undefined){
 		try{
-			var backup_name;
-			backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + MIX_fileTypes[MIX_fName][3];
+			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + MIX_fileTypes[MIX_fName][3];
 			fs.writeFileSync(APP_PATH + '\\Backup\\MIX\\' + backup_name, MIX_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\MIX\\' + backup_name + '</font>');

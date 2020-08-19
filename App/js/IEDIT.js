@@ -90,15 +90,20 @@ function IEDIT_saveOnFile(){
 			c++;
 		}
 		var NEW_FILE = RE3_FILE_START + IEDIT_NEW_DATABASE + RE3_FILE_END;
-		try {
-			fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
-			LOG_addLog('log', 'IEDIT - The file was saved successfull!');
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-			LOG_separator();
-			IEDIT_updateList();
-		} catch (err){
-			LOG_addLog('error', 'ERROR - Unable to save IEDIT file!');
-			LOG_addLog('error', 'ERROR - Reason: ' + err);
+		if (RE3_RUNNING !== true){
+			try {
+				fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				LOG_addLog('log', 'IEDIT - The file was saved successfull!');
+				LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+				LOG_separator();
+				IEDIT_updateList();
+			} catch (err) {
+				LOG_addLog('error', 'ERROR - Unable to save IEDIT file!');
+				LOG_addLog('error', 'ERROR - Reason: ' + err);
+			}
+		} else {
+			LOG_addLog('warn', 'WARN - Unable to save file!');
+			LOG_addLog('warn', 'WARN - Reason: Resident Evil 3 is Running!');
 		}
 	}
 	LOG_scroll();
@@ -107,8 +112,7 @@ function IEDIT_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (IEDIT_arquivoBruto !== undefined){
 		try{
-			var backup_name;
-			backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-IEDIT-' + currentTime() + IEDIT_fileTypes[IEDIT_fileName][3];
+			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-IEDIT-' + currentTime() + IEDIT_fileTypes[IEDIT_fileName][3];
 			fs.writeFileSync(APP_PATH + '\\Backup\\IEDIT\\' + backup_name, IEDIT_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\IEDIT\\' + backup_name + '</font>');

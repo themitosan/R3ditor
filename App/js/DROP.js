@@ -85,28 +85,33 @@ function DROP_compileItems(){
 	DROP_saveFile(FINAL_HEX);
 }
 function DROP_saveFile(hexValue){
-	try{
-		DROP_backup();
-		var DROP_START = DROP_arquivoBruto.slice(0, RANGES['DROP_' + DROP_gameVersion + '_itemIds'][0]);
-		var DROP_END = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][1], DROP_arquivoBruto.length);
-		var FINAL_FILE = DROP_START + hexValue + DROP_END;
-		fs.writeFileSync(ORIGINAL_FILENAME, FINAL_FILE, 'hex');
-		LOG_addLog('log', 'DROP - The file was saved successfull!');
-		LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-		LOG_separator();
-		DROP_loadFile(ORIGINAL_FILENAME, 0);
-	} catch (err) {
-		LOG_addLog('error', 'Unable to save file!');
-		LOG_addLog('error', 'Reason: ' + err);
-		console.error('Unable to save file!\nReason: ' + err);
+	if (RE3_RUNNING !== true){
+		try{
+			DROP_backup();
+			var DROP_START = DROP_arquivoBruto.slice(0, RANGES['DROP_' + DROP_gameVersion + '_itemIds'][0]);
+			var DROP_END = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][1], DROP_arquivoBruto.length);
+			var FINAL_FILE = DROP_START + hexValue + DROP_END;
+			fs.writeFileSync(ORIGINAL_FILENAME, FINAL_FILE, 'hex');
+			LOG_addLog('log', 'DROP - The file was saved successfull!');
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			LOG_separator();
+			DROP_loadFile(ORIGINAL_FILENAME, 0);
+		} catch (err) {
+			LOG_addLog('error', 'Unable to save file!');
+			LOG_addLog('error', 'Reason: ' + err);
+			console.error('Unable to save file!\nReason: ' + err);
+		}
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to save file!');
+		LOG_addLog('warn', 'WARN - Reason: Resident Evil 3 is Running!');
 	}
+	LOG_scroll();
 }
 function DROP_backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (DROP_arquivoBruto !== undefined){
 		try{
-			var DROP_backupName;
-			DROP_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-DROP-' + currentTime() + DROP_fileTypes[DROP_fName][2];
+			var DROP_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-DROP-' + currentTime() + DROP_fileTypes[DROP_fName][2];
 			fs.writeFileSync(APP_PATH + '\\Backup\\DROP\\' + DROP_backupName, DROP_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + DROP_backupName);
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\DROP\\' + DROP_backupName + '</font>');

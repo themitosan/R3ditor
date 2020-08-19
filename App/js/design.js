@@ -2595,6 +2595,7 @@ function RE3SET_showMenu(){
 function RE3SET_itemStart_showEdit(mode){
 	// 0: Show, 1: Hide
 	if (mode === 0){
+		RE3SET_edit_updateTextInfo();
 		if (DESIGN_ENABLE_ANIMS !== true){
 			$('#RE3SET_DIV_itemsAllHolder').css({'left': '12px'});
 			$('#RE3SET_EDIT_ITEMSTART_HOLDER').css({'display': 'block'});
@@ -2611,6 +2612,16 @@ function RE3SET_itemStart_showEdit(mode){
 			$('#RE3SET_DIV_itemsAllHolder').animate({'left': '222px'}, {duration: 180, queue: false});
 		}
 	}
+}
+function RE3SET_edit_updateTextInfo(){
+	var IT = document.getElementById('RE3SET_EDIT_ITEMSTART_IT').value;
+	if (IT !== '00'){
+		$('#RE3SET_ITEMSTART_infos').css({'display': 'block'});
+		document.getElementById('RE3SET_EDIT_LBL_ITEMDESC').innerHTML = ITEM[IT][1];
+	} else {
+		$('#RE3SET_ITEMSTART_infos').css({'display': 'none'});
+	}
+	$('#RE3SET_BG_ITEMSTARTEDIT').css({'background-image': 'url(Img/items/details/' + IT + '.png)'});
 }
 /*
 	DROP Editor

@@ -5,7 +5,7 @@
 */
 function R3_START_KEYPRESS(){
 	window.onkeyup = function(key){
-		//console.info(key);
+		console.info(key);
 		if (RE3_LIVE_keyPress_enable === true){
 			// Keys
 			if (MEM_JS_requreSucess === true){

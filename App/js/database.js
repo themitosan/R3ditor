@@ -6,21 +6,21 @@
 var ITEM = {
 	'00': ['Empty Slot', 									   '', 																																																									   						],
 	'01': ['Combat Knife', 									   'It is a simple combat Knife<br><br>It can be very useful when you are low on ammunition. In the hand of those who know how to use, it does damage!'],
-	'02': ['Sigpro SP 2009 handgun', 						   'Carlos alternative pistol.<br>Not a big deal but it can help you if you\'re in the worst...'],
+	'02': ['Sigpro SP 2009 handgun', 						   'Sigpro SP 2009 Handgun<br><br>This is the Carlos alternative pistol.<br>Not a big deal but it can help you if you\'re in the worst...'],
 	'03': ['Beretta M92F handgun',   						   'M92F special version of S.T.A.R.S made by Kendo.<br><br>There is a legend has it that those who have no life play using it without ever reloading.'],
 	'04': ['Shotgun Benelli M3S', 							   'This is a Benelli M3S Shotgun but with a sawed-off barrel.<br><br>It can be a great help if you aim up when you have an enemy nearby!'],
 	'05': ['Magnum M629C', 									   'Smith & Wesson M629C .44-caliber magnum revolver<br>It\'s a magnum boy! Just shoot the foot and the head explodes!<br>Even though it\'s absurdly powerful, it doesn\'t quite match the magnum of the previous games. (design)'],
-	'06': ['Hk-p Grenade launcher with normal rounds',		   'It is extremely effective against most enemies in the game.'],
-	'07': ['Hk-p Grenade launcher with fire rounds',	 	   'It is extremely effective against most enemies in the game.'],
-	'08': ['Hk-p Grenade launcher with acid rounds',	 	   'It is extremely effective against the worm you find in the cemetery (park).'],
-	'09': ['Hk-p Grenade launcher with freeze rounds',	 	   'It is extremely effective in battles against nemesis.'],
-	'0a': ['M66 Rocket Launcher', 							   'By this is the best gun of all!<br><br>...but Jesus Christ, it take so long to aim!'],
-	'0b': ['Gatling Gun', 									   'One of the most powerful weapons available. The only thing that is bad about her is the time it takes her to fire her projectiles.'],
+	'06': ['Hk-p Grenade launcher with normal rounds',		   'Hk-p Grenade launcher with normal rounds<br><br>It is extremely effective against most enemies in the game.'],
+	'07': ['Hk-p Grenade launcher with fire rounds',	 	   'Hk-p Grenade launcher with fire rounds<br><br>It is extremely effective against most enemies in the game.'],
+	'08': ['Hk-p Grenade launcher with acid rounds',	 	   'Hk-p Grenade launcher with acid rounds<br><br>It is extremely effective against the worm you find in the cemetery (park).'],
+	'09': ['Hk-p Grenade launcher with freeze rounds',	 	   'Hk-p Grenade launcher with freeze rounds<br><br>It is extremely effective in battles against nemesis.'],
+	'0a': ['M66 Rocket Launcher', 							   'M66 Rocket Launcher<br><br>By this is the best gun of all!<br><br>...but Jesus Christ, it take so long to aim!'],
+	'0b': ['Gatling Gun', 									   'Gatling Gun<br><br>One of the most powerful weapons available. The only thing that is bad about her is the time it takes her to fire her projectiles.'],
 	'0c': ['Mine Thrower', 									   'By far is one of the most different weapons in the game.<br><br>The best use is in the final battle!'],
 	'0d': ['STI Eagle 6.0', 								   'This gun shoots faster than standard pistol and also has a chance to hit the enemy with critical damage, exploding his head (zombie).'],
 	'0e': ['M4A1 Assault rifle (Auto Mode)', 				   'M4A1 Assault Rifle in Auto Mode.<br><br>It\'s a good rifle for those learning how to play the game, but know that there are weapons that are better than it.'],
 	'0f': ['M4A1 Assault rifle (Manual Mode)', 				   'M4A1 Assault Rifle in Manual Mode.<br><br>It\'s a good rifle for those learning how to play the game, but know that there are weapons that are better than it.'],
-	'10': ['Western Custom M37 lever action shotgun', 		   'It has a bigger hitbox and can fire faster than the Benelli M3S but on the other hand can\'t shoot stronger projectiles.<br><br>Use when you have several enemies ahead!'],
+	'10': ['Western Custom M37 lever action shotgun', 		   'Western Custom M37 lever action shotgun<br><br>It has a bigger hitbox and can fire faster than the Benelli M3S but on the other hand can\'t shoot stronger projectiles.<br><br>Use when you have several enemies ahead!'],
 	'11': ['Sigpro SP 2009 E', 							       'It\'s the same Sigpro that Carlos uses, but with improved bullets.'],
 	'12': ['Beretta M92F E',    							   'It\'s the same M93F that Jill uses, only with more powerful bullets.<br><br>The sound of the shot hurts more than the bullet itself!'],
 	'13': ['Shotgun Benelli M3S E',        					   'Shotgun Benelli M3S E<br><br>This is the same shotgun, but with bullets that do much more damage than usual.'],
@@ -46,7 +46,7 @@ var ITEM = {
 	'27': ['Mix of 3 Green Herbs', 							   'This combination can heal your life completely without removing poisoning status.'],
 	'28': ['Mix of 2x Green Herbs + Blue Herb', 			   'This combination can heal little more than a green weed alone and removes the poison status.'],
 	'29': ['Mix of all Herbs',		     					   'This combination completely heals your life, including removing the poison status of the current character.'],
-	'2a': ['First aid spray kit',	 						   'Kit that supports up to three first aid kit units.'],
+	'2a': ['First aid spray kit',	 						   'This is a kit of Aid Spray that supports up to three first aid kit units.'],
 	'2b': ['Square crank', 									   'Square Tip Crank - Used in uptown to open a cabinet full of grenade launcher bullets.'],
 	'2c': ['(BOTU) Red Coin',								   'BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in red color.<br><br>Item discarded during the development process.'],
 	'2d': ['(BOTU) Blue Coin', 							   	   'BOTU!<br><br>A coin with the symbol of \"Nosferatu\" in blue color.<br><br>Item discarded during the development process.'],
@@ -1612,16 +1612,16 @@ var RDT_CAMERAS_CAMTYPES = {
 	File Types
 */
 var IEDIT_fileTypes = {
-	'residentevil3': ['PC EXE', 2448160, 2449232, '.exe'], // PC Version
-	'slus_009.23':   ['PS SLUS', 1186344, 1187416, '.23'], // Playstation Version
-	'main.dol':      ['GC DOL', 4375520, 4376592, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN', 2835856, 2836928, '.BIN']  // Sega Dreamcast Version
+	'residentevil3': ['PC EXE',  2448160, 2449232, '.exe'], // PC Version
+	'slus_009.23':   ['PS SLUS', 1186344, 1187416,  '.23'], // Playstation Version
+	'main.dol':      ['GC DOL',  4375520, 4376592, '.dol'], // GameCube Version
+	'1st_read.bin':  ['DC BIN',  2835856, 2836928, '.BIN']  // Sega Dreamcast Version
 }
 var MIX_fileTypes = {
-	'residentevil3': ['PC EXE', 2449536, 2451536, '.exe'], // PC Version
-	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720, '.23'], // Playstation Version
-	'main.dol': 	 ['GC DOL', 4376896, 4378896, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN', 2837232, 2839232, '.BIN']  // Sega Dreamcast Version
+	'residentevil3': ['PC EXE',  2449536, 2451536, '.exe'], // PC Version
+	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720,  '.23'], // Playstation Version
+	'main.dol': 	 ['GC DOL',  4376896, 4378896, '.dol'], // GameCube Version
+	'1st_read.bin':  ['DC BIN',  2837232, 2839232, '.BIN']  // Sega Dreamcast Version
 }
 var DROP_fileTypes = {
 	'residentevil3': ['PC EXE',  0, '.exe'], // PC Version
@@ -1634,7 +1634,11 @@ var RANGES = {
 		RE3SET Editor
 		Edit Starting items, Starting pos. and more
 	*/
-	'RE3SET_invent_0_startItems': [2441496, 2441656],
+	// Item start
+	'RE3SET_invent_0_startItems': [2441496, 2441656], // PC version
+	'RE3SET_invent_1_startItems': [1184536, 1184696], // PS version
+	'RE3SET_invent_2_startItems': [0, 0],			  // GAMECUBE Invent are not stored on main.dol!
+	'RE3SET_invent_3_startItems': [2833760, 2833920], // DC version
 	/*
 		DROP
 		Nemesis Item Drops

@@ -15,7 +15,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = 'V. 0.0.3.5 [ALPHA]';
+var APP_VERSION = 'V. 0.0.3.6 [ALPHA]';
 var fs, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
 	Onload
@@ -35,7 +35,7 @@ window.onresize = function(){
 	window.resizeBy(1340, 733);
 }
 /*
-	Functions
+	Main Functions
 */
 function reload(){
 	process.chdir(TEMP_APP_PATH);
@@ -132,14 +132,17 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Update\\Extract') === true){
 		deleteFolderRecursive(APP_PATH + '\\Update\\Extract');
 	}
+	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
+		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
+	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\RE3SET') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\RE3SET');
+	}
 	if (fs.existsSync(APP_PATH + '\\Configs\\ARDRDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\ARDRDT');
 	}
 	if (fs.existsSync(APP_PATH + '\\Configs\\ARDMAP') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\ARDMAP');
-	}
-	if (fs.existsSync(APP_PATH + '\\version.r3ditor') === true){
-		fs.unlinkSync(APP_PATH + '\\version.r3ditor');
 	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDTMAP2');
@@ -157,22 +160,23 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 /*
 	Internal Log
 */
-function LOG_addLog(type, texto){
-	var classe = undefined;
-	if (type.toLowerCase() !== 'log' && type.toLowerCase() !== 'warn' && type.toLowerCase() !== 'error'){
-		classe = 'log-text';
+function LOG_addLog(logType, text){
+	var cssClass;
+	var type = logType.toLowerCase();
+	if (type !== 'log' && type !== 'warn' && type !== 'error'){
+		cssClass = 'log-text';
 	} else {
 		if (type.toLowerCase() === 'log' || type === undefined || type === null){
-			classe = 'log-text';
+			cssClass = 'log-text';
 		}
 		if (type.toLowerCase() === 'warn'){
-			classe = 'log-warn';
+			cssClass = 'log-warn';
 		}
 		if (type.toLowerCase() === 'error'){
-			classe = 'log-error';
+			cssClass = 'log-error';
 		}
 	}
-	var logTemplate = '<div class="' + classe + '">' + texto + '</div>';
+	var logTemplate = '<div class="' + cssClass + '">' + text + '</div>';
 	$('#log-programa').append(logTemplate);
 }
 function clearInternalLog(){
@@ -213,11 +217,10 @@ function showNotify(titulo, texto, tempo){
 			body: texto,
 		});
 		setTimeout(NOTIFY.close.bind(NOTIFY), tempo);
-	}
-	catch(err){
+	} catch (err) {
 		if (DEBUG === true){
 			console.error('(Notification) ERROR: ' + err);
-			LOG_addLog('error', '(Notification) ERROR - ' + err);
+			LOG_addLog('error', 'ERROR - ' + err);
 		}
 	}
 }
@@ -502,7 +505,7 @@ function runExternalSoftware(exe, args){
 				LOG_scroll();
 			}
 		});
-	} catch (err){
+	} catch (err) {
 		LOG_separator();
 		if (WZ_showWizard === true && err.toString().indexOf('Error: spawn UNKNOWN') !== -1){
 			LOG_addLog('error', 'ERROR - Unable to extract ROFS.exe! You need to instal Visual Studio 2005 runtime files to run this software.');
@@ -1032,8 +1035,7 @@ function setLoadFile(input){
 			loadCancel = true;
 			loadType = 'Load RE3SETTINGS';
 		} else {
-			R3_WIP();
-			//RE3SET_loadFile(cFile.path, 0);
+			RE3SET_loadFile(cFile.path, 0);
 			document.getElementById('loadRE3SET').value = '';
 		}
 	}

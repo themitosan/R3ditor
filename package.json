@@ -3,13 +3,13 @@
   "name": "R3ditor",
   "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",
   "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "keywords": [
     "R3ditor",
     "node-webkit"
   ],
   "window": {
-    "title": "R3ditor - Wait...",
+    "title": "R3ditor - Please wait...",
     "icon": "App/img/logo.png",
     "fullscreen": false,
     "min_width": 1340,

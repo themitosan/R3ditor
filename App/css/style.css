@@ -634,6 +634,11 @@ input[type='range' i]{
 	font-size: xx-large;
     text-shadow: 0 0 10px #131329;
 }
+.titulo-2{
+    font-style: italic;
+    font-size: x-large;
+    text-shadow: 0 0 10px #131329;
+}
 .none{
 	display: none;
 }
@@ -2816,6 +2821,23 @@ input[type='range' i]{
     RE3SET
     RE3 Settings Editor
 */
+.RE3SET_EDIT_itemstart_infos{
+    width: 400px;
+    position: absolute;
+}
+.RE3SET_EDIT_itemBackground{
+    top: 0px;
+    z-index: -1;
+    height: 100%;
+    border-radius: 4px;
+    position: absolute;
+    background-color: #000;
+    width: calc(100% - 10px);
+    background-size: auto 490px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to left, #0000007d, #0000);
+}
 .RE3SET_EDIT_selectItemStart{
     width: 360px;
     text-transform: none !important;

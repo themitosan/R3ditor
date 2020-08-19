@@ -15,15 +15,22 @@ function RE3SET_loadFile(exe, mode){
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
 	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
-	// Start Reading values
-	RE3SET_inventoryHex = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0], RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1]);
+	/*
+		Item start
+	*/
+	if (RE3SET_gameVersion !== 2){
+		RE3SET_inventoryHex = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0], RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1]);
+		RE3SET_jillHard     = RE3SET_inventoryHex.slice(0, 32).match(/.{8,8}/g);
+		RE3SET_carlosHard   = RE3SET_inventoryHex.slice(40, 64).match(/.{8,8}/g);
+		RE3SET_jillEasy     = RE3SET_inventoryHex.slice(80, 120).match(/.{8,8}/g);
+		RE3SET_carlosEasy   = RE3SET_inventoryHex.slice(128, RE3SET_inventoryHex.length).match(/.{8,8}/g);
+		RE3SET_decompileInventory();
+	} else {
+		alert('WARN - This is GC Version!\nDue starting items settings are not set on this file, Item start will not be avaliable!');
+		LOG_addLog('warn', 'WARN - This is GC Version! Due starting items settings are not set on this file, Item start will not be avaliable!');
+		reload();
+	}
 	//
-	RE3SET_jillHard   = RE3SET_inventoryHex.slice(0, 32).match(/.{8,8}/g);
-	RE3SET_carlosHard = RE3SET_inventoryHex.slice(40, 64).match(/.{8,8}/g);
-	RE3SET_jillEasy   = RE3SET_inventoryHex.slice(80, 120).match(/.{8,8}/g);
-	RE3SET_carlosEasy = RE3SET_inventoryHex.slice(128, RE3SET_inventoryHex.length).match(/.{8,8}/g);
-	//
-	RE3SET_decompileInventory();
 	// End - Using DROP_fileTypes because it works!
 	LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
 	LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
@@ -171,6 +178,110 @@ function RE3SET_EDITSTARTITEM(mode, char, id){
 	document.getElementById('RE3SET_EDIT_ITEMSTART_AT').value = AT;
 	document.getElementById('RE3SET_EDIT_ITEMSTART_QT').value = QT;
 	document.getElementById('RE3SET_LBL_editItemName').innerHTML = ITEM[IT][0];
+	document.getElementById('RE3SET_EDIT_LBL_ITEMDESC').innerHTML = ITEM[IT][1];
 	// End
 	RE3SET_itemStart_showEdit(0);
+}
+function RE3SET_ITEMSTART_CHECK(){
+	var IT = document.getElementById('RE3SET_EDIT_ITEMSTART_IT').value;
+	var AT = document.getElementById('RE3SET_EDIT_ITEMSTART_AT').value;
+	var QU = document.getElementById('RE3SET_EDIT_ITEMSTART_QT').value;
+	if (QU === '' || parseInt(QU) === NaN){
+		QU = 0;
+	}
+	var QT = parseInt(QU).toString(16);
+	if (QT.length !== 2){
+		QT = '0' + QT;
+	}
+	RE3SET_ITEMSTART_APPLY(IT + QT + AT + '00');
+}
+function RE3SET_ITEMSTART_APPLY(itemHex){
+	var c, gMode, gChar, newJillHardInvent, newCarlosHardInvent, newJillEasyInvent, newCarlosEasyInvent, FINAL_HEX;
+	if (RE3SET_itemStart_currentMode === 0){
+		gMode = 'E';
+	} else {
+		gMode = 'H';
+	}
+	if (RE3SET_itemStart_currentPlayer === 0){
+		gChar = 'J';
+	} else {
+		gChar = 'C';
+	}
+	localStorage.setItem('RE3SET_INVENT_' + gChar + '_' + gMode + '_' + RE3SET_itemStart_currentId, itemHex);
+	// Recompile Inventory
+	FINAL_HEX = newJillHardInvent = newCarlosHardInvent = newJillEasyInvent = newCarlosEasyInvent = '';
+	// Jill Hard
+	c = 0;
+	while (c < RE3SET_jillHard.length){
+		newJillHardInvent = newJillHardInvent + localStorage.getItem('RE3SET_INVENT_J_H_' + c);
+		c++;
+	}
+	// Carlos Hard
+	c = 0;
+	while (c < RE3SET_carlosHard.length){
+		newCarlosHardInvent = newCarlosHardInvent + localStorage.getItem('RE3SET_INVENT_C_H_' + c);
+		c++;
+	}
+	// Jill Easy
+	c = 0;
+	while (c < RE3SET_jillEasy.length){
+		newJillEasyInvent = newJillEasyInvent + localStorage.getItem('RE3SET_INVENT_J_E_' + c);
+		c++;
+	}
+	// Carlos Easy
+	c = 0;
+	while (c < RE3SET_carlosEasy.length){
+		newCarlosEasyInvent = newCarlosEasyInvent + localStorage.getItem('RE3SET_INVENT_C_E_' + c);
+		c++;
+	}
+	FINAL_HEX = newJillHardInvent + 'ffffffff' + newCarlosHardInvent + 'ffffffff00000000' + newJillEasyInvent + 'ffffffff' + newCarlosEasyInvent;
+	RE3SET_RECOMPILE(0, FINAL_HEX);
+}
+/*
+	RECOMPILE Executable
+	~~~~~~~~~~~~~~~~~~~~
+	Mode 0: Item Start
+*/
+function RE3SET_RECOMPILE(mode, hexReplace){
+	var EXE_START, EXE_END, EXE_FINAL;
+	if (mode === 0){
+		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0]);
+		EXE_END = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1], RE3SET_arquivoBruto.length);
+		EXE_FINAL = EXE_START + hexReplace + EXE_END;
+	}
+	// Save File
+	if (RE3_RUNNING !== true){
+		try {
+			RE3SET_Backup();
+			fs.writeFileSync(ORIGINAL_FILENAME, EXE_FINAL.toLowerCase(), 'hex');
+			LOG_separator();
+			LOG_addLog('log', 'RE3SET - File saved sucessfully!');
+			LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			RE3SET_loadFile(ORIGINAL_FILENAME, 0);
+		} catch (err) {
+			LOG_addLog('error', 'ERROR - Something went wrong while saving data!');
+			LOG_addLog('error', 'ERROR - Reason: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+		}
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to save file!');
+		LOG_addLog('warn', 'WARN - Reason: Resident Evil 3 is Running!');
+	}
+	LOG_scroll();
+}
+function RE3SET_Backup(){
+	R3DITOR_CHECK_FILES_AND_DIRS();
+	if (RE3SET_arquivoBruto !== undefined){
+		try{
+			var RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + DROP_fileTypes[RE3SET_fName][2];
+			fs.writeFileSync(APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName, RE3SET_arquivoBruto, 'hex');
+			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + RE3SET_backupName);
+			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName + '</font>');
+			LOG_separator();
+		} catch (err) {
+			LOG_addLog('error', 'ERROR - Unable to make backup!');
+			LOG_addLog('error', 'ERROR - Reason: ' + err);
+		}
+	} else {
+		LOG_addLog('error', 'ERROR - You can\'t make a backup if you haven\'t opened a file yet!');
+	}
 }

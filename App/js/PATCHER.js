@@ -31,20 +31,11 @@ function PATCHER_createPatch(executable){
 	LOG_scroll();
 }
 function PATCHER_cleanVars(){
-	MIX_Database = undefined;
-	IEDIT_Database = undefined;
-	PATCHER_platform = undefined;
-	ORIGINAL_FILENAME = undefined;
-	DROP_databaseItems = undefined;
-	DROP_databaseQuant = undefined;
-	PATCHER_arquivoBruto = undefined;
-	DROP_databaseCompiled = undefined;
-	PATCHER_patchDecompiled = undefined;
+	MIX_Database = IEDIT_Database = PATCHER_platform = ORIGINAL_FILENAME = DROP_databaseItems = DROP_databaseQuant = PATCHER_arquivoBruto = DROP_databaseCompiled = PATCHER_patchDecompiled = undefined;
 }
 function PATCHER_loadPatch(patchFile){
 	PATCHER_patchDecompiled = [];
-	PATCHER_platform = undefined;
-	PATCHER_arquivoBruto = undefined;
+	PATCHER_platform = PATCHER_arquivoBruto = undefined;
 	LOG_addLog('log', 'PATCHER - Patch loaded successfully!');
 	LOG_addLog('log', 'PATCHER - Path: <font class="user-can-select">' + patchFile + '</font>');
 	fs.readFileSync(patchFile).toString().split('\n').forEach(function(line){ 
@@ -107,7 +98,7 @@ function PATCHER_applyOnExec(targetExec){
 				LOG_addLog('log', 'PATCHER - The patch was applied successfully!');
 				LOG_addLog('log', 'PATCHER - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 				PATCHER_showNotice('The patch was applied successfully!', 0);
-			} catch (err){
+			} catch (err) {
 				LOG_addLog('error', 'ERROR - Something went wrong while applying the patch!');
 				LOG_addLog('error', 'ERROR - Details: ' + err);
 				PATCHER_showNotice('Something went wrong! Look at the log to know more about!', 1);
