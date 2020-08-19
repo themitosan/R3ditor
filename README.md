@@ -66,11 +66,13 @@ R3ditor also can do:
 - Extract all Rofs (.dat) files (Wizard)
 - Edit items combinations
 - Edit nemesis item drops
+- Edit starting items³
 - Extract RDT files from PS ARD files²
 - Apply Xdelta patches
 
 <i>¹ - Only avaliable in x64 NW.js version</i><br>
-<i>² - You need extract PC version before extracting ARD files</i>
+<i>² - You need extract PC version before extracting ARD files</i><br>
+<i>³ - You can't edit GameCube version due this info are not stored on main executable file!</i>
 
 ### Important
 Any changes you make will automatically apply to your files.

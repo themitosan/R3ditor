@@ -64,11 +64,19 @@ This file can (and will be) modified several times!
 - ~~Add support for Gamecube main.dol~~
 - ~~Add support for Dreamcast 1ST_READ.BIN~~
 
+## RE3SET (Settings Editor)
+- ~~Add Starting Items (GameCube not inclused)~~
+- Add option to change starting position
+- Add option to change starting map
+- Add option to change max health
+- More things to come in this list!
+
 ## Patcher
 - ~~Add main options (MIX & IEDIT)~~ 
 - Add more options to patch!
 
 ## ARD Map File
+- ~~Create a tool to extract RDT from ARD files~~
 - Almost everything!
 
 ## Advanced and Long-Term Goals
@@ -77,13 +85,11 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Modify nemesis item drops~~
-- ~~Create a tool to extract RDT from ARD files~~
 - Implement a randomizer!
 - Compress the files for releases!
 - Improve the first boot message info
-- Merge IEDIT on a proper editor for EXE (MIX not inluded)
 - Implement / Improve a proper backup section on all sections
-- Remove all kind of ~~sassy~~ hacks inside all editors!
+- Remove all kind of ~~sassy~~ hacks inside all editors! <i>*giggles*<i>
 - ~~Create a xdelta patch section~~
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe (64 Bits)~~
