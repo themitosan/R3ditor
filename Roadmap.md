@@ -73,7 +73,7 @@ This file can (and will be) modified several times!
 - Almost everything!
 
 ## RE3SET (Settings Editor)
-- ~~Add Starting Items (GameCube not inclused)
+- ~~Add Starting Items (GameCube not inclused)~~
 - Add option to change starting position
 - Add option to change starting map
 - Add option to change max health
