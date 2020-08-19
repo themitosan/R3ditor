@@ -9,6 +9,7 @@ var MIX_totalMenus = 7;
 var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 4;
+var RE3SET_totalMenus = 2;
 var RE3_LIVE_prevCam = '';
 var RE3_LIVE_prevRDT = '';
 var SETTINGS_totalMenus = 3;

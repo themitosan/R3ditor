@@ -791,23 +791,12 @@ function SETTINGS_RESET(){
 	if (fs.existsSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor') === true){
 		fs.unlinkSync(APP_PATH + '\\Configs\\lastRDTFiles.r3ditor');
 	}
-	//
-	deleteFolderRecursive(APP_PATH + '\\Backup\\RDT');
-	deleteFolderRecursive(APP_PATH + '\\Backup\\SAV');
-	deleteFolderRecursive(APP_PATH + '\\Backup\\MIX');
-	deleteFolderRecursive(APP_PATH + '\\Configs\\RDT');
-	deleteFolderRecursive(APP_PATH + '\\Backup\\DROP');
-	deleteFolderRecursive(APP_PATH + '\\Backup\\IEDIT');
-	deleteFolderRecursive(APP_PATH + '\\Backup\\RDTMAP2');
+	deleteFolderRecursive(APP_PATH + '\\Backup');
+	deleteFolderRecursive(APP_PATH + '\\Configs');
 	var delInterval = setInterval(function(){
-		var check_1 = fs.existsSync(APP_PATH + '\\Configs\\RDT');
-		var check_2 = fs.existsSync(APP_PATH + '\\Backup\\RDT');
-		var check_3 = fs.existsSync(APP_PATH + '\\Backup\\SAV');
-		var check_4 = fs.existsSync(APP_PATH + '\\Backup\\MIX');
-		var check_5 = fs.existsSync(APP_PATH + '\\Backup\\IEDIT');
-		var check_6 = fs.existsSync(APP_PATH + '\\Backup\\RDTMAP2');
-		var check_7 = fs.existsSync(APP_PATH + '\\Backup\\DROP');
-		if (check_1 === false && check_2 === false && check_3 === false && check_4 === false && check_5 === false && check_6 === false && check_7 === false){
+		var check_0 = fs.existsSync(APP_PATH + '\\Backup');
+		var check_1 = fs.existsSync(APP_PATH + '\\Configs');
+		if (check_0 === false && check_1 === false){
 			clearInterval(delInterval);
 			reload();
 		}
@@ -870,19 +859,19 @@ function WZ_FORCE_UPDATE(){
 			$('#SETTINGS-aba-menu-' + c).css({'display': 'none'});
 			c++;
 		}
-		$('#menu-topo-settings').css({'display': 'none'});
-		$('#menu-SETTINGS').css({'display': 'none'});
 		$('#menu-topo').css({'display': 'none'});
+		$('#menu-SETTINGS').css({'display': 'none'});
+		$('#menu-topo-settings').css({'display': 'none'});
 		R3DITOR_applyUpdate();
 	}
 }
 function WZ_APPLY_R3DITOR_SETTINGS(){
-	REALTIME_renderToolbar = document.getElementById('SETTINGS_edit_enableRE3_live_toolBar').checked;
-	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
-	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
-	RDT_USE_DECOMPILER_WIP = document.getElementById('SETTINGS_edit_RDT_ExpMode').checked;
-	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
 	WINDOW_MOVETOLEFT = document.getElementById('SETTINGS_edit_enableMoveTo').checked;
+	RE3_LIVE_RENDER_TIME = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
+	RDT_USE_DECOMPILER_WIP = document.getElementById('SETTINGS_edit_RDT_ExpMode').checked;
+	DESIGN_ENABLE_ANIMS = document.getElementById('SETTINGS_edit_enableAnimations').checked;
+	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
+	REALTIME_renderToolbar = document.getElementById('SETTINGS_edit_enableRE3_live_toolBar').checked;
 	//
 	WZ_saveConfigs(true);
 	reload();

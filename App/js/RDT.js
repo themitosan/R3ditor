@@ -293,8 +293,8 @@ function RDT_getSLDPosition(){
 	RDT_SLD_selectMask();
 }
 function RDT_decryptSldMask(startPosition){
-	var c = 0;
-	var t_m = 0;
+	var c, t_m;
+	c = t_m = 0;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
 	document.getElementById('SLD_Layer_totalBlocks').innerHTML = '<font class="user-can-select">' + pushes + '</font> (Hex: <font class="user-can-select">' + pushes.toString(16).toUpperCase() + '</font>)';
@@ -423,8 +423,8 @@ function RDT_SLD_openSldOnHex(){
 	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
 */
 function RDT_getCameras(){
-	var c = 0;
 	if (RDT_arquivoBruto !== undefined){
+		var c = 0;
 		var start = 192;
 		var offset = 64;
 		var extractTotCams = parseInt(RDT_arquivoBruto.slice(2, 4), 16);
@@ -1468,11 +1468,8 @@ function RDT_deleteAudio(){
 */
 function RDT_readItens(){
 	var c = 0;
-	RDT_totalItens = 0;
-	RDT_totalFiles = 0;
-	RDT_totalMapas = 0;
+	RDT_totalItens = RDT_totalFiles = RDT_totalMapas = RDT_totalItensGeral = c;
 	RDT_ItensArray = [];
-	RDT_totalItensGeral = 0;
 	if (getFileName(ORIGINAL_FILENAME) === 'r218'){
 		RDT_generateItemIndexRaw('02210000');
 	}
@@ -2311,15 +2308,12 @@ function RDT_WRITEFILE(flag, HEX){
 	LOG_scroll();
 }
 function RDT_doAfterSave(){
+	RDT_totalMessages = RDT_totalItens = RDT_totalFiles = RDT_totalMapas = 0;
 	document.getElementById('RDT_audio_holder').innerHTML = '';
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;
-	RDT_totalMessages = 0;
 	RDT_ItensArray = [];
-	RDT_totalItens = 0;
-	RDT_totalFiles = 0;
-	RDT_totalMapas = 0;
 	RDT_editItemCancel();
 	LOG_scroll();
 }
