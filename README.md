@@ -71,7 +71,7 @@ R3ditor also can do:
 - Apply Xdelta patches
 
 <i>¹ - Only avaliable in x64 NW.js version</i><br>
-<i>² - You need extract PC version before extracting ARD files</i>
+<i>² - You need extract PC version before extracting ARD files</i><br>
 <i>³ - You can't edit GameCube version due this info are not stored on main executable file!</i>
 
 ### Important
