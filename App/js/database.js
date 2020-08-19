@@ -1535,7 +1535,8 @@ var IEDIT_displayMode = {
 	'0b': 'Infinite in yellow color',
 	'0d': 'Number in blue color',
 	'0e': 'Percentage in blue color',
-	'0f': 'Infinite in blue color'
+	'0f': 'Infinite in blue color',
+	'20': 'No Display (Square Crank / Iron Pipe)'
 }
 var UTILS_REMOVE_CHARS = [
 	',',

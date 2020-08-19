@@ -9,9 +9,10 @@ var MIX_totalMenus = 7;
 var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 4;
-var RE3SET_totalMenus = 2;
+var RE3SET_totalMenus = 1;
 var RE3_LIVE_prevCam = '';
 var RE3_LIVE_prevRDT = '';
+var RE3SET_currentMenu = 1;
 var SETTINGS_totalMenus = 3;
 var FILELIST_totalReloads = 0;
 var DESIGN_ENABLE_ANIMS = false;
@@ -601,7 +602,7 @@ function main_menu(anim){
 			$('#menu-topo-MOD').css({'display': 'none'});
 		}
 		$('#menu-topo-RE3SET').css({'display': 'inline'});
-		RE3SET_showMenu();
+		RE3SET_showMenu(1);
 	}
 	if (anim === 13){ // XDELTA Patcher
 		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
@@ -940,15 +941,17 @@ function showAbout(){
 	$('#menu-utility-aba-2').css({'display': 'none'});
 	$('#menu-utility-aba-3').css({'display': 'none'});
 	$('#menu-utility-aba-4').css({'display': 'none'});
+	$('#menu-utility-aba-5').css({'display': 'none'});
 	$('#mainMenu-patcher-div').css({'display': 'none'});
+	$('#mainMenu-exeEdit-div').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
-		$('#ABOUT_R3ditorLogo').fadeIn({duration: 1500, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
 		$('#about-r3ditor').fadeIn({duration: 500, queue: false});
+		$('#ABOUT_R3ditorLogo').fadeIn({duration: 1500, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'none'});
-		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 		$('#about-r3ditor').css({'display': 'inline'});
+		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 	}
 	MISC_unblurImg();
 }
@@ -2586,11 +2589,20 @@ function MIX_RENDER_PREVIEW(){
 /*
 	RE3SET Editor
 */
-function RE3SET_showMenu(){
-	document.title = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
-	$('#log-programa').css({'top': '626px', 'height': '82px'});
-	$('#menu-RE3SET-editor').css({'display': 'block'});
+function RE3SET_showMenu(menuId){
+	var c = 0;
+	RE3SET_currentMenu = menuId;
+	while (c < (RE3SET_totalMenus + 1)){
+		$('#RE3SET-menu-' + c).css({'display': 'none'});
+		$('#RE3SET-aba-menu-' + c).removeClass('aba-select');
+		c++;
+	}
 	$('#img-logo').css({'display': 'none'});
+	$('#menu-RE3SET-editor').css({'display': 'block'});
+	$('#RE3SET-menu-' + menuId).css({'display': 'block'});
+	$('#RE3SET-aba-menu-' + menuId).addClass('aba-select');
+	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	document.title = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
 	LOG_scroll();
 }
 function RE3SET_itemStart_showEdit(mode){

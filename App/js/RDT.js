@@ -2313,7 +2313,7 @@ function RDT_doAfterSave(){
 	RDT_totalItensGeral = undefined;
 	RDT_itemIndexRAW = undefined;
 	RDT_arquivoBruto = undefined;
-	RDT_ItensArray = [];
 	RDT_editItemCancel();
+	RDT_ItensArray = [];
 	LOG_scroll();
 }

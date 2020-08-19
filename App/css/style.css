@@ -554,10 +554,10 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #bcbcbc, #aaa);
 }
 .slot-presente:active{
-    background-image: linear-gradient(to bottom, #007c1b, #03b500);
+    background-image: linear-gradient(to bottom, #03a700, #00ce2c);
 }
 .slot-ausente:active{
-    background-image: linear-gradient(to bottom, #636363, #a9a9a9);
+    background-image: linear-gradient(to bottom, #aaa, #bcbcbc);
 }
 .slot-easy{
     color: #00f;

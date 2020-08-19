@@ -114,6 +114,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Backup\\RDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RDT');
 	}
+	if (fs.existsSync(APP_PATH + '\\appveyor.yml') === true){
+		fs.unlinkSync(APP_PATH + '\\appveyor.yml');
+	}
 	if (fs.existsSync(APP_PATH + '\\Backup\\MIX') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\MIX');
 	}

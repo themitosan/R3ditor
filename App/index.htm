@@ -81,7 +81,7 @@
 			<input type="button" class="botao-menu" value="MIX Editor" title="Click here to edit Resident Evil 3 item combinations" onclick="triggerLoad(17);">
 			<input type="button" class="botao-menu" value="ITEM Editor" title="Click here to edit Resident Evil 3 item information" onclick="triggerLoad(18);">
 			<input type="button" class="botao-menu" value="DROP Editor" title="Click here to edit Resident Evil 3 Nemesis item drops" onclick="triggerLoad(7);">
-			<input type="button" class="botao-menu" value="RE3SET Editor" title="Click here to edit Resident Evil 3 Nemesis General Settings" onclick="triggerLoad(8);">
+			<input type="button" class="botao-menu" value="RE3SET Editor" title="Click here to edit Resident Evil 3 Nemesis general settings" onclick="triggerLoad(8);">
 		</div>
 		<!-- Other Tools -->
 		<input type="button" id="menu-utility-aba" class="aba aba-left-fix aba-select aba-utility-fix" value="Other Tools / Commands">
@@ -248,8 +248,9 @@
 
 		<!-- FORM: RE3SET (RE3 Settings) -->
 		<div class="none" id="menu-RE3SET-editor" onclick="main_closeFileList();">
-			<input type="button" id="RE3SET-aba-menu-1" class="aba aba-left-fix aba-select" value="Start Items">
-			<!--<input type="button" id="RE3SET-aba-menu-2" class="aba" value="Start Location">-->
+			<input type="button" id="RE3SET-aba-menu-1" onclick="RE3SET_showMenu(1);" class="aba aba-left-fix aba-select" value="Start Items">
+			<!--<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Start Location">-->
+			<!-- Starting Items -->
 			<div class="menu" id="RE3SET-menu-1">
 				<div class="menu-general-content">
 					<center><font class="titulo">Start Items</font></center>
@@ -371,6 +372,13 @@
 					</div>
 				</div>
 			</div>
+			<!-- Starting Location -->
+			<div class="menu none" id="RE3SET-menu-2">
+				<div class="menu-general-content">
+					<center><font class="titulo">Start Location</font></center>
+					
+				</div>
+			</div>
 		</div>
 		
 		<!-- FORM: IEDIT Item Editor -->
@@ -439,7 +447,7 @@
 						<div id="MIX_edit_holder_00">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -478,7 +486,7 @@
 						<div id="MIX_edit_holder_01">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -519,7 +527,7 @@
 						<div id="MIX_edit_holder_02">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -560,7 +568,7 @@
 						<div id="MIX_edit_holder_03">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -601,7 +609,7 @@
 						<div id="MIX_edit_holder_04">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -643,7 +651,7 @@
 						<div id="MIX_edit_holder_05">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -684,7 +692,7 @@
 						<div id="MIX_edit_holder_06">
 							<!-- Edit goes here -->
 						</div>
-						<div class="menu-separador"></div>
+						<div class="menu-separador-2"></div>
 						<div id="MIX_item_preview_holder">
 							<center>
 								Preview:<br>
@@ -809,7 +817,7 @@
 			<div class="menu none" id="INI_menu_1">
 				<div class="menu-general-content" id="INI_content_1">
 					<center><font class="titulo">General</font></center>
-					Path: <font id="INI_lbl_filePath" class="INI_general_adjust">???</font><br>
+					Path: <font id="INI_lbl_filePath" class="INI_general_adjust user-can-select">???</font><br>
 					File Size: <font id="INI_lbl_fileSize" class="INI_general_adjust">???</font>
 					<div class="menu-separador"></div>
 					Selected Mode: <font id="INI_lbl_videoMode" class="INI_general_adjust">???</font><br>
@@ -872,14 +880,12 @@
 					<!-- Video Options -->
 					<input type="button" value="Video Options" class="INI_inernalTab INI_tabPos-4">
 					<div class="INI_MINIWINDOW INI_WINDOW-4">
-						<input type="checkbox" id="INI_edit_checkbox_playMovie" oninput="BIO3INI_videoOptionCheckbox();"> - <font title="Disable the intro and in-game movies">Disable Movies</font><br>
-						<input type="checkbox" id="INI_edit_checkbox_disableAlpha" oninput="BIO3INI_videoOptionCheckbox();"> - Disable Alpha<br>
-						<input type="checkbox" id="INI_edit_checkbox_textureCorrection" oninput="BIO3INI_videoOptionCheckbox();"> - 
-						<font title="This is the same thing of Disable Linear">Texture Correction</font>
+						<input type="checkbox" id="INI_edit_checkbox_playMovie" oninput="BIO3INI_videoOptionCheckbox();"> - <font class="CURSOR_POINTER" onclick="UTILS_toggleChkBox('INI_edit_checkbox_playMovie');" title="Disable the intro and in-game movies">Disable Movies</font><br>
+						<input type="checkbox" id="INI_edit_checkbox_disableAlpha" oninput="BIO3INI_videoOptionCheckbox();"> - <font class="CURSOR_POINTER" onclick="UTILS_toggleChkBox('INI_edit_checkbox_disableAlpha');">Disable Alpha</font><br>
+						<input type="checkbox" id="INI_edit_checkbox_textureCorrection" oninput="BIO3INI_videoOptionCheckbox();"> - <font class="CURSOR_POINTER" onclick="UTILS_toggleChkBox('INI_edit_checkbox_textureCorrection');" title="This is the same thing of Disable Linear">Texture Correction</font>
 						<div class="INI_videoOptionsFix">
-							<input type="checkbox" id="INI_edit_checkbox_textureCompletion" oninput="BIO3INI_videoOptionCheckbox();"> - Texture Completion<br>
-							<input type="checkbox" id="INI_edit_checkbox_voodoo2" oninput="BIO3INI_videoOptionCheckbox();"> - 
-							<font title="Enable the compatibility with Voodoo 2 Cards">Voodoo 2</font><br>
+							<input type="checkbox" id="INI_edit_checkbox_textureCompletion" oninput="BIO3INI_videoOptionCheckbox();"> - <font class="CURSOR_POINTER" onclick="UTILS_toggleChkBox('INI_edit_checkbox_textureCompletion');">Texture Completion</font><br>
+							<input type="checkbox" id="INI_edit_checkbox_voodoo2" oninput="BIO3INI_videoOptionCheckbox();"> - <font class="CURSOR_POINTER" onclick="UTILS_toggleChkBox('INI_edit_checkbox_voodoo2');" title="Enable the compatibility with Voodoo 2 Cards">Voodoo 2</font><br>
 							<div class="INI_displayDivFix">
 								Display mode: 
 								<select class="item-select-mod no-transform-text INI_displaySelectFix" id="INI_edit_displayMode">
