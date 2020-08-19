@@ -69,7 +69,15 @@ This file can (and will be) modified several times!
 - Add more options to patch!
 
 ## ARD Map File
+- ~~Create a tool to extract RDT from ARD files~~
 - Almost everything!
+
+## RE3SET (Settings Editor)
+- ~~Add Starting Items (GameCube not inclused)
+- Add option to change starting position
+- Add option to change starting map
+- Add option to change max health
+- more things to come in this list!
 
 ## Advanced and Long-Term Goals
 - ~~Create a updater~~
@@ -77,7 +85,6 @@ This file can (and will be) modified several times!
 - ~~Make an internal launcher for ResidentEvil3.exe (Internal Error Proof!)~~
 - ~~Ask the user where the game is Installed to make all the tools work simultaneously~~
 - ~~Modify nemesis item drops~~
-- ~~Create a tool to extract RDT from ARD files~~
 - Implement a randomizer!
 - Compress the files for releases!
 - Improve the first boot message info
