@@ -89,7 +89,7 @@ This file can (and will be) modified several times!
 - Compress the files for releases!
 - Improve the first boot message info
 - Implement / Improve a proper backup section on all sections
-- Remove all kind of ~~sassy~~ hacks inside all editors! <i>*giggles*<i>
+- Remove all kind of ~~sassy~~ hacks inside all editors! <i>* giggles *<i>
 - ~~Create a xdelta patch section~~
 - ~~Add the option to extract all the Rofs files~~
 - ~~Create a custom executable for nw.exe (64 Bits)~~
