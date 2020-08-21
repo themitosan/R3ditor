@@ -9,7 +9,7 @@ var MIX_totalMenus = 7;
 var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 4;
-var RE3SET_totalMenus = 1;
+var RE3SET_totalMenus = 2;
 var RE3_LIVE_prevCam = '';
 var RE3_LIVE_prevRDT = '';
 var RE3SET_currentMenu = 1;
@@ -602,7 +602,11 @@ function main_menu(anim){
 			$('#menu-topo-MOD').css({'display': 'none'});
 		}
 		$('#menu-topo-RE3SET').css({'display': 'inline'});
-		RE3SET_showMenu(1);
+		if (RE3SET_gameVersion !== 2){
+			RE3SET_showMenu(1);
+		} else {
+			RE3SET_showMenu(2);
+		}
 	}
 	if (anim === 13){ // XDELTA Patcher
 		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
@@ -1987,30 +1991,32 @@ function RDT_showCanvasTab(){
 */
 function R3ditor_enableLiveStatusButton(){
 	if (MEM_JS_requreSucess === true){
-		$('#fileGen_LIVESTATUS').css({'display': 'inline'});
-		$('#main_LIVESTATUS').css({'display': 'inline'});
 		$('#RDT_LIVESTATUS').css({'display': 'inline'});
 		$('#MSG_LIVESTATUS').css({'display': 'inline'});
 		$('#SAV_LIVESTATUS').css({'display': 'inline'});
+		$('#main_LIVESTATUS').css({'display': 'inline'});
+		$('#fileGen_LIVESTATUS').css({'display': 'inline'});
+		$('#RE3SET_startPos_LIVESTATUS').css({'display': 'inline'});
 		// Another Buttons
-		$('#RDT_EMD_usePlayerPosBtn').css({'display': 'inline'});
-		$('#RDT_door_usePlayerPos').css({'display': 'inline'});
-		$('#RDT_useJillPos_3DProp').css({'display': 'inline'})
 		$('#RDT_useJillPos_Item').css({'display': 'inline'});
+		$('#RDT_door_usePlayerPos').css({'display': 'inline'});
+		$('#RDT_useJillPos_3DProp').css({'display': 'inline'});
+		$('#RDT_EMD_usePlayerPosBtn').css({'display': 'inline'});
 	}
 }
 function R3ditor_disableLiveStatusButton(){
+	RDT_enableDisableDoorUsePlayerPos(1);
 	$('#RDT_LIVESTATUS').css({'display': 'none'});
 	$('#MSG_LIVESTATUS').css({'display': 'none'});
 	$('#SAV_LIVESTATUS').css({'display': 'none'});
 	$('#main_LIVESTATUS').css({'display': 'none'});
 	$('#fileGen_LIVESTATUS').css({'display': 'none'});
+	$('#RE3SET_startPos_LIVESTATUS').css({'display': 'none'});
 	// Another Buttons
-	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
+	$('#RDT_useJillPos_Item').css({'display': 'none'});
 	$('#RDT_door_usePlayerPos').css({'display': 'none'});
 	$('#RDT_useJillPos_3DProp').css({'display': 'none'});
-	$('#RDT_useJillPos_Item').css({'display': 'none'});
-	RDT_enableDisableDoorUsePlayerPos(1);
+	$('#RDT_EMD_usePlayerPosBtn').css({'display': 'none'});
 }
 function RDT_enableDisableDoorUsePlayerPos(mode){
 	if (mode === 0){
@@ -2030,12 +2036,13 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-R').value = REALTIME_R_Pos;
 	}
 	if (mode === 1){
-		document.getElementById('RDT_door-edit-NX').value  = REALTIME_X_Pos;
-		document.getElementById('RDT_door-edit-NY').value  = REALTIME_Y_Pos;
-		document.getElementById('RDT_door-edit-NZ').value  = REALTIME_Z_Pos;
-		document.getElementById('RDT_door-edit-NR').value  = REALTIME_R_Pos;
-		document.getElementById('RDT_door-edit-NRN').value = REALTIME_CurrentRoomNumber;
-		document.getElementById('RDT_door-edit-NS').value  = '0' + (parseInt(REALTIME_CurrentStage) - 1);
+		document.getElementById('RDT_door-edit-NX').value     = REALTIME_X_Pos;
+		document.getElementById('RDT_door-edit-NY').value     = REALTIME_Y_Pos;
+		document.getElementById('RDT_door-edit-NZ').value     = REALTIME_Z_Pos;
+		document.getElementById('RDT_door-edit-NR').value     = REALTIME_R_Pos;
+		document.getElementById('RDT_door-edit-zIndex').value = REALTIME_zIndex;
+		document.getElementById('RDT_door-edit-NRN').value    = REALTIME_CurrentRoomNumber;
+		document.getElementById('RDT_door-edit-NS').value     = '0' + (parseInt(REALTIME_CurrentStage) - 1);
 		document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
 		if (enable_mod === true){
 			document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
@@ -2277,6 +2284,7 @@ function RE3_LIVE_RENDER_POSITIONS(){
 		document.getElementById('RDT_LIVESTATUS_toolBar_Y').innerHTML = REALTIME_Y_Pos;
 		document.getElementById('RDT_LIVESTATUS_toolBar_Z').innerHTML = REALTIME_Z_Pos;
 		document.getElementById('RDT_LIVESTATUS_toolBar_R').innerHTML = REALTIME_R_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_zI').innerHTML = REALTIME_zIndex;
 		document.getElementById('RDT_LIVESTATUS_toolBar_CAM').innerHTML = REALTIME_CurrentCam;
 	}
 	document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
@@ -2605,6 +2613,35 @@ function RE3SET_showMenu(menuId){
 	document.title = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
 	LOG_scroll();
 }
+// Start Position
+function RE3SET_startPos_updateImgBg(){
+	var NX_CAM = document.getElementById('RE3SET_EDIT_STARTPOS_ROOMCAM').value.toUpperCase();
+	var NX_ROOM = document.getElementById('RE3SET_EDIT_STARTPOS_ROOMNUMBER').value.toUpperCase();
+	if (NX_ROOM !== '' && NX_CAM !== ''){
+		var nextCamImg;
+		if (NX_CAM.length === 2 && NX_ROOM.length === 2 && enable_mod === true){
+			nextCamImg = APP_PATH + '\\Assets\\DATA_A\\BSS\\R1' + NX_ROOM + NX_CAM + '.JPG';
+			if (fs.existsSync(nextCamImg) !== false){
+				document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').src = nextCamImg;
+				document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').title = 'Map: R1' + NX_ROOM + '.RDT\nCam: ' + NX_CAM;
+				$('#RE3SET_STARTPOS_IMG_BG').css({'background-image': 'url(../Assets/DATA_A/BSS/R1' + NX_ROOM + NX_CAM + '.JPG)'});
+			} else {
+				nextCamImg = APP_PATH + '\\App\\Img\\404.png';
+				$('#RE3SET_STARTPOS_IMG_BG').css({'background-image': 'url()'});
+				document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').title = '';
+				document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').src = nextCamImg;
+				LOG_addLog('warn', 'WARN - Unable to find cam file! (File: ' + NX_ROOM + NX_CAM + '.JPG)');
+			}
+		} else {
+			nextCamImg = APP_PATH + '\\App\\Img\\404.png';
+			$('#RE3SET_STARTPOS_IMG_BG').css({'background-image': 'url()'});
+			document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').title = '';
+			document.getElementById('RE3SET_EDIT_STARTPOS_IMG_CAMPREV').src = nextCamImg;
+		}
+	}
+	LOG_scroll();
+}
+// Start Items
 function RE3SET_itemStart_showEdit(mode){
 	// 0: Show, 1: Hide
 	if (mode === 0){

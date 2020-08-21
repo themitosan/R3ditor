@@ -111,7 +111,7 @@ function INI_resetVars(){
 	BIO3INI_v_textureAdjust = false;
 	BIO3INI_v_disableSpecular = true;
 	BIO3INI_f_device = '0ed36e48aa64fc1118f600000c0251e6';
-	BIO3INI_w_device = '0ed36e48aa64fc1118f600000c0251e6';
+	BIO3INI_w_device = BIO3INI_f_device;
 }
 function INI_reload(){
 	if (ORIGINAL_FILENAME !== undefined){
@@ -265,19 +265,19 @@ function INI_CARREGAR_ARQUIVO(file){
 		BIO3INI_kb_keyE = INI_array[parseInt(indexSearch + 14)].replace('KeyE=', '');
 	} else {
 		BIO3INI_kb_key1 = '';
-		BIO3INI_kb_key2 = '';
-		BIO3INI_kb_key3 = '';
-		BIO3INI_kb_key4 = '';
-		BIO3INI_kb_key5 = '';
-		BIO3INI_kb_key6 = '';
-		BIO3INI_kb_key7 = '';
-		BIO3INI_kb_key8 = '';
-		BIO3INI_kb_key9 = '';
-		BIO3INI_kb_keyA = '';
-		BIO3INI_kb_keyB = '';
-		BIO3INI_kb_keyC = '';
-		BIO3INI_kb_keyD = '';
-		BIO3INI_kb_keyE = '';
+		BIO3INI_kb_key2 = BIO3INI_kb_key1;
+		BIO3INI_kb_key3 = BIO3INI_kb_key1;
+		BIO3INI_kb_key4 = BIO3INI_kb_key1;
+		BIO3INI_kb_key5 = BIO3INI_kb_key1;
+		BIO3INI_kb_key6 = BIO3INI_kb_key1;
+		BIO3INI_kb_key7 = BIO3INI_kb_key1;
+		BIO3INI_kb_key8 = BIO3INI_kb_key1;
+		BIO3INI_kb_key9 = BIO3INI_kb_key1;
+		BIO3INI_kb_keyA = BIO3INI_kb_key1;
+		BIO3INI_kb_keyB = BIO3INI_kb_key1;
+		BIO3INI_kb_keyC = BIO3INI_kb_key1;
+		BIO3INI_kb_keyD = BIO3INI_kb_key1;
+		BIO3INI_kb_keyE = BIO3INI_kb_key1;
 	}
 	/*
 		[Data]
@@ -388,18 +388,18 @@ function INI_displayVarToForm(){
 	document.getElementById('INI_lbl_newFullScreenRes').innerHTML = BIO3INI_f_width + 'x' + BIO3INI_f_height + 'x' + BPP;
 	document.getElementById('INI_lbl_fullScreenRes').innerHTML = BIO3INI_f_width + 'x' + BIO3INI_f_height + ' (' + BIO3INI_f_BPP + ' BPP)';
 	// Game Assets
-	document.getElementById('INI_edit_savePath').value   = BIO3INI_Save;
-	document.getElementById('INI_edit_registPath').value = BIO3INI_Regist;
-	document.getElementById('INI_edit_moviesPath').value = BIO3INI_Movie;
-	document.getElementById('INI_edit_rofsPath_1').value = BIO3INI_Rofs1;
-	document.getElementById('INI_edit_rofsPath_2').value = BIO3INI_Rofs2;
-	document.getElementById('INI_edit_rofsPath_3').value = BIO3INI_Rofs3;
-	document.getElementById('INI_edit_rofsPath_4').value = BIO3INI_Rofs4;
-	document.getElementById('INI_edit_rofsPath_5').value = BIO3INI_Rofs5;
-	document.getElementById('INI_edit_rofsPath_6').value = BIO3INI_Rofs6;
-	document.getElementById('INI_edit_rofsPath_7').value = BIO3INI_Rofs7;
-	document.getElementById('INI_edit_rofsPath_8').value = BIO3INI_Rofs8;
-	document.getElementById('INI_edit_rofsPath_9').value = BIO3INI_Rofs9;
+	document.getElementById('INI_edit_savePath').value    = BIO3INI_Save;
+	document.getElementById('INI_edit_registPath').value  = BIO3INI_Regist;
+	document.getElementById('INI_edit_moviesPath').value  = BIO3INI_Movie;
+	document.getElementById('INI_edit_rofsPath_1').value  = BIO3INI_Rofs1;
+	document.getElementById('INI_edit_rofsPath_2').value  = BIO3INI_Rofs2;
+	document.getElementById('INI_edit_rofsPath_3').value  = BIO3INI_Rofs3;
+	document.getElementById('INI_edit_rofsPath_4').value  = BIO3INI_Rofs4;
+	document.getElementById('INI_edit_rofsPath_5').value  = BIO3INI_Rofs5;
+	document.getElementById('INI_edit_rofsPath_6').value  = BIO3INI_Rofs6;
+	document.getElementById('INI_edit_rofsPath_7').value  = BIO3INI_Rofs7;
+	document.getElementById('INI_edit_rofsPath_8').value  = BIO3INI_Rofs8;
+	document.getElementById('INI_edit_rofsPath_9').value  = BIO3INI_Rofs9;
 	document.getElementById('INI_edit_rofsPath_10').value = BIO3INI_Rofs10;
 	document.getElementById('INI_edit_rofsPath_11').value = BIO3INI_Rofs11;
 	document.getElementById('INI_edit_rofsPath_12').value = BIO3INI_Rofs12;
@@ -508,8 +508,8 @@ function INI_updateRangeAudioVolume(mode, source){
 			document.getElementById('INI_editAudioSEVolRange').value = newSEVol;
 		}
 	}
-	document.getElementById('INI_LBL_editBGM_percent').innerHTML = parsePercentage(newBGMVol, 65535);
-	document.getElementById('INI_LBL_editSE_percent').innerHTML = parsePercentage(newSEVol, 65535);
+	document.getElementById('INI_LBL_editBGM_percent').innerHTML = parsePercentage(newBGMVol, 65534);
+	document.getElementById('INI_LBL_editSE_percent').innerHTML = parsePercentage(newSEVol, 65534);
 	BIO3INI_sound_bgmVol = newBGMVol;
 	BIO3INI_sound_seVol = newSEVol;
 }
@@ -545,8 +545,7 @@ function BIO3INI_videoOptionCheckbox(){
 	BIO3INI_v_disableLinear = document.getElementById('INI_edit_checkbox_textureCompletion').checked;
 }
 function BIO3INI_changeRes(mode, isW){
-	var newW;
-	var newH;
+	var newW, newH;
 	// Mode 0: Windowed, 1: Fullscreen
 	if (mode === 0){
 		newW = document.getElementById('INI_editNewWindowWidth').value;
@@ -602,8 +601,7 @@ function BIO3INI_changeRes(mode, isW){
 }
 function BIO3INI_runVideoScaler(scalerId){
 	// Scaler 0: Window, 1: FullScreen
-	var newResW;
-	var newResH;
+	var newResW, newResH;
 	var BPP = document.getElementById('INI_editSelectFullScreenBPP').value;
 	if (scalerId === 0){
 		newResW = document.getElementById('INI_rangeScaleWindow').value;
@@ -651,18 +649,18 @@ function BIO3INI_OPEN_NOTEPAD(){
 */
 function BIO3INI_SAVE(askSave){
 	// General
-	BIO3INI_Save = document.getElementById('INI_edit_savePath').value;
-	BIO3INI_Movie = document.getElementById('INI_edit_registPath').value;
+	BIO3INI_Save   = document.getElementById('INI_edit_savePath').value;
+	BIO3INI_Movie  = document.getElementById('INI_edit_registPath').value;
 	BIO3INI_Regist = document.getElementById('INI_edit_moviesPath').value;
-	BIO3INI_Rofs1 = document.getElementById('INI_edit_rofsPath_1').value;
-	BIO3INI_Rofs2 = document.getElementById('INI_edit_rofsPath_2').value;
-	BIO3INI_Rofs3 = document.getElementById('INI_edit_rofsPath_3').value;
-	BIO3INI_Rofs4 = document.getElementById('INI_edit_rofsPath_4').value;
-	BIO3INI_Rofs5 = document.getElementById('INI_edit_rofsPath_5').value;
-	BIO3INI_Rofs6 = document.getElementById('INI_edit_rofsPath_6').value;
-	BIO3INI_Rofs7 = document.getElementById('INI_edit_rofsPath_7').value;
-	BIO3INI_Rofs8 = document.getElementById('INI_edit_rofsPath_8').value;
-	BIO3INI_Rofs9 = document.getElementById('INI_edit_rofsPath_9').value;
+	BIO3INI_Rofs1  = document.getElementById('INI_edit_rofsPath_1').value;
+	BIO3INI_Rofs2  = document.getElementById('INI_edit_rofsPath_2').value;
+	BIO3INI_Rofs3  = document.getElementById('INI_edit_rofsPath_3').value;
+	BIO3INI_Rofs4  = document.getElementById('INI_edit_rofsPath_4').value;
+	BIO3INI_Rofs5  = document.getElementById('INI_edit_rofsPath_5').value;
+	BIO3INI_Rofs6  = document.getElementById('INI_edit_rofsPath_6').value;
+	BIO3INI_Rofs7  = document.getElementById('INI_edit_rofsPath_7').value;
+	BIO3INI_Rofs8  = document.getElementById('INI_edit_rofsPath_8').value;
+	BIO3INI_Rofs9  = document.getElementById('INI_edit_rofsPath_9').value;
 	BIO3INI_Rofs10 = document.getElementById('INI_edit_rofsPath_10').value;
 	BIO3INI_Rofs11 = document.getElementById('INI_edit_rofsPath_11').value;
 	BIO3INI_Rofs12 = document.getElementById('INI_edit_rofsPath_12').value;
@@ -837,21 +835,21 @@ function BIO3INI_MAKEFILE(path, mode){
 		'Data02=' + BIO3INI_data_02 + '\n' +
 		'Data03=' + BIO3INI_data_03 + '\n' +
 		'Data10=' + BIO3INI_data_10 + '\n\n';
-	addLog('log', 'INFO - Bio3INI: The file was generated sucessfully!');
+	LOG_addLog('log', 'INFO - Bio3INI: The file was generated sucessfully!');
 	log_separador();
 	// Saving the file!
 	if (mode === 0){
 		try{
 			fs.writeFileSync(path, FINAL, 'utf-8');
-			addLog('log', 'INFO - Bio3INI: The file was saved sucessfully!');
-			addLog('log', 'Path - ' + path);
-		} catch (err){
+			LOG_addLog('log', 'INFO - Bio3INI: The file was saved sucessfully!');
+			LOG_addLog('log', 'Path - ' + path);
+		} catch (err) {
 			console.error('ERROR - Bio3INI: Something went wrong!\n' + err);
-			addLog('error', 'ERROR - Bio3INI: Something went wrong!');
-			addLog('error', err);
+			LOG_addLog('error', 'ERROR - Bio3INI: Something went wrong!');
+			LOG_addLog('error', err);
 		}
 	} else {
 		R3DITOR_SAVE('Bio3.ini', FINAL, 'utf-8', 'ini');
 	}
-	scrollLog();
+	LOG_scroll();
 }

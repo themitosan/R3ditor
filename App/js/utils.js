@@ -280,7 +280,6 @@ function UTILS_ARDEnabler_genFiles(ardName, ardExists){
 	var ARD_START = ARD_arquivoBruto.slice(0, ardExists);
 	var RDT_EXTRACT = ARD_arquivoBruto.slice(ardExists, (ardExists + RDT_arquivoBruto.length));
 	var ARD_END = ARD_arquivoBruto.slice((ardExists + RDT_arquivoBruto.length), ARD_arquivoBruto.length);
-	// console.info('RDT slice: ' + ardExists + ' - ' + (ardExists + RDT_arquivoBruto.length) + ' (ARD length: ' + ARD_arquivoBruto.length + ')');
 	//
 	var ARDMAP_FILE = 'ARDMAP\nGenerated with ' + APP_NAME + '\nFile: ' + ardName + '\n\nARDSIZE = ' + ARD_arquivoBruto.length + 
 					  '\nARDSTART = ' + btoa(ARD_START) + '\nARDEND = ' + btoa(ARD_END);

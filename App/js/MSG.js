@@ -14,6 +14,9 @@ var MSG_useSeekCameras = false;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
 var MSG_CURRENT_RDT_MESSAGE_START = 0;
 var MSG_ID, MSG_Commands, MSG_FILL_PASS, MSG_arquivoBruto;
+/*
+	Functions
+*/
 function MSG_goBackToRDT(){
 	localStorage.clear();
 	sessionStorage.clear();
@@ -61,8 +64,8 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	if (RAW_DATA !== '' && RAW_DATA !== undefined && RAW_DATA !== null){
-		var t;
 		var c = 0;
+		var t, COMMAND;
 		MSG_DECRYPT_LV1_LAST = '';
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
 		var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
@@ -72,7 +75,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + ' ';
 				c++; 
 			}
-		} catch(err){
+		} catch(err) {
 			$('#RDT-aba-menu-2').css({'display': 'none'});
 			LOG_addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
 			LOG_addLog('error', err);
@@ -86,7 +89,6 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		} else {
 			t = 0;
 		}
-		var COMMAND;
 		var cAtual = 0;
 		var final = '';
 		var startPoint = 0;
@@ -181,7 +183,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var startPoint = 0;
 	var textoTraduzido = '';
 	while (startPoint < t){
-		// if is a command / special function
+		// If is a command / special function
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
 			if (textoTraduzido !== ''){
 				localStorage.setItem('MSG_comando-' + cAtual, textoHex);
@@ -289,8 +291,7 @@ function MSG_addCommandToList(com, args, hexCommand, index){
 	}
 	// Change camera
 	if (com === 9){
-		var cor;
-		var argsFilter;
+		var cor, argsFilter;
 		if (args === '00'){
 			cor = MSG_TEXTCOLOR[args];
 			argsFilter = args;
@@ -758,11 +759,10 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 	MSG_applyMSGCommand(0);
 }
 function MSG_applyMSGCommand(mode){
-	var u;
 	var c = 0;
 	var newHex = '';
-	var POINTER_HOLD;
 	var finalArray = '';
+	var u, POINTER_HOLD;
 	document.getElementById('msg-lbl-totalCommands').innerHTML = MSG_totalComandos;
 	while(c !== MSG_totalComandos + 1){
 		if (localStorage.getItem('MSG_comando-' + c) === null){

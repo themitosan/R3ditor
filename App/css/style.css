@@ -370,6 +370,9 @@ input[type='range' i]{
     margin-bottom: 4px;
     background-image: linear-gradient(90deg, #0000, #ffff, #0000);   
 }
+.separador-2-fix{
+    width: 342px;
+}
 .separador-log-fix{
     width: 88%;
     margin-top: 8px;
@@ -2821,9 +2824,87 @@ input[type='range' i]{
     RE3SET
     RE3 Settings Editor
 */
+.RE3SET_OTHER_startPosTab{
+    top: 61px;
+    left: 20px;
+}
+.RE3SET_OTHER_startPosDiv{
+    top: 84px;
+    width: 350px;
+    height: 214px;
+}
+.RE3SET_OTHER_STARTPOS_zFix{
+    margin-top: 10px;
+}
+.RE3SET_zFix{
+    width: 98%;
+    z-index: 1;
+    position: absolute;
+}
+.RE3SET_OTHER_startPosCamPrevDiv{
+    top: 50px;
+    left: 180px;
+    border-radius: 6px;
+    position: absolute;
+}
+.RE3SET_OTHER_startPosCamPrevImg{
+    width: 160px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px #0000005e;
+}
+.RE3SET_OTHER_miniDivTab_base{
+    z-index: 1;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding-top: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    position: absolute;
+    padding-bottom: 4px;
+    text-shadow: 0 0 10px #000;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    background-image: linear-gradient(to bottom, #656565, #404040);
+}
+.RE3SET_OTHER_miniDiv_base{
+    padding: 6px;
+    border-radius: 6px;
+    position: absolute;
+    box-shadow: 0 0 10px #161616;
+    background-image: linear-gradient(to bottom, #404040, #222);
+}
 .RE3SET_EDIT_itemstart_infos{
     width: 400px;
     position: absolute;
+}
+.RE3SET_OTHER_startPos_inputRoomFix{
+    width: 18px !important;
+}
+.RE3SET_GLOBAL_APPLY{
+    z-index: 1;
+    top: 480px;
+    left: 1058px;
+    position: absolute;
+}
+.RE3SET_OTHER_startPos_LIVETSTATUS{
+    top: 190px;
+    left: 36px;
+    display: none;
+    position: absolute;
+}
+.RE3SET_STARTPOS_IMG_BG_DIV{
+    top: 0px;
+    z-index: 0;
+    height: 100%;
+    border-radius: 4px;
+    position: absolute;
+    background-color: #000;
+    width: calc(100% - 6px);
+    background-size: auto 490px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to left, #00000045, #0000);
 }
 .RE3SET_EDIT_itemBackground{
     top: 0px;

@@ -1288,7 +1288,6 @@ function RDT_copyPastePos(mode){
 		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
 		document.getElementById('RDT_door-edit-NC').value 	  	  = RDT_TEMP_NEXT_CAMERA;
 		document.getElementById('RDT_door-edit-NC-TXT').value 	  = RDT_TEMP_NEXT_CAMERA;
-		document.getElementById('RDT_lbl_door_editCam').innerHTML = RDT_TEMP_NEXT_CAMERA;
 		RDT_renderNextRDTLbl();
 		RDT_renderEditDoorCamPreview();
 	}
@@ -1395,8 +1394,12 @@ function RDT_DOOR_APPLY(index){
 	}
 	//
 	if (zIndex.length !== 2){
-		canCompile = false;
-		reason = '(Position) Z-Index length is wrong!';
+		if (zIndex.length === 1){
+			zIndex = '0' + zIndex;
+		} else {
+			canCompile = false;
+			reason = '(Position) Z-Index length is wrong!';
+		}
 	}
 	if (UnkFlag.length !== 2){
 		canCompile = false;

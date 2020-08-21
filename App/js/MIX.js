@@ -325,7 +325,7 @@ function MIX_Backup(){
 			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-MIX-' + currentTime() + MIX_fileTypes[MIX_fName][3];
 			fs.writeFileSync(APP_PATH + '\\Backup\\MIX\\' + backup_name, MIX_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\MIX\\' + backup_name + '</font>');
+			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\MIX\\' + backup_name + '</font>');
 			LOG_separator();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);

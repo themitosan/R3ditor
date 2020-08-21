@@ -114,7 +114,7 @@ function DROP_backup(){
 			var DROP_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-DROP-' + currentTime() + DROP_fileTypes[DROP_fName][2];
 			fs.writeFileSync(APP_PATH + '\\Backup\\DROP\\' + DROP_backupName, DROP_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + DROP_backupName);
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\DROP\\' + DROP_backupName + '</font>');
+			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\DROP\\' + DROP_backupName + '</font>');
 			LOG_separator();
 		} catch (err) {
 			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);

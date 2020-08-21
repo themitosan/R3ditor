@@ -20,7 +20,7 @@ var REALTIME_CurrentWeapon = '00';
 var REALTIME_CurrentPlayer = '00';
 var RE3_LIVE_keyPress_enable = false;
 var REALTIME_CurrentRoomNumber = '00';
-var TEMP_X_Pos, TEMP_Y_Pos, TEMP_Z_Pos, TEMP_R_Pos, REALTIME_X_Pos, REALTIME_Y_Pos, REALTIME_Z_Pos, REALTIME_R_Pos;
+var TEMP_X_Pos, TEMP_Y_Pos, TEMP_Z_Pos, TEMP_R_Pos, TEMP_zIndex, REALTIME_X_Pos, REALTIME_Y_Pos, REALTIME_Z_Pos, REALTIME_R_Pos, REALTIME_zIndex;
 //
 var PREV_INVENT = '';
 var PREV_PLAYER = '';
@@ -113,6 +113,10 @@ function MEMORY_JS_getPosition(){
 		var Z2 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_zPosition'][1], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		var R1 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][0], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
 		var R2 = MEMORY_JS_fixVars(MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_rPosition'][1], MEM_JS.BYTE).toString(16).toUpperCase(), 2);
+		REALTIME_zIndex = MEM_JS.readMemory(PROCESS_OBJ.handle, MEMJS_HEXPOS['RE3_mode_' + RE3_LIVE_CURRENTMOD + '_zIndex'][0], MEM_JS.BYTE).toString(16).toUpperCase();
+		if (parseInt(REALTIME_zIndex, 16) < 16){
+			REALTIME_zIndex = '0' + REALTIME_zIndex;
+		}
 		REALTIME_X_Pos = X1 + X2;
 		REALTIME_Y_Pos = Y1 + Y2;
 		REALTIME_Z_Pos = Z1 + Z2;
@@ -224,7 +228,7 @@ function RE3_LIVE_APPLYITEM(slotID){
 	if (DEBUG_LOCKRENDER === false && PROCESS_OBJ !== undefined && RE3_RUNNING === true && MEM_JS_canRender === true){
 		var cPlayer;
 		var quantidade = parseInt(document.getElementById('RE3_LIVESTATUS_CHANGE_ITEM_QNT').value);
-		if (quantidade === '' || quantidade === NaN){
+		if (quantidade === '' || quantidade === NaN || quantidade < 0){
 			quantidade = 1;
 		}
 		if (quantidade > 255){
@@ -311,7 +315,8 @@ function RE3_LIVE_COPY_PASTE_LOCATION(mode){
 	}
 }
 /*
-	Open and Close
+	RE3 Livestatus
+	Open and Close Form
 */
 function RE3_LIVE_closeForm(){
 	MEM_JS_canRender = false;

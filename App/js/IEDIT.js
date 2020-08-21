@@ -115,7 +115,7 @@ function IEDIT_Backup(){
 			var backup_name = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-IEDIT-' + currentTime() + IEDIT_fileTypes[IEDIT_fileName][3];
 			fs.writeFileSync(APP_PATH + '\\Backup\\IEDIT\\' + backup_name, IEDIT_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + backup_name);
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\IEDIT\\' + backup_name + '</font>');
+			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\IEDIT\\' + backup_name + '</font>');
 			LOG_separator();
 		} catch (err){
 			LOG_addLog('error', 'ERROR - Unable to make backup! - ' + err);

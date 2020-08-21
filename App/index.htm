@@ -118,14 +118,15 @@
 				<font class="RE3_LIVESTATUS_X_color">X: <font id="RDT_LIVESTATUS_toolBar_X" class="user-can-select">????</font></font> - 
 				<font class="RE3_LIVESTATUS_Y_color">Y: <font id="RDT_LIVESTATUS_toolBar_Y" class="user-can-select">????</font></font> - 
 				<font class="RE3_LIVESTATUS_Z_color">Z: <font id="RDT_LIVESTATUS_toolBar_Z" class="user-can-select">????</font></font> - 
-				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font>
+				<font class="RE3_LIVESTATUS_R_color">R: <font id="RDT_LIVESTATUS_toolBar_R" class="user-can-select">????</font></font> - 
+				<font class="RE3_LIVESTATUS_zI_color">zI: <font id="RDT_LIVESTATUS_toolBar_zI" class="user-can-select">??</font></font>
 			</div>
 			<!-- Right -->
 			<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 			<input type="button" title="Click here to open the map list" class="botao-menu right none" id="RDT_openFileList" value="Open Map List" onclick="main_renderFileList(3, 2);">
 			<input type="button" title="Click here to restore your last edition on this file" class="botao-menu right none" id="RDT_restoreLastBackup" value="Restore Last Backup" onclick="RDT_restoreLastBackup();">
 			<input type="button" title="Click here to backup this file" class="botao-menu right none" id="RDT_backupBtn" value="Backup Map" onclick="RDT_Backup();">
-			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
+			<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="RDT_LIVESTATUS" value="Live Status" onclick="RE3_LIVE_openForm();">
 		</div>
 		<!-- Menu MSG -->
 		<div class="menu-topo none" id="menu-topo-msg">
@@ -249,7 +250,7 @@
 		<!-- FORM: RE3SET (RE3 Settings) -->
 		<div class="none" id="menu-RE3SET-editor" onclick="main_closeFileList();">
 			<input type="button" id="RE3SET-aba-menu-1" onclick="RE3SET_showMenu(1);" class="aba aba-left-fix aba-select" value="Start Items">
-			<!--<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Start Location">-->
+			<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Other Settings">
 			<!-- Starting Items -->
 			<div class="menu" id="RE3SET-menu-1">
 				<div class="menu-general-content">
@@ -357,7 +358,7 @@
 							<select class="item-select-mod RE3SET_EDIT_selectItemStart" id="RE3SET_EDIT_ITEMSTART_AT">
 								<!-- Attr. goes here -->
 							</select><br>
-							Quantity: <input type="number" min="0" max="255" step="1" class="item-select-mod RE3SET_EDIT_startItemQuant" placeholder="00" id="RE3SET_EDIT_ITEMSTART_QT"><br>
+							Quantity: <input type="number" min="0" max="255" step="1" maxlength="3" class="item-select-mod RE3SET_EDIT_startItemQuant" placeholder="00" id="RE3SET_EDIT_ITEMSTART_QT"><br>
 							<div id="RE3SET_ITEMSTART_infos" class="RE3SET_EDIT_itemstart_infos">
 								<center><font class="titulo-2">Item Info</font></center>
 								<div class="menu-separador-2"></div>
@@ -372,11 +373,34 @@
 					</div>
 				</div>
 			</div>
-			<!-- Starting Location -->
+			<!-- Other Sections -->
 			<div class="menu none" id="RE3SET-menu-2">
 				<div class="menu-general-content">
-					<center><font class="titulo">Start Location</font></center>
-					
+					<center><font class="titulo">Other Settings</font></center>
+					<!-- Starting Location -->
+					<input type="button" value="Starting Location" class="RE3SET_OTHER_miniDivTab_base RE3SET_OTHER_startPosTab">
+					<div class="RE3SET_OTHER_miniDiv_base RE3SET_OTHER_startPosDiv">
+						<div id="RE3SET_STARTPOS_IMG_BG" class="RE3SET_STARTPOS_IMG_BG_DIV"></div>
+						<div class="RE3SET_zFix">
+							<center>
+								Start Map: R1<input type="text" onkeyup="RE3SET_startPos_updateImgBg();" placeholder="0D" maxlength="2" id="RE3SET_EDIT_STARTPOS_ROOMNUMBER" class="item-select-mod RE3SET_OTHER_startPos_inputRoomFix">.RDT
+							</center>
+							<div class="menu-separador-2 separador-2-fix"></div>
+							<font class="RE3_LIVESTATUS_X_color">X Pos</font>: <input type="text" placeholder="CE33" id="RE3SET_EDIT_STARTPOS_XPOS" class="item-select-mod RDT_door_textEditFix_0"><br>
+							<font class="RE3_LIVESTATUS_Y_color">Y Pos</font>: <input type="text" placeholder="07CF" id="RE3SET_EDIT_STARTPOS_YPOS" class="item-select-mod RDT_door_textEditFix_0"><br>
+							<div class="RE3SET_OTHER_STARTPOS_zFix"><font class="RE3_LIVESTATUS_Z_color">Z Pos</font>: <font class="RE3_LIVESTATUS_Z_color">0000</font> (Hardcoded)</div>
+							<font class="RE3_LIVESTATUS_R_color">R Pos</font>: <input type="text" placeholder="2007" id="RE3SET_EDIT_STARTPOS_RPOS" class="item-select-mod RDT_door_textEditFix_0"><br>
+							<input type="button" class="botao-menu botao-aplicar RE3SET_OTHER_startPos_LIVETSTATUS" id="RE3SET_startPos_LIVESTATUS" value="Use Player Pos." onclick="RE3SET_startPos_applyLiveStatus();">
+							<div class="RE3SET_OTHER_startPosCamPrevDiv">
+								<center>
+									<img src="img/404.png" class="RE3SET_OTHER_startPosCamPrevImg" id="RE3SET_EDIT_STARTPOS_IMG_CAMPREV"><br>
+									Camera: <input type="text" onkeyup="RE3SET_startPos_updateImgBg();" placeholder="0B" maxlength="2" id="RE3SET_EDIT_STARTPOS_ROOMCAM" class="item-select-mod RE3SET_EDIT_startItemQuant">
+								</center>
+							</div>
+						</div>
+					</div>
+					<!-- Global Apply Btn -->
+					<input type="button" title="Click here to apply!" onclick="RE3SET_RECOMPILE(1);" value="APPLY CHANGES!" class="RDT-btn-apply color-green RE3SET_GLOBAL_APPLY">
 				</div>
 			</div>
 		</div>

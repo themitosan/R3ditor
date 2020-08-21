@@ -6,6 +6,8 @@
 var RE3SET_fName, RE3SET_gameVersion, RE3SET_arquivoBruto, RE3SET_jillHard, RE3SET_carlosHard, RE3SET_jillEasy, RE3SET_carlosEasy, RE3SET_inventoryHex;
 // Edit Start Item Vars
 var RE3SET_itemStart_currentId, RE3SET_itemStart_currentPlayer, RE3SET_itemStart_currentMode;
+// Edit Start Pos. Vars
+var RE3SET_startPos_xPos, RE3SET_startPos_yPos, RE3SET_startPos_rPos, RE3SET_startPos_roomNumber, RE3SET_startPos_roomCam;
 /*
 	Functions
 */
@@ -15,30 +17,81 @@ function RE3SET_loadFile(exe, mode){
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
 	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
-	/*
-		Item start
-	*/
 	if (RE3SET_gameVersion !== 2){
+		/*
+			Tab 1
+			Start items
+		*/
 		RE3SET_inventoryHex = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0], RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1]);
 		RE3SET_jillHard     = RE3SET_inventoryHex.slice(0, 32).match(/.{8,8}/g);
 		RE3SET_carlosHard   = RE3SET_inventoryHex.slice(40, 64).match(/.{8,8}/g);
 		RE3SET_jillEasy     = RE3SET_inventoryHex.slice(80, 120).match(/.{8,8}/g);
 		RE3SET_carlosEasy   = RE3SET_inventoryHex.slice(128, RE3SET_inventoryHex.length).match(/.{8,8}/g);
 		RE3SET_decompileInventory();
+		/*
+			Tab 2
+			Other Settings
+		*/
+		if (RE3SET_gameVersion === 0){
+			$('#RE3SET-aba-menu-2').removeClass('none');
+			RE3SET_startPos_xPos 	   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomXpos'][0],   RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomXpos'][1]);
+			RE3SET_startPos_yPos  	   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomYpos'][0],   RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomYpos'][1]);
+			RE3SET_startPos_rPos  	   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][0],   RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][1]);
+			RE3SET_startPos_roomNumber = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][0], RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][1]);
+			RE3SET_startPos_roomCam    = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][0],    RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][1]);
+			RE3SET_showOtherSettingsInfo();
+		} else {
+			$('#RE3SET-aba-menu-2').addClass('none');
+			alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.');
+			LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos.');
+		}
+		/*
+			End - Using DROP_fileTypes because it works!
+		*/
+		LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
+		LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+		if (mode === 0){
+			main_menu(12);
+		}
 	} else {
-		alert('WARN - This is GC Version!\nDue starting items settings are not set on this file, Item start will not be avaliable!');
-		LOG_addLog('warn', 'WARN - This is GC Version! Due starting items settings are not set on this file, Item start will not be avaliable!');
-		reload();
-	}
-	//
-	// End - Using DROP_fileTypes because it works!
-	LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
-	LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-	if (mode === 0){
-		main_menu(12);
+		if (mode === 0){
+			LOG_addLog('warn', 'WARN - This is GC Version! Due settings are not set on this file (main.dol), R3ditor will exit from this tool!');
+			alert('WARN - This is GC Version!\nDue settings are not set on this file (main.dol), R3ditor will exit from this tool!');
+			reload();
+		} else {
+			LOG_addLog('warn', 'WARN - This is GC Version! Due settings are not set on this file (main.dol), R3ditor will not apply any setings from this tool!');
+		}
 	}
 	LOG_scroll();
 }
+/*
+	Other Settings
+*/
+function RE3SET_showOtherSettingsInfo(){
+	document.getElementById('RE3SET_EDIT_STARTPOS_XPOS').value = RE3SET_startPos_xPos;
+	document.getElementById('RE3SET_EDIT_STARTPOS_YPOS').value = RE3SET_startPos_yPos;
+	document.getElementById('RE3SET_EDIT_STARTPOS_RPOS').value = RE3SET_startPos_rPos;
+	document.getElementById('RE3SET_EDIT_STARTPOS_ROOMCAM').value = RE3SET_startPos_roomCam;
+	document.getElementById('RE3SET_EDIT_STARTPOS_ROOMNUMBER').value = RE3SET_startPos_roomNumber;
+	RE3SET_startPos_updateImgBg();
+}
+function RE3SET_startPos_applyLiveStatus(){
+	if (REALTIME_CurrentStage === '1'){
+		document.getElementById('RE3SET_EDIT_STARTPOS_XPOS').value = REALTIME_X_Pos;
+		document.getElementById('RE3SET_EDIT_STARTPOS_YPOS').value = REALTIME_Y_Pos;
+		document.getElementById('RE3SET_EDIT_STARTPOS_RPOS').value = REALTIME_R_Pos;
+		document.getElementById('RE3SET_EDIT_STARTPOS_ROOMCAM').value = REALTIME_CurrentCam;
+		document.getElementById('RE3SET_EDIT_STARTPOS_ROOMNUMBER').value = REALTIME_CurrentRoomNumber;
+		RE3SET_startPos_updateImgBg();
+	} else {
+		LOG_addLog('warn', 'WARN - Unable to set player pos!');
+		LOG_addLog('warn', 'WARN - Reason: Only Stage 1 is supported! (Current Stage: ' + REALTIME_CurrentStage + ')');
+		LOG_scroll();
+	}
+}
+/*
+	Start Items
+*/
 function RE3SET_decompileInventory(){
 	var c = 0;
 	var currentHex, IT, QT, AT, SV;
@@ -238,29 +291,91 @@ function RE3SET_ITEMSTART_APPLY(itemHex){
 	RE3SET_RECOMPILE(0, FINAL_HEX);
 }
 /*
+	~~~~~~~~~~~~~~~~~~~~
 	RECOMPILE Executable
 	~~~~~~~~~~~~~~~~~~~~
 	Mode 0: Item Start
+	Mode 1: Other Settings
 */
 function RE3SET_RECOMPILE(mode, hexReplace){
+	var EXE_REASON = '';
+	var EXE_CAN_SAVE = true;
 	var EXE_START, EXE_END, EXE_FINAL;
 	if (mode === 0){
 		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0]);
-		EXE_END = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1], RE3SET_arquivoBruto.length);
+		EXE_END   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1], RE3SET_arquivoBruto.length);
 		EXE_FINAL = EXE_START + hexReplace + EXE_END;
+	}
+	if (mode === 1){
+		/*
+			Start Position
+		*/
+		RE3SET_startPos_xPos = document.getElementById('RE3SET_EDIT_STARTPOS_XPOS').value;
+		RE3SET_startPos_yPos = document.getElementById('RE3SET_EDIT_STARTPOS_YPOS').value;
+		RE3SET_startPos_rPos = document.getElementById('RE3SET_EDIT_STARTPOS_RPOS').value;
+		RE3SET_startPos_roomCam = document.getElementById('RE3SET_EDIT_STARTPOS_ROOMCAM').value;
+		RE3SET_startPos_roomNumber = document.getElementById('RE3SET_EDIT_STARTPOS_ROOMNUMBER').value;
+		// Fix Vars
+		if (RE3SET_startPos_xPos === '' || RE3SET_startPos_xPos.length !== 4){
+			EXE_CAN_SAVE = false;
+			EXE_REASON = EXE_REASON + '\nX Pos. have invalid value!';
+		}
+		if (RE3SET_startPos_yPos === '' || RE3SET_startPos_yPos.length !== 4){
+			EXE_CAN_SAVE = false;
+			EXE_REASON = EXE_REASON + '\nY Pos. have invalid value!';
+		}
+		if (RE3SET_startPos_rPos === '' || RE3SET_startPos_rPos.length !== 4){
+			EXE_CAN_SAVE = false;
+			EXE_REASON = EXE_REASON + '\nR Pos. have invalid value!';
+		}
+		if (RE3SET_startPos_roomCam === '' || RE3SET_startPos_roomCam.length !== 2){
+			EXE_CAN_SAVE = false;
+			EXE_REASON = EXE_REASON + '\nRoom Cam have invalid value!';
+		}
+		if (RE3SET_startPos_roomNumber === '' || RE3SET_startPos_roomNumber.length !== 2){
+			EXE_CAN_SAVE = false;
+			EXE_REASON = EXE_REASON + '\nRoom Number have invalid value!';
+		}
+		if (EXE_CAN_SAVE === true){
+			// X Pos.
+			EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomXpos'][0]);
+			EXE_END   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomXpos'][1], RE3SET_arquivoBruto.length);
+			EXE_FINAL = EXE_START + RE3SET_startPos_xPos + EXE_END;
+			// Y Pos.
+			EXE_START = EXE_FINAL.slice(0, RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomYpos'][0]);
+			EXE_END   = EXE_FINAL.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomYpos'][1], EXE_FINAL.length);
+			EXE_FINAL = EXE_START + RE3SET_startPos_yPos + EXE_END;
+			// R Pos.
+			EXE_START = EXE_FINAL.slice(0, RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][0]);
+			EXE_END   = EXE_FINAL.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][1], EXE_FINAL.length);
+			EXE_FINAL = EXE_START + RE3SET_startPos_rPos + EXE_END;
+			// Room Cam
+			EXE_START = EXE_FINAL.slice(0, RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][0]);
+			EXE_END   = EXE_FINAL.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][1], EXE_FINAL.length);
+			EXE_FINAL = EXE_START + RE3SET_startPos_roomCam + EXE_END;
+			// Room Number
+			EXE_START = EXE_FINAL.slice(0, RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][0]);
+			EXE_END   = EXE_FINAL.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][1], EXE_FINAL.length);
+			EXE_FINAL = EXE_START + RE3SET_startPos_roomNumber + EXE_END;
+		}
 	}
 	// Save File
 	if (RE3_RUNNING !== true){
-		try {
-			RE3SET_Backup();
-			fs.writeFileSync(ORIGINAL_FILENAME, EXE_FINAL.toLowerCase(), 'hex');
-			LOG_separator();
-			LOG_addLog('log', 'RE3SET - File saved sucessfully!');
-			LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
-			RE3SET_loadFile(ORIGINAL_FILENAME, 0);
-		} catch (err) {
-			LOG_addLog('error', 'ERROR - Something went wrong while saving data!');
-			LOG_addLog('error', 'ERROR - Reason: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+		if (EXE_CAN_SAVE === true){
+			try {
+				RE3SET_Backup();
+				fs.writeFileSync(ORIGINAL_FILENAME, EXE_FINAL.toLowerCase(), 'hex');
+				LOG_separator();
+				LOG_addLog('log', 'RE3SET - File saved sucessfully!');
+				LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+				RE3SET_loadFile(ORIGINAL_FILENAME, 0);
+			} catch (err) {
+				LOG_addLog('error', 'ERROR - Something went wrong while saving data!');
+				LOG_addLog('error', 'ERROR - Reason: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
+			}
+		} else {
+			LOG_addLog('warn', 'WARN - Unable to save file!');
+			LOG_addLog('warn', 'WARN - Reason: ' + EXE_REASON);
 		}
 	} else {
 		LOG_addLog('warn', 'WARN - Unable to save file!');
@@ -275,7 +390,7 @@ function RE3SET_Backup(){
 			var RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + DROP_fileTypes[RE3SET_fName][2];
 			fs.writeFileSync(APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName, RE3SET_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + RE3SET_backupName);
-			LOG_addLog('log', 'Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName + '</font>');
+			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName + '</font>');
 			LOG_separator();
 		} catch (err) {
 			LOG_addLog('error', 'ERROR - Unable to make backup!');
