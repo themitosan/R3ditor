@@ -1503,10 +1503,8 @@ function RDT_canvasResetPos(){
 	RDT_updateCanvasInfos(0);
 }
 function RDT_showEditCamera(index, camEdit){
-	var CAM_IMG;
-	var titleFileName;
-	var CAM_lbl_fileName;
-	var CAM_ID = index.toString(16).toUpperCase();
+	var CAM_IMG, titleFileName;
+	var CAM_ID = camEdit;
 	if (CAM_ID.length < 2){
 		CAM_ID = '0' + CAM_ID;
 	}
@@ -1527,8 +1525,8 @@ function RDT_showEditCamera(index, camEdit){
 	var codeHex = localStorage.getItem('RDT_Camera-' + index.toString());
 	document.getElementById('RDT-lbl-CAMERA-index').innerHTML = index;
 	document.getElementById('RDT-lbl-CAMERA-edit').innerHTML  = camEdit;
-	document.getElementById('RDT_editCamera_camType').value = codeHex.slice(RANGES['RDT_cam-0-type'][0],     RANGES['RDT_cam-0-type'][1]);
-	document.getElementById('RDT_editCam_ident').value      = codeHex.slice(RANGES['RDT_cam-0-ident'][0],    RANGES['RDT_cam-0-ident'][1]);
+	document.getElementById('RDT_editCamera_camType').value = codeHex.slice(RANGES['RDT_cam-0-type'][0],     			 RANGES['RDT_cam-0-type'][1]);
+	document.getElementById('RDT_editCam_ident').value      = codeHex.slice(RANGES['RDT_cam-0-ident'][0],    			 RANGES['RDT_cam-0-ident'][1]);
 	document.getElementById('RDT_XP_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-XPos'][0],     RANGES['RDT_cam-0-XPos'][1]));
 	document.getElementById('RDT_XPS_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-XPos-Sig'][0], RANGES['RDT_cam-0-XPos-Sig'][1]));
 	document.getElementById('RDT_YP_Origin-edit').value 	= parseEndian(codeHex.slice(RANGES['RDT_cam-0-YPos'][0], 	 RANGES['RDT_cam-0-YPos'][1]));
@@ -1702,6 +1700,7 @@ function RDT_renderNextRDTLbl(){
 }
 function RDT_editItem_renderIconPreview(){
 	var IC = document.getElementById('RDT-item-select').value;
+	$('#RDT_EDIT_ITEM_BG').css({'background-image': 'url("Img/items/details/' + IC + '.png")'});
 	document.getElementById('RDT_editItem_itemIconPreview').title = '(' + IC.toUpperCase() + ') ' + ITEM[IC][0];
 	document.getElementById('RDT_editItem_itemIconPreview').src = APP_PATH + '\\App\\Img\\items\\' + IC.toLowerCase() + '.png';
 }
@@ -1853,32 +1852,34 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	// Item
 	if (id === 1){
 		nome = ITEM[hex][0];
-		document.getElementById('RDT-item-select').value = hex;
-		$('#RDT-item-editOtherFix').css({'top': '266px'});
-		$('#RDT-edit-item-select').removeClass('none');
-		$('#RDT-edit-file-select').addClass('none');
+		$('#RDT-iEditOther').css({'top': '266px'});
+		$('#RDT_btnEditPos').css({'top': '178px'});
 		$('#RDT-edit-map-select').addClass('none');
-		$('#RDT_btnEditPos').css({'top': '182px'});
-		$('#RDT-iEditOther').css({'top': '273px'});
+		$('#RDT-edit-file-select').addClass('none');
+		$('#RDT-edit-item-select').removeClass('none');
+		$('#RDT-item-editOtherFix').css({'top': '266px'});
+		document.getElementById('RDT-item-select').value = hex;
+		$('#RDT_EDIT_ITEM_BG').css({'display': 'block', 'background-image': 'url(Img/items/details/' + hex + '.png)'});
 	} else {
-		$('#RDT_btnEditPos').css({'top': '146px'});
-		$('#RDT-iEditOther').css({'top': '235px'});
+		$('#RDT_btnEditPos').css({'top': '140px'});
+		$('#RDT-iEditOther').css({'top': '229px'});
+		$('#RDT_EDIT_ITEM_BG').css({'display': 'none', 'background-image': 'url()'});
 	}
 	// File
 	if (id === 2){
 		nome = FILES[hex][0];
-		document.getElementById('RDT-file-select').value = hex;
-		$('#RDT-edit-file-select').removeClass('none');
-		$('#RDT-edit-item-select').addClass('none');
 		$('#RDT-edit-map-select').addClass('none');
+		$('#RDT-edit-item-select').addClass('none');
+		$('#RDT-edit-file-select').removeClass('none');
+		document.getElementById('RDT-file-select').value = hex;
 	}
 	// Map
 	if (id === 3){
 		nome = RDT_MAPAS[hex][0];
-		document.getElementById('RDT-map-select').value = hex;
-		$('#RDT-edit-map-select').removeClass('none');
-		$('#RDT-edit-file-select').addClass('none');
 		$('#RDT-edit-item-select').addClass('none');
+		$('#RDT-edit-file-select').addClass('none');
+		$('#RDT-edit-map-select').removeClass('none');
+		document.getElementById('RDT-map-select').value = hex;
 	}
 	document.getElementById('RDT-lbl-edit-index').innerHTML = index.toUpperCase();
 	document.getElementById('RDT_item-edit-X').innerHTML = posX.toUpperCase();

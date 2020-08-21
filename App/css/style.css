@@ -700,8 +700,8 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT_editItem_iconPrevew{
-    top: 71px;
-    left: 566px;
+    top: 65px;
+    left: 560px;
     width: 38px;
     border-radius: 2px;
     position: absolute;
@@ -1191,7 +1191,7 @@ input[type='range' i]{
     margin-top: 8px;
 }
 .RDT-item-editOtherFix{
-    top: 273px;
+    top: 266px;
     left: 132px;
     position: absolute;
 }
@@ -1435,6 +1435,28 @@ input[type='range' i]{
 .RDT_MSGCODE-eDisplay{
     margin-top: 6px;
     width: 318px !important;
+}
+.RDT_EDIT_ITEM_APPLY_FIX{
+    left: 674px !important;
+}
+.RDT_EDIT_ITEM_HOLDER{
+    width: 100%;
+    height: 98%;
+    position: absolute;
+    z-index: 1 !important;
+}
+.RDT_EDIT_ITEM_BG{
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #000;
+    background-size: auto 870px;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to left, #0000007d, #0000);
 }
 .RDT-Item-Misc{
     width: 30%;

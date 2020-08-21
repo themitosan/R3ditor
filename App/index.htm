@@ -1667,7 +1667,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- RDT Itens -->
+			<!-- RDT Items -->
 			<div class="menu none" id="RDT_menu-3" onclick="main_closeFileList();">
 				<div class="menu-general-content" id="RDT-ifm">
 					<div id="RDT_BG_3" class="RDT_BG_IMAGE"></div>
@@ -1678,41 +1678,46 @@
 				</div>
 				<!-- RDT Item - Edit -->
 				<div class="RDT-Item-Edit none" id="RDT-Item-Edit">
-					<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - Identfier: <font id="RDT-lbl-edit-index">???</font> - ID: <font id="RDT_lbl_item_id">???</font></center>
-					<div id="RDT-item-edit-form">
-						<div id="RDT-edit-item-select" class="none">
-							Item: <select class="RDT-item-select item-select-mod RDT_editItem_selectFix" value="00" oninput="RDT_editItem_renderIconPreview();" id="RDT-item-select"></select>
-							<img id="RDT_editItem_itemIconPreview" class="RDT_editItem_iconPrevew"><br>
-							Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_editItem_renderIconPreview();" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15">
+					<div class="RDT_EDIT_ITEM_BG" id="RDT_EDIT_ITEM_BG"></div>
+					<div class="RDT_EDIT_ITEM_HOLDER">
+						<div>
+							<center><font class="titulo">Edit Parameters</font><br>Item: <font id="RDT-lbl-item-edit">???</font> - Identfier: <font id="RDT-lbl-edit-index">???</font> - ID: <font id="RDT_lbl_item_id">???</font></center>
 						</div>
-						<div id="RDT-edit-file-select" class="none">
-							File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
-						</div>
-						<div id="RDT-edit-map-select" class="none">
-							Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
-						</div>
-						<div class="menu-separador"></div>
-						<input type="button" title="Click here to edit the XYZR Position" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
-						<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-X">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Y">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Z">0000</font></div><br>
-						<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-R">0000</font></div>
-						<div class="menu-separador"></div>
-						<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
-						<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-MI" placeholder="00" value=""></div>
-						<div class="RDT-item-editOtherFix" id="RDT-iEditOther">
-							<div>
-								Item flag: <input type="text" class="item-select-mod RDT_itemEdit_IF_fix" id="RDT_item-edit-IF" placeholder="00">
+						<div id="RDT-item-edit-form">
+							<div id="RDT-edit-item-select" class="none">
+								Item: <select class="RDT-item-select item-select-mod RDT_editItem_selectFix" value="00" oninput="RDT_editItem_renderIconPreview();" id="RDT-item-select"></select>
+								<img id="RDT_editItem_itemIconPreview" class="RDT_editItem_iconPrevew"><br>
+								Quantity: <input type="number" min="0" max="255" step="1" oninput="RDT_editItem_renderIconPreview();" class="item-select-mod RDT-item-pos" id="RDT_item-edit-Quant" placeholder="15">
 							</div>
-							Convert to: 
-							<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix no-transform-text RDT_item_convert_width_fix">
-								<!-- Convert Goes here -->
-							</select>
-							<input type="button" title="Click here to convert!" value="Convert!" id="RDT_applyConvertItem" class="botao-menu RDT_item_convert_btn_margin_fix">
-						</div>
-						<div class="RDT-applyBtn-div">
-							<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
-							<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
+							<div id="RDT-edit-file-select" class="none">
+								File: <select class="RDT-item-select item-select-mod" id="RDT-file-select"></select>
+							</div>
+							<div id="RDT-edit-map-select" class="none">
+								Map: <select class="RDT-item-select item-select-mod" id="RDT-map-select"></select>
+							</div>
+							<div class="menu-separador"></div>
+							<input type="button" title="Click here to edit the XYZR Position" class="botao-menu RDT_btn_fix1" id="RDT_btnEditPos" onclick="RDT_showCanvasTab();" value="Edit Pos.">
+							<div class="RDT_coordsHolder_A RE3_LIVESTATUS_X_color" id="RDT_item_X">X Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-X">0000</font></div><br>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Y_color" id="RDT_item_Y">Y Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Y">0000</font></div><br>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_Z_color" id="RDT_item_Z">Z Position: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-Z">0000</font></div><br>
+							<div class="RDT_coordsHolder_B RE3_LIVESTATUS_R_color" id="RDT_item_R">Rotation: <font class="RDT-item-pos user-can-select" id="RDT_item-edit-R">0000</font></div>
+							<div class="menu-separador"></div>
+							<div id="RDT_item_A">Animation: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-A" placeholder="00" maxlength="2"></div>
+							<div>Model ID: <input type="text" class="item-select-mod RDT-item-pos" id="RDT_item-edit-MI" placeholder="00" value=""></div>
+							<div class="RDT-item-editOtherFix" id="RDT-iEditOther">
+								<div>
+									Item flag: <input type="text" class="item-select-mod RDT_itemEdit_IF_fix" id="RDT_item-edit-IF" placeholder="00">
+								</div>
+								Convert to: 
+								<select id="RDT_convertItemTo" class="item-select-mod RDT_itemEditOtherLeftFix no-transform-text RDT_item_convert_width_fix">
+									<!-- Convert Goes here -->
+								</select>
+								<input type="button" title="Click here to convert!" value="Convert!" id="RDT_applyConvertItem" class="botao-menu RDT_item_convert_btn_margin_fix">
+							</div>
+							<div class="RDT-applyBtn-div RDT_EDIT_ITEM_APPLY_FIX">
+								<input type="button" title="Click here to cancel" class="RDT-btn-apply btn-apply-fix color-white" value="Cancel" onclick="RDT_editItemCancel();">
+								<input type="button" title="Click here to apply!" class="RDT-btn-apply btn-apply-fix color-green" id="RDT-btn-aplicarItem" value="APPLY CHANGES!">
+							</div>
 						</div>
 					</div>
 				</div>
