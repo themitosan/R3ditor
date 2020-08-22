@@ -41,4 +41,19 @@ function R3_START_KEYPRESS(){
 			RE3_LIVE_openForm();
 		}
 	}
+	// Mouse press
+	window.onmousedown = function(mClick){
+		// console.info(mClick.button);
+		/*
+			Left Side Buttons
+		*/
+		// Down
+		if (mClick.button === 3){
+			R3_MOUSECLICK(0);
+		}
+		// Up
+		if (mClick.button === 4){
+			R3_MOUSECLICK(1);
+		}
+	}
 }

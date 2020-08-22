@@ -8,17 +8,17 @@ var INI_totalMenus = 3;
 var MIX_totalMenus = 7;
 var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
-var SAVE_totalMenus = 4;
+var SAVE_totalMenus = 3;
 var RE3SET_totalMenus = 2;
 var RE3_LIVE_prevCam = '';
-var RE3_LIVE_prevRDT = '';
 var RE3SET_currentMenu = 1;
 var SETTINGS_totalMenus = 3;
 var FILELIST_totalReloads = 0;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
 var R3ditor_showFirstBootMessage = true;
-var RDT_aba_atual, SAVE_aba_atual, main_currentMenu, fileList_gameMode, request_render_save, RE3_LIVE_RENDERTIMER;
+var RE3_LIVE_prevRDT = RE3_LIVE_prevCam;
+var RDT_aba_atual, SAVE_aba_atual, INI_aba_atual, main_currentMenu, fileList_gameMode, request_render_save, RE3_LIVE_RENDERTIMER;
 /*
 	LOG Functions
 */
@@ -195,12 +195,10 @@ function main_renderFileList(id, mode){
 					if (FILELIST_totalReloads === 1){
 						$('#filelist_progressBar_files').css({'width': parsePercentage(c, listRDT.length) + '%'});
 					}
-					var mFile;
-					var gMODE;
-					var imgPreview;
 					var nOriginal = '';
 					var origName = 'Unknown';
 					var origCity = 'Unknown';
+					var mFile, gMODE, imgPreview;
 					var currentRDT = APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\' + listRDT[c];
 					var RDT_name = getFileName(currentRDT).toUpperCase();
 					if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
@@ -332,13 +330,11 @@ function main_renderFileList(id, mode){
 				});
 				while (c < parseInt(fList.length - 1)){
 					fList.splice();
-					var mFile;
-					var gMODE;
-					var imgPreview;
 					var nOriginal = '';
 					var origName = 'Unknown';
 					var origCity = 'Unknown';
 					var currentRDT = fList[c];
+					var mFile, gMODE, imgPreview;
 					var RDT_name = getFileName(fList[c]).toUpperCase();
 					var mapExt = getFileExtension(fList[c]).toUpperCase();
 					if (fs.existsSync(APP_PATH + '\\Assets\\DATA_A\\BSS\\' + RDT_name.toUpperCase() + '00.JPG') === true){
@@ -635,7 +631,7 @@ function SAVE_applyMenuFocus(menuId){
 	if (GAME_PATH !== '' && GAME_PATH !== undefined){
 		$('#SAV_openFileList').css({'display': 'inline'});
 	}
-	while(i < SAVE_totalMenus){
+	while (i < (SAVE_totalMenus + 1)){
 		$('#menu-' + i).removeClass('aba-select');
 		i++;
 	}
@@ -661,7 +657,7 @@ function SAVE_showMenu(menuId){
 		$('#menu-SAVE').css({'display': 'block'});
 	}
 	cancelShowModItem();
-	if (menuId === 0){ // General
+	if (menuId === 1){ // General
 		if (request_render_save === false){
 			SAV_addInfo(0, '00');
 			SAV_addInfo(1, '00');
@@ -682,7 +678,7 @@ function SAVE_showMenu(menuId){
 		$('#menu-info').css({'height': '530px'});
 	}
 	// JILL
-	if (menuId === 1){
+	if (menuId === 2){
 		SAV_addInfo(0, '00');
 		SAVE_applyMenuFocus(2);
 		$('#save-geral').addClass('none');
@@ -691,23 +687,13 @@ function SAVE_showMenu(menuId){
 		$('#save-jill').removeClass('none');
 	}
 	// Menu Carlos
-	if (menuId === 2){
+	if (menuId === 3){
 		SAV_addInfo(1, '00');
 		SAVE_applyMenuFocus(3);
 		$('#save-jill').addClass('none');
 		$('#save-geral').addClass('none');
 		$('#msg-viewer').addClass('none');
 		$('#save-carlos').removeClass('none');
-	}
-	// Menu Opções
-	if (menuId === 3){
-		SAV_addInfo(1, '00');
-		SAVE_applyMenuFocus(4);
-		$('#save-jill').addClass('none');
-		$('#save-geral').addClass('none');
-		$('#save-carlos').addClass('none');
-		$('#msg-viewer').removeClass('none');
-		$('#o-menu-general').css({'display': 'block'});
 	}
 	LOG_scroll();
 }
@@ -2313,6 +2299,7 @@ function RE3_LIVE_CANVAS_RENDER(){
 function INI_showMenu(menuId){
 	// Fix CSS and show Form
 	var c = 0;
+	INI_aba_atual = menuId;
 	document.title = APP_NAME + ' - INI Editor (*.INI) - File: ' + ORIGINAL_FILENAME;
 	while (c < parseInt(INI_totalMenus + 1)){
 		$('#INI-aba-menu-' + c).removeClass('aba-select');
@@ -2967,6 +2954,132 @@ function DESIGN_XDELTA_showInfo(message, showReload){
 			$('#R3_PATCHER_XDELTA_BTN_NOTICE_CANCEL').css({'display': 'inline'});
 			$('#R3_XDELTA_PATCHER_notice').css({'width': '792px', 'height': '82px', 'display': 'block'});
 			$('#R3_Patcher_Xdelta_menu').css({'width': '812px', 'height': '144px', 'top': '274px', 'left': '280px'});
+		}
+	}
+}
+/*
+	Mouse Click
+*/
+function R3_MOUSECLICK(mode){
+	// 0 Down, 1: Up
+	var cMenu;
+	if (mode === 0){
+		if (main_currentMenu !== undefined){
+			// RDT
+			if (main_currentMenu === 3 && RDT_arquivoBruto !== undefined){
+				cMenu = (RDT_aba_atual + 1);
+				if (cMenu === 4 || cMenu === 10){
+					cMenu++;
+				}
+				// Message Block
+				if (cMenu === 2 && fs.existsSync(RDT_fm_path) !== true){
+					cMenu++;
+				}
+				// Audio Tab
+				if (cMenu === 5 && RDT_totalAudios === 0){
+					cMenu++;
+				}
+				// Message Code
+				if (cMenu === 7 && fs.existsSync(RDT_fm_path) !== true){
+					cMenu++;
+				}
+				// NPC
+				if (cMenu === 8 && RDT_totalEnemies === 0){
+					cMenu++;
+				}
+				//
+				if (cMenu > RDT_totalMenus){
+					cMenu = 1;
+				}
+				if (cMenu === 0){
+					cMenu = 11;
+				}
+				console.info(cMenu);
+				RDT_showMenu(cMenu);
+			}
+			// INI
+			if (main_currentMenu === 6 && BIO3INI_arquivoBruto !== undefined){
+				cMenu = (INI_aba_atual + 1);
+				if (cMenu === 0 || cMenu === INI_totalMenus){
+					cMenu = 1;
+				}
+				INI_showMenu(cMenu);
+			}
+			// MIX
+			if (main_currentMenu === 8 && MIX_arquivoBruto !== undefined){
+				cMenu = (MIX_currentMenu + 1);
+				if (cMenu === 0 || cMenu === (MIX_totalMenus + 1)){
+					cMenu = 1;
+				}
+				MIX_showMenu(cMenu);
+			}
+			// SAV
+			if (main_currentMenu === 1 && SAVE_arquivoBruto !== undefined){
+				cMenu = (SAVE_aba_atual + 1);
+				if (cMenu === 0 || cMenu === (SAVE_totalMenus + 1)){
+					cMenu = 1;
+				}
+				SAVE_showMenu(cMenu);
+			}
+		}
+	} else {
+		if (main_currentMenu !== undefined){
+			// RDT
+			if (main_currentMenu === 3 && RDT_arquivoBruto !== undefined){
+				cMenu = (RDT_aba_atual - 1);
+				// NPC
+				if (cMenu === 8 && RDT_totalEnemies === 0){
+					cMenu--;
+				}
+				// Message Code
+				if (cMenu === 7 && fs.existsSync(RDT_fm_path) !== true){
+					cMenu--;
+				}
+				// Audio Tab
+				if (cMenu === 5 && RDT_totalAudios === 0){
+					cMenu--;
+				}
+				// Message Block
+				if (cMenu === 2 && fs.existsSync(RDT_fm_path) !== true){
+					cMenu--;
+				}
+				if (cMenu === 4 || cMenu === 10){
+					cMenu--;
+				}
+				//
+				if (cMenu > RDT_totalMenus){
+					cMenu = 1;
+				}
+				if (cMenu === 0){
+					cMenu = 11;
+				}
+				//console.info(cMenu);
+				RDT_showMenu(cMenu);
+			}
+			// INI
+			if (main_currentMenu === 6 && BIO3INI_arquivoBruto !== undefined){
+				cMenu = (INI_aba_atual - 1);
+				if (cMenu === 0 || cMenu === 4){
+					cMenu = 1;
+				}
+				INI_showMenu(cMenu);
+			}
+			// MIX
+			if (main_currentMenu === 8 && MIX_arquivoBruto !== undefined){
+				cMenu = (MIX_currentMenu - 1);
+				if (cMenu === 0 || cMenu === (MIX_totalMenus + 1)){
+					cMenu = 1;
+				}
+				MIX_showMenu(cMenu);
+			}
+			// SAV
+			if (main_currentMenu === 1 && SAVE_arquivoBruto !== undefined){
+				cMenu = (SAVE_aba_atual - 1);
+				if (cMenu === 0 || cMenu === (SAVE_totalMenus + 1)){
+					cMenu = 1;
+				}
+				SAVE_showMenu(cMenu);
+			}
 		}
 	}
 }

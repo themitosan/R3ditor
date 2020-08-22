@@ -213,7 +213,7 @@ function save_renderSaveSlots(){
 	}
 	// Final
 	LOG_scroll();
-	SAVE_showMenu(0);
+	SAVE_showMenu(1);
 }
 function save_renderInvent(s_slot, mode){
 	var atual = 1;
@@ -262,10 +262,10 @@ function save_renderBox(s_slot){
 	document.getElementById('CARLOS-BOX').innerHTML = '<!-- Hey, can you give me a cookie? ~wink~ -->';
 	// Jill Box
 	LOG_addLog('log', 'SAV - Loading Jill Item Box...');
-	var totalItens = 63; // 63 = Total de slots no baú
-	var current = 0;
-	var position = RANGES['j-box'][0];
 	var plus = 8;
+	var current = 0;
+	var totalItens = 63; // 63 = Total de slots no baú
+	var position = RANGES['j-box'][0];
 	while(current !== totalItens + 1){
 		JILL_BAU.push(localStorage.getItem('Save_' + s_slot).slice(position, position + plus));
 		position = position + plus;
