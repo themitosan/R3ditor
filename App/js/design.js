@@ -3000,7 +3000,7 @@ function R3_MOUSECLICK(mode){
 			// INI
 			if (main_currentMenu === 6 && BIO3INI_arquivoBruto !== undefined){
 				cMenu = (INI_aba_atual + 1);
-				if (cMenu === 0 || cMenu === INI_totalMenus){
+				if (cMenu === 0 || cMenu === (INI_totalMenus + 1)){
 					cMenu = 1;
 				}
 				INI_showMenu(cMenu);
@@ -3059,7 +3059,7 @@ function R3_MOUSECLICK(mode){
 			// INI
 			if (main_currentMenu === 6 && BIO3INI_arquivoBruto !== undefined){
 				cMenu = (INI_aba_atual - 1);
-				if (cMenu === 0 || cMenu === 4){
+				if (cMenu === 0 || cMenu === (INI_totalMenus + 1)){
 					cMenu = 1;
 				}
 				INI_showMenu(cMenu);
