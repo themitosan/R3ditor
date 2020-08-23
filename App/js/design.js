@@ -2994,7 +2994,6 @@ function R3_MOUSECLICK(mode){
 				if (cMenu === 0){
 					cMenu = 11;
 				}
-				console.info(cMenu);
 				RDT_showMenu(cMenu);
 			}
 			// INI

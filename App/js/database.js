@@ -1046,7 +1046,7 @@ var ROFS_STATUS = {
 	15: ['Background music (.WAV)']
 }
 var MAIN_exludeFileFormats = [
-	'.rdt','.txt','.msg','.sav','.exe','.ini','.r3ditor','.rdtmap2','.tim','.sld','.rbj','.ard','.dat','.ARDMAP'
+	'.rdt','.txt','.msg','.sav','.exe','.ini','.r3ditor','.rdtmap2','.tim','.sld','.rbj','.ard','.dat','.ARDMAP', '.SCD'
 ]
 // Remove this hack later!
 var RDT_ARD_tempExclude = [
@@ -1690,6 +1690,7 @@ var RANGES = {
 	'RDT_FILE_MAP_HEADER':			 [0, 192],
 	// Header
 	'RDT_HEADER_CAM_TOTAL':	     	   [0, 4],
+	'RDT_HEADER_SCD_POS': 		   [144, 148],
 	////////////////////////////////////////////////////////////////////////////////////////
 	/*
 		Item, File or Map

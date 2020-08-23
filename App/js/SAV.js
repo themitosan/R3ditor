@@ -716,7 +716,7 @@ function SAV_ADD_ITEM_BOX(PERSON, INDEX, ITEMHEX, QUANTIDADE, ATRIBUTO, VNULO){
 	var nome = ITEM[ITEMHEX][0];
 	var marg = ITEM[ITEMHEX][3];
 	var cssfixbtn = '';
-	var cssfix = '';
+	var cssfix = cssfixbtn;
 	if (parseInt(quan) === 0){
 		quan = '';
 	} else {
@@ -761,9 +761,7 @@ function SAV_addInfo(person, itemId){
 }
 function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	// Infos
-	var cor;
-	var shad;
-	var quanti;
+	var cor, shad, quanti;
 	var titulo = ITEM[itemHex][0];
 	var percent = false;
 	if (atrib === '00'){
@@ -789,7 +787,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	var p;
 	var s = 0;
 	var fix = 4;
-	var startB = 0;
+	var startB = s;
 	var startA = 956;
 	var pushOffset = 106;
 	// Finais
@@ -810,7 +808,7 @@ function addInvent(person, itemHex, quantHex, block, atrib, nulo){
 	}
 	var IT_css = ATTR[atrib][3];
 	// Jill inventory
-	if (person == 0){
+	if (person === 0){
 		document.getElementById('J-icon-' + block).src = 'img\\items\\' + itemHex + '.png';
 		document.getElementById('J-icon-' + block).onclick = function(){
 			SAV_addInfo(person, itemHex);
@@ -1071,12 +1069,12 @@ function decompileHexTime(p0x2200, p0x2201, p0x2202, p0x2203){
 	//console.log("IGT: " + h_0x2200 + " - " + h_0x2201 + " - " + h_0x2202 + " - " + h_0x2203);
 }
 function resetTimer(){
-	milesimos = 0;
+	dia       = 0;
+	hora      = 0;
+	minutos   = 0;
 	decimos   = 0;
 	segundos  = 0;
-	minutos   = 0;
-	hora      = 0;
-	dia       = 0;
+	milesimos = 0;
 	document.getElementById('lbl-time').innerHTML = '00:00:00';
 }
 function resetIGT(){

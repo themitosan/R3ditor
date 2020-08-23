@@ -248,6 +248,20 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 	LOG_scroll();
 }
 /*
+	SCD
+*/
+function RDT_extractSCD(){
+    if (RDT_arquivoBruto !== undefined && RDT_ARD_compatMode !== true){
+    	RDT_HEADER_SCD = parseEndian(RDT_arquivoBruto.slice(RANGES['RDT_HEADER_SCD_POS'][0], RANGES['RDT_HEADER_SCD_POS'][1]));
+        var SCD_HEX_STARTPOS = (parseInt(RDT_HEADER_SCD, 16) * 2);
+        var SCD_POINTER_START = parseEndian(RDT_arquivoBruto.slice(SCD_HEX_STARTPOS, (SCD_HEX_STARTPOS + 4)));
+        var SCD_POINTER_END = SCD_HEX_STARTPOS + (parseInt(SCD_POINTER_START, 16) * 2);
+        var SCD_LENGTH = (parseInt(parseEndian(RDT_arquivoBruto.slice((SCD_POINTER_END - 4), SCD_POINTER_END)), 16) * 2);
+        var SCD_CODE = RDT_arquivoBruto.slice(SCD_HEX_STARTPOS, (SCD_HEX_STARTPOS + SCD_LENGTH));
+        R3DITOR_SAVE(RDT_mapName + '.SCD', SCD_CODE, 'hex', '.SCD');
+    }
+}
+/*
 	SLD Layers [WIP]
 	This is a REALLY beta thing!
 

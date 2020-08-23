@@ -201,7 +201,7 @@ input[type='range' i]{
 }
 .RDT_lbl_pointers{
     left: 206px;
-    width: 1104px;
+    width: 1090px;
     position: sticky;
     margin-top: -18px;
 }
@@ -273,7 +273,7 @@ input[type='range' i]{
 }
 .botao-aplicar:active{
     color: #e6ffdc;
-    background-image: linear-gradient(to bottom, #264230, #304036);
+    background-image: linear-gradient(to bottom, #003f18, #009a3a);
 }
 .botao-aplicar:hover{
     box-shadow: 0 0 10px #037f01;
@@ -333,6 +333,7 @@ input[type='range' i]{
     color: #fff;
     padding: 4px;
     height: 520px;
+    overflow: auto;
     margin-top: 2px;
     border-radius: 6px;
     text-shadow: 0px 0px 5px #367948;
