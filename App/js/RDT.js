@@ -221,9 +221,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 				RDT_getCameras();
 				RDT_ARD_compatMode = false;
 				$('#RDT-aba-menu-9').css({'display': 'inline'});
+				$('#RDT_DIV_extractSCD').css({'display': 'inline'});
 			} else {
 				RDT_ARD_compatMode = true;
 				$('#RDT-aba-menu-9').css({'display': 'none'});
+				$('#RDT_DIV_extractSCD').css({'display': 'none'});
 			}
 			RDT_getPropModelsArray();
 			RDT_readDoors();
