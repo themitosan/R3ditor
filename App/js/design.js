@@ -285,6 +285,7 @@ function main_renderFileList(id, mode){
 					$('#fileList_aba_easy').removeClass('aba-select-2');
 					$('#fileList_aba_hard').removeClass('aba-select-2');
 					$('#fileList_aba_recent').removeClass('aba-select-2');
+					$('#FILELIST_removeRecentFiles').css({'display': 'none'});
 					document.getElementById('fileListHolder_ardConvert').innerHTML = '';
 					//
 					if (R3_ARDENABLER_ENABLED === true){
@@ -3133,9 +3134,7 @@ function R3DITOR_RUNGAME(id){
 				$('#RDT-SLD-hold').css({'height': '516px'});
 				$('#RDT_SLD_LAYER_holder').css({'height': '472px'});
 				$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '288px'});
-
 				//console.log('Open RE3');
-
 			} else {
 				if (EXEC_BIO3_original !== ''){
 					$('#btn_run_bio3').css({'display': 'inline'});
@@ -3182,9 +3181,7 @@ function R3DITOR_RUNGAME(id){
 					$('#RDT-SLD-hold').css({'height': '472px'});
 					$('#RDT_SLD_LAYER_holder').css({'height': '430px'});
 					$('#RDT_SLD_LAYER_BLOCK_LIST').css({'height': '242px'});
-
 					//console.log('Close RE3');
-
 					if (main_currentMenu !== 6){
 						if (DESIGN_ENABLE_ANIMS === true){
 							$('#menu-topo-MOD').fadeIn({duration: 120, queue: false});

@@ -5,6 +5,7 @@
 */
 
 // Other
+var RDT_newSearch;
 var RDT_USE_DECOMPILER_WIP = false;
 
 // Cameras
@@ -217,11 +218,11 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		LOG_separator();
 		//
 		if (RDT_USE_DECOMPILER_WIP === false){
+			RDT_scanSCD();
 			RDT_getTextMessages();
 			RDT_getMessageCodesArray();
 			RDT_getEnemiesArray();
 			if (RDT_fileType === 'RDT'){
-				RDT_scanSCD();
 				RDT_getCameras();
 				RDT_ARD_compatMode = false;
 				$('#RDT-aba-menu-9').css({'display': 'inline'});
@@ -264,6 +265,8 @@ function RDT_scanSCD(){
         var SCD_POINTER_END = SCD_HEX_STARTPOS + (parseInt(SCD_POINTER_START, 16) * 2);
         var SCD_LENGTH = (parseInt(parseEndian(RDT_arquivoBruto.slice((SCD_POINTER_END - 4), SCD_POINTER_END)), 16) * 2);
         RDT_SCD_CODE = RDT_arquivoBruto.slice(SCD_HEX_STARTPOS, (SCD_HEX_STARTPOS + SCD_LENGTH));
+        //
+        RDT_newSearch = RDT_arquivoBruto.slice(SCD_LENGTH, RDT_arquivoBruto.length);
     }
 }
 function RDT_extractSCD(){
@@ -2240,7 +2243,7 @@ function RDT_restoreLastBackup(){
 					fs.unlinkSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.' + RDT_fileType);
 				}
 				RDT_restoreLastBackup_1(mName);
-			} catch (err){
+			} catch (err) {
 				console.error(err);
 				LOG_addLog('error', 'MAP - ERROR: Unable to delete ' + RDT_fileType + ' file!');
 				LOG_addLog('error', err);
@@ -2259,8 +2262,8 @@ function RDT_restoreLastBackup_1(name){
 			fs.writeFileSync(APP_PATH + '\\Configs\\RDT\\' + name + '_' + RDT_fileType + '.rdtmap2', fm_bck, 'utf-8');
 		}
 		var BK = fs.readFileSync(RDT_lastBackup, 'hex');
-		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.' + RDT_fileType, BK, 'hex');
-		alert('File: ' + name + '.' + RDT_fileType + '\n\nThe backup was restored successfully!');
+		fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.RDT', BK, 'hex');
+		alert('File: ' + name + '.RDT\n\nThe backup was restored successfully!');
 		if (ORIGINAL_FILENAME !== undefined){
 			RDT_CARREGAR_ARQUIVO(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + name + '.' + RDT_fileType);
 		}

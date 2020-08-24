@@ -7,7 +7,7 @@
 */
 // Header Vars
 var RDT_V2_MAP_HEADER;		  // Hx     Hx
-var RDT_V2_HEADER_CAM_TOTAL;  // 00 --> 02: Nº Total Cameras
+var RDT_V2_HEADER_CAM_TOTAL;  // 00 --> 02: Number of Total Cameras
 var RDT_V2_HEADER_UNK_0;      // 08 --> 09: ???
 var RDT_V2_HEADER_BOUNDARIES; // 20 --> 21: Boundaries
 var RDT_V2_HEADER_CAM_POS;    // 24 --> 25: Camera Position (Start)
