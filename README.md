@@ -69,6 +69,7 @@ R3ditor also can do:
 - Edit starting items³
 - Extract RDT files from PS ARD files²
 - Apply Xdelta patches
+- Extract SCD from RDT Maps
 
 <i>¹ - Only avaliable in x64 NW.js version</i><br>
 <i>² - You need extract PC version before extracting ARD files</i><br>
