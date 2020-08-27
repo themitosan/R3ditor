@@ -35,7 +35,6 @@ body{
 	color: #fff;
     overflow: hidden;
     font-family: 'timesNR', Fallback, times;
-    background-image: linear-gradient(to bottom, #020202, #0f0c23);
 }
 u{
     text-shadow: 0px 0px 10px #ff000063;
@@ -54,6 +53,22 @@ input[type='range' i]{
     margin-right: 6px;
     position: relative;
 }
+/*
+    App Holder
+*/
+.R3DITOR_MAIN_APP_HOLDER{
+    color: #fff;
+    width: 1360px;
+    height: 733px;
+    position: fixed;
+    overflow: hidden;
+    transform-origin: top left;
+    transition: all .0.1s ease-in-out;
+    background-image: linear-gradient(to bottom, #020202, #0f0c23);
+}
+/*
+    Fill
+*/
 .fill{
     width: 100%;
     height: 100%;
@@ -348,7 +363,7 @@ input[type='range' i]{
     position: sticky;
 }
 .menu-general-btn{
-    left: 1230px;
+    left: 1246px;
     margin-top: 1px;
     padding-top: 2px;
     position: sticky;
@@ -655,7 +670,7 @@ input[type='range' i]{
     border: none;
     outline: none;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 58px;
     padding-top: 6px;
     margin-right: 2px;
     padding-left: 16px;
@@ -667,6 +682,9 @@ input[type='range' i]{
 }
 .aba:focus{
     outline: none;
+}
+.abaFix{
+    margin-top: 52px;
 }
 .aba-left-fix{
     outline: none;
@@ -747,7 +765,7 @@ input[type='range' i]{
 }
 .RDT-applyBtn-div{
     top: 88%;
-    left: 684px;
+    left: 704px;
     width: 612px;
     position: absolute;
     z-index: 1 !important;
@@ -852,7 +870,7 @@ input[type='range' i]{
 
 .save-alterar-menu{
     top: 14px;
-    left: 968px;
+    left: 994px;
     width: 320px;
     padding: 10px;
     border-radius: 6px;
@@ -861,7 +879,7 @@ input[type='range' i]{
 }
 .msg-raw{
     top: 455px;
-    width: 546px;
+    width: 554px;
     height: 152px;
     overflow: auto;
     margin-top: 4px;
@@ -890,7 +908,7 @@ input[type='range' i]{
 }
 .msg-events{
     top: 44px;
-    width: 926px;
+    width: 934px;
     height: 396px;
     margin-top: 4px;
     padding-top: 6px;
@@ -916,7 +934,7 @@ input[type='range' i]{
 .msg-addcomand-menu{
     top: 48px;
     left: 960px;
-    width: 352px;
+    width: 362px;
     height: 350px;
     overflow: auto;
     padding-top: 6px;
@@ -930,7 +948,7 @@ input[type='range' i]{
 .msg-hex{
     top: 414px;
     left: 960px;
-    width: 351px;
+    width: 364px;
     height: 197px;
     padding-top: 6px;
     position: absolute;
@@ -1106,7 +1124,7 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #473cab, #251d65);
 }
 .RDT-holder{
-    width: 1288px;
+    width: 1312px;
     height: 476px;
     overflow: auto;
     margin-top: 4px;
@@ -1188,7 +1206,9 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #4b7571, #2c4245);
 }
 .txtarea-hex-fix{
+    width: 352px;
     height: 128px;
+    outline: none;
     margin-top: 8px;
 }
 .RDT-item-editOtherFix{
@@ -1340,7 +1360,7 @@ input[type='range' i]{
     background-image: linear-gradient(to bottom, #737373, #545454);
 }
 .aba-settings-fix{
-    left: 970px;
+    left: 983px;
     width: 350px;
 }
 .aba-principal-fix{
@@ -1348,7 +1368,7 @@ input[type='range' i]{
 }
 .aba-settings-fix-2{
     top: -44px;
-    left: 970px;
+    left: 982px;
 }
 .aba-utility-fix{
     top: 484px;
@@ -1431,6 +1451,7 @@ input[type='range' i]{
     width: 100%;
     height: 100%;
     opacity: 0.4;
+    display: none;
     position: absolute;
 }
 .RDT_MSGCODE-eDisplay{
@@ -1454,7 +1475,7 @@ input[type='range' i]{
     height: 100%;
     position: absolute;
     background-color: #000;
-    background-size: auto 870px;
+    background-size: auto 880px;
     background-position: center;
     background-repeat: no-repeat;
     -webkit-mask-image: linear-gradient(to left, #0000007d, #0000);
@@ -1494,7 +1515,7 @@ input[type='range' i]{
 .RDT-Item-Edit{
     top: 53px;
     padding: 6px;
-    width: 1290px;
+    width: 1312px;
     height: 468px;
     border-radius: 6px;
     position: absolute;
@@ -1605,8 +1626,8 @@ input[type='range' i]{
     left: 10px;
     opacity: 1;
     z-index: -1;
+    width: 1324px;
     height: 516px;
-    width: 1306px;
     filter: blur(2px);
     border-radius: 6px;
     position: absolute;
@@ -1616,8 +1637,8 @@ input[type='range' i]{
 }
 .fileList{
     top: 54px;
-    width: 50%;
     z-index: 2;
+    width: 670px;
     padding: 6px;
     height: 514px;
     border-radius: 6px;
@@ -1691,12 +1712,12 @@ input[type='range' i]{
     box-shadow: 0px 0px 6px #222;
 }
 .blockInfo_fix{
-    left: 972px;
+    left: 993px;
     height: 449px;
     box-shadow: 0px 0px 10px #a2a2a247;
 }
 .msg_holder_fix{
-    width: 944px;
+    width: 964px;
 }
 /*
     Item Map
@@ -1799,7 +1820,7 @@ input[type='range' i]{
     cursor: pointer;
 }
 .FILEGEN_saveImageBtn{
-    left: 806px !important;
+    left: 816px !important;
 }
 .FG_selectColor_space_0{
     position: sticky;
@@ -1811,7 +1832,7 @@ input[type='range' i]{
 }
 .FG_CANVAS{
     zoom: 2;
-    left: 400px;
+    left: 406px;
     width: 256px;
     height: 176px;
     overflow: hidden;
@@ -2007,7 +2028,7 @@ input[type='range' i]{
     top: 48px;
     z-index: 10;
     padding: 6px;
-    width: 1313px;
+    width: 1334px;
     height: 564px;
     border-radius: 6px;
     position: absolute;
@@ -2033,7 +2054,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_CLOSEBTN{
     top: 14px;
-    left: 1256px;
+    left: 1276px;
     position: absolute;
 }
 .RE3_LIVESTATUS_MENU{
@@ -2060,6 +2081,7 @@ input[type='range' i]{
 .RE3_LIVESTATUS_inernalTab{
     color: #fff;
     border: none;
+    outline: none;
     padding-top: 4px;
     position: absolute;
     padding-left: 14px;
@@ -2172,13 +2194,13 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_WINDOW-3{
     top: 106px;
-    left: 468px;
-    width: 368px;
+    left: 476px;
+    width: 374px;
     height: 442px;
 }
 .RE3_LIVESTATUS_WINDOW-4{
     top: 106px;
-    left: 854px;
+    left: 874px;
     width: 442px;
     height: 442px;
 }
@@ -2205,11 +2227,11 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_tabPos-3{
     top: 86px;
-    left: 478px;
+    left: 487px;
 }
 .RE3_LIVESTATUS_tabPos-4{
     top: 86px;
-    left: 864px;
+    left: 884px;
 }
 .RE3_LIVESTATUS_tabPos-5{
     top: 86px;
@@ -2248,7 +2270,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_INVENT_SLOT_2{
     top: 80px;
-    left: 188px;
+    left: 184px;
     margin-top: 0px !important;
     border-top-right-radius: 6px;
 }
@@ -2258,7 +2280,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_INVENT_SLOT_4{
     top: 112px;
-    left: 188px;
+    left: 184px;
     margin-top: 0px !important;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_5{
@@ -2267,7 +2289,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_INVENT_SLOT_6{
     top: 144px;
-    left: 188px;
+    left: 184px;
     margin-top: 0px !important;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_7{
@@ -2276,7 +2298,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_INVENT_SLOT_8{
     top: 176px;
-    left: 188px;
+    left: 184px;
     margin-top: 0px !important;
 }
 .RE3_LIVESTATUS_INVENT_SLOT_9{
@@ -2286,7 +2308,7 @@ input[type='range' i]{
 }
 .RE3_LIVESTATUS_INVENT_SLOT_10{
     top: 208px;
-    left: 188px;
+    left: 184px;
     margin-top: 0px !important;
     border-bottom-right-radius: 6px;
 }
@@ -2771,7 +2793,7 @@ input[type='range' i]{
     filter: hue-rotate(140deg);
 }
 .MIX_select_fix{
-    left: 815px;
+    left: 812px;
     width: 480px;
     position: sticky;
 }
@@ -2907,7 +2929,7 @@ input[type='range' i]{
 .RE3SET_GLOBAL_APPLY{
     z-index: 1;
     top: 480px;
-    left: 1058px;
+    left: 1078px;
     position: absolute;
 }
 .RE3SET_OTHER_startPos_LIVETSTATUS{
@@ -2951,7 +2973,8 @@ input[type='range' i]{
 }
 .RE3SET_DIV_startItemsApply{
     top: 396px;
-    width: 100%;
+    left: 22px;
+    width: 92%;
     position: absolute;
 }
 .RE3SET_BTN_APPLYSTARTITEM{
@@ -2962,7 +2985,7 @@ input[type='range' i]{
     z-index: 0;
     left: 890px;
     color: #fff;
-    width: 403px;
+    width: 422px;
     height: 438px;
     padding: 10px;
     position: absolute;
@@ -3243,7 +3266,7 @@ input[type='range' i]{
     height: 126px;
 }
 .IEDIT_ITEM_holder{
-    width: 1298px;
+    width: 1314px;
     height: 480px;
     overflow: auto;
     padding-left: 4px;
@@ -3252,7 +3275,7 @@ input[type='range' i]{
 }
 .IEDIT_edit_stickyFix{
     position: sticky;
-    left: 854px;
+    left: 866px;
 }
 .IEDIT_edit_select_fix{
     width: 304px;

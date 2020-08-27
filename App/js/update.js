@@ -12,17 +12,18 @@ function forceUpdate(){
 	main_closeFileList();
 	if (forceUpdat < 15 && forceUpdat > 10){
 		$('#img-logo').css({'cursor': 'no-drop'});
+		$('#R3DITOR_MAIN_APP_HOLDER').css({'background-image': 'linear-gradient(to bottom, #020202, #110022)'});
 	}
 	if (forceUpdat > 15){
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		LOG_addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
-			$('#img-logo').fadeOut({duration: 2200, queue: false});
 			$('#hidden_msg').fadeIn({duration: 2200, queue: false});
 		} else {
-			$('#img-logo').css({'display': 'none'});
 			$('#hidden_msg').css({'display': 'inline'});
 		}
+		$('#img-logo').css({'cursor': 'none'});
+		$('#R3DITOR_MAIN_APP_HOLDER').css({'background-image': 'linear-gradient(to bottom, #020202, #202)'});
 		LOG_scroll();
 	}
 }
@@ -122,7 +123,7 @@ function R3DITOR_update_0(){
 			} else {
 				runExternalSoftware(APP_PATH + '\\App\\tools\\7z\\32\\7z.exe', ['x', APP_PATH + '\\Update\\master.zip', '-o' + APP_PATH + '\\Update\\Extract', '-aoa']);
 			}
-		} catch (err){
+		} catch (err) {
 			LOG_addLog('error', 'ERROR - Something went wrong while extracting the package!');
 			LOG_addLog('error', 'ERROR - Details: ' + err);
 		}
@@ -156,7 +157,7 @@ function R3DITOR_update_2(){
 		fs.mkdirSync(APP_PATH + '\\App');
 		R3DITOR_movePercent(0, 90, 'Moving the new files...');
 		fs.copy(APP_PATH + '\\Update\\Extract\\R3ditor-master\\App\\', APP_PATH + '\\App\\', function(err){
-			if (err)return console.error(err);
+			if (err)return console.error('ERROR: ' + err);
 			reload();
 		});
 	} else {

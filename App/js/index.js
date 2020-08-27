@@ -30,10 +30,10 @@ window.onclose = function(){
 		killExternalSoftware(RE3_PID);
 	}
 }
-window.onresize = function(){
-	window.moveTo(0, 0);
-	window.resizeBy(1340, 733);
-}
+//window.onresize = function(){
+//	window.moveTo(0, 0);
+//	window.resizeBy(1340, 733);
+//}
 /*
 	Main Functions
 */

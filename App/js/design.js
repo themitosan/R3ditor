@@ -20,6 +20,21 @@ var R3ditor_showFirstBootMessage = true;
 var RE3_LIVE_prevRDT = RE3_LIVE_prevCam;
 var RDT_aba_atual, SAVE_aba_atual, INI_aba_atual, main_currentMenu, fileList_gameMode, request_render_save, RE3_LIVE_RENDERTIMER;
 /*
+	Window Resize
+*/
+window.onresize = function(){
+	DESIGN_FITSCREEN();
+}
+// Original code: https://stackoverflow.com/questions/36603751/how-to-zoom-content-to-screen-width
+function DESIGN_FITSCREEN(){
+	var windowWidth = $(document).outerWidth();
+	var windowHeight = $(document).outerHeight();
+	var width = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetWidth;
+	var height = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetHeight;
+	var r = Math.min(windowWidth / width, windowHeight / height);
+	$('#R3DITOR_MAIN_APP_HOLDER').css({'transform': 'scale(' + r + ')'});
+}
+/*
 	LOG Functions
 */
 function LOG_scroll(){
@@ -57,9 +72,9 @@ function FILELIST_clearTextBox(){
 }
 function FILELIST_triggerSearchBox(){
 	if (main_currentMenu === 3){
+		var searchResult;
 		document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value = UTILS_removeMiscChars(document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase()).replace(new RegExp('R', 'gi'), '');
 		var searchQuery = document.getElementById('fileList_RDT_SEARCH_TEXTBOX').value.toUpperCase();
-		var searchResult;
 		if (searchQuery !== '' && searchQuery.length === 3){
 			if (fileList_gameMode === 'DATA_E' || fileList_gameMode === 'DATA_AJ'){
 				searchResult = document.getElementById('RDT_file_' + fileList_gameMode + '_R' + searchQuery);
@@ -168,7 +183,7 @@ function main_renderFileList(id, mode){
 			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
 			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
-		$('#RDT_recentFile').css({'display': 'block', 'left': '690px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
+		$('#RDT_recentFile').css({'display': 'block', 'left': '680px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
 		document.getElementById('fileListHolder').innerHTML = '';
 		document.getElementById('fileListHolder_AJ').innerHTML = '';
@@ -515,11 +530,11 @@ function main_menu(anim){
 	}
 	if (anim === 4){ // FILEGEN
 		document.title = APP_NAME + ' - File Generator';
-		$('#menu-topo-fileEditor').css({'display': 'block'});
-		$('#FILEGEN_contents').css({'height': '434px'});
-		$('#menu-FILEGEN').css({'display': 'inline'});
-		$('#FILEGEN_holder').css({'height': '474px'});
 		$('#FILEGEN_menu').css({'height': '484px'});
+		$('#menu-FILEGEN').css({'display': 'inline'});
+		$('#FILEGEN_contents').css({'height': '434px'});
+		$('#menu-topo-fileEditor').css({'display': 'block'});
+		$('#FILEGEN_holder').css({'height': '474px', 'overflow': 'hidden'});
 		if (DESIGN_ENABLE_ANIMS === true){
 			$('#FILEGEN_ruler').fadeIn({duration: 1000, queue: false});
 			$('#FILEGEN_ruler').animate({'top': '60px', 'width': '2px', 'height': '218px'}, {duration: 1000, queue: false});
@@ -1425,11 +1440,10 @@ function RDT_show3DPropEdit(mode, id){
 				RDT_3D_PROP_APPLY(id);
 			}
 			$('#RDT-3D_props-Edit').css({'display': 'inline'});
-			$('#RDT_3DProps_holder').css({'width': '722px'});
 		}
 	} else {
 		$('#RDT_openFileList').css({'display': 'inline'});
-		$('#RDT_3DProps_holder').css({'width': '1293px'});
+		$('#RDT_3DProps_holder').css({'width': '1312px'});
 		$('#RDT-3D_props-Edit').css({'display': 'none'});
 	}
 }
@@ -2428,13 +2442,13 @@ function MIX_showEdit(mode, combId, combHex){
 		document.getElementById('MIX_applyBtn-' + funcMode).onclick = function(){
 			MIX_applyChanges(combId, funcMode);
 		}
-		$('#MIX-item-edit-' + parseInt(funcMode)).css({'display': 'block', 'width': '553px', 'left': '750px'});
+		$('#MIX-item-edit-' + parseInt(funcMode)).css({'display': 'block', 'width': '572px', 'left': '750px'});
 		MIX_RENDER_PREVIEW();
 	} else {
 		var c = 0;
 		while(c < 8){
 			$('#MIX-item-edit-' + c).css({'display': 'none'});
-			$('#MIX-holder-' + c).css({'width': '1294px'});
+			$('#MIX-holder-' + c).css({'width': '1314px'});
 			c++;
 		}
 	}
@@ -2679,13 +2693,13 @@ function DROP_showEdit(mode, id, hex, quant){
 		document.getElementById('DROP_edit_lbl_itemID').innerHTML = (id + 1);
 		document.getElementById('DROP_EDIT_QUANT').value = parseInt(quant, 16);
 		document.getElementById('DROP_edit_lbl_itemName').innerHTML = ITEM[hex][0];
-		$('#DROP_ITEM_edit').css({'display': 'inline', 'width': '550px', 'left': '750px', 'top': '49px'});
+		$('#DROP_ITEM_edit').css({'display': 'inline', 'width': '568px', 'left': '750px', 'top': '49px'});
 		document.getElementById('DROP_editApplyBtn').onclick = function(){
 			DROP_checkValues(id);
 		}
 	} else {
 		$('#DROP_ITEM_edit').css({'display': 'none'});
-		$('#DROP-holder').css({'width': '1298px'});
+		$('#DROP-holder').css({'width': '1314px'});
 	}
 }
 /*
@@ -2713,11 +2727,11 @@ function IEDIT_showEdit(mode, id, hex){
 		document.getElementById('IEDIT_editApplyBtn').onclick = function(){
 			IEDIT_applyChanges(id);
 		}
-		$('#IEDIT-holder').css({'width': '728px'});
-		$('#IEDIT_ITEM_edit').css({'display': 'inline', 'left': '750px', 'width': '550px', 'top': '50px'});
+		$('#IEDIT-holder').css({'width': '747px'});
+		$('#IEDIT_ITEM_edit').css({'display': 'inline', 'left': '770px', 'width': '550px', 'top': '50px'});
 	} else {
 		$('#IEDIT_ITEM_edit').css({'display': 'none'});
-		$('#IEDIT-holder').css({'width': '1298px'});
+		$('#IEDIT-holder').css({'width': '1314px'});
 	}
 }
 /*

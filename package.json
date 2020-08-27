@@ -12,14 +12,12 @@
     "title": "R3ditor - Please wait...",
     "icon": "App/img/logo.png",
     "fullscreen": false,
-    "min_width": 1340,
-    "min_height": 706,
-    "max_width": 1340,
-    "max_height": 706,
+    "min_width": 820,
+    "min_height": 416,
     "toolbar": false,
     "frame": true,
-    "width": 1341,
-    "height": 707
+    "width": 1360,
+    "height": 744
   },
   "webkit": {
     "plugin": true

@@ -27,11 +27,11 @@ var OBJ_arquivoBruto, ARD_arquivoBruto, UTILS_ARD_INTERVAL, ARD_DECOMP_INTERVAL,
 */
 function FILEGEN_TOGGLE_RES(){
 	if (FILEGEN_TOGGLE === false){
-		$('#FILEGEN_CANVAS').css({'zoom': '1', 'left': '926px'});
+		$('#FILEGEN_CANVAS').css({'zoom': '1', 'left': '938px'});
 		document.getElementById('BTN_saveImage').value = 'Toggle Zoom (Size: Original)';
 		FILEGEN_TOGGLE = true;
 	} else {
-		$('#FILEGEN_CANVAS').css({'zoom': '2', 'left': '400px'});
+		$('#FILEGEN_CANVAS').css({'zoom': '2', 'left': '406px'});
 		document.getElementById('BTN_saveImage').value = 'Toggle Zoom (Size: Double)';
 		FILEGEN_TOGGLE = false;
 	}

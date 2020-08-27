@@ -18,6 +18,7 @@ var TEMP_APP_PATH, EXEC_BIO3_MERCE, EXEC_BIO3_original, EXEC_rofs;
 	Functions
 */
 function WZ_verifyConfigFile(){
+	DESIGN_FITSCREEN();
 	TEMP_APP_PATH = APP_PATH;
 	if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor') === false){
 		WZ_showWizard = true;
@@ -393,6 +394,9 @@ function WZ_loadFiles(file){
 	} else {
 		GAME_PATH = '';
 	}
+	if (fs.existsSync(GAME_PATH) !== true){
+		GAME_PATH = EXEC_BIO3_original.replace('ResidentEvil3.exe', '');
+	}
 	// Enable Mod
 	if (cfgs[4] !== undefined){
 		enable_mod = JSON.parse(cfgs[4]);
@@ -552,6 +556,7 @@ function WZ_SHOW_INTERFACE(){
 	document.title = APP_NAME;
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeIn({duration: 2000, queue: false});
+		$('#R3_MAIN_FRAME_BG').fadeIn({duration: 2000, queue: false});
 		$('#menu-topo').fadeIn({duration: 200, queue: false});
 		$('#menu-utility').fadeIn({duration: 200, queue: false});
 		$('#menu-settings').fadeIn({duration: 200, queue: false});
@@ -565,25 +570,26 @@ function WZ_SHOW_INTERFACE(){
 		$('#menu-topo').animate({'top': '32px'}, {duration: 100, queue: false});
 		$('#menu-utility').animate({'top': '546px'}, {duration: 100, queue: false});
 		$('#menu-settings').animate({'top': '32px'}, {duration: 100, queue: false});
-		$('#menu-utility-aba').animate({'top': '472px'}, {duration: 140, queue: false});
-		$('#menu-utility-aba-5').animate({'top': '26px'}, {duration: 140, queue: false});
-		$('#menu-utility-aba-4').animate({'top': '26px'}, {duration: 140, queue: false});
-		$('#menu-utility-aba-3').animate({'top': '-44px'}, {duration: 140, queue: false});
-		$('#menu-utility-aba-2').animate({'top': '-44px'}, {duration: 140, queue: false});
-		$('#mainMenu-patcher-div').animate({'top': '102px'}, {duration: 100, queue: false});
-		$('#mainMenu-exeEdit-div').animate({'top': '102px'}, {duration: 100, queue: false});
+		$('#menu-utility-aba').animate({'top': '463px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-5').animate({'top': '16px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-4').animate({'top': '16px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-3').animate({'top': '-51px'}, {duration: 140, queue: false});
+		$('#menu-utility-aba-2').animate({'top': '-51px'}, {duration: 140, queue: false});
+		$('#mainMenu-patcher-div').animate({'top': '96px'}, {duration: 100, queue: false});
+		$('#mainMenu-exeEdit-div').animate({'top': '96px'}, {duration: 100, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'inline'});
+		$('#R3_MAIN_FRAME_BG').css({'display': 'inline'});
 		$('#menu-topo').css({'top': '32px', 'display': 'inline'});
 		$('#menu-settings').css({'display': 'inline','top': '32px'});
 		$('#menu-utility').css({'top': '546px', 'display': 'inline'});
-		$('#menu-utility-aba').css({'top': '472px', 'display': 'inline'});
-		$('#menu-utility-aba-5').css({'top': '26px', 'display': 'inline'});
-		$('#menu-utility-aba-4').css({'top': '26px', 'display': 'inline'});
-		$('#menu-utility-aba-3').css({'top': '-44px', 'display': 'inline'});
-		$('#menu-utility-aba-2').css({'top': '-44px', 'display': 'inline'});
-		$('#mainMenu-patcher-div').css({'top': '102px', 'display': 'inline'});
-		$('#mainMenu-exeEdit-div').css({'top': '102px', 'display': 'inline'});
+		$('#menu-utility-aba').css({'top': '463px', 'display': 'inline'});
+		$('#menu-utility-aba-5').css({'top': '16px', 'display': 'inline'});
+		$('#menu-utility-aba-4').css({'top': '16px', 'display': 'inline'});
+		$('#menu-utility-aba-3').css({'top': '-51px', 'display': 'inline'});
+		$('#menu-utility-aba-2').css({'top': '-51px', 'display': 'inline'});
+		$('#mainMenu-patcher-div').css({'top': '96px', 'display': 'inline'});
+		$('#mainMenu-exeEdit-div').css({'top': '96px', 'display': 'inline'});
 	}
 }
 function WZ_FIRST_BOOT_MESSAGE(){
