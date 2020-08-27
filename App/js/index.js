@@ -30,10 +30,6 @@ window.onclose = function(){
 		killExternalSoftware(RE3_PID);
 	}
 }
-//window.onresize = function(){
-//	window.moveTo(0, 0);
-//	window.resizeBy(1340, 733);
-//}
 /*
 	Main Functions
 */
@@ -425,7 +421,7 @@ function runGame(exe, args){
 	RE3_PID = ls.pid;
 	if (RE3_RUNNING === true && RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined){
 		$('#menu-utility').css({'top': '586px'});
-		$('#menu-utility-aba').css({'top': '512px'});
+		$('#menu-utility-aba').css({'top': '504px'});
 	}
 	ls.stdout.on('data', (data) => {
 		LOG_addLog('log', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
@@ -453,7 +449,7 @@ function runGame(exe, args){
 			LOG_separator();
 		}
 		if (RDT_arquivoBruto === undefined && SAVE_arquivoBruto === undefined && MSG_arquivoBruto === undefined && BIO3INI_arquivoBruto === undefined && main_currentMenu !== 6){
-			$('#menu-utility-aba').css({'top': '472px'});
+			$('#menu-utility-aba').css({'top': '464px'});
 			$('#menu-utility').css({'top': '546px'});
 		}
 		R3DITOR_RUNGAME(1);
