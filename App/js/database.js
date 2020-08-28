@@ -1405,6 +1405,8 @@ var IEDIT_displayMode = {
 	'0d': 'Number in blue color',
 	'0e': 'Percentage in blue color',
 	'0f': 'Infinite in blue color',
+	'12': 'M4A1 Assault Auto',
+	'16': 'M4A1 Assault Manual',
 	'20': 'No Display (Square Crank / Iron Pipe)'
 }
 var UTILS_REMOVE_CHARS = [

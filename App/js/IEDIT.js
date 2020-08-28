@@ -28,6 +28,7 @@ function IEDIT_loadExec(file, mode){
 		LOG_addLog('log', 'IEDIT - File loaded sucessfully! (Mode: ' + IEDIT_fileTypes[IEDIT_fileName][0] + ')');
 		LOG_addLog('log', 'IEDIT - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		main_menu(9);
+		document.getElementById('IEDIT_search_itemId').focus();
 	} else {
 		LOG_addLog('log', 'PATCHER - IEDIT database was loaded!');
 	}
@@ -49,7 +50,7 @@ function IEDIT_decompileItem(useLocalStorage, id, hex){
 	var IEDIT_CAPACITY = IEDIT_HEX.slice(RANGES['IEDIT_MAX_CAPACITY'][0], RANGES['IEDIT_MAX_CAPACITY'][1]);
 	var IEDIT_CODE_QUEST = IEDIT_HEX.slice(RANGES['IEDIT_CODE_QUEST'][0], RANGES['IEDIT_CODE_QUEST'][1]);
 	var IEDIT_DISPLAY_MODE = IEDIT_HEX.slice(RANGES['IEDIT_DISPLAY_MODE'][0], RANGES['IEDIT_DISPLAY_MODE'][1]);
-	var IEDIT_HTML_TEMPLATE = '<div class="RDT-Item MIX-func-comb-bg IEDIT_ITEM_heightFix" id="IEDIT_item_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="IEDIT_editBtn_' + id + 
+	var IEDIT_HTML_TEMPLATE = '<div class="RDT-Item MIX-func-comb-bg IEDIT_ITEM_heightFix" id="IEDIT_item_' + IEDIT_CURRENT_ITEM.toUpperCase() + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="IEDIT_editBtn_' + id + 
 							'" value="Modify" onclick="IEDIT_showEdit(0, ' + id + ', \'' + IEDIT_HEX + '\');">(' + id + ') Item <font class="user-can-select">' + IEDIT_CURRENT_ITEM.toUpperCase() + '</font> - ' + ITEM[IEDIT_CURRENT_ITEM][0] + '<br><div class="menu-separador"></div>' + 
 							'Type: <font class="IEDIT_lbl_item_sticky">' + IEDIT_itemType[IEDIT_TYPE] + '</font><br>Capacity: <font class="IEDIT_lbl_item_sticky">' +	parseInt(IEDIT_CAPACITY, 16) + '</font><br>Code Quest: ' + '<font class="IEDIT_lbl_item_sticky user-can-select">' + 
 							IEDIT_CODE_QUEST.toUpperCase() + '</font><br>Display Mode: <font class="IEDIT_lbl_item_sticky">' + IEDIT_displayMode[IEDIT_DISPLAY_MODE] + '</font><div class="menu-separador"><div class="IEDIT_lbl_item_hex_fix">Hex: <font class="user-can-select">' + 
@@ -63,6 +64,16 @@ function IEDIT_updateList(){
 	while (c < 134){
 		IEDIT_decompileItem(true, c);
 		c++;
+	}
+}
+function IEDIT_searchItemId(){
+	var itemId = document.getElementById('IEDIT_search_itemId').value.toUpperCase();
+	if (itemId !== '' && itemId.length === 2){
+		var found = document.getElementById('IEDIT_item_' + itemId);
+		if (found !== null){
+			var distance = document.getElementById('IEDIT_item_' + itemId).offsetTop;
+			document.getElementById('IEDIT-holder').scrollTo(0, (distance - 50));
+		}
 	}
 }
 function IEDIT_applyChanges(id){

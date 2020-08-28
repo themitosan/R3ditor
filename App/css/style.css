@@ -530,7 +530,7 @@ input[type='range' i]{
     background-image: linear-gradient(to right, #000040, #0d0d57);
 }
 .item-box{
-    width: 618px;
+    width: 624px;
     padding: 10px;
     height: 446px;
     overflow: auto;
@@ -3255,6 +3255,30 @@ input[type='range' i]{
 /*
     IEDIT
 */
+.IEDIT_searchItemId_DIV{
+    top: 5px;
+    left: 92px;
+    width: 400px;
+    position: absolute;
+}
+.IEDIT_searchItemId_lbl{
+    top: 4px;
+    position: absolute;
+}
+.IEDIT_searchItemId_input{
+    color: #0f0;
+    left: 130px;
+    width: 262px;
+    height: 17px;
+    padding: 4px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    position: absolute;
+    background-color: #0000;
+    text-transform: uppercase;
+    background-image: linear-gradient(to right, #000, #0000);
+}
 .IEDIT_lbl_item_sticky{
     left: 110px;
     position: sticky;
