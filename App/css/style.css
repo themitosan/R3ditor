@@ -2376,8 +2376,9 @@ input[type='range' i]{
 }
 .INI_MINIWINDOW{
     padding: 6px;
-    border-radius: 6px;
+    overflow: hidden;
     position: absolute;
+    border-radius: 6px;
     background-image: linear-gradient(to bottom, #454545, #333);
 }
 .INI_inernalTab{

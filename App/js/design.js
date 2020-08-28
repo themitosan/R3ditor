@@ -2788,7 +2788,7 @@ function SETTINGS_showMenu(menuId){
 		c++;
 	}
 	if (MAIN_32BitMode === true){
-		$('#SETTINGS_perfTab').css({'height': '20px'});
+		$('#SETTINGS_perfTab').css({'height': '34px'});
 		$('#SETTINGS_RE3_LIVE_PERF_DIV').css({'display': 'none'});
 	}
 	$('#SETTINGS_menu_' + menuId).css({'display': 'block', 'height': '524px'});
