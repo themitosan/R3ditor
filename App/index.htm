@@ -781,12 +781,13 @@
 							<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" onclick="WZ_FORCE_UPDATE();" value="Download last changes from GitHub"></center>
 						</div>
 						<!-- Performance -->
-						<input type="button" value="Performance" class="INI_inernalTab SETTINGS_ABA-2">
+						<input type="button" value="Graphics and Performance" class="INI_inernalTab SETTINGS_ABA-2">
 						<div class="INI_MINIWINDOW SETTINGS_WINDOW-2" id="SETTINGS_perfTab">
 							<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableAnimations');">Enable Animations</font></font><br>
+							<input type="checkbox" class="chkbox" id="SETTINGS_edit_lockRes"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_lockRes');">Lock Window Size</font></font><br>
 							<div id="SETTINGS_RE3_LIVE_PERF_DIV">
 								<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableRE3_live_toolBar"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableRE3_live_toolBar');">Enable RE3 Live Toolbar</font></font>
-								<div class="menu-separador"></div>
+								<div class="menu-separador-2"></div>
 								<center>RE3 Live Info Speed - Current: <font id="SETTINGS_lbl_RE3_liveSpeed">???</font>ms<br>
 								Fast (50ms) <input type="range" id="SETTINGS_edit_RE3LIVEUPDATE" oninput="SETTINGS_updateLiveSpeed();" min="50" max="120" step="2" value="80" class="SETTINGS_slider"> Slow (120ms)</center><br>
 								Slow makes information refresh on screen less often, ideal for those with <i>less processing power.</i><br><br>

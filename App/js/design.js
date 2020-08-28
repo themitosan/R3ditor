@@ -11,8 +11,11 @@ var MIX_currentMenu = 0;
 var SAVE_totalMenus = 3;
 var RE3SET_totalMenus = 2;
 var RE3_LIVE_prevCam = '';
+var R3_WINDOW_WIDTH = 1366;
+var R3_WINDOW_HEIGTH = 768;
 var RE3SET_currentMenu = 1;
 var SETTINGS_totalMenus = 3;
+var R3_WINDOW_LOCKRES = false;
 var FILELIST_totalReloads = 0;
 var DESIGN_ENABLE_ANIMS = false;
 var R3ditor_tool_selected = false;
@@ -27,12 +30,16 @@ window.onresize = function(){
 }
 // Original code: https://stackoverflow.com/questions/36603751/how-to-zoom-content-to-screen-width
 function DESIGN_FITSCREEN(){
-	var windowWidth = $(document).outerWidth();
-	var windowHeight = $(document).outerHeight();
-	var width = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetWidth;
-	var height = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetHeight;
-	var r = Math.min(windowWidth / width, windowHeight / height);
-	$('#R3DITOR_MAIN_APP_HOLDER').css({'transform': 'scale(' + r + ')'});
+	if (R3_WINDOW_LOCKRES === false){
+		var windowWidth = $(document).outerWidth();
+		var windowHeight = $(document).outerHeight();
+		var width = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetWidth;
+		var height = document.getElementById('R3DITOR_MAIN_APP_HOLDER').offsetHeight;
+		var r = Math.min(windowWidth / width, windowHeight / height);
+		$('#R3DITOR_MAIN_APP_HOLDER').css({'transform': 'scale(' + r + ')'});
+	} else {
+		window.resizeTo(R3_WINDOW_WIDTH, R3_WINDOW_HEIGTH);
+	}
 }
 /*
 	LOG Functions
@@ -2045,6 +2052,7 @@ function RDT_applyDoorUsePlayerPos(mode){
 		document.getElementById('RDT_door-edit-zIndex').value = REALTIME_zIndex;
 		document.getElementById('RDT_door-edit-NRN').value    = REALTIME_CurrentRoomNumber;
 		document.getElementById('RDT_door-edit-NS').value     = '0' + (parseInt(REALTIME_CurrentStage) - 1);
+		RDT_renderNextRDTLbl();
 		document.getElementById('RDT_door-edit-NC-TXT').value = REALTIME_CurrentCam.toUpperCase();
 		if (enable_mod === true){
 			document.getElementById('RDT_door-edit-NC').value = REALTIME_CurrentCam.toUpperCase();
