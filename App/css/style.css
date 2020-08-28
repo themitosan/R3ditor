@@ -2383,6 +2383,7 @@ input[type='range' i]{
 .INI_inernalTab{
     color: #fff;
     border: none;
+    outline: none;
     padding-top: 4px;
     position: absolute;
     padding-left: 14px;
