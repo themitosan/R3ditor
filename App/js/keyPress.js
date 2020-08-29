@@ -13,6 +13,10 @@ function R3_START_KEYPRESS(){
 				if (key.keyCode === 113){
 					RE3_LIVE_gotoTitleScreen();
 				}
+				// Esc = Close RE3 Live
+				if (key.keyCode === 27){
+					RE3_LIVE_closeForm();
+				}
 			}
 		}
 		// (F1) Open RE3 Livestatus
