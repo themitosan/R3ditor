@@ -535,6 +535,8 @@ function WZ_loadFiles(file){
 		if (R3ditor_showFirstBootMessage === false){
 			WZ_SHOW_INTERFACE();
 		} else {
+			R3_WINDOW_LOCKRES = true;
+			document.getElementById('SETTINGS_edit_lockRes').checked = R3_WINDOW_LOCKRES;
 			WZ_FIRST_BOOT_MESSAGE();
 		}
 		$('#RDT-SLD-hold').css({'height': '472px'});
@@ -562,7 +564,7 @@ function WZ_loadFiles(file){
 function WZ_SHOW_INTERFACE(){
 	document.title = APP_NAME;
 	if (DESIGN_ENABLE_ANIMS === true){
-		$('#img-logo').fadeIn({duration: 2000, queue: false});
+		$('#img-logo').fadeIn({duration: 2100, queue: false});
 		$('#R3_MAIN_FRAME_BG').fadeIn({duration: 2000, queue: false});
 		$('#menu-topo').fadeIn({duration: 200, queue: false});
 		$('#menu-utility').fadeIn({duration: 200, queue: false});
@@ -600,10 +602,12 @@ function WZ_SHOW_INTERFACE(){
 	}
 }
 function WZ_FIRST_BOOT_MESSAGE(){
+	DESIGN_FITSCREEN();
 	DESIGN_ENABLE_ANIMS = true;
+	$('body').css({'margin': '0px'});
 	R3ditor_showFirstBootMessage = false;
-	$('#RE2_introEffect').css({'display': 'inline'});
 	document.title = 'Welcome to R3ditor!';
+	$('#RE2_introEffect').css({'display': 'inline'});
 	setTimeout(function(){
 		$('#RE2_introEffect').animate({'background-color': '#fff'}, {duration: 1000, queue: false});
 	}, 200);
@@ -635,6 +639,7 @@ function WZ_FIRST_BOOT_MESSAGE(){
 	setTimeout(function(){
 		$('#RE2_introEffect').css({'background-color': '#fff', 'display': 'inline'});
 		$('#RE2_introEffect').fadeOut({duration: 80, queue: false});
+		$('body').css({'margin': '8px'});
 		WZ_SHOW_INTERFACE();
 	}, 11680);
 }
