@@ -9,8 +9,8 @@ var MIX_totalMenus = 7;
 var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 3;
-var RE3SET_totalMenus = 2;
 var RE3_LIVE_prevCam = '';
+var RE3SET_totalMenus = 2;
 var R3_WINDOW_WIDTH = 1366;
 var R3_WINDOW_HEIGTH = 768;
 var RE3SET_currentMenu = 1;
@@ -39,6 +39,7 @@ function DESIGN_FITSCREEN(){
 		$('#R3DITOR_MAIN_APP_HOLDER').css({'transform': 'scale(' + r + ')'});
 	} else {
 		window.resizeTo(R3_WINDOW_WIDTH, R3_WINDOW_HEIGTH);
+		$('#R3DITOR_MAIN_APP_HOLDER').css({'transform': 'scale(0.989)'});
 	}
 }
 /*
@@ -219,7 +220,7 @@ function main_renderFileList(id, mode){
 					}
 					var nOriginal = '';
 					var origName = 'Unknown';
-					var origCity = 'Unknown';
+					var origCity = origName;
 					var mFile, gMODE, imgPreview;
 					var currentRDT = APP_PATH + '\\Assets\\' + gameModePath + '\\RDT\\' + listRDT[c];
 					var RDT_name = getFileName(currentRDT).toUpperCase();
@@ -355,7 +356,7 @@ function main_renderFileList(id, mode){
 					fList.splice();
 					var nOriginal = '';
 					var origName = 'Unknown';
-					var origCity = 'Unknown';
+					var origCity = origName;
 					var currentRDT = fList[c];
 					var mFile, gMODE, imgPreview;
 					var RDT_name = getFileName(fList[c]).toUpperCase();
@@ -549,7 +550,7 @@ function main_menu(anim){
 			$('#FILEGEN_ruler').css({'top': '60px', 'width': '2px', 'height': '218px', 'display': 'block'});
 		}
 	}
-	if (anim === 5){ // TIM Patcher
+	if (anim === 5){ // Free slot
 		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');
 	}
 	if (anim === 6){ // INI Editor
@@ -942,7 +943,7 @@ function adjustDialogSave(percent){
 	$('#menu-mod-item').css({'top': percent + '%'});
 }
 /// About
-function showAbout(){
+function R3_showAbout(){
 	main_closeFileList();
 	RE3_LIVE_closeForm();
 	$('#menu-topo').css({'display': 'none'});
@@ -1604,10 +1605,7 @@ function RDT_showEditEnemyNPC(index, codeHex){
 	$('#RDT_enemy_holder').css({'display': 'none'});
 }
 function RDT_showEditDoor(index, id, hex){
-	var nextCam;
-	var realStage;
-	var roomNumber;
-	var DOOR_READ_MODE;
+	var nextCam, realStage, roomNumber, DOOR_READ_MODE;
 	main_closeFileList();
 	$('#RDT_openFileList').css({'display': 'none'});
 	document.getElementById('RDT_door-edit-NC').innerHTML = '';
@@ -2039,10 +2037,10 @@ function RDT_enableDisableDoorUsePlayerPos(mode){
 }
 function RDT_applyDoorUsePlayerPos(mode){
 	if (mode === 0){
-		document.getElementById('RDT_door-edit-X').value = REALTIME_X_Pos;
-		document.getElementById('RDT_door-edit-Y').value = REALTIME_Z_Pos;
-		document.getElementById('RDT_door-edit-Z').value = REALTIME_Y_Pos;
-		document.getElementById('RDT_door-edit-R').value = REALTIME_R_Pos;
+		document.getElementById('RDT_door-edit-X').value 	  = REALTIME_X_Pos;
+		document.getElementById('RDT_door-edit-Y').value 	  = REALTIME_Z_Pos;
+		document.getElementById('RDT_door-edit-Z').value 	  = REALTIME_Y_Pos;
+		document.getElementById('RDT_door-edit-R').value 	  = REALTIME_R_Pos;
 	}
 	if (mode === 1){
 		document.getElementById('RDT_door-edit-NX').value     = REALTIME_X_Pos;
@@ -2290,11 +2288,11 @@ function RE3_LIVE_enableDisableToolBar(mode){
 }
 function RE3_LIVE_RENDER_POSITIONS(){
 	if (REALTIME_renderToolbar === true){
-		document.getElementById('RDT_LIVESTATUS_toolBar_X').innerHTML = REALTIME_X_Pos;
-		document.getElementById('RDT_LIVESTATUS_toolBar_Y').innerHTML = REALTIME_Y_Pos;
-		document.getElementById('RDT_LIVESTATUS_toolBar_Z').innerHTML = REALTIME_Z_Pos;
-		document.getElementById('RDT_LIVESTATUS_toolBar_R').innerHTML = REALTIME_R_Pos;
-		document.getElementById('RDT_LIVESTATUS_toolBar_zI').innerHTML = REALTIME_zIndex;
+		document.getElementById('RDT_LIVESTATUS_toolBar_X').innerHTML   = REALTIME_X_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_Y').innerHTML   = REALTIME_Y_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_Z').innerHTML   = REALTIME_Z_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_R').innerHTML   = REALTIME_R_Pos;
+		document.getElementById('RDT_LIVESTATUS_toolBar_zI').innerHTML  = REALTIME_zIndex;
 		document.getElementById('RDT_LIVESTATUS_toolBar_CAM').innerHTML = REALTIME_CurrentCam;
 	}
 	document.getElementById('RE3_LIVESTATUS_lbl_CurrentStage').innerHTML = REALTIME_CurrentStage;
@@ -2307,7 +2305,7 @@ function RE3_LIVE_RENDER_POSITIONS(){
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_Z_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_Z_Pos), 0);
 	document.getElementById('RE3_LIVESTATUS_lbl_Current_R_PositionDecimal').innerHTML = processBIO3PosNumbers(processBIO3Vars(REALTIME_R_Pos), 0);
 }
-// MINI_MAP
+// MINI_MAP [WIP SAFADISSIMO]
 var ACRESIMO = 10;
 var FATORDEGIRO = 11.1;
 function RE3_LIVE_CANVAS_RENDER(){
