@@ -7,24 +7,24 @@ var MSG_LENGTH = 0;
 var MSG_useSlice = false;
 var MSG_increment = true;
 var MSG_totalComandos = 0;
-var MSG_useClimaxFix = false;
-var MSG_CONTAINS_FE00 = false;
 var MSG_DECRYPT_LV1_LAST = '';
-var MSG_useSeekCameras = false;
 var MSG_CURRENT_RDT_MESSAGE_END = 0;
-var MSG_CURRENT_RDT_MESSAGE_START = 0;
+var MSG_useClimaxFix = MSG_useSlice;
+var MSG_CONTAINS_FE00 = MSG_useSlice;
+var MSG_useSeekCameras = MSG_useSlice;
 var MSG_ID, MSG_Commands, MSG_FILL_PASS, MSG_arquivoBruto;
+var MSG_CURRENT_RDT_MESSAGE_START = MSG_CURRENT_RDT_MESSAGE_END;
 /*
 	Functions
 */
 function MSG_goBackToRDT(){
-	localStorage.clear();
-	sessionStorage.clear();
 	MSG_LENGTH = 0;
 	RDT_resetVars();
 	MSG_ID = undefined;
 	MSG_increment = true;
+	localStorage.clear();
 	MSG_totalComandos = 0;
+	sessionStorage.clear();
 	MSG_Commands = undefined;
 	MSG_FILL_PASS = undefined;
 	MSG_CONTAINS_FE00 = false;
@@ -38,6 +38,14 @@ function MSG_goBackToRDT(){
 	TRANSFER_MSG_TO_RDT();
 	RDT_openFile(ORIGINAL_FILENAME);
 	$('#RDT-aba-menu-2').trigger('click');
+}
+function MSG_goBackToRE3SET(){
+	MSG_ID = undefined;
+	MSG_totalComandos = 0;
+	MSG_useSeekCameras = false;
+	MSG_arquivoBruto = undefined;
+	document.title = RE3SET_itemDesc_tempWinTitle;
+	TRANSFER_MSG_TO_RE3SET();
 }
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	if (fs.existsSync(msgFile) === true){
@@ -687,7 +695,7 @@ function MAKE_NEW_POINTERS(msg_hex){
 			break;
 		}
 	}
-	console.log('Novos ponteiros: ' + NEW_POINTERS);
+	// console.log('Novos ponteiros: ' + NEW_POINTERS);
 	return NEW_POINTERS;
 }
 function MSG_SAVE_ON_RDT(msgHex){
@@ -709,14 +717,19 @@ function MSG_SAVE_ON_RDT(msgHex){
 			LOG_addLog('log', 'MSG - INFO: The file was saved successfully! - File: ' + getFileName(ORIGINAL_FILENAME).toUpperCase() + '.' + RDT_fileType);
 			LOG_addLog('log', 'MSG - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();
-		} catch(err){
+		} catch (err) {
 			LOG_addLog('error', 'MSG - ERROR: Something went wrong while saving!');
 			LOG_addLog('error', 'MSG - Details: ' + err);
 		}
 	} else {
-		LOG_addLog('error', 'ERROR - Function list are empty or <u>you are not using this software properly!</u>');
+		LOG_addLog('error', 'ERROR - Function list are empty or <u>you are <b>not</b> using this software properly!</u>');
 	}
 	LOG_scroll();
+}
+function MSG_SAVE_ON_RE3SET(msgHex){
+	sessionStorage.setItem('RE3SET_ITEMDESC_' + MSG_ID, msgHex);
+	RE3SET_itemDesc_updateList();
+	MSG_goBackToRE3SET();
 }
 function MSG_updateMapFile(pointer){
 	if (pointer !== ''){
@@ -761,10 +774,10 @@ function MSG_REMOVECOMMAND(comandId, isTxt){
 function MSG_applyMSGCommand(mode){
 	var c = 0;
 	var newHex = '';
-	var finalArray = '';
 	var u, POINTER_HOLD;
+	var finalArray = newHex;
 	document.getElementById('msg-lbl-totalCommands').innerHTML = MSG_totalComandos;
-	while(c !== MSG_totalComandos + 1){
+	while(c !== (MSG_totalComandos + 1)){
 		if (localStorage.getItem('MSG_comando-' + c) === null){
 			c++;
 		} else {
@@ -799,7 +812,7 @@ function MSG_applyMSGCommand(mode){
 		if (MSG_totalComandos !== 0){
 			try{
 				R3DITOR_SAVE('MyMessage.msg', newHex, 'hex', 'msg');
-			} catch(err){
+			} catch (err) {
 				LOG_addLog('error', 'ERROR - Unable to save the MSG File ' + ask + ' - ' + err);
 			}
 		} else {
@@ -811,19 +824,24 @@ function MSG_applyMSGCommand(mode){
 			MSG_SAVE_ON_RDT(newHex);
 			MSG_goBackToRDT();
 		} else {
-			LOG_addLog('warn', 'WARN - Unable to save message: You need insert \"End Message\" function before saving!');
+			LOG_addLog('warn', 'WARN - Unable to save message! You need insert \"End Message\" function before saving!');
 			alert('ERROR - Unable to save message!\nYou need insert \"End Message\" function before saving!');
 		}
 	} else {
-		MSG_Commands = [];
-		MSG_FILL_PASS = '';
-		localStorage.clear();
-		if (POINTER_HOLD !== undefined){
-			localStorage.setItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
+		if (mode !== 3){
+			MSG_Commands = [];
+			MSG_FILL_PASS = '';
+			localStorage.clear();
+			if (POINTER_HOLD !== undefined){
+				localStorage.setItem('RDT_POINTER_' + getFileName(ORIGINAL_FILENAME).toUpperCase(), POINTER_HOLD);
+			}
+			MSG_CONTAINS_FE00 = false;
+			document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
+			MSG_startMSGDecrypt_Lv2(newHex);
 		}
-		MSG_CONTAINS_FE00 = false;
-		document.getElementById('text-msg-textPrev').innerHTML = MSG_startMSGDecrypt_Lv1(newHex);
-		MSG_startMSGDecrypt_Lv2(newHex);
+	}
+	if (mode === 3){
+		MSG_SAVE_ON_RE3SET(newHex);
 	}
 	LOG_scroll();
 }

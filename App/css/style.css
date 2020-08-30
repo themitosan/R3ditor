@@ -147,7 +147,7 @@ input[type='range' i]{
 }
 .ABOUT_goBackBtn{
     left: 4px;
-    top: 316px;
+    top: 330px;
     position: absolute;
     width: 180px !important;
     border-radius: 6px !important;
@@ -2871,6 +2871,28 @@ input[type='range' i]{
     RE3SET
     RE3 Settings Editor
 */
+.RE3SET_itemDesc_topDiv{
+    top: 8px;
+    left: 94px;
+    display: none;
+    position: absolute;
+}
+.RE3SET_itemDesc_holder{
+    top: 52px;
+    width: 1318px;
+    height: 478px;
+    overflow: auto;
+    border-radius: 6px;
+    padding-right: 4px;
+    position: absolute;
+}
+.RE3SET-message-content{
+    width: 84%;
+    min-height: 18px;
+    margin-top: -18px;
+    margin-left: 64px;
+    text-align: -webkit-left;
+}
 .RE3SET_OTHER_startPosTab{
     top: 61px;
     left: 20px;

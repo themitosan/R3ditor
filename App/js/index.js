@@ -779,7 +779,7 @@ function splitHex(hex, mode){
 	var rw;
 	var c = 0;
 	var fina = '';
-	if (mode == 0){
+	if (mode === 0){
 		rw = hex.match(/.{1,2}/g);
 	} else {
 		rw = hex.match(/.{1,4}/g);

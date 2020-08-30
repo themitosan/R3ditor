@@ -1477,12 +1477,17 @@ var RANGES = {
 	'RE3SET_invent_1_startItems': [1184536, 1184696], // PS version
 	'RE3SET_invent_2_startItems': [0, 0],			  // GC Invent are not stored on main.dol!
 	'RE3SET_invent_3_startItems': [2833760, 2833920], // DC version
-	//
-	'RE3SET_local_0_roomXpos':    [360620, 360624], // Original: CE 33
-	'RE3SET_local_0_roomYpos': 	  [360666, 360670], // Original: 07 CF
-	'RE3SET_local_0_roomRpos':    [360736, 360740], // Original: 20 07
-	'RE3SET_local_0_roomNumber':  [360794, 360796], // Original: 0D
-	'RE3SET_local_0_roomCam':     [360812, 360814], // Original: 0B
+	// Other Settings
+	'RE3SET_local_0_roomXpos':    [360620, 360624],   // Original: CE 33
+	'RE3SET_local_0_roomYpos': 	  [360666, 360670],   // Original: 07 CF
+	'RE3SET_local_0_roomRpos':    [360736, 360740],   // Original: 20 07
+	'RE3SET_local_0_roomNumber':  [360794, 360796],   // Original: 0D
+	'RE3SET_local_0_roomCam':     [360812, 360814],   // Original: 0B
+	// Item infos
+	'RE3SET_0_itemInfos':   	  [2297424, 2317296], // PC
+	'RE3SET_1_itemInfos':   	  [1129928, 1149800], // PS
+	'RE3SET_2_itemInfos':   	  [4212352, 4232224], // GC
+	'RE3SET_3_itemInfos':   	  [0, 0], 			  // DC Item Desc. are not stored on 1ST_READ.BIN!
 	/*
 		DROP
 		Nemesis Item Drops

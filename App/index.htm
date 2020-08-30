@@ -136,9 +136,11 @@
 				<input type="button" title="Click here to open this MSG file on Hex Editor" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 				<input type="button" title="Click here to save this changes to a MSG file" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
 				<input type="button" title="Click here to apply your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
+				<input type="button" title="Click here to set changes to RE3SET" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET" value="Apply Message to Database" onclick="MSG_applyMSGCommand(3);">
 				<!-- Right -->
 				<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 				<input type="button" title="Click here to return to map" class="botao-menu right none" id="btn-goback-rdt" value="Return to Map" onclick="MSG_goBackToRDT();">
+				<input type="button" title="Click here to return to RE3SET" class="botao-menu right none" id="btn-goback-RE3SET" value="Return to RE3SET" onclick="MSG_goBackToRE3SET();">
 				<input type="button" title="Click here to open RE3 Live Status" class="botao-menu botao-aplicar right none" id="MSG_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 			</div>
 			<!-- Menu SAV -->
@@ -201,8 +203,12 @@
 			<!-- Menu RE3SET -->
 			<div class="menu-topo none" id="menu-topo-RE3SET">
 				<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(8);" value="Open File">
+				<div class="RE3SET_itemDesc_topDiv" id="RE3SET_INFODIV_itemDesc">
+					Status: <font id="RE3SET_LBL_itemDesc_topTotalOf">???</font> of <font id="RE3SET_LBL_itemDesc_topTotalSize">???</font> (<font id="RE3SET_LBL_itemDesc_totalPercentage">???</font>%)
+				</div>
 				<!-- Right -->
 				<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
+				<input type="button" title="Click here to apply Item Desc. changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applyItemDesc" value="APPLY SETTINGS" onclick="RE3SET_applyItemDesc();">
 			</div>
 	
 			<!-- CONTENT -->
@@ -254,7 +260,8 @@
 			<!-- FORM: RE3SET (RE3 Settings) -->
 			<div class="none" id="menu-RE3SET-editor" onclick="main_closeFileList();">
 				<input type="button" id="RE3SET-aba-menu-1" onclick="RE3SET_showMenu(1);" class="aba aba-left-fix aba-select" value="Start Items">
-				<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Other Settings">
+				<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Starting Location">
+				<input type="button" id="RE3SET-aba-menu-3" onclick="RE3SET_showMenu(3);" class="aba" value="Item Description">
 				<!-- Starting Items -->
 				<div class="menu" id="RE3SET-menu-1">
 					<div class="menu-general-content">
@@ -377,10 +384,10 @@
 						</div>
 					</div>
 				</div>
-				<!-- Other Sections -->
+				<!-- Starting Location (Other Settings) -->
 				<div class="menu none" id="RE3SET-menu-2">
 					<div class="menu-general-content">
-						<center><font class="titulo">Other Settings</font></center>
+						<center><font class="titulo">Starting Location</font></center>
 						<!-- Starting Location -->
 						<input type="button" value="Starting Location" class="RE3SET_OTHER_miniDivTab_base RE3SET_OTHER_startPosTab">
 						<div class="RE3SET_OTHER_miniDiv_base RE3SET_OTHER_startPosDiv">
@@ -405,6 +412,15 @@
 						</div>
 						<!-- Global Apply Btn -->
 						<input type="button" title="Click here to apply!" onclick="RE3SET_RECOMPILE(1);" value="APPLY CHANGES!" class="RDT-btn-apply color-green RE3SET_GLOBAL_APPLY">
+					</div>
+				</div>
+				<!-- Item Description -->
+				<div class="menu none" id="RE3SET-menu-3">
+					<div class="menu-general-content">
+						<center><font class="titulo">Item Description</font></center>
+						<div id="RE3SET_itemDesc_holder" class="RE3SET_itemDesc_holder">
+							<!-- Item Desc goes here -->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -784,7 +800,7 @@
 						<input type="button" value="Graphics and Performance" class="INI_inernalTab SETTINGS_ABA-2">
 						<div class="INI_MINIWINDOW SETTINGS_WINDOW-2" id="SETTINGS_perfTab">
 							<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableAnimations"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableAnimations');">Enable Animations</font></font><br>
-							<input type="checkbox" class="chkbox" id="SETTINGS_edit_lockRes"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_lockRes');">Lock Window Size <u>(Need Restart!)</u></font></font><br>
+							<input type="checkbox" class="chkbox" id="SETTINGS_edit_lockRes"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_lockRes');">Lock Window Size <u>(<font title="You will need to close R3ditor and open it again to this option make effect">Need Restart!</font>)</u></font></font><br>
 							<div id="SETTINGS_RE3_LIVE_PERF_DIV">
 								<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableRE3_live_toolBar"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableRE3_live_toolBar');">Enable RE3 Live Toolbar</font></font>
 								<div class="menu-separador-2"></div>
@@ -2016,6 +2032,7 @@
 						Version: <font id="app_version">???</font><br>
 						NW.js Version: <font id="app_nwjs_version">???</font><br>
 						Created by <a href="https://twitter.com/themitosan" target="_blank">@themitosan</a><br>
+						<a href="https://themitosan.github.io/" target="_blank">Official Website</a><br>
 						<input type="button" class="RDT-btn-apply color-white ABOUT_goBackBtn" title="Click here to go back" value="Go Back" onclick="reload();">
 					</div>
 					<div class="ABOUT_separador"></div>
@@ -2031,6 +2048,7 @@
 						jprichardson - fs-extra plugin - <a target="_blank" href="https://github.com/jprichardson/node-fs-extra">GitHub</a><br>
 						Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
 						The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
+						Angus Johnson - Resource hacker - <a target="_blank" href="http://www.angusj.com/resourcehacker/">Official Website</a><br>
 						<font title="The true legend!">Leo2236 - RE3SLDE Software Creator</font> - <a target="_blank" href="http://lgt.createaforum.com/">LGT Forum</a><br>
 						The Mortican - BIO3GPS and Memory Address - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
 						Khaled SA - RDT / ARD Header Infos - Beta-testing - <a target="_blank" href="https://twitter.com/khaleed681">Twitter</a><br>

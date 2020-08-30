@@ -53,7 +53,7 @@ Expect compatibility improvements and more features in the future!
 For now this type of file cannot be fully recognized. Keep in mind that R3ditor is a long way from being able to change this type of file.
 
 ### Configuration File (.INI)
-You can create a new config. file, edit your screen resolution, use an experimental resolution scaler and more. [WIP] <br>
+You can create a new config. file, edit your screen resolution, use an experimental resolution scaler and more. [WIP]<br>
 Expect compatibility improvements and more features in the future!
 
 ## Other Features
@@ -77,7 +77,7 @@ R3ditor also can do:
 
 ### Important
 Any changes you make will automatically apply to your files.
-If you want to recover your save, open the "backup" folder and select the file you want to recover. <br><br>
+If you want to recover your save, open the "backup" folder and select the file you want to recover.<br><br>
 You can restore your RDT by using the "Restore Last Backup" button on "RDT Editor".
 
 ## Third-Party software used on this project
@@ -111,6 +111,7 @@ Many thanks to:
  - jprichardson - fs-extra plugin - <a target="_blank" href="https://github.com/jprichardson/node-fs-extra">GitHub</a><br>
  - Niklas von Hertzen - Html2Canvas - <a target="_blank" href="https://html2canvas.hertzen.com">More Info</a><br>
  - The entire Resident Evil 1 2 3 Forum! - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/">More Info</a><br>
+ - Angus Johnson - Resource hacker - <a target="_blank" href="http://www.angusj.com/resourcehacker/">Official Website</a><br>
  - <font title="The true legend!">Leo2236 - RE3SLDE Software Creator</font> - <a target="_blank" href="http://lgt.createaforum.com/">LGT Forum</a><br>
  - The Mortican - BIO3GPS and Memory Address - <a target="_blank" href="https://www.tapatalk.com/groups/residentevil123/bio3gps-t1780.html">More Info</a><br>
  - Khaled SA - RDT / ARD Header Infos - Beta-testing - <a target="_blank" href="https://twitter.com/khaleed681">Twitter</a><br>
