@@ -417,3 +417,36 @@ function UTILS_XDELTA_FINISH(saveFileName){
 	}
 	LOG_scroll();
 }
+/*
+	Watermark
+*/
+function R3_CHECK_WATERMARK(WM_fileToCheck){
+	if (WM_fileToCheck !== ''){
+		var CHECK_0 = WM_fileToCheck.slice(RANGES['WATERMARK_CHECK_0'][0], RANGES['WATERMARK_CHECK_0'][1]) === 'c055';
+		var CHECK_1 = WM_fileToCheck.slice(RANGES['WATERMARK_CHECK_1'][0], RANGES['WATERMARK_CHECK_1'][1]) === '6066';
+		var CHECK_2 = WM_fileToCheck.slice(RANGES['WATERMARK_CHECK_2'][0], RANGES['WATERMARK_CHECK_2'][1]) === '000000';
+		if (CHECK_0 === true && CHECK_1 === true && CHECK_2 === true){
+			LOG_addLog('log', 'INFO - Applying R3ditor Watermark...');
+			var TEMP_FILE, TEMP_FILE_2, FINAL_FILE;
+			//
+			var PATCH_0 = fs.readFileSync(APP_PATH + '\\App\\tools\\wm_patch_0.patch', 'utf-8');
+			var PATCH_1 = fs.readFileSync(APP_PATH + '\\App\\tools\\wm_patch_1.patch', 'utf-8');
+			//
+			TEMP_FILE   = WM_fileToCheck.slice(RANGES['WATERMARK_POS'][0], WM_fileToCheck.length);
+			TEMP_FILE_2 = PATCH_0 + TEMP_FILE;
+			TEMP_FILE   = TEMP_FILE_2.slice(0, RANGES['WATERMARK_POS'][1]);
+			FINAL_FILE  = TEMP_FILE + PATCH_1;
+			try {
+				fs.writeFileSync(ORIGINAL_FILENAME, FINAL_FILE, 'hex');
+				LOG_addLog('log', 'INFO - Watermark OK!');
+			} catch (err) {
+				LOG_addLog('error', 'ERROR - Unable to create Watermark!');
+				LOG_addLog('error', 'ERROR - Reason: ' + err);
+			}
+		} else {
+			console.info('Skip Watermark...');
+			fs.writeFileSync(ORIGINAL_FILENAME, WM_fileToCheck, 'hex');
+		}
+		LOG_scroll();
+	}
+}

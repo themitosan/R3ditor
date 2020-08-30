@@ -1429,16 +1429,16 @@ var RDT_CAMERAS_CAMTYPES = {
 	File Types
 */
 var IEDIT_fileTypes = {
-	'residentevil3': ['PC EXE',  2448160, 2449232, '.exe'], // PC Version
-	'slus_009.23':   ['PS SLUS', 1186344, 1187416,  '.23'], // Playstation Version
-	'main.dol':      ['GC DOL',  4375520, 4376592, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN',  2835856, 2836928, '.BIN']  // Sega Dreamcast Version
+	'residentevil3': ['PC EXE',  2448160, 2449232, '.exe', 0], // PC Version
+	'slus_009.23':   ['PS SLUS', 1186344, 1187416,  '.23', 1], // Playstation Version
+	'main.dol':      ['GC DOL',  4375520, 4376592, '.dol', 2], // GameCube Version
+	'1st_read.bin':  ['DC BIN',  2835856, 2836928, '.BIN', 3]  // Sega Dreamcast Version
 }
 var MIX_fileTypes = {
-	'residentevil3': ['PC EXE',  2449536, 2451536, '.exe'], // PC Version
-	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720,  '.23'], // Playstation Version
-	'main.dol': 	 ['GC DOL',  4376896, 4378896, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN',  2837232, 2839232, '.BIN']  // Sega Dreamcast Version
+	'residentevil3': ['PC EXE',  2449536, 2451536, '.exe', 0], // PC Version
+	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720,  '.23', 1], // Playstation Version
+	'main.dol': 	 ['GC DOL',  4376896, 4378896, '.dol', 2], // GameCube Version
+	'1st_read.bin':  ['DC BIN',  2837232, 2839232, '.BIN', 3]  // Sega Dreamcast Version
 }
 var DROP_fileTypes = {
 	'residentevil3': ['PC EXE',  0, '.exe'], // PC Version
@@ -1446,7 +1446,18 @@ var DROP_fileTypes = {
 	'main.dol': 	 ['GC DOL',  2, '.dol'], // GameCube Version
 	'1st_read.bin':  ['DC BIN',  3, '.BIN']  // Sega Dreamcast Version
 }
+/*
+	RANGES
+	Map for specific places on RE3 files
+*/
 var RANGES = {
+	/*
+		Watermark Check
+	*/
+	'WATERMARK_CHECK_0': [562, 566],
+	'WATERMARK_CHECK_1': [658, 662],
+	'WATERMARK_CHECK_2': [672, 678],
+	'WATERMARK_POS': 	 [1270, 2531384],
 	/*
 		RE3SET Editor
 		Edit Starting items, Starting pos. and more

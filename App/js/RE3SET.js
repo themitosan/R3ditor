@@ -364,7 +364,11 @@ function RE3SET_RECOMPILE(mode, hexReplace){
 		if (EXE_CAN_SAVE === true){
 			try {
 				RE3SET_Backup();
-				fs.writeFileSync(ORIGINAL_FILENAME, EXE_FINAL.toLowerCase(), 'hex');
+				if (RE3SET_gameVersion === 0){
+					R3_CHECK_WATERMARK(EXE_FINAL);
+				} else {
+					fs.writeFileSync(ORIGINAL_FILENAME, EXE_FINAL.toLowerCase(), 'hex');
+				}
 				LOG_separator();
 				LOG_addLog('log', 'RE3SET - File saved sucessfully!');
 				LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');

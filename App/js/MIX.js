@@ -7,7 +7,7 @@
 	52 41 46 4B 00 4B 00 49 51 4A 40 4B 00 40 4B 00 46 41 45 50 4B 
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
-var MIX_TOTAL_00, MIX_TOTAL_01, MIX_TOTAL_02, MIX_TOTAL_03, MIX_TOTAL_04, MIX_TOTAL_05, MIX_TOTAL_06, MIX_fName, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
+var MIX_TOTAL_00, MIX_TOTAL_01, MIX_TOTAL_02, MIX_TOTAL_03, MIX_TOTAL_04, MIX_TOTAL_05, MIX_TOTAL_06, MIX_fName, MIX_gameVersion, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
 /*
 	Functions
 */
@@ -19,6 +19,7 @@ function MIX_loadExe(file, mode){
 	localStorage.clear();
 	ORIGINAL_FILENAME = file;
 	MIX_fName = getFileName(ORIGINAL_FILENAME);
+	MIX_gameVersion = MIX_fileTypes[MIX_fName][4];
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
 	MIX_clearHolders();
 	MIX_Database = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][1], MIX_fileTypes[MIX_fName][2]);
@@ -302,7 +303,11 @@ function MIX_saveOnFile(){
 			}
 			var NEW_FILE = RE3_FILE_START + MIX_NEW_DATABASE + RE3_FILE_END;
 			try {
-				fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				if (MIX_gameVersion === 0){
+					R3_CHECK_WATERMARK(NEW_FILE);
+				} else {
+					fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				}
 				LOG_addLog('log', 'MIX - The file was saved successfull!');
 				LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 				LOG_separator();

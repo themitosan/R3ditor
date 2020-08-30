@@ -2307,7 +2307,7 @@ function RE3_LIVE_RENDER_POSITIONS(){
 }
 // MINI_MAP [WIP SAFADISSIMO]
 var ACRESIMO = 10;
-var FATORDEGIRO = 11.1;
+var FATORDEGIRO = 11.11;
 function RE3_LIVE_CANVAS_RENDER(){
 	var X = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_X_Pos), 0) + 32767), 65535);
 	var Y = parsePercentage(parseFloat(processBIO3PosNumbers(processBIO3Vars(REALTIME_Y_Pos), 0) + 32767), 65535);

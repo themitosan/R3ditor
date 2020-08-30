@@ -91,7 +91,11 @@ function DROP_saveFile(hexValue){
 			var DROP_START = DROP_arquivoBruto.slice(0, RANGES['DROP_' + DROP_gameVersion + '_itemIds'][0]);
 			var DROP_END = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][1], DROP_arquivoBruto.length);
 			var FINAL_FILE = DROP_START + hexValue + DROP_END;
-			fs.writeFileSync(ORIGINAL_FILENAME, FINAL_FILE, 'hex');
+			if (DROP_gameVersion === 0){
+				R3_CHECK_WATERMARK(FINAL_FILE);
+			} else {
+				fs.writeFileSync(ORIGINAL_FILENAME, FINAL_FILE, 'hex');
+			}
 			LOG_addLog('log', 'DROP - The file was saved successfull!');
 			LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 			LOG_separator();

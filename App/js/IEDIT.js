@@ -3,7 +3,7 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Mais uma vez, obrigado Biohazard España / ResidentEvilArtist!
 */
-var IEDIT_Database, IEDIT_fileName, IEDIT_arquivoBruto;
+var IEDIT_Database, IEDIT_fileName, IEDIT_arquivoBruto, IEDIT_gameVersion;
 /*
 	Functions
 */
@@ -15,6 +15,7 @@ function IEDIT_loadExec(file, mode){
 	ORIGINAL_FILENAME = file;
 	IEDIT_fileName = getFileName(ORIGINAL_FILENAME);
 	IEDIT_arquivoBruto = fs.readFileSync(file, 'hex');
+	IEDIT_gameVersion = IEDIT_fileTypes[IEDIT_fileName][4];
 	document.getElementById('IEDIT-holder').innerHTML = '';
 	IEDIT_Database = IEDIT_arquivoBruto.slice(IEDIT_fileTypes[IEDIT_fileName][1], IEDIT_fileTypes[IEDIT_fileName][2]);
 	if (mode === 0){
@@ -103,7 +104,11 @@ function IEDIT_saveOnFile(){
 		var NEW_FILE = RE3_FILE_START + IEDIT_NEW_DATABASE + RE3_FILE_END;
 		if (RE3_RUNNING !== true){
 			try {
-				fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				if (IEDIT_gameVersion === 0){
+					R3_CHECK_WATERMARK(NEW_FILE);
+				} else {
+					fs.writeFileSync(ORIGINAL_FILENAME, NEW_FILE, 'hex');
+				}
 				LOG_addLog('log', 'IEDIT - The file was saved successfull!');
 				LOG_addLog('log', 'Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 				LOG_separator();
