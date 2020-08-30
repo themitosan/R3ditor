@@ -3,6 +3,11 @@
 	By mitosan/mscore/misto_quente/mscorehdr
 	Em terra de quem tem nemmy jill's sofrem!
 */
+/*
+	R3ditor Version
+*/
+var INT_VER = '0.0.3.6';
+// Game Items
 var ITEM = {
 	'00': ['Empty Slot', 									   '', 																																																									   						],
 	'01': ['Combat Knife', 									   'It is a simple combat Knife<br><br>It can be very useful when you are low on ammunition. In the hand of those who know how to use, it does damage!'],
@@ -1445,6 +1450,11 @@ var DROP_fileTypes = {
 	'slus_009.23': 	 ['PS SLUS', 1,  '.23'], // Playstation Version
 	'main.dol': 	 ['GC DOL',  2, '.dol'], // GameCube Version
 	'1st_read.bin':  ['DC BIN',  3, '.BIN']  // Sega Dreamcast Version
+}
+// Lockres Fix
+var R3_LR_MODE = {
+	0: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 820,\n    "min_height": 416,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 744\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "memoryjs": "^3.2.3"\n  }\n}',
+	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "memoryjs": "^3.2.3"\n  }\n}\n'
 }
 /*
 	RANGES

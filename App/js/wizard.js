@@ -892,6 +892,22 @@ function WZ_APPLY_R3DITOR_SETTINGS(){
 	DESIGN_ENABLE_ANIMS 	  = document.getElementById('SETTINGS_edit_enableAnimations').checked;
 	REALTIME_renderToolbar 	  = document.getElementById('SETTINGS_edit_enableRE3_live_toolBar').checked;
 	//
-	WZ_saveConfigs(true);
-	reload();
+	WZ_CHECK_LOCKRES();
+}
+function WZ_CHECK_LOCKRES(){
+	var NEW_PKG_JSON;
+	if (R3_WINDOW_LOCKRES !== true){
+		NEW_PKG_JSON = R3_LR_MODE[0];
+	} else {
+		NEW_PKG_JSON = R3_LR_MODE[1];
+	}
+	try{
+		fs.writeFileSync(APP_PATH + '\\package.json', NEW_PKG_JSON, 'utf-8');
+		WZ_saveConfigs(true);
+		reload();
+	} catch (err) {
+		LOG_addLog('error', 'ERROR - Unable to update package data!');
+		LOG_addLog('error', 'ERROR - Reason: ' + err);
+	}
+	LOG_scroll();
 }

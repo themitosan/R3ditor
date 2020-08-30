@@ -15,7 +15,7 @@ var MAIN_32BitMode = false;
 var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
-var APP_VERSION = 'V. 0.0.3.6 [ALPHA]';
+var APP_VERSION = 'V. ' + INT_VER + ' [ALPHA]';
 var fs, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
 	Onload
