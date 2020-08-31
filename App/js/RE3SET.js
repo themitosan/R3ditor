@@ -37,7 +37,6 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_1 = true;
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
-		//
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos.');
 	}
@@ -46,7 +45,6 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_1 = false;
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
-		//
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem start');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item start, Start Map & Pos.');
 	}
@@ -55,7 +53,6 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_1 = true;
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = false;
-		//
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Starting Map & Pos.');
 	}
@@ -152,7 +149,7 @@ function RE3SET_itemDesc_appendItemDesc(id){
 	var ITEMDESC_HTML_TEMPLATE = '<div class="RDT-Item RDT-msg-bg" id="RE3SET_itemDesc_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RE3SET_transferMessageToMsgEdit(' + id + ')">' + 
 								 'ID: ' + id + '<br>Message: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
 	// Prevent Last FE 00
-	if (id < 149){
+	if (id < 150){
 		$('#RE3SET_itemDesc_holder').append(ITEMDESC_HTML_TEMPLATE);
 	}
 }
