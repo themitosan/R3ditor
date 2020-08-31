@@ -99,8 +99,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		}
 		var cAtual = 0;
 		var final = '';
-		var startPoint = 0;
-		var textoTraduzido = '';
+		var startPoint = cAtual;
+		var textoTraduzido = final;
 		while (startPoint < t){
 			// If is a funcion / special command
 			if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
@@ -188,8 +188,8 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	}
 	var cAtual = 0;
 	var textoHex = '';
-	var startPoint = 0;
-	var textoTraduzido = '';
+	var startPoint = cAtual;
+	var textoTraduzido = textoHex;
 	while (startPoint < t){
 		// If is a command / special function
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){

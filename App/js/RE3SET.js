@@ -187,6 +187,7 @@ function RE3SET_itemDesc_recompileDB(){
 	}
 }
 function RE3SET_transferMessageToMsgEdit(msgId){
+	MSG_increment = true;
 	var msg_transfer = sessionStorage.getItem('RE3SET_ITEMDESC_' + msgId);
 	if (msg_transfer !== null && msg_transfer !== undefined){
 		MSG_ID = msgId;
@@ -459,6 +460,7 @@ function RE3SET_ITEMSTART_APPLY(itemHex){
 function RE3SET_RECOMPILE(mode, hexReplace){
 	var EXE_REASON = '';
 	var EXE_CAN_SAVE = true;
+	var rTab = RE3SET_currentMenu;
 	var EXE_START, EXE_END, EXE_FINAL;
 	if (mode === 0){
 		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0]);
@@ -537,6 +539,7 @@ function RE3SET_RECOMPILE(mode, hexReplace){
 				LOG_addLog('log', 'RE3SET - File saved sucessfully!');
 				LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 				RE3SET_loadFile(ORIGINAL_FILENAME, 0);
+				$('#RE3SET-aba-menu-' + rTab).trigger('click');
 			} catch (err) {
 				LOG_addLog('error', 'ERROR - Something went wrong while saving data!');
 				LOG_addLog('error', 'ERROR - Reason: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
@@ -559,7 +562,6 @@ function RE3SET_Backup(){
 			fs.writeFileSync(APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName, RE3SET_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + RE3SET_backupName);
 			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName + '</font>');
-			LOG_separator();
 		} catch (err) {
 			LOG_addLog('error', 'ERROR - Unable to make backup!');
 			LOG_addLog('error', 'ERROR - Reason: ' + err);
