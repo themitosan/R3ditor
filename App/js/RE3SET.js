@@ -175,7 +175,7 @@ function RE3SET_itemDesc_recompileDB(){
 	document.getElementById('RE3SET_LBL_itemDesc_totalPercentage').innerHTML = dbPercentage;
 	document.getElementById('RE3SET_LBL_itemDesc_topTotalOf').innerHTML = parseInt(tempHex.length).toString(16).toUpperCase();
 	document.getElementById('RE3SET_LBL_itemDesc_topTotalSize').innerHTML = parseInt(RE3SET_itemDesc_origSize).toString(16).toUpperCase();
-	if (dbPercentage !== 100){
+	if (tempHex.length !== RE3SET_itemDesc_origSize){
 		RE3SET_itemDesc_canSave = false;
 		$('#RE3SET_applyItemDesc').css({'display': 'none'});
 	} else {
