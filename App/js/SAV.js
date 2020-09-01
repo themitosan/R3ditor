@@ -25,12 +25,7 @@ var dificuldade, totalVezesSaves, localSave, lCidade, outf, cPlayer, jArmaEquip,
 	Misc.
 */
 // Time vars
-var dia = 0;
-var hora = 0;
-var minutos = 0;
-var decimos = 0;
-var segundos = 0;
-var milesimos = 0;
+var dia = 0, hora = 0, minutos = 0, decimos = 0, segundos = 0, milesimos = 0;
 /*
 	Functions
 */
@@ -132,7 +127,6 @@ function CARREGAR_SAVE(sFile){
 	ORIGINAL_FILENAME = sFile;
 	LOG_separator();
 	LOG_addLog('log', 'SAV - Loading file: <font class="user-can-select">' + sFile + '</font>');
-	LOG_separator();
 	SAVE_arquivoBruto = fs.readFileSync(sFile, 'hex');
 	// Montar Arquivo Nas variaveis para reconstruir novamente
 	// Essa parte do processo será feita aqui pois essas informações não serão modificadas pelo usuário
@@ -185,6 +179,7 @@ function save_renderSlot(slotID){
 	}
 	resetTimer();
 	cleanForSaveLoad();
+	R3_DISC_setActivity('On SAV', 'Editing Save Slot ' + CURRENT_SAVE_SLOT);
 	document.title = APP_NAME + ' - Save Editor (*.SAV) - Slot ' + slotID + ' - File: ' + ORIGINAL_FILENAME;
 	document.getElementById('lbl-currentSlot').innerHTML = slotID;
 	CURRENT_SAVE_SLOT = slotID;

@@ -505,6 +505,7 @@ function main_menu(anim){
 		$('#mainMenu-exeEdit-div').css({'display': 'none'});
 	}
 	if (anim === 1){ // Save
+		R3_DISC_setActivity('On SAV editor', 'idle');
 		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});
 		document.title = APP_NAME + ' - Save Editor (*.SAV)';
 		$('#menu-topo-save').css({'display': 'block'});
@@ -512,6 +513,7 @@ function main_menu(anim){
 		main_renderFileList(2);
 	}
 	if (anim === 2){ // MSG
+		R3_DISC_setActivity('On MSG editor', 'idle');
 		$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'none'});
 		document.title = APP_NAME + ' - Message Editor (*.MSG)';
 		$('#msg-lbl-totalCommands').html(MSG_totalComandos);
@@ -520,6 +522,7 @@ function main_menu(anim){
 		MSG_showMenu(1);
 	}
 	if (anim === 3){ // RDT
+		R3_DISC_setActivity('On Map editor', 'idle');
 		document.title = APP_NAME + ' - Map Editor';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
@@ -538,6 +541,7 @@ function main_menu(anim){
 	}
 	if (anim === 4){ // FILEGEN
 		document.title = APP_NAME + ' - File Generator';
+		R3_DISC_setActivity('On File Generator', 'Creating RE3 files');
 		$('#FILEGEN_menu').css({'height': '484px'});
 		$('#menu-FILEGEN').css({'display': 'inline'});
 		$('#FILEGEN_contents').css({'height': '434px'});
@@ -554,6 +558,7 @@ function main_menu(anim){
 		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');
 	}
 	if (anim === 6){ // INI Editor
+		R3_DISC_setActivity('On INI', 'idle');
 		document.title = APP_NAME + ' - INI Editor (*.INI)';
 		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
 			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
@@ -573,6 +578,7 @@ function main_menu(anim){
 			$('#menu-topo-MOD').css({'display': 'none'});
 		}
 		$('#menu-topo-settings').css({'display': 'inline'});
+		R3_DISC_setActivity('On Settings', 'Editing R3ditor Settings');
 		SETTINGS_showMenu(1);
 	}
 	if (anim === 8){ // MIX Editor
@@ -635,6 +641,7 @@ function main_menu(anim){
 		if (enable_mod === true){
 			$('#menu-topo-MOD').css({'display': 'none'});
 		}
+		R3_DISC_setActivity('Xdelta Patcher', 'idle');
 		DESIGN_XDELTA_showMenu();
 	}
 }
@@ -967,6 +974,7 @@ function R3_showAbout(){
 		$('#about-r3ditor').css({'display': 'inline'});
 		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 	}
+	R3_DISC_setActivity('On About', discUserName + ' are a blessed person!');
 	MISC_unblurImg();
 }
 // Eu preciso parar de pensar em animações assim...
@@ -1912,6 +1920,7 @@ function RDT_displayItemEdit(id, idx, itemHx){
 	$('#RDT_item_Y').css({'display': 'block'});
 	$('#RDT_item_Z').css({'display': 'block'});
 	$('#RDT_item_R').css({'display': 'block'});
+	$('#RDT-item-list').css({'display': 'none'});
 	$('#RDT-Item-Edit').css({'display': 'inline', 'margin-left': '4px'});
 	if (header === '68'){
 		$('#RDT_btnEditPos').css({'display': 'none'});

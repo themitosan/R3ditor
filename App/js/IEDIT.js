@@ -17,6 +17,7 @@ function IEDIT_loadExec(file, mode){
 	IEDIT_arquivoBruto = fs.readFileSync(file, 'hex');
 	IEDIT_gameVersion = IEDIT_fileTypes[IEDIT_fileName][4];
 	document.getElementById('IEDIT-holder').innerHTML = '';
+	R3_DISC_setActivity('On IEDIT', '(' + IEDIT_fileTypes[IEDIT_fileName][0] + ') Editing RE3 item settings');
 	IEDIT_Database = IEDIT_arquivoBruto.slice(IEDIT_fileTypes[IEDIT_fileName][1], IEDIT_fileTypes[IEDIT_fileName][2]);
 	if (mode === 0){
 		while (c < totalPushes){

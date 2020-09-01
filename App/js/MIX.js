@@ -21,6 +21,7 @@ function MIX_loadExe(file, mode){
 	MIX_fName = getFileName(ORIGINAL_FILENAME);
 	MIX_gameVersion = MIX_fileTypes[MIX_fName][4];
 	MIX_arquivoBruto = fs.readFileSync(file, 'hex');
+	R3_DISC_setActivity('On MIX', '(' + MIX_fileTypes[MIX_fName][0] + ') Editing RE3 item combinations');
 	MIX_clearHolders();
 	MIX_Database = MIX_arquivoBruto.slice(MIX_fileTypes[MIX_fName][1], MIX_fileTypes[MIX_fName][2]);
 	MIX_TOTAL_00 = MIX_TOTAL_01 = MIX_TOTAL_02 = MIX_TOTAL_03 = MIX_TOTAL_04 = MIX_TOTAL_05 = MIX_TOTAL_06 = 0;

@@ -2150,7 +2150,7 @@ input[type='range' i]{
     padding-right: 26px;
 }
 .RE3_LIVESTATUS_lbl_window-1-fix{
-    left: 158px;
+    left: 150px;
     position: sticky;
 }
 .RE3_LIVESTATUS_lbl_window-2-fix{
@@ -2407,7 +2407,7 @@ input[type='range' i]{
     margin-left: 26px;
 }
 .INI_fixAudioNumberInput{
-    left: 120px;
+    left: 104px;
     position: sticky;
 }
 .INI_selectBPP{
@@ -2604,6 +2604,10 @@ input[type='range' i]{
     top: 332px;
     left: 858px;
 }
+.SETTINGS_ABA-8{
+    top: 392px;
+    left: 858px;
+}
 .SETTINGS_WINDOW-1{
     top: 78px;
     left: 14px;
@@ -2642,6 +2646,12 @@ input[type='range' i]{
 }
 .SETTINGS_WINDOW-7{
     top: 354px;
+    left: 848px;
+    width: 450px;
+    height: 20px;
+}
+.SETTINGS_WINDOW-8{
+    top: 414px;
     left: 848px;
     width: 450px;
     height: 20px;

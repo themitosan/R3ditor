@@ -51,6 +51,7 @@ function PATCHER_loadPatch(patchFile){
 	MIX_Database  = atob(PATCHER_patchDecompiled[9].replace('R3_MIX = ', ''));
 	IEDIT_Database = atob(PATCHER_patchDecompiled[10].replace('R3_IEDIT = ', ''));
 	DROP_databaseCompiled = atob(PATCHER_patchDecompiled[11].replace('R3_DROP = ', ''));
+	R3_DISC_setActivity('On Patcher', 'Applying R3ditor patch');
 	// Final
 	main_menu(10);
 	LOG_scroll();

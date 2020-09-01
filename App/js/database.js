@@ -6,7 +6,7 @@
 /*
 	R3ditor Version
 */
-var INT_VER = '0.0.3.6';
+var INT_VER = '0.3.6';
 // Game Items
 var ITEM = {
 	'00': ['Empty Slot', 									   '', 																																																									   						],
@@ -1301,6 +1301,7 @@ var special_day_00 = 'IlNlcHRlbWJlciAyOHRoLCBEYXlsaWdodC4gVGhlIG1vbnN0ZXJzIGhhdm
 var speci_day_ffff = 'Tm8gbWF0dGVyIGhvdyBpIHRyeSB0byBwcm92ZSB0aGF0IGkgY2FuIGJlIGdvb2QgdG9vLi4uIGkgd2lsbCBuZXZlciBiZSBhYmxlIHRvIHByb3ZlIG15IHBvaW50LiBUaGlzIGlzIG5vdCBsaWtlIGEgb2RkLXNoYXBlZCBvYmplY3QgdGhhdCBt' +
 					 'YWtlcyBzZW5zZSB3aGVuIHlvdSBsb29rIG9uIGEgc3BlY2lmaWMgYW5nbGUuIE15IG1pbmQgYWx3YXlzIHRlbGxzIG1lIHRoZSB0cnV0aCAtIHJlZ2FyZGxlc3Mgb2YgaG93IHBhaW5mdWxsIGl0IGNhbiBiZS4='; 
 var special_day_01 = 'T2N0b2JlciAxc3QsIG5pZ2h0LiBJIHdva2UgdXAgdG8gdGhlIHNvdW5kIG9mIGZhbGxpbmcgcmFpbi4gSSBjYW4ndCBiZWxpZXZlIEknbSBzdGlsbCBhbGl2ZS4uLiAtIEppbGwgVmFsZW50aW5lLCBSZXNpZGVudCBFdmlsIDMgLSBOZW1lc2lz';
+var special_day_02 = ['NzUwMzQ3ODYyOTM1NjAxMTY0', 'cjNfbG9nbw==', 'SDBwQzhJR0s5QWUtTzRf', 'eXpPOEhoeEVudExjeThxZi0='];
 /*
 	TIM Database
 */
@@ -1453,8 +1454,8 @@ var DROP_fileTypes = {
 }
 // Lockres Fix
 var R3_LR_MODE = {
-	0: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 820,\n    "min_height": 416,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 744\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "memoryjs": "^3.2.3"\n  }\n}',
-	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "memoryjs": "^3.2.3"\n  }\n}\n'
+	0: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 820,\n    "min_height": 416,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 744\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n    "memoryjs": "^3.2.3"\n  }\n}',
+	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n 	"memoryjs": "^3.2.3"\n  }\n}\n'
 }
 /*
 	RANGES

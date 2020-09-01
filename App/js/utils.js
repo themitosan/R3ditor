@@ -143,6 +143,7 @@ function UTILS_OBJ_Patcher_RUN(file){
 */
 function UTILS_extract_rofs(rofsFile){
 	try{
+		R3_DISC_setActivity('On ROFS', 'Extracting ROFS files');
 		LOG_addLog('log', 'ROFS - Extracting file: <font class="user-can-select">' + rofsFile + '</font>');
 		if (R3ditor_tool_selected === false && rofsFile !== undefined && rofsFile !== '' && EXEC_rofs !== undefined){
 			UTILS_rofs_hideButtons();
@@ -179,6 +180,7 @@ function UTILS_ARDEnabler(){
 		if (psStagePaths !== null && fs.existsSync(psStagePaths) !== false){
 			var cStage = 0;
 			ARD_LIST_ENABLE = [];
+			R3_DISC_setActivity('On ARD Enabler', 'Decompiling ARD files');
 			DESIGN_prepareForARDEnabler();
 			$('body').css({'cursor': 'wait'});
 			UTILS_ARD_INTERVAL = setInterval(function(){
@@ -376,6 +378,7 @@ function UTILS_XDELTA_VERIFY(){
 }
 function UTILS_XDELTA_APPLY(){
 	LOG_separator();
+	R3_DISC_setActivity('On Xdelta', 'Applying Xdelta patch');
 	$('body').css({'cursor': 'progress'});
 	LOG_addLog('log', 'XDELTA - Starting process...');
 	DESIGN_XDELTA_showInfo('Creating File - Please wait...', false);

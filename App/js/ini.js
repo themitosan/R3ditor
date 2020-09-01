@@ -122,6 +122,7 @@ function INI_CARREGAR_ARQUIVO(file){
 	ORIGINAL_FILENAME = file;
 	BIO3INI_arquivoBruto = fs.readFileSync(ORIGINAL_FILENAME, 'utf-8');
 	INI_resetVars();
+	R3_DISC_setActivity('On INI', 'Editing RE3 INI settings');
 	LOG_addLog('log', 'INFO - The file was loaded sucessfully! - File: <font class="user-can-select>' + ORIGINAL_FILENAME + '</font>');
 	fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 		INI_array.push(line); 

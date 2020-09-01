@@ -839,7 +839,11 @@
 						<!-- RDT Load -->
 						<input type="button" value="RDT Options" class="INI_inernalTab SETTINGS_ABA-7">
 						<div class="INI_MINIWINDOW SETTINGS_WINDOW-7">
-							<input type="checkbox" class="chkbox" id="SETTINGS_edit_RDT_ExpMode"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_RDT_ExpMode');">Decompile using experimental mode (WIP)</font></font><br>
+							<input type="checkbox" class="chkbox" id="SETTINGS_edit_RDT_ExpMode"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_RDT_ExpMode');" title="This is WIP!">Decompile using experimental mode (WIP)</font></font><br>
+						</div>
+						<input type="button" value="Integrations" class="INI_inernalTab SETTINGS_ABA-8">
+						<div class="INI_MINIWINDOW SETTINGS_WINDOW-8">
+							<input type="checkbox" class="chkbox" id="SETTINGS_edit_enableDISC"><font class="font-chkbox-fix"> - <font onclick="UTILS_toggleChkBox('SETTINGS_edit_enableDISC');" title="This will display a info on your Discord avatar telling what are you doing on R3ditor">Enable Discord Rich Integration</font></font><br>
 						</div>
 						<!-- Note (Future) -->
 						<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">
@@ -1036,7 +1040,7 @@
 						<div class="RE3_LIVESTATUS_MINIWINDOW RE3_LIVESTATUS_WINDOW-1">
 							Game status: <font class="green">Running</font>
 							<input type="button" class="botao-menu RE3_LIVESTATUS_closeGameBtnFix" value="Close" id="RE3_LIVESTATUS_closeGameBtn">
-							<div class="menu-separador"></div>
+							<div class="menu-separador-2"></div>
 							Parent Process ID: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_parentProcessID">???</font><br>
 							Process ID: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processID">???</font><br>
 							Threads: <font class="RE3_LIVESTATUS_lbl_window-1-fix" id="RE3_LIVESTATUS_lbl_processThreads">???</font><br>
@@ -1050,7 +1054,7 @@
 							</div>
 							<div class="RE3_LIVESTATUS_statusDiv">
 								Current Player: <font id="RE3_LIVESTATUS_lbl_pCurrentPlayer">???</font>
-								<div class="menu-separador"></div>
+								<div class="menu-separador-2"></div>
 								Condition: <font id="RE3_LIVESTATUS_lbl_pStatus">???</font><br>
 								HP: <font class="RE3_LIVESTATUS_lbl_window-6-fix" id="RE3_LIVESTATUS_lbl_pHP">???</font><br>
 								<input type="checkbox" class="chkbox" id="RE3_LIVESTATUS_CHEAT_INFHP">
@@ -2040,6 +2044,7 @@
 						<u>Many Thanks to:</u>
 					</div><br><br>
 					<div class="ABOUT_manyThanksDiv">
+						discordjs - RPC - <a target="_blank" href="https://discord.js.org/#/docs/rpc/master/general/welcome">Website</a><br>
 						Rob-- - memoryjs - <a target="_blank" href="https://github.com/Rob--/memoryjs">GitHub</a><br>
 						hongru - Canvas2Image - <a target="_blank" href="https://github.com/hongru/canvas2image">GitHub</a><br>
 						MarkGrass - BIOFAT - <a target="_blank" href="https://www.romhacking.net/utilities/1019/">More Info</a><br>

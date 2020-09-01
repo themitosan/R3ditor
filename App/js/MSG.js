@@ -59,6 +59,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 		sessionStorage.clear();
 		MSG_useSeekCameras = false;
 		ORIGINAL_FILENAME = msgFile;
+		R3_DISC_setActivity('On MSG', 'Editing RE3 messages');
 		LOG_addLog('log', 'MSG - Loading MSG File: <font class="user-can-select">' + msgFile + '</font>');
 		MSG_arquivoBruto = fs.readFileSync(msgFile, 'hex');
 		$('#MSG_openInHex').css({'display': 'inline'});

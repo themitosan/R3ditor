@@ -314,7 +314,7 @@ function WZ_saveConfigs(justSave){
 	try{
 		var CONFIGS = R3DITOR_check_for_updates + '\n' + EXEC_BIO3_original + '\n' + EXEC_BIO3_MERCE + '\n' + GAME_PATH + '\n' + enable_mod + '\n' + SHOW_EDITONHEX + 
 			'\n' + HEX_EDITOR + '\n' + RDT_lastFileOpened + '\n' + RDT_lastBackup + '\n' + RE3_LIVE_RENDER_TIME + '\n' + DESIGN_ENABLE_ANIMS + '\n' + REALTIME_renderToolbar + 
-			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage + '\n' + RDT_USE_DECOMPILER_WIP + '\n' + R3_ARDENABLER_ENABLED + '\n' + R3_WINDOW_LOCKRES;
+			'\n' + WINDOW_MOVETOLEFT + '\n' + R3ditor_showFirstBootMessage + '\n' + RDT_USE_DECOMPILER_WIP + '\n' + R3_ARDENABLER_ENABLED + '\n' + R3_WINDOW_LOCKRES + '\n' + R3_ENABLE_DISC;
 		fs.writeFileSync(APP_PATH + '\\Configs\\configs.r3ditor', CONFIGS, 'utf-8');
 		if (fs.existsSync(APP_PATH + '\\Configs\\configs.r3ditor' && WZ_showWizard == true && WZ_skipRofs == false)){
 			WZ_showWizardDialog(4);
@@ -495,6 +495,13 @@ function WZ_loadFiles(file){
 		R3_WINDOW_LOCKRES = false;
 	}
 	document.getElementById('SETTINGS_edit_lockRes').checked = R3_WINDOW_LOCKRES;
+	// Discord Rich Integration
+	if (cfgs[17] !== undefined){
+		R3_ENABLE_DISC = JSON.parse(cfgs[17]);
+	} else {
+		R3_ENABLE_DISC = false;
+	}
+	document.getElementById('SETTINGS_edit_enableDISC').checked = R3_ENABLE_DISC;
 	/*
 		Visuals
 	*/
@@ -562,6 +569,7 @@ function WZ_loadFiles(file){
 	}
 }
 function WZ_SHOW_INTERFACE(){
+	R3_DISCORD_INIT();
 	document.title = APP_NAME;
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeIn({duration: 2100, queue: false});
@@ -885,8 +893,9 @@ function WZ_FORCE_UPDATE(){
 }
 function WZ_APPLY_R3DITOR_SETTINGS(){
 	R3_WINDOW_LOCKRES 		  = document.getElementById('SETTINGS_edit_lockRes').checked;
-	RE3_LIVE_RENDER_TIME 	  = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
+	R3_ENABLE_DISC			  = document.getElementById('SETTINGS_edit_enableDISC').checked;
 	RDT_USE_DECOMPILER_WIP 	  = document.getElementById('SETTINGS_edit_RDT_ExpMode').checked;
+	RE3_LIVE_RENDER_TIME 	  = document.getElementById('SETTINGS_edit_RE3LIVEUPDATE').value;
 	WINDOW_MOVETOLEFT 		  = document.getElementById('SETTINGS_edit_enableMoveTo').checked;
 	R3DITOR_check_for_updates = document.getElementById('SETTINGS_edit_enableUpdates').checked;
 	DESIGN_ENABLE_ANIMS 	  = document.getElementById('SETTINGS_edit_enableAnimations').checked;

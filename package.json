@@ -23,6 +23,7 @@
     "plugin": true
   },
   "dependencies": {
+    "discord-rpc": "^3.1.3",
     "memoryjs": "^3.2.3"
   }
 }

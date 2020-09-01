@@ -22,6 +22,7 @@ function RE3SET_loadFile(exe, mode){
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
 	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
+	R3_DISC_setActivity('On RE3SET', '(' + DROP_fileTypes[RE3SET_fName][0] + ') Editing RE3 general settings');
 	var RE3SET_LOADTAB_1 = false;
 	var RE3SET_LOADTAB_2 = false;
 	var RE3SET_LOADTAB_3 = false;

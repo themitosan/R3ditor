@@ -16,6 +16,7 @@ function DROP_loadFile(exeFile, mode){
 	DROP_gameVersion = DROP_fileTypes[DROP_fName][1];
 	DROP_arquivoBruto = fs.readFileSync(exeFile, 'hex');
 	document.getElementById('DROP-holder').innerHTML = '';
+	R3_DISC_setActivity('On DROP', '(' + DROP_fileTypes[DROP_fName][0] + ') Editing RE3 nemesis drops');
 	// Read Values
 	DROP_databaseItems = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemIds'][0], RANGES['DROP_' + DROP_gameVersion + '_itemIds'][1]);
 	DROP_databaseQuant = DROP_arquivoBruto.slice(RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][0], RANGES['DROP_' + DROP_gameVersion + '_itemQuant'][1]);

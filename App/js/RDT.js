@@ -245,6 +245,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 				}
 			}
 			RDT_BG_display();
+			R3_DISC_setActivity('Editing map ' + RDT_mapName, RDT_locations[RDT_mapName][0] + ', ' + RDT_locations[RDT_mapName][1]);
 		} else {
 			RDT_setHeaderPointers();
 		}
@@ -2236,8 +2237,13 @@ function RDT_restoreLastBackup(){
 		var ask = confirm('Restore Last Backup\n\nMap: ' + mName + '\nOriginal Local Name: ' + loc + '\nPath: ' + RDT_lastBackup + '\n\nDo you want to proceed?');
 		if (ask === true){
 			try{
+				var fm = APP_PATH + '\\Configs\\RDT\\' + mName + '_' + RDT_fileType + '.rdtmap2';
 				if (RDT_fm_avaliable === true){
-					fs.unlinkSync(APP_PATH + '\\Configs\\RDT\\' + mName + '_' + RDT_fileType + '.rdtmap2');
+					if (fs.existsSync(fm) === true){
+						fs.unlinkSync(APP_PATH + '\\Configs\\RDT\\' + mName + '_' + RDT_fileType + '.rdtmap2');
+					} else {
+						LOG_addLog('warn', 'WARN - Skipping Filemap (404)');
+					}
 				}
 				if (fs.existsSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.' + RDT_fileType) === true){
 					fs.unlinkSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + mName + '.' + RDT_fileType);

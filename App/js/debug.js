@@ -86,4 +86,4 @@ function DEBUG_createLine_Lv2(where, lineId, cssClass, ax, ay, bx, by){
     $('#' + where).append(LINE_HTML_TEMPLATE);
     console.log(document.getElementById(lineId));
     // RE3_LIVECANVAS_BOUNDARY_TEST_LV_2_0
- }
+}

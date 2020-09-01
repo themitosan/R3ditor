@@ -5,10 +5,12 @@
 */
 var e_e = 0;
 var RE3_PID = 0;
+var rpcReady = false;
 var RE3_RUNNING = false;
 var APP_NAME = 'R3ditor';
 var STATUS = 'Undefined';
 var EXTERNAL_APP_PID = 0;
+var R3_ENABLE_DISC = true;
 var SHOW_EDITONHEX = false;
 var RE3SLDE_CANRUN = false;
 var MAIN_32BitMode = false;
@@ -16,7 +18,7 @@ var DOWNLOAD_COMPLETE = true;
 var EXTERNAL_APP_EXITCODE = 0;
 var EXTERNAL_APP_RUNNING = false;
 var APP_VERSION = 'V. ' + INT_VER + ' [ALPHA]';
-var fs, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
+var fs, RPC, DiscordRPC, discUserName, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
 	Onload
 */
@@ -35,6 +37,9 @@ window.onclose = function(){
 */
 function reload(){
 	process.chdir(TEMP_APP_PATH);
+	if (R3_ENABLE_DISC === true){
+		RPC.destroy();
+	}
 	if (RE3_RUNNING === true){
 		killExternalSoftware(RE3_PID);
 	}
@@ -61,7 +66,7 @@ function R3_startLoad(){
 		$('#app_version').html(oldAppVer);
 		LOG_addLog('log', APP_NAME);
 		LOG_separator();
-		//
+		// Requires
 		fs = require('fs-extra');
 		APP_PATH = process.cwd();
 		console.info(APP_NAME);
@@ -85,6 +90,29 @@ function R3_startLoad(){
 	}
 	LOG_scroll();
 }
+/*
+	Discord Functions
+*/
+function R3_DISCORD_INIT(){
+    DiscordRPC = require('discord-rpc');
+    RPC = new DiscordRPC.Client({ transport: 'ipc' });
+    if (navigator.onLine !== false){
+        var loginRPC = RPC.login({clientId: atob(special_day_02[0]), clientSecret: (atob(special_day_02[2]) + atob(special_day_02[3])).slice(0, (atob(special_day_02[2]) + atob(special_day_02[3])).length - 1) + '-'});
+    	console.info(loginRPC);
+    	RPC.on('ready', () => {
+    		rpcReady = true;
+    		discUserName = RPC.user.username;
+    		console.info('INFO - Discord Int are ready!');
+    		R3_DISC_setActivity('Main menu', 'idle');
+    	});
+    }
+}
+function R3_DISC_setActivity(det, stat){
+	if (R3_ENABLE_DISC !== false && rpcReady !== false){
+		RPC.setActivity({'details': det, 'state': stat, 'largeImageKey': atob(special_day_02[1]), 'maxpartysize': 0});
+	}
+}
+//
 function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Update') === false){
 		fs.mkdirSync(APP_PATH + '\\Update');
