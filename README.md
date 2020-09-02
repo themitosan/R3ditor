@@ -90,7 +90,8 @@ External JS Plugins:
 - <a href="https://jqueryui.com/" target="_blank">jQuery UI</a> by <a href="https://jquery.org/team/" target="_blank">The jQuery Foundation</a>
 
 NW.js Plugins:
-- <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> by <a href="https://github.com/Rob--" target="_blank"> Rob--</a>
+- <a target="_blank" href="https://discord.js.org/#/docs/rpc/master/general/welcome">RPC</a> by <a href="https://discord.js.org/#/" target="_blank">discord.js</a>
+- <a href="https://github.com/Rob--/memoryjs" target="_blank">memoryjs</a> by <a href="https://github.com/Rob--" target="_blank">Rob--</a>
 - <a href="https://github.com/jprichardson/node-fs-extra" target="_blank">fs-extra</a> by <a href="https://github.com/jprichardson" target="_blank"> jprichardson</a>
 
 These files can be found in "App/tools/":
