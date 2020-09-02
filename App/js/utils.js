@@ -475,7 +475,7 @@ function RDT_importMap_DROP(ev){
 	}
 }
 function RDT_checkMap(path){
-	if (path !== ''){
+	if (path !== '' && path !== undefined){
 		var fileExt = getFileExtension(path);
 		if (fileExt === 'RDT'){
 			var use_DATA_E = document.getElementById('fileList_import_DATA_E').checked;
@@ -483,28 +483,44 @@ function RDT_checkMap(path){
 			if (use_DATA_AJ !== true && use_DATA_E !== true){
 				LOG_addLog('warn', 'WARN - You need select where you want to import this Map!');
 			} else {
+				var cantReason = '';
+				var canImport = true;
 				var fName = getFileName(path).toUpperCase();
-				var FILE_TO_IMPORT = fs.readFileSync(path, 'hex');
-				LOG_addLog('log', 'INFO - Importing ' + fName + '.RDT...');
-				LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + path + '</font>');
-				LOG_separator();
-				try {
-					if (use_DATA_AJ === true){
-						fs.writeFileSync(APP_PATH + '\\Assets\\DATA_AJ\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
-						LOG_addLog('log', 'INFO - DATA_AJ: Import sucessfull!');
+				if (fName.slice(4, 5) !== '.' || fName.length !== 8){
+					var ask = prompt('WARN - The filename are not set in RE3 pattern!\n\nPlease insert the stage and the map number below:\nExample: 10F (Stage 1, Map 0F - R10F)');
+					if (ask === null || ask.length !== 3){
+						canImport = false;
+						cantReason = 'Map location was not set properly!';
+					} else {
+						fName = 'R' + ask.toUpperCase();
 					}
-					if (use_DATA_E === true){
-						fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
-						LOG_addLog('log', 'INFO - DATA_E: Import sucessfull!');
+				}
+				if (canImport === true){
+					var FILE_TO_IMPORT = fs.readFileSync(path, 'hex');
+					LOG_addLog('log', 'INFO - Importing ' + fName + '.RDT...');
+					LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + path + '</font>');
+					LOG_separator();
+					try {
+						if (use_DATA_AJ === true){
+							fs.writeFileSync(APP_PATH + '\\Assets\\DATA_AJ\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
+							LOG_addLog('log', 'INFO - DATA_AJ: Import sucessfull!');
+						}
+						if (use_DATA_E === true){
+							fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
+							LOG_addLog('log', 'INFO - DATA_E: Import sucessfull!');
+						}
+						LOG_separator();
+						LOG_addLog('log', 'INFO - Map name: ' + fName);
+						LOG_addLog('log', 'INFO - Local name: ' + RDT_locations[fName][0] + ', ' + RDT_locations[fName][1]);
+						LOG_separator();
+					} catch (err) {
+						LOG_addLog('error', 'ERROR - Unable to import ' + fName + '.RDT!');
+						LOG_addLog('error', 'ERROR - Reason: ' + err);
+						console.error(err);
 					}
-					LOG_separator();
-					LOG_addLog('log', 'INFO - Map name: ' + fName);
-					LOG_addLog('log', 'INFO - Local name: ' + RDT_locations[fName][0] + ', ' + RDT_locations[fName][1]);
-					LOG_separator();
-				} catch (err) {
-					LOG_addLog('error', 'ERROR - Unable to import ' + fName + '.RDT!');
-					LOG_addLog('error', 'ERROR - Reason: ' + err);
-					console.error(err);
+				} else {
+					LOG_addLog('warn', 'WARN - Unable to import map!');
+					LOG_addLog('warn', 'WARN - Reason: ' + cantReason);
 				}
 			}
 		} else {
