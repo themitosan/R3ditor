@@ -1645,6 +1645,69 @@ input[type='range' i]{
     position: absolute;
     background-image: linear-gradient(to bottom, #3f3f3f, #515151);
 }
+.RDT_IMPORT_CSS{
+    box-shadow: 0 0 10px #000 !important;
+    background-image: linear-gradient(to bottom, #060a0e, #080c12) !important;
+}
+.fileList_importRDT{
+    top: 54px;
+    left: 690px;
+    width: 634px;
+    height: 338px;
+    padding: 10px;
+    position: absolute;
+    border-radius: 6px;
+    box-shadow: 0 0 10px #222;
+    background-image: linear-gradient(170deg, #414141, #292929);
+}
+.fileList_checkBox{
+    cursor: pointer;
+    margin-top: 0px;
+    margin-left: 4px;
+    position: inherit;
+}
+.fileList_checkBox_dom{
+    top: 2px;
+    display: inline;
+    margin-right: -4px;
+    position: relative;
+}
+.fileList_IMPORT_DIV{
+    color: #fff;
+    width: 634px;
+    height: 274px;
+    margin-top: 8px;
+    border-radius: 6px;
+    background-color: #000;
+    box-shadow: 0 0 10px #212121;
+    background-image: linear-gradient(to bottom, #131d26, #1a2637);
+}
+.fileList_import_lbl{
+    left: 0px;
+    z-index: 1;
+    top: 194px;
+    width: 100%;
+    color: #fff;
+    opacity: 0.7;
+    font-size: 30px;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 0 10px #5555c5;
+}
+.fileList_import_bg{
+    top: 75px;
+    z-index: 0;
+    width: 634px;
+    height: 274px;
+    border-radius: 4px;
+    position: absolute;
+    background-color: #000;
+    background-size: auto 490px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/JILL-ICON.png);
+    -webkit-mask-image: linear-gradient(to left, #ffffff3d, #0000002e);
+}
 .fileList_files{
     top: 70px;
     width: 658px;

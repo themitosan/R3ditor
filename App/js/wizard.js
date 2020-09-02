@@ -570,6 +570,7 @@ function WZ_loadFiles(file){
 }
 function WZ_SHOW_INTERFACE(){
 	R3_DISCORD_INIT();
+	MAIN_dropEffects();
 	document.title = APP_NAME;
 	if (DESIGN_ENABLE_ANIMS === true){
 		$('#img-logo').fadeIn({duration: 2100, queue: false});

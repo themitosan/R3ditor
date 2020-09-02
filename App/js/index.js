@@ -98,11 +98,11 @@ function R3_DISCORD_INIT(){
     RPC = new DiscordRPC.Client({ transport: 'ipc' });
     if (navigator.onLine !== false){
         var loginRPC = RPC.login({clientId: atob(special_day_02[0]), clientSecret: (atob(special_day_02[2]) + atob(special_day_02[3])).slice(0, (atob(special_day_02[2]) + atob(special_day_02[3])).length - 1) + '-'});
-    	console.info(loginRPC);
+    	//console.info(loginRPC);
     	RPC.on('ready', () => {
     		rpcReady = true;
     		discUserName = RPC.user.username;
-    		console.info('INFO - Discord Int are ready!');
+    		//console.info('INFO - Discord Int are ready!');
     		R3_DISC_setActivity('Main menu', 'idle');
     	});
     }

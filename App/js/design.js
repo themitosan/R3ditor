@@ -186,12 +186,12 @@ function main_renderFileList(id, mode){
 			}
 		}
 		var fileList_HTML_template = '<div class="fileList_item fileList_item_color_a" style="height: 100px;" id="RDT_file_' + c + '"' + 
-			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview +'" class="fileList_img" ' + 
+			' onclick="RDT_openFile(\'' + RDT_lastFileOpened.replace(new RegExp('\\\\', 'gi'), '/') + '\');"><img src="' + imgPreview + '" class="fileList_img" ' + 
 			'draggable="false" style="width: 134px;"><div class="fileList_details">File: ' + RDT_name.toUpperCase() + '.RDT<br>Path: <font title="' + originalPFile + 
 			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
 			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
-		$('#RDT_recentFile').css({'display': 'block', 'left': '680px', 'height': '144px', 'width': '630px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
+		$('#RDT_recentFile').css({'display': 'block', 'left': '680px', 'height': '144px', 'width': '652px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
 		document.getElementById('fileListHolder').innerHTML = '';
 		document.getElementById('fileListHolder_AJ').innerHTML = '';
@@ -481,6 +481,23 @@ function main_closeFileList(){
 /*
 	Main Functions
 */
+function MAIN_dropEffects(){
+	/*
+		Import RDT
+	*/
+	$('#fileList_IMPORT_DIV').on('dragover dragenter', function(){
+		$('#fileList_import_lbl').css({'opacity': '1'});
+		$('#fileList_IMPORT_DIV').addClass('RDT_IMPORT_CSS');
+		document.getElementById('fileList_import_lbl').innerHTML = 'Release the file to import';
+		$('#fileList_import_bg').css({'-webkit-mask-image': 'linear-gradient(to left, #ffffffad, #00000014)'});
+	});
+	$('#fileList_IMPORT_DIV').on('dragleave dragend drop', function(){
+		$('#fileList_import_lbl').css({'opacity': '0.7'});
+		$('#fileList_IMPORT_DIV').removeClass('RDT_IMPORT_CSS');
+		document.getElementById('fileList_import_lbl').innerHTML = 'Drag and Drop your RDT file here';
+		$('#fileList_import_bg').css({'-webkit-mask-image': 'linear-gradient(to left, #ffffff3d, #0000002e)'});
+	});
+}
 function main_menu(anim){
 	main_closeFileList();
 	if (anim !== 8 && anim !== 9 && anim !== 12){
@@ -526,10 +543,12 @@ function main_menu(anim){
 		document.title = APP_NAME + ' - Map Editor';
 		$('#menu-topo-RDT').css({'display': 'block'});
 		if (enable_mod === true){
-			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
 			main_renderFileList(3, 2);
+			$('#RDT_importRdtTo_div').css({'display': 'inline'});
+			$('#RE3_LIVESTATUS_openOnR3ditor').css({'display': 'inline'});
 		} else {
 			$('#avaliable_fileList').css({'display': 'none'});
+			$('#RDT_importRdtTo_div').css({'display': 'none'});
 		}
 		$('#RDT_selectEnemyNPC').append(RDT_EDIT_ENEMYNP_SELECT);
 		$('#RDT_enemyNPC-edit-PO').append(RDT_EDIT_ENEMYNP_EMDPOS);
@@ -1382,6 +1401,7 @@ function RDT_showMenu(id){
 	}
 	RDT_SLD_CANVAS_BG_CHANGE_OPACITY();
 	$('#RDT_backupBtn').css({'display': 'inline'});
+	$('#RDT_importRdtTo_div').css({'display': 'none'});
 	document.getElementById('RDT-item-list').scrollTop = 0;
 	document.getElementById('RDT_MSG-holder').scrollTop = 0;
 	$('#log-programa').css({'height': '86px', 'top': '626px'});

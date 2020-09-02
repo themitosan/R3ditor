@@ -37,7 +37,7 @@
 		<script type="text/javascript" src="js/keyPress.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
-	<body bgcolor="#000">
+	<body bgcolor="#000" ondragover="R3_dragOverHandler(event);">
 		<div class="R3DITOR_MAIN_APP_HOLDER" id="R3DITOR_MAIN_APP_HOLDER">
 			<!-- First boot message -->
 			<div class="fillScreen-white" id="RE2_introEffect">
@@ -1212,10 +1212,21 @@
 			</div>
 			<!-- Last RDT File -->
 			<div class="fileList none" id="RDT_recentFile">
-				<center>
-					<font class="titulo">Last File Opened</font>
-				</center>
+				<center><font class="titulo">Last File Opened</font></center>
 				<!-- The last RDT goes here -->
+			</div>
+			<!-- Import RDT -->
+			<div class="fileList_importRDT none" id="RDT_importRdtTo_div">
+				<center>
+					<font class="titulo">Import RDT</font><br>
+					<input type="checkbox" id="fileList_import_DATA_AJ" checked="true" class="fileList_checkBox_dom"><font class="fileList_checkBox"> - <font onclick="UTILS_toggleChkBox('fileList_import_DATA_AJ');">Import to DATA_AJ (Easy)</font></font> 
+					<input type="checkbox" id="fileList_import_DATA_E" checked="true" class="fileList_checkBox_dom"><font class="fileList_checkBox"> - <font onclick="UTILS_toggleChkBox('fileList_import_DATA_E');">Import to DATA_E (Hard)</font></font>
+				</center>
+				<!-- Drop Div -->
+				<div id="fileList_IMPORT_DIV" ondrop="RDT_importMap_DROP(event);" ondragover="R3_dragOverHandler(event);" class="fileList_IMPORT_DIV">
+					<div class="fileList_import_bg" id="fileList_import_bg"></div>
+					<div class="fileList_import_lbl" id="fileList_import_lbl">Drag and Drop your RDT file here</div>
+				</div>
 			</div>
 			<!-- FORM - File Generator -->
 			<div class="none" id="menu-FILEGEN">

@@ -453,3 +453,67 @@ function R3_CHECK_WATERMARK(WM_fileToCheck){
 		LOG_scroll();
 	}
 }
+/*
+	Drag Over Handeler
+	Original code: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+*/
+function R3_dragOverHandler(evt){
+	evt.preventDefault();
+}
+function RDT_importMap_DROP(ev){
+	// Prevent default behavior (Prevent file from being opened)
+	ev.preventDefault();
+	if (ev.dataTransfer.items){
+		// Use DataTransferItemList interface to access the file(s)
+		for (var i = 0; i < ev.dataTransfer.items.length; i++){
+	   		// If dropped items aren't files, reject them
+			if (ev.dataTransfer.items[i].kind === 'file'){
+				var file = ev.dataTransfer.items[i].getAsFile();
+				RDT_checkMap(file.path);
+			}
+		}
+	}
+}
+function RDT_checkMap(path){
+	if (path !== ''){
+		var fileExt = getFileExtension(path);
+		if (fileExt === 'RDT'){
+			var use_DATA_E = document.getElementById('fileList_import_DATA_E').checked;
+			var use_DATA_AJ = document.getElementById('fileList_import_DATA_AJ').checked;
+			if (use_DATA_AJ !== true && use_DATA_E !== true){
+				LOG_addLog('warn', 'WARN - You need select where you want to import this Map!');
+			} else {
+				var fName = getFileName(path).toUpperCase();
+				var FILE_TO_IMPORT = fs.readFileSync(path, 'hex');
+				LOG_addLog('log', 'INFO - Importing ' + fName + '.RDT...');
+				LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + path + '</font>');
+				LOG_separator();
+				try {
+					if (use_DATA_AJ === true){
+						fs.writeFileSync(APP_PATH + '\\Assets\\DATA_AJ\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
+						LOG_addLog('log', 'INFO - DATA_AJ: Import sucessfull!');
+					}
+					if (use_DATA_E === true){
+						fs.writeFileSync(APP_PATH + '\\Assets\\DATA_E\\RDT\\' + fName + '.RDT', FILE_TO_IMPORT, 'hex');
+						LOG_addLog('log', 'INFO - DATA_E: Import sucessfull!');
+					}
+					LOG_separator();
+					LOG_addLog('log', 'INFO - Map name: ' + fName);
+					LOG_addLog('log', 'INFO - Local name: ' + RDT_locations[fName][0] + ', ' + RDT_locations[fName][1]);
+					LOG_separator();
+				} catch (err) {
+					LOG_addLog('error', 'ERROR - Unable to import ' + fName + '.RDT!');
+					LOG_addLog('error', 'ERROR - Reason: ' + err);
+					console.error(err);
+				}
+			}
+		} else {
+			if (fileExt === 'ARD'){
+				LOG_addLog('warn', 'WARN - To use this map format, run "ARD Enabler" to extract RDT from this file!');
+			} else {
+				LOG_addLog('warn', 'WARN - This is not a RE3 Map File!');
+			}
+		}
+		LOG_scroll();
+	}
+}
