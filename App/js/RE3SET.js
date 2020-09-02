@@ -42,15 +42,15 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
 		RE3SET_LOADTAB_4 = false;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos.');
+		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nSave Names');
+		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos., Save Names');
 	}
 	if (RE3SET_gameVersion === 2){ // GC
 		RE3SET_iniTab = 3;
 		RE3SET_LOADTAB_1 = false;
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
-		RE3SET_LOADTAB_4 = false;
+		RE3SET_LOADTAB_4 = true;
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem start');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item start, Start Map & Pos.');
 	}
@@ -60,8 +60,8 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = false;
 		RE3SET_LOADTAB_4 = false;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Starting Map & Pos.');
+		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.\nSave Names');
+		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Save Names, Starting Map & Pos.');
 	}
 	/*
 		Tab 1
