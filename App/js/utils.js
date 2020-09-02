@@ -486,7 +486,7 @@ function RDT_checkMap(path){
 				var cantReason = '';
 				var canImport = true;
 				var fName = getFileName(path).toUpperCase();
-				if (fName.slice(4, 5) !== '.' || fName.length !== 8){
+				if (fName.slice(4, 5) !== '.' || fName.length !== 4){
 					var ask = prompt('WARN - The filename are not set in RE3 pattern!\n\nPlease insert the stage and the map number below:\nExample: 10F (Stage 1, Map 0F - R10F)');
 					if (ask === null || ask.length !== 3){
 						canImport = false;
