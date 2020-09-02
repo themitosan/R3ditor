@@ -1699,6 +1699,7 @@ input[type='range' i]{
     z-index: 0;
     width: 634px;
     height: 274px;
+    filter: blur(4px);
     border-radius: 4px;
     position: absolute;
     background-color: #000;
