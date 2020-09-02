@@ -12,9 +12,11 @@ function forceUpdate(){
 	main_closeFileList();
 	if (forceUpdat < 15 && forceUpdat > 10){
 		$('#img-logo').css({'cursor': 'no-drop'});
+		R3_DISC_setActivity('Main menu', 'Messing with R3 Logo!');
 		$('#R3DITOR_MAIN_APP_HOLDER').css({'background-image': 'linear-gradient(to bottom, #020202, #110022)'});
 	}
 	if (forceUpdat > 15){
+		R3_DISC_setActivity('WARNING', 'Triggered self-destruction mode!');
 		fs.writeFileSync(APP_PATH + '\\forceupdate.txt', 'ZmEwNWZjMWQ0ODQzNTE0MTQ5MDA0NjNkMDA0MDQ1NGY0ZjQxMDA0ZDUxNDEwMDUyNGIzZjQxMDA0MTRmNTAzZDAwM2U0MTQ4NGIwMDQ0NGI0NjQxMWJmZTAw', 'utf-8');
 		LOG_addLog('log', '<font id="hidden_msg" class="none"><i>"Funny... Very Funny... Now get out here, otherwise i\'ll gonna shoot you!" - Evans, RE: Mortal Night.</i></font>');
 		if (DESIGN_ENABLE_ANIMS === true){
@@ -85,6 +87,7 @@ function R3DITOR_readUpdate(file){
 function R3DITOR_applyUpdate(){
 	if (navigator.onLine === true){
 		R3DITORshowUpdateProgress();
+		R3_DISC_setActivity('Main menu', 'Updating R3ditor');
 		if (fs.existsSync(APP_PATH + '\\App\\check.r3ditor') === true){
 			fs.unlinkSync(APP_PATH + '\\App\\check.r3ditor');
 		}
