@@ -37,7 +37,7 @@
 		<script type="text/javascript" src="js/keyPress.js"></script>
 		<script type="text/javascript" src="js/debug.js"></script>
 	</head>
-	<body bgcolor="#000" ondragover="R3_dragOverHandler(event);" ondrop="R3_dragOverHandler(event);">
+	<body bgcolor="#000" ondragover="R3_dragOverHandler(event);" ondrop="RDT_importMap_DROP(event);">
 		<div class="R3DITOR_MAIN_APP_HOLDER" id="R3DITOR_MAIN_APP_HOLDER">
 			<!-- First boot message -->
 			<div class="fillScreen-white" id="RE2_introEffect">
@@ -136,7 +136,8 @@
 				<input type="button" title="Click here to open this MSG file on Hex Editor" class="botao-menu none" id="MSG_openInHex" value="Open in Hex Editor" onclick="openFileOnHex(ORIGINAL_FILENAME);">
 				<input type="button" title="Click here to save this changes to a MSG file" class="botao-menu none" value="Save MSG" id="MSG_saveAs" onclick="MSG_applyMSGCommand(1);">
 				<input type="button" title="Click here to apply your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
-				<input type="button" title="Click here to set changes to RE3SET" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET" value="Apply Message to Database" onclick="MSG_applyMSGCommand(3);">
+				<input type="button" title="Click here to set changes to RE3SET (Item Desc)" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET_0" value="Apply Message to Database" onclick="MSG_applyMSGCommand(3);">
+				<input type="button" title="Click here to set changes to RE3SET (Save Name)" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET_1" value="Apply Message to Database" onclick="MSG_applyMSGCommand(4);">
 				<!-- Right -->
 				<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 				<input type="button" title="Click here to return to map" class="botao-menu right none" id="btn-goback-rdt" value="Return to Map" onclick="MSG_goBackToRDT();">
@@ -203,12 +204,18 @@
 			<!-- Menu RE3SET -->
 			<div class="menu-topo none" id="menu-topo-RE3SET">
 				<input type="button" class="botao-menu" title="Click here to open a file" onclick="triggerLoad(8);" value="Open File">
+				<!-- Info - Item Desc -->
 				<div class="RE3SET_itemDesc_topDiv" id="RE3SET_INFODIV_itemDesc">
 					Status: <font id="RE3SET_LBL_itemDesc_topTotalOf">???</font> of <font id="RE3SET_LBL_itemDesc_topTotalSize">???</font> (<font id="RE3SET_LBL_itemDesc_totalPercentage">???</font>%)
+				</div>
+				<!-- Info - Save Name -->
+				<div class="RE3SET_itemDesc_topDiv" id="RE3SET_INFODIV_saveName">
+					Status: <font id="RE3SET_LBL_saveName_topTotalOf">???</font> of <font id="RE3SET_LBL_saveName_topTotalSize">???</font> (<font id="RE3SET_LBL_saveName_totalPercentage">???</font>%)
 				</div>
 				<!-- Right -->
 				<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 				<input type="button" title="Click here to apply Item Desc. changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applyItemDesc" value="APPLY SETTINGS" onclick="RE3SET_applyItemDesc();">
+				<input type="button" title="Click here to apply Save name changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applySaveName" value="APPLY SETTINGS" onclick="RE3SET_saveName_apply();">
 			</div>
 	
 			<!-- CONTENT -->
@@ -262,6 +269,7 @@
 				<input type="button" id="RE3SET-aba-menu-1" onclick="RE3SET_showMenu(1);" class="aba aba-left-fix aba-select" value="Start Items">
 				<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Starting Location">
 				<input type="button" id="RE3SET-aba-menu-3" onclick="RE3SET_showMenu(3);" class="aba" value="Item Description">
+				<input type="button" id="RE3SET-aba-menu-4" onclick="RE3SET_showMenu(4);" class="aba" value="Save Names">
 				<!-- Starting Items -->
 				<div class="menu" id="RE3SET-menu-1">
 					<div class="menu-general-content">
@@ -420,6 +428,15 @@
 						<center><font class="titulo">Item Description</font></center>
 						<div id="RE3SET_itemDesc_holder" class="RE3SET_itemDesc_holder">
 							<!-- Item Desc goes here -->
+						</div>
+					</div>
+				</div>
+				<!-- Save Names -->
+				<div class="menu none" id="RE3SET-menu-4">
+					<div class="menu-general-content">
+						<center><font class="titulo">Save Names</font></center>
+						<div id="RE3SET_saveNames_holder" class="RE3SET_itemDesc_holder">
+							<!-- Save Names goes here -->
 						</div>
 					</div>
 				</div>

@@ -39,13 +39,19 @@ function MSG_goBackToRDT(){
 	RDT_openFile(ORIGINAL_FILENAME);
 	$('#RDT-aba-menu-2').trigger('click');
 }
-function MSG_goBackToRE3SET(){
+function MSG_goBackToRE3SET(mode){
+	var c = 0;
 	MSG_ID = undefined;
+	var totalBackBtns = 2;
 	MSG_totalComandos = 0;
 	MSG_useSeekCameras = false;
 	MSG_arquivoBruto = undefined;
 	document.title = RE3SET_itemDesc_tempWinTitle;
-	TRANSFER_MSG_TO_RE3SET();
+	while (c < totalBackBtns){
+		$('#MSG_applyMessageRE3SET_' + c).css({'display': 'none'});
+		c++;
+	}
+	TRANSFER_MSG_TO_RE3SET(mode);
 }
 function MSG_CARREGAR_ARQUIVO(msgFile){
 	if (fs.existsSync(msgFile) === true){
@@ -73,8 +79,7 @@ function MSG_CARREGAR_ARQUIVO(msgFile){
 }
 function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 	if (RAW_DATA !== '' && RAW_DATA !== undefined && RAW_DATA !== null){
-		var c = 0;
-		var t, COMMAND;
+		var c = 0, t, COMMAND;
 		MSG_DECRYPT_LV1_LAST = '';
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
 		var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
@@ -84,7 +89,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 				MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + ' ';
 				c++; 
 			}
-		} catch(err) {
+		} catch (err) {
 			$('#RDT-aba-menu-2').css({'display': 'none'});
 			LOG_addLog('error', 'MSG - Error in formatHex: The array is null or empty!');
 			LOG_addLog('error', err);
@@ -699,6 +704,9 @@ function MAKE_NEW_POINTERS(msg_hex){
 	// console.log('Novos ponteiros: ' + NEW_POINTERS);
 	return NEW_POINTERS;
 }
+/*
+	MSG Save To
+*/
 function MSG_SAVE_ON_RDT(msgHex){
 	if (MSG_totalComandos !== 0 && RDT_arquivoBruto !== undefined && ORIGINAL_FILENAME !== undefined){
 		RDT_Backup();
@@ -727,11 +735,21 @@ function MSG_SAVE_ON_RDT(msgHex){
 	}
 	LOG_scroll();
 }
-function MSG_SAVE_ON_RE3SET(msgHex){
-	sessionStorage.setItem('RE3SET_ITEMDESC_' + MSG_ID, msgHex);
-	RE3SET_itemDesc_updateList();
-	MSG_goBackToRE3SET();
+function MSG_SAVE_ON_RE3SET(mode, msgHex){
+	if (mode === 0){
+		sessionStorage.setItem('RE3SET_ITEMDESC_' + MSG_ID, msgHex);
+		RE3SET_itemDesc_updateList();
+	}
+	if (mode === 1){
+		sessionStorage.setItem('RE3SET_SNAME_' + MSG_ID, msgHex);
+		RE3SET_saveName_updateList();
+	}
+	MSG_goBackToRE3SET(mode);
 }
+/*
+	Map file
+	I hope someday i will abandon this kind of file...
+*/
 function MSG_updateMapFile(pointer){
 	if (pointer !== ''){
 		var c = 0;
@@ -842,7 +860,10 @@ function MSG_applyMSGCommand(mode){
 		}
 	}
 	if (mode === 3){
-		MSG_SAVE_ON_RE3SET(newHex);
+		MSG_SAVE_ON_RE3SET(0, newHex);
+	}
+	if (mode === 4){
+		MSG_SAVE_ON_RE3SET(1, newHex);
 	}
 	LOG_scroll();
 }

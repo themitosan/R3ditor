@@ -10,7 +10,7 @@ var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 3;
 var RE3_LIVE_prevCam = '';
-var RE3SET_totalMenus = 3;
+var RE3SET_totalMenus = 4;
 var R3_WINDOW_WIDTH = 1366;
 var R3_WINDOW_HEIGTH = 768;
 var RE3SET_currentMenu = 1;
@@ -2645,11 +2645,17 @@ function RE3SET_showMenu(menuId){
 	}
 	if (menuId === 3){
 		RE3SET_itemDesc_recompileDB();
-		$('#RE3SET_applyItemDesc').css({'display': 'block'});
 		$('#RE3SET_INFODIV_itemDesc').css({'display': 'block'});
 	} else {
 		$('#RE3SET_applyItemDesc').css({'display': 'none'});
 		$('#RE3SET_INFODIV_itemDesc').css({'display': 'none'});
+	}
+	if (menuId === 4){
+		RE3SET_saveName_recompileDB();
+		$('#RE3SET_INFODIV_saveName').css({'display': 'block'});
+	} else {
+		$('#RE3SET_applySaveName').css({'display': 'none'});
+		$('#RE3SET_INFODIV_saveName').css({'display': 'none'});
 	}
 	$('#img-logo').css({'display': 'none'});
 	$('#menu-RE3SET-editor').css({'display': 'block'});
@@ -2660,17 +2666,22 @@ function RE3SET_showMenu(menuId){
 	document.title = RE3SET_itemDesc_tempWinTitle;
 	LOG_scroll();
 }
-// Item description
-function TRANSFER_MSG_TO_RE3SET(){
+// Item description / Save Name
+function TRANSFER_MSG_TO_RE3SET(mode){
 	onMSG = false;
 	main_closeFileList();
 	$('#menu-MSG').css({'display': 'none'});
 	$('#menu-topo-msg').css({'display': 'none'});
 	$('#MSG_openInHex').css({'display': 'none'});
-	$('#RE3SET-menu-3').css({'display': 'block'});
 	$('#btn-goback-rdt').css({'display': 'none'});
 	$('#menu-topo-RE3SET').css({'display': 'block'});
 	$('#menu-RE3SET-editor').css({'display': 'block'});
+	if (mode === 0){
+		$('#RE3SET-menu-3').css({'display': 'block'});
+	}
+	if (mode === 1){
+		$('#RE3SET-menu-4').css({'display': 'block'});
+	}
 }
 // Start Position
 function RE3SET_startPos_updateImgBg(){

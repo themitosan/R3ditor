@@ -1489,6 +1489,8 @@ var RANGES = {
 	'RE3SET_1_itemInfos':   	  [1129928, 1149800], // PS
 	'RE3SET_2_itemInfos':   	  [4212352, 4232224], // GC
 	'RE3SET_3_itemInfos':   	  [0, 0], 			  // DC Item Desc. are not stored on 1ST_READ.BIN!
+	// Save Names
+	'RE3SET_0_saveNames': 		  [2431186, 2431498], // PC
 	/*
 		DROP
 		Nemesis Item Drops

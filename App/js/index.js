@@ -20,7 +20,7 @@ var EXTERNAL_APP_RUNNING = false;
 var APP_VERSION = 'V. ' + INT_VER + ' [ALPHA]';
 var fs, RPC, DiscordRPC, discUserName, MEM_JS, APP_PATH, HEX_EDITOR, PROCESS_OBJ, ORIGINAL_FILENAME;
 /*
-	Onload
+	Onload / Onclose
 */
 window.onload = function(){
 	R3_startLoad();
