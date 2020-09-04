@@ -684,11 +684,11 @@ function RDT_decompileEnemyNPC(index, enemyHex){
 	localStorage.setItem('RDT_enemy-' + index, enemyHex);
 	RDT_totalEnemies++;
 	var ENEMY_HTML_TEMPLATE = '<div class="RDT-Item RDT-enemy-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditEnemyNPC(' + index + ', \'' + enemyHex + '\');">' + 
-		'(' + parseInt(index + 1) + ') Enemy / NPC: ' + RDT_EMDNAME[EN_type] + ' (Hex: ' + EN_type.toUpperCase() + ')<div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + EN_xPos.toUpperCase() + '</font><br>' + 
-		'Y Position: <font class="RDT-item-lbl-fix">' + EN_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + EN_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + EN_rPos.toUpperCase() + '</font>' + 
-		'<div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + EN_header.toUpperCase() + '</font><br>Pose: <font class="RDT-item-lbl-fix-2" title="' + RDT_EMDPOS[EN_pose] + '">' + EN_pose.toUpperCase() + '</font><br><font title="Enemy flag">E. flag</font>: ' + 
-		'<font class="RDT-item-lbl-fix-2">' + EN_enFlag.toUpperCase() + '</font><br><font title="Enemy number">E. number</font>: <font class="RDT-item-lbl-fix-2">' + EN_numero.toUpperCase() + '</font></div><div class="RDT-Item-Misc-4">' + 
-		'<br>Texture: <font class="RDT-item-lbl-fix-8">' + EN_texture.toUpperCase() + '</font><br>Extra flag: <font class="RDT-item-lbl-fix-8">' + EN_exFlag.toUpperCase() + '</font><br>Sound set: <font class="RDT-item-lbl-fix-8">' + EN_soundSet.toUpperCase() + 
+		'(' + parseInt(index + 1) + ') Enemy / NPC: ' + RDT_EMDNAME[EN_type] + ' (Hex: ' + EN_type.toUpperCase() + ')<div class="menu-separador"></div>X Position: <font class="RDT-lbl_enNPC-fix">' + EN_xPos.toUpperCase() + '</font><br>' + 
+		'Y Position: <font class="RDT-lbl_enNPC-fix">' + EN_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-lbl_enNPC-fix">' + EN_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-lbl_enNPC-fix">' + EN_rPos.toUpperCase() + '</font>' + 
+		'<div class="RDT_HOLDER_enNPC-1">Header: <font class="RDT-lbl_enNPC-fix-2">' + EN_header.toUpperCase() + '</font><br>Pose: <font class="RDT-lbl_enNPC-fix-2" title="' + RDT_EMDPOS[EN_pose] + '">' + EN_pose.toUpperCase() + '</font><br><font title="Enemy flag">E. flag</font>: ' + 
+		'<font class="RDT-lbl_enNPC-fix-2">' + EN_enFlag.toUpperCase() + '</font><br><font title="Enemy number">E. number</font>: <font class="RDT-lbl_enNPC-fix-2">' + EN_numero.toUpperCase() + '</font></div><div class="RDT_HOLDER_enNPC-3">' + 
+		'<br>Texture: <font class="RDT-lbl_enNPC-fix-8">' + EN_texture.toUpperCase() + '</font><br>Extra flag: <font class="RDT-lbl_enNPC-fix-8">' + EN_exFlag.toUpperCase() + '</font><br>Sound set: <font class="RDT-lbl_enNPC-fix-8">' + EN_soundSet.toUpperCase() + 
 		'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + EN_header.toUpperCase() + '</font> <font title="Number">' + EN_numero.toUpperCase() + '</font> <font title="Type">' + EN_type.toUpperCase() + '</font> <font title="Pose">' + 
 		EN_pose.toUpperCase() + '</font> <font title="Extra Flag">' + EN_exFlag.toUpperCase() + '</font> ' + enemyHex.slice(RANGES["RDT_enemy-offset-0"][0], RANGES["RDT_enemy-offset-0"][1]) + ' <font title="Sound Set">' + EN_soundSet.toUpperCase() + '</font> <font title="Texture">' + EN_texture.toUpperCase() + 
 		'</font> <font title="E. Flag">' + EN_enFlag.toUpperCase() + '</font> <font title="X pos.">' + EN_xPos.toUpperCase() + '</font> <font title="Z pos.">' + EN_yPos.toUpperCase() + '</font> <font title="Y pos.">' + EN_zPos.toUpperCase() + '</font> <font title="R pos.">' + EN_rPos.toUpperCase() + '</font> ' + 
@@ -866,14 +866,14 @@ function RDT_decompile3DProp(id){
 		var PROP_OFFSET_2 = PROP_RAW.slice(18, 28);
 		var PROP_ITEMLINK = PROP_RAW.slice(28, 30);
 		var PROP_OFFSET_3 = PROP_RAW.slice(30, 32);
-		var PROP_XPOS = PROP_RAW.slice(32, 36);
-		var PROP_ZPOS = PROP_RAW.slice(36, 40);
-		var PROP_YPOS = PROP_RAW.slice(40, 44);
-		var PROP_RPOS = PROP_RAW.slice(44, 48);
-		var PROP_EXTRA = PROP_RAW.slice(48, 52);
-		var PROP_FINAL = PROP_RAW.slice(52, PROP_RAW.length);
+		var PROP_XPOS     = PROP_RAW.slice(32, 36);
+		var PROP_ZPOS     = PROP_RAW.slice(36, 40);
+		var PROP_YPOS     = PROP_RAW.slice(40, 44);
+		var PROP_RPOS     = PROP_RAW.slice(44, 48);
+		var PROP_EXTRA    = PROP_RAW.slice(48, 52);
+		var PROP_FINAL    = PROP_RAW.slice(52, PROP_RAW.length);
 
-		var PROP_HTML_TEMPLATE = '<div class="RDT-Item RDT-3DProp-bg" id="RDT-3D_Item-0" onclick="main_closeFileList();"><input type="button" class="btn-remover-comando ' +
+		var PROP_HTML_TEMPLATE = '<div class="RDT-Item RDT-3DProp-bg" id="RDT-3D_Item-' + id + '" onclick="main_closeFileList();"><input type="button" class="btn-remover-comando ' +
 				'RDT_modifyBtnFix" id="RDT_edit3D_ItemBtn_0" value="Modify" onclick="RDT_show3DPropEdit(0, ' + id + ')">(' + id + ') ID: ' + PROP_ID.toUpperCase() +
 				'<div class="menu-separador"></div>X Pos: ' + PROP_XPOS.toUpperCase() + '<br>Y Pos: ' + PROP_YPOS.toUpperCase() + '<br>Z Pos: ' + PROP_ZPOS.toUpperCase() +
 				'<br>R Pos: ' + PROP_RPOS.toUpperCase() + '<div class="RDT-Item-Misc">Item Link: ' + PROP_ITEMLINK.toUpperCase() + '<br>Extra: ' + PROP_EXTRA.toUpperCase() +
@@ -887,19 +887,19 @@ function RDT_3D_PROP_APPLY(id){
 		if (OLD_PROP_RAW !== null){
 			var reason;
 			var canCompile = true;
-			var PROP_HEADER = OLD_PROP_RAW.slice(0, 2);
-			var PROP_ID = OLD_PROP_RAW.slice(2, 4);
+			var PROP_HEADER   = OLD_PROP_RAW.slice(0, 2);
+			var PROP_ID       = OLD_PROP_RAW.slice(2, 4);
 			var PROP_OFFSET_0 = OLD_PROP_RAW.slice(4, 16);
 			var PROP_OFFSET_1 = OLD_PROP_RAW.slice(16, 18);
 			var PROP_OFFSET_2 = OLD_PROP_RAW.slice(18, 28);
 			var PROP_OFFSET_3 = OLD_PROP_RAW.slice(30, 32);
-			var PROP_FINAL = OLD_PROP_RAW.slice(52, OLD_PROP_RAW.length);
+			var PROP_FINAL    = OLD_PROP_RAW.slice(52, OLD_PROP_RAW.length);
 			//
-			var NEW_XPOS = document.getElementById('RDT_edit_3DProp_X').value.toLowerCase();
-			var NEW_YPOS = document.getElementById('RDT_edit_3DProp_Y').value.toLowerCase();
-			var NEW_ZPOS = document.getElementById('RDT_edit_3DProp_Z').value.toLowerCase();
-			var NEW_RPOS = document.getElementById('RDT_edit_3DProp_R').value.toLowerCase();
-			var NEW_LINK = document.getElementById('RDT_edit_3DProp_iLink').value.toLowerCase();
+			var NEW_XPOS  = document.getElementById('RDT_edit_3DProp_X').value.toLowerCase();
+			var NEW_YPOS  = document.getElementById('RDT_edit_3DProp_Y').value.toLowerCase();
+			var NEW_ZPOS  = document.getElementById('RDT_edit_3DProp_Z').value.toLowerCase();
+			var NEW_RPOS  = document.getElementById('RDT_edit_3DProp_R').value.toLowerCase();
+			var NEW_LINK  = document.getElementById('RDT_edit_3DProp_iLink').value.toLowerCase();
 			var NEW_EXTRA = document.getElementById('RDT_edit_3DProp_Extra').value.toLowerCase();
 			//
 			if (NEW_XPOS.length !== 4){
@@ -1042,12 +1042,12 @@ function RDT_decompileMessageCode(index, hex){
 		localStorage.setItem('RDT_MSGBLOCK-' + index, fHex);
 		var HTML_HUGE_MSGCODE_TEMPLATE = '<div class="RDT-Item RDT-MSGCODE-bg" id="RDT_MSGCODE-' + index + '">' + 
 			'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RDT_showEditMsgCode(' + index + ', \'' + fHex + '\');">(' + parseInt(index + 1) + ') Message ID: ' + MC_ID.toUpperCase() + 
-			'<br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + MC_XPOS.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
-			'Radius: <font class="RDT-item-lbl-fix">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT-Item-Misc"><br>Header: <font class="RDT-item-lbl-fix-6">' + 
-			MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: <font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + '</font></div><div class="menu-separador">' + 
-			'</div>Hex: <font class="user-can-select"><font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + '</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> <font title="X pos.">' + MC_XPOS.toUpperCase() + 
-			'</font> <font title="Y pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="Size Radius">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font> <font title="R pos.">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + 
-			MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + ' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></font></div>';
+			'<br><div class="menu-separador"></div>X Position: <font class="RDT-lbl_messageCode-fix-1">' + MC_XPOS.toUpperCase() + '</font><br>Y Position: <font class="RDT-lbl_messageCode-fix-1">' + MC_ZPOS.toUpperCase() + '</font><br><font title="Trigger zone (radius)">' + 
+			'Radius: <font class="RDT-lbl_messageCode-fix-1">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font><br>R Position: <font class="RDT-lbl_messageCode-fix-1">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font></font><br><div class="RDT_HOLDER_messageCode-2"><br>Header: ' + 
+			'<font class="RDT-item-lbl-fix-6">' + MC_HEADER.toUpperCase() + '</font><br>Display mode: <font class="RDT-item-lbl-fix-6">' + MC_READMODE.toUpperCase() + '</font><br>Special properties: <font class="RDT-item-lbl-fix-6">' + MC_SPECIALPROP.toUpperCase() + 
+			'</font></div><div class="menu-separador"></div>Hex: <font class="user-can-select"><font title="Header">' + MC_HEADER.toUpperCase() + '</font> <font title="ID">' + MC_ID.toUpperCase() + '</font> <font title="Identifier">' + MC_IDENT.toUpperCase() + '</font> ' + 
+			'<font title="X pos.">' + MC_XPOS.toUpperCase() + '</font> <font title="Y pos.">' + MC_ZPOS.toUpperCase() + '</font> <font title="Size Radius">' + MC_XWIDTHTRIGGER.toUpperCase() + '</font> <font title="R pos.">' + MC_ZWIDTHTRIGGER.toUpperCase() + '</font> ' + 
+			MC_OFFSET0.toUpperCase() + ' <font title="Jap. Chars">' + MC_JAPCHARS.toUpperCase() + '</font> ' + MC_OFFSET1.toUpperCase() + ' <font title="Special P.">' + MC_SPECIALPROP.toUpperCase() + '</font> <font title="Read Mode">' + MC_READMODE.toUpperCase() + '</font></font></div>';
 		$('#RDT_msgCode_holder').append(HTML_HUGE_MSGCODE_TEMPLATE);
 	}
 }
@@ -1246,9 +1246,16 @@ function RDT_decompileDoors(index, location){
 			} else {
 				doorLeadsTo_title = 'Unknown';
 			}
+			var nCam = '';
+			if (enable_mod === true){
+				nCam = '../Assets/DATA_A/BSS/R' + parseInt(parseInt(dr_nStage, 16) + 1) + dr_nRoomNumber.toUpperCase() + dr_nCamPos.toUpperCase() + '.JPG';
+			} else {
+				nCam = './img/404.png';
+			}
+			var DOOR_LEAD_HTML = '<div class="RDT_door_leadBD" style="background-image: url(' + nCam + ');"></div>';
 			if (dr_header === '61'){
-				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-' + index + '" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + 
+				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg">' + DOOR_LEAD_HTML + '<div class="RDT_door_itemInfos"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-' + index + '" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + ' (' + doorLeadsTo_title + ')</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + 
 					dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + dr_rPos.toUpperCase() + '</font><br>' + 
 					'<div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() + 
 					'</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: <font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() +
@@ -1258,14 +1265,14 @@ function RDT_decompileDoors(index, location){
 					'</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> <font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> ' + 
 					'<font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> ' + '<font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Next Room Number">' + dr_nRoomNumber.toUpperCase() + '</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> <font title="Z Index">' + dr_zIndex.toUpperCase() +
 					'</font> <font title="Door Type">' + dr_type.toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> <font title="Unk. Flag">' + dr_offset1.toUpperCase() + '</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + 
-					'</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div></div>';
 			} else {
 				var drType = parseInt(parseInt(dr_type, 16) - 1).toString();
 				if (drType.length !== 2){
 					drType = '0' + drType;
 				}
-				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-' + index + '" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
-					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + '</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' +
+				EXTREME_MASSIVE_HTML_TEMPLATE = '<div class="RDT-Item RDT-door-bg">' + DOOR_LEAD_HTML + '<div class="RDT_door_itemInfos"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-' + index + '" value="Modify" onclick="RDT_showEditDoor(' + parseInt(index + 1) + ', \'' + dr_id + '\', \'' + DOOR_RAW + '\');">' + 
+					'(' + parseInt(index + 1) + ') Door ID: <font class="RDT-item-lbl-fix">' + dr_id.toUpperCase() + '</font> - Leads to <font title="' + doorLeadsTo_title + '">' + doorLeadsTo + '.' + RDT_fileType + ' (' + doorLeadsTo_title + ')</font><br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' +
 					dr_xPos.toUpperCase() + '</font><br>Y Position: <font class="RDT-item-lbl-fix">' + dr_yPos.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + dr_zPos.toUpperCase() + '</font><br>R Position: <font class="RDT-item-lbl-fix">' + dr_rPos.toUpperCase() + '</font><br>' + 
 					'<div class="RDT-Item-Misc">Spawn X Position: <font class="RDT-item-lbl-fix-3">' + dr_nXpos.toUpperCase() + '</font><br>Spawn Y Position: <font class="RDT-item-lbl-fix-3">' + dr_nYpos.toUpperCase() + '</font><br>Spawn Z Position: <font class="RDT-item-lbl-fix-3">' + dr_nZpos.toUpperCase() +
 					'</font><br>Spawn R Position: <font class="RDT-item-lbl-fix-3">' + dr_nRpos.toUpperCase() + '</font><br></div><div class="RDT-Item-Misc-2">Door Type: <font class="RDT-item-lbl-fix-4">' + dr_type.toUpperCase() + '</font><br>Next Stage: <font class="RDT-item-lbl-fix-4">' + dr_nStage.toUpperCase() +
@@ -1275,7 +1282,7 @@ function RDT_decompileDoors(index, location){
 					'<font title="Y Pos.">' + dr_yPos.toUpperCase() + '</font> <font title="Z Pos.">' + dr_zPos.toUpperCase() + '</font> <font title="R Pos.">' + dr_rPos.toUpperCase() + '</font> <font title="Unknown Values">' + dr_offset0.toUpperCase() + '</font> <font title="Spawn X Pos.">' + dr_nXpos.toUpperCase() + '</font> ' + 
 					'<font title="Spawn Z Pos.">' + dr_nZpos.toUpperCase() + '</font> <font title="Spawn Y Pos.">' + dr_nYpos.toUpperCase() + '</font> <font title="Spawn R Pos.">' + dr_nRpos.toUpperCase() + '</font> <font title="Next Stage">' + dr_nStage.toUpperCase() + '</font> <font title="Room Number">' + dr_nRoomNumber.toUpperCase() + 
 					'</font> <font title="Next Cam">' + dr_nCamPos.toUpperCase() + '</font> <font title="Z Index">' + dr_zIndex.toUpperCase() + '</font> <font title="Door Type">' + drType.toString().toUpperCase() + '</font> <font title="Open Orientation">' + dr_openOrient.toUpperCase() + '</font> <font title="Unk. Flag">' + dr_offset1.toUpperCase() + 
-					'</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div>';
+					'</font> <font title="Lock Flag">' + dr_lockFlag.toUpperCase() + '</font> <font title="Lock Key">' + dr_key.toUpperCase() + '</font> <font title="Display Text">' + dr_displayText.toUpperCase() + '</font></font></div></div>';
 			}
 			$('#RDT_door_holder').append(EXTREME_MASSIVE_HTML_TEMPLATE);
 			RDT_totalDoors++;
@@ -1307,15 +1314,15 @@ function RDT_copyPastePos(mode){
 	}
 	// Paste Next
 	if (mode === 1 && RDT_TEMP_NEXTX !== '' && RDT_TEMP_NEXTY !== '' && RDT_TEMP_NEXTZ !== '' && RDT_TEMP_NEXTR !== '' && RDT_TEMP_NEXT_STAGE !== '' && RDT_TEMP_NEXT_ROOM !== ''){
-		document.getElementById('RDT_door-edit-NX').value 		  = RDT_TEMP_NEXTX;
-		document.getElementById('RDT_door-edit-NY').value 		  = RDT_TEMP_NEXTY;
-		document.getElementById('RDT_door-edit-NZ').value 		  = RDT_TEMP_NEXTZ;
-		document.getElementById('RDT_door-edit-NR').value 		  = RDT_TEMP_NEXTR;
-		document.getElementById('RDT_door-edit-zIndex').value     = RDT_TEMP_ZINDEX;
-		document.getElementById('RDT_door-edit-NRN').value 		  = RDT_TEMP_NEXT_ROOM;
-		document.getElementById('RDT_door-edit-NS').value 		  = RDT_TEMP_NEXT_STAGE;
-		document.getElementById('RDT_door-edit-NC').value 	  	  = RDT_TEMP_NEXT_CAMERA;
-		document.getElementById('RDT_door-edit-NC-TXT').value 	  = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_door-edit-NX').value 	  = RDT_TEMP_NEXTX;
+		document.getElementById('RDT_door-edit-NY').value 	  = RDT_TEMP_NEXTY;
+		document.getElementById('RDT_door-edit-NZ').value 	  = RDT_TEMP_NEXTZ;
+		document.getElementById('RDT_door-edit-NR').value 	  = RDT_TEMP_NEXTR;
+		document.getElementById('RDT_door-edit-zIndex').value = RDT_TEMP_ZINDEX;
+		document.getElementById('RDT_door-edit-NRN').value 	  = RDT_TEMP_NEXT_ROOM;
+		document.getElementById('RDT_door-edit-NS').value 	  = RDT_TEMP_NEXT_STAGE;
+		document.getElementById('RDT_door-edit-NC').value 	  = RDT_TEMP_NEXT_CAMERA;
+		document.getElementById('RDT_door-edit-NC-TXT').value = RDT_TEMP_NEXT_CAMERA;
 		RDT_renderNextRDTLbl();
 		RDT_renderEditDoorCamPreview();
 	}
@@ -1457,8 +1464,7 @@ function RDT_getAllRelatedAudios(){
 	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
 	var getAudioArray = fs.readdirSync(APP_PATH + '\\Assets\\DATA_A\\VOICE\\').filter(fn => fn.startsWith('M' + MAPID));
 	while(c < getAudioArray.length){
-		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">' +
-			'(' + parseInt(c + 1) + ') File Name: <font class="italic RDT-item-lbl-fix">' + getAudioArray[c] + '</font>' + 
+		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">(' + parseInt(c + 1) + ') File Name: <font class="italic">' + getAudioArray[c] + '</font>' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Remove" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';RDT_deleteAudio();">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Replace" onclick="RDT_currentAudio = \'' + getFileName(getAudioArray[c]).toUpperCase() + '\';triggerLoad(1);">' + 
 			'<input type="button" class="btn-remover-comando" style="margin-top: 5px;" value="Open" ' + 
@@ -1641,13 +1647,13 @@ function RDT_renderItens(index, hex){
 			id = '0' + id;
 		}
 		RDT_addIconToCanvas(typeId, index, x, y, z, r, id);
-		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': ' + convert + 
-			' (Hex: <font title="' + convert + '">' + id.toUpperCase() + '</font>)<input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editItemBtn_' + index + '" value="Modify" onclick="RDT_selectPoint(' + index + ');' + 
-			'RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>Quantity: ' + parseInt(quant, 16) + '<br><div class="menu-separador"></div>X Position: <font class="RDT-item-lbl-fix">' + x.toUpperCase() + '</font><br>' +
-			'Y Position: <font class="RDT-item-lbl-fix">' + y.toUpperCase() + '</font><br>Z Position: <font class="RDT-item-lbl-fix">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-item-lbl-fix">' + 
-			r.toUpperCase() + '</font><br><div class="RDT-Item-Misc">Header: <font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>' + 
-			'Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + '</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc RDT_ITEM_MISC_FIX"><br><br><br>Item flag: ' + 
-			iFlag.toUpperCase() + '</div><div class="menu-separador"></div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
+		var RDT_ITEM_HTML_TEMPLATE = '<div class="RDT-Item ' + cssFix + '" id="RDT-item-' + index + '" onclick="main_closeFileList();">(' + parseInt(index + 1) + ') ' + tipo + ': (' + id.toUpperCase() + ') ' + convert + 
+			'<input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editItemBtn_' + index + '" value="Modify" onclick="RDT_selectPoint(' + index + ');RDT_displayItemEdit(' + typeId + ', ' + index + ', \'' + hex + '\');"><br>' + 
+			'Quantity: ' + parseInt(quant, 16) + '<br><div class="menu-separador"></div>X Position: <font class="RDT-lbl_iFM-fix-1">' + x.toUpperCase() + '</font><br>Y Position: <font class="RDT-lbl_iFM-fix-1">' + y.toUpperCase() + '</font><br>' + 
+			'Z Position: <font class="RDT-lbl_iFM-fix-1">' + z.toUpperCase() + '</font><br><font title="Rotation">R Position</font>: <font class="RDT-lbl_iFM-fix-1">' + r.toUpperCase() + '</font><br><div class="RDT_HOLDER_iFM-1">Header: ' + 
+			'<font class="RDT-item-lbl-fix-2">' + header.toUpperCase() + '</font><br>Identifier: <font class="RDT-item-lbl-fix-2">' + ident.toUpperCase() + '</font><br>Animation: <font class="RDT-item-lbl-fix-2">' + mp.toUpperCase() + 
+			'</font><br>Model ID: <font class="RDT-item-lbl-fix-2">' + modelId.toUpperCase() + '</font></div><div class="RDT-Item-Misc RDT_ITEM_MISC_FIX"><br><br><br>Item flag: ' + iFlag.toUpperCase() + '</div><div class="menu-separador">' + 
+			'</div>Hex: <font class="user-can-select">' + hexComp + '</font></div>';
 		$('#RDT-item-list').append(RDT_ITEM_HTML_TEMPLATE);
 	} catch (err){
 		var msg = 'MAP - ERROR: Unable to render item ' + id.toUpperCase() + ' - ' + msg;

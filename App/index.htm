@@ -1208,9 +1208,7 @@
 				</div>
 				<!-- Loading List -->
 				<div class="filelist_loadingFilesDiv none" id="FILELIST_loadingMessage">
-					<center>
-						Loading Files - Please Wait...
-					</center>
+					<center>Loading Files - Please Wait...</center>
 					<div class="progressBar" id="filelist_progressBar_files"></div>
 				</div>
 				<!-- Lists -->
@@ -1241,8 +1239,7 @@
 				</center>
 				<!-- Drop Div -->
 				<div id="fileList_IMPORT_DIV" ondrop="RDT_importMap_DROP(event);" ondragover="R3_dragOverHandler(event);" class="fileList_IMPORT_DIV">
-					<div class="fileList_import_bg" id="fileList_import_bg"></div>
-					<div class="fileList_import_lbl" id="fileList_import_lbl">Drag and Drop your RDT file here</div>
+					<div class="fileList_import_bg" id="fileList_import_bg"></div><div class="fileList_import_lbl" id="fileList_import_lbl">Drag and Drop your RDT file here</div>
 				</div>
 			</div>
 			<!-- FORM - File Generator -->
@@ -1326,7 +1323,7 @@
 						<div id="RDT_mainMenu_totalMsgLbl" class="none">
 							Number of messages: <font class="RDT-menu-geral-text" id="RDT_lbl-totalMsg">???</font>
 						</div>
-						Number of 3D Props: <font class="RDT-menu-geral-text" id="RDT_lbl-total3DProps">???</font><br>
+						[WIP] Number of 3D Props: <font class="RDT-menu-geral-text" id="RDT_lbl-total3DProps">???</font><br>
 						Number of audios related: <font class="RDT-menu-geral-text" id="RDT_lbl-totalAudios">???</font><br>
 						Number of enemies / NPC's: <font class="RDT-menu-geral-text" id="RDT_lbl-totalEnemies">???</font>
 					</div>
@@ -1443,7 +1440,7 @@
 				<div class="menu none" id="RDT_menu-11">
 					<div class="menu-general-content" id="RDT-3D_props" onclick="main_closeFileList();">
 						<div id="RDT_BG_11" class="RDT_BG_IMAGE"></div>
-						<center><font class="titulo">3D Props - Total: <font id="RDT_lbl_total3DProps">???</font></font></center>
+						<center><font class="titulo">[WIP] 3D Props - Total: <font id="RDT_lbl_total3DProps">???</font></font></center>
 						<div id="RDT_3DProps_holder" class="RDT-holder">
 							<!-- Props goes here -->
 						</div>
@@ -2057,6 +2054,7 @@
 			</div>
 			<!-- Sobre -->
 			<div class="ABOUT_main none" id="about-r3ditor" onclick="main_closeFileList();">
+				<div class="ABOUT_BG" id="ABOUT_BG"></div>
 				<center>
 					<div class="ABOUT_appLogo">
 						<img src="img/logo.png" alt="R3ditor-Logo" class="appLogo none" id="ABOUT_R3ditorLogo"><br>

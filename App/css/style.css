@@ -92,6 +92,23 @@ input[type='range' i]{
 .ABOUT_right{
     position: absolute;
 }
+.ABOUT_BG{
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    filter: blur(4px);
+    position: absolute;
+    border-radius: 50px;
+    background-color: #000;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../img/tms.png);
+    -webkit-mask-image: linear-gradient(to left, #ffffff14, #00000014);
+}
 .ABOUT_main{
     top: 40px;
     left: 140px;
@@ -1138,6 +1155,27 @@ input[type='range' i]{
     border-radius: 6px;
     margin-bottom: 6px;
 }
+.RDT_door_leadBD{
+    z-index: 0;
+    width: 170px;
+    height: 128px;
+    margin-top: 0px;
+    margin-left: 0px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    background-color: #0000;
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to left, #ffffff, #000000);
+}
+.RDT_door_itemInfos{
+    z-index: 1;
+    width: 1116px;
+    margin-top: -136px;
+    margin-left: 176px;
+    position: relative;
+}
 .RDT_doorPosHolder{
     margin-top: 14px;
 }
@@ -1229,7 +1267,7 @@ input[type='range' i]{
     user-select: all;
 }
 .RDT-item-lbl-fix{
-    left: 82px;
+    left: 258px;
     position: sticky;
 }
 .RDT-item-lbl-fix-2{
@@ -1237,15 +1275,15 @@ input[type='range' i]{
     position: sticky;
 }
 .RDT-item-lbl-fix-3{
-    left: 254px;
+    left: 430px;
     position: sticky;
 }
 .RDT-item-lbl-fix-4{
-    left: 444px;
+    left: 618px;
     position: sticky;
 }
 .RDT-item-lbl-fix-5{
-    left: 592px;
+    left: 766px;
     position: sticky;
 }
 .RDT-item-lbl-fix-6{
@@ -1277,6 +1315,79 @@ input[type='range' i]{
     margin-top: 4px;
     position: sticky;
 }
+/*
+    Enemies / NPC lbl fix
+*/
+.RDT-lbl_enNPC-fix-1{
+    left: 85px;
+    position: sticky;
+}
+.RDT_HOLDER_enNPC-1{
+    width: 30%;
+    left: 126px;
+    height: 70px;
+    position: sticky;
+    margin-top: -73px;
+    padding-left: 10px;
+}
+.RDT-lbl_enNPC-fix-2{
+    left: 212px;
+    position: sticky;
+}
+.RDT_HOLDER_enNPC-2{
+    width: 30%;
+    left: 296px;
+    height: 70px;
+    position: sticky;
+    margin-top: -73px;
+    padding-left: 10px;
+}
+.RDT-lbl_enNPC-fix-3{
+    left: 85px;
+    position: sticky;
+}
+.RDT_HOLDER_enNPC-3{
+    width: 30%;
+    left: 266px;
+    height: 70px;
+    position: sticky;
+    margin-top: -70px;
+    padding-left: 10px;
+    margin-bottom: 6px;
+}
+/*
+    Item, files e maps
+*/
+.RDT-lbl_iFM-fix-1{
+    left: 84px;
+    position: sticky;
+}
+.RDT_HOLDER_iFM-1{
+    width: 30%;
+    left: 122px;
+    height: 70px;
+    position: sticky;
+    margin-top: -73px;
+    padding-left: 10px;
+}
+/*
+    Message Code
+*/
+.RDT-lbl_messageCode-fix-1{
+    left: 88px;
+    position: sticky;
+}
+.RDT_HOLDER_messageCode-2{
+    width: 30%;
+    left: 126px;
+    height: 70px;
+    position: sticky;
+    margin-top: -73px;
+    padding-left: 10px;
+}
+/*
+
+*/
 .RDT_doorEditHolderFix{
     position: static;
     margin-top: -16px;
@@ -1379,7 +1490,7 @@ input[type='range' i]{
     animation-timing-function: cubic-bezier(0.72, 0.01, 0.26, 0.99);
 }
 .RDT_ITEM_MISC_FIX{
-    left: 230px !important;
+    left: 250px !important;
     margin-top: -70px !important;
 }
 .RDT_editEnemyNPC-misc{
@@ -1482,7 +1593,7 @@ input[type='range' i]{
 }
 .RDT-Item-Misc{
     width: 30%;
-    left: 126px;
+    left: 296px;
     height: 70px;
     position: sticky;
     margin-top: -73px;
@@ -1490,14 +1601,14 @@ input[type='range' i]{
 }
 .RDT-Item-Misc-2{
     width: 30%;
-    left: 294px;
+    left: 468px;
     height: 70px;
     position: sticky;
     margin-top: -70px;
     padding-left: 10px;
 }
 .RDT-Item-Misc-3{
-    left: 460px;
+    left: 634px;
     width: 146px;
     height: 70px;
     position: sticky;
@@ -3063,7 +3174,7 @@ input[type='range' i]{
     -webkit-mask-image: linear-gradient(to left, #0000007d, #0000);
 }
 .RE3SET_EDIT_selectItemStart{
-    width: 360px;
+    width: 384px;
     text-transform: none !important;
 }
 .RE3SET_EDIT_startItemQuant{

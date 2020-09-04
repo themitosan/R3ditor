@@ -191,7 +191,7 @@ function main_renderFileList(id, mode){
 			'">' + pFile +  '</font><br>MapFile: <font title="' + originalMFile + '">' + mFile + '</font><br><div class="menu-separador"></div>Original Local Name: ' + 
 			origName + '<br>Original City Location: ' + origCity + '<br></div></div>';
 		$('#RDT_recentFile').append(fileList_HTML_template);
-		$('#RDT_recentFile').css({'display': 'block', 'left': '680px', 'height': '144px', 'width': '652px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
+		$('#RDT_recentFile').css({'display': 'block', 'overflow': 'hidden', 'left': '680px', 'height': '144px', 'width': '652px', 'top': '424px', 'background-image': 'linear-gradient(to right, rgb(77, 77, 77), #232323)', 'border-top-left-radius': '0px', 'border-bottom-left-radius': '0px'});
 	} else {
 		document.getElementById('fileListHolder').innerHTML = '';
 		document.getElementById('fileListHolder_AJ').innerHTML = '';
@@ -985,11 +985,13 @@ function R3_showAbout(){
 	$('#mainMenu-patcher-div').css({'display': 'none'});
 	$('#mainMenu-exeEdit-div').css({'display': 'none'});
 	if (DESIGN_ENABLE_ANIMS === true){
+		$('#ABOUT_BG').fadeIn({duration: 4000, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
 		$('#about-r3ditor').fadeIn({duration: 500, queue: false});
 		$('#ABOUT_R3ditorLogo').fadeIn({duration: 1500, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'none'});
+		$('#ABOUT_BG').css({'display': 'inline'});
 		$('#about-r3ditor').css({'display': 'inline'});
 		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 	}
@@ -1010,7 +1012,7 @@ function MISC_unblurImg(){
 					ABOUT_hueEffect();
 				}, 50);
 			}
-		}, 100);
+		}, 300);
 	} else {
 		$('#ABOUT_R3ditorLogo').css({'filter': 'blur(0px)'});
 	}
