@@ -247,7 +247,6 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 				}
 			}
 			RDT_BG_display();
-			R3_DISC_setActivity('Editing map ' + RDT_mapName, RDT_locations[RDT_mapName][0] + ', ' + RDT_locations[RDT_mapName][1]);
 		} else {
 			RDT_setHeaderPointers();
 		}

@@ -42,7 +42,7 @@ function MSG_goBackToRDT(){
 function MSG_goBackToRE3SET(mode){
 	var c = 0;
 	MSG_ID = undefined;
-	var totalBackBtns = 2;
+	var totalBackBtns = 3;
 	MSG_totalComandos = 0;
 	MSG_useSeekCameras = false;
 	MSG_arquivoBruto = undefined;
@@ -744,6 +744,10 @@ function MSG_SAVE_ON_RE3SET(mode, msgHex){
 		sessionStorage.setItem('RE3SET_SNAME_' + MSG_ID, msgHex);
 		RE3SET_saveName_updateList();
 	}
+	if (mode === 2){
+		sessionStorage.setItem('RE3SET_INAME_' + MSG_ID, msgHex);
+		RE3SET_itemName_updateList();
+	}
 	MSG_goBackToRE3SET(mode);
 }
 /*
@@ -864,6 +868,9 @@ function MSG_applyMSGCommand(mode){
 	}
 	if (mode === 4){
 		MSG_SAVE_ON_RE3SET(1, newHex);
+	}
+	if (mode === 5){
+		MSG_SAVE_ON_RE3SET(2, newHex);
 	}
 	LOG_scroll();
 }

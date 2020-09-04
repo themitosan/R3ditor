@@ -16,6 +16,10 @@ var RE3SET_itemDesc_raw, RE3SET_itemDesc_tempWinTitle, RE3SET_itemDesc_totalMsgs
 var RE3SET_saveName_origSize = 312;
 var RE3SET_saveName_canSave = false;
 var RE3SET_saveName_raw, RE3SET_saveName_totalNames;
+// Edit Item Names
+var RE3SET_itemName_canSave = false;
+var RE3SET_itemName_origSize = 4532;
+var RE3SET_itemName_raw, RE3SET_itemName_totalNames;
 /*
 	Functions
 */
@@ -26,8 +30,7 @@ function RE3SET_loadFile(exe, mode){
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
 	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
-	R3_DISC_setActivity('On RE3SET', '(' + DROP_fileTypes[RE3SET_fName][0] + ') Editing RE3 general settings');
-	var RE3SET_LOADTAB_1 = false, RE3SET_LOADTAB_2 = false, RE3SET_LOADTAB_3 = false, RE3SET_LOADTAB_4 = false;
+	var RE3SET_LOADTAB_1 = false, RE3SET_LOADTAB_2 = false, RE3SET_LOADTAB_3 = false, RE3SET_LOADTAB_4 = false, RE3SET_LOADTAB_5 = false;
 	// Enable Tabs
 	if (RE3SET_gameVersion === 0){ // PC
 		RE3SET_iniTab = 1;
@@ -35,6 +38,7 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = true;
 		RE3SET_LOADTAB_3 = true;
 		RE3SET_LOADTAB_4 = true;
+		RE3SET_LOADTAB_5 = true;
 	}
 	if (RE3SET_gameVersion === 1){ // PS
 		RE3SET_iniTab = 1;
@@ -42,6 +46,7 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
 		RE3SET_LOADTAB_4 = false;
+		RE3SET_LOADTAB_5 = true;
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nSave Names');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos., Save Names');
 	}
@@ -51,6 +56,7 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = true;
 		RE3SET_LOADTAB_4 = true;
+		RE3SET_LOADTAB_5 = true;
 		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem start');
 		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item start, Start Map & Pos.');
 	}
@@ -60,8 +66,9 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_LOADTAB_2 = false;
 		RE3SET_LOADTAB_3 = false;
 		RE3SET_LOADTAB_4 = false;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.\nSave Names');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Save Names, Starting Map & Pos.');
+		RE3SET_LOADTAB_5 = false;
+		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.\nSave Names\nItem Names');
+		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Save Names, Starting Map & Pos., Item Names');
 	}
 	/*
 		Tab 1
@@ -116,6 +123,17 @@ function RE3SET_loadFile(exe, mode){
 		$('#RE3SET-aba-menu-4').addClass('none');
 	}
 	/*
+		Tab 5
+		Item Names
+	*/
+	if (RE3SET_LOADTAB_5 === true){
+		$('#RE3SET-aba-menu-5').removeClass('none');
+		RE3SET_itemName_raw = RE3SET_arquivoBruto.slice(RANGES['RE3SET_' + RE3SET_gameVersion + '_itemName'][0], RANGES['RE3SET_' + RE3SET_gameVersion + '_itemName'][1]);
+		RE3SET_itemName_startDecompile();
+	} else {
+		$('#RE3SET-aba-menu-5').addClass('none');
+	}
+	/*
 		End - Using DROP_fileTypes because it works!
 	*/
 	LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
@@ -132,15 +150,84 @@ function RE3SET_loadFile(exe, mode){
 	LOG_scroll();
 }
 /*
-	Save names
+	Item names
+*/
+function RE3SET_itemName_startDecompile(){
+	document.getElementById('RE3SET_itemName_holder').innerHTML = '';
+	var INAME_DB_DECOMP = RE3SET_itemName_raw.match(/.{2,2}/g);
+	var INAME_DB_TOTAL = INAME_DB_DECOMP.length, TEMP_TEXT_HOLDER = '', c = 0, cItem = c;
+	while (c < INAME_DB_TOTAL){
+		// F7 = Item Separator
+		if (INAME_DB_DECOMP[c] !== 'f7'){
+			TEMP_TEXT_HOLDER = TEMP_TEXT_HOLDER + INAME_DB_DECOMP[c];
+		} else {
+			sessionStorage.setItem('RE3SET_INAME_' + cItem, TEMP_TEXT_HOLDER);
+			RE3SET_itemName_append(cItem);
+			TEMP_TEXT_HOLDER = '';
+			cItem++;
+		}
+		c++;
+	}
+	RE3SET_itemName_totalNames = cItem;
+}
+function RE3SET_itemName_append(id){
+	var d = 0, formatHex = '';
+	var hex = sessionStorage.getItem('RE3SET_INAME_' + id);
+	var hexMatch = hex.match(/.{2,2}/g);
+	var cMessage = MSG_startMSGDecrypt_Lv1(hex);
+	while (d < hexMatch.length){
+		formatHex = formatHex + hexMatch[d].toUpperCase() + ' ';
+		d++;
+	}
+	var INAME_HTML_TEMPLATE = '<div class="RDT-Item RDT-msg-bg" id="RE3SET_itemName_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RE3SET_transferMessageToMsgEdit(2, ' + id + ')">' + 
+							  'ID: ' + id + '<br>Item Name: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
+	$('#RE3SET_itemName_holder').append(INAME_HTML_TEMPLATE);
+}
+function RE3SET_itemName_updateList(){
+	var c = 0;
+	document.getElementById('RE3SET_itemName_holder').innerHTML = '';
+	while (c < RE3SET_itemName_totalNames){
+		RE3SET_itemName_append(c);
+		c++;
+	}
+	RE3SET_itemName_recompileDB();
+}
+function RE3SET_itemName_recompileDB(){
+	var c = 0, tempHex = '';
+	while (c < RE3SET_itemName_totalNames){
+		var cHex = sessionStorage.getItem('RE3SET_INAME_' + c);
+		tempHex = tempHex + cHex + 'f7';
+		c++;
+	}
+	tempHex = tempHex + '00';
+	var dbPercentage = parsePercentage(tempHex.length, RE3SET_itemName_origSize);
+	document.getElementById('RE3SET_LBL_itemName_totalPercentage').innerHTML = dbPercentage;
+	document.getElementById('RE3SET_LBL_itemName_topTotalOf').innerHTML = parseInt(tempHex.length).toString(16).toUpperCase();
+	document.getElementById('RE3SET_LBL_itemName_topTotalSize').innerHTML = parseInt(RE3SET_itemName_origSize).toString(16).toUpperCase();
+	if (tempHex.length !== RE3SET_itemName_origSize){
+		RE3SET_itemName_canSave = false;
+		$('#RE3SET_applyItemName').css({'display': 'none'});
+	} else {
+		RE3SET_itemName_raw = tempHex;
+		RE3SET_itemName_canSave = true;
+		if (RE3SET_currentMenu === 5){
+			$('#RE3SET_applyItemName').css({'display': 'inline'});
+		}
+	}
+}
+function RE3SET_itemName_apply(){
+	if (RE3SET_itemName_canSave !== false){
+		// console.info(RE3SET_itemName_raw);
+		RE3SET_RECOMPILE(4, RE3SET_itemName_raw);
+	}
+}
+/*
+	Save Names
 */
 function RE3SET_saveName_startDecompile(){
 	document.getElementById('RE3SET_saveNames_holder').innerHTML = '';
 	var SNAME_DB_DECOMP = RE3SET_saveName_raw.match(/.{2,2}/g);
-	var SNAME_DB_TOTAL = SNAME_DB_DECOMP.length;
-	var TEMP_TEXT_HOLDER = '';
-	var c = 0;
-	var cItem = c;
+	var SNAME_DB_TOTAL = SNAME_DB_DECOMP.length, TEMP_TEXT_HOLDER = '', c = 0, cItem = c;
 	while (c < SNAME_DB_TOTAL){
 		if (SNAME_DB_DECOMP[c] !== 'fe'){
 			TEMP_TEXT_HOLDER = TEMP_TEXT_HOLDER + SNAME_DB_DECOMP[c];
@@ -155,8 +242,7 @@ function RE3SET_saveName_startDecompile(){
 	RE3SET_saveName_totalNames = cItem;
 }
 function RE3SET_saveName_append(id){
-	var d = 0, formatHex = '';
-	var hex = sessionStorage.getItem('RE3SET_SNAME_' + id);
+	var d = 0, formatHex = '', hex = sessionStorage.getItem('RE3SET_SNAME_' + id);
 	var hexMatch = hex.match(/.{2,2}/g);
 	var cMessage = MSG_startMSGDecrypt_Lv1(hex);
 	while (d < hexMatch.length){
@@ -164,7 +250,7 @@ function RE3SET_saveName_append(id){
 		d++;
 	}
 	var SNAME_HTML_TEMPLATE = '<div class="RDT-Item RDT-msg-bg" id="RE3SET_itemDesc_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RE3SET_transferMessageToMsgEdit(1, ' + id + ')">' + 
-							  'ID: ' + id + '<br>Message: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
+							  'ID: ' + id + '<br>Save Name: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
 	$('#RE3SET_saveNames_holder').append(SNAME_HTML_TEMPLATE);
 }
 function RE3SET_saveName_updateList(){
@@ -177,8 +263,7 @@ function RE3SET_saveName_updateList(){
 	RE3SET_saveName_recompileDB();
 }
 function RE3SET_saveName_recompileDB(){
-	var c = 0;
-	var tempHex = '';
+	var c = 0, tempHex = '';
 	while (c < RE3SET_saveName_totalNames){
 		var cHex = sessionStorage.getItem('RE3SET_SNAME_' + c);
 		tempHex = tempHex + cHex + 'fe';
@@ -202,7 +287,7 @@ function RE3SET_saveName_recompileDB(){
 }
 function RE3SET_saveName_apply(){
 	if (RE3SET_saveName_canSave !== false){
-		//console.info(RE3SET_saveName_raw);
+		// console.info(RE3SET_saveName_raw);
 		RE3SET_RECOMPILE(3, RE3SET_saveName_raw);
 	}
 }
@@ -212,10 +297,7 @@ function RE3SET_saveName_apply(){
 function RE3SET_itemDesc_decompileItemDesc(){
 	document.getElementById('RE3SET_itemDesc_holder').innerHTML = '';
 	var ITEM_DB_DECOMP = RE3SET_itemDesc_raw.match(/.{2,2}/g);
-	var ITEM_DB_TOTAL = ITEM_DB_DECOMP.length;
-	var TEMP_TEXT_HOLDER = '';
-	var c = 0;
-	var cItem = c;
+	var ITEM_DB_TOTAL = ITEM_DB_DECOMP.length, TEMP_TEXT_HOLDER = '', c = 0, cItem = c;
 	while (c < ITEM_DB_TOTAL){
 		if (ITEM_DB_DECOMP[c] !== 'fe'){
 			TEMP_TEXT_HOLDER = TEMP_TEXT_HOLDER + ITEM_DB_DECOMP[c];
@@ -239,7 +321,7 @@ function RE3SET_itemDesc_appendItemDesc(id){
 		d++;
 	}
 	var ITEMDESC_HTML_TEMPLATE = '<div class="RDT-Item RDT-msg-bg" id="RE3SET_itemDesc_' + id + '"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" value="Modify" onclick="RE3SET_transferMessageToMsgEdit(0, ' + id + ')">' + 
-								 'ID: ' + id + '<br>Message: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
+								 'ID: ' + id + '<br>Description: <div class="RE3SET-message-content">' + cMessage + '</div><div class="menu-separador"></div>Hex: <div class="RE3SET-message-content user-can-select">' + formatHex + '</div></div>';
 	// Prevent Last FE 00
 	if (id < 150){
 		$('#RE3SET_itemDesc_holder').append(ITEMDESC_HTML_TEMPLATE);
@@ -255,8 +337,7 @@ function RE3SET_itemDesc_updateList(){
 	RE3SET_itemDesc_recompileDB();
 }
 function RE3SET_itemDesc_recompileDB(){
-	var d = 0;
-	var tempHex = '';
+	var d = 0, tempHex = '';
 	while (d < RE3SET_itemDesc_totalMsgs){
 		var cHex = sessionStorage.getItem('RE3SET_ITEMDESC_' + d);
 		tempHex = tempHex + cHex + 'fe';
@@ -287,7 +368,11 @@ function RE3SET_transferMessageToMsgEdit(mode, msgId){
 	if (mode === 1){
 		msg_transfer = sessionStorage.getItem('RE3SET_SNAME_' + msgId);
 	}
-	if (msg_transfer !== null && msg_transfer !== undefined){
+	if (mode === 2){
+		msg_transfer = sessionStorage.getItem('RE3SET_INAME_' + msgId);
+	}
+	// End
+	if (msg_transfer !== null){
 		MSG_ID = msgId;
 		document.getElementById('RDT_MSG_NUMBER').innerHTML = 'Message ' + parseInt(msgId + 1) + ' - ';
 		MSG_startMSGDecrypt_Lv2(msg_transfer);
@@ -317,7 +402,7 @@ function RE3SET_TRANSFER_TO_MSG(mode){
 }
 function RE3SET_applyItemDesc(){
 	if (RE3SET_itemDesc_canSave !== false){
-		//console.info(RE3SET_itemDesc_raw);
+		// console.info(RE3SET_itemDesc_raw);
 		RE3SET_RECOMPILE(2, RE3SET_itemDesc_raw);
 	}
 }
@@ -350,8 +435,7 @@ function RE3SET_startPos_applyLiveStatus(){
 	Start Items
 */
 function RE3SET_decompileInventory(){
-	var c = 0;
-	var currentHex, IT, QT, AT, SV;
+	var c = 0, currentHex, IT, QT, AT, SV;
 	// Jill Hard
 	while (c < RE3SET_jillHard.length){
 		currentHex = RE3SET_jillHard[c];
@@ -556,6 +640,7 @@ function RE3SET_ITEMSTART_APPLY(itemHex){
 	| Mode 1: Starting Location (Other Settings) 	   |
 	| Mode 2: Item Description 						   |
 	| Mode 3: Save Names 							   |
+	| Mode 4: Item Name 							   |
 	|__________________________________________________|
 
 */
@@ -630,6 +715,11 @@ function RE3SET_RECOMPILE(mode, hexReplace){
 	if (mode === 3){
 		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_' + RE3SET_gameVersion + '_saveNames'][0]);
 		EXE_END   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_' + RE3SET_gameVersion + '_saveNames'][1], RE3SET_arquivoBruto.length);
+		EXE_FINAL = EXE_START + hexReplace + EXE_END;
+	}
+	if (mode === 4){
+		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_' + RE3SET_gameVersion + '_itemName'][0]);
+		EXE_END   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_' + RE3SET_gameVersion + '_itemName'][1], RE3SET_arquivoBruto.length);
 		EXE_FINAL = EXE_START + hexReplace + EXE_END;
 	}
 	// Save File

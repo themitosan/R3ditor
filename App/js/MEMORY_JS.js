@@ -10,7 +10,7 @@ var MEM_JS_canRender = false;
 var RE3_LIVE_RENDER_TIME = 80;
 var MEM_JS_requreSucess = false;
 var REALTIME_renderToolbar = false;
-var RE3_LIVE_POS, MEM_JS_updatePosTimer;
+var RE3_LIVE_POS, MEM_JS_updatePosTimer, MEM_JS_discInterval;
 //
 var REALTIME_CurrentCam = '00';
 var REALTIME_CurrentHP = '0000';
@@ -320,8 +320,8 @@ function RE3_LIVE_COPY_PASTE_LOCATION(mode){
 */
 function RE3_LIVE_closeForm(){
 	MEM_JS_canRender = false;
-	clearInterval(RE3_LIVE_RENDERTIMER);
 	RE3_LIVE_RENDERTIMER = undefined;
+	clearInterval(RE3_LIVE_RENDERTIMER);
 	if (main_currentMenu === undefined){
 		$('#menu-topo').css({'top': '32px'});
 		$('#menu-settings').css({'top': '32px'});
@@ -330,6 +330,7 @@ function RE3_LIVE_closeForm(){
 	}
 	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
 	window.onkeypress = undefined;
+	R3_DISC_clearActivity();
 	LOG_scroll();
 }
 function RE3_LIVE_openForm(){

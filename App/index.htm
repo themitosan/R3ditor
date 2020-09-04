@@ -138,6 +138,7 @@
 				<input type="button" title="Click here to apply your changes to map" class="botao-menu botao-aplicar none" id="MSG_applyMessageRDT" value="APPLY MESSAGE ON MAP" onclick="MSG_applyMSGCommand(2);">
 				<input type="button" title="Click here to set changes to RE3SET (Item Desc)" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET_0" value="Apply Message to Database" onclick="MSG_applyMSGCommand(3);">
 				<input type="button" title="Click here to set changes to RE3SET (Save Name)" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET_1" value="Apply Message to Database" onclick="MSG_applyMSGCommand(4);">
+				<input type="button" title="Click here to set changes to RE3SET (Item Name)" class="botao-menu botao-aplicar none" id="MSG_applyMessageRE3SET_2" value="Apply Message to Database" onclick="MSG_applyMSGCommand(5);">
 				<!-- Right -->
 				<input type="button" title="Click here to go back" class="botao-menu right" value="Exit" onclick="reload();">
 				<input type="button" title="Click here to return to map" class="botao-menu right none" id="btn-goback-rdt" value="Return to Map" onclick="MSG_goBackToRDT();">
@@ -158,7 +159,6 @@
 			</div>
 			<!-- Menu Filegen -->
 			<div class="menu-topo none" id="menu-topo-fileEditor">
-				<!--<input type="button" class="botao-menu botao-aplicar" onclick="DEBUG_REFRESH_DATABASE();" value="Refresh Database">-->
 				<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 				<input type="button" class="botao-menu botao-aplicar right none" title="Click here to open RE3 Live Status" id="fileGen_LIVESTATUS" value="RE3 Live Status" onclick="RE3_LIVE_openForm();">
 			</div>
@@ -212,10 +212,15 @@
 				<div class="RE3SET_itemDesc_topDiv" id="RE3SET_INFODIV_saveName">
 					Status: <font id="RE3SET_LBL_saveName_topTotalOf">???</font> of <font id="RE3SET_LBL_saveName_topTotalSize">???</font> (<font id="RE3SET_LBL_saveName_totalPercentage">???</font>%)
 				</div>
+				<!-- Info - Item Name -->
+				<div class="RE3SET_itemDesc_topDiv" id="RE3SET_INFODIV_itemName">
+					Status: <font id="RE3SET_LBL_itemName_topTotalOf">???</font> of <font id="RE3SET_LBL_itemName_topTotalSize">???</font> (<font id="RE3SET_LBL_itemName_totalPercentage">???</font>%)
+				</div>
 				<!-- Right -->
 				<input type="button" class="botao-menu right" title="Click here to go back" value="Exit" onclick="reload();">
 				<input type="button" title="Click here to apply Item Desc. changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applyItemDesc" value="APPLY SETTINGS" onclick="RE3SET_applyItemDesc();">
 				<input type="button" title="Click here to apply Save name changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applySaveName" value="APPLY SETTINGS" onclick="RE3SET_saveName_apply();">
+				<input type="button" title="Click here to apply Item name changes!" class="botao-menu botao-aplicar right none" id="RE3SET_applyItemName" value="APPLY SETTINGS" onclick="RE3SET_itemName_apply();">
 			</div>
 	
 			<!-- CONTENT -->
@@ -270,6 +275,7 @@
 				<input type="button" id="RE3SET-aba-menu-2" onclick="RE3SET_showMenu(2);" class="aba" value="Starting Location">
 				<input type="button" id="RE3SET-aba-menu-3" onclick="RE3SET_showMenu(3);" class="aba" value="Item Description">
 				<input type="button" id="RE3SET-aba-menu-4" onclick="RE3SET_showMenu(4);" class="aba" value="Save Names">
+				<input type="button" id="RE3SET-aba-menu-5" onclick="RE3SET_showMenu(5);" class="aba" value="Item Names">
 				<!-- Starting Items -->
 				<div class="menu" id="RE3SET-menu-1">
 					<div class="menu-general-content">
@@ -437,6 +443,15 @@
 						<center><font class="titulo">Save Names</font></center>
 						<div id="RE3SET_saveNames_holder" class="RE3SET_itemDesc_holder">
 							<!-- Save Names goes here -->
+						</div>
+					</div>
+				</div>
+				<!-- Item Name -->
+				<div class="menu none" id="RE3SET-menu-5">
+					<div class="menu-general-content">
+						<center><font class="titulo">Item Names</font></center>
+						<div id="RE3SET_itemName_holder" class="RE3SET_itemDesc_holder">
+							<!-- Item Name goes here -->
 						</div>
 					</div>
 				</div>
@@ -1822,7 +1837,7 @@
 				<div class="msg-raw" id="MSG_hexPrev">
 					Hex - Preview: <font class="right">Message Length: <font id="lbl-msg-length" title="Current Size">0 (Hex: 0)</font></font><br>
 					<div class="menu-separador-2"></div>
-					<div id="text-msg-raw" class="user-can-select">
+					<div id="text-msg-raw" class="user-can-select monospace">
 						<!-- Hex goes here -->
 					</div>
 				</div>

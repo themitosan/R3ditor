@@ -10,7 +10,7 @@ var RDT_totalMenus = 11;
 var MIX_currentMenu = 0;
 var SAVE_totalMenus = 3;
 var RE3_LIVE_prevCam = '';
-var RE3SET_totalMenus = 4;
+var RE3SET_totalMenus = 5;
 var R3_WINDOW_WIDTH = 1366;
 var R3_WINDOW_HEIGTH = 768;
 var RE3SET_currentMenu = 1;
@@ -586,7 +586,7 @@ function main_menu(anim){
 		LOG_addLog('warn', 'HEY - this menu are not avaliable yet - try again later!');
 	}
 	if (anim === 6){ // INI Editor
-		R3_DISC_setActivity('On INI', 'idle');
+		R3_DISC_setActivity('On INI Editor', 'idle');
 		document.title = APP_NAME + ' - INI Editor (*.INI)';
 		if (PROCESS_OBJ !== undefined && RE3_RUNNING === true){
 			killExternalSoftware(PROCESS_OBJ['th32ProcessID']);
@@ -1313,9 +1313,10 @@ function MSG_renderCamPreview(){
 function RDT_showMenu(id){
 	var c = 1;
 	RDT_loop = 0;
-	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + RDT_mapName + '.' + RDT_fileType;
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
+	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + RDT_mapName + '.' + RDT_fileType;
+	R3_DISC_setActivity('Editing map ' + RDT_mapName, RDT_locations[RDT_mapName][0] + ', ' + RDT_locations[RDT_mapName][1]);
 	if (RDT_lastFileOpened !== ''){
 		$('#RDT_recentFile').remove();
 	}
@@ -2654,6 +2655,7 @@ function RE3SET_showMenu(menuId){
 		$('#RE3SET-aba-menu-' + c).removeClass('aba-select');
 		c++;
 	}
+	// Item Description
 	if (menuId === 3){
 		RE3SET_itemDesc_recompileDB();
 		$('#RE3SET_INFODIV_itemDesc').css({'display': 'block'});
@@ -2661,6 +2663,7 @@ function RE3SET_showMenu(menuId){
 		$('#RE3SET_applyItemDesc').css({'display': 'none'});
 		$('#RE3SET_INFODIV_itemDesc').css({'display': 'none'});
 	}
+	// Save names
 	if (menuId === 4){
 		RE3SET_saveName_recompileDB();
 		$('#RE3SET_INFODIV_saveName').css({'display': 'block'});
@@ -2668,11 +2671,20 @@ function RE3SET_showMenu(menuId){
 		$('#RE3SET_applySaveName').css({'display': 'none'});
 		$('#RE3SET_INFODIV_saveName').css({'display': 'none'});
 	}
+	// Info names
+	if (menuId === 5){
+		RE3SET_itemName_recompileDB();
+		$('#RE3SET_INFODIV_itemName').css({'display': 'block'});
+	} else {
+		$('#RE3SET_applyItemName').css({'display': 'none'});
+		$('#RE3SET_INFODIV_itemName').css({'display': 'none'});
+	}
 	$('#img-logo').css({'display': 'none'});
 	$('#menu-RE3SET-editor').css({'display': 'block'});
 	$('#RE3SET-menu-' + menuId).css({'display': 'block'});
 	$('#RE3SET-aba-menu-' + menuId).addClass('aba-select');
 	$('#log-programa').css({'top': '626px', 'height': '82px'});
+	R3_DISC_setActivity('On RE3SET', '(' + DROP_fileTypes[RE3SET_fName][0] + ') Editing RE3 general settings');
 	RE3SET_itemDesc_tempWinTitle = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
 	document.title = RE3SET_itemDesc_tempWinTitle;
 	LOG_scroll();
@@ -2692,6 +2704,9 @@ function TRANSFER_MSG_TO_RE3SET(mode){
 	}
 	if (mode === 1){
 		$('#RE3SET-menu-4').css({'display': 'block'});
+	}
+	if (mode === 2){
+		$('#RE3SET-menu-5').css({'display': 'block'});
 	}
 }
 // Start Position

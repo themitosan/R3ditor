@@ -6,7 +6,7 @@
 /*
 	R3ditor Version
 */
-var INT_VER = '0.3.6';
+var INT_VER = '0.3.7';
 // Game Items
 var ITEM = {
 	'00': ['Empty Slot', 									   '', 																																																									   						],
@@ -350,6 +350,7 @@ var DIFICULDADE = {
 	'00': ['Hard']
 }
 var RDT_locations = {
+	'0000': ['Unknown Map', 				  'Unknown'],
 	'R100': ['Warehouse Save Room', 		   'Uptown'],
 	'R101': ['Warehouse', 					   'Uptown'],
 	'R102': ['Alley 1', 					   'Uptown'],
@@ -1494,21 +1495,22 @@ var RANGES = {
 	'RE3SET_1_saveNames': 		  [0, 0], 			  // PS Save Names are not stored on SLUS_009.23!
 	'RE3SET_2_saveNames':   	  [4202854, 4203166], // GC
 	'RE3SET_3_saveNames': 		  [0, 0], 			  // DC Save Names are not stored on 1ST_READ.BIN!
+	// Item name
+	'RE3SET_0_itemName': 		  [2317906, 2322438], // PC
+	'RE3SET_1_itemName': 		  [1150410, 1154942], // PS
+	'RE3SET_2_itemName': 		  [4232830, 4237362], // GC
+	'RE3SET_3_itemName': 		  [0, 0], 			  // DC Item Names are not stored on 1ST_READ.BIN!
 	/*
 		DROP
 		Nemesis Item Drops
 	*/
-	// PC
-	'DROP_0_itemIds': 	[2453680, 2453696],
+	'DROP_0_itemIds': 	[2453680, 2453696], // PC
 	'DROP_0_itemQuant': [2453696, 2453712],
-	// PS
-	'DROP_1_itemIds': 	[1169792, 1169808],
+	'DROP_1_itemIds': 	[1169792, 1169808], // PS
 	'DROP_1_itemQuant': [1169808, 1169824],
-	// GC
-	'DROP_2_itemIds': 	[4592272, 4592288],
+	'DROP_2_itemIds': 	[4592272, 4592288], // GC
 	'DROP_2_itemQuant': [4592288, 4592304],
-	// DC
-	'DROP_3_itemIds': 	[2813296, 2813312],
+	'DROP_3_itemIds': 	[2813296, 2813312], // DC
 	'DROP_3_itemQuant': [2813312, 2813328],
 	/*
 		IEDIT

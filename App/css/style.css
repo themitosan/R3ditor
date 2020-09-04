@@ -1263,6 +1263,9 @@ input[type='range' i]{
     left: 218px;
     position: sticky;
 }
+.monospace{
+    font-family: monospace;
+}
 .user-can-select{
     user-select: all;
 }
@@ -1673,6 +1676,9 @@ input[type='range' i]{
 }
 .center{
     float: center;
+}
+.txt-center{
+    text-align: center;
 }
 .code{
     padding: 4px;
@@ -3090,7 +3096,7 @@ input[type='range' i]{
     width: 84%;
     min-height: 18px;
     margin-top: -18px;
-    margin-left: 64px;
+    margin-left: 84px;
     text-align: -webkit-left;
 }
 .RE3SET_OTHER_startPosTab{

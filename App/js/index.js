@@ -98,7 +98,6 @@ function R3_DISCORD_INIT(){
     RPC = new DiscordRPC.Client({ transport: 'ipc' });
     if (navigator.onLine !== false){
         var loginRPC = RPC.login({clientId: atob(special_day_02[0]), clientSecret: (atob(special_day_02[2]) + atob(special_day_02[3])).slice(0, (atob(special_day_02[2]) + atob(special_day_02[3])).length - 1) + '-'});
-    	//console.info(loginRPC);
     	RPC.on('ready', () => {
     		rpcReady = true;
     		discUserName = RPC.user.username;
@@ -109,7 +108,16 @@ function R3_DISCORD_INIT(){
 }
 function R3_DISC_setActivity(det, stat){
 	if (R3_ENABLE_DISC !== false && rpcReady !== false){
-		RPC.setActivity({'details': det, 'state': stat, 'largeImageKey': atob(special_day_02[1]), 'maxpartysize': 0});
+		if (RE3_RUNNING === true){
+			RPC.setActivity({'details': 'Running RE3', 'state': 'On ' + RDT_locations[REALTIME_CurrentRDT][0], 'largeImageKey': atob(special_day_02[1]), 'maxpartysize': 0});
+		} else {
+			RPC.setActivity({'details': det, 'state': stat, 'largeImageKey': atob(special_day_02[1]), 'maxpartysize': 0});
+		}
+	}
+}
+function R3_DISC_clearActivity(){
+	if (R3_ENABLE_DISC !== false && rpcReady !== false){
+		RPC.clearActivity();
 	}
 }
 //
@@ -459,7 +467,11 @@ function runGame(exe, args){
 		LOG_addLog('warn', 'Resident Evil 3 / Mercenaries: ' + data.replace(new RegExp('\n', 'g'), '<br>'));
 		scrollDownLog();
 	});
+	MEM_JS_discInterval = setInterval(function(){
+		R3_DISC_setActivity('Running RE3', 'Loading map info...');
+	}, 800);
 	ls.on('close', (code) => {
+		clearInterval(MEM_JS_discInterval);
 		RE3_PID = 0;
 		MEM_JS_canRender = false;
 		RE3_LIVE_enableDisableToolBar(1);
