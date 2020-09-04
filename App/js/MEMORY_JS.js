@@ -330,7 +330,6 @@ function RE3_LIVE_closeForm(){
 	}
 	$('#R3DITOR_RE3_LIVESTATUS').css({'display': 'none'});
 	window.onkeypress = undefined;
-	R3_DISC_clearActivity();
 	LOG_scroll();
 }
 function RE3_LIVE_openForm(){
