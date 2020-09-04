@@ -480,6 +480,7 @@ function runGame(exe, args){
 		}
 		RE3_RUNNING = false;
 		RE3_LIVE_closeForm();
+		R3_DISC_clearActivity();
 		R3ditor_disableLiveStatusButton();
 		if (PROCESS_OBJ !== undefined){
 			clearInterval(MEM_JS_updatePosTimer);
