@@ -1196,7 +1196,8 @@
 			<!-- Avaliable filelist - FileList -->
 			<div class="fileList none" id="avaliable_fileList">
 				<center><font class="titulo" id="fileList_title">Files Avaliable</font></center>
-				<input type="button" value="Close" title="Close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
+				<input type="button" value="Close" title="Click here to close this menu" id="FILELIST_goBackBtn" onclick="main_closeFileList();" class="botao-menu btn-goBack-fix none right"/>
+				<input type="button" value="Import RDT" title="Click here to open RDT Import menu" id="FILELIST_openImportRDT" onclick="main_openImportRDT();" class="botao-menu btn-openImport-fix none"/>
 				<input type="button" class="botao-menu fileList_removeListBtn" id="FILELIST_removeRecentFiles" title="Click on this button to remove all files present on this list" value="Clear Recent List" onclick="R3DITOR_REMOVE_RECENT_FILES();"/>
 				<input type="text" id="fileList_RDT_SEARCH_TEXTBOX" maxlength="3" onclick="FILELIST_clearTextBox();" oninput="FILELIST_triggerSearchBox();" class="item-select-mod fileList_serachBox" title="Search RDT (11A = R11A.RDT)" placeholder="Search RDT...">
 				<!-- Lists -->
@@ -1232,12 +1233,13 @@
 			</div>
 			<!-- Import RDT -->
 			<div class="fileList_importRDT none" id="RDT_importRdtTo_div">
+				<input type="button" value="Close" title="Click here to close this menu" id="FILELIST_import_goBackBtn" onclick="main_closeImportRDT();" class="botao-menu btn-closeImport-fix none right"/>
 				<center>
 					<font class="titulo">Import RDT</font><br>
 					<input type="checkbox" id="fileList_import_DATA_AJ" checked="true" class="fileList_checkBox_dom"><font class="fileList_checkBox"> - <font onclick="UTILS_toggleChkBox('fileList_import_DATA_AJ');">Import to DATA_AJ (Easy)</font></font> 
 					<input type="checkbox" id="fileList_import_DATA_E" checked="true" class="fileList_checkBox_dom"><font class="fileList_checkBox"> - <font onclick="UTILS_toggleChkBox('fileList_import_DATA_E');">Import to DATA_E (Hard)</font></font>
 				</center>
-				<!-- Drop Div -->
+				<!-- Drop DIV -->
 				<div id="fileList_IMPORT_DIV" ondrop="RDT_importMap_DROP(event);" ondragover="R3_dragOverHandler(event);" class="fileList_IMPORT_DIV">
 					<div class="fileList_import_bg" id="fileList_import_bg"></div><div class="fileList_import_lbl" id="fileList_import_lbl">Drag and Drop your RDT file here</div>
 				</div>

@@ -1171,7 +1171,7 @@ input[type='range' i]{
 }
 .RDT_door_itemInfos{
     z-index: 1;
-    width: 1116px;
+    width: 1122px;
     margin-top: -136px;
     margin-left: 176px;
     position: relative;
@@ -1721,6 +1721,20 @@ input[type='range' i]{
     position: absolute;
     box-shadow: 0px 0px 6px #2b2b2b;
 }
+.btn-openImport-fix{
+    top: 10px;
+    left: 8px;
+    z-index: 1;
+    position: absolute;
+    box-shadow: 0px 0px 6px #2b2b2b;
+}
+.btn-closeImport-fix{
+    top: 10px;
+    z-index: 1;
+    left: 588px;
+    position: absolute;
+    box-shadow: 0px 0px 6px #2b2b2b;
+}
 .wizard{
     top: 28%;
     left: 28%;
@@ -1763,6 +1777,7 @@ input[type='range' i]{
 .fileList_importRDT{
     top: 54px;
     left: 690px;
+    z-index: 10;
     width: 634px;
     height: 338px;
     padding: 10px;

@@ -476,7 +476,16 @@ function main_closeFileList(){
 	if (RDT_arquivoBruto !== undefined || SAVE_arquivoBruto !== undefined || MSG_arquivoBruto !== undefined || TIM_arquivoBruto !== undefined){
 		$('#avaliable_fileList').css({'display': 'none'});
 		$('#FILELIST_goBackBtn').css({'display': 'none'});
+		main_closeImportRDT();
 	}
+}
+function main_openImportRDT(){
+	$('#RDT_importRdtTo_div').css({'display': 'inline'});
+	$('#FILELIST_openImportRDT').css({'display': 'none'});
+}
+function main_closeImportRDT(){
+	$('#RDT_importRdtTo_div').css({'display': 'none'});
+	$('#FILELIST_openImportRDT').css({'display': 'inline'});
 }
 /*
 	Main Functions

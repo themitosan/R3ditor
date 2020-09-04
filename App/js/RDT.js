@@ -168,6 +168,8 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 		RDT_messageCodesArray = [];
 		RDT_SLD_MASKS_POSITION = [];
 		RDT_MSGTEXT_MAXSIZE = undefined;
+		$('#FILELIST_openImportRDT').css({'display': 'block'});
+		$('#FILELIST_import_goBackBtn').css({'display': 'block'});
 		ORIGINAL_FILENAME = rdtFile.replace(new RegExp('/', 'gi'), '\\');
 		$('#RDT-aba-menu-4').css({'display': 'none'});
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
