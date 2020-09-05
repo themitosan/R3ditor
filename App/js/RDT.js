@@ -248,7 +248,7 @@ function RDT_CARREGAR_ARQUIVO(rdtFile){
 			}
 			RDT_BG_display();
 		} else {
-			RDT_setHeaderPointers();
+			RDT_V2_PREPARE();
 		}
 	} else {
 		LOG_addLog('error', 'MAP - ERROR: Unable to read ' + getFileName(rdtFile) + '!');
@@ -322,8 +322,7 @@ function RDT_getSLDPosition(){
 	RDT_SLD_selectMask();
 }
 function RDT_decryptSldMask(startPosition){
-	var c, t_m;
-	c = t_m = 0;
+	var c = 0, t_m = c;
 	document.getElementById('RDT_SLD_LAYER_BLOCK_LIST').innerHTML = '';
 	var pushes = processBIO3Vars(RDT_arquivoBruto.slice(parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][0]), parseInt(startPosition + RANGES['SLD_LAYER_count_offsets'][1]))); // Offset count_offsets
 	document.getElementById('SLD_Layer_totalBlocks').innerHTML = '<font class="user-can-select">' + pushes + '</font> (Hex: <font class="user-can-select">' + pushes.toString(16).toUpperCase() + '</font>)';
@@ -370,13 +369,11 @@ function RDT_decryptSldMask(startPosition){
 				currentPos = parseInt(currentPos + 16);
 			}
 			// Attempt to render
-
 			var currentCam = document.getElementById('RDT_SLD_SELECT_LAYER').value;
 			var maskImage = localStorage.getItem('RDT_CAM_' + currentCam + '_MASK');
 			if (maskImage !== null && fs.existsSync(maskImage) === true){
 				RDT_RENDER_MASK(c, maskImage, parseInt(LAYER_source_X, 16), parseInt(LAYER_source_Y, 16), parseInt(LAYER_pos_X, 16), parseInt(LAYER_pos_Y, 16), LAYER_crop_type);
 			}
-
 			var L_replace_w = LAYER_width.replace('N/A', '');
 			var L_replace_h = LAYER_height.replace('N/A', '');
 			var HTML_LAYER_TEMPLATE = '<div class="RDT-Item RDT-SLD-BLOCK-bg"><input type="button" class="btn-remover-comando RDT_modifyBtnFix" id="RDT_editDoor-0" value="Modify" onclick="WIP();">' + 
@@ -446,16 +443,13 @@ function RDT_SLD_openSldOnHex(){
 	}
 }
 /*
-	Cameras
-	This will have a different way to retrive the infos... for now!
-	
-	Cam Hex Size = 20 (In string mode: 32 * total de letras por bloco hex = 64 - Offset)
+	Cameras (RID)
+	This will have a different way to retrive the infos... for now! (Different = Correct)
+	Cam Hex Size = 20 (In string mode: 32 * total chars in string = 64 - Offset)
 */
 function RDT_getCameras(){
 	if (RDT_arquivoBruto !== undefined){
-		var c = 0;
-		var start = 192;
-		var offset = 64;
+		var c = 0, start = 192, offset = 64;
 		var extractTotCams = parseInt(RDT_arquivoBruto.slice(2, 4), 16);
 		var extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));
 		while(RDT_totalCameras < extractTotCams){
@@ -472,8 +466,7 @@ function RDT_getCameras(){
 	}
 }
 function RDT_decompileCameras(id){
-	var CAM_IMG, titleFileName;
-	var CAM_ID = id.toString(16).toUpperCase();
+	var CAM_IMG, titleFileName, CAM_ID = id.toString(16).toUpperCase();
 	if (CAM_ID.length < 2){
 		CAM_ID = '0' + CAM_ID;
 	}
@@ -484,8 +477,6 @@ function RDT_decompileCameras(id){
 		CAM_IMG = APP_PATH + '\\App\\Img\\404.png';
 		titleFileName = 'Unable to render cam preview!\nFile not found (404)';
 	}
-	// WIP Thing
-	// $('#RDT_SLD_SELECT_CAM').append('<option value="' + CAM_ID + '">Camera ' + CAM_ID + '</option>');
 	var CAM_HEX = localStorage.getItem('RDT_Camera-' + id);
 	var CAM_TYPE     = CAM_HEX.slice(RANGES['RDT_cam-0-type'][0],     RANGES['RDT_cam-0-type'][1]);
 	var CAM_IDENT    = CAM_HEX.slice(RANGES['RDT_cam-0-ident'][0],	  RANGES['RDT_cam-0-ident'][1]);
@@ -548,26 +539,25 @@ function RDT_copyPasteCameraInfo(mode){
 	// Paste
 	if (mode === 2){
 		document.getElementById('RDT_editCamera_camType').value = TEMP_RDT_editCamera_camType.toUpperCase();
-		document.getElementById('RDT_editCam_ident').value = TEMP_RDT_editCam_ident.toUpperCase();
-		document.getElementById('RDT_XP_Origin-edit').value = TEMP_RDT_XP_Origin.toUpperCase();
-		document.getElementById('RDT_XPS_Origin-edit').value = TEMP_RDT_XPS_Origin.toUpperCase();
-		document.getElementById('RDT_YP_Origin-edit').value = TEMP_RDT_YP_Origin.toUpperCase();
-		document.getElementById('RDT_YPS_Origin-edit').value = TEMP_RDT_YPS_Origin.toUpperCase();
-		document.getElementById('RDT_ZP_Origin-edit').value = TEMP_RDT_ZP_Origin.toUpperCase();
-		document.getElementById('RDT_ZPS_Origin-edit').value = TEMP_RDT_ZPS_Origin.toUpperCase();
-		document.getElementById('RDT_XD_Direction-edit').value = TEMP_RDT_XD_Direction.toUpperCase();
+		document.getElementById('RDT_editCam_ident').value      = TEMP_RDT_editCam_ident.toUpperCase();
+		document.getElementById('RDT_XP_Origin-edit').value     = TEMP_RDT_XP_Origin.toUpperCase();
+		document.getElementById('RDT_XPS_Origin-edit').value    = TEMP_RDT_XPS_Origin.toUpperCase();
+		document.getElementById('RDT_YP_Origin-edit').value     = TEMP_RDT_YP_Origin.toUpperCase();
+		document.getElementById('RDT_YPS_Origin-edit').value    = TEMP_RDT_YPS_Origin.toUpperCase();
+		document.getElementById('RDT_ZP_Origin-edit').value     = TEMP_RDT_ZP_Origin.toUpperCase();
+		document.getElementById('RDT_ZPS_Origin-edit').value    = TEMP_RDT_ZPS_Origin.toUpperCase();
+		document.getElementById('RDT_XD_Direction-edit').value  = TEMP_RDT_XD_Direction.toUpperCase();
 		document.getElementById('RDT_XDS_Direction-edit').value = TEMP_RDT_XDS_Direction.toUpperCase();
-		document.getElementById('RDT_YD_Direction-edit').value = TEMP_RDT_YD_Direction.toUpperCase();
+		document.getElementById('RDT_YD_Direction-edit').value  = TEMP_RDT_YD_Direction.toUpperCase();
 		document.getElementById('RDT_YDS_Direction-edit').value = TEMP_RDT_YDS_Direction.toUpperCase();
-		document.getElementById('RDT_ZD_Direction-edit').value = TEMP_RDT_ZD_Direction.toUpperCase();
+		document.getElementById('RDT_ZD_Direction-edit').value  = TEMP_RDT_ZD_Direction.toUpperCase();
 		document.getElementById('RDT_ZDS_Direction-edit').value = TEMP_RDT_ZDS_Direction.toUpperCase();
-		document.getElementById('RDT_RD_Direction-edit').value = TEMP_RDT_RD_Direction.toUpperCase();
+		document.getElementById('RDT_RD_Direction-edit').value  = TEMP_RDT_RD_Direction.toUpperCase();
 		document.getElementById('RDT_RDS_Direction-edit').value = TEMP_RDT_RDS_Direction.toUpperCase();
 	}
 }
 function RDT_CAMERA_APPLY(id){
-	var reason;
-	var canCompile = true;
+	var reason, canCompile = true;
 	var ORIGINAL_CM = localStorage.getItem('RDT_Camera-' + id);
 	var CAM_NEW_CI  = document.getElementById('RDT_editCam_ident').value.toLowerCase();
 	var CAM_NEW_CT  = parseEndian(document.getElementById('RDT_editCamera_camType').value.toLowerCase());
@@ -724,8 +714,7 @@ function RDT_EMD_USEPLAYERPOS(){
 	document.getElementById('RDT_enemyNPC-edit-R').value = REALTIME_R_Pos;
 }
 function RDT_ENEMYNPC_APPLY(id){
-	var reason;
-	var canCompile = true;
+	var reason, canCompile = true;
 	var header     = localStorage.getItem('RDT_enemy-' + id).slice(RANGES['RDT_enemy-header'][0],   RANGES['RDT_enemy-header'][1]);
 	var offset_0   = localStorage.getItem('RDT_enemy-' + id).slice(RANGES['RDT_enemy-offset-0'][0], RANGES['RDT_enemy-offset-0'][1]);
 	var offset_1   = localStorage.getItem('RDT_enemy-' + id).slice(RANGES['RDT_enemy-offset-1'][0], RANGES['RDT_enemy-offset-1'][1]);
@@ -804,8 +793,7 @@ function RDT_ENEMYNPC_APPLY(id){
 }
 function RDT_getEnemies(hx){
 	if (RDT_arquivoBruto !== undefined){
-		var c = 0;
-		var enemyRaw = getAllIndexes(RDT_arquivoBruto, hx);
+		var c = 0, enemyRaw = getAllIndexes(RDT_arquivoBruto, hx);
 		while (c < enemyRaw.length){
 			var check_0 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 40), parseInt(enemyRaw[c] + 48)) === '00000000';
 			var check_1 = RDT_arquivoBruto.slice(parseInt(enemyRaw[c] + 12), parseInt(enemyRaw[c] + 18)) === '000000';
@@ -826,7 +814,7 @@ function RDT_getEnemies(hx){
 	}
 }
 /*
-	3D Props WIP!
+	3D Props [WIP SAFADEX]
 */
 function RDT_getPropModelsArray(){
 	if (RDT_arquivoBruto !== undefined){
@@ -860,8 +848,8 @@ function RDT_decompile3DProp(id){
 	if (id !== undefined){
 		var PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
 
-		var PROP_HEADER = PROP_RAW.slice(0, 2);
-		var PROP_ID = PROP_RAW.slice(2, 4);
+		var PROP_HEADER   = PROP_RAW.slice(0, 2);
+		var PROP_ID       = PROP_RAW.slice(2, 4);
 		var PROP_OFFSET_0 = PROP_RAW.slice(4, 16);
 		var PROP_OFFSET_1 = PROP_RAW.slice(16, 18);
 		var PROP_OFFSET_2 = PROP_RAW.slice(18, 28);
@@ -886,8 +874,7 @@ function RDT_3D_PROP_APPLY(id){
 	if (id !== undefined){
 		var OLD_PROP_RAW = localStorage.getItem('RDT_3D_PROP_' + id);
 		if (OLD_PROP_RAW !== null){
-			var reason;
-			var canCompile = true;
+			var reason, canCompile = true;
 			var PROP_HEADER   = OLD_PROP_RAW.slice(0, 2);
 			var PROP_ID       = OLD_PROP_RAW.slice(2, 4);
 			var PROP_OFFSET_0 = OLD_PROP_RAW.slice(4, 16);
@@ -993,8 +980,7 @@ function RDT_getMessageCodesArray(){
 	}
 }
 function RDT_getMessageCodes(hx){
-	var c = 0;
-	var msgCodeRaw = getAllIndexes(RDT_arquivoBruto, hx);
+	var c = 0, msgCodeRaw = getAllIndexes(RDT_arquivoBruto, hx);
 	while (c < msgCodeRaw.length){
 		var check_0 = RDT_arquivoBruto.slice(parseInt(msgCodeRaw[c] - 4), parseInt(msgCodeRaw[c] - 2));
 		if (check_0 === '63'){
@@ -1053,8 +1039,7 @@ function RDT_decompileMessageCode(index, hex){
 	}
 }
 function RDT_MSGCODE_APPLY(id){
-	var reason, offset;
-	var canCompile  = true;
+	var reason, offset, canCompile = true;
 	var readMode 	= document.getElementById('RDT_MSGCODE-edit-display').value;
 	var novaX		= document.getElementById('RDT_MSGCODE-edit-X').value.slice(0, 4).toLowerCase();
 	var novaZ		= document.getElementById('RDT_MSGCODE-edit-Z').value.slice(0, 4).toLowerCase();
@@ -1144,10 +1129,7 @@ function RDT_getDoorsArray(str){
 function RDT_decompileDoors(index, location){
 	if (location !== undefined && location !== null){
 		var dr_key, dr_xPos, dr_yPos, dr_zPos, dr_rPos, dr_type, dr_nXpos, dr_nYpos, dr_nZpos, dr_nRpos, dr_nStage, dr_zIndex, dr_nCamPos, dr_offset0, dr_offset1, dr_lockFlag, dr_openOrient, dr_nRoomNumber, dr_displayText, doorLeadsTo_title, EXTREME_MASSIVE_HTML_TEMPLATE;
-		var reason 		   = '';
-		var itemTitle 	   = '';
-		var canAdd         = true;
-		var loc 		   = parseInt(location);
+		var reason = '', itemTitle = reason, canAdd = true, loc = parseInt(location);
 		var DOOR_RAW 	   = RDT_arquivoBruto.slice(loc, parseInt(loc + 64));
 		var dr_id 	  	   = DOOR_RAW.slice(RANGES['RDT_door-id'][0], 			    	RANGES['RDT_door-id'][1]);
 		var dr_header 	   = DOOR_RAW.slice(RANGES['RDT_door-header'][0], 		    	RANGES['RDT_door-header'][1]);
@@ -1296,13 +1278,13 @@ function RDT_decompileDoors(index, location){
 function RDT_copyPastePos(mode){
 	// Copy Next
 	if (mode === 0){
-		RDT_TEMP_NEXTX 		 = document.getElementById('RDT_door-edit-NX').value.toUpperCase();
-		RDT_TEMP_NEXTY 		 = document.getElementById('RDT_door-edit-NY').value.toUpperCase();
-		RDT_TEMP_NEXTZ 		 = document.getElementById('RDT_door-edit-NZ').value.toUpperCase();
-		RDT_TEMP_NEXTR 		 = document.getElementById('RDT_door-edit-NR').value.toUpperCase();
-		RDT_TEMP_NEXT_STAGE  = document.getElementById('RDT_door-edit-NS').value.toUpperCase();
-		RDT_TEMP_NEXT_ROOM   = document.getElementById('RDT_door-edit-NRN').value.toUpperCase();
-		RDT_TEMP_ZINDEX      = document.getElementById('RDT_door-edit-zIndex').value.toUpperCase();
+		RDT_TEMP_NEXTX 		= document.getElementById('RDT_door-edit-NX').value.toUpperCase();
+		RDT_TEMP_NEXTY 		= document.getElementById('RDT_door-edit-NY').value.toUpperCase();
+		RDT_TEMP_NEXTZ 		= document.getElementById('RDT_door-edit-NZ').value.toUpperCase();
+		RDT_TEMP_NEXTR 		= document.getElementById('RDT_door-edit-NR').value.toUpperCase();
+		RDT_TEMP_NEXT_STAGE = document.getElementById('RDT_door-edit-NS').value.toUpperCase();
+		RDT_TEMP_NEXT_ROOM  = document.getElementById('RDT_door-edit-NRN').value.toUpperCase();
+		RDT_TEMP_ZINDEX     = document.getElementById('RDT_door-edit-zIndex').value.toUpperCase();
 		if (enable_mod === true){
 			RDT_TEMP_NEXT_CAMERA = document.getElementById('RDT_door-edit-NC').value.toUpperCase();
 		} else {
@@ -1341,9 +1323,7 @@ function RDT_DOOR_copyPasteLockKey(mode){
 	}
 }
 function RDT_DOOR_APPLY(index){
-	var reason = '';
-	var canCompile = true;
-	var offset0, DOOR_COMPILED;
+	var reason = '', canCompile = true, offset0, DOOR_COMPILED;
 	var ident 	= localStorage.getItem('RDT_DOOR-' + parseInt(index - 1));
 	var header 	= ident.slice(RANGES['RDT_door-header'][0], RANGES['RDT_door-doorIdentifier'][1]).toLowerCase();
 	var hexType = header.slice(0, 2);
@@ -1461,8 +1441,7 @@ function RDT_DOOR_APPLY(index){
 	Audios with names related with current map
 */
 function RDT_getAllRelatedAudios(){
-	var c = 0;
-	var MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
+	var c = 0, MAPID = getFileName(ORIGINAL_FILENAME).slice(1, getFileName(ORIGINAL_FILENAME).length);
 	var getAudioArray = fs.readdirSync(APP_PATH + '\\Assets\\DATA_A\\VOICE\\').filter(fn => fn.startsWith('M' + MAPID));
 	while(c < getAudioArray.length){
 		var AUDIO_HTML_TEMPLATE = '<div class="RDT-Item RDT-audio-bg" id="RDT_audio_details-' + c + '">(' + parseInt(c + 1) + ') File Name: <font class="italic">' + getAudioArray[c] + '</font>' + 
@@ -1556,8 +1535,7 @@ function RDT_generateItemIndexRaw(str){
 	}
 }
 function RDT_decompileItens(id, edit){
-	var RDT_reason;
-	var RDT_CanRender = true;
+	var RDT_reason, RDT_CanRender = true;
 	var currentItem = localStorage.getItem('RDT_Item-' + id);
 	var header = currentItem.slice(RANGES['RDT_item-header'][0], RANGES['RDT_item-header'][1]);
 	if (header !== '67' && header !== '68'){

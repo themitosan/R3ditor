@@ -1464,6 +1464,13 @@ var R3_LR_MODE = {
 */
 var RANGES = {
 	/*
+		RDT V2 Ranges [WIP]
+	*/
+	'RDT_FILE_MAP_HEADER':			 [0, 192],
+	// Header
+	'RDT_HEADER_CAM_TOTAL':	     	   [0, 4],
+	'RDT_HEADER_SCD_POS': 		   [144, 148],
+	/*
 		Watermark Check
 	*/
 	'WATERMARK_CHECK_0': [562,  566],
@@ -1720,13 +1727,6 @@ var RANGES = {
 	*/
 	'TIM_header': 					   [0, 8], // Header
 	'TIM_BPP': 						  [8, 16], // Bit Per Pixel (BPP)
-	/*
-		RDT Ranges [WIP]
-	*/
-	'RDT_FILE_MAP_HEADER':			 [0, 192],
-	// Header
-	'RDT_HEADER_CAM_TOTAL':	     	   [0, 4],
-	'RDT_HEADER_SCD_POS': 		   [144, 148],
 	////////////////////////////////////////////////////////////////////////////////////////
 	/*
 		Item, File or Map
