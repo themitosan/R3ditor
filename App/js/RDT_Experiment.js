@@ -1,13 +1,16 @@
 /*
 	R3ditor - RDT_Experiment.js
 	Por mitosan/mscore/misto_quente/mscorehdr
-	Please don't rely on this.
+	Please don't rely your hopes on this.
 
 	This is only a experiment, so don't believe on these lines - it will not save the world...
 	...Or it will? Who knows!
 */
-// C. Location
-var RDT_V2_READER_CURRENT_SECTION, RDT_V2_READER_INTERVAL, RDT_V2_SECOND_INTERVAL, RDT_V2_READER_CURRENT_LOCATION, RDT_V2_EXT_RUNNING = false;
+/*
+	RDT Extract Vars
+*/
+var RDT_DECOMPILER_RUNNING_MASTER = false, RDT_V2_EXT_RUNNING = false;
+var RDT_V2_READER_CURRENT_SECTION, RDT_V2_READER_INTERVAL, RDT_V2_SECOND_INTERVAL, RDT_V2_READER_CURRENT_LOCATION;
 /*
 	Header Vars
 */
@@ -15,14 +18,14 @@ var RDT_V2_MAP_HEADER;		  // Hx     Hx
 var RDT_V2_HEADER_RID_TOTAL;  // 00 --> 02: Number of Total Cameras (RID)
 var RDT_V2_HEADER_UNK_0;      // 08 --> 09: ???
 var RDT_V2_HEADER_BOUNDARIES; // 20 --> 21: Boundaries
-var RDT_V2_HEADER_CAM_POS;    // 24 --> 25: Camera Position (Start)
+var RDT_V2_HEADER_CAM_POS;    // 24 --> 25: Camera Position
 var RDT_V2_HEADER_COLISION;   // 28 --> 29: Camera Colision
-var RDT_V2_HEADER_TIM; 	   	  // 30 --> 31: Total Objects? (TIM)
+var RDT_V2_HEADER_OBJ; 	   	  // 30 --> 31: Total Objects?  (TIM)
 var RDT_V2_HEADER_LIGHTS;     // 2C --> 2D: Lights (LIT)
 var RDT_V2_HEADER_UNK_1;      // 38 --> 39: ???
 var RDT_V2_HEADER_MSG;        // 3C --> 3D: Text Pointers (if 0000 = no text)
 var RDT_V2_HEADER_SCD;	   	  // 48 --> 49: Script Execution (SCD)
-var RDT_V2_HEADER_UNK_2;      // 58 --> 59: ??? - Nemesis drop? (Sometimes it points to file end... Why?)
+var RDT_V2_HEADER_UNK_2;      // 58 --> 59: ??? (Nemesis drop? Sometimes it points to file end... Why?)
 var RDT_V2_HEADER_PRI;        // ?? --> ??
 /*
 	SCD Vars
@@ -40,7 +43,11 @@ function RDT_V2_PREPARE(){
 				Start reading pointers in Hex Order
 			*/
 			// Total Cameras
-			RDT_V2_HEADER_RID_TOTAL = parseEndian(RDT_V2_MAP_HEADER.slice(RANGES['RDT_HEADER_CAM_TOTAL'][0], RANGES['RDT_HEADER_CAM_TOTAL'][1]));
+			RDT_V2_HEADER_RID_TOTAL = parseEndian(RDT_V2_MAP_HEADER.slice(RANGES['RDT_HEADER_RID_MAX'][0], RANGES['RDT_HEADER_RID_MAX'][1]));
+			// Objects
+			RDT_V2_HEADER_OBJ 		= parseEndian(RDT_V2_MAP_HEADER.slice(RANGES['RDT_HEADER_OBJ_POS'][0], RANGES['RDT_HEADER_OBJ_POS'][1]));
+			// Text Message
+			RDT_V2_HEADER_MSG		= parseEndian(RDT_V2_MAP_HEADER.slice(RANGES['RDT_HEADER_MSG_POS'][0], RANGES['RDT_HEADER_MSG_POS'][1]));
 			// Script Execution (SCD)
 			RDT_V2_HEADER_SCD       = parseEndian(RDT_V2_MAP_HEADER.slice(RANGES['RDT_HEADER_SCD_POS'][0], RANGES['RDT_HEADER_SCD_POS'][1]));
 			// End
@@ -54,8 +61,8 @@ function RDT_V2_PREPARE(){
 	}
 }
 function RDT_V2_START(){
-	alert('WARN - This is WIP! Please, disable Experimental mode on Settings.');
-	LOG_addLog('warn', 'WARN - This is WIP! Please, disable Experimental mode on Settings.');
+	alert('WARN - RDT Decompiler V2 is WIP! Please, disable \"Decompile using experimental mode (WIP)\" mode on Settings.');
+	LOG_addLog('warn', 'WARN - RDT Decompiler V2 is WIP! Please, disable \"Decompile using experimental mode (WIP)\" mode on Settings.');
 	// RDT_V2_EXTRACT();
 }
 /*
@@ -65,20 +72,54 @@ function RDT_V2_EXTRACT(){
 	// Start with cameras
 	RDT_V2_EXTRACT_RID();
 	RDT_V2_READER_INTERVAL = setInterval(function(){
-		if (RDT_V2_EXT_RUNNING !== true){
-			RDT_V2_GOTO_NEXT_SECTION();
+		if (RDT_V2_READER_CURRENT_LOCATION !== RDT_arquivoBruto.length || RDT_V2_READER_CURRENT_LOCATION < RDT_arquivoBruto.length){
+			if (RDT_V2_EXT_RUNNING !== true){
+				RDT_V2_GOTO_NEXT_SECTION();
+			} else {
+				console.info('Waiting ' + RDT_V2_READER_CURRENT_SECTION);
+			}
 		} else {
-			console.info('Waiting ' + RDT_V2_READER_CURRENT_SECTION);
+			// Done Loading (Show Menu)
+			clearInterval(RDT_V2_READER_INTERVAL);
 		}
 	}, 1000);
 }
 function RDT_V2_GOTO_NEXT_SECTION(){
 	var nextPos = RDT_V2_READER_CURRENT_LOCATION.toString(16).match(/.{2,2}/g).reverse().toString().replace(new RegExp(',', 'g'), '');
-	//
+	var OBJ_FORMAT = parseInt(RDT_V2_HEADER_OBJ, 16).toString(16);
+	var MSG_FORMAT = parseInt(RDT_V2_HEADER_MSG, 16).toString(16);
 	var SCD_FORMAT = parseInt(RDT_V2_HEADER_SCD, 16).toString(16);
-	//
+	// OBJ
+	if (nextPos === OBJ_FORMAT){
+		RDT_V2_EXTRACT_OBJ();
+	}
+	// SCD
 	if (nextPos === SCD_FORMAT){
 		RDT_V2_EXTRACT_SCD();
+	}
+	// MSG
+	if (nextPos === MSG_FORMAT){
+		RDT_V2_EXTRACT_MSG();
+	}
+}
+/*
+	Objects / TIM (OBJ)
+*/
+function RDT_V2_EXTRACT_OBJ(){
+	if (RDT_arquivoBruto !== undefined){
+		RDT_V2_EXT_RUNNING = true;
+		RDT_V2_READER_CURRENT_SECTION = 'OBJ';
+		// WIP
+	}
+}
+/*
+	Text Messages Database (MSG)
+*/
+function RDT_V2_EXTRACT_MSG(){
+	if (RDT_arquivoBruto !== undefined){
+		RDT_V2_EXT_RUNNING = true;
+		RDT_V2_READER_CURRENT_SECTION = 'MSG';
+		// WIP
 	}
 }
 /*
@@ -111,6 +152,7 @@ function RDT_V2_EXTRACT_RID(){
 		RDT_V2_EXT_RUNNING = true;
 		RDT_V2_READER_CURRENT_SECTION = 'RID';
 		LOG_addLog('log', 'INFO - RDT V2: Reading Camera Positions...');
+		//
 		var c = 0, start = 192, offset = 64;
 		var extractTotCams = parseInt(RDT_arquivoBruto.slice(2, 4), 16);
 		var extract = RDT_arquivoBruto.slice(start, parseInt(start + offset));

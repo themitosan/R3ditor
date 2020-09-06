@@ -1316,7 +1316,7 @@ function RDT_showMenu(id){
 	$('#img-logo').css({'display': 'none'});
 	$('#avaliable_fileList').css({'display': 'none'});
 	document.title = APP_NAME + ' - Map Editor (' + RDT_fileType + ' Mode) - File: ' + RDT_mapName + '.' + RDT_fileType;
-	R3_DISC_setActivity('Editing map ' + RDT_mapName, RDT_locations[RDT_mapName][0] + ', ' + RDT_locations[RDT_mapName][1]);
+	R3_DISC_setActivity('Editing ' + RDT_mapName, RDT_locations[RDT_mapName][0] + ', ' + RDT_locations[RDT_mapName][1]);
 	if (RDT_lastFileOpened !== ''){
 		$('#RDT_recentFile').remove();
 	}

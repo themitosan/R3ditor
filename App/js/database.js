@@ -1467,8 +1467,10 @@ var RANGES = {
 		RDT V2 Ranges [WIP]
 	*/
 	'RDT_FILE_MAP_HEADER':			 [0, 192],
-	// Header
-	'RDT_HEADER_CAM_TOTAL':	     	   [0, 4],
+	// Header (In order)
+	'RDT_HEADER_RID_MAX':	     	   [0, 4],
+	'RDT_HEADER_OBJ_POS': 			 [94, 98],
+	'RDT_HEADER_MSG_POS': 		   [120, 124],
 	'RDT_HEADER_SCD_POS': 		   [144, 148],
 	/*
 		Watermark Check
