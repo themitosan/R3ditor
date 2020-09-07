@@ -993,21 +993,20 @@ function R3_showAbout(){
 	$('#menu-utility-aba-5').css({'display': 'none'});
 	$('#mainMenu-patcher-div').css({'display': 'none'});
 	$('#mainMenu-exeEdit-div').css({'display': 'none'});
+	$('#ABOUT_BG').fadeIn({duration: 10000, queue: false});
 	if (DESIGN_ENABLE_ANIMS === true){
-		$('#ABOUT_BG').fadeIn({duration: 4000, queue: false});
 		$('#img-logo').fadeOut({duration: 120, queue: false});
 		$('#about-r3ditor').fadeIn({duration: 500, queue: false});
 		$('#ABOUT_R3ditorLogo').fadeIn({duration: 1500, queue: false});
 	} else {
 		$('#img-logo').css({'display': 'none'});
-		$('#ABOUT_BG').css({'display': 'inline'});
 		$('#about-r3ditor').css({'display': 'inline'});
 		$('#ABOUT_R3ditorLogo').css({'display': 'inline'});
 	}
 	R3_DISC_setActivity('On About', discUserName + ' are a blessed person!');
 	MISC_unblurImg();
 }
-// Eu preciso parar de pensar em animações assim...
+// I need stop thinking in things like this...
 function MISC_unblurImg(){
 	if (DESIGN_ENABLE_ANIMS === true){
 		var c = 10;
