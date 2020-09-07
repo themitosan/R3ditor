@@ -2833,6 +2833,7 @@ function IEDIT_showEdit(mode, id, hex){
 function PATCHER_showMenu(){
 	$('#img-logo').css({'display': 'none'});
 	$('#menu-topo-MOD').css({'display': 'none'});
+	R3_DISC_setActivity('On Patcher', 'Applying R3ditor patch');
 	if (DESIGN_ENABLE_ANIMS === false){
 		$('#R3_Patcher_main_menu').css({'display': 'inline', 'height': '400px', 'top': '124px'});
 	} else {
@@ -2844,10 +2845,10 @@ function PATCHER_showNotice(noticeTxt, mode){
 	// Mode 0: Sucess, 1: Error
 	if (mode === 0){
 		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #00ff0075'});
-		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #00ff003d'});
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 300px #00ff003d'});
 	} else {
 		$('#R3_PATCHER_notice').css({'text-shadow': '0 0 8px #ff000075'});
-		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 30px #ff00008a'});
+		$('#R3_Patcher_main_menu').css({'box-shadow': '0 0 300px #ff00008a'});
 	}
 	$('#R3_Patcher_main_menu').css({'height': '120px', 'top': '270px'});
 	document.getElementById('R3_PATCHER_notice').innerHTML = '<center>' + noticeTxt + '</center>';

@@ -3,11 +3,14 @@
 	Por mitosan/mscore/misto_quente/mscorehdr
 	Can you give me a tea? Pleeeeeease! ~wink~ ;)
 */
+// RE3SET Tabs
+var RE3SET_LOADTAB_1 = false, RE3SET_LOADTAB_2 = false, RE3SET_LOADTAB_3 = false, RE3SET_LOADTAB_4 = false, RE3SET_LOADTAB_5 = false;
+//
 var RE3SET_iniTab, RE3SET_fName, RE3SET_gameVersion, RE3SET_arquivoBruto, RE3SET_jillHard, RE3SET_carlosHard, RE3SET_jillEasy, RE3SET_carlosEasy, RE3SET_inventoryHex;
 // Edit Start Item Vars
 var RE3SET_itemStart_currentId, RE3SET_itemStart_currentPlayer, RE3SET_itemStart_currentMode;
 // Edit Start Pos. Vars
-var RE3SET_startPos_xPos, RE3SET_startPos_yPos, RE3SET_startPos_rPos, RE3SET_startPos_roomNumber, RE3SET_startPos_roomCam;
+var RE3SET_startPos_xPos, RE3SET_startPos_yPos, RE3SET_startPos_rPos, RE3SET_startPos_roomNumber, RE3SET_startPos_roomCam, RE3SET_startPos_raw;
 // Edit Item Desc
 var RE3SET_itemDesc_canSave = false;
 var RE3SET_itemDesc_origSize = 19872;
@@ -30,7 +33,6 @@ function RE3SET_loadFile(exe, mode){
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
 	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
-	var RE3SET_LOADTAB_1 = false, RE3SET_LOADTAB_2 = false, RE3SET_LOADTAB_3 = false, RE3SET_LOADTAB_4 = false, RE3SET_LOADTAB_5 = false;
 	// Enable Tabs
 	if (RE3SET_gameVersion === 0){ // PC
 		RE3SET_iniTab = 1;
@@ -96,6 +98,7 @@ function RE3SET_loadFile(exe, mode){
 		RE3SET_startPos_rPos  	   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][0],   RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomRpos'][1]);
 		RE3SET_startPos_roomNumber = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][0], RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomNumber'][1]);
 		RE3SET_startPos_roomCam    = RE3SET_arquivoBruto.slice(RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][0],    RANGES['RE3SET_local_' + RE3SET_gameVersion + '_roomCam'][1]);
+		RE3SET_startPos_raw 	   = RE3SET_startPos_xPos + RE3SET_startPos_yPos + RE3SET_startPos_rPos + RE3SET_startPos_roomNumber + RE3SET_startPos_roomCam;
 		RE3SET_showOtherSettingsInfo();
 	} else {
 		$('#RE3SET-aba-menu-2').addClass('none');
@@ -136,9 +139,9 @@ function RE3SET_loadFile(exe, mode){
 	/*
 		End - Using DROP_fileTypes because it works!
 	*/
-	LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
-	LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 	if (mode === 0){
+		LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
+		LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		main_menu(12);
 		if (RE3SET_gameVersion === 2){
 			$('#RE3SET-aba-menu-3').addClass('aba-left-fix');
@@ -647,8 +650,7 @@ function RE3SET_ITEMSTART_APPLY(itemHex){
 function RE3SET_RECOMPILE(mode, hexReplace){
 	var EXE_REASON = '';
 	var EXE_CAN_SAVE = true;
-	var rTab = RE3SET_currentMenu;
-	var EXE_START, EXE_END, EXE_FINAL;
+	var rTab = RE3SET_currentMenu, EXE_START, EXE_END, EXE_FINAL;
 	if (mode === 0){
 		EXE_START = RE3SET_arquivoBruto.slice(0, RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][0]);
 		EXE_END   = RE3SET_arquivoBruto.slice(RANGES['RE3SET_invent_' + RE3SET_gameVersion + '_startItems'][1], RE3SET_arquivoBruto.length);
@@ -754,7 +756,7 @@ function RE3SET_RECOMPILE(mode, hexReplace){
 function RE3SET_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (RE3SET_arquivoBruto !== undefined){
-		try{
+		try {
 			var RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + DROP_fileTypes[RE3SET_fName][2];
 			fs.writeFileSync(APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName, RE3SET_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + RE3SET_backupName);

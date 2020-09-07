@@ -447,7 +447,7 @@ function R3_CHECK_WATERMARK(WM_fileToCheck){
 				LOG_addLog('error', 'ERROR - Reason: ' + err);
 			}
 		} else {
-			console.info('Skip Watermark...');
+			// console.info('UTILS - Skip Watermark...');
 			fs.writeFileSync(ORIGINAL_FILENAME, WM_fileToCheck, 'hex');
 		}
 		LOG_scroll();
@@ -482,10 +482,8 @@ function RDT_checkMap(path){
 			if (use_DATA_AJ !== true && use_DATA_E !== true){
 				LOG_addLog('warn', 'WARN - You need select where you want to import this Map!');
 			} else {
-				var cantReason = '';
-				var canImport = true;
-				var fName = getFileName(path).toUpperCase();
-				console.info(fName.length);
+				var cantReason = '', canImport = true, fName = getFileName(path).toUpperCase();
+				//console.info(fName.length);
 				if (fName.slice(4, 5) !== '.' && fName.length !== 4){
 					var ask = prompt('WARN - The filename are not set in RE3 pattern!\n\nPlease insert the stage and the map number below:\nExample: 10F (Stage 1, Map 0F - R10F)');
 					if (ask === null || ask.length !== 3){

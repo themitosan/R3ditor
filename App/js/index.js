@@ -173,6 +173,9 @@ function R3DITOR_CHECK_FILES_AND_DIRS(){
 	if (fs.existsSync(APP_PATH + '\\Backup\\RE3SET') === false){
 		fs.mkdirSync(APP_PATH + '\\Backup\\RE3SET');
 	}
+	if (fs.existsSync(APP_PATH + '\\Backup\\PATCHER') === false){
+		fs.mkdirSync(APP_PATH + '\\Backup\\PATCHER');
+	}
 	if (fs.existsSync(APP_PATH + '\\Configs\\ARDRDT') === false){
 		fs.mkdirSync(APP_PATH + '\\Configs\\ARDRDT');
 	}

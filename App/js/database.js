@@ -1453,10 +1453,26 @@ var DROP_fileTypes = {
 	'main.dol': 	 ['GC DOL',  2, '.dol'], // GameCube Version
 	'1st_read.bin':  ['DC BIN',  3, '.BIN']  // Sega Dreamcast Version
 }
-// Lockres Fix
+/*
+	Lockres Fix
+*/
 var R3_LR_MODE = {
 	0: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 820,\n    "min_height": 416,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 744\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n    "memoryjs": "^3.2.3"\n  }\n}',
 	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n 	"memoryjs": "^3.2.3"\n  }\n}\n'
+}
+/*
+	RE3SET Patcher Compat
+
+	0: PC Version
+	1: Playstation Version
+	2: GameCube Version
+	3: Sega Dreamcast Version
+*/
+var RE3SET_PATCHER_COMPAT = {
+	0: [true, true, true, true, true],
+	1: [true, false, true, false, true],
+	2: [false, false, true, true, true],
+	3: [true, false, false, false, false]
 }
 /*
 	RANGES
