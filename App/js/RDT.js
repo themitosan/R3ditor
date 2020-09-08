@@ -1106,6 +1106,8 @@ function RDT_readDoors(){
 	RDT_getDoorsArray('012109');
 	RDT_getDoorsArray('012110');
 	RDT_getDoorsArray('01210c');
+	RDT_getDoorsArray('0d2100');
+	RDT_getDoorsArray('013100');
 	if (RDT_doorsArray.length !== 0){
 		while(c < RDT_doorsArray.length){
 			RDT_decompileDoors(c, RDT_doorsArray[c]);
