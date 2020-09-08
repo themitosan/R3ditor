@@ -1461,18 +1461,22 @@ var R3_LR_MODE = {
 	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n 	"memoryjs": "^3.2.3"\n  }\n}\n'
 }
 /*
-	RE3SET Patcher Compat
+	RE3SET Vars
 
+	Patcher Compat
 	0: PC Version
 	1: Playstation Version
 	2: GameCube Version
 	3: Sega Dreamcast Version
 */
 var RE3SET_PATCHER_COMPAT = {
-	0: [true, true, true, true, true],
-	1: [true, false, true, false, true],
-	2: [false, false, true, true, true],
-	3: [true, false, false, false, false]
+	0: [true,  true,  true,  true,  true],
+	1: [true,  false, true,  false, true],
+	2: [false, false, true,  true,  true],
+	3: [true,  false, false, false, false]
+}
+var RE3SET_OTHERFILES_LIST = {
+	'mem_card.bin': [0, 'PS MEM_CARD']
 }
 /*
 	RANGES
@@ -1482,49 +1486,51 @@ var RANGES = {
 	/*
 		RDT V2 Ranges [WIP]
 	*/
-	'RDT_FILE_MAP_HEADER':			 [0, 192],
+	'RDT_FILE_MAP_HEADER': [0, 192],
 	// Header (In order)
-	'RDT_HEADER_RID_MAX':	     	   [0, 4],
-	'RDT_HEADER_OBJ_POS': 			 [94, 98],
-	'RDT_HEADER_MSG_POS': 		   [120, 124],
-	'RDT_HEADER_SCD_POS': 		   [144, 148],
+	'RDT_HEADER_RID_MAX':  [0, 4],
+	'RDT_HEADER_OBJ_POS':  [94, 98],
+	'RDT_HEADER_MSG_POS':  [120, 124],
+	'RDT_HEADER_SCD_POS':  [144, 148],
 	/*
 		Watermark Check
 	*/
-	'WATERMARK_CHECK_0': [562,  566],
-	'WATERMARK_CHECK_1': [658,  662],
-	'WATERMARK_CHECK_2': [672,  678],
+	'WATERMARK_CHECK_0': [562, 566],
+	'WATERMARK_CHECK_1': [658, 662],
+	'WATERMARK_CHECK_2': [672, 678],
 	'WATERMARK_POS': 	 [1270, 2531384],
 	/*
 		RE3SET Editor
 		Edit Starting items, Starting pos. and more
+
+		Executables (.exe, .23, .dol, .bin)
 	*/
 	// Item start
 	'RE3SET_invent_0_startItems': [2441496, 2441656], // PC version
 	'RE3SET_invent_1_startItems': [1184536, 1184696], // PS version
-	'RE3SET_invent_2_startItems': [0, 0],			  // GC Invent are not stored on main.dol!
+	'RE3SET_invent_2_startItems':       [0, 	  0], // GC Invent are not stored on main.dol!
 	'RE3SET_invent_3_startItems': [2833760, 2833920], // DC version
 	// Other Settings
-	'RE3SET_local_0_roomXpos':    [360620, 360624],   // Original: CE 33
-	'RE3SET_local_0_roomYpos': 	  [360666, 360670],   // Original: 07 CF
-	'RE3SET_local_0_roomRpos':    [360736, 360740],   // Original: 20 07
-	'RE3SET_local_0_roomNumber':  [360794, 360796],   // Original: 0D
-	'RE3SET_local_0_roomCam':     [360812, 360814],   // Original: 0B
+	'RE3SET_local_0_roomXpos':     [360620,  360624], // Original: CE 33
+	'RE3SET_local_0_roomYpos': 	   [360666,  360670], // Original: 07 CF
+	'RE3SET_local_0_roomRpos':     [360736,  360740], // Original: 20 07
+	'RE3SET_local_0_roomNumber':   [360794,  360796], // Original: 0D
+	'RE3SET_local_0_roomCam':      [360812,  360814], // Original: 0B
 	// Item infos
 	'RE3SET_0_itemInfos':   	  [2297424, 2317296], // PC
 	'RE3SET_1_itemInfos':   	  [1129928, 1149800], // PS
 	'RE3SET_2_itemInfos':   	  [4212352, 4232224], // GC
-	'RE3SET_3_itemInfos':   	  [0, 0], 			  // DC Item Desc. are not stored on 1ST_READ.BIN!
+	'RE3SET_3_itemInfos':   	  		[0, 	  0], // DC Item Desc. are not stored on 1ST_READ.BIN!
 	// Save Names
 	'RE3SET_0_saveNames': 		  [2431186, 2431498], // PC
-	'RE3SET_1_saveNames': 		  [0, 0], 			  // PS Save Names are not stored on SLUS_009.23!
+	'RE3SET_1_saveNames': 			[35700,   36012], // PS Save Names are not stored on SLUS_009.23! (MEM_CARD.BIN)
 	'RE3SET_2_saveNames':   	  [4202854, 4203166], // GC
-	'RE3SET_3_saveNames': 		  [0, 0], 			  // DC Save Names are not stored on 1ST_READ.BIN!
+	'RE3SET_3_saveNames':   	  		[0, 	  0], // DC Save Names are not stored on 1ST_READ.BIN!
 	// Item name
 	'RE3SET_0_itemName': 		  [2317906, 2322438], // PC
 	'RE3SET_1_itemName': 		  [1150410, 1154942], // PS
 	'RE3SET_2_itemName': 		  [4232830, 4237362], // GC
-	'RE3SET_3_itemName': 		  [0, 0], 			  // DC Item Names are not stored on 1ST_READ.BIN!
+	'RE3SET_3_itemName': 				[0, 	  0], // DC Item Names are not stored on 1ST_READ.BIN!
 	/*
 		DROP
 		Nemesis Item Drops

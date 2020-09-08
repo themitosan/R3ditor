@@ -6,7 +6,7 @@
 // RE3SET Tabs
 var RE3SET_LOADTAB_1 = false, RE3SET_LOADTAB_2 = false, RE3SET_LOADTAB_3 = false, RE3SET_LOADTAB_4 = false, RE3SET_LOADTAB_5 = false;
 //
-var RE3SET_iniTab, RE3SET_fName, RE3SET_gameVersion, RE3SET_arquivoBruto, RE3SET_jillHard, RE3SET_carlosHard, RE3SET_jillEasy, RE3SET_carlosEasy, RE3SET_inventoryHex;
+var RE3SET_loadCount = 0, RE3SET_iniTab, RE3SET_fName, RE3SET_gameVersion, RE3SET_arquivoBruto, RE3SET_jillHard, RE3SET_carlosHard, RE3SET_jillEasy, RE3SET_carlosEasy, RE3SET_inventoryHex;
 // Edit Start Item Vars
 var RE3SET_itemStart_currentId, RE3SET_itemStart_currentPlayer, RE3SET_itemStart_currentMode;
 // Edit Start Pos. Vars
@@ -27,50 +27,80 @@ var RE3SET_itemName_raw, RE3SET_itemName_totalNames;
 	Functions
 */
 function RE3SET_loadFile(exe, mode){
+	RE3SET_loadCount++;
 	sessionStorage.clear();
 	ORIGINAL_FILENAME = exe;
+	DESIGN_RE3SET_cleanTabs();
 	RE3SET_itemStart_showEdit(1);
 	RE3SET_fName = getFileName(exe);
 	RE3SET_arquivoBruto = fs.readFileSync(exe, 'hex');
-	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
-	// Enable Tabs
-	if (RE3SET_gameVersion === 0){ // PC
-		RE3SET_iniTab = 1;
-		RE3SET_LOADTAB_1 = true;
-		RE3SET_LOADTAB_2 = true;
-		RE3SET_LOADTAB_3 = true;
-		RE3SET_LOADTAB_4 = true;
-		RE3SET_LOADTAB_5 = true;
-	}
-	if (RE3SET_gameVersion === 1){ // PS
-		RE3SET_iniTab = 1;
-		RE3SET_LOADTAB_1 = true;
-		RE3SET_LOADTAB_2 = false;
-		RE3SET_LOADTAB_3 = true;
-		RE3SET_LOADTAB_4 = false;
-		RE3SET_LOADTAB_5 = true;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nSave Names');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos., Save Names');
-	}
-	if (RE3SET_gameVersion === 2){ // GC
-		RE3SET_iniTab = 3;
-		RE3SET_LOADTAB_1 = false;
-		RE3SET_LOADTAB_2 = false;
-		RE3SET_LOADTAB_3 = true;
-		RE3SET_LOADTAB_4 = true;
-		RE3SET_LOADTAB_5 = true;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem start');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item start, Start Map & Pos.');
-	}
-	if (RE3SET_gameVersion === 3){ // DC
-		RE3SET_iniTab = 1;
-		RE3SET_LOADTAB_1 = true;
-		RE3SET_LOADTAB_2 = false;
-		RE3SET_LOADTAB_3 = false;
-		RE3SET_LOADTAB_4 = false;
-		RE3SET_LOADTAB_5 = false;
-		alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.\nSave Names\nItem Names');
-		LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Save Names, Starting Map & Pos., Item Names');
+	RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName];
+	if (RE3SET_gameVersion !== undefined){
+		RE3SET_gameVersion = DROP_fileTypes[RE3SET_fName][1];
+		// Enable Tabs
+		if (RE3SET_gameVersion === 0){ // PC
+			RE3SET_iniTab = 1;
+			RE3SET_LOADTAB_1 = true;
+			RE3SET_LOADTAB_2 = true;
+			RE3SET_LOADTAB_3 = true;
+			RE3SET_LOADTAB_4 = true;
+			RE3SET_LOADTAB_5 = true;
+		}
+		if (RE3SET_gameVersion === 1){ // PS
+			LOG_separator();
+			RE3SET_iniTab = 1;
+			RE3SET_LOADTAB_1 = true;
+			RE3SET_LOADTAB_2 = false;
+			RE3SET_LOADTAB_3 = true;
+			RE3SET_LOADTAB_4 = false;
+			RE3SET_LOADTAB_5 = true;
+			alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nSave Names');
+			LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Starting Map & Pos., Save Names');
+			LOG_separator();
+		}
+		if (RE3SET_gameVersion === 2){ // GC
+			LOG_separator();
+			RE3SET_iniTab = 3;
+			RE3SET_LOADTAB_1 = false;
+			RE3SET_LOADTAB_2 = false;
+			RE3SET_LOADTAB_3 = true;
+			RE3SET_LOADTAB_4 = true;
+			RE3SET_LOADTAB_5 = true;
+			alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem start');
+			LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item start, Start Map & Pos.');
+			LOG_separator();
+		}
+		if (RE3SET_gameVersion === 3){ // DC
+			LOG_separator();
+			RE3SET_iniTab = 1;
+			RE3SET_LOADTAB_1 = true;
+			RE3SET_LOADTAB_2 = false;
+			RE3SET_LOADTAB_3 = false;
+			RE3SET_LOADTAB_4 = false;
+			RE3SET_LOADTAB_5 = false;
+			alert('WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings:\n\nStarting Map & Pos.\nItem desc.\nSave Names\nItem Names');
+			LOG_addLog('warn', 'WARN - Due some settings are not set on this file, R3ditor will not be able to edit the following settings: Item Desc., Save Names, Starting Map & Pos., Item Names');
+			LOG_separator();
+		}
+	} else {
+		var checkFile = RE3SET_OTHERFILES_LIST[RE3SET_fName];
+		if (checkFile !== undefined){
+			var RE3SET_otherfileType = RE3SET_OTHERFILES_LIST[RE3SET_fName][0];
+			// PS MEM_CARD.bin
+			if (RE3SET_otherfileType === 0){
+				RE3SET_iniTab = 4;
+				RE3SET_gameVersion = 1;
+				RE3SET_LOADTAB_1 = false;
+				RE3SET_LOADTAB_2 = false;
+				RE3SET_LOADTAB_3 = false;
+				RE3SET_LOADTAB_4 = true;
+				RE3SET_LOADTAB_5 = false;
+				$('#RE3SET-aba-menu-4').addClass('aba-left-fix');
+			}
+		} else {
+			alert('ERROR - Unknown file type!\nR3ditor will exit from RE3SET.');
+			reload();
+		}
 	}
 	/*
 		Tab 1
@@ -139,15 +169,22 @@ function RE3SET_loadFile(exe, mode){
 	/*
 		End - Using DROP_fileTypes because it works!
 	*/
+	if (RE3SET_loadCount > 1){
+		LOG_separator();
+	}
 	if (mode === 0){
-		LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
+		if (DROP_fileTypes[RE3SET_fName] !== undefined){
+			LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ')');
+			if (RE3SET_gameVersion === 2){
+				$('#RE3SET-aba-menu-3').addClass('aba-left-fix');
+			} else {
+				$('#RE3SET-aba-menu-3').removeClass('aba-left-fix');
+			}
+		} else {
+			LOG_addLog('log', 'RE3SET - File loaded sucessfully! (Mode: ' + RE3SET_OTHERFILES_LIST[RE3SET_fName][1] + ')');
+		}
 		LOG_addLog('log', 'RE3SET - Path: <font class="user-can-select">' + ORIGINAL_FILENAME + '</font>');
 		main_menu(12);
-		if (RE3SET_gameVersion === 2){
-			$('#RE3SET-aba-menu-3').addClass('aba-left-fix');
-		} else {
-			$('#RE3SET-aba-menu-3').removeClass('aba-left-fix');
-		}
 		$('#RE3SET-aba-menu-' + RE3SET_iniTab).trigger('click');
 	}
 	LOG_scroll();
@@ -550,34 +587,36 @@ function RE3SET_decompileInventory(){
 }
 // Show on Edit
 function RE3SET_EDITSTARTITEM(mode, char, id){
-	// Item Slot
-	RE3SET_itemStart_currentId = parseInt(id);
-	// Game Mode (0 = Easy, 1 = Hard)
-	RE3SET_itemStart_currentMode = mode;
-	// Char Name (0 = Jill, 1 = Carlos)
-	RE3SET_itemStart_currentPlayer = char;
-	var itemHex, gMode, gChar, IT, QT, AT;
-	if (RE3SET_itemStart_currentMode === 0){
-		gMode = 'E';
+	if (DROP_fileTypes[RE3SET_fName] !== undefined){
+		RE3SET_itemStart_currentMode = mode;
+		RE3SET_itemStart_currentPlayer = char;
+		var itemHex, gMode, gChar, IT, QT, AT;
+		RE3SET_itemStart_currentId = parseInt(id);
+		if (RE3SET_itemStart_currentMode === 0){
+			gMode = 'E';
+		} else {
+			gMode = 'H';
+		}
+		if (RE3SET_itemStart_currentPlayer === 0){
+			gChar = 'J';
+		} else {
+			gChar = 'C';
+		}
+		itemHex = localStorage.getItem('RE3SET_INVENT_' + gChar + '_' + gMode + '_' + RE3SET_itemStart_currentId);
+		IT = itemHex.slice(0, 2);
+		QT = parseInt(itemHex.slice(2, 4), 16);
+		AT = itemHex.slice(4, 6);
+		document.getElementById('RE3SET_EDIT_ITEMSTART_IT').value = IT;
+		document.getElementById('RE3SET_EDIT_ITEMSTART_AT').value = AT;
+		document.getElementById('RE3SET_EDIT_ITEMSTART_QT').value = QT;
+		document.getElementById('RE3SET_LBL_editItemName').innerHTML = ITEM[IT][0];
+		document.getElementById('RE3SET_EDIT_LBL_ITEMDESC').innerHTML = ITEM[IT][1];
+		// End
+		RE3SET_itemStart_showEdit(0);
 	} else {
-		gMode = 'H';
+		LOG_addLog('warn', 'WARN - You can\'t edit this item because it is from a section that is not located on this file!');
 	}
-	if (RE3SET_itemStart_currentPlayer === 0){
-		gChar = 'J';
-	} else {
-		gChar = 'C';
-	}
-	itemHex = localStorage.getItem('RE3SET_INVENT_' + gChar + '_' + gMode + '_' + RE3SET_itemStart_currentId);
-	IT = itemHex.slice(0, 2);
-	QT = parseInt(itemHex.slice(2, 4), 16);
-	AT = itemHex.slice(4, 6);
-	document.getElementById('RE3SET_EDIT_ITEMSTART_IT').value = IT;
-	document.getElementById('RE3SET_EDIT_ITEMSTART_AT').value = AT;
-	document.getElementById('RE3SET_EDIT_ITEMSTART_QT').value = QT;
-	document.getElementById('RE3SET_LBL_editItemName').innerHTML = ITEM[IT][0];
-	document.getElementById('RE3SET_EDIT_LBL_ITEMDESC').innerHTML = ITEM[IT][1];
-	// End
-	RE3SET_itemStart_showEdit(0);
+	LOG_scroll();
 }
 function RE3SET_ITEMSTART_CHECK(){
 	var IT = document.getElementById('RE3SET_EDIT_ITEMSTART_IT').value;
@@ -757,11 +796,17 @@ function RE3SET_Backup(){
 	R3DITOR_CHECK_FILES_AND_DIRS();
 	if (RE3SET_arquivoBruto !== undefined){
 		try {
-			var RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + DROP_fileTypes[RE3SET_fName][2];
+			var RE3SET_backupName;
+			if (DROP_fileTypes[RE3SET_fName] !== undefined){
+				RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + DROP_fileTypes[RE3SET_fName][2];
+			} else {
+				RE3SET_backupName = getFileName(ORIGINAL_FILENAME).toUpperCase() + '-RE3SET-' + currentTime() + RE3SET_OTHERFILES_LIST[RE3SET_fName][1];
+			}
 			fs.writeFileSync(APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName, RE3SET_arquivoBruto, 'hex');
 			LOG_addLog('log', 'INFO - The backup was made successfully! - File: ' + RE3SET_backupName);
 			LOG_addLog('log', 'INFO - Path: <font class="user-can-select">' + APP_PATH + '\\Backup\\RE3SET\\' + RE3SET_backupName + '</font>');
 		} catch (err) {
+			LOG_separator();
 			LOG_addLog('error', 'ERROR - Unable to make backup!');
 			LOG_addLog('error', 'ERROR - Reason: ' + err);
 		}

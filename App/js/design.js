@@ -2683,10 +2683,22 @@ function RE3SET_showMenu(menuId){
 	$('#RE3SET-menu-' + menuId).css({'display': 'block'});
 	$('#RE3SET-aba-menu-' + menuId).addClass('aba-select');
 	$('#log-programa').css({'top': '626px', 'height': '82px'});
-	R3_DISC_setActivity('On RE3SET', '(' + DROP_fileTypes[RE3SET_fName][0] + ') Editing RE3 general settings');
-	RE3SET_itemDesc_tempWinTitle = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
+	if (DROP_fileTypes[RE3SET_fName] !== undefined){
+		R3_DISC_setActivity('On RE3SET', '(' + DROP_fileTypes[RE3SET_fName][0] + ') Editing RE3 general settings');
+		RE3SET_itemDesc_tempWinTitle = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + DROP_fileTypes[RE3SET_fName][0] + ' - File: ' + ORIGINAL_FILENAME;
+	} else {
+		R3_DISC_setActivity('On RE3SET', '(' + RE3SET_OTHERFILES_LIST[RE3SET_fName][1] + ') Editing RE3 general settings');
+		RE3SET_itemDesc_tempWinTitle = APP_NAME + ' - RE3SET Editor (Game Settings) - Mode: ' + RE3SET_OTHERFILES_LIST[RE3SET_fName][1] + ' - File: ' + ORIGINAL_FILENAME;
+	}
 	document.title = RE3SET_itemDesc_tempWinTitle;
 	LOG_scroll();
+}
+function DESIGN_RE3SET_cleanTabs(){
+	var c = 2;
+	while (c < RE3SET_totalMenus){
+		$('#RE3SET-aba-menu-' + c).removeClass('aba-left-fix');
+		c++;
+	}
 }
 // Item description / Save Name
 function TRANSFER_MSG_TO_RE3SET(mode){
