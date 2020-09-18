@@ -221,7 +221,7 @@ function WZ_EXTRACT_ROFS(){
 	if (fs.existsSync(APP_PATH + '\\Assets') === false){
 		fs.mkdirSync(APP_PATH + '\\Assets');
 	}
-	var timer = setInterval(function(){
+	var rofsTimer = setInterval(function(){
 		if (current_rofs !== 16){
 			if (EXTERNAL_APP_RUNNING === false && current_rofs < 16){
 				if (EXTERNAL_APP_EXITCODE === 0){
@@ -230,21 +230,21 @@ function WZ_EXTRACT_ROFS(){
 					WZ_EXTRACT(current_rofs);
 				} else {
 					LOG_addLog('error', 'ERROR - Something went wrong while extracting Rofs' + id + '!');
-					clearInterval(timer);
+					clearInterval(rofsTimer);
 				}
 			} else {
 				console.log('Waiting Rofs ' + current_rofs);
 			}
 		} else {
 			WZ_finishExtract();
-			clearInterval(timer);
+			clearInterval(rofsTimer);
 		}
 	}, 50);
 	LOG_scroll();
 }
 function WZ_EXTRACT(id){
 	if (fs.existsSync(GAME_PATH + 'Rofs' + id + '.dat') === true){
-		process.chdir(APP_PATH + '/Assets');
+		process.chdir(APP_PATH + '\\Assets');
 		progressbar_1 = parseInt(progressbar_1 + 2);
 		progressbar_0 = parseInt(progressbar_0 + 6.6);
 		R3DITOR_movePercent(1, progressbar_1);

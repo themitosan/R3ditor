@@ -40,12 +40,11 @@ function MSG_goBackToRDT(){
 	$('#RDT-aba-menu-2').trigger('click');
 }
 function MSG_goBackToRE3SET(mode){
-	var c = 0;
 	MSG_ID = undefined;
-	var totalBackBtns = 3;
 	MSG_totalComandos = 0;
 	MSG_useSeekCameras = false;
 	MSG_arquivoBruto = undefined;
+	var c = 0, totalBackBtns = 3;
 	document.title = RE3SET_itemDesc_tempWinTitle;
 	while (c < totalBackBtns){
 		$('#MSG_applyMessageRE3SET_' + c).css({'display': 'none'});
@@ -82,9 +81,8 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		var c = 0, t, COMMAND;
 		MSG_DECRYPT_LV1_LAST = '';
 		$('#RDT-aba-menu-2').css({'display': 'inline'});
-		var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
-		var formatHex = RAW_DATA.match(/.{2,2}/g);
-		try{
+		var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g), formatHex = RAW_DATA.match(/.{2,2}/g);
+		try {
 			while(c < formatHex.length){
 				MSG_DECRYPT_LV1_LAST = MSG_DECRYPT_LV1_LAST + formatHex[c] + ' ';
 				c++; 
@@ -103,10 +101,7 @@ function MSG_startMSGDecrypt_Lv1(RAW_DATA){
 		} else {
 			t = 0;
 		}
-		var cAtual = 0;
-		var final = '';
-		var startPoint = cAtual;
-		var textoTraduzido = final;
+		var cAtual = 0, final = '', startPoint = cAtual, textoTraduzido = final;
 		while (startPoint < t){
 			// If is a funcion / special command
 			if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
@@ -180,8 +175,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 	var RAW_DATA_ARRAY = RAW_DATA.match(/.{1,2}/g);
 	document.getElementById('msg-lista-eventos').innerHTML = '';
 	document.getElementById('lbl-msg-length').innerHTML = RAW_DATA.length + ' (Hex: ' + parseHex(RAW_DATA.length).toUpperCase() + ')';
-	var c = 0;
-	var t, COMMAND, COMMAND_HEX, COMMAND_ATTR;
+	var c = 0, t, COMMAND, COMMAND_HEX, COMMAND_ATTR;
 	if (RAW_DATA_ARRAY !== null){
 		t = RAW_DATA_ARRAY.length;
 	} else {
@@ -192,10 +186,7 @@ function MSG_startMSGDecrypt_Lv2(RAW_DATA){
 		finalArray = finalArray + RAW_DATA_ARRAY[c] + ' ';
 		c++;
 	}
-	var cAtual = 0;
-	var textoHex = '';
-	var startPoint = cAtual;
-	var textoTraduzido = textoHex;
+	var cAtual = 0, textoHex = '', startPoint = cAtual, textoTraduzido = textoHex;
 	while (startPoint < t){
 		// If is a command / special function
 		if (MSG_DICIONARIO[RAW_DATA_ARRAY[startPoint]][0] === true){
@@ -350,8 +341,7 @@ function MSG_checkHexLength(){
 	}
 }
 function MSG_renderCommands(){
-	var c = 0;
-	var total = MSG_Commands.length;
+	var c = 0, total = MSG_Commands.length;
 	MSG_renderMSGLength(total);
 	while(c !== total){
 		var COM;
@@ -360,8 +350,7 @@ function MSG_renderCommands(){
 		} else {
 			COM = MSG_DICIONARIO[MSG_Commands[c][0]][2];
 		}
-		var ATT = MSG_Commands[c][1];
-		var hexCom = COM + ATT;
+		var ATT = MSG_Commands[c][1], hexCom = COM + ATT;
 		MSG_addCommandToList(COM, ATT, hexCom, c);
 		c++;
 	}

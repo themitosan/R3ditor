@@ -44,9 +44,7 @@ function FILEGEN_saveImage(){
 	$('#FILEGEN_CANVAS').css({'zoom': '2', 'left': '400px'});
 }
 function FG_RENDER(){
-	var c = 0;
-	var x_offset = 0;
-	var y_offset = 0;
+	var c = 0, x_offset = c, y_offset = c;
 	document.getElementById('FILEGEN_CANVAS').innerHTML = '';
 	if (document.getElementById('FILEGEN_text').value !== ''){
 		var text = document.getElementById('FILEGEN_text').value.toString().replace(new RegExp('\n', 'gi'), '§').match(/.{1,1}/g);
@@ -106,9 +104,7 @@ function UTILS_OBJ_Patcher_load(){
 }
 function UTILS_OBJ_Patcher_RUN(file){
 	if (file !== undefined && file !== null){
-		var c = 0;
-		var tPaches = 0;
-		var OBJ_array = [];
+		var c = 0, tPaches = c, OBJ_array = [];
 		fs.readFileSync(file).toString().split('\n').forEach(function(line){ 
 			OBJ_array.push(line); 
 		});

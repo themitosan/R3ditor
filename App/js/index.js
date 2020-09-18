@@ -609,7 +609,6 @@ function R3DITOR_downloadFile(url, downloadFileName){
 /* 
 	Utils
 */
-/// Get file names
 function getFileName(file){
 	if (file !== '' && file !== undefined){
 		var c = 0;
@@ -631,19 +630,12 @@ function getFileExtension(file){
 function solveHEX(hex){
 	if (hex !== '' && hex !== undefined){
 		var res = hex.replace(new RegExp(' ', 'g'), '');
-		var fin = res.toLowerCase();
-		return fin;
+		return res.toLowerCase();
 	}
 }
 /// Get current date
 function currentTime(){
-	var t = new Date;
-	var d = t.getDate();
-	var h = t.getHours();
-	var s = t.getSeconds();
-	var y = t.getFullYear();
-	var mi = t.getMinutes();
-	var m = t.getMonth() + 1;
+	var t = new Date, d = t.getDate(), h = t.getHours(), s = t.getSeconds(), y = t.getFullYear(), mi = t.getMinutes(), m = t.getMonth() + 1;
 	if (m === 9 && d === 28 && e_e === 0){
 		e_e++;
 		LOG_addLog('log', '<font class="none" id="special_msg" title="' + atob(special_day_00) + '" style="text-shadow: 0 0 16px #fff;"><i>' + atob(special_day_00) + '</i></font>');
@@ -727,8 +719,7 @@ function parseDecimalToBIO3Var(value, mode){
 	var number = parseInt(value);
 	// Mode 0: XXXX
 	if (mode === 0){
-		var segundaCasa = 0;
-		var primeiraCasa = 0;
+		var segundaCasa = 0, primeiraCasa = segundaCasa;
 		while (number > 255){
 			number = parseInt(number - 255);
 			segundaCasa++;
@@ -748,9 +739,7 @@ function parseDecimalToBIO3Var(value, mode){
 function processBIO3Vars(hex){
 	if (hex !== undefined && hex !== ''){
 		if (hex.length === 4){
-			var numerofinal = 0;
-			var first = parseInt(hex.slice(0, 2), 16);
-			var second = parseInt(hex.slice(2, 4), 16);
+			var numerofinal = 0, first = parseInt(hex.slice(0, 2), 16), second = parseInt(hex.slice(2, 4), 16);
 			while(second !== 0){
 				numerofinal = numerofinal + 255;
 				numerofinal++;
@@ -768,9 +757,7 @@ function processBIO3Vars(hex){
 }
 function processBIO3HP(hex){
 	if (hex !== '' && hex.length === 4){
-		var stat;
-		var color;
-		var vital = processBIO3Vars(hex);
+		var stat, color, vital = processBIO3Vars(hex);
 		/*
 			O correto seria 32767 mas estou deixando uma margem de erro para
 			que o R3ditor não pense que o player esteja vivo.
@@ -820,9 +807,7 @@ function processBIO3HP(hex){
 }
 /// Undo solvehex
 function splitHex(hex, mode){
-	var rw;
-	var c = 0;
-	var fina = '';
+	var rw, c = 0, fina = '';
 	if (mode === 0){
 		rw = hex.match(/.{1,2}/g);
 	} else {
@@ -986,9 +971,7 @@ function triggerLoad(loadForm){
 	}
 }
 function setLoadFile(input){
-	var cFile;
-	var loadType = '';
-	var loadCancel = false;
+	var cFile, loadType = '', loadCancel = false;
 	// Audio
 	if (input === 1){
 		cFile = document.getElementById('loadWAVForm').files[0];

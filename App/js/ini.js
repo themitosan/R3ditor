@@ -12,7 +12,6 @@ var BIO3INI_MAX_HEIGHT = 5760;
 var BIO3INI_Save, BIO3INI_Movie, BIO3INI_Regist, BIO3INI_Rofs1, BIO3INI_Rofs2, BIO3INI_Rofs3, BIO3INI_Rofs4, BIO3INI_Rofs5, BIO3INI_Rofs6, BIO3INI_Rofs7, BIO3INI_Rofs8, BIO3INI_Rofs9, BIO3INI_Rofs10, BIO3INI_Rofs11, BIO3INI_Rofs12, BIO3INI_Rofs13, BIO3INI_Rofs14, BIO3INI_Rofs15;
 /*
 	Video Config
-	Variaveis usadas para obter as configs de vídeo
 */
 // True == On || False == Off
 var BIO3INI_v_disableMovie = true;

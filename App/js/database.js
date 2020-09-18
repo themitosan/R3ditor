@@ -1034,22 +1034,22 @@ var MSG_DICIONARIO = {
 	'ca': [false, 'ó', false],
 	'd1': [false, 'ú', false]
 }
-var ROFS_STATUS = {
-	1:  ['Doors (.DO2)'],
-	2:  ['DATA_AE and ETC2 (.TIM)'],
-	3:  ['DATA and ETC (.TIM, .SLD, .DAT)'],
-	4:  ['DATA_E (.TIM, .DAT, .PIX)'],
-	5:  ['Models (.PLD and .PLW)'],
-	6:  ['DATA_A (.PLD and .TIM)'],
-	7:  ['Sounds (.VB, .VH and BGM\'s)'],
-	8:  ['Backgrounds (BSS - .JPG and .SLD)'],
-	9:  ['ROOM (.EMD and .TIM)'],
-	10: ['ROOM - EMD08 (.EMD and .TIM)'],
-	11: ['ROOM (.RBJ)'],
-	12: ['DATA_AJ - Easy mode (.RDT)'],
-	13: ['DATA_E - Hard mode (.RDT)'],
-	14: ['Voices (.WAV)'],
-	15: ['Background music (.WAV)']
+var ROFS_FILE_DESC = {
+	1:  'Doors (.DO2)',
+	2:  'DATA_AE and ETC2 (.TIM)',
+	3:  'DATA and ETC (.TIM, .SLD, .DAT)',
+	4:  'DATA_E (.TIM, .DAT, .PIX)',
+	5:  'Models (.PLD and .PLW)',
+	6:  'DATA_A (.PLD and .TIM)',
+	7:  'Sounds (.VB, .VH and BGM\'s)',
+	8:  'Backgrounds (BSS - .JPG and .SLD)',
+	9:  'ROOM (.EMD and .TIM)',
+	10: 'ROOM - EMD08 (.EMD and .TIM)',
+	11: 'ROOM (.RBJ)',
+	12: 'DATA_AJ - Easy mode (.RDT)',
+	13: 'DATA_E - Hard mode (.RDT)',
+	14: 'Voices (.WAV)',
+	15: 'Background music (.WAV)'
 }
 var MAIN_exludeFileFormats = [
 	'.rdt','.txt','.msg','.sav','.exe','.ini','.r3ditor','.rdtmap2','.tim','.sld','.rbj','.ard','.dat','.ARDMAP', '.SCD'
