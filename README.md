@@ -20,8 +20,8 @@ R3ditor (it reads REditor) is a editor written in JS / NW.js <i>(aka. Node-Webki
 - Just click on "Check for updates" and follow the instructions!
 
 ## Roadmap
-As you can see, this software still WIP - Expect changes in the next versions!<br>
-You can see what will be implemented in the future in our <a href="https://github.com/themitosan/R3ditor/blob/master/Roadmap.md">Roadmap</a>.<br>
+As you can see, this software is in alpha stage.<br>
+This software will receive less updates, since the efforts are being applied on R3ditor V2.
 
 ## Supported File Formats
 
