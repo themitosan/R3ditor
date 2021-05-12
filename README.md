@@ -1,3 +1,7 @@
+## Important
+This project was put on hold due development on R3ditor V2.
+Click <a href="https://themitosan.github.io" target="_blank" title="Click here to visit TheMitoSan's modding site">here</a> to know more about
+
 <img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
 
 # R3ditor
