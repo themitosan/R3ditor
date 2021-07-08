@@ -2,6 +2,10 @@
 With this file you can see my roadmap for this project.
 This file can (and will be) modified several times!
 
+### Important info
+This project is archived and we recommend to use R3ditor V2 (R3V2) instead.
+Click <a target="_blank" href="https://themitosan.github.io/"></a> to know more.
+
 ## Room Data Table (RDT)
 - Read items, files and maps! [WIP]
 - Refactor the message reading code! (it makes me feel like a idiot) [Almost there... WIP!]
