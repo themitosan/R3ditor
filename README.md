@@ -2,9 +2,12 @@
 This project was put on hold due development on R3ditor V2.
 Click <a href="https://themitosan.github.io" target="_blank" title="Click here to visit TheMitoSan's modding site">here</a> to know more about
 
-<img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/themitosan/R3ditor/master/App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
+  <br>R3ditor<br>
+  <a href="https://discord.gg/hfWJbZPJk2" target="_blank"><img src="https://img.shields.io/discord/686340740904648714?label=Discord%20Users"></a>
+</h1>
 
-# R3ditor
 R3ditor (it reads REditor) is a editor written in JS / NW.js <i>(aka. Node-Webkit)</i> capable of editing some Resident Evil 3 Classic files.<br>
 <p align="center"><img src="https://i.imgur.com/FB8Tx6j.png" width="680" height="360"></p>
 
