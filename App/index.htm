@@ -810,12 +810,18 @@
 								<font class="titulo">Edit Parameters</font><br>
 								Item ID: <font id="DROP_edit_lbl_itemID">??</font><br><font id="DROP_edit_lbl_itemName">??</font>
 							</center>
-							<div class="menu-separador"></div>
+							<div class="menu-separador-2"></div>
 							Item: 
-							<select id="DROP_EDIT_ITEM" class="item-select-mod RDT_door_selectLockKeyFix no-transform-text DROP_stickyFix">
+							<select id="DROP_EDIT_ITEM" class="item-select-mod RDT_door_selectLockKeyFix no-transform-text DROP_stickyFix" oninput="DROP_updatePreview();">
 								<!-- DROP select items goes here -->
 							</select><br>
-							Quantity: <input type="number" min="0" max="255" step="1" id="DROP_EDIT_QUANT" class="item-select-mod user-can-select RDT-valueEdit-fix DROP_stickyFix">
+							Quantity: <input type="number" min="0" max="250" step="1" id="DROP_EDIT_QUANT" class="item-select-mod user-can-select RDT-valueEdit-fix DROP_stickyFix"><br>
+							<center>
+								Preview:<br>
+								<div class="MIX_edit_preview_canvas">
+									<img id="DROP_item_preview" class="MIX_preview_item_shadow">
+								</div>
+							</center>
 							<div class="RDT-applyBtn-div_2">
 								<input type="button" title="Click here to cancel" onclick="DROP_showEdit(1);" value="Cancel" class="RDT-btn-apply btn-apply-fix color-white">
 								<input type="button" title="Click here to apply!" id="DROP_editApplyBtn" value="APPLY CHANGES" class="RDT-btn-apply btn-apply-fix color-green">
@@ -832,9 +838,9 @@
 					<div class="menu-general-content" id="SETTINGS_content_1">
 						<center><font class="titulo">Settings</font></center>
 						<!-- Update -->
-						<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1">
-						<div class="INI_MINIWINDOW SETTINGS_WINDOW-1">
-							<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" onclick="WZ_FORCE_UPDATE();" value="Download last changes from GitHub"></center>
+						<input type="button" value="Update" class="INI_inernalTab SETTINGS_ABA-1 none">
+						<div class="INI_MINIWINDOW SETTINGS_WINDOW-1 none">
+							<center><input type="button" class="botao-menu SETTINGS_MENUBTNFIX" disabled="disabled" value="Download last changes from GitHub"></center>
 						</div>
 						<!-- Performance -->
 						<input type="button" value="Graphics and Performance" class="INI_inernalTab SETTINGS_ABA-2">
@@ -889,9 +895,9 @@
 						<input type="button" value="Small Note" class="INI_inernalTab SETTINGS_ABA-3">
 						<div class="INI_MINIWINDOW SETTINGS_WINDOW-3">
 							<div class="SETTINGS_FUTURE">
-								I know that for now this menu is very empty and with few options...<br>
-								But do not worry! Wait for more options here in the future!<br><br>
-								- TheMitoSan.
+								This project has been archived and will no longer get updates.<br>
+								To not let you down, try R3ditor V2 - It's a way more complete tool!<br>
+								<center><input type="button" value="Click here to know more about" class="botao-menu SETTINGS_MENUBTNFIX" title="Click here to know more about R3ditor V2" onclick="location.replace('https://themitosan.github.io/');"></center>
 							</div>
 						</div>
 					</div>
@@ -2123,7 +2129,6 @@
 					</div>
 					<div class="ABOUT_LEGAL_INFO">
 						THE LICENSE TO USE THIS SOFTWARE IS FREE FOR PERSONAL AND COMMERCIAL USE SINCE YOU GIVE CREDITS TO CREATOR OF THIS SOFTWARE AND FOR ALL NAMES CITED ABOVE - SINCE THEY ARE OWNERS OF KNOWLEDGE THAT WERE NECESSARY FOR THE CREATION OF THIS SOFTWARE. IF THIS RULE IS NOT FULFILLED OR IGNORED IT WILL BE TREATED AS THEFT OF INFORMATION - <u>WHICH WILL BE TREATED AS SHOULD BY LAW</u>.
-						<!-- GoofyAss45 - Estamos de olho em você! -->
 					</div>
 				</center>
 			</div>

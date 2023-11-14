@@ -7,15 +7,18 @@
 	52 41 46 4B 00 4B 00 49 51 4A 40 4B 00 40 4B 00 46 41 45 50 4B 
 	00 4D 51 41 00 41 48 41 00 4F 41 49 4C 4E 41 00 42 4B 45 01 00
 */
+
 var MIX_TOTAL_00, MIX_TOTAL_01, MIX_TOTAL_02, MIX_TOTAL_03, MIX_TOTAL_04, MIX_TOTAL_05, MIX_TOTAL_06, MIX_fName, MIX_gameVersion, MIX_Database, MIX_arquivoBruto, MIX_currentFunction;
+
 /*
 	Functions
 */
+
 function MIX_loadExe(file, mode){
-	var c = 0;
-	var end_pos = 16;
-	var start_pos = 0;
-	var totalMixes = 125;
+	var c = 0,
+		end_pos = 16,
+		start_pos = 0,
+		totalMixes = 125;
 	localStorage.clear();
 	ORIGINAL_FILENAME = file;
 	MIX_fName = getFileName(ORIGINAL_FILENAME);
@@ -48,12 +51,12 @@ function MIX_decompileMix(id, start, end, useLocalStorage){
 	} else {
 		hex_temp = localStorage.getItem('MIX_ID_' + id);
 	}
-	var comb_function = hex_temp.slice(RANGES['MIX_HEX_currentFunction'][0], RANGES['MIX_HEX_currentFunction'][1]);
-	var comb_item_a   = hex_temp.slice(RANGES['MIX_Combine_Item_A'][0],	  	 RANGES['MIX_Combine_Item_A'][1]);
-	var comb_item_b   = hex_temp.slice(RANGES['MIX_Combine_Item_B'][0],   	 RANGES['MIX_Combine_Item_B'][1]);
-	var comb_value_a  = hex_temp.slice(RANGES['MIX_Combine_Value_A'][0],  	 RANGES['MIX_Combine_Value_A'][1]);
-	var comb_value_b  = hex_temp.slice(RANGES['MIX_Combine_Value_B'][0],  	 RANGES['MIX_Combine_Value_B'][1]);
-	var comb_offset   = hex_temp.slice(RANGES['MIX_Combine_Offset'][0],   	 RANGES['MIX_Combine_Offset'][1]);
+	var comb_function = hex_temp.slice(RANGES['MIX_HEX_currentFunction'][0], RANGES['MIX_HEX_currentFunction'][1]),
+		comb_item_a   = hex_temp.slice(RANGES['MIX_Combine_Item_A'][0],	  	 RANGES['MIX_Combine_Item_A'][1]),
+		comb_item_b   = hex_temp.slice(RANGES['MIX_Combine_Item_B'][0],   	 RANGES['MIX_Combine_Item_B'][1]),
+		comb_value_a  = hex_temp.slice(RANGES['MIX_Combine_Value_A'][0],  	 RANGES['MIX_Combine_Value_A'][1]),
+		comb_value_b  = hex_temp.slice(RANGES['MIX_Combine_Value_B'][0],  	 RANGES['MIX_Combine_Value_B'][1]),
+		comb_offset   = hex_temp.slice(RANGES['MIX_Combine_Offset'][0],   	 RANGES['MIX_Combine_Offset'][1]);
 	/*
 		00: Reloading / Sum
 		V1 & V2 Always gonna be 00
@@ -237,7 +240,7 @@ function MIX_applyChanges(id, funcType){
 		Item_A = document.getElementById('MIX_01_edit_item_A').value.toLowerCase();
 		Item_B = document.getElementById('MIX_01_edit_item_B').value.toLowerCase();
 		Item_C = document.getElementById('MIX_01_edit_item_Result').value.toLowerCase();
-		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_01_edit_item_Quantity').value).toString(16), 2);
+		Quanti = MEMORY_JS_fixVars(Number(document.getElementById('MIX_01_edit_item_Quantity').value).toString(16), 2);
 		if (Quanti > 255){
 			Quanti = 250;
 		}
@@ -248,7 +251,7 @@ function MIX_applyChanges(id, funcType){
 		Item_A = document.getElementById('MIX_02_edit_reloadingItem').value.toLowerCase();
 		Item_B = document.getElementById('MIX_02_edit_item').value.toLowerCase();
 		Item_C = document.getElementById('MIX_02_edit_item_Result').value.toLowerCase();
-		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_02_edit_item_Quantity').value).toString(16), 2);
+		Quanti = MEMORY_JS_fixVars(Number(document.getElementById('MIX_02_edit_item_Quantity').value).toString(16), 2);
 		if (Quanti > 255){
 			Quanti = 250;
 		}
@@ -274,7 +277,7 @@ function MIX_applyChanges(id, funcType){
 		Item_A = document.getElementById('MIX_05_edit_powderGl_ammo').value.toLowerCase();
 		Item_B = document.getElementById('MIX_05_edit_powderGl_powder').value.toLowerCase();
 		Item_C = document.getElementById('MIX_05_edit_powderGl_newAmmo').value.toLowerCase();
-		Quanti = MEMORY_JS_fixVars(parseInt(document.getElementById('MIX_edit_powderGl_quantity').value).toString(16), 2);
+		Quanti = MEMORY_JS_fixVars(Number(document.getElementById(`MIX_${funcType}_edit_powderGl_quantity`).value).toString(16), 2);
 		if (Quanti > 255){
 			Quanti = 250;
 		}

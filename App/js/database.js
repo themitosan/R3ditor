@@ -2,11 +2,15 @@
 	R3ditor - database.js
 	By mitosan/mscore/misto_quente/mscorehdr
 	Em terra de quem tem nemmy jill's sofrem!
+
+	...DEPOIS DE TANTOS ANOS, PORQUÊ EU AINDA ESTOU ENTORTANDO ESSES ARQUIVOS?
 */
+
 /*
 	R3ditor Version
 */
-var INT_VER = '0.3.7';
+var INT_VER = '0.3.9';
+
 // Game Items
 var ITEM = {
 	'00': ['Empty Slot', 									   '', 																																																									   						],
@@ -1432,27 +1436,32 @@ var RDT_CAMERAS_CAMTYPES = {
 	'0000': 'Normal',
 	'0100': 'Cutscene?'
 }
+
 /*
 	File Types
 */
 var IEDIT_fileTypes = {
-	'residentevil3': ['PC EXE',  2448160, 2449232, '.exe', 0], // PC Version
-	'slus_009.23':   ['PS SLUS', 1186344, 1187416,  '.23', 1], // Playstation Version
-	'main.dol':      ['GC DOL',  4375520, 4376592, '.dol', 2], // GameCube Version
-	'1st_read.bin':  ['DC BIN',  2835856, 2836928, '.BIN', 3]  // Sega Dreamcast Version
+	'residentevil3': 	 ['PC EXE',  2448160, 2449232, '.exe', 0], // PC Version
+	'slus_009.23':   	 ['PS SLUS', 1186344, 1187416,  '.23', 1], // Playstation Version
+	'main.dol':      	 ['GC DOL',  4375520, 4376592, '.dol', 2], // GameCube Version
+	'1st_read.bin':  	 ['DC BIN',  2835856, 2836928, '.BIN', 3], // Sega Dreamcast Version
+	'biohazard(r) 3 pc': ['REBIRTH', 2473712, 2474784, '.exe', 4]  // Gemini REBirth
 }
 var MIX_fileTypes = {
-	'residentevil3': ['PC EXE',  2449536, 2451536, '.exe', 0], // PC Version
-	'slus_009.23': 	 ['PS SLUS', 1187720, 1189720,  '.23', 1], // Playstation Version
-	'main.dol': 	 ['GC DOL',  4376896, 4378896, '.dol', 2], // GameCube Version
-	'1st_read.bin':  ['DC BIN',  2837232, 2839232, '.BIN', 3]  // Sega Dreamcast Version
+	'residentevil3': 	 ['PC EXE',  2449536, 2451536, '.exe', 0], // PC Version
+	'slus_009.23': 	 	 ['PS SLUS', 1187720, 1189720,  '.23', 1], // Playstation Version
+	'main.dol': 	 	 ['GC DOL',  4376896, 4378896, '.dol', 2], // GameCube Version
+	'1st_read.bin':  	 ['DC BIN',  2837232, 2839232, '.BIN', 3], // Sega Dreamcast Version
+	'biohazard(r) 3 pc': ['REBIRTH', 2475088, 2477088, '.exe', 4]  // Gemini REBirth
 }
 var DROP_fileTypes = {
-	'residentevil3': ['PC EXE',  0, '.exe'], // PC Version
-	'slus_009.23': 	 ['PS SLUS', 1,  '.23'], // Playstation Version
-	'main.dol': 	 ['GC DOL',  2, '.dol'], // GameCube Version
-	'1st_read.bin':  ['DC BIN',  3, '.BIN']  // Sega Dreamcast Version
+	'residentevil3': 	 ['PC EXE',  0, '.exe'], // PC Version
+	'slus_009.23': 	 	 ['PS SLUS', 1,  '.23'], // Playstation Version
+	'main.dol': 	 	 ['GC DOL',  2, '.dol'], // GameCube Version
+	'1st_read.bin':  	 ['DC BIN',  3, '.BIN'], // Sega Dreamcast Version
+	'biohazard(r) 3 pc': ['REBIRTH', 4, '.exe']  // Gemini REBirth
 }
+
 /*
 	Lockres Fix
 */
@@ -1460,6 +1469,7 @@ var R3_LR_MODE = {
 	0: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 820,\n    "min_height": 416,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 744\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n    "memoryjs": "^3.2.3"\n  }\n}',
 	1: '{\n  "main": "App/index.htm",\n  "name": "R3ditor",\n  "description": "An open-source project to do reverse-engineering some files of Resident Evil 3",\n  "js-flags": "--disable-devtools --disable-web-security --allow-file-access-from-files --allow-file-access",\n  "version": "' + INT_VER + '",\n  "keywords": [\n    "R3ditor",\n    "node-webkit"\n  ],\n  "window": {\n    "title": "R3ditor - Please wait...",\n    "icon": "App/img/logo.png",\n    "fullscreen": false,\n    "min_width": 1360,\n    "min_height": 714,\n    "max_width": 1360,\n    "max_height": 714,\n    "toolbar": false,\n    "frame": true,\n    "width": 1360,\n    "height": 714\n  },\n  "webkit": {\n    "plugin": true\n  },\n  "dependencies": {\n    "discord-rpc": "^3.1.3",\n 	"memoryjs": "^3.2.3"\n  }\n}\n'
 }
+
 /*
 	RE3SET Vars
 
@@ -1468,12 +1478,14 @@ var R3_LR_MODE = {
 	1: Playstation Version
 	2: GameCube Version
 	3: Sega Dreamcast Version
+	4: Gemini REBirth
 */
 var RE3SET_PATCHER_COMPAT = {
 	0: [true,  true,  true,  true,  true],
 	1: [true,  false, true,  false, true],
 	2: [false, false, true,  true,  true],
-	3: [true,  false, false, false, false]
+	3: [true,  false, false, false, false],
+	4: [false, false, false, false, false]
 }
 var RE3SET_OTHERFILES_LIST = {
 	'mem_card.bin': [0, 'PS MEM_CARD']
@@ -1483,6 +1495,7 @@ var RE3SET_OTHERFILES_LIST = {
 	Map for specific places on RE3 files
 */
 var RANGES = {
+
 	/*
 		RDT V2 Ranges [WIP]
 	*/
@@ -1531,6 +1544,7 @@ var RANGES = {
 	'RE3SET_1_itemName': 		  [1150410, 1154942], // PS
 	'RE3SET_2_itemName': 		  [4232830, 4237362], // GC
 	'RE3SET_3_itemName': 				[0, 	  0], // DC Item Names are not stored on 1ST_READ.BIN!
+
 	/*
 		DROP
 		Nemesis Item Drops
@@ -1543,6 +1557,9 @@ var RANGES = {
 	'DROP_2_itemQuant': [4592288, 4592304],
 	'DROP_3_itemIds': 	[2813296, 2813312], // DC
 	'DROP_3_itemQuant': [2813312, 2813328],
+	'DROP_4_itemIds': 	[2479232, 2479248], // Rebirth
+	'DROP_4_itemQuant': [2479248, 2479264],
+
 	/*
 		IEDIT
 		Item proprieties
@@ -1551,6 +1568,7 @@ var RANGES = {
 	'IEDIT_MAX_CAPACITY': [2, 4],
 	'IEDIT_CODE_QUEST':   [4, 6],
 	'IEDIT_DISPLAY_MODE': [6, 8],
+
 	/*
 		MIX
 		Ingame item combinations
