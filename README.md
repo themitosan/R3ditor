@@ -3,13 +3,13 @@ This project was put on hold due development on R3ditor V2.
 Click <a href="https://themitosan.github.io/" target="_blank" title="Click here to visit TheMitoSan's site.">here</a> to know more.
 
 <h1 align="center">
-  <img src="App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
-  <br>R3ditor<br>
-  <a href="https://discord.gg/hfWJbZPJk2" target="_blank"><img src="https://img.shields.io/discord/686340740904648714?label=Discord%20Users"></a>
+    <img src="App/Img/logo.png" alt="R3ditor-Logo" draggable="false" width="120" height="120">
+    <br>R3ditor<br>
+    <a href="https://discord.gg/hfWJbZPJk2" target="_blank"><img src="https://img.shields.io/discord/686340740904648714?label=Discord%20Users"></a>
 </h1>
 
 R3ditor (it reads REditor) is a editor written in JS / NW.js <i>(aka. Node-Webkit)</i> capable of editing some Resident Evil 3 Classic files.<br>
-<p align="center"><img src="https://i.imgur.com/FB8Tx6j.png" width="680" height="360" alt="obsolete_preview"></p>
+<p align="center"><img src="preview.png" width="680" alt="obsolete_preview"></p>
 
 ## How to install
 - Download NW.js (Node-Webkit) V. 0.37.4 and extract it into a folder of your choice!<br>(Click <a href="https://dl.nwjs.io/v0.37.4/nwjs-sdk-v0.37.4-win-x64.zip" target="_blank">here</a> to download)
